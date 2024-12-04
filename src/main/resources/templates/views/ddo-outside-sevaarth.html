@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.ddoOutsideSevaarth}"></title>
+</head>
+<body class="ddo-outside-sevaarth">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.dcpsBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.ddoOutsideSevaarth}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.ddoOutsideSevaarth}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<fieldset>
+				<legend>DDO Details</legend>
+				<table class="table bor-0 width-60">
+					<tbody>
+						<tr>
+							<td width="15%">DDO Code</td>
+							<td width="35%"><input type="text" id="txtDdoCode"
+								name="txtDdoCode" value=""> <label
+								class="mandatoryindicator">*</label></td>
+						</tr>
+						<tr>
+							<td width="15%">DDO Name</td>
+							<td width="35%"><input type="text" id="txtDdoName"
+								name="txtDdoName" readonly="readonly" value=""></td>
+						</tr>
+						<tr>
+							<td width="15%">DDO Personal Name</td>
+							<td width="35%"><input type="text" id="txtDdoPersnlName"
+								name="txtDdoPersnlName" readonly="readonly" value=""></td>
+						</tr>
+						<tr>
+							<td width="15%">Old User Name</td>
+							<td width="35%"><input type="text" id="txtOldUsrName"
+								name="txtOldUsrName" readonly="readonly" value=""></td>
+						</tr>
+						<tr>
+							<td width="15%">User Name</td>
+							<td width="35%"><input type="text" id="txtNewUserName"
+								name="txtNewUserName"> <label class="mandatoryindicator">*</label>
+							</td>
+						</tr>
+						<tr>
+							<td width="15%">Employee Name</td>
+							<td width="35%"><input type="text" id="txtEmpName"
+								name="txtEmpName"> <label class="mandatoryindicator">*</label>
+							</td>
+						</tr>
+						<tr>
+							<td width="15%">Date of Birth</td>
+							<td width="35%"><input type="date" name="txtEmpDOB"
+								id="txtEmpDOB"> <label class="mandatoryindicator">*</label>
+							</td>
+						</tr>
+						<tr>
+							<td width="15%">Date of Joining Service</td>
+							<td width="35%"><input type="date" name="txtEmpDOJ"
+								id="txtEmpDOJ"> <label class="mandatoryindicator">*</label>
+							</td>
+						</tr>
+						<tr>
+							<td width="15%">Service Expire On</td>
+							<td width="35%"><input type="date" name="txtEmpServiceExpr"
+								id="txtEmpServiceExpr"> <label
+								class="mandatoryindicator">*</label></td>
+						</tr>
+					</tbody>
+				</table>
+			</fieldset>
+			<div class="text-center">
+				<input type="button" name="btnSave" id="btnSave" value="Update"
+					class="buttontag"> <input type="button" name="backButton"
+					id="backButton" value="Cancel" class="buttontag"
+					onclick="history.back()">
+			</div>
+		</div>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script>
+		$(".renewalPostmain").hide();
+		function getEmpInfo() {
+			$(".renewalPostmain").fadeIn(100);
+		}
+	</script>
+</body>
+</html>

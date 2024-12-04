@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.gisReport}"></title>
+</head>
+<body class="gis-search">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.reportBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.gisReport}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<div class="formMainwithNoborTb container">
+			<div class="text-center">
+				<h3 Class="PageHeading">
+					<span th:utext="#{msg.thymeleaf.pageheading.gisReport}"></span>
+				</h3>
+			</div>
+			<br />
+			<form method="POST" action="" name="ReportForm" th:action="@{/ddoast/gisReport}"
+				th:object="${regularReportModel}"
+				enctype="multipart/form-data">
+				<div id="tcontent1">
+
+					<table class="table bor-0 width-50">
+						<tbody>
+							<tr>
+								<td width="20%"><label class="control-label " for="title"><span
+							th:utext="#{msg.thymeleaf.pagelabel.billGroup}"></span>&nbsp;&nbsp;<b><font
+								color="red" size="4px;">*</font></b></label>
+							</td>
+							<td width="30%"><select name="billGroup"
+								 id="billGroup" th:field="*{billGroup}"
+								class="form-control removeErrorFromDropdown"><!--  -->
+									<option selected="selected" th:value="0"
+										th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+									<option th:each="varGetAllBillGrp : ${lstBillDesc}"
+										th:value="${varGetAllBillGrp.dcpsDdoBillGroupId}"
+										th:text="${language=='mh' ? varGetAllBillGrp.description : varGetAllBillGrp.description}"></option>
+							</select></td>
+							</tr>
+							<tr>
+								<td width="20%"><label class="control-label monthhide"
+									for="title"><span
+										th:utext="#{msg.thymeleaf.pagelabel.month}"></span>&nbsp;&nbsp;<b><font
+											color="red" size="4px;">*</font></b></label></td>
+								<td width="30%"><select name="monthId" th:field="*{monthId}"
+									 id="monthId"
+									class="form-control removeErrorFromDropdown"><!--  -->
+										<option selected="selected" th:value="0"
+											th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+										<option th:each="varGetAllMonths : ${lstMonths}"
+											th:value="${varGetAllMonths.monthId}"
+											th:text="${language=='mh' ? varGetAllMonths.monthMarathi : varGetAllMonths.monthEnglish}"></option>
+								</select></td>
+							</tr>
+							<tr>
+								<td><label class="control-label" for="title"><span
+										th:utext="#{msg.thymeleaf.pagelabel.Year}"></span>&nbsp;&nbsp;<b><font
+											color="red" size="4px;">*</font></b></label></td>
+								<td><select name="yearId"  id="yearId" th:field="*{yearId}"
+									class="form-control removeErrorFromDropdown"><!--  -->
+										<option selected="selected" th:value="0"
+											th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+										<option th:each="varGetAllYear : ${lstYears}"
+											th:value="${varGetAllYear.yearId}"
+											th:text="${language=='mh' ? varGetAllYear.yearMarathi : varGetAllYear.yearEnglish}"></option>
+								</select></td>
+							</tr>
+							<tr>
+								<td align="center" width="10%"><b>GIS Type</b></td>
+								<td width="30%"><select name="GIS" id="GIS" th:field="*{gisAllowDeducCode}"
+									class="selecttag mandatorycontrol">
+										<option value="-1" selected="selected">---------Select---------
+										</option>
+										<option value="84">GIS(IAS)</option>
+										<option value="85">GIS(IFS)</option>
+										<option value="87">GIS</option>
+										<option value="98">CGIS</option>
+										<option value="104">GIS(IPS)</option>
+								</select>&nbsp;&nbsp;<label class="mandatoryindicator">*</label></td>
+							</tr>
+						</tbody>
+					</table>
+					<br> <br>
+					<div class="text-center">
+						<a> <input type="submit" class="btn"
+							id="rptBtn_GenerateReport"></a> <input type="button"
+							name="btnBackAgain" id="btnBackAgain" onclick="history.back()"
+							value="Back" class="buttontag">
+					</div>
+				</div>
+				<br>
+			</form>
+		</div>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.verifyDcpsLegacy}"></title>
+<style>
+#dcpsVerifyTb td {
+	min-width: 200px;
+}
+
+#dcpslegacyTb input {
+	float: left;
+}
+
+#dcpslegacyTb .mandatoryindicator {
+	float: right;
+}
+
+.scrollablediv {
+	box-shadow: 0px 0px 5px #ccc;
+	padding: 15px 15px;
+}
+</style>
+</head>
+<body class="verify-dcps-legacy">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.verifyDcpsLegacy}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.verifyDcpsLegacy}"></span>
+		</h3>
+
+		<div class="verify-dcps-legacy-main container">
+			<form method="post" action="" name="DCPSForwardedFormsList"
+				enctype="multipart/form-data" id="DCPSForwardedFormsList">
+
+				<div align="center">
+
+					<table class="table width-50-auto table-bordered" id="searchTable">
+						<tbody>
+							<tr>
+								<td
+									style="background-color: #F7E7D7; color: rgb(202, 97, 12); font-size: small; font-style: normal; font-weight: bold">
+									Validate Period:</td>
+								<td><select id="treasuryList">
+										<option value="-1">-- Select --</option>
+										<option value="10001198258">2011-2012 to March 2021</option>
+										<option value="10001198259">2021-2022</option>
+										<option value="10001198260" selected="selected">2022-2023
+										</option>
+										<option value="10001198261">2023-2024</option>
+								</select> <label class="mandatoryindicator">*</label></td>
+							</tr>
+							<tr>
+								<td colspan="4" align="center"><input type="button"
+									onclick="getListOfEmp();" class="buttontag"
+									value="View Records" /></td>
+							</tr>
+						</tbody>
+					</table>
+
+					<fieldset style="width: 100%" class="tabstyle" id="displayData">
+						<legend id="headingMsg">
+							<b>Employee Details</b>
+						</legend>
+						<div class="scrollablediv">
+							<table class="table table-bordered table-striped"
+								id="dcpsVerifyTb">
+								<thead>
+									<tr>
+										<th>Employee Name</th>
+										<th>DCPS Id</th>
+										<th>PRAN No</th>
+										<th>Period</th>
+										<th>Employee Contribution</th>
+										<th>Employer Contribution</th>
+										<th>Interest on Employee Contribution</th>
+										<th>Interest on Employer Contribution</th>
+										<th>Total</th>
+										<th>Remarks</th>
+										<th>Approve</th>
+										<th>Reject</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td style="text-align: center; width: 8%"><input
+											type="hidden" id="empName" name="empName"> MADHURI
+											PRAKASHRAV MAHORE <input type="hidden" id="txtSevaarthId"
+											value="06DHEMPMF7701"> <input type="hidden"
+											id="valueI" name="valueI" value="1"></td>
+										<td style="text-align: center; width: 8%"><label
+											id="dcpsIdd">066101002205MPMF7701A</label></td>
+										<td style="text-align: center; width: 8%"><label
+											id="pranNo">110159078346</label></td>
+										<td style="text-align: center; width: 8%"><label
+											id="PPeriod">2022-2023</label></td>
+										<td style="text-align: center; width: 8%">59006.0</td>
+										<td style="text-align: center; width: 8%">82610.0</td>
+										<td style="text-align: center; width: 8%">41122.0</td>
+										<td style="text-align: center; width: 8%">46276.0</td>
+										<td style="text-align: center; width: 8%">229014.0</td>
+										<td style="text-align: center; width: 8%"><input
+											type="text" id="remarks1" name="remarks" readonly="readonly"
+											value="ok"></td>
+										<td style="text-align: center; width: 8%"><input
+											type="button" id="Verify" value="Approve" class="btn bnt-sm">
+										</td>
+										<td style="text-align: center; width: 8%"><input
+											type="button" id="Reject1" value="Reject" class="btn bnt-sm">
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</fieldset>
+
+					<input type="hidden" id="hdnCounter" name="hdnCounter" value="2">
+					<div align="center"></div>
+
+				</div>
+
+			</form>
+
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/hte/verify-dcps-legacy.js}"></script>
+	<script th:src="@{/js/jquery.validate.min.js}"></script>
+
+</body>
+</html>

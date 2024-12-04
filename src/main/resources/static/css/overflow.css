@@ -1,0 +1,24 @@
+@media print {
+	div#print-content {
+		height: 100% !important;
+	}
+	div#print-content {
+		height: 85vh;
+		overflow-y: auto !important;
+	}
+}
+
+div#print-content::-webkit-scrollbar {
+	display: none;
+}
+
+div#print-content {
+	height: 85vh;
+	overflow-y: auto !important;
+}
+
+.btnmaindv {
+	text-align: center;
+	background: #efefef;
+	padding: 7px 0;
+}

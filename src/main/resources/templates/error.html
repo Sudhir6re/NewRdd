@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Error</title>
+<link rel="stylesheet" href="/css/payrollSyles.css" />
+</head>
+<body class="ErrorPage error">
+	<div th:replace="~{header/menuHeader :: var-script-header}"></div>
+	<div th:replace="~{header/menuHeader :: varmenuheader}"></div>
+	<div class="container min-height-600">
+		<div align="center"> 
+		
+		<p class="error" th:text="${sessionExpMessageMsg}"></p>
+		
+		<p><a th:href="@{/user/login?logOut}">Click to login again</a></p>
+	</div>
+	
+		</div>
+	<div th:replace="~{header/menuHeader :: varmenufooter}"></div>
+</body>
+</html>

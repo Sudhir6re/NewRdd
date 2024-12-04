@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.ITR}"></title>
+<style>
+.vm {
+	vertical-align: middle !important;
+}
+
+input[type='text'] {
+	max-width: 175px !important;
+}
+
+table.table.bor-0 * {
+	vertical-align: middle;
+}
+
+.ckeditor-readmore {
+	width: 65%;
+	padding: 10px;
+	border-radius: 4px;
+	background-color: #ebf4fd;
+}
+</style>
+</head>
+<body class="itr-report">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.reportBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.ITR}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.ITR}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<form method="post" action="" name="frmDCPSSanctionedBudget"
+				enctype="multipart/form-data">
+				<div class="panel-group" id="accordion">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title" data-toggle="collapse"
+								data-parent="#accordion" href="#collapse1">
+								<b>Section 80C, 80CCC, 80CCD (1)</b>
+							</h4>
+						</div>
+						<div id="collapse1" class="panel-collapse collapse in">
+							<div class="panel-body">
+								<p>
+									<b>&nbsp;Deduction towards payments made to&nbsp;</b>
+								</p>
+								<table class="table bor-0">
+									<tbody>
+										<tr>
+											<td rowspan="8" class="vm"><b>80C</b></td>
+										</tr>
+										<tr>
+											<td>Life Insurance Premium</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td>Provident Fund</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td>Subscription to certain equity shares</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td>Tuition Fees</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td>National Savings Certificate</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td>Housing Loan Principal</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td>Other various items</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td><b>80CCC</b></td>
+											<td>Annuity plan of LIC or other insurer towards Pension
+												Scheme</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td><b>80CCD(1)</b></td>
+											<td>Pension Scheme of Central Government</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td></td>
+											<td align="right"><b> Total </b></td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+											<td><b> Deduction Limit :</b> <input type="text"
+												disabled value="150000" /></td>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title" data-toggle="collapse"
+								data-parent="#accordion" href="#collapse2">
+								<b>Section 80CCD(1B)</b>
+							</h4>
+						</div>
+						<div id="collapse2" class="panel-collapse collapse">
+							<div class="panel-body">
+								<table class="table bor-0">
+									<tbody>
+										<tr>
+											<td>Deduction towards payments made to Pension Scheme of
+												Central Government, excluding deduction claimed under 80CCD
+												(1)</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+
+											<td align="right"><b> Deduction Limit </b></td>
+											<td align="right"><input type="text"
+												class="form-control" disabled value="50000" /></td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title" data-toggle="collapse"
+								data-parent="#accordion" href="#collapse3">
+								<b>Section 80CCD(2)</b>
+							</h4>
+						</div>
+						<div id="collapse3" class="panel-collapse collapse">
+							<div class="panel-body">
+								<p>Deduction towards contribution made by an employer to the
+									Pension Scheme of Central Government</p>
+								<table class="table bor-0">
+									<tbody>
+										<tr>
+											<td>If the Employer is a PSU&nbsp;or Others</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+
+											<td align="right"><b> Deduction Limit </b></td>
+											<td align="right"><input type="text"
+												class="form-control" /> 10% of salary</td>
+										</tr>
+										<tr>
+											<td colspan="2"><hr /></td>
+										</tr>
+										<tr>
+											<td>If the&nbsp;Employer is Central or State Government</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td align="right"><b> Deduction Limit </b></td>
+											<td align="right"><input type="text"
+												class="form-control" /> 14% of salary</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title" data-toggle="collapse"
+								data-parent="#accordion" href="#collapse4">
+								<b>Section 80D</b>
+							</h4>
+						</div>
+						<div id="collapse4" class="panel-collapse collapse">
+							<div class="panel-body">
+								<p>Deduction towards payments made to Health Insurance
+									Premium &amp; Preventive Health check up</p>
+								<table class="table bor-0">
+									<tbody>
+										<tr>
+											<td rowspan="3" class="vm"><b>For Self / Spouse or
+													Dependent Children</b></td>
+										</tr>
+										<tr>
+											<td>(if any person is a Senior Citizen)</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td>for preventive health check up, included in above
+												limit</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td align="right" colspan="2"><b> Total </b></td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+											<td align="right"><b> Deduction Limit </b> <input
+												type="text" disabled value="50000" /></td>
+										</tr>
+										<tr>
+											<td colspan="4"><hr /></td>
+										</tr>
+										<tr>
+											<td rowspan="3" class="vm"><b>For Parents</b></td>
+										</tr>
+										<tr>
+											<td>(if any person is a Senior Citizen)</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td>for preventive health check up, included in above
+												limit</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td align="right" colspan="2"><b> Total </b></td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+											<td align="right"><b> Deduction Limit </b> <input
+												type="text" disabled value="50000" /></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title" data-toggle="collapse"
+								data-parent="#accordion" href="#collapse5">
+								<b>Section 80DD</b>
+							</h4>
+						</div>
+						<div id="collapse5" class="panel-collapse collapse">
+							<div class="panel-body">
+								<table class="table bor-0">
+									<tbody>
+										<tr>
+											<td colspan="3"><b>Deduction towards payments made
+													towards maintenance or medical treatment of a Disabled
+													Dependent or Paid / Deposited any amount under relevant
+													approved scheme</b></td>
+										</tr>
+										<tr>
+											<td>available for a person with Disability, irrespective
+												of expense incurred</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+											<td align="right"><b> Deduction Limit </b> <input
+												type="text" disabled value="75000" /></td>
+										</tr>
+										<tr>
+											<td>if the person has Severe Disability (80% or more)</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+											<td align="right"><b> Deduction Limit </b> <input
+												type="text" disabled value="125000" /></td>
+										</tr>
+										<tr>
+											<td align="right"><b> Total </b></td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+
+										</tr>
+										<tr>
+											<td colspan="3">Please note: If Taxpayer is claiming
+												deduction u/s 80DD then its recommended to file form 10-IA
+												also before filing of return. Form 10IA can be filed later
+												also however it is recommended to file form 10-IA along with
+												return of income to avoid any inconvenience later.</td>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title" data-toggle="collapse"
+								data-parent="#accordion" href="#collapse6">
+								<b>Section 80DDB</b>
+							</h4>
+						</div>
+						<div id="collapse6" class="panel-collapse collapse">
+							<div class="panel-body">
+								<table class="table bor-0">
+									<tbody>
+										<tr>
+											<td><b>Deduction towards payments made towards
+													Medical treatment of Self or Dependant for specified
+													diseases</b></td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td align="right" colspan="2"><b> Deduction Limit </b> <input
+												type="text" disabled value="40000" /> <br />(₹ 1,00,000 if
+												Senior Citizen)</td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title" data-toggle="collapse"
+								data-parent="#accordion" href="#collapse9">
+								<b>Section 80E</b>
+							</h4>
+						</div>
+						<div id="collapse9" class="panel-collapse collapse">
+							<div class="panel-body">
+								<table class="table bor-0">
+									<tbody>
+										<tr>
+											<td><b>Deduction towards interest payments made on
+													loan for higher education of Self or relative</b></td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td align="right" colspan="2">Total amount paid towards
+												interest on loan taken</td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title" data-toggle="collapse"
+								data-parent="#accordion" href="#collapse10">
+								<b>Section 80EE</b>
+							</h4>
+						</div>
+						<div id="collapse10" class="panel-collapse collapse">
+							<div class="panel-body">
+								<table class="table bor-0">
+									<tbody>
+										<tr>
+											<td width="75%"><b>Deduction towards interest
+													payments made on loan taken for acquisition of residential
+													house property where the loan is sanctioned between 1st
+													April 2016 to 31st March 2017</b></td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td align="right" colspan="2"><b> Deduction Limit </b> <input
+												type="text" disabled value="50000" /></td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title" data-toggle="collapse"
+								data-parent="#accordion" href="#collapse11">
+								<b>Section 80EEA</b>
+							</h4>
+						</div>
+						<div id="collapse11" class="panel-collapse collapse">
+							<div class="panel-body">
+								<table class="table bor-0">
+									<tbody>
+										<tr>
+											<td width="75%"><b>Deduction available only to
+													individuals towards interest payments made on loan taken
+													for acquisition of residential house property for the first
+													time where the loan is sanctioned between 1st April 2019 to
+													31st March 2022 & deduction should not have been claimed
+													u/s 80EE</b></td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+
+											<td align="right" colspan="2"><b> Deduction Limit </b> <input
+												type="text" disabled value="150000" /></td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title" data-toggle="collapse"
+								data-parent="#accordion" href="#collapse12">
+								<b>Section 80EEB</b>
+							</h4>
+						</div>
+						<div id="collapse12" class="panel-collapse collapse">
+							<div class="panel-body">
+								<table class="table bor-0">
+									<tbody>
+										<tr>
+											<td width="75%" c><b>Deduction towards interest
+													payments made on loan for purchase of Electric Vehicle
+													where the loan is sanctioned between 1st April 2019 to 31st
+													March 2023</b></td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+
+											<td align="right" colspan="2"><b> Deduction Limit </b> <input
+												type="text" disabled value="150000" /></td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title" data-toggle="collapse"
+								data-parent="#accordion" href="#collapse13">
+								<b>Section 80G</b>
+							</h4>
+						</div>
+						<div id="collapse13" class="panel-collapse collapse ">
+							<div class="panel-body">
+								<p>
+									<b>Deduction towards Donations made to prescribed Funds,
+										Charitable Institutions, etc.<br /> Donation are eligible for
+										deduction under the below categories
+									</b>
+								</p>
+								<table class="table bor-0">
+									<tbody>
+										<tr>
+											<td rowspan="3" class="vm"><b>Without any limit</b></td>
+										</tr>
+										<tr>
+											<td>100% deduction</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td>50% deduction</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td colspan="3">Note: No deduction shall be allowed
+												under this section in respect of donation made in cash
+												exceeding ₹ 2000/-</td>
+
+										</tr>
+										<tr>
+											<td colspan="3"><hr /></td>
+										</tr>
+										<tr>
+											<td rowspan="3"><b>Subject to qualifying limit</b></td>
+										</tr>
+										<tr>
+											<td>100% deduction</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td>50% deduction</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+
+											<td align="right" colspan="3"><b> Total </b> &nbsp;<input
+												type="text" /></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title" data-toggle="collapse"
+								data-parent="#accordion" href="#collapse14">
+								<b>Section 80GG</b>
+							</h4>
+						</div>
+						<div id="collapse14" class="panel-collapse collapse ">
+							<div class="panel-body">
+								<p>
+									Deduction towards rent paid for house &amp; applicable to only
+									those who are self-employed or&nbsp;for whom HRA is not part of
+									Salary<br />Least of the following shall be allowed as
+									deduction
+								</p>
+								<table class="table table-bordered">
+									<tbody>
+										<tr>
+											<td>Rent paid reduced by 10% of Total Income before this
+												deduction</td>
+											<td><input type="text" class="form-control" /></td>
+											<td>25% of Total Income (excluding long term capital
+												gains, short term capital gains under section 111A or income
+												under section 115A or 115D)</td>
+										</tr>
+										<tr>
+											<td align="right" colspan="3"><b> Total </b> &nbsp;<input
+												type="text" /></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="ckeditor-readmore">
+									<strong>Note:</strong> Form 10BA to be filled for claiming this
+									deduction.
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title" data-toggle="collapse"
+								data-parent="#accordion" href="#collapse15">
+								<b>Section 80GG</b>
+							</h4>
+						</div>
+						<div id="collapse15" class="panel-collapse collapse ">
+							<div class="panel-body">
+								<p>Deduction towards Donations made for Scientific Research
+									or Rural Development</p>
+								<p>Donation are eligible for deduction under the below
+									categories:</p>
+								<table class="table table-bordered">
+									<tbody>
+										<tr>
+											<td colspan="2"><b>Research Association or
+													University, College or other Institution for</b></td>
+										</tr>
+										<tr>
+											<td>Scientific Research</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td>Social Science or Statistical Research</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td colspan="2"><b>Association or Institution for</b></td>
+										</tr>
+										<tr>
+											<td>Rural Development</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td>Conservation of Natural Resources or for
+												Afforestation</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td colspan="2"><b>PSU or Local Authority or an
+													association or institution approved by the National
+													Committee for carrying out any eligible project&nbsp;</b></td>
+										</tr>
+										<tr>
+											<td colspan="2"><b>Funds notified by Central
+													Government for</b></td>
+										</tr>
+										<tr>
+											<td>Afforestation</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td>Rural Development</td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td colspan="2"><b>National Urban Poverty
+													Eradication Fund as setup and notified by Central
+													Government&nbsp;</b></td>
+										</tr>
+										<tr>
+											<td align="right" colspan="2"><b> Total </b> &nbsp;<input
+												type="text" /></td>
+										</tr>
+									</tbody>
+								</table>
+								<br />
+								<div class="ckeditor-readmore">
+									<p>
+										<strong>Note:</strong>&nbsp;No deduction shall be allowed
+										under this Section in respect of donation made in cash
+										exceeding ₹&nbsp; 2000/- or if Gross Total Income includes
+										income from Profit / Gains of Business / Profession
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title" data-toggle="collapse"
+								data-parent="#accordion" href="#collapse16">
+								<b>Section 80GGC</b>
+							</h4>
+						</div>
+						<div id="collapse16" class="panel-collapse collapse">
+							<div class="panel-body">
+								<table class="table bor-0">
+									<tbody>
+										<tr>
+											<td><b>Deduction towards Donations made to Political
+													Party or Electoral Trust</b></td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td align="right" colspan="2"><b> Total </b> <input
+												type="text" class="" /></td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title" data-toggle="collapse"
+								data-parent="#accordion" href="#collapse20">
+								<b>Section 80TTA</b>
+							</h4>
+						</div>
+						<div id="collapse20" class="panel-collapse collapse">
+							<div class="panel-body">
+								<table class="table bor-0">
+									<tbody>
+										<tr>
+											<td><b> Deduction on interest received on saving
+													bank accounts by Non-Senior Citizens</b></td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+
+											<td align="right" colspan="2"><b> Deduction Limit </b> <input
+												type="text" disabled value="10000" /></td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title" data-toggle="collapse"
+								data-parent="#accordion" href="#collapse17">
+								<b>Section 80TTB</b>
+							</h4>
+						</div>
+						<div id="collapse17" class="panel-collapse collapse">
+							<div class="panel-body">
+								<table class="table bor-0">
+									<tbody>
+										<tr>
+											<td><b>Deduction on interest received on deposits by
+													Resident Senior Citizens</b></td>
+											<td align="right"><input type="text"
+												class="form-control" /></td>
+										</tr>
+										<tr>
+											<td align="right" colspan="2"><b> Deduction Limit </b> <input
+												type="text" disabled value="50000" /></td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title" data-toggle="collapse"
+								data-parent="#accordion" href="#collapse18">
+								<b>Section 80U</b>
+							</h4>
+						</div>
+						<div id="collapse18" class="panel-collapse collapse ">
+							<div class="panel-body">
+								<table class="table bor-0">
+									<tbody>
+										<tr>
+											<td rowspan="3" class="vm"><b> Deductions for a
+													resident individual taxpayer with Disability</b></td>
+										</tr>
+										<tr>
+											<td width="29%">deduction for a person with Disability,
+												irrespective of expense incurred</td>
+											<td align="right"><input type="text"
+												class="form-control" disabled value="75000" /></td>
+										</tr>
+										<tr>
+											<td>deduction for a person with Severe Disability (80%
+												or more), irrespective of expense incurred</td>
+											<td align="right"><input type="text"
+												class="form-control" disabled value="125000" /></td>
+										</tr>
+										<tr>
+											<td colspan="3">
+												<p>
+													<strong>Please note:</strong> If Taxpayer is claiming
+													deduction 80U then it is recommended to file form 10-IA
+													also before filing of return. Form 10IA can be filed later
+													also however it is recommended to file form 10-IA along
+													with return of income to avoid any inconvenience later.
+												</p>
+											</td>
+										</tr>
+										<tr>
+											<td align="right" colspan="3"><b> Total </b> <input
+												type="text" /></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="text-center">
+					<input type="button" name="formSubmitButton" id="formSubmitButton"
+						value="Save" class="btn"> <input type="button"
+						name="Close" id="Close" value="Close" class="btn"
+						onclick="history.back()">
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

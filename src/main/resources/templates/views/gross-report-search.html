@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.grossReport}"></title>
+</head>
+<body class="gross-report-search">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.reportBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.grossReport}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.grossReport}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<form method="post" action="" name="" enctype="multipart/form-data">
+				<fieldset class="tabstyle">
+					<legend> Post Master </legend>
+					<table class="table bor-0 width-60">
+						<tbody>
+							<tr>
+								<td width="20%" align="left">Field Department</td>
+								<td width="30%"><select name="cmbFieldDepartment"
+									id="cmbFieldDepartment">
+										<option value="-1">-- Select --</option>
+										<option value="10676">DIRECTORATE OF ART</option>
+										<option value="10566">DIRECTORATE OF EDUCATION</option>
+										<option value="10677">DIRECTORATE OF HIGHER EDUCATION
+										</option>
+										<option value="10645">DIRECTORATE OF SOCIAL WELFARE</option>
+										<option value="10678">DIRECTORATE OF TECHNICAL
+											EDUCATION</option>
+										<option value="10679">DIRECTORATE OF VOCATIONAL
+											EDUCATION</option>
+								</select> <label class="mandatoryindicator">*</label></td>
+							</tr>
+						</tbody>
+					</table>
+				</fieldset>
+				<br />
+				<div class="text-center">
+					<a th:href="@{/mdc/grossReport}" id="btnGenerateReport"
+						class="btn">Search</a> <input type="button"
+						name="btnReset" id="btnReset" value="Reset" class="btn"> <input
+						type="button" name="backButton" id="backButton" value="Close"
+						size="3" maxlength="3" class="buttontag" onclick="history.back()">
+
+
+				</div>
+			</form>
+		</div>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

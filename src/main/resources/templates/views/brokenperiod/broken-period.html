@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+ 
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.borokenperiod}"></title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi">
+    </script>
+<style>
+table#vo {
+	text-align: center;
+}
+</style>
+</head>
+
+<BODY class="Broken-period">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.borokenperiod}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.borokenperiod}"></span>
+		</h3>
+
+		<DIV id=pageContent>
+			<DIV id=inContent>
+				<DIV id=content>
+					<FORM encType=multipart/form-data method="post" id="BrokenPeriod"
+						name="BrokenPeriod" th:object="${brokenPeriodModel}"
+						th:action="@{/ddoast/brokenPeriod}" class="form-horizontal">
+						<input type="hidden" name="action" id="action"
+							th:field="*{action}" class="form-control" /> <input
+							type="hidden" id="hidTotalAllowances"
+							th:value="${hidTotalAllowances}" name="hidTotalAllowances" /> <input
+							type="hidden" id="hidTotalDeductions"
+							th:value="${hidTotalDeductions}" name="hidTotalDeductions" /> <input
+							type="hidden" id="BrokenPeriodPayListSize"
+							th:value="${BrokenPeriodPayListSize}"
+							name="BrokenPeriodPayListSize" />
+							<input type="hidden" id="ddoCode" th:value="${ddoCode}" name="ddoCode" />
+
+						<div class=" container">
+							<fieldset>
+								<LEGEND>
+									<span th:utext="#{msg.pagelabel.searchEmp}"></span>
+								</LEGEND>
+							</fieldset>
+							<div class="form-group">
+								<label class="control-label col-sm-2" for="title"> <span
+									th:utext="#{msg.pagelabel.searchwidthID}"> </span>&nbsp;&nbsp;<b>
+										<font color="red" size="4px;">*</font>
+								</b></label>
+								<div class="col-md-2">
+									<INPUT id="txtSearchName" class="form-control"
+										style="TEXT-TRANSFORM: uppercase" th:field="*{sevaarthid}"
+										name=txtSearchName autocomplete="off">
+								</div>
+								<label class="control-label col-sm-2" for="title"><span
+									th:utext="#{msg.pagelabel.patYear}"></span>&nbsp;&nbsp;<b>
+										<font color="red" size="4px;">*</font>
+								</b></label>
+								<div class="col-md-2">
+									<select class="form-control" id="yearName"
+										th:field="*{paybillYear}">
+										<option selected="selected" th:value="0"
+											th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+										<option th:each="varYear : ${lstYears}"
+											th:value="${varYear.yearId}"
+											th:text="${language=='mh' ? varYear.yearMarathi : varYear.yearEnglish}"></option>
+									</select>
+								</div>
+								<label class="control-label col-sm-2" for="title"><span
+									th:utext="#{msg.pagelabel.patMonth}"> </span>&nbsp;&nbsp;<b>
+										<font color="red" size="4px;">*</font>
+								</b></label>
+								<div class="col-md-2">
+									<select class="form-control" id="monthName"
+										th:field="*{paybillMonth}">
+										<option selected="selected" th:value="0"
+											th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+										<option th:each="varMonth : ${lstMonths}"
+											th:value="${varMonth.monthId}"
+											th:text="${language=='mh' ? varMonth.monthMarathi : varMonth.monthEnglish}"></option>
+									</select>
+								</div>
+
+								<div class="text-center clear">
+									<br /> <input type="button" id="brokenSearchbtn1"
+										class="btn btn-primary" value="Search"
+										onclick="SearchEmployee();"> <input type="reset"
+										id="btnReset" class="btn btn-primary"
+										th:value="#{msg.thymeleaf.pagelabel.btnReset}" /> <a
+										th:href="@{/user/home}" class="btn"><span
+										th:text="#{msg.thymeleaf.pagelabel.btnCancel}"></span></a>
+								</div>
+								<hr />
+							</div>
+							<div class="BrokenPeriodHiddenData" th:if="${status}=='1'">
+								<div class="form-group">
+									<label class="control-label col-sm-2" for="title"><span
+										th:utext="#{msg.pagelabel.employeeName}"></span></label>
+									<div class="col-md-2">
+										<INPUT id=txtEmployeeName style="TEXT-TRANSFORM: uppercase"
+											readOnly name=txtEmployeeName th:value="${EmpDetail[0]}"
+											class="form-control">
+									</div>
+									<label class="control-label col-sm-2 hide" for="title"><span
+										th:utext="#{msg.pagelabel.employeeIID}"> </span></label>
+									<div class="col-md-2 hide">
+										<INPUT id=txtEmployeeId style="TEXT-TRANSFORM: uppercase"
+											readOnly th:value="${EmpDetail[6]}" name=txtEmployeeId
+											class="form-control">
+									</div>
+									<label class="control-label col-sm-2" for="title"><span
+										th:utext="#{msg.pagelabel.SevaarthID}"> </span></label>
+									<div class="col-md-2">
+										<INPUT id=txtSevarthId style="TEXT-TRANSFORM: uppercase"
+											readOnly th:value="${EmpDetail[1]}" name=txtSevarthId
+											class="form-control">
+									</div>
+									<label class="control-label col-sm-2" for="title"><span
+										th:utext="#{msg.pagelabel.designation}"></span></label>
+									<div class="col-md-2">
+										<INPUT id=txtDesignation style="TEXT-TRANSFORM: uppercase"
+											readOnly th:value="${EmpDetail[2]}" name=txtDesignation
+											class="form-control">
+									</div>
+								</div>
+								<div class="form-group">
+									<!--  <label class="control-label col-sm-2 clear" for="title"><span th:utext="#{msg.pagelabel.orgInstiName}"></span></label>
+                                    <div class="col-md-2">
+                                        <INPUT id=txtOfficeName style="TEXT-TRANSFORM: uppercase" readOnly th:value="${EmpDetail[3]}" name=txtOfficeName class="form-control">
+                                    </div> -->
+									<label class="control-label col-sm-2" for="title"><span
+										th:utext="#{msg.pagelabel.GPFDCPS}"></span></label>
+									<div class="col-md-2">
+										<INPUT id=txtGpfNo style="TEXT-TRANSFORM: uppercase" readOnly
+											th:value="${EmpDetail[4]}" name=txtGpfNo class="form-control">
+									</div>
+									<label class="control-label col-sm-2" for="title"><span
+										th:utext="#{msg.pagelabel.superAnnuationdt}"></span></label>
+									<div class="col-md-2">
+										<INPUT id=superAnnuationDate style="TEXT-TRANSFORM: uppercase"
+											readOnly th:value="${EmpDetail[5]}" name=superAnnuationDate
+											class="form-control">
+									</div>
+								</div>
+								<BR>
+								<FIELDSET class="tabstyle">
+									<LEGEND>
+										<span th:utext="#{msg.pagelabel.brokenPeriodPay}"></span>
+									</LEGEND>
+									<SCRIPT type=text/javascript> LISTREASONSFORBROKENPERIOD='' ; </SCRIPT>
+									<SCRIPT> LISTREASONSFORBROKENPERIOD += "<option value='Suspension'> Suspension</option>";</SCRIPT>
+									<SCRIPT> LISTREASONSFORBROKENPERIOD += "<option value='Abscond'> Abscond</option>";</SCRIPT>
+									<SCRIPT> LISTREASONSFORBROKENPERIOD += "<option value='Leave without Pay'> Leave without Pay</option>";</SCRIPT>
+									<SCRIPT> LISTREASONSFORBROKENPERIOD += "<option value='Leave not sanctioned'> Leave not sanctioned</option>";</SCRIPT>
+									<SCRIPT> LISTREASONSFORBROKENPERIOD += "<option value='Others'> Others</option>";</SCRIPT>
+									<DIV class="table-responsive table-responsive1">
+										<TABLE id="vo" class="table table-bordered table-striped"
+											style="width: 100%">
+											<THEAD>
+												<TR>
+													<TH class=datatableheader><span
+														th:utext="#{msg.pagelabel.fromDate}"></span> <b> <font
+															color="red" size="4px;">*</font>
+													</b></TH>
+													<TH class=datatableheader><span
+														th:utext="#{msg.pagelabel.toDate}"></span> <b> <font
+															color="red" size="4px;">*</font>
+													</b></TH>
+
+
+
+													<TH class=datatableheader><span
+														th:utext="#{msg.thymeleaf.pagelabel.calculationOnBasic}"></span>
+														<b> <font color="red" size="4px;">*</font>
+													</b></TH>
+
+
+
+
+
+													<TH class=datatableheader><span
+														th:utext="#{msg.pagelabel.noOfDays}"></span><b> <font
+															color="red" size="4px;">*</font>
+													</b></TH>
+													<TH class=datatableheader><span
+														th:utext="#{msg.pagelabel.basic}"></span><b> <font
+															color="red" size="4px;">*</font>
+													</b></TH>
+													<span
+														th:each="allowRuleListRow,iterationStatus : ${allowRuleList}">
+														<TH class=datatableheader><span
+															th:text="${allowRuleListRow.deptalldetNm}"><b>
+																	<font color="red" size="4px;">*</font>
+															</b></TH>
+													</span>
+													<!-- <span
+														th:each="deducOthEdpListRow,iterationStatus : ${deducOthEdpList}">
+														<TH class=datatableheader><span
+															th:text="${deducOthEdpListRow.deptalldetNm}"><b> <font
+																	color="red" size="4px;">*</font>
+															</b></TH>
+													</span> -->
+
+													<TH class=datatableheader><span
+														th:utext="#{msg.pagelabel.grossAmount}"></span></TH>
+
+													<span
+														th:each="dedRuleListRow,iterationStatus : ${dedRuleList}">
+														<TH class=datatableheader><span
+															th:text="${dedRuleListRow.deptalldetNm}"><b> <font
+																	color="red" size="4px;">*</font>
+															</b></TH>
+													</span>
+
+
+													<TH class=datatableheader><span
+														th:utext="#{msg.pagelabel.TotalDeduction}"></span><b>
+															<font color="red" size="4px;">*</font>
+													</b></TH>
+													<TH class=datatableheader><span
+														th:utext="#{msg.pagelabel.netPay}"></span><b> <font
+															color="red" size="4px;">*</font>
+													</b></TH>
+													<TH class="datatableheader" size="10"><span
+														th:utext="#{msg.pagelabel.reasonForNondrawal}"></span> <b>
+															<font color="red" size="4px;">*</font>
+													</b></TH>
+													<TH class=datatableheader><span
+														th:utext="#{msg.pagelabel.remark}"></span><b> <font
+															color="red" size="4px;">*</font>
+													</b></TH>
+													<TH class=datatableheader><span
+														th:utext="#{msg.pagelabel.Delete}"></span></TH>
+												</TR>
+											</THEAD>
+											<TBODY>
+												<!--    <div th:switch="${#authentication}? ${#authorization.expression('isAuthenticated()')} : ${false}">
+    <span th:case="${false}">User is not logged in</span>
+    <span th:case="${true}">Logged in user</span>
+    <span th:case="*">Should never happen, but who knows...</span>
+</div> -->
+
+												<!-- <div th:if="${customer.anonymous}">
+   <div>Welcome, Guest</div>
+ELSE
+<div th:unless="${customer.anonymous}">
+   <div th:text=" 'Hi,' + ${customer.name}">Hi, User</div>
+</div> -->
+												<span th:if="${PaysAddedBefore}"> <span
+													th:each="dataForDisplayListrow,iterationStatuss : ${DataForDisplayList}">
+
+														<TR>
+															<TD style="border: 1px solid rgb(255, 218, 178);">
+																<!--                                                     <INPUT  th:onblur="checkDateForThisMonth(this,1);" maxLength=10 name=txtFromDate type="date" class="form-control" th:value="${#dates.format(dataForDisplayListrow.fromDate, 'yyyy-MM-dd')}"  th:id="'txtFromDate' + ${iterationStatuss.count}" >  -->
+																<INPUT
+																th:onblur="'javascript:checkDateForThisMonth(this,\''+${iterationStatuss.count}+ '\');'"
+																maxLength=10 name=txtFromDate type="date"
+																class="form-control"
+																th:value="${#dates.format(dataForDisplayListrow.fromDate, 'yyyy-MM-dd')}"
+																th:id="'txtFromDate' + ${iterationStatuss.count}" >
+																<!--                                                <INPUT 	th:onblur="'javascript:checkDateForThisMonth(\'' +this+'\',\''+${iterationStatuss.count}+ '\');'"  maxLength=10 name=txtFromDate type="date" class="form-control" th:value="${#dates.format(dataForDisplayListrow.fromDate, 'yyyy-MM-dd')}"  th:id="'txtFromDate' + ${iterationStatuss.count}" >  -->
+																&nbsp;
+
+															</TD>
+															<TD style="border: 1px solid rgb(255, 218, 178);">
+																<!--                                                     <INPUT th:onblur="checkDateForThisMonth(this,${iterationStatuss.count});checkSameMonth(this,${iterationStatuss.count});setNoOfDays(${iterationStatuss.count});loadSalaryFromRuleEngine(${iterationStatuss.count});" th:value="${#dates.format(dataForDisplayListrow.toDate, 'yyyy-MM-dd')}" th:id="'txtToDate'+${iterationStatuss.count}"  maxLength=10 name=txtToDate type="date" class="form-control"> &nbsp; -->
+																<INPUT
+																th:onblur="'javascript:checkDateForThisMonth(this,\''+${iterationStatuss.count}+ '\');checkSameMonth(this,\''+${iterationStatuss.count}+ '\');setNoOfDays(\''+${iterationStatuss.count}+ '\');loadSalaryFromRuleEngine(\''+${iterationStatuss.count}+ '\');'"
+																th:value="${#dates.format(dataForDisplayListrow.toDate, 'yyyy-MM-dd')}"
+																th:id="'txtToDate'+${iterationStatuss.count}"
+																maxLength=10 name=txtToDate type="date"
+																class="form-control"> &nbsp;
+
+															</TD>
+
+
+
+															<td style="border: 1px solid rgb(255, 218, 178);">
+															
+															
+															<!-- <input type="text" th:value="${dataForDisplayListrow.basicForCalculation}" /> -->
+															
+															
+															<select
+																style="width: 154px"
+																th:id="'basicForCalculation'+${iterationStatuss.count}"
+																name="basicForCalculation" class="form-control"
+																th:onchange="'javascript:calculateSalaryBasedonBasic(\''+${iterationStatuss.count}+ '\');'">
+																
+																
+																	<span
+																	th:if="${dataForDisplayListrow.basicForCalculation=='oldBasic'}">
+																		<option value="newBasic">New Basic</option>
+																		<option selected value="oldBasic">Old Basic</option>
+															      	</span>
+
+																	<span
+																	th:if="${dataForDisplayListrow.basicForCalculation=='newBasic'}">
+																		<option selected value="newBasic">New Basic</option>
+																		<option value="oldBasic">Old Basic</option>
+																</span>
+
+
+
+
+
+															</select></td>
+
+
+
+															<TD style="border: 1px solid rgb(255, 218, 178);"><INPUT
+																th:id="'txtNoOfDays'+${iterationStatuss.count}" readOnly
+																name=txtNoOfDays
+																th:value="${dataForDisplayListrow.noOfDays}"
+																class="form-control"></TD>
+															<TD style="border: 1px solid rgb(255, 218, 178);">
+															
+															<INPUT
+																onkeypress=digitFormat(this);
+																th:onblur="calcNetPay(${iterationStatuss.count});"
+																th:value="${dataForDisplayListrow.basicPay}"
+																th:id="'txtBasicPay'+${iterationStatuss.count}"
+																maxLength=8 name=txtBasicPay class="form-control">
+																
+															</TD>
+															<span
+																th:each="allowRuleListRow,iterationStatus : ${dataForDisplayListrow.allowList}">
+																<TD style="border: 1px solid rgb(255, 218, 178);">
+																	<INPUT onkeypress=digitFormat(this);
+																	th:onblur="'javascript:calcGrossAmount(\''+${iterationStatuss.count}+ '\');calcNetPay(\''+${iterationStatuss.count}+ '\');'"
+																	th:value="${allowRuleListRow[3]}"
+																	th:id="'allowances' + ${iterationStatus.count} +  ${iterationStatuss.count}"
+																	maxLength=8 name=allowances class="form-control"> 
+																	
+																	<INPUT type="hidden"
+																	onkeypress=digitFormat(this);
+																	th:value="${allowRuleListRow[2]}"
+																	th:id="'allowancescode' + ${iterationStatus.count} +  ${iterationStatuss.count}"
+																	readOnly maxLength=8 name=allowancescode
+																	class="form-control">
+																	
+																	 <INPUT type="hidden"
+																	onkeypress=digitFormat(this);
+																	th:id="'hidAllowanceName' + ${iterationStatus.count} +  ${iterationStatuss.count}"
+																	readOnly maxLength=8 name=hidAllowanceName
+																	class="form-control">
+															</TD>
+															</span>
+															<!-- <span
+														th:each="deducOthEdpListRow,iterationStatus : ${deducOthEdpList}">
+														<TD style=""><INPUT onkeypress=digitFormat(this); onblur="calcNetPay('1');" id=otherallowances readOnly maxLength=8 name=otherallowances class="form-control">
+																	
+														</TD>
+													</span> -->
+															<!--                                                     <INPUT id="hidTotalAllowances" type="hidden" value="0" name="hidTotalAllowances" /> -->
+															<TD style="border: 1px solid rgb(255, 218, 178);"><INPUT
+																th:id="'txtGrossAmt'+${iterationStatuss.count}" readOnly
+																name="txtGrossAmt" class="form-control"> <!--                                                     <INPUT id=hidTotalDeductions type=hidden value=0 name=hidTotalDeductions class="form-control"> -->
+															</TD>
+
+															<span
+																th:each="dedRuleListRow,iterationStatus : ${dataForDisplayListrow.deductList}">
+																<TD style="border: 1px solid rgb(255, 218, 178);">
+																	<INPUT onkeypress=digitFormat(this);
+																	th:onblur="'javascript:calcTotalDeduction(\''+${iterationStatuss.count}+ '\');calcNetPay(\''+${iterationStatuss.count}+ '\');'"
+																	th:value="${dedRuleListRow[3]}"
+																	th:id="'dedections' + ${iterationStatus.count} + ${iterationStatuss.count}"
+																	maxLength=8 class="form-control"> <INPUT
+																	type="hidden" onkeypress=digitFormat(this);
+																	th:value="${dedRuleListRow[2]}"
+																	th:id="'dedectionscode' + ${iterationStatus.count} + ${iterationStatuss.count}"
+																	readOnly maxLength=8 name=dedectionscode
+																	class="form-control"> <INPUT type="hidden"
+																	onkeypress=digitFormat(this);
+																	th:id="'hidDeductionName' + ${iterationStatus.count} + ${iterationStatuss.count}"
+																	readOnly maxLength=8 name=hidDeductionName
+																	class="form-control">
+															</TD>
+
+
+															</span>
+															<!-- <span
+														th:each="deducTyEdpListRow,iterationStatus : ${deducTyEdpList}">
+														<TD style=""><INPUT onkeypress=digitFormat(this); onblur="calcNetPay('1');" id=otherdedections readOnly maxLength=8 name=otherallowances class="form-control">
+																	
+															</TD>
+													</span> -->
+
+															<TD style="border: 1px solid rgb(255, 218, 178);"><INPUT
+																th:id="'txtTotalDeduction'+${iterationStatuss.count}"
+																readOnly name="txtTotalDeduction;?" class="form-control">
+															</TD>
+															<TD style="border: 1px solid rgb(255, 218, 178);"><INPUT
+																th:id="'txtNetPay'+${iterationStatuss.count}" readOnly
+																th:value="${dataForDisplayListrow.netPay}"
+																name="txtNetPay" class="form-control"></TD>
+															<TD style="border: 1px solid rgb(255, 218, 178);"><SELECT
+																style="width: 154px"
+																th:id="'cmbReasonForBrokenPeriod'+${iterationStatuss.count}"
+																name="cmbReasonForBrokenPeriod" class="form-control">
+																	<span
+																	th:if="${dataForDisplayListrow.reason=='Suspension' }">
+																		<OPTION value="0">-- Select --</OPTION>
+																		<OPTION selected value="Suspension">Suspension</OPTION>
+																		<OPTION value="Abscond">Abscond</OPTION>
+																		<OPTION value="Leave without Pay">Leave
+																			without Pay</OPTION>
+																		<OPTION value="Leave not sanctioned">Leave
+																			not sanctioned</OPTION>
+																		<OPTION value="Others">Others</OPTION>
+																</span>
+																	<span
+																	th:if="${dataForDisplayListrow.reason=='Abscond'}">
+																		<OPTION value="0">-- Select --</OPTION>
+																		<OPTION value="Suspension">Suspension</OPTION>
+																		<OPTION selected value="Abscond">Abscond</OPTION>
+																		<OPTION value="Leave without Pay">Leave
+																			without Pay</OPTION>
+																		<OPTION value="Leave not sanctioned">Leave
+																			not sanctioned</OPTION>
+																		<OPTION value="Others">Others</OPTION>
+																</span>
+																	<span
+																	th:if="${dataForDisplayListrow.reason=='Leave without Pay'}">
+																		<OPTION value="0">-- Select --</OPTION>
+																		<OPTION value="Suspension">Suspension</OPTION>
+																		<OPTION value="Abscond">Abscond</OPTION>
+																		<OPTION selected value="Leave without Pay">Leave
+																			without Pay</OPTION>
+																		<OPTION value="Leave not sanctioned">Leave
+																			not sanctioned</OPTION>
+																		<OPTION value="Others">Others</OPTION>
+																</span>
+																	<span
+																	th:if="${dataForDisplayListrow.reason=='Leave not sanctioned' }">
+																		<OPTION value="0">-- Select --</OPTION>
+																		<OPTION value="Suspension">Suspension</OPTION>
+																		<OPTION value="Abscond">Abscond</OPTION>
+																		<OPTION value="Leave without Pay">Leave
+																			without Pay</OPTION>
+																		<OPTION selected value="Leave not sanctioned">Leave
+																			not sanctioned</OPTION>
+																		<OPTION value="Others">Others</OPTION>
+																</span>
+																	<!--   <span th:if="${ dataForDisplayListrow.reason=='Leave not sanctioned' }" >
+                                                            <OPTION selected th:value="${dataForDisplayListrow.reason}" th:text="${dataForDisplayListrow.reason}"></OPTION>
+                                                           </span> -->
+																	<span
+																	th:if="${ dataForDisplayListrow.reason=='Others'}">
+																		<OPTION value="0">-- Select --</OPTION>
+																		<OPTION value="Suspension">Suspension</OPTION>
+																		<OPTION value="Abscond">Abscond</OPTION>
+																		<OPTION value="Leave without Pay">Leave
+																			without Pay</OPTION>
+																		<OPTION value="Leave not sanctioned">Leave
+																			not sanctioned</OPTION>
+																		<OPTION selected value="Others">Others</OPTION>
+																</span>
+																	<!--   <span th:if="${dataForDisplayListrow.reason=='Suspension' || dataForDisplayListrow.reason=='Abscond'  || dataForDisplayListrow.reason=='Leave without Pay' || dataForDisplayListrow.reason=='Leave not sanctioned' || dataForDisplayListrow.reason=='Others'}" >
+                                                            <OPTION selected th:value="${dataForDisplayListrow.reason}" th:text="${dataForDisplayListrow.reason}"></OPTION>
+                                                           </span> -->
+																	<span th:if="${dataForDisplayListrow.reason} == null">
+																		<OPTION selected value="0">-- Select --</OPTION>
+																		<OPTION value="Suspension">Suspension</OPTION>
+																		<OPTION value="Abscond">Abscond</OPTION>
+																		<OPTION value="Leave without Pay">Leave
+																			without Pay</OPTION>
+																		<OPTION value="Leave not sanctioned">Leave
+																			not sanctioned</OPTION>
+																		<OPTION value="Others">Others</OPTION>
+																</span>
+
+
+															</SELECT></TD>
+															<TD style="border: 1px solid rgb(255, 218, 178);"><input
+																th:id="'txtRemarks'+${iterationStatuss.count}"
+																th:value="${dataForDisplayListrow.remarks}"
+																name="txtRemarks" class="form-control"></TD>
+															<TD style="border: 1px solid rgb(255, 218, 178);"><A
+																onClick="removeRow(this)" style="CURSOR: pointer"><LABEL
+																	id="DeleteRowBrokenPrd"><span
+																		class="glyphicon glyphicon-trash"></span></LABEL></A></TD>
+														</TR>
+												</span>
+												</span>
+
+												<span th:unless="${PaysAddedBefore}">
+													<TR>
+														<TD style="border: 1px solid rgb(255, 218, 178);"><INPUT
+															onkeypress=digitFormat(this);dateFormat(this);
+															id="txtFromDate1" maxLength="10" name="txtFromDate"
+															onBlur="checkDateForThisMonth(this,'1');" type="date"
+															class="form-control"> &nbsp;</TD>
+														<TD style="border: 1px solid rgb(255, 218, 178);"><INPUT
+															onblur="checkDateForThisMonth(this,'1');checkSameMonth(this,'1');setNoOfDays('1');loadSalaryFromRuleEngine('1');calcGrossAmount ('1');calcNetPay('1')"
+															id="txtToDate1" maxLength="10" name="txtToDate"
+															type="date" class="form-control"> &nbsp;</TD>
+
+
+														<td style="border: 1px solid rgb(255, 218, 178);"><select
+															style="width: 154px" th:id="basicForCalculation1"
+															name="basicForCalculation"
+															onchange="calculateSalaryBasedonBasic(1);"
+															class="form-control">
+																<option value="newBasic">New Basic</option>
+																<option value="oldBasic">Old Basic</option>
+														</select></td>
+
+
+
+
+														<TD style="border: 1px solid rgb(255, 218, 178);"><INPUT
+															id="txtNoOfDays1" readOnly name="txtNoOfDays"
+															class="form-control"></TD>
+														<TD style="border: 1px solid rgb(255, 218, 178);"><INPUT
+															onkeypress=digitFormat(this); onblur="calcNetPay('1');"
+															id="txtBasicPay1" maxLength="8" name="txtBasicPay"
+															class="form-control" readOnly></TD>
+														<span
+															th:each="allowRuleListRow,iterationStatus : ${allowRuleList}">
+															<TD style="border: 1px solid rgb(255, 218, 178);"><INPUT
+																onkeypress=digitFormat(this);
+																onblur="calcGrossAmount('1');"
+																th:id="'allowances' + ${iterationStatus.count} + '1'"
+																maxLength="8" class="form-control"> <INPUT
+																type="hidden" onkeypress=digitFormat(this);
+																th:id="'allowancescode' + ${iterationStatus.count} + '1'"
+																readOnly maxLength="8" name=allowancescode
+																class="form-control"> <INPUT type="hidden"
+																onkeypress=digitFormat(this);
+																th:id="'hidAllowanceName' + ${iterationStatus.count} + '1'"
+																readOnly maxLength="8" name=hidAllowanceName
+																class="form-control"></TD>
+														</span>
+														<!-- <span
+														th:each="deducOthEdpListRow,iterationStatus : ${deducOthEdpList}">
+														<TD style="border:1px solid rgb(255, 218, 178);"><INPUT onkeypress=digitFormat(this); onblur="calcNetPay('1');" id=otherallowances readOnly maxLength=8 name=otherallowances class="form-control">
+																	
+														</TD>
+													</span> -->
+														<!--                                                     <INPUT id="hidTotalAllowances" type="hidden" value="0" name="hidTotalAllowances" /> -->
+
+														<TD style="border: 1px solid rgb(255, 218, 178);"><INPUT
+															id="txtGrossAmt1" onblur="calcGrossAmount ('1');"
+															readOnly name="txtGrossAmt" class="form-control">
+															<!--                                                     <INPUT id=hidTotalDeductions type=hidden value=0 name=hidTotalDeductions class="form-control"> -->
+														</TD>
+
+														<span
+															th:each="dedRuleListRow,iterationStatus : ${dedRuleList}">
+															<TD style="border: 1px solid rgb(255, 218, 178);"><INPUT
+																onkeypress=digitFormat(this);
+																onblur="calcNetPay('1');calcTotalDeduction('1');"
+																th:id="'dedections' + ${iterationStatus.count} + '1'"
+																maxLength=8 class="form-control"> <INPUT
+																type="hidden" onkeypress=digitFormat(this);
+																th:id="'dedectionscode' + ${iterationStatus.count} + '1'"
+																readOnly maxLength=8 name="dedectionscode"
+																class="form-control"> <INPUT type="hidden"
+																onkeypress=digitFormat(this);
+																th:id="'hidDeductionName' + ${iterationStatus.count} + '1'"
+																readOnly maxLength=8 name="hidDeductionName"
+																class="form-control"></TD>
+														</span>
+														<!-- <span
+														th:each="deducTyEdpListRow,iterationStatus : ${deducTyEdpList}">
+														<TD style="border:1px solid rgb(255, 218, 178);"><INPUT onkeypress=digitFormat(this); onblur="calcNetPay('1');" id=otherdedections readOnly maxLength=8 name=otherallowances class="form-control">
+																	
+															</TD>
+													</span> -->
+
+														<TD style="border: 1px solid rgb(255, 218, 178);"><INPUT
+															id="txtTotalDeduction1" readOnly
+															name="txtTotalDeduction;?" class="form-control">
+														</TD>
+														<TD style="border: 1px solid rgb(255, 218, 178);"><INPUT
+															id="txtNetPay1" readOnly name="txtNetPay"
+															class="form-control"></TD>
+														<TD style="border: 1px solid rgb(255, 218, 178);"><SELECT
+															width="154px" id="cmbReasonForBrokenPeriod1"
+															name="cmbReasonForBrokenPeriod" _counted="undefined"
+															oldVisibility="null" class="form-control">
+																<OPTION selected value="0">-- Select --</OPTION>
+																<OPTION value="Suspension">Suspension</OPTION>
+																<OPTION value="Abscond">Abscond</OPTION>
+																<OPTION value="Leave without Pay">Leave without
+																	Pay</OPTION>
+																<OPTION value="Leave not sanctioned">Leave not
+																	sanctioned</OPTION>
+																<OPTION value="Others">Others</OPTION>
+														</SELECT></TD>
+														<TD style="border: 1px solid rgb(255, 218, 178);"><input
+															id="txtRemarks1" name="txtRemarks" class="form-control">
+														</TD>
+														<TD style="border: 1px solid rgb(255, 218, 178);"><A
+															onClick="removeRow(this)" style="CURSOR: pointer"><LABEL
+																id="DeleteRowBrokenPrd"><span
+																	class="glyphicon glyphicon-trash"></span></LABEL></A></TD>
+													</TR>
+												</span>
+
+											</TBODY>
+										</TABLE>
+										<INPUT id="hidTotalRows" type=hidden
+											th:value="${hidTotalRows}">
+									</DIV>
+									<BR>
+									<DIV class="text-center">
+										<INPUT id="btnAddRow" class="btn btn-primary"
+											style="WIDTH: 75px" maxLength=3 size=3 type=button value=Add
+											name="btnAddRow"> <INPUT id="btnSave"
+											class="btn btn-primary" maxLength=3 size=3 type=button
+											onclick="saveBrokenPrdData();" value=Save name="btnSave">
+									</DIV>
+									<br />
+									<br />
+								</FIELDSET>
+								<INPUT id=hidSearchFromSRKA type=hidden value=searchBySRKA
+									name=hidSearchFromSRKA>
+							</div>
+						</div>
+						<SCRIPT type=text/javascript> // new AjaxJspTag.Autocomplete( // "ifms.htm?actionFlag=getEmpNameForAutoCompletePayrollSearch" , { // indicator: "roleIndicatorRegion" , // source: "txtSearchName" , // target: "txtSearchName" , // minimumCharacters: "3" , // className: "autocomplete" , // parameters: "searchKey={txtSearchName},searchBy={hidSearchFromSRKA}" // }); </SCRIPT>
+						<SCRIPT language=JavaScript>
+                            // setForm('BrokenPeriod');
+						</SCRIPT>
+					</FORM>
+					<SCRIPT type=text/javascript> // loadNetPay(); // loadGrossAmount(); // loadTotalDeduction(); </SCRIPT>
+				</DIV>
+			</DIV>
+		</DIV>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/datatable-common.js}"></script>
+	<script th:src="@{/js/project/broken-period.js}"></script>
+
+	<script type="text/javascript">
+
+loadNetPay();
+loadGrossAmount();
+loadTotalDeduction();
+
+
+</script>
+	
+</BODY>
+
+</html>

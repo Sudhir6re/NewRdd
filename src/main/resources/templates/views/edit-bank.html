@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.bankMaster}"></title>
+</head>
+<body class="edit-bank">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+	<div class="breadcrumbMain">
+				<nav aria-label="breadcrumb">
+				  <ol class="breadcrumb">
+				<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+				    <li class="breadcrumb-item"><a href="#"><span  th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+				    <li class="breadcrumb-item active" aria-current="page"><span   th:utext="#{msg.thymeleaf.pageheading.bankMaster}"></span></li>
+				  </ol>
+				</nav>
+			</div>
+			<h3 Class="PageHeading"><span  th:utext="#{msg.thymeleaf.pageheading.bankMaster}"></span></h3>
+		<div align="center" class="success">
+			<span th:utext="${message}"></span>
+		</div>
+		<!-- <div th:if="${savedSuccessfully.value} eq 'SAVED'">
+			<p>Saved Successfully !</p>
+		</div> -->
+		<fieldset class="container">
+		<!-- <legend th:utext="#{msg.thymeleaf.pageheading.addBankDetails}" th:style="${'color: orange;'}"></legend> -->
+		
+<!-- 		<h1 th:utext="#{common.label.title}"></h1> -->
+		
+		<form class="form-horizontal" th:action="@{/mdc/editbankdetails}"
+			th:object="${mstBankEntity}" method="POST" enctype="multipart/form-data">
+			
+			<input type="hidden" name="language" id="language" th:value="${language}"/>
+			 
+			
+			
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="title" ><span th:utext="#{msg.thymeleaf.pagelabel.bankname}"></span>&nbsp;&nbsp;<b><font color="red" size="4px;">*</font></b></label>
+				<div class="col-sm-3">
+			<input type="text" class="form-control"  name="bankName" th:field="*{bankName}" id ="bankName1" ></input> 
+				</div>
+				<label class="control-label col-sm-2" for="title" ><span th:utext="#{msg.thymeleaf.datatablelabel.bankShortName}"></span>&nbsp;&nbsp;<b><font color="red" size="4px;">*</font></b></label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control"  name="bankShortName" th:field="*{bankShortName}" id ="bankShortName" ></input> 
+				</div>
+			</div>
+			<div class="form-group">
+			<!-- 	<label class="control-label col-sm-2" for="title" ><span th:utext="#{msg.thymeleaf.datatablelabel.bankCode}"></span>&nbsp;&nbsp;<b><font color="red" size="4px;">*</font></b></label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control"  id="bankCode1" th:field="*{bankCode}" name="bankCode"  readonly="readonly"></input>
+				</div> -->
+				
+				<input type="hidden" th:field="*{bankId}" id="bankId1"/>
+			</div>
+			
+			
+			<div class="form-group">
+				<hr/>
+				<div class="col-sm-offset-5 col-sm-1">
+					<input type="submit" id="btnSave1" class="btn btn-primary" th:value="#{msg.thymeleaf.pagelabel.btnUpdate}" />
+				</div>
+				<!-- <div class="col-sm-offset-0 col-sm-1">
+					<input type="button" class="btn btn-info" th:value="#{msg.thymeleaf.pagelabel.btnCancel}"/>
+				</div> -->
+				<div class="col-sm-offset-0 col-sm-1"><a th:href = "@{/mdc/mstBank}" >
+  				<input type="button"  id="cancel" class="btn btn-info"   th:href = "@{/master/mstBank}"  
+  				th:value="#{msg.thymeleaf.pagelabel.btnCancel}"  /> </a>
+  				</div>
+			</div>
+			
+			<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+			
+		</form>
+		</fieldset>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/datatable-common.js}"></script> 
+ 	<script th:src="@{/js/project/mst-bank.js}"></script> 
+	
+</body>
+</html>

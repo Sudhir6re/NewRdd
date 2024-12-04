@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.employeeConfigurationapp}"></title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi">
+	
+</script>
+
+<style type="text/css">
+input[type="Date"] {
+	border-radius: 20px;
+	text-align: center;
+	padding-left: 20px;
+	border-color: green;
+}
+
+input#uid1, input#uid2, input#uid3 {
+	width: 28% !important;
+}
+
+.nav.nav-tabs li.active	a, .nav-tabs>li>a:hover {
+	background: #ffbb55 !important;
+}
+
+ul.nav.nav-tabs {
+	background: bisque;
+	border: 1px solid #cc6306;
+}
+
+.tab-content {
+	border: 1px solid #cc6306;
+	padding: 15px;
+	border-top: none;
+}
+
+input#uid1, input#uid2, input#uid3 {
+	width: 23% !important;
+}
+</style>
+</head>
+<body class="approve-dcps-employee-configuration">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.employeeConfigurationapp}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span
+				th:utext="#{msg.thymeleaf.pageheading.employeeConfigurationapp}"></span>
+		</h3>
+
+		<fieldset class="container">
+			<form class="form-horizontal" name="myForm" id="myForm"
+				th:action="@{/ddo/dcpsEmployeeDetails}"
+				th:object="${mstEmployeeModel}" method="POST"
+				enctype="multipart/form-data">
+
+				<input type="hidden" name="dcpsgpfflag" id="dcpsgpfflag"
+					th:field="*{dcpsgpfflag}" disabled="disabled" class="form-control" />
+				<input type="hidden" name="sevaarthId" id="sevaarthId"
+					th:field="*{sevaarthId}" disabled="disabled" class="form-control" />
+				<input type="hidden" name="deptNm" id="deptNm" th:field="*{deptNm}"
+					disabled="disabled" class="form-control" /> <input type="hidden"
+					name="dcpsid" id="dcpsid" th:field="*{dcpsid}" class="form-control" />
+				<input type="hidden" name="gpf_id" id="gpf_id" th:field="*{gpf_id}"
+					class="form-control" /> <input type="hidden" name="nomineeid"
+					id="nomineeid" th:field="*{nomineeid}" class="form-control" /> <input
+					type="hidden" name="gisid" id="gisid" th:field="*{gisid}"
+					class="form-control" /> <input type="hidden"
+					name="photoAttachmentId" id="photoAttachmentId"
+					th:field="*{photoAttachmentId}" class="form-control" /> <input
+					type="hidden" name="signatureAttachmentId"
+					id="signatureAttachmentId" th:field="*{signatureAttachmentId}"
+					class="form-control" /> <input type="hidden" name="uidNo"
+					id="uidNo" th:field="*{uidNo}" disabled="disabled"
+					class="form-control" /> <input type="hidden" name="ddoCode"
+					id="ddoCode" th:field="*{ddoCode}" disabled="disabled"
+					class="form-control" /> <input type="hidden" name="employeeId"
+					id="employeeId" th:field="*{employeeId}" disabled="disabled"
+					class="form-control" /> <input type="hidden" name="action"
+					id="action" th:field="*{action}" disabled="disabled"
+					class="form-control" /> <input type="hidden" name="isActive"
+					id="isActive" th:field="*{isActive}" /> <input type="hidden"
+					name="language" id="language" th:value="${language}" /> <input
+					type="hidden" name="message" id="message" th:value="${message}" />
+				<input type="hidden" name="dcpsgpfflg" id="dcpsgpfflg"
+					th:field="*{dcpsgpfflag}" disabled="disabled" class="form-control" />
+				<div id="tabContainer" class="container">
+					<ul class="nav nav-tabs">
+						<!-- <li ><a data-toggle="tab" href="#home">Sevaarth Id Detail</a></li> -->
+						<li class="active"><a data-toggle="tab" href="#menu1"><b>Employee
+									Details</b></a></li>
+						<li><a data-toggle="tab" href="#menu2"><b>Department
+									Details</b></a></li>
+						<li><a data-toggle="tab" href="#menu3"><b>Bank/DCPS/NPS/GPF
+									Details</b></a></li>
+						<li><a data-toggle="tab" href="#menu4"><b>GIS Details</b></a></li>
+						<li><a data-toggle="tab" href="#menu5"><b>DCPS/NPS
+									Nominee Details</b></a></li>
+						<li><a data-toggle="tab" href="#menu6"><b>Photo/Signature</b></a></li>
+					</ul>
+					<div class="tab-content">
+
+						<div id="menu1" class="tab-pane fade in active">
+							<br />
+							<fieldset>
+								<legend>Employee Details </legend>
+							</fieldset>
+							<div
+								th:replace="views/approve-emp-config-tabs :: EmployeeDetails"></div>
+						</div>
+						<div id="menu2" class="tab-pane fade">
+							<br />
+							<fieldset>
+								<legend>Department Details </legend>
+							</fieldset>
+							<div
+								th:replace="views/approve-emp-config-tabs :: DepartmentDetails"></div>
+						</div>
+						<div id="menu3" class="tab-pane fade">
+							<br />
+							<fieldset>
+								<legend>Bank/DCPS/NPS/GPF Details </legend>
+							</fieldset>
+							<div th:replace="views/approve-emp-config-tabs :: BankDetails"></div>
+						</div>
+						<div id="menu4" class="tab-pane fade">
+							<br />
+							<fieldset>
+								<legend>GIS Details </legend>
+							</fieldset>
+							<div th:replace="views/approve-emp-config-tabs :: GISDetails"></div>
+						</div>
+						<div id="menu5" class="tab-pane fade">
+							<br />
+							<fieldset>
+								<legend>DCPS/NPS Nominee Details </legend>
+							</fieldset>
+							<div th:replace="views/approve-emp-config-tabs :: NomineeDetails"></div>
+						</div>
+						<div id="menu6" class="tab-pane fade">
+							<br />
+							<fieldset>
+								<legend> Photo/Signature</legend>
+							</fieldset>
+							<div th:replace="views/approve-emp-config-tabs ::PhotoSignature "></div>
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" />
+						</div>
+					</div>
+					<hr />
+					<div class="form-group text-center">
+						<hr />
+						<input type="button" id="btnPrevious" name="btnPrevious"
+							value="Previous" class="btn" /> <input type="button"
+							id="btnNext" name="btnNext" value="Next" class="btn" /> <input
+							type="button" id="btnSave" class="btn btn-primary"
+							th:value="#{msg.thymeleaf.pagelabel.approve}"
+							th:onclick="'approveDcpsEmpDtls();'" />
+						<!-- 							ng-click="saveAsDraft();" /> -->
+						<input type="button" class="btn btn-primary rejectbtnn"
+							th:value="#{msg.thymeleaf.pagelabel.reject}"
+							th:onclick="'rejectEmpDtls();'" /> <span
+							th:if="${mstEmployeeModel.dcpsgpfflag == 'Y'}"> <input
+							type="button" class="btn btn-primary"
+							th:value="#{msg.thymeleaf.pagelabel.printformone}"
+							th:onclick="'empDtlsReport();'" />
+						</span> <input type="button" name="btnCancel" onclick="history.back()"
+							id="btnCancel" value="Cancel" class="buttontag">
+
+					</div>
+				</div>
+			</form>
+		</fieldset>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+
+	<script th:src="@{/js/project/employee-configuration.js}"></script>
+	<script th:src="@{/js/tab-pre-next.js}"></script>
+	<script th:src="@{/js/project/census.js}"></script>
+
+	<script>
+		$(document).ready(function() {
+			$("#parentFieldDepartmentId").prop("readonly", true);
+			$('#parentFieldDepartmentId').select2('readonly');
+			$("#subCorporationId").prop("readonly", true);
+			$("#isChangeParentDepartment1").prop("readonly", true);
+		});
+	</script>
+
+</body>
+</html>

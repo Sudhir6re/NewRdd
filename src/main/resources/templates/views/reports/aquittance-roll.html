@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.auiroll}"></title>
+</head>
+<body class="aquittance-roll">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.reportBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.auiroll}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<div class="formMainwithNoborTb container">
+			<div class="text-center">
+				<h3 Class="PageHeading">
+					<span th:utext="#{msg.thymeleaf.pageheading.auiroll}"></span>
+				</h3>
+			</div>
+			<br />
+			<form method="POST" action="" name="ReportForm"
+				enctype="multipart/form-data">
+				<table class="table bor-0 tbBold">
+					<tbody>
+						<tr>
+							<td class="captionTag" width="20%">Department <font
+								color="RED">*</font>
+							</td>
+							<td width="30%"><select name="Department" id="Department">
+									<option value="-1">-- Select --</option>
+									<option value="4000839">MAHARASHTRA
+										UNIVERSITY,THANE,NORTH MAHARASHTRA UNIVERSITY</option>
+							</select></td>
+
+							<td class="captionTag" width="20%">Month <font color="RED">*</font>
+							</td>
+							<td width="30%"><select name="Month" id="Month">
+									<option value="-1">-- Select --</option>
+									<option value="1">January</option>
+									<option value="2">February</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td class="captionTag">Year <font color="RED">*</font>
+							</td>
+							<td><select name="Year" id="Year">
+									<option value="-1">-- Select --</option>
+									<option value="2021">2021</option>
+									<option value="2022">2022</option>
+									<option value="2023">2023</option>
+									<option value="2024">2024</option>
+							</select></td>
+							<td class="captionTag">Bill Type</td>
+							<td><select name="billTypePara" id="billTypePara">
+									<option value="-1">-- Select --</option>
+									<option value="250015">Paybill</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td class="captionTag">Bill No <font color="RED">*</font>
+							</td>
+							<td><select name="Bill No" id="Bill No">
+									<option value="-1">-- Select --</option>
+									<option value="20541200001~1~22020872~22020872~9910000443">1</option>
+									<option value="20541200001~2~22020872~22020872~9910000442">2</option>
+									<option value="20541200001~3~22020872~22020872~9910000436">3</option>
+									<option value="20541200001~4~22020872~22020872~9910000434">4</option>
+							</select></td>
+							<td class="captionTag">Grade</td>
+							<td><select name="Grade" id="Grade">
+									<option value="-1">-- Select --</option>
+									<option value="100001">A</option>
+									<option value="100064">B</option>
+									<option value="100065">BnGz</option>
+									<option value="100066">C</option>
+									<option value="100067">D</option>
+									<option value="100115">No Grade</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td class="captionTag">Designation</td>
+							<td><select name="Designation" id="Designation">
+									<option value="-1">-- Select --</option>
+									<option value="100680">Accounts Clerk</option>
+									<option value="99100001139">Assistant Accountant</option>
+							</select></td>
+						</tr>
+						<tr bgcolor="#f3f3f3">
+							<td colspan="2" style="border-top: solid 1px #333333;"><i><b>Note:
+								</b>Parameter marked with a '<font face="Verdana" color="red">*</font>'
+									are mandatory</i> <br></td>
+							<td colspan="2" class="TableBorderTN"
+								style="padding: 5px; text-align: right">
+								<!-- <input
+								type="button" name="GenerateReport" id="rptBtn_GenerateReport"
+								value="Generate Report" class="btn"> --> <a
+								th:href="@{/ddoast/aquittanceRollReport}" class="btn"
+								id="rptBtn_GenerateReport">Generate Report</a> <input
+								type="reset" name="ResetParams" id="rptBtn_ResetBtn"
+								value="Reset" class="btn"> <input type="button"
+								name="btnBackAgain" id="btnBackAgain" onclick="history.back()"
+								value="Back" class="buttontag">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<br>
+
+			</form>
+		</div>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

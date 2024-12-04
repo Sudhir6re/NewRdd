@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.audittrial}"></title>
+<style type="text/css">
+</style>
+</head>
+<body class="audit-trial">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.audittrial}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.audittrial}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<div id="content">
+				<fieldset class="tabstyle">
+					<div class="scrollablediv">
+						<table class="table table=bordered" id="so">
+							<thead>
+								<tr>
+									<th class="">User Id</th>
+									<th class="">IP Address</th>
+									<th class="">Login Date and time</th>
+									<th class="">Login Status</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="bankstat : ${lstdata}">
+									<td th:text="${bankstat.username}"></td>
+									<td th:text="${bankstat.loginIp}">47.247.155.86</td>
+									<td th:text="${bankstat.loginDate}">2024-07-02
+										00:23:04.639</td>
+									<td th:text="${bankstat.status}">Login Successful.</td>
+
+								</tr>
+							</tbody>
+						</table>
+						<br />
+						<div class="text-center">
+							<input type="button" name="btnCancel" onclick="history.back()"
+								id="btnCancel" value="Cancel" size="3" maxlength="3"
+								class="buttontag">
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/mst-bank.js}"></script>
+</body>
+</html>

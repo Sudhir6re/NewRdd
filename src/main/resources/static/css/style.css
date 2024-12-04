@@ -1,0 +1,1650 @@
+/* Styling all elements=======================================================================================*/
+* {
+	font-family: Verdana;
+	font-size: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+td {
+	font-size: 98%;
+}
+
+th {
+	font-size: 80%;
+}
+
+h1 { font-size:1.5em!important;}
+
+label.error {
+	float: none;
+	color: red;
+	padding-left: .5em;
+	vertical-align: top;
+}
+
+p {
+	clear: both;
+}
+
+.submit {
+	padding: 7px 0 0 13px;
+}
+
+em {
+	font-weight: bold;
+	padding-right: 1em;
+	vertical-align: top;
+}
+
+img {
+	border: none
+}
+
+abbr,acronym {
+	cursor: help
+}
+
+.floatleft {
+	float: left !important
+}
+
+.floatright {
+	float: right !important
+}
+/* --------------- Applying clearfix fix for some browsers to use in appropriate places -------------- */
+.clearfix:after {
+	content: " ";
+	display: block;
+	height: 0%;
+	clear: both;
+	visibility: hidden
+}
+
+.clearfix {
+	display: inline-block
+}
+/* Hide from IE Mac \*/
+.clearfix {
+	display: block
+}
+/* End hide from IE Mac */
+.clear {
+	clear: both
+}
+/* Global Hyperlinks */
+a {
+	color: #111;
+	outline: none;
+	border: none;
+	text-decoration: none
+}
+
+a:link {
+	color: #111
+}
+
+a:visited {
+	color: #353535
+}
+
+a:hover,a:focus {
+	text-decoration: underline
+}
+/*==========================================================================================================*/
+html {
+	font-size: 100.01%;
+	color: #00000;
+	height: 100%;
+	min-height: 100%;
+	font-family: Arial, Helvetica, sans-serif
+}
+
+body {
+	font: 100% Arial, Helvetica, sans-serif;
+	color: #00000;
+	min-height: 101%
+} /*----- Body -----*/
+#wrapper {
+	background: #fff url(../../images/uninor/wrapper.jpg) repeat-x 0 0;
+	width: 99%;
+	border-left: 1px solid #d4dae6;
+	border-right: 1px solid #d4dae6;
+	margin: 0 auto;
+	height: 100%
+} /*----- Main Wrapper -----*/
+#top {
+	position: relative;
+	height: 110px
+}
+
+.logo {
+	cursor: pointer
+}
+
+.uninor-logo {
+	position: absolute;
+	top: 48px;
+	right: 11px
+}
+
+.logout {
+	position: absolute;
+	top: 6px;
+	right: 11px;
+	color: #dee5f2;
+	font-size: .8em
+}
+
+.logout img {
+	vertical-align: middle;
+	margin: 0 0 2px 5px
+}
+
+#nav {
+	height: 52px;
+	padding: 7px 0 0 13px;
+}
+
+#nav li {
+	float: left;
+	list-style: none;
+	text-align: center;
+	font: 1em "Myriad Pro", Arial, Helvetica;
+	color: #334e84;
+	display: block;;
+	background: url(../../images/uninor/nav-sep.jpg) no-repeat right 0;
+	padding: 0 9px
+}
+
+#nav li a {
+	display: inline-block;
+	text-decoration: none;
+	height: 21px;
+	padding-top: 31px;
+	cursor: default;
+	color: #43567e; /*line-height:82px;*/
+}
+
+#nav li a:hover,#nav li .active {
+	float: left;
+	background-position: left bottom !important; /*line-height:82px;*/
+	color: #fffffe
+}
+
+#nav li.last {
+	background: none
+}
+
+#about-us a {
+	background: url(../../images/uninor/about-us.png) no-repeat 0 0;
+	width: 75px
+}
+
+#contact-us a {
+	background: url(../../images/uninor/contact-us.png) no-repeat 0 0;
+	width: 86px
+}
+
+#scan a {
+	background: url(../../images/uninor/scan.png) no-repeat 0 0;
+	width: 53px
+}
+
+#scan-status a {
+	background: url(../../images/uninor/scan-status.png) no-repeat 0 0;
+	width: 96px
+}
+
+#sync-data a {
+	background: url(../../images/uninor/sync-data.png) no-repeat 0 0;
+	width: 86px
+}
+
+#rename-caf a {
+	background: url(../../images/uninor/rename-caf.png) no-repeat 0 0;
+	width: 105px
+}
+
+#side menu a {
+	background: url(../../images/uninor/rename-caf.png) no-repeat 0 0;
+	width: 105px
+}
+
+
+
+* html #container {
+	height: 420px
+}
+
+*+html #container {
+	height: 420px
+}
+
+
+
+#otp {
+	background: url(../../images/uninor/otp-section.png) no-repeat 0 0;
+	height: 341px;
+	margin-top: 30px;
+	position: relative
+}
+
+.logo2 {
+	position: absolute;
+	top: 0;
+	left: 302px;
+}
+
+#login h2 {
+	color: #43567e;
+	font: 20px "Myriad Pro", Arial, Helvetica;
+	margin-bottom: 17px
+}
+
+
+
+.formotp {
+	padding: 80px 0 0 450px;
+}
+
+.form p {
+	clear: both
+}
+
+.form label {
+	float: left;
+	color: #8391ad;
+	width: 120px;
+	font-size: 0.75em;
+	height: 33px;
+	margin: 0 0 7px 0;
+	background: url(../../images/uninor/login-fld-left.png) no-repeat 5px 0;
+	display: block;
+	padding-left: 5px
+}
+
+.formotp label {
+	float: left;
+	color: #8391ad;
+	width: 120px;
+	font-size: 0.75em;
+	height: 33px;
+	margin: 0 0 7px 0;
+	background: url(../../images/uninor/login-fld-left.png) no-repeat 5px 0;
+	display: block;
+	padding-left: 5px
+}
+
+.form label span {
+	background: url(../../images/uninor/login-fld-bg.png) repeat-x 0 0;
+	border-right: 1px solid #cad1dd;
+	display: block;
+	height: 33px;
+	margin-left: 8px;
+	padding-top: 8px
+}
+
+.formotp label span {
+	background: url(../../images/uninor/login-fld-bg.png) repeat-x 0 0;
+	border-right: 1px solid #cad1dd;
+	display: block;
+	height: 25px;
+	margin-left: 8px;
+	padding-top: 8px
+}
+
+.logtexbox,.logtexbox2 {
+	float: left;
+	background: url(../../images/uninor/logtexbox-rt.gif) no-repeat right 0;
+	width: 290px;
+	height: 33px;
+	display: block
+}
+
+
+.logtexbox2 span {
+	background: url(../../images/uninor/logtexbox.gif) repeat-x 0 0;
+	border: 0;
+	width: 190px;
+	height: 33px;
+	display: block
+}
+
+.textbox1,.textbox2 {
+	font: 12px Arial, Helvetica, sans-serif;
+	color: #303030;
+	border: 0;
+	width: 150px;
+	cursor: text;
+	padding-left: 5px;
+	margin-top: 7px;
+}
+
+.logtexbox2 {
+	width: 196px;
+}
+
+.textbox2 {
+	width: 183px
+}
+
+.for-pass {
+	float: left;
+	color: #43567e;
+	font-size: .8em;
+	font-weight: 700;
+	margin: 7px 0 0 8px
+}
+
+.for-pass a {
+	color: #43567e
+}
+
+.submit input {
+	margin-top: 13px
+}
+
+#footer {
+	background: url(../../images/uninor/fbg.gif) repeat-x 0 0;
+}
+
+#footer .datamatic {
+	text-align: center;
+	padding-top: 17px
+}
+
+#fbox {
+	width: 90%;
+	margin: 0 auto;
+	margin-top: 5px
+}
+
+.fbox-cont {
+	position: relative;
+	/* background: #e8eaf3; */
+	border-left: 1px solid #d2d8e4;
+	border-right: 1px solid #d2d8e4;
+	padding: 0px 0px 0px 0px;
+	margin: 0;
+	/* 	width: 1004px; */
+}
+
+* html .fbox-cont {
+	/* 	width: 96.4% */
+	
+}
+
+.fbox-bottom {
+	height: 7px;
+	background: url(../../images/uninor/fbox-bot.gif) no-repeat left bottom;
+}
+
+* html .fbox-bottom {
+	margin-top: -11px
+}
+
+.fbox-bottom span {
+	display: block;
+	position: relative;
+	height: 7px;
+	background: url(../../images/uninor/fbox-bot-right.gif) no-repeat right
+		bottom;
+}
+
+.fbox-top {
+	height: 7px;
+	background: url(../../images/uninor/fbox-top.gif) no-repeat left top;
+}
+
+* html .fbox-top {
+	margin-bottom: -11px
+}
+
+.fbox-top span {
+	display: block;
+	position: relative;
+	height: 7px;
+	background: url(../../images/uninor/fbox-top-right.gif) no-repeat right
+		top;
+}
+
+#fbox .left {
+	float: left;
+	width: 48.8%;
+	text-align: right;
+	background: url(../../images/uninor/col-sep.gif) no-repeat right 0;
+	padding-right: 11px;
+	min-height: 65px
+}
+
+#fbox .right {
+	float: right;
+	width: 48.8%
+}
+
+#fbox h2 {
+	color: #7185b0;
+	font-size: 14px;
+	font-weight: 700;
+	padding: 5px 0
+}
+
+#fbox p {
+	color: #7185b0;
+	font-size: 12px;
+	line-height: 18px
+}
+
+#int-bottom {
+	height: 7px;
+	background: url(../../images/uninor/cbottom-left.png) no-repeat left
+		bottom;
+	width: 99.2%;
+	margin: 0 auto;
+	margin-bottom: 5px
+}
+
+* html #int-bottom {
+	margin-top: -9px
+}
+
+#int-bottom span {
+	display: block;
+	position: relative;
+	height: 7px;
+	background: url(../../images/uninor/cbottom-right.gif) no-repeat right
+		bottom;
+}
+
+#int-container {
+	width: 95.8%;
+	margin: 0 auto;
+	padding: 23px 0 10px;
+	min-height: 480px
+}
+
+* html #int-container {
+	height: 480px
+}
+
+.cbox-cont {
+	position: relative;
+	/* background: #eaeef7; */
+	border-left: 1px solid #c1c7dd;
+	border-right: 1px solid #c1c7dd;
+	margin: 0;
+}
+
+.cbox-cont1 {
+	position: relative;
+	background: #fff;
+	border-left: 1px solid #c1c7dd;
+	border-right: 1px solid #c1c7dd;
+	margin: 0;
+}
+
+.cbox-top {
+	height: 11px;
+	background: url(../../images/uninor/cbox-top-left.png) no-repeat left
+		top;
+}
+
+* html .cbox-top {
+	display: block;
+	overflow: hidden
+}
+
+* html .cbox-bottom {
+	margin-top: -2px
+}
+
+.cbox-top span {
+	display: block;
+	position: relative;
+	height: 11px;
+	background: url(../../images/uninor/cbox-top-right.png) no-repeat right
+		top;
+}
+
+.cbox-bottom {
+	height: 16px;
+	background: url(../../images/uninor/cbox-bot-left.png) no-repeat left
+		bottom;
+}
+
+.cbox-bottom span {
+	display: block;
+	position: relative;
+	height: 16px;
+	background: url(../../images/uninor/cbox-bot-right.png) no-repeat right
+		bottom;
+}
+
+.cbox-cont h2 {
+	background: url(../../images/uninor/cbox-head.gif) repeat-x 0 0;
+	height: 39px;
+	padding: 5px 0 0 19px;
+	color: #43567e;
+	font-size: .9em;
+	font-weight: 700
+}
+
+.content {
+	padding: 10px 0 0
+}
+
+.content form p {
+	padding: 4px 19px
+}
+
+.content form p label {
+	color: #43567e;
+	font-size: .75em;
+	margin-left: 8px
+}
+
+.content form p input {
+	vertical-align: middle
+}
+
+.selectbox {
+	background: url(../../images/uninor/selectbox.png) no-repeat 0 0;
+	display: block;
+	width: 125px;
+	height: 26px;
+	padding: 0 4px 0 6px;
+	margin-top: 3px
+}
+
+.select {
+	border: 0;
+	width: 125px;
+	height: 18px;
+	background: none;
+	color: #a6b2cb;
+	font-size: 12px;
+	margin-top: 4px
+}
+
+.cbox-cont .cbox-foot {
+	background: url(../../images/uninor/cbox-foot.gif) repeat-x 0 0;
+	height: 44px;
+	padding: 10px 0 0 19px;
+	margin-top: 12px
+}
+
+.plugin {
+	margin-right: 11px
+}
+
+.smbox {
+	background: url(../../images/uninor/smbox-top.png) no-repeat 0 0;
+	width: 291px;
+	padding-top: 11px;
+	margin-left: 11px
+}
+
+.smbox-bottom {
+	background: url(../../images/uninor/smbox-bottom.png) no-repeat 0 0;
+	height: 18px
+}
+
+.smbox-cont {
+	background: #dfe5f1 url(../../images/uninor/smbox-bg.gif) repeat-x 0 0;
+	border-left: 1px solid #c1c7dd;
+	border-right: 1px solid #c1c7dd;
+}
+
+#form label {
+	float: left;
+	width: 95px;
+	margin: 5px 5px 0 22px;
+	font: 12px Arial, Helvetica, sans-serif;
+	color: #43567e
+}
+
+#form p {
+	clear: both;
+	padding: 10px 0
+}
+
+* html #form p {
+	clear: both;
+	padding: 5px 0
+}
+
+*+html #form p {
+	clear: both;
+	padding: 5px 0
+}
+
+.textbox-bg {
+	float: left;
+	background: url(../../images/uninor/textbox-bg.gif) no-repeat 0 0;
+	width: 136px;
+	height: 24px;
+	padding: 2px 4px 0 6px;
+	display: block
+}
+
+.textbox {
+	background: none;
+	border: 0;
+	width: 135px;
+	font: 12px Arial, Helvetica, sans-serif;
+	color: #303030;
+	cursor: text
+}
+
+.selectbox2 {
+	float: left;
+	background: url(../../images/uninor/selectbox2.gif) no-repeat 0 0;
+	display: block;
+	width: 110px;
+	height: 26px;
+	padding: 0 4px 0 6px
+}
+
+.select2 {
+	border: 0;
+	width: 110px;
+	height: 18px;
+	background: none;
+	color: #a6b2cb;
+	font-size: 12px;
+	margin-top: 4px
+}
+
+.smbox-cont .smbox-foot {
+	background: url(../../images/uninor/smbox-foot.gif) repeat-x 0 0;
+	height: 37px;
+	padding-top: 15px;
+	margin-top: 7px
+}
+
+.smbox-cont .smbox-foot span {
+	padding-left: 122px
+}
+
+.smbox-cont .smbox-foot span input {
+	margin-right: 7px
+}
+
+#tbl tr.tbl-head {
+	height: 24px
+}
+
+#tbl .tbl-left-top {
+	background: url(../../images/uninor/tbl-left-top.png) no-repeat 0 0;
+	width: 36px;
+	border-right: 2px solid #e7eaf2;
+	color: #43567e;
+	font-size: .9em;
+}
+
+#tbl .tbl-top {
+	background: url(../../images/uninor/tbl-top.gif) repeat-x 0 0;
+	color: #43567e;
+	font-size: .7em;
+	padding-left: 5px;
+	border-right: 2px solid #e7eaf2
+}
+
+#tbl .tbl-rt-top {
+	background: url(../../images/uninor/tbl-rt-top.png) no-repeat 0 0;
+	width: 49px;
+}
+
+#tbl .tbl-top.alignc {
+	text-align: center;
+	padding-left: 0
+}
+
+#tbl tr.row td {
+	background: #eaeff7 url(../../images/uninor/row-bg.gif) repeat-x 0
+		bottom;
+	padding: 0px 0px 5px 0px;
+	font-size: .75em;
+	color: #43567e;
+	border-right: 2px solid #d5d9e7;
+}
+
+#tbl tr.row td.first,#tbl tr.row-alter td.first {
+	border-left: 1px solid #c1c7dd;
+	padding: 6px 0 12px;
+	width: 35px
+}
+
+#tbl tr.row-alter td {
+	background: #f7f9fc url(../../images/uninor/row-alter-bg.gif) repeat-x 0
+		bottom;
+	padding: 0px 0px 5px 0px;
+	font-size: .75em;
+	color: #43567e;
+	border-right: 2px solid #d5d9e7;
+}
+
+#tbl .tbl-left-bot {
+	background: url(../../images/uninor/tbl-left-bot.png) no-repeat 0 0;
+	width: 4px;
+	height: 17px
+}
+
+#tbl .tbl-bot {
+	background: url(../../images/uninor/tbl-bot.gif) repeat-x 0 0;
+	height: 17px
+}
+
+#tbl .tbl-rt-bot {
+	background: url(../../images/uninor/tbl-rt-bot.png) no-repeat 0 0;
+	width: 49px;
+	height: 17px
+}
+
+div.popupWrapper {
+	margin: 0px auto;
+	padding: 5px;
+	border: solid 1px #17a5cd;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	overflow: hidden;
+	font-family: Verdana, Geneva, sans-serif;
+	font-weight: normal;
+	font-size: 12px;
+}
+
+.content-header {
+	background: url(../../images/uninor/cbox-head.gif) repeat-x 0 0;
+	height: 30px;
+	padding: 0px 0 0 0px;
+	color: #43567e;
+	font-size: .9em;
+	font-weight: 700;
+}
+
+.content-title {
+	padding: 0px 0 0 0px;
+	color: #43567e;
+	font-size: .9em;
+	font-weight: 700;
+	width: 60%;
+}
+
+.content-toolbar {
+	padding: 0px 0 0 0px;
+	color: #43567e;
+	font-size: .9em;
+	font-weight: 700;
+	width: 40%;
+}
+
+.buttoneffect {
+	-moz-opacity: 0.5;
+	opacity: .50;
+	filter: alpha(opacity =       50);
+}
+
+.buttoneffect:hover {
+	-moz-opacity: 0.9;
+	opacity: .90;
+	filter: alpha(opacity =       90);
+}
+
+.textlabelChpsw {
+	float: left;
+	width: 134px;
+	margin: 5px 5px 0 22px;
+	font: 12px Arial, Helvetica, sans-serif;
+	color: #43567e
+}
+
+/* Updated for BAS */
+#heading {
+	width: 500px;
+	height: 44px;
+	background-image: -webkit-linear-gradient(top, rgb(249, 249, 249),
+		rgb(233, 233, 233));
+	background-image: -moz-linear-gradient(top, rgb(249, 249, 249),
+		rgb(233, 233, 233));
+	background-image: -o-linear-gradient(top, rgb(249, 249, 249),
+		rgb(233, 233, 233));
+	background-image: -ms-linear-gradient(top, rgb(249, 249, 249),
+		rgb(233, 233, 233));
+	background-image: linear-gradient(top, rgb(249, 249, 249),
+		rgb(233, 233, 233));
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,
+		StartColorStr='#f9f9f9', EndColorStr='#e9e9e9');
+	border-bottom: 1px solid #bababa;
+	-webkit-box-shadow: inset 0px -1px 0px #fff, 0px 1px 3px
+		rgba(0, 0, 0, .08);
+	-moz-box-shadow: inset 0px -1px 0px #fff, 0px 1px 3px rgba(0, 0, 0, .08);
+	box-shadow: inset 0px -1px 0px #fff, 0px 1px 3px rgba(0, 0, 0, .08);
+	-webkit-border-radius: 4px 4px 0px 0px;
+	-moz-border-radius: 4px 4px 0px 0px;
+	border-radius: 4px 4px 0px 0px;
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 44px;
+	color: #444444;
+	text-shadow: 0px 1px 0px #fff;
+}
+
+#content {
+	width: 500px;
+	height: 295px;
+	background: #fcfcfc;
+	-webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, .25);
+	-moz-box-shadow: 0px 1px 3px rgba(0, 0, 0, .25);
+	box-shadow: 0px 1px 3px rgba(0, 0, 0, .25);
+	-webkit-border-radius: 0px 0px 4px 4px;
+	-moz-border-radius: 0px 0px 4px 4px;
+	border-radius: 0px 0px 4px 4px;
+}
+
+.reveal-modal-bg {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	background: #000;
+	background: rgba(0, 0, 0, .4);
+	z-index: 100;
+	display: none;
+	top: 0;
+	left: 0;
+}
+
+#content p {
+	font-size: 13px;
+	font-weight: normal;
+	text-align: center;
+	line-height: 22px;
+	color: #555555;
+	width: 100%;
+	float: left;
+	margin: 19px 0;
+}
+
+#modal {
+	visibility: hidden;
+	width: 500px;
+	height: 295px;
+	padding: 8px;
+	background: rgba(0, 0, 0, .3);
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	position: absolute !important;
+	top: 15% !important;
+	left: 50% !important;
+	margin-top: -94px !important;
+	margin-left: -180px !important;
+	z-index: 101;
+}
+
+#modalUid {
+	visibility: hidden;
+	width: 500px;
+	height: 295px;
+	padding: 8px;
+	background: rgba(0, 0, 0, .3);
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	position: absolute !important;
+	top: 15% !important;
+	left: 50% !important;
+	margin-top: -94px !important;
+	margin-left: -180px !important;
+	z-index: 101;
+}
+
+#modalCardID {
+	visibility: hidden;
+	width: 500px;
+	height: 295px;
+	padding: 8px;
+	background: rgba(0, 0, 0, .3);
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	position: absolute !important;
+	top: 65% !important;
+	left: 50% !important;
+	margin-top: -94px !important;
+	margin-left: -180px !important;
+	z-index: 101;
+}
+/*
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 75%;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	line-height: 1;
+	color: #000000;
+	padding: 0em;
+	margin: 0em;
+}
+*/
+td {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+th {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+select:hover,select:focus {
+	border-color: #66DD55 #55BB55 #459455;
+}
+
+input,select,textarea {
+	background-color: #FEFEFE;
+	border: #c1c7dd solid 1px;
+}
+
+input,select,textarea,button {
+	line-height: inherit;
+}
+
+input,button,select {
+	vertical-align: middle;
+}
+
+form {
+	/*height: auto !important;*/
+	min-height: 600px;
+	width: 100%;
+	border: 0px;
+	margin:  0 auto;
+	padding: 0px;
+}
+
+.toptable {
+	background-image: url(../images/topbg.gif);
+	background-repeat: repeat-x;
+	color: #ffffff;
+	font-size: 100%;
+	border-top: solid 0.01em #225a96;
+	border-bottom: solid 0.01em #225a96;
+}
+
+.welcome {
+	padding-bottom: 5px;
+	padding-left: 10px;
+	margin-bottom: 2px;
+}
+
+.logout {
+	padding: 15px;
+	padding-top: 0px;
+	margin-bottom: 2px;
+	text-align: right;
+	vertical-align: top;
+	color: #003871;
+}
+
+.logouttable {
+	background-image: url(../images/top.gif);
+	vertical-align: top;
+	text-align: left;
+	padding: 2px;
+	padding-left: 5px;
+	background-color: #f0f9fb;
+	width: 200px;
+	height: 28px;
+}
+
+.logout a {
+	color: #003871;
+}
+
+.logout a:hover {
+	color: #cccccc;
+	text-decoration: none;
+}
+
+.logout a:visited {
+	color: #cccccc;
+}
+
+.time {
+	padding-bottom: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 2px;
+	text-align: right;
+}
+
+.breadcrum {
+	color: #000000;
+	background-color: #f0f9fb;
+	border-bottom: solid 0.1em #daedf3;
+	height: 2em;
+	padding-left: 10px;
+	font-weight: bold;
+}
+
+.breadcrumlight {
+	color: #000000;
+	background-color: #FDFFFF;
+	border: solid 0.1em #a9d0f5;
+	height: 2em;
+	padding-left: 10px;
+	font-weight: bold;
+}
+
+.bluetable {
+	background-color: #FFFFFF;
+	border: solid 0.1em #a9d0f5;
+	padding: 2px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.bluetableheader {
+	color: #005a8e;
+	font-size: 110%;
+	font-weight: bold;
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-bottom: 5px;
+}
+
+.bluetablesummary {
+	background-color: #ffffff;
+	border-top: solid 0.1em #daedf3;
+	border-bottom: solid 0.1em #daedf3;
+	padding: 5px;
+	line-height: 1.5em;
+}
+
+.bluetablecontent {
+	padding: 5px;
+}
+
+.queue {
+	padding: 0px;
+	margin: 0px;
+	margin-left: 10px;
+}
+
+.table {
+	background-color: #FFFFFF;
+	margin: 0px;
+	margin-top: 10px;
+	padding: 10px;
+	border: solid 0.01em #a9d0f5;
+}
+
+.tabletd {
+	/*border: solid 0.01em #43567;*/
+	border: solid 0.01em #daedf3;
+	padding: 10px;
+}
+
+.border {
+	border: solid 0.01em #daedf3;
+	padding: 5px;
+}
+
+.table th {
+	/* 	background-color: #003871; */
+	background-color: #daedf3;
+	padding: 5px;
+	vertical-align: top;
+}
+
+.table th.totalt,.totalb {
+	border: solid 0.01em #daedf3;
+	/*border: solid 0.01em #43567;*/
+	border-bottom: 0px;
+	text-align: left;
+}
+
+.table th.totalb {
+	border-top: 0px;
+	border-bottom: solid 0.01em #daedf3;
+}
+
+.table th.paginationt,.paginationb {
+	border-top: solid 0.01em #daedf3;
+	border-right: solid 0.01em #daedf3;
+	text-align: right;
+	color: #999999;
+}
+
+.table th.paginationb {
+	border-top: 0px;
+	border-bottom: solid 0.01em #daedf3;
+}
+
+.table th.pagination a,paginationb a {
+	color: #003871;
+}
+
+.table th.pagination a:hover,paginationb a:hover {
+	color: #999999;
+	text-decoration: none;
+}
+
+.table th.pagination a:visited,paginationb a:visited {
+	color: #666666
+}
+
+.table th.first {
+	border: solid 0.01em #daedf3;
+}
+
+.tabletd
+.table th.first input {
+	border: 0px;
+	background-color: transparent;
+}
+
+.table th.mid {
+	border-top: solid 0.01em #daedf3;
+	border-bottom: solid 0.01em #daedf3;
+	border-right: solid 0.01em #daedf3;
+	border-left: solid 0.01em #daedf3;
+}
+
+.table th.last {
+	border-top: solid 0.01em #daedf3;
+	border-bottom: solid 0.01em #daedf3;
+	border-right: solid 0.01em #daedf3;
+	border-left: solid 0.01em #daedf3;
+}
+
+.table td {
+	padding: 5px;
+}
+
+.table tr.row {
+	background-color: #ffffff;
+}
+
+.table tr.rowa {
+	background-color: #f1f1f1;
+}
+
+.table tr.rowblue {
+	background-color: #f0f9fb;
+}
+
+.table tr.rowred {
+	background-color: #ffc1c1;
+}
+
+.table tr.rowgreen {
+	background-color: #ccffcc;
+}
+
+.table td.firstcentre {
+	text-align: center;
+	border-bottom: solid 0.01em #daedf3;
+	border-right: solid 0.01em #daedf3;
+	border-left: solid 0.01em #daedf3;
+}
+
+.table td.firstcentre input,.table td.midcentre input {
+	border: 0px;
+	background-color: transparent;
+}
+
+.radio {
+	background: transparent !important;
+	color: #003399;
+	border: 0px;
+	padding: 2px;
+}
+
+.table td.firstleft,.table td.firstleft input.readonly {
+	text-align: left;
+	border-bottom: solid 0.01em #daedf3;
+	border-right: solid 0.01em #daedf3;
+	border-left: solid 0.01em #daedf3;
+}
+
+.table td.firstL,.table td.firstL input.readonly {
+	text-align: left;
+	border-bottom: solid 0.01em #daedf3;
+	border-right: solid 0.01em #daedf3;
+	border-left: solid 0.01em #daedf3;
+	width: 200px;
+	float: left;
+	margin-left: -1px;
+	padding: 5px;
+}
+
+.table td.lastL {
+	width: 600px;
+	text-align: left;
+	border-bottom: solid 0.01em #daedf3;
+	border-right: solid 0.01em #daedf3;
+	padding: 5px;
+	margin-left: 405px;
+}
+
+.table td.firstleft input.readonly {
+	background-color: #f1f1f1;
+	color: #000000;
+}
+
+.table td.firstright {
+	text-align: right;
+	border-bottom: solid 0.01em #daedf3;
+	border-right: solid 0.01em #daedf3;
+	border-left: solid 0.01em #daedf3;
+}
+
+.table td.midcentre {
+	text-align: center;
+	border-bottom: solid 0.01em #daedf3;
+	border-right: solid 0.01em #daedf3;
+	border-left: solid 0.01em #daedf3;
+}
+
+.table td.midleft,.table td.midleftgreen,.table td.midleftred,.table td.midlefty,.table td.midleft input.readonly
+	{
+	text-align: left;
+	border-bottom: solid 0.01em #daedf3;
+	border-right: solid 0.01em #daedf3;
+}
+
+.table td.midleft input.readonly {
+	background-color: #f1f1f1;
+}
+
+.table td.midright input.numeric {
+	text-align: right;
+}
+
+.table td.midleftgreen {
+	background-color: #ccffcc;
+}
+
+.table td.midleftred {
+	background-color: #ffc1c1;
+}
+
+.table td.midlefty {
+	background-color: #FFFF99;
+}
+
+.table td.midright {
+	text-align: right;
+	border-bottom: solid 0.01em #daedf3;
+	border-right: solid 0.01em #daedf3;
+}
+
+.table td.midrightgreen,.table td.midrightred,.table td.midrighty {
+	background-color: #ccffcc;
+	text-align: right;
+	border-bottom: solid 0.01em #daedf3;
+	border-right: solid 0.01em #daedf3;
+	border-left: solid 0.01em #daedf3;
+}
+
+.table td.midrightred {
+	background-color: #ffc1c1;
+}
+
+.table td.midrighty {
+	background-color: #FFFF99;
+}
+
+.table td.lastcentre {
+	text-align: center;
+	border-bottom: solid 0.01em #daedf3;
+	border-right: solid 0.01em #daedf3;
+}
+
+.table td.lastleft,.table td.lastleftgreen,.table td.lastleftred,.table td.lastlefty
+	{
+	text-align: left;
+	border-bottom: solid 0.01em #daedf3;
+	border-right: solid 0.01em #daedf3;
+}
+
+.table td.lastleftgreen {
+	background-color: #ccffcc;
+}
+
+.table td.lastleftred {
+	background-color: #ffc1c1;
+}
+
+.table td.lastlefty {
+	background-color: #FFFF99;
+}
+
+.table td.lastright {
+	text-align: right;
+	border-bottom: solid 0.01em #daedf3;
+	border-right: solid 0.01em #daedf3;
+}
+
+.table td.lastrightgreen {
+	background-color: #ccffcc;
+	text-align: right;
+	border-bottom: solid 0.01em #daedf3;
+	border-right: solid 0.01em #daedf3;
+}
+
+.table td.lastrightred {
+	background-color: #ffc1c1;
+	text-align: right;
+	border-bottom: solid 0.01em #daedf3;
+	border-right: solid 0.01em #daedf3;
+}
+
+.tablered {
+	background-color: #ffeded;
+	border: solid 0.01em #ffb7b8;
+	margin: 10px;
+	padding: 4px;
+}
+
+.tableredheader {
+	color: #43567E;
+	font-size: 100%;
+	font-weight: bold;
+}
+
+.tableredtable {
+	padding: 2px;
+}
+
+.tableredtable th.first {
+	background-color: #ffeded;
+	border: solid 0.01em #ffb7b8;
+	border-right: 0px;
+	font-weight: bold;
+	padding: 2px;
+}
+
+.tableredtable th.last {
+	background-color: #ffeded;
+	border: solid 0.01em #ffb7b8;
+	font-weight: bold;
+	padding: 2px;
+}
+
+.tableredtable td.first {
+	background-color: #fff9f9;
+	padding: 4px;
+	border: solid 0.01em #ffb7b8;
+	border-top: 0px;
+	border-right: 0px;
+}
+
+.tableredtable td.first a {
+	color: #000033;
+}
+
+.tableredtable td.first a:hover {
+	text-decoration: none;
+}
+
+.tableredtable td.last {
+	background-color: #fff9f9;
+	padding: 2px;
+	border: solid 0.01em #ffb7b8;
+	border-top: 0px;
+	text-align: center;
+}
+
+.tableredtable td.last {
+	background-color: #fff9f9;
+	padding: 2px;
+	border: solid 0.01em #ffb7b8;
+	border-top: 0px;
+	text-align: center;
+}
+
+.quicklinkstable {
+	background-color: #f0f9fb;
+	border: solid 0.1em #d3eaf1;
+	margin: 10px;
+	padding: 5px;
+}
+
+.quicklinksheader {
+	color: #005a8e;
+	font-size: 110%;
+	font-weight: bold;
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-bottom: 5px;
+}
+
+.quicklinkstable th {
+	padding: 2px;
+	font-weight: normal;
+	text-align: left;
+	margin: 2px;
+}
+
+.padding {
+	padding: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.bottomtable {
+	background-image: url(../images/topbg.gif);
+	background-repeat: repeat-x;
+	color: #ffffff;
+	font-size: 100%;
+	border-top: solid 0.01em #225a96;
+	border-bottom: solid 0.01em #225a96;
+	padding: 5px;
+	margin-top: 10px;
+}
+
+.bottomtable a {
+	color: #ffffff;
+}
+
+.bottomtable a:hover {
+	text-decoration: none;
+}
+
+.conheader,.conheaderl {
+	border: solid 0.01em #d3eaf1;
+}
+
+.conheaderl {
+	border-left: 0px;
+}
+
+label {
+	color: black;
+	font-size: 9px;
+}
+
+.labeldata {
+	color: #000000;
+	font-weight: bold;
+	vertical-align: middle;
+}
+
+.logintype {
+	background-color: #dce8f4;
+	padding: 5px;
+	margin: 0px;
+	border: solid 0.01em #d3eaf1;
+	border-top: 0px;
+	vertical-align: middle;
+	color: #999999;
+	font-size: 130%;
+	font-weight: bold;
+}
+
+.norecords,.norecords td {
+	padding-top: 15px;
+	padding-left: 40px;
+	padding-bottom: 10px;
+	width: 80%;
+	border: solid 0.01em #d3eaf1;
+	color: #333333;
+	background-color: #FFFFCC;
+	background-image: url(../images/warning.gif);
+	background-repeat: no-repeat;
+}
+
+.norecords td {
+	border: 0px;
+}
+
+.frame {
+	border-style: solid;
+	border-color: #6698FF;
+	border-width: 1px 1px 1px 1px;
+}
+
+.success,.success td {
+	padding-top: 15px;
+	padding-left: 40px;
+	padding-bottom: 10px;
+	width: 100%;
+	border: solid 0.01em #d3eaf1;
+	color: #333333;
+	background-color: #E5FFCB;
+	background-image: url(../images/warning.gif);
+	background-repeat: no-repeat;
+}
+
+.success td {
+	border: 0px;
+}
+
+/*SEXY PANELS START*/
+.sexypanels {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 190px; /* width of menu */
+	margin-left: 6px;
+	margin-right: 6px;
+}
+
+.sexypanels li {
+	border-bottom: 1px solid white;
+	/* white border beneath each menu item */
+}
+
+.sexypanels li a {
+	background: #43567E url(../../images/uninor/wrapper.jpg) no-repeat right
+		top; /*color of menu by default*/
+	font: bold 13px "Lucida Grande", "Trebuchet MS", Verdana;
+	display: block;
+	color: white;
+	width: auto;
+	padding: 5px 0; /* Vertical (top/bottom) padding for each menu link */
+	text-indent: 8px;
+	text-decoration: none;
+	border-bottom: 1px solid black;
+	/*bottom border of menu link. Should be equal or darker to link's bgcolor*/
+}
+
+.sexypanels li a:visited,.sexypanels li a:active {
+	color: white;
+}
+
+.sexypanels li a:hover {
+	background-color: black; /*color of menu onMouseover*/
+	color: white;
+	border-bottom: 1px solid black;
+	/*bottom border of menu link during hover. Should be equal or darker to link's hover's bgcolor*/
+}
+
+#round {
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px border-radius:10px;
+	border: 1px solid;
+}
+
+.input,textarea,submit,reset,option,select,label,button {
+	font-size: 12px;
+}
+
+<!--
+[if IE]> <style type ="text/css">.sexypanels li a {
+	/* Menu link width value for IE */
+	width: 100%;
+}
+</
+style
+>
+<!
+[
+endif
+]
+--> /*SEXY PANELS END */
+
+
+
+.locationdiv div { width:1200px!important;}
+.buttonclass {
+	width: 110px;
+	font-size: 14px;
+	background: none repeat scroll 0% 0% #369;
+	color: #FFF;
+	cursor: pointer;
+}
+.text-center{
+    text-align:center;
+
+}
+div#ui-datepicker-div {
+    z-index: 999 !important;
+}
+.LockOn {
+display: block;
+visibility: visible;
+position: absolute;
+z-index: 999;
+top: 0px;
+left: 0px;
+width: 105%;
+height: 105%;
+background-color: white;
+vertical-align: bottom;
+padding-top: 20%;
+filter: alpha(opacity = 75);
+opacity: 0.75;
+font-size: large;
+color: blue;
+font-style: italic;
+font-weight: 400;
+background-image: url("../../images/biometriclogo.gif");
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-position: center;
+}
+
+.error {
+	color: red !important;
+	font-size: 12px !important;
+}
+
+select.error, textarea.error, input.error {
+	border: 1px solid red !important;
+}
+
+.readonlydropdown{
+	pointer-events: none;
+}
+
+.deathCerificateBlockHide {
+   display: none;
+}
+
+.deathCerificateBlockShow {
+   display: block;
+}

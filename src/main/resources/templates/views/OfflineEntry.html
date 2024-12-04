@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pagelabel.dcpsContri}"></title>
+</head>
+<body class="OfflineEntry">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+
+	<div class="container min-height-600 ">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pagelabel.dcpsContri}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pagelabel.dcpsContri}"></span>
+		</h3>
+		<div class="newpagecontent">
+			
+			<form method="post" action="" name="DCPSOfflineEntryForm" enctype="multipart/form-data" id="DCPSOfflineEntryForm">
+    <fieldset class="tabstyle">
+       
+        <table align="center" width="100%" class="bor-0 table">
+            <tbody>
+                <tr>
+                    <td width="15%" style="padding-left:5%;">Treasury Name
+                    </td>
+                    <td width="35%">
+                        <select name="cmbTreasuryCode" id="cmbTreasuryCode" style="width:95%;" onchange="" disabled="disabled">
+                            <option value="2017907" title="Joint Director, Higher Education, Nanded Region, Nanded">Joint Director, Higher Education, Nanded Region, Nanded</option>
+                        </select>
+                        <label class="mandatoryindicator">*</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="15%" style="padding-left: 5%">DDO Name
+                    </td>
+                    <td width="35%">
+                        <select name="cmbDDOCode" id="cmbDDOCode" style="width:95%;" onchange="">
+                            <option value="-1" title="-- Select --">(-1) -- Select --</option>
+                            <option value="06340100003" title="Incharge HM, Rajarshi Shahu College, Latur">(06340100003) Incharge HM, Rajarshi Shahu College, Latur</option>
+                        </select>
+                        <label class="mandatoryindicator">*</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="15%" style="padding-left: 5%">Bill Group
+                    </td>
+                    <td width="35%">
+                        <select name="cmbBillGroup" id="cmbBillGroup" style="width:95%;" onchange="getSchemeforBillGroup();">
+                            <option value="-1">-- Select --</option>
+                        </select>
+                        <label class="mandatoryindicator">*</label>
+                    </td>
+                    <td width="15%" style="padding-left: 5%">Scheme
+                    </td>
+                    <td width="35%"><input type="text" name="txtSchemeName" id="txtSchemeName" value="" style="width: 93%" readonly="readonly">
+                        <label class="mandatoryindicator">*</label>
+                        <input type="hidden" name="schemeCode" id="schemeCode" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td width="15%" style="padding-left: 5%">Sub Scheme
+                    </td>
+                    <td width="35%"><input type="text" name="txtSubSchemeName" id="txtSubSchemeName" value="" style="width: 93%" readonly="readonly">
+                        <label class="mandatoryindicator">*</label>
+                        <input type="hidden" name="subSchemeCode" id="subSchemeCode" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td width="15%" style="padding-left: 5%">Pay Month
+                    </td>
+                    <td width="35%">
+                        <select name="cmbMonth" id="cmbMonth" style="width:30%;" onchange="selectCorrectFinYear();">
+                            <option value="-1">-- Select --</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4" selected="selected">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                        <label class="mandatoryindicator">*</label>
+                    </td>
+                    <td width="15%" style="padding-left: 5%">Pay year
+                    </td>
+                    <td width="35%">
+                        <select name="cmbYear" id="cmbYear" style="width:30%;" onchange="">
+                            <option value="-1">-- Select --</option>
+                            <option value="37" selected="selected">2024-2025</option>
+                            <option value="36">2023-2024</option>
+                            <option value="35">2022-2023</option>
+                            <option value="34">2021-2022</option>
+                            <option value="33">2020-2021</option>
+                            <option value="32">2019-2020</option>
+                            <option value="31">2018-2019</option>
+                            <option value="30">2017-2018</option>
+                            <option value="29">2016-2017</option>
+                            <option value="28">2015-2016</option>
+                            <option value="27">2014-2015</option>
+                            <option value="26">2013-2014</option>
+                            <option value="25">2012-2013</option>
+                            <option value="24">2011-2012</option>
+                            <option value="23">2010-2011</option>
+                            <option value="22">2009-2010</option>
+                            <option value="21">2008-2009</option>
+                        </select>
+                        <label class="mandatoryindicator">*</label>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="paymentMasterDivDisplay" style="display:none">
+            <table align="center" width="100%">
+                <tbody>
+                    <tr id="typeOfPaymentMasterRow">
+                        <td width="15%" style="padding-left: 5%">Payment Type
+                        </td>
+                        <td width="35%">
+                            <select name="cmbTypeOfPaymentMaster" id="cmbTypeOfPaymentMaster" style="width: 40%;" onchange="addMonthYearComboForDelayed();">
+                                <option value="-1">-- Select --</option>
+                                <option value="700049">Pay Arrear</option>
+                                <option value="700048">DA Arrear</option>
+                                <option value="700047">Delayed</option>
+                                <option value="700046" selected="selected">Regular</option>
+                            </select>
+                        </td>
+                        <td width="15%"></td>
+                        <td width="35%"></td>
+                    </tr>
+                    <tr style="display:none" id="delayedMonthAndYearCombos">
+                        <td width="15%" style="padding-left: 5%">Delayed Month
+                        </td>
+                        <td width="35%">
+                            <select name="cmbDelayedMonth" id="cmbDelayedMonth" onchange="">
+                                <option value="-1">-- Select --</option>
+                                <option value="1">January</option>
+                                <option value="2">February</option>
+                                <option value="3">March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">August</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                            <label class="mandatoryindicator">*</label>
+                        </td>
+                        <td width="15%" style="padding-left: 5%">
+                            Delayed Year
+                        </td>
+                        <td width="35%">
+                            <select name="cmbDelayedYear" id="cmbDelayedYear" onchange="">
+                                <option value="-1">-- Select --</option>
+                                <option value="5">2005-2006</option>
+                                <option value="6">2006-2007</option>
+                                <option value="20">2007-2008</option>
+                                <option value="21">2008-2009</option>
+                                <option value="22">2009-2010</option>
+                                <option value="23">2010-2011</option>
+                                <option value="24">2011-2012</option>
+                                <option value="25">2012-2013</option>
+                                <option value="26">2013-2014</option>
+                                <option value="27">2014-2015</option>
+                                <option value="28">2015-2016</option>
+                                <option value="29">2016-2017</option>
+                                <option value="30">2017-2018</option>
+                                <option value="31">2018-2019</option>
+                                <option value="32">2019-2020</option>
+                                <option value="33">2020-2021</option>
+                                <option value="34">2021-2022</option>
+                                <option value="35">2022-2023</option>
+                                <option value="36">2023-2024</option>
+                                <option value="37">2024-2025</option>
+                            </select>
+                            <label class="mandatoryindicator">*</label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <table align="center">
+            <tbody>
+                <tr>
+                    <td id="go" align="center" style="padding-left: 50px">
+                        <input type="button" name="btnGo" onclick="getEmpListAfterValidation();" id="btnGo" value="GO" size="3" maxlength="3" class="buttontag">
+                        <input type="button" name="btnBackWithGo" onclick="ReturnLoginPage();" id="btnBackWithGo" value="Back" size="3" maxlength="3" class="buttontag">
+                        <input type="hidden" id="User" name="User" value="TO">
+                        <input type="hidden" id="Use" name="Use" value="ViewForwarded">
+                        <input type="hidden" id="Type" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="color: red;font-family: bold; font-size: large;font-weight:bold;">NOTE : If you don't need NPS employer contribution in paybill then make this value as '0' in DCPS Delayed, DCPS DA Arrear and DCPS PAY Arrear.</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <div id="DAArrearsDatesDivDisplay" style="display:none">
+            <table align="center" width="88%">
+                <tbody>
+                    <tr>
+                        <td width="20%" style="padding-left: 1%">DA Arrear Start Date
+                        </td>
+                        <td width="20%" style="padding-left: 1%">
+                            <input type="text" style="width: 50%" name="txtDAArrearStartDate" id="txtDAArrearStartDate" value="" maxlength="10" onkeypress="digitFormat(this);dateFormat(this);" onblur="validateDate(this);">
+                            <img src="images/CalendarImages/ico-calendar.gif" onclick="window_open(&quot;txtDAArrearStartDate&quot;,375,570)" style="cursor: pointer;">
+                        </td>
+                        <td width="20%" style="padding-left: 1%">DA Arrear End Date
+                        </td>
+                        <td width="20%" style="padding-left: 1%">
+                            <input type="text" style="width: 50%" name="txtDAArrearEndDate" id="txtDAArrearEndDate" value="" maxlength="10" onkeypress="digitFormat(this);dateFormat(this);" onblur="validateDate(this);">
+                            <img src="images/CalendarImages/ico-calendar.gif" onclick="window_open(&quot;txtDAArrearEndDate&quot;,375,570)" style="cursor: pointer;">
+                        </td>
+                        <td width="15%" style="padding-left: 1%">
+                            <input type="button" name="btnDAArrearSetDates" onclick="setDAArrearDates();" id="btnDAArrearSetDates" value="Set DA Arrear Dates For All" size="3" maxlength="3" class="bigbutton">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-style:italic;color: red ;padding-left: 1%" colspan="5">Note :- DA Arrear Start Date must be greater than employee's joining date else delete DA arrear of those employees. Save contributions carefully with correct dates. Please press Go button first then set dates.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="PayArrearsDatesDivDisplay" style="display:none">
+            <table align="center" width="88%">
+                <tbody>
+                    <tr>
+                        <td width="20%" style="padding-left: 1%">Pay Arrear Start Date
+                        </td>
+                        <td width="20%" style="padding-left: 1%">
+                            <input type="text" style="width: 50%" name="txtPayArrearStartDate" id="txtPayArrearStartDate" value="" maxlength="10" onkeypress="digitFormat(this);dateFormat(this);" onblur="validateDate(this);">
+                            <img src="images/CalendarImages/ico-calendar.gif" onclick="window_open(&quot;txtPayArrearStartDate&quot;,375,570)" style="cursor: pointer;">
+                        </td>
+                        <td width="20%" style="padding-left: 1%">Pay Arrear End Date
+                        </td>
+                        <td width="20%" style="padding-left: 1%">
+                            <input type="text" style="width: 50%" name="txtPayArrearEndDate" id="txtPayArrearEndDate" value="" maxlength="10" onkeypress="digitFormat(this);dateFormat(this);" onblur="validateDate(this);">
+                            <img src="images/CalendarImages/ico-calendar.gif" onclick="window_open(&quot;txtPayArrearEndDate&quot;,375,570)" style="cursor: pointer;">
+                        </td>
+                        <td width="15%" style="padding-left: 1%">
+                            <input type="button" name="btnPayArrearSetDates" onclick="setPayArrearDates();" id="btnPayArrearSetDates" value="Set Pay Arrear Dates For All" size="3" maxlength="3" class="bigbutton">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-style:italic;color: red ;padding-left: 1%" colspan="5">Note :- Pay Arrear Start Date must be greater than employee's joining date else delete Pay arrear of those employees. Save contributions carefully with correct dates. Please press Go button first then set dates.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+    <br>
+    <br>
+   
+</form>
+		</div>
+		
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

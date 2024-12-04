@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.updateDOB}"></title>
+
+</head>
+<body class="update-dob">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.dcpsBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.updateDOB}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.updateDOB}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<form method="post" action="" name="frmEmpInfo"
+				enctype="multipart/form-data" id="frmEmpInfo">
+				<fieldset class="tabstyle">
+					<table class="table bor-0 width-50">
+						<tbody>
+							<tr>
+								<td>Sevarth Id</td>
+								<td><input type="text" maxlength="13" id="txtSevaarthId"
+									name="txtSevaarthId" value=""></td>
+								<td><input type="button" name="btnSubmit"
+									onclick="getEmpInfo()" id="btnSubmit" value="Search" size="3"
+									maxlength="3" class="buttontag"></td>
+							</tr>
+						</tbody>
+					</table>
+				</fieldset>
+				<br> <br>
+				<fieldset class="tabstyle empdetails">
+					<legend>Employee Information</legend>
+					<table class="table bor-0 width-70 tbBold">
+						<tbody>
+							<tr>
+								<td width="50%">DDO Code</td>
+								<td><input type="text" id="txtDdoCode" name="txtDdoCode"
+									readonly="readonly" value="20541200001"></td>
+							</tr>
+							<tr>
+								<td>DDO Name</td>
+								<td><input type="text" id="txtDdoName" name="txtDdoName"
+									size="70" readonly="readonly"
+									value="Incharge HM, MAHARASHTRA UNIVERSITY,THANE,NORTH MAHARASHTRA UNIVERSITY">
+								</td>
+							</tr>
+							<tr>
+								<td>DDO Office</td>
+								<td><input type="text" id="txtDdoOffice"
+									name="txtDdoOffice" size="70" readonly="readonly"
+									value="MAHARASHTRA UNIVERSITY,THANE,NORTH MAHARASHTRA UNIVERSITY">
+								</td>
+							</tr>
+							<tr>
+								<td>Date of Birth</td>
+								<td><input type="text" id="txtDOB" name="txtDOB"
+									readonly="readonly" value="01/01/1990"></td>
+							</tr>
+							<tr>
+								<td>Date of Retirement</td>
+								<td><input type="text" id="txtDOR" name="txtDOR"
+									readonly="readonly" value="31/12/2047"></td>
+							</tr>
+							<tr>
+								<td>New Date of Birth</td>
+								<td><input type="date" name="txtNewDOB" id="txtNewDOB"
+									maxlength="10" value=""></td>
+							</tr>
+							<tr>
+								<td>New Date of Retirement</td>
+								<td><input type="date" name="txtNewDOR" id="txtNewDOR"
+									maxlength="10" value=""></td>
+							</tr>
+						</tbody>
+					</table>
+					<br />
+					<div class="text-center">
+						<input type="button" name="btnUpdate" id="btnUpdate"
+							value="Update" size="3" maxlength="3" class="buttontag">
+						<input type="button" name="btnCancel" onclick="history.back()"
+							id="btnCancel" value="Cancel" size="3" maxlength="3"
+							class="buttontag">
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script>
+		$(".empdetails").hide();
+		function getEmpInfo() {
+			$(".empdetails").fadeIn(100);
+		}
+	</script>
+</body>
+</html>

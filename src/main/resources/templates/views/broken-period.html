@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.brokenPeriod}"></title>
+</head>
+<body class="broken-period">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.payrollBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.brokenPeriod}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.brokenPeriod}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<fieldset class="tabstyle">
+				<legend>Search Employee</legend>
+				<table class="table bor-0">
+					<tbody>
+						<tr>
+							<td width="10%">Search With Name</td>
+							<td><input type="text" id="serEmployeeName"></td>
+							<td width="10%">Pay year</td>
+							<td width="20%"><select name="cmbYear" id="cmbYear">
+									<option value="-1">-- Select --</option>
+									<option value="35">2022-2023</option>
+									<option value="36">2023-2024</option>
+									<option value="37">2024-2025</option>
+							</select> <label class="mandatoryindicator">*</label></td>
+						</tr>
+						<tr>
+							<td width="10%">Pay Month</td>
+							<td width="20%"><select name="cmbMonth" id="cmbMonth">
+									<option value="-1">-- Select --</option>
+									<option value="1">January</option>
+									<option value="2">February</option>
+									<option value="3">March</option>
+									<option value="4">April</option>
+									<option value="5">May</option>
+									<option value="6">June</option>
+									<option value="7">July</option>
+									<option value="8">August</option>
+									<option value="9">September</option>
+									<option value="10">October</option>
+									<option value="11">November</option>
+									<option value="12">December</option>
+							</select> <label class="mandatoryindicator">*</label></td>
+						</tr>
+						<tr>
+							<td colspan="6"><input type="button" name="btnSubmitData"
+								id="btnSubmitData" value="Search" class="buttontag"></td>
+						</tr>
+						<tr>
+							<td colspan="6"><legend> Employee Datails</legend></td>
+						</tr>
+						<tr>
+							<td width="10%">Employee Name</td>
+							<td width="20%"><input type="text" id="txtEmployeeName"
+								style="text-transform: uppercase" name="txtEmployeeName"></td>
+							<td width="10%" style="display: none">Employee ID</td>
+							<td width="20%" style="display: none"><input type="text"
+								id="txtEmployeeId" style="text-transform: uppercase"
+								name="txtEmployeeId"></td>
+						</tr>
+						<tr>
+							<td width="10%">Sevaarth Id</td>
+							<td width="20%"><input type="text" id="txtSevarthId"
+								style="text-transform: uppercase" name="txtSevarthId"></td>
+							<td width="10%">Designation</td>
+							<td width="20%"><input type="text" id="txtDesignation"
+								style="text-transform: uppercase" name="txtDesignation"></td>
+						</tr>
+						<tr>
+							<td width="10%">Organization/Institution Name</td>
+							<td width="20%"><input type="text" id="txtOfficeName"
+								style="text-transform: uppercase" name="txtOfficeName"></td>
+							<td width="10%">G.P.F No / DCPS No</td>
+							<td width="20%"><input type="text" id="txtGpfNo"
+								style="text-transform: uppercase" name="txtGpfNo"></td>
+						</tr>
+						<tr>
+							<td width="10%">Super Annuation Date</td>
+							<td width="20%"><input type="text" id="superAnnuationDate"
+								style="text-transform: uppercase" name="superAnnuationDate"></td>
+						</tr>
+					</tbody>
+				</table>
+			</fieldset>
+			<div align="center">
+				<input type="button" name="btnBackAgain" id="btnBackAgain"
+					onclick="history.back()" value="Back" class="buttontag">
+			</div>
+		</div>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.UpdateCSRFForm}"></title>
+<style>
+input#countryNameEn::placeholder {
+	font-size: 11px;
+	color: #ccccccb3;
+}
+
+td {
+	font-weight: 600;
+}
+
+.error {
+	color: red !important;
+	font-size: 12px !important;
+}
+
+select.error, textarea.error, input.error {
+	border: 1px solid red !important;
+}
+</style>
+</head>
+<body class="UpdateCSRF-Form">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pagelabel.updateCSRFform}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.UpdateCSRFForm}"></span><br>
+			<!-- <span th:utext="#{msg.thymeleaf.pagelabel.empPerDtl}"></span> -->
+		</h3>
+		<div class="container csrfformmain">
+			<form method="post" action="" name="NPSForm"
+				enctype="multipart/form-data" id="NPSForm"
+				th:action="@{/ddo/saveCSRF}" th:object="${mstEmployeeEntity}">
+
+
+				<input type="hidden" id="sevaarthId" th:field="*{sevaarthId}">
+				<input type="hidden" id="employeeId" th:field="*{employeeId}">
+ 				<input type="hidden" id="bankName" th:value="${employeeBankName}" th:field="*{employeeBankName}">
+ 				<input type="hidden" id="bankBranchName" th:value="${employeeBankBranchName}" th:field="*{employeeBankBranchName}">
+				<div class="tabcontentstyle" style="height: 100%;">
+					<!-- Personal Details Page -->
+					<div id="tcontent1" class="tabcontent" style="height: 100%;">
+
+						<fieldset class="tabstylee">
+							<legend>Personal Details </legend>
+							<table class="table table-bordered">
+								<tbody>
+									<tr>
+										<td width="25%" align="left">Salutation</td>
+										<!-- Shri, Smt, Mr, Mrs, Ms, Mast, Dr etc. -->
+										<td width="25%" align="left"><select name="cmbSalutation"
+											id="cmbSalutation" class="form-control"
+											th:field="*{salutation}">
+												<option value="0">-- Select --</option>
+												<option value="700075">SHRI.</option>
+												<option value="700076">SMT.</option>
+												<option value="700077">KUM.</option>
+												<option value="400016">DR.</option>
+										</select></td>
+										<td width="25%" align="left">First Name</td>
+										<td width="25%" align="left"><input type="text"
+											id="firstName" maxlength="99" name="firstName"
+											th:field="*{employeeFNameEn}" class="form-control"></td>
+									</tr>
+									<tr>
+										<td width="25%" align="left">Middle Name</td>
+										<td width="25%" align="left"><input type="text"
+											id="middleName" maxlength="99" name="middleName"
+											th:field="*{employeeMNameEn}" class="form-control"></td>
+										<td width="25%" align="left">Last Name</td>
+										<td width="25%" align="left"><input type="text"
+											id="lastName" maxlength="99" name="lastName"
+											th:field="*{employeeLNameEn}" class="form-control"></td>
+									</tr>
+									<tr>
+										<td width="25%" align="left">Full Name</td>
+										<td width="25%" align="left"><input type="text"
+											id="txtName" maxlength="99" name="txtName"
+											th:field="*{employeeFullNameEn}" class="form-control"></td>
+										<td width="25%" align="left">Mother's First Name</td>
+										<td width="25%" align="left"><input type="text"
+											id="mothername" maxlength="99" name="mothername"
+											th:field="*{employeeMotherName}" class="form-control"></td>
+									</tr>
+									<tr>
+										<td width="25%" align="left">Gender</td>
+										<td width="25%" align="left">Male <input type="radio"
+											id="radioGender" name="radioGender" value="M"
+											th:field="*{gender}"> Female <input type="radio"
+											id="radioGender" name="radioGender" value="F"
+											th:field="*{gender}"> Transgender <input type="radio"
+											id="radioGender" name="radioGender" th:field="*{gender}"
+											value="T"> <label id="gender-error" class="error"
+											for="gender" style="display: none;"> Please select
+												Gender</label>
+										</td>
+										<td width="25%" align="left">PPAN NO</td>
+										<td width="25%" align="left"><input type="text"
+											id="ppanno" maxlength="99" name="ppanno" disabled value=""
+											th:field=*{ppanNo} class="form-control"></td>
+
+									</tr>
+
+
+									<tr>
+										<td width="25%" align="left">Date of Birth</td>
+										<td width="25%" align="left" style="font-size: smaller;">
+											<input type="date" value="" name="txtBirthDate"
+											th:field="*{dob}" id="txtBirthDate" maxlength="10"
+											class="form-control">
+										</td>
+										<td width="25%" align="left">Birth Place</td>
+										<td width="25%" align="left"><input type="text"
+											id="birthPlace" name="birthPlace"
+											th:field="*{employeeBirthPlace}" class="form-control"></td>
+									</tr>
+
+									<tr>
+										<td width="25%" align="left">Father Name</td>
+										<td width="25%" align="left"><input type="text"
+											id="fathername" maxlength="99" name="fathername"
+											th:field="*{employeeFatherHubandName}" class="form-control"></td>
+										<td width="25%" align="left">SPOUSE Name</td>
+										<td width="25%" align="left"><input type="text"
+											id="spouseName" maxlength="99" name="spouseName" value=""
+											th:field="*{employeeSpouseName}" class="form-control"></td>
+									</tr>
+									<tr>
+										<td width="25%" align="left">Martial Status</td>
+										<td width="25%" align="left">YES <input type="radio"
+											th:field="*{maritalStatus}" id="martialStatusMarried"
+											th:value="Y"> NO <input type="radio"
+											id="martialStatusUnmarried" th:field="*{maritalStatus}"
+											value="N"> <label>other</label> <input type="radio"
+											id="martialStatusOther" th:field="*{maritalStatus}" value="O">
+											<label id="maritalStatus-error" class="error"
+											for="maritalStatus" style="display: none;">Please
+												select Marital Status</label>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</fieldset>
+						<fieldset class="tabstyle">
+							<legend>Identity Details </legend>
+							<table class="table table-bordered">
+								<tbody>
+									<tr>
+										<td width="25%" align="left">PAN</td>
+										<td width="25%" align="left"><input type="text"
+											name="pan_no" value="" id="pan_no" maxlength="99"
+											th:field="*{panNo}" class="form-control"></td>
+										<td width="25%" align="left">Aadhaar</td>
+										<td width="25%" align="left"><input type="text"
+											name="aadhaar_no" id="aadhaar_no" th:field="*{uidNo}"
+											maxlength="99" class="form-control number"></td>
+									</tr>
+									<tr>
+										<td width="25%" align="left">Date of Joining(DCPS/NPS
+											Applicable Date)</td>
+										<td width="25%" align="left"><input type="date"
+											name="doj" id="doj" value="" maxlength="99" th:field="*{doj}"
+											class="form-control"></td>
+										<td width="25%" align="left">Subscriber's Date of
+											Retirement</td>
+										<td width="25%" align="left"><input type="date"
+											th:field="*{superAnnDate}" name="dor" id="dor" value=""
+											class="form-control" /></td>
+									</tr>
+									<tr>
+										<td width="25%" align="left">Subscriber's Employment
+											Class</td>
+
+										<td width="25%" align="left"><select
+											th:field="*{empClass}" class="form-control">
+												<option th:value="0"
+													th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+												<option th:each="varGISGroup : ${lstGISGroup}"
+													th:value="${varGISGroup.id}"
+													th:text="${language=='mh' ? varGISGroup.group_name_mh : varGISGroup.group_name_en}"></option>
+										</select></td>
+										<td width="25%" align="left">Basic Salary</td>
+										<td width="25%" align="left"><input type="text"
+											name="basicsalary" value="" id="basicsalary" disabled
+											th:value="${basicsalary}" maxlength="99" class="form-control"></td>
+									</tr>
+									<tr>
+										<td width="25%" align="left">Payscale</td>
+										<td width="25%" align="left"><input type="text"
+											th:field="*{payScaleDesc}" class="form-control"></td>
+									</tr>
+								</tbody>
+							</table>
+						</fieldset>
+
+					</div>
+					<div id="tcontent6" class="tabcontent">
+						<fieldset class="tabstyle"
+							th:each="nominee, itemStat : *{mstNomineeDetailsEntity}">
+							<legend>Subscribers Nominee Details </legend>
+							<small style="color: red;">Note: You can nominate up to a
+								maximum of 3 nominees and if you desire so please fill in
+								Annexure III (Additional Nomination Form) provided separately</small>
+							<div id="noMineeDiv">
+								<table class="table table-bordered" id="tbl1">
+									<tbody>
+										<tr>
+											<td colspan="4">
+												<fieldset>
+													<legend style="margin-bottom: 0 !important;">
+														<span
+															th:utext="${'Nominee '+(itemStat.index+1)+' Detail'}">
+														</span>
+													</legend>
+												</fieldset>
+											</td>
+										</tr>
+										<tr>
+											<td width="25%" align="left">Nominee Name <input
+												type="hidden" id="numNominees" th:value="${#lists.size(mstNomineeDetailsEntity)}"
+												 /></td><!-- th:value="${itemStat.index+1}" -->
+											<td width="25%" align="left"><input type="text"
+												name="nominee_name" th:id="'nomineeName'+${itemStat.index}"
+												th:field="*{mstNomineeDetailsEntity[__${itemStat.index}__].nomineename}"
+												maxlength="120" class="form-control nomineeName"></td>
+											<td width="25%" align="left">Relationship with the
+												Nominee</td>
+											<td width="25%" align="left"><select
+												th:id="'nomineeRelation'+${itemStat.index}"
+												th:field="*{mstNomineeDetailsEntity[__${itemStat.index}__].relation}"
+												class="form-control nomineeRelation">
+													<option th:value="0">Please Select</option>
+													<option th:each="varRelation : ${lstRelation}"
+														th:value="${varRelation[1]}"
+														th:text="${language=='mh' ? varRelation[1] : varRelation[1]}"></option>
+											</select></td>
+										</tr>
+										<tr>
+
+											<td width="25%" align="left">Date of Birth</td>
+											<td><input type="date"
+												th:id="'nomineeDob'+${itemStat.index}"
+												th:field="*{mstNomineeDetailsEntity[__${itemStat.index}__].dob}"
+												class="datepicker form-control nomineeDob" title="dd/mm/yyyy" value=""
+												maxlength="10"></td>
+											<td width="25%" align="left"><label>Nominee
+													Percentage Share</label></td>
+											<td width="25%" align="left"><input type="text"
+												th:id="'nomineePercentShare'+${itemStat.index}"
+												th:field="*{mstNomineeDetailsEntity[__${itemStat.index}__].percent_share}"
+												maxlength="99" value="" class="form-control number nomineePercentShare"></td>
+										</tr>
+										<tr>
+											<td width="25%" align="left">Nominee's Guardian Details
+												(in case of a minor)</td>
+											<td width="25%" align="left"><span>Nominee
+													Guardian Name</span> <input type="text"
+												th:id="'nomineeGuardianName'+${itemStat.index}"
+												th:field="*{mstNomineeDetailsEntity[__${itemStat.index}__].guardianName}"
+												maxlength="99" class="form-control nomineeGuardianName"></td>
+											<td width="25%" align="left"><label>Nominee
+													Address</label></td>
+											<td width="25%" align="left"><span>Nominee
+													Condition rendering</span> <input type="text"
+												th:id="'nomineeAddress'+${itemStat.index}"
+												th:field="*{mstNomineeDetailsEntity[__${itemStat.index}__].nomineeaddress}"
+												maxlength="40" value="" class="form-control nomineeAddress"></td>
+										</tr>
+										<tr>
+											<td width="25%" align="left"><label>Major/Minor</label></td>
+											<td width="25%" align="left"><label>Major</label> <input
+												type="radio" value="N"
+												th:id="*{mstNomineeDetailsEntity[__${itemStat.index}__].majorMinor}"
+												th:field="*{mstNomineeDetailsEntity[__${itemStat.index}__].majorMinor}"
+												checked="checked"
+												class="majorMinor"
+												
+												
+												> &nbsp; &nbsp; <label>Minor</label>
+												<input type="radio"
+												th:id="*{mstNomineeDetailsEntity[__${itemStat.index}__].majorMinor}"
+												th:field="*{mstNomineeDetailsEntity[__${itemStat.index}__].majorMinor}" class="majorMinor"
+												value="Y"> <br> 
+												
+												<label id="majorMinor0"
+												class="error" style="display: none;">Please select
+													Major/Minor Nominee</label></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							
+						</fieldset>
+					</div>
+					<div class="text-right">
+								<button class="btn" id="addNomineess">
+									<span>Add Nominee</span>
+								</button>
+							</div>
+					<div id="tcontent2" class="tabcontent" style="height: 100%;">
+
+						<fieldset class="tabstyle">
+							<legend>Subscribers Bank Details </legend>
+							<table class="table table-bordered">
+								<tbody>
+									<tr>
+										<td width="25%" align="left">Bank A/c Number</td>
+										<td width="25%" align="left"><input type="text"
+											name="bankac_number" th:field="*{bankAcntNo}"
+											id="bankac_number" maxlength="99" class="form-control number"></td>
+
+										<td width="25%"><label><span
+												th:utext="#{msg.thymeleaf.pagelabel.bankname}"></span>&nbsp;&nbsp;<b><font
+													color="red" size="4px;">*</font></b></label></td>
+										<td width="25%"><select class="form-control"
+											th:field="*{bankCode}" id="bankCode">
+												<option selected="selected" th:value="0"
+													th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+												<option th:each="varAllBankList : ${lstAllBankList}"
+													th:value="${varAllBankList.bankCode}"
+													th:data = "${varAllBankList.bankName}"
+													th:text="${language=='mh' ? varAllBankList.bankName : varAllBankList.bankName}"></option>
+										</select> <label id="employeeBankName-error" class="error"
+											for="employeeBankName" style="display: none;">Please
+												enter employee Bank Name</label></td>
+									</tr>
+									<tr>
+
+									</tr>
+									<tr>
+										<td width="25%" align="left">Branch Name</td>
+											<td width="25%"><select class="form-control"
+											th:field="*{bankBranchCode}" id="bankBranchCode">
+												<option th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option th:each="varAllBankbranchList : ${lstAllBankBranch}"
+							th:value="${varAllBankbranchList.bankBranchCode}"
+							th:text="${language=='mh' ? varAllBankbranchList.bankBranchName : varAllBankbranchList.bankBranchName}"></option></select>
+										
+										<!-- <td width="25%" align="left"><input type="text"
+											name="branch_name" value=""
+											th:field="*{employeeBankBranchName}" id="branch_name"
+											maxlength="99" class="form-control"> --></td>
+
+										<td width="25%" align="left">Branch Address</td>
+										<td width="25%" align="left"><input type="text"
+											name="branch_add" id="branch_add" value=""
+											th:field="*{employeeBankBankAddress}" maxlength="99"
+											class="form-control"></td>
+									</tr>
+									<tr>
+										<td width="25%" align="left">PIN Code</td>
+										<td width="25%" align="left"><input type="text"
+											name="pincodeac" id="pincodeac"
+											th:field="*{employeeBankPinCode}"
+											onkeypress="digitFormat(this);" value=""
+											class="form-control number"></td>
+										<td width="25%" align="left">Bank State</td>
+										<td width="25%" align="left"><select name="bankstate"
+											id="bankstate" class="form-control">
+
+
+												<option selected="selected" th:value="0"
+													th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+												<option th:each="varlstAllState : ${lstAllState}"
+													th:value="${varlstAllState.stateCode}"
+													th:text="${language=='mh' ? varlstAllState.stateNameEn: varlstAllState.stateNameEn}"></option>
+
+										</select></td>
+									<tr>
+										<td width="25%" align="left">IFSC Code</td>
+										<td width="25%" align="left"><input type="text"
+											name="ifsccode" id="ifsccode" value="" th:field="*{IfscCode}"
+											maxlength="99" class="form-control"></td>
+									</tr>
+								</tbody>
+							</table>
+						</fieldset>
+					</div>
+					<div id="tcontent4" class="tabcontent" style="height: 100%;">
+						<fieldset class="tabstyle">
+							<legend>Correspondence Address Details</legend>
+							<table class="table table-bordered">
+								<tbody>
+									<tr>
+										<td width="25%" align="left">Flat/Room/Door/Block no</td>
+										<td width="25%" align="left"><input type="text"
+											name="frdbno" th:field="*{flatUnitNo}" id="frdbno"
+											maxlength="99" value="" class="form-control"></td>
+										<td width="25%" align="left">Landmark</td>
+										<td width="25%" align="left"><input type="text"
+											name="landmark" id="landmark" maxlength="99" value=""
+											class="form-control"></td>
+									</tr>
+									<tr>
+										<td width="25%" align="left">Premises/Building/Village</td>
+										<td width="25%" align="left"><input type="text"
+											name="pbv" th:field="*{buildingName}" id="pbv" maxlength="99"
+											value="" class="form-control"></td>
+										<td width="25%" align="left">Road/Street/Lane</td>
+										<td width="25%" align="left"><input type="text"
+											name="rsl" id="rsl" maxlength="99" value=""
+											class="form-control"></td>
+									</tr>
+									<tr>
+										<td width="25%" align="left">Area/Locality/Taluk</td>
+										<td width="25%" align="left"><input type="text"
+											name="alt" id="alt" maxlength="99" value=""
+											th:field="*{locality}" class="form-control"></td>
+										<td width="25%" align="left">City/Town/District</td>
+										<td width="25%" align="left"><input type="text"
+											name="ctd" id="ctd" maxlength="99" value=""
+											th:field="*{district}" class="form-control"></td>
+									</tr>
+									<!-- onblur="checkLengthData('alt',' Area/Locality/Taluk  of Correspondence Address .',30);" -->
+									<tr>
+										<!-- <td width="25%" align="left">State/U.T</td>
+										<td width="25%" align="left"><select 
+											name="stateut" id="stateut" class="form-control">
+												<option value="02">Andhra Pradesh</option>
+												<option value="03">Arunachal Pradesh</option>
+												<option value="04">Assam</option>
+												<option value="05">Bihar</option>
+												<option value="06">UT Chandigarh</option>
+
+										</select></td> -->
+										<td width="25%" align="left">State/U.T</td>
+										<td width="25%" align="left"><select th:field="*{state}"
+											class="form-control">
+
+
+												<option selected="selected" th:value="0"
+													th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+												<option th:each="varlstAllState : ${lstAllState}"
+													th:value="${varlstAllState.stateCode}"
+													th:text="${language=='mh' ? varlstAllState.stateNameEn: varlstAllState.stateNameEn}"></option>
+
+										</select></td>
+										<td width="25%" align="left">PIN Code</td>
+										<td width="25%" align="left"><input type="text"
+											name="pincode" id="pincode" maxlength="99" value=""
+											th:field="*{pinCode}" class="form-control number"></td>
+									</tr>
+									<tr>
+										<td width="25%" align="left">Address type</td>
+										<td width="25%" align="left"><select name="addresstype"
+											id="addresstype" class="form-control">
+												<option selected value="R">Residential</option>
+												<option value="B">Business</option>
+												<option value="U">Unspecified</option>
+												<option value="O">Registered Office</option>
+												<option value="C">Residential / Business</option>
+										</select></td>
+									</tr>
+								</tbody>
+							</table>
+						</fieldset>
+
+						<div class="text-center">
+							<fieldset class="tabstyle">
+								<legend>
+									<span th:utext="#{msg.thymeleaf.pagelabel.PresentAddressSame}"></span>
+								</legend>
+								<table class="table table-bordered table-striped">
+									<tbody>
+										<tr>
+											<td width="25%" align="left"><label> <span
+													th:utext="#{msg.thymeleaf.pagelabel.PresentAddressSame}"></span></label></td>
+											<td width="25%" align="left"><b><span
+													th:utext="#{msg.thymeleaf.pagelabel.whetherMinisterialNo}"></span>:</b><input
+												type="radio" name="sameAdd" value="NO"
+												id="presentNotSamePerm">&nbsp; <b><span
+													th:utext="#{msg.thymeleaf.pagelabel.whetherMinisterialYes}"></span>:</b><input
+												type="radio" name="sameAdd" value="YES" id="presentSamePerm">
+
+												<label id="sameAdd-error" class="error" for="sameAdd"
+												style="display: none;">Please select Present Address
+													Same as Permanent Address</label></td>
+										</tr>
+									</tbody>
+								</table>
+							</fieldset>
+						</div>
+						<fieldset class="tabstyle">
+							<legend>permanent address details </legend>
+							<table class="table table-bordered">
+								<tbody>
+									<tr>
+										<td width="25%" align="left">Flat/Room/Door/Block no</td>
+										<td width="25%" align="left"><input type="text"
+											name="p_frdbno" id="p_frdbno" maxlength="99" value=""
+											th:field="*{empPermanentFlatUnitNo}"
+											class="form-control permanentAddress"></td>
+										<td width="25%" align="left">Landmark</td>
+										<td width="25%" align="left"><input type="text"
+											name="p_landmark" th:field="*{empPermanentLocality}"
+											id="p_landmark" maxlength="99" value=""
+											class="form-control permanentAddress"></td>
+									</tr>
+									<tr>
+										<td width="25%" align="left">Premises/Building/Village</td>
+										<td width="25%" align="left"><input type="text"
+											name="p_pbv" th:field="*{empPermanentBuildingName}"
+											id="p_pbv" maxlength="99" value=""
+											class="form-control permanentAddress"></td>
+										<td width="25%" align="left">Road/Street/Lane</td>
+										<td width="25%" align="left"><input type="text"
+											name="p_rsl" id="p_rsl" maxlength="99" value=""
+											class="form-control permanentAddress"></td>
+									</tr>
+									<tr>
+										<td width="25%" align="left">Area/Locality/Taluka</td>
+										<td width="25%" align="left"><input type="text"
+											name="p_alt" th:field="*{empPermanentLocality}" value=""
+											id="p_alt" maxlength="99"
+											class="form-control permanentAddress"></td>
+										<td width="25%" align="left">City/Town/District</td>
+										<td width="25%" align="left"><input type="text"
+											th:field="*{empPermanentDistrict}" name="p_ctd" value=""
+											id="p_ctd" maxlength="99"
+											class="form-control permanentAddress"></td>
+									</tr>
+									<tr>
+										<!-- 	<td width="25%" align="left">State/U.T</td>
+										<td width="25%" align="left"><select  th:field="*{state}"
+											name="p_stateut" id="p_stateut" class="form-control permanentAddress">
+												<option value="02">Mahatrashtra</option>
+
+										</select></td> -->
+										<td width="25%" align="left">State/U.T</td>
+										<td width="25%" align="left">
+											<!-- <input type="text"  th:field="*{empPermanentState}"
+											name="p_stateut" value="" id="p_stateut"
+											maxlength="99" class="form-control permanentAddress"> --> <select
+											th:field="*{empPermanentState}" class="form-control">
+
+
+												<option selected="selected" th:value="0"
+													th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+												<option th:each="varlstAllState : ${lstAllState}"
+													th:value="${varlstAllState.stateCode}"
+													th:text="${language=='mh' ? varlstAllState.stateNameEn: varlstAllState.stateNameEn}"></option>
+
+										</select>
+
+										</td>
+										<td width="25%" align="left">PIN Code</td>
+										<td width="25%" align="left"><input type="text"
+											name="p_pincode" value="" th:field="*{empPermanentPinCode}"
+											id="p_pincode" maxlength="99"
+											class="form-control permanentAddress number"></td>
+									</tr>
+									<tr>
+										<td width="25%" align="left">Address type</td>
+										<td width="25%" align="left"><select
+											name="addresstypepermanent" id="addresstypepermanent"
+											class="form-control permanentAddress">
+												<option selected value="R">Residential</option>
+												<option value="B">Business</option>
+												<option value="U">Unspecified</option>
+												<option value="O">Registered Office</option>
+												<option value="C">Residential / Business</option>
+										</select></td>
+									</tr>
+								</tbody>
+							</table>
+						</fieldset>
+					</div>
+					<div id="tcontent5" class="tabcontent">
+						<fieldset class="tabstyle">
+							<legend>Contact / Other Details</legend>
+							<table class="table table-bordered">
+								<tbody>
+									<tr>
+										<td width="25%" align="left">Landline Phone (with STD
+											Code)</td>
+										<td width="25%" align="left"><input type="text"
+											name="landline" th:field="*{landlineNo}" id="con_landline"
+											value="" maxlength="11" class="form-control number"></td>
+										<td width="25%" align="left">Mobile</td>
+										<td width="25%" align="left"><input type="text"
+											name="con_mobile" th:field="*{mobileNo1}" id="con_mobile"
+											value="" maxlength="10" class="form-control number"></td>
+									</tr>
+									<tr>
+										<td width="25%" align="left">Email ID</td>
+										<td width="25%" align="left"><input type="text"
+											name="con_email" value="" th:field="*{emailId}"
+											id="con_email" class="form-control"></td>
+										<td width="25%" align="left">Do you want to subscribe to
+											SMS Alerts :</td>
+										<td width="25%" align="left">Yes <input type="radio"
+											id="con_agree" name="con_agree" value="Y" checked="checked">
+											No <input type="radio" id="con_agree" name="con_agree"
+											value="Y">
+										</td>
+									</tr>
+									<tr>
+										<td width="25%" align="left"><label>Do you want
+												to subscribe to EMAIL Alerts :</label></td>
+										<td width="25%" align="left">Yes <input type="radio"
+											id="emailsubflag" name="emailsubflag" value="Y"
+											checked="checked"> No <input type="radio"
+											id="emailsubflag" name="emailsubflag" value="Y">
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</fieldset>
+						<fieldset class="tabstyle">
+							<legend>Other Details </legend>
+							<table class="table table-bordered">
+								<tbody>
+									<tr>
+										<td width="25%" align="left">Display Name Flag (Name to
+											be printed on PRAN Card)</td>
+										<td width="25%" align="left"><label>Father Name</label> <input
+											type="radio" id="dips_name_flag" name="dips_name_flag"
+											value="F" checked="checked"> <label>Mother
+												Name</label> <input type="radio" id="dips_name_flag"
+											name="dips_name_flag" value="M"></td>
+									</tr>
+									<tr>
+										<td width="25%" align="left">Date of Birth Proof</td>
+										<td width="25%" align="left" colspan="2">AADHAAR Card <input
+											type="radio" id="dobp" name="dobp" value="150"
+											th:field="*{dobProof}" checked="checked"> PAN Card <input
+											type="radio" id="dobp" name="dobp" th:field="*{dobProof}"
+											value="119"> Passport <input type="radio" id="dobp"
+											name="dobp" th:field="*{dobProof}" value="103">
+											Driving License <input type="radio" id="dobp" name="dobp"
+											value="104" th:field="*{dobProof}"> Voter ID <input
+											type="radio" id="dobp" name="dobp" th:field="*{dobProof}"
+											value="10"> <label id="dobProof-error" class="error"
+											for="dobProof" style="display: none;">Please select
+												DOB proof</label>
+										</td>
+									</tr>
+									<tr>
+										<td width="25%" align="left">Educational Qulification</td>
+										<td width="25%" align="left">If no information available
+											from Subscriber <input type="radio" id="NoInfo"
+											name="EduQualification" value="00" th:field="*{eduQual}">
+											Below SSC <input type="radio" id="BelowSSC"
+											name="EduQualification" value="01" th:field="*{eduQual}">
+											SSC <input type="radio" id="EduSSC" name="EduQualification"
+											th:field="*{eduQual}" value="02"> HSC <input
+											type="radio" th:field="*{eduQual}" id="EduHsc"
+											name="EduQualification" value="03"> Graduate <input
+											type="radio" id="EduGraduate" th:field="*{eduQual}"
+											name="EduQualification" value="04"> Masters <input
+											type="radio" id="EduMaster" name="EduQualification"
+											th:field="*{eduQual}" value="05"> Professionals (CA,
+											CS, CMA etc.) <input type="radio" id="EduProfessional"
+											th:field="*{eduQual}" name="EduQualification" value="06">
+											<label id="eduQual-error" class="error" for="eduQual"
+											style="display: none;">please select Education
+												Qualification</label>
+										</td>
+									</tr>
+									<tr>
+										<td width="25%" align="left">Income Range</td>
+										<td width="25%" align="left" colspan="2">If no
+											information available from Subscriber <input type="radio"
+											th:field="*{incomeRange}" id="NoInfoIncome"
+											name="IncomeRange" value="00"> Upto 1 Lac <input
+											type="radio" id="IncomeOne" th:field="*{incomeRange}"
+											name="IncomeRange" value="01"> 1 Lac to 5 Lac <input
+											type="radio" id="IncomeFive" name="IncomeRange"
+											th:field="*{incomeRange}" value="02" checked="checked">
+											5 Lac to 10 Lac <input type="radio" id="IncomeTenLac"
+											name="IncomeRange" th:field="*{incomeRange}" value="03">
+											10 Lac to 25 Lac <input type="radio" id="IncomeTwenty"
+											name="IncomeRange" th:field="*{incomeRange}" value="04">
+											25 Lac and Above <input type="radio" id="IncomeAbve"
+											th:field="*{incomeRange}" name="IncomeRange" value="05">
+											<label id="incomeRange-error" class="error" for="incomeRange"
+											style="display: none;">please select Income Range</label>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</fieldset>
+					</div>
+					<div id="tcontent3" class="tabcontent" style="height: 100%;">
+						<fieldset style="width: 100%;" class="tabstyle">
+							<legend id="headingMsg">
+								<b>Photo/Signature</b>
+							</legend>
+							<table class="table table-bordered">
+								<tr>
+									<td width="25%"><label><span
+											th:utext="#{msg.thymeleaf.pagelabl.filedesc}"></span>
+											&nbsp;&nbsp;<b><font color="red" size="4px;">*</font></b> </label></td>
+									<!-- <td width="25%">
+											<input Type="file" id="files" th:field="*{photoAttachmentId}"
+											onchange="getimage(this);" name="files" class="form-control" />
+										</td> -->
+									<td width="25%"><input type="file"
+										name="photoAttachmentIdnew" maxlength="40"
+										th:field="*{signatureAttachmentIdnew}"
+										class="filetag  form-control" id="photoAttachmentIdnew"></td>
+									<td width="25%"><img id="imagePath" src="" alt="Photo"
+										width="100" height="100" /></td>
+								</tr>
+								<tr>
+									<td width="25%"><label><span
+											th:utext="#{msg.thymeleaf.pagelabl.signDesc}"></span>&nbsp;&nbsp;<b><font
+												color="red" size="4px;">*</font></b></label></td>
+									<!-- <td width="25%">
+											<input Type="file"  id="files"  th:field="*{signatureAttachmentId}"
+											onchange="getimagesign(this);" name="files" class="form-control"/>
+										</td> -->
+									<td width="25%"><input type="file"
+										name="signatureAttachmentIdnew" maxlength="40"
+										th:field="*{photoAttachmentIdnew}"
+										class="filetag  form-control" id="signatureAttachmentIdnew"></td>
+									<td width="25%"><img id="imagePathSign" src="" alt="sign"
+										width="100" height="100" /></td>
+								</tr>
+							</table>
+						</fieldset>
+					</div>
+
+					<div class="text-center">
+						<input type="submit" name="" id="submit" class="btn" value="save" />
+						<input type="reset" id="btnReset" class="btn btn-primary"
+							th:value="#{msg.thymeleaf.pagelabel.btnReset}" /> <a
+							th:href="@{/user/home}" class="btn"><span
+							th:text="#{msg.thymeleaf.pagelabel.btnCancel}"></span></a>
+					</div>
+
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/jquery.validate.min.js}"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.min.js"></script>
+	<script th:src="@{/js/nps/CSRF-Form.js}"></script>
+
+
+</body>
+</html>

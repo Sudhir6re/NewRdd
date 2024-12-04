@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.changeDcpsGpf}"></title>
+
+</head>
+<body class="change-dcps-gpf">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.dcpsBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.changeDcpsGpf}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.changeDcpsGpf}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<form method="post" th:action="@{/mdc/savechangeDcpsGpf}" name="FrmSetDCPSorGPF" th:object="${mstEmployeeModel}"
+				enctype="multipart/form-data">
+				<fieldset class="tabstyle">
+					<legend>Employee Details</legend>
+					<table class="table bor-0 tbBold width-70">
+						<tbody>
+							<tr>
+								<td width="50%">Sevarth Id</td>
+								<td><input type="text" id="txtSevaarthId"
+									name="txtSevaarthId"> <label class="mandatoryindicator">*</label>
+								</td>
+							</tr>
+							<tr>
+								<td>Date Of Joining Government Service</td>
+								<td><input type="date" id="txtDOJ" name="txtDOJ">  <label class="mandatoryindicator">*</label></td>
+							</tr>
+							<tr>
+								<td>Date Of Joining(New)</td>
+								<td><input type="date" name="txtDOJNew" id="txtDOJNew"
+									maxlength="10"> <label class="mandatoryindicator">*</label>
+								</td>
+							</tr>
+							<tr>
+								<td>DCPS or GPF?</td>
+								<td><input type="radio" id="radioDCPS" name="radioDCPSGPF"
+									value="D"> DCPS &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" id="radioGPF"
+									name="radioDCPSGPF" value="G"> GPF</td>
+							</tr>
+						</tbody>
+					</table>
+					<br />
+					<div class="text-center">
+						<input type="button" name="btnUpdate" id="btnUpdate"
+							value="Update" size="3" maxlength="3" class="buttontag">
+						<input type="button" name="btnBack" onclick="history.back()"
+							id="btnBack" value="Back" size="3" maxlength="3"
+							class="buttontag">
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script>
+		$(".empdetails").hide();
+		function getEmpInfo() {
+			$(".empdetails").fadeIn(100);
+		}
+	</script>
+	<script th:src="@{/js/project/change-dcps-gpf.js}"></script>
+</body>
+</html>

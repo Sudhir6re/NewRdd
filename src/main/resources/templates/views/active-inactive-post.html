@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title >Active In Active Post</title>
+<style type="text/css">
+.error {
+	color: red !important;
+	font-size: 12px !important;
+}
+
+select.error, textarea.error, input.error {
+	border: 1px solid red !important;
+}
+</style>
+</head>
+<body class="mst-menu">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+	<div class="container min-height-600">
+	<div class="breadcrumbMain">
+				<nav aria-label="breadcrumb">
+				  <ol class="breadcrumb">
+				<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+				    <li class="breadcrumb-item"><a href="#"><span  th:utext="#{msg.thymeleaf.pagelabel.UtilitiesBD}"></span></a></li>
+				    <li class="breadcrumb-item active" aria-current="page"><span th:utext="#{msg.thymeleaf.pagelabel.menuScreen}"></span></li>
+				  </ol>
+				</nav>
+			</div>
+			<h3 Class="PageHeading"><span>Active In Active Post</span></h3>
+
+		<fieldset class="container">
+			<!-- <b><legend th:utext="#{msg.thymeleaf.pagelabel.menuScreen}"
+					th:style="${'color: orange;'}"></legend></b> -->
+
+		<input type="hidden" th:field="*{ddoCode}" id="ddoCode"/>
+
+				<table class="table table-bordered" id="postDetails">
+						<thead>
+							<tr>
+								<th class="datatableheader sortable">Sr. No.</th>
+								<th class="datatableheader sortable">Employee Name</th>
+								<th class="datatableheader">Post Name</th>
+								<th class="datatableheader sortable">Post Type</th>
+								<th class="datatableheader sortable">Designation</th>
+								<th class="datatableheader sortable">DDO Code</th>
+								<th class="datatableheader sortable">Bill Group Name</th>
+								<th>Status</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="userPostCustomVO,rowStat : ${getPostNameForDisplay}">
+								<td th:text="${rowStat.index+1}">1</td>
+								<td th:text="${userPostCustomVO.empFullName}"></td>
+								<td th:text="${userPostCustomVO.postname}"></td>
+								<td th:text="${userPostCustomVO.postType}"></td>
+								<td th:text="${userPostCustomVO.dsgnname}"></td>
+								<td th:text="${userPostCustomVO.ddoCode}"></td>
+								<td th:text="${userPostCustomVO.billNo}"></td>
+								<td>
+								   <span th:switch="${userPostCustomVO.activateFlag}">
+									    <span th:case='1' th:class="'label label-success text-center'"
+									         >Active</span>
+									  
+									    <span  th:case = "*" th:class="'label label-warning text-center'"
+									          >InActive</span>
+							</span>
+							</td>
+							<td>
+							
+							<div class="form-group text-center">
+									<a data-toggle="tooltip" title="Edit"  id="updatePostStatus"
+									  th:data-postId="${userPostCustomVO.postId}"
+									 th:data-activateFlag="${userPostCustomVO.activateFlag}"
+									  > <span
+										class="glyphicon glyphicon-edit"></span>
+									</a>
+								</div>
+							</td>
+							</tr>
+						</tbody>
+					</table>
+
+				<input type="hidden" name="${_csrf.parameterName}"
+					value="${_csrf.token}" />
+
+		</fieldset>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+
+	<script th:src="@{/js/project/datatable-common.js}"></script>
+	<script th:src="@{/js/jquery.validate.min.js}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.min.js"></script>
+	<script th:src="@{/js/project/active-inactive-post.js}"></script>
+
+
+</body>
+</html>

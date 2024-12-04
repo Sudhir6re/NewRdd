@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.daRateEntry}"></title>
+
+</head>
+<body class="da-rate-entry">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.dcpsBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.daRateEntry}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.daRateEntry}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<form method="post" action="" name="frmDCPSSanctionedBudget"
+				enctype="multipart/form-data">
+				<fieldset class="tabstyle">
+					<table class="table bor-0 width-60 tbBold">
+						<tbody>
+							<tr>
+								<td width="50%" align="left">Pay Commission</td>
+								<td width="50%" align="left"><select name="cmbPayComm"
+									id="cmbPayComm">
+										<option value="-1">-- Select --</option>
+										<option value="700338">Non Govt. Scales</option>
+										<option value="700339">Padmanabhan Comm.</option>
+										<option value="700340">Fourth ( IV )</option>
+										<option value="700015">5th Pay Commission</option>
+										<option value="700005">7th Pay Commission</option>
+										<option value="700016">6th Pay Commission</option>
+										<option value="700337">Consolidated Pay</option>
+										<option value="700345">Shetty Commission</option>
+										<option value="10001198186">6th Pay Comission UGC</option>
+								</select></td>
+							</tr>
+							<tr>
+								<td width="50%" align="left">DA Rate</td>
+								<td width="50%" align="left"><input type="text"
+									name="txtDARate" id="txtDARate"
+									 /></td>
+							</tr>
+							<tr>
+								<td width="50%" align="left">Effective From Date</td>
+								<td width="50%" align="left"><input type="date"
+									name="txtFromDate" id="txtFromDate" maxlength="10"></td>
+							</tr>
+						</tbody>
+					</table>
+				</fieldset>
+				<br />
+				<div class="text-center">
+					<input type="button" name="btnSaveData" id="btnSaveData"
+						value="Save" size="3" maxlength="3" class="buttontag"> <input
+						type="button" name="btnCancel" onclick="history.back()"
+						id="btnCancel" value="Cancel" size="3" maxlength="3"
+						class="buttontag">
+				</div>
+				<br />
+				<fieldset class="tabstyle">
+					<table class="table table-bordered" id="datatableNew">
+						<thead>
+							<tr>
+								<th>Sr No</th>
+								<th>Rate</th>
+								<th>Effective From</th>
+								<th>Applicable Upto</th>
+								<th>Status</th>
+								<th>Pay Commission</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td align="center">1</td>
+								<td align="center">65.0%</td>
+								<td align="center">31/03/2012</td>
+								<td align="center"></td>
+								<td align="center">Active</td>
+								<td align="center">Non Govt. Scales</td>
+							</tr>
+							<tr>
+								<td align="center">2</td>
+								<td align="center">72.0%</td>
+								<td align="center">01/11/2012</td>
+								<td align="center"></td>
+								<td align="center">Active</td>
+								<td align="center">Consolidated Pay</td>
+							</tr>
+						</tbody>
+					</table>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

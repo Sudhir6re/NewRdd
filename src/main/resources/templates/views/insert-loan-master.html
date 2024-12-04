@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.insertLoanMaster}"></title>
+<style type="text/css">
+</style>
+</head>
+<body class="insert-loan-master">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.dcpsBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.insertLoanMaster}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.insertLoanMaster}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<form method="POST" action="" name="frmLoanMaster"
+				enctype="text/form-data">
+				<div id="tcontent1">
+					<br>
+					<table class="table bor-0 width-60">
+						<tbody>
+							<tr>
+								<td><b><label class="captionTag" id="LM.loanName">Loan
+											Name</label></b></td>
+								<td><input type="text" name="loanName" id="loanName"
+									class="texttag mandatorycontrol" value="" maxlength="50/">&nbsp;&nbsp;<label
+									class="mandatoryindicator">*</label></td>
+							</tr>
+
+							<tr>
+								<td><b><label class="captionTag" id="LM.maxNoAmount">Maximum
+											Amount</label></b> <font size="3" face="Rupee Foradian"> (<font
+										size="3" face="Rupee Foradian">`</font>)
+								</font></td>
+								<td><input type="text" name="txtMaxNoAmount"
+									id="txtMaxNoAmount" class="numbertag mandatorycontrol" value=""
+									maxlength="50/">&nbsp;&nbsp;<label
+									class="mandatoryindicator">*</label></td>
+							</tr>
+
+							<tr>
+								<td><b><label class="captionTag" id="LM.maxNoInstall">Maximum
+											No of Installment</label></b></td>
+								<td><input type="text" name="txtMaxNoInstall"
+									id="txtMaxNoInstall" class="numbertag mandatorycontrol"
+									value="" maxlength="50/">&nbsp;&nbsp;<label
+									class="mandatoryindicator">*</label></td>
+							</tr>
+
+							<tr>
+								<td><b><label class="captionTag" id="LM.minNoInstall">Minimum
+											No of Installment</label></b></td>
+								<td><input type="text" name="txtMinNoInstall"
+									id="txtMinNoInstall" class="numbertag mandatorycontrol"
+									value="" maxlength="50/">&nbsp;&nbsp;<label
+									class="mandatoryindicator">*</label></td>
+							</tr>
+
+							<tr>
+								<td><input type="radio" name="group1" value="2500382"
+									class="radiobuttontag mandatorycontrol" checked="true"><label
+									class="captionTag">&nbsp;&nbsp;By Accountant General&nbsp;&nbsp;&nbsp;&nbsp;</label><label
+									class="mandatoryindicator">*</label> <input type="radio"
+									name="group1" value="2500381"
+									class="radiobuttontag mandatorycontrol"><label
+									class="captionTag">&nbsp;&nbsp;By Treasury&nbsp;&nbsp;&nbsp;&nbsp;</label><label
+									class="mandatoryindicator">*</label></td>
+							</tr>
+						</tbody>
+					</table>
+					<br />
+					<div class="text-center">
+						<input type="button" name="formSubmitButton"
+							id="formSubmitButtonTemp" value="Save" size="3" maxlength="3"
+							class="buttontag"> <input type="button" name="Close"
+							id="Close" value="Close" size="3" maxlength="3" class="buttontag"
+							onclick="history.back()"> <input type="reset"
+							name="Reset" id="Reset" value="Reset" size="3" maxlength="3"
+							class="buttontag">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/mst-bank.js}"></script>
+</body>
+</html>

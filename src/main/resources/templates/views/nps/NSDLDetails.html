@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.NSDLDetails}"></title>
+<style type="text/css">
+.error {
+	color: red !important;
+	font-size: 12px !important;
+}
+
+select.error, textarea.error, input.error {
+	border: 1px solid red !important;
+}
+</style>
+</head>
+<body class="NSDLDetails">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.NPSDB}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.NSDLDetails}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.NSDLDetails}"></span>
+		</h3>
+		<fieldset class="container">
+
+			<form  method="post"  th:action="@{/master/validateNsdlFile}" name="frmDCPSMatchedEntries"  th:object="${nsdlDetailsModel}" 
+				enctype="multipart/form-data" class="form-horizontal"  id="contributionList">
+				<fieldset class="tabstyle">
+
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.month}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+						<select  name="monthId" id="monthId" class="form-control removeErrorFromDropdown">
+						<option selected="selected" th:value="0"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+								<option th:each="varGetAllMonths : ${lstGetAllMonths}"
+									th:value="${varGetAllMonths.monthId}"
+									th:text="${language=='mh' ? varGetAllMonths.monthMarathi : varGetAllMonths.monthEnglish}"></option>
+						</select>
+					</div>
+
+						<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.Year}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+						<select  name="yearId"	id="yearId" class="form-control removeErrorFromDropdown" >
+							<option selected="selected" th:value="0"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+								
+							<option th:each="varGetAllYear : ${lstGetAllYear}"
+								th:value="${varGetAllYear.yearId}"
+								th:text="${language=='mh' ? varGetAllYear.yearMarathi : varGetAllYear.yearEnglish}"></option>
+						</select>
+					</div>
+					</div>
+					<div class="form-group">
+					<label class="control-label col-sm-2" for="title"><span>Treasury</span>&nbsp;&nbsp;</label>
+						<div class="col-sm-3">
+							<select name="cmbTr" id="cmbTr" class="form-control removeErrorFromDropdown">
+								<option value="0" selected="selected">--Select--</option>
+								<option value="3333" selected="selected">DEMO TREASURY</option>
+							</select>
+						</div>
+					
+					</div>
+					<br />
+					<div class=" text-center">
+					<input type="button" name="Search" id="Search" value="Search" size="3" maxlength="3" class="btn" />
+		<input type="hidden" th:field="*{fileId}" id="fileId" > 
+	<input type="hidden" th:field="*{bhId}" id="bhId" > 
+	<input type="hidden" th:field="*{nsdlStatusCode}" id="nsdlStatusCode" > 
+					</div>
+				</fieldset>
+				<br> <br>
+				<table class="table table-bordered" id="tblDataTable">
+					<thead>
+						<tr>
+							<th align="center" width="5%"><b>Select</b></th>
+							<th align="center" width="12%"><b>File Id</b></th>
+							<th align="center" width="12%"><b>Amount of Employer
+									Contribution</b></th>
+							<th align="center" width="12%"><b>Amount of Employee
+									Contribution</b></th>
+							<th align="center" width="12%"><b>Transaction ID</b></th>
+							<th align="center" width="11%"><b>File Validation Result</b></th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- <tr>
+							<td align="center"><input type="radio" name="fileNo"
+								id="fileNo0" value="3333201803011" onclick="disableEnableBtn();"></td>
+							<td align="center"><a th:href="@{/master/NSDLEmpWiseReport}"
+								onclick="getEmployeeReport('3333201803011');">3333201803011</a>
+							</td>
+							<td align="center">4040.00</td>
+							<td align="center">4040.00</td>
+							<td align="center">1234561234561</td>
+							<td align="center">Transaction Id Updated</td>
+						</tr> -->
+					</tbody>
+				</table>
+				<br> <br>
+				<div class="text-center">
+				
+					<input type="button" name="save" class="btn"  id="save"
+						value="View and Save File"> &nbsp;&nbsp;
+						
+						<input
+						type="submit" name="validate" class="btn" id="validate"
+						value="Validate File">&nbsp;&nbsp;
+						
+					
+						
+							<input
+						type="submit" name="validate" class="btn" id="send"
+						value="Send Contribution File ">&nbsp;&nbsp;
+						
+						
+						<input
+						type="submit" name="validate" class="btn" id="getContributionStatus"
+						value="Get Contribution File Status ">&nbsp;&nbsp;
+						
+						
+							<input type="button"
+						name="delete" class="btn" id="delete" value="Delete">&nbsp;&nbsp;
+						
+						
+						
+						
+						
+					<a th:href="@{/user/home}"> 
+					<input type="button" id="btnCancel"
+						class="btn btn-primary"
+						th:value="#{msg.thymeleaf.pagelabel.btnCancel}" /></a>
+						
+						
+						
+				</div>
+
+			</form>
+		</fieldset>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/datatable-common.js}"></script>
+	<script th:src="@{/js/project/NSDLDtls.js}"></script>
+</body>
+</html>

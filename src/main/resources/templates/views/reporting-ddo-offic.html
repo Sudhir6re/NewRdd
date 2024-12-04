@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.reportDDO}"></title>
+<style type="text/css">
+</style>
+</head>
+<body class="reporting-ddo-offic">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.reportDDO}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.reportDDO}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<div id="content" style="background: :#f0ebe8;">
+   
+    <form method="POST" name="lvl2DDOList" action="">
+        
+        <div id="tcontent1" >
+            <div align="center">
+                <h1>
+                </h1>
+            </div> <br>&nbsp;
+            <a th:href="@{/mdc/definingDdoOffices}" class="btn"> Defining Level2 DDO for offices having no DDO Code </a>
+            <br>
+            No Records found to display
+            <br>&nbsp;
+            <br><br>
+            <script type="text/javascript">
+            initializetabcontent("maintab")
+            </script>
+        </div>
+    </form>
+</div>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

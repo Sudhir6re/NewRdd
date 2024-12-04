@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:fragment="var-script-header">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" th:href="@{/css/payrollStyles.css}" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="icon" th:href="@{/images/GOM.png}" type="image/png"
+	sizes="16x16">
+</head>
+
+<body class="indexpage header">
+
+	<div class=" body-contents" th:fragment="varheader">
+		<input type="hidden" name="levelRoleVal" id="levelRoleVal"
+			th:value="${session.levelRoleVal}" />
+		<div class="hearder-top">
+			<marquee>Welcome to <span th:text="#{msg.thymeleaf.pagelabel.MahaSevaarth}"></span></marquee>
+		</div>
+		<div class=" logo-mainn">
+			<div class="row logo-row">
+				<div class="col-md-9 col-sm-9 flex">
+					<div class="logobar ">
+						<a class="logo" th:href="@{/}"><img
+							th:src="@{/images/logo_new.svg}" class="logo-img" id="logo-img"></a>
+<!-- 						<a class="logo" th:href="@{/}"><img
+							th:src="@{/images/GOM.png}" class="logo-img" id="logo-img"></a> -->
+					</div>
+					<h5 class="logo-Title">
+						<p class="m-title"><span th:text="#{msg.thymeleaf.pagelabel.MahaSevaarth}"></span></p>
+						<p class="logo-sub-text"></p>
+					</h5>
+				</div>
+				<div class="col-md-3 col-sm-3 text-right">
+					<div class="logobar1">
+						<a class="logo-secondary-m" href="https://mahait.org/"
+							target="_blank"><img th:src="@{/images/mahait_logo.png}"
+							class="logo-secondary"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<header>
+			<img th:src="@{/images/logo-v16.png}" class="hide" id="favicon">
+			<nav class="navbar navbar-inverse">
+				<div class="">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse"
+							data-target="#myNavbar">
+							<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
+					</div>
+					<div class="collapse navbar-collapse" id="myNavbar">
+						<!-- <ul class="nav navbar-nav navbar-left">
+							<li class="active"><a th:href="@{/}"><span
+									class="glyphicon glyphicon-home"></span> Home</a></li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li><a th:href="@{/user/login}" target="_blank"><span
+									class="glyphicon glyphicon-log-in"></span> Login</a></li>
+						</ul> -->
+						<div class="tab">
+							<button class="tablinks" onclick="openCity(event, 'London')">London</button>
+							<button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+							<button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+						</div>
+
+						<div id="London" class="tabcontent">
+							<h3>London</h3>
+							<p>London is the capital city of England.</p>
+						</div>
+
+						<div id="Paris" class="tabcontent">
+							<h3>Paris</h3>
+							<p>Paris is the capital of France.</p>
+						</div>
+
+						<div id="Tokyo" class="tabcontent">
+							<h3>Tokyo</h3>
+							<p>Tokyo is the capital of Japan.</p>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</header>
+		<script>
+			function openCity(evt, cityName) {
+				var i, tabcontent, tablinks;
+				tabcontent = document.getElementsByClassName("tabcontent");
+				for (i = 0; i < tabcontent.length; i++) {
+					tabcontent[i].style.display = "none";
+				}
+				tablinks = document.getElementsByClassName("tablinks");
+				for (i = 0; i < tablinks.length; i++) {
+					tablinks[i].className = tablinks[i].className.replace(
+							" active", "");
+				}
+				document.getElementById(cityName).style.display = "block";
+				evt.currentTarget.className += " active";
+			}
+		</script>
+	</div>
+	<div class="footer-main" th:fragment="varfooter">
+		<footer>
+			<div class="footer row flex">
+				<div class="col-md-7 " style="margin: auto;">
+					<p>© By <span th:text="#{msg.thymeleaf.pagelabel.MahaSevaarth}"></span></p>
+				</div>
+				<div class="col-md-5 flex logo-txt">
+					<p>Developed &amp; Maintained by :</p>
+					<img th:src="@{/images/footer-logo.png}"
+						alt="Maharashtra Government" />
+				</div>
+			</div>
+		</footer>
+	</div>
+</body>
+</html>

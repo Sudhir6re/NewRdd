@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Outer Report</title>
+<link rel="stylesheet" type="text/css"
+	href="http://cdn.webrupee.com/font">
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<style>
+@media print {
+	h1 {
+		page-break-before: always
+	}
+	div#print-content {
+		height: 100% !important;
+	}
+	.btn {
+		display: none !important;
+	}
+}
+
+div#print-content {
+	height: 85vh;
+	overflow: auto !important;
+}
+</style>
+<style type="text/css">
+.Label5 {
+	font-family: Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	font-size: 12px;
+	font-weight: normal;
+	color: Black;
+	border-bottom: 1px solid #000000;
+	border-right: 1px solid #000000;
+	border-top: 0px solid #000000;
+	border-left: 0px solid #000000;
+}
+
+.frmlrbBorder {
+	border-bottom: 1px solid #000000;
+	border-right: 1px solid #000000;
+	border-top: 0px solid #000000;
+	border-left: 1px solid #000000;
+}
+
+.frmlftBorder {
+	border-left: 1px solid #000000;
+}
+
+.TopBorder {
+	border-top: 1px solid #000000;
+	border-left: 1px solid #000000;
+}
+
+.border-bottom {
+	border-bottom: 1px solid #000000;
+}
+
+.RightBorder {
+	border-right: 1px solid #000000;
+}
+
+.TopBottomBorder {
+	border-top: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+}
+
+.btn {
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #fff;
+	/*  background-image: linear-gradient( 24deg , #fa7045, #FF9800) !important; */
+	border: none !important;
+	outline: none !important;
+	box-shadow: none !important;
+}
+
+.btn, .swal-button {
+	background: linear-gradient(45deg, #26b9bf, #157478) !important;
+	border: none !important;
+	outline: 0 !important;
+	box-shadow: none !important;
+}
+
+body, table {
+	font-family: "Helvetica Neue", Helvetica, Arial !important;
+	font-size: 14px;
+}
+table.outertb7 tr:nth-child(3) td:nth-child(2),table.outertb7 tr:nth-child(7) td:nth-child(2) {
+    display: inline-block;
+    width: 250px;
+    border: none;
+    ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-top: 0px;
+    padding-top: 0px;
+    float: left;
+    text-transform: uppercase !important;
+}
+</style>
+<script type="text/javascript">
+	function GoToPage() {
+		document.ViewOuterFirst.action = "./hrms.htm?actionFlag=getBillMonthYearData&nextPage=outer";
+		document.ViewOuterFirst.submit();
+	}
+	function printReport() 
+	{
+
+		document.getElementById('Print').style.visibility = 'hidden'; // hide
+		document.getElementById('Back').style.visibility = 'hidden'; // hide   
+		document.getElementById('Save').style.visibility = 'hidden'; // hide   
+		window.print();
+		document.getElementById('Print').style.visibility = 'visible'; // show 
+		document.getElementById('Back').style.visibility = 'visible'; // show 
+		document.getElementById('Save').style.visibility = 'visible'; // show 
+
+		
+	}
+		function doSaveAs() 
+	{
+		document.getElementById('Print').style.visibility = 'hidden'; // hide
+		document.getElementById('Back').style.visibility = 'hidden'; // hide   
+		document.getElementById('Save').style.visibility = 'hidden'; // hide
+
+		
+		document.execCommand("SaveAs");
+		document.getElementById('Print').style.visibility = 'visible'; // show 
+		document.getElementById('Back').style.visibility = 'visible'; // show 
+		document.getElementById('Save').style.visibility = 'visible'; // show 
+	}
+</script>
+</head>
+<body class="OuterReportDesign">
+	<div id="print-content">
+	<div th:replace="header/reportHeader :: var-script-headerReport"></div>
+	<div th:replace="header/reportHeader :: varmenuheaderReport"></div>
+		<table cellpadding="0" cellspacing="0" border="0" frame="box"
+			align="CENTER" width="100%" class="outertb1">
+
+			<tr>
+				<td align="center">
+					<p>
+						Outer Page Of Monthly Pay Bill<br> (As per Govt Resolution
+						No:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Dated:
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )
+
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td align="left">
+					<p>
+						Bill For : <span class="capitalize" th:text="${billDetails}"></span> - <span
+							th:text="${carde}"></span> <br /> <br /> Name of Office : <span
+							th:text="${officeName}"></span> <br> Month : <b><span
+							th:text="${month}"></span> </b> Year : <b><span th:text="${year}"></span> </b> Bill
+						Id : <b th:text="${paybillNo}"> </b>
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center">
+					<table cellpadding="0" cellspacing="0" border="1" align="CENTER"
+						width="100%" class="outertb2">
+						<tr>
+							<td width="30%" valign="top">
+								<table cellpadding="5" cellspacing="0" border="0" height="100%"
+									width="100%" class="outertb3 borderNone">
+
+									<tr align="left">
+
+									</tr>
+									<tr>
+										<td align="left" class="borderNone">
+											<p>
+												Treasury/Sub Treasury Code: <span th:text="${treasurycode}"></span>
+												&nbsp;<br> Treasury/Sub Treasury Name: <span
+													th:text="${treasury}"></span>
+											</p> <br>
+											<p>
+												Drawing Officer's Code: &nbsp; <span th:text="${ddocode}"></span>
+
+												<br> Drawing Officer's Designation: <span
+													th:text="${lsouterrepheaddtls[0].desgName}"></span> <br> Name Of
+												Cluster/Beat/Block/Group: &nbsp; <br> Name Of Office:<span th:text="${officeName}"></span>
+												&nbsp; <br> Percentage of Grant(%):
+												&nbsp;20/40/60/80/100 <br> Office Code: &nbsp; <br>
+												Bank Name/Branch Name: &nbsp;
+										</td>
+									</tr>
+									<tr>
+										<td align="left" class="borderNone"><br></br> <br></td>
+									</tr>
+								</table>
+							</td>
+							<td width="50%" style="border-right: none" class="tdBorNoneall">
+								<table class="outertb4">
+									<tr>
+										<td align="left">
+
+											<table class="outertb5">
+												<tr>
+													<td>HEAD OF ACCOUNT</td>
+													<td></td>
+												</tr>
+												<tr>
+													<td>Administrative Department-</td>
+													<td></td>
+												</tr>
+												<tr>
+													<td>Demand No.</td>
+													<td>:
+ 													<span th:text="${lsouterrepheaddtls[0].demandCode}"></span>
+													</td>
+												</tr>
+												<tr>
+													<td>Sector</td>
+													<td>:<c:out value=" " />
+													</td>
+												</tr>
+												<tr>
+													<td>Sub-Sector</td>
+													<td>:<c:out value="" />
+													</td>
+												</tr>
+												<tr>
+													<td>Major Head</td>
+													<td>:
+													<span th:text="${lsouterrepheaddtls[0].majorHead}"></span> 
+													</td>
+												</tr>
+												<tr>
+													<td>Sub-Major Head</td>
+													<td>:
+ 													<span th:text="${lsouterrepheaddtls[0].subMajorHead}"></span>
+													</td>
+												</tr>
+												<tr>
+													<td>Minor Head</td>
+													<td>:
+													<span th:text="${lsouterrepheaddtls[0].minorHead}"></span> 
+													</td>
+												</tr>
+												<tr>
+													<td>Sub-Minor Head</td>
+													<td>:
+ 													<span th:text="${lsouterrepheaddtls[0].subMinorHead}"></span>
+													</td>
+												</tr>
+												<tr>
+													<td>Sub-Head</td>
+													<td>:
+ 													<span th:text="${lsouterrepheaddtls[0].subHead}"></span> 
+													</td>
+												</tr>
+												<tr>
+													<td>Detail-Head</td>
+													<td>: SALARY &nbsp; &nbsp;Scheme Code : 
+ 													<span th:text="${lsouterrepheaddtls[0].schemeCode}"></span> 
+													</td>
+												</tr>
+												<tr>
+													<td>(Object of Expenditure)</td>
+													<td></td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</table>
+							</td>
+							<td width="20%" valign="top" style="border-left: none">
+								<table align="right" cellspacing="0" class="outertb6">
+									<tr>
+										<td
+											style="border-bottom: solid; border-left: solid; border-top: solid; border-color: black; border-width: 1px">
+
+											<h5 align="right">&nbsp;&nbsp;&nbsp;Scheme/Committed&nbsp;&nbsp;&nbsp;</h5>
+										</td>
+									</tr>
+									<tr>
+										<td
+											style="border-bottom: solid; border-left: solid; border-top: solid; border-color: black; border-width: 1px">
+											<h5 align="right">Charged /
+												Voted&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h5>
+										</td>
+									</tr>
+
+									<tr>
+										<td align="left"
+											style="border-bottom: solid; border-left: solid; border-top: solid; border-color: black; border-width: 1px">Voucher
+											No:&nbsp;&nbsp;&nbsp;</td>
+									</tr>
+									<tr>
+										<td align="left"
+											style="border-left: solid; border-bottom: solid; border-color: black; border-width: 1px">Date:&nbsp;&nbsp;&nbsp;</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table> <br />
+					<table cellpadding="4" cellspacing="0" border="1" align="CENTER"
+						width="100%" class="outertb7">
+						<tr>
+							<td width="5%" align="center">001</td>
+							<td width="25%">Detailed Head</td>
+							<td width="20%">Sub-Detailed Head</td>
+							<td width="15%">Row</td>
+							<td width="15%">Amount <Font face='Rupee Foradian'>`</Font></td>
+							<td width="20%">Head Of Account Code</td>
+						</tr>
+						<tr>
+							<td width="5%" align="center">&nbsp;</td>
+							<td width="25%">A</td>
+							<td width="20%">&nbsp;</td>
+							<td width="15%">&nbsp;</td>
+							<td width="15%">&nbsp;</td>
+							<td width="20%">&nbsp;</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td align="left">
+								<!-- Basic<br> --> <span th:each="allowEdpList: ${allowEdpList}">
+									<span th:text="${allowEdpList.deptalldetNm}" /><br>
+							</span>
+							</td>
+							<td>
+								<!-- 1<br />  --> <span th:each="allowEdpList: ${allowEdpList}">
+									<span th:text="${allowEdpList.tempempty}" /><br>
+							</span>
+							</td>
+							<td align="center">
+								<!-- 1<br />  --> <span
+								th:each="allowEdpList,iterationStatus : ${allowEdpList}">
+									<span th:text="${iterationStatus.count}" /><br>
+							</span>
+							</td>
+							<td align="right">
+								<!-- <span th:text="${basicvalue}"></span><br> --> <span
+								th:each="allowEdpList: ${allowEdpList}"> <span
+									th:text="${allowEdpList.tempvalue}" /><br>
+							</span>
+							</td>
+							<!-- 					<td align="right">0</td> -->
+							<td align="right"><span
+								th:each="allowEdpList: ${allowEdpList}"> <span
+									th:text="${allowEdpList.tempempty}" /><br>
+							</span></td>
+						</tr>
+
+						<tr>
+							<td>&nbsp;</td>
+							<td>Total Of 1</td>
+							<td align="left">Total Salary &nbsp; &nbsp; &nbsp; &nbsp;</td>
+							<td align="center"><span th:text="${allowancecount+1}"></td>
+							<!-- 					 <td align="right"><span th:text="${grossamount}"></span></td> -->
+							<td align="right"><span th:text="${#numbers.formatDecimal(basicvalue, 0, 2)}"></span></td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>Gross Amount</td>
+							<td align="left">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td align="center"><span
+								th:text="${allowancecount+2}"></span></td>
+							<td align="right">
+								<!-- 					<span th:text="${grossamount}"></span> --> <span
+								th:text="${#numbers.formatDecimal(basicvalue, 0, 2)}"></span>
+							</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td>002</td>
+							<td>Deductions &nbsp;</td>
+							<td align="left"></td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td align="left"><span
+								th:each="deducOthEdpList: ${deducOthEdpList}"> <span
+									th:text="${deducOthEdpList.deptalldetNm}" /><br>
+							</span></td>
+							<td align="center">&nbsp;</td>
+							<td align="center"><span
+								th:each="deducOthEdpList,iterationStatus : ${deducOthEdpList}">
+									<span th:text="${iterationStatus.count+allowancecount+2}"></span><br>
+							</span></td>
+							<td align="right"><span
+								th:each="deducOthEdpList: ${deducOthEdpList}"> <span
+									th:text="${deducOthEdpList.tempvalue}"></span><br>
+							</span></td>
+								<td align="right"><span
+								th:each="deducOthEdpList: ${deducOthEdpList}"> <span
+									th:text="${deducOthEdpList.tempempty}" /><br>
+							</span></td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						<td align="left"> &nbsp; </td>
+							<td align="center"><span
+								th:text="${otherdedectioncount+allowancecount+3}"></span></td>
+												<!-- <td align="right"><span th:text="${grossamount}"></span></td> -->
+							<td align="right"><span th:text="${deduction2value}"></span></td>
+							<td>&nbsp;</td>
+						</tr> 
+						<tr>
+							<td>&nbsp;</td>
+							<td colspan="5">&nbsp;</td>
+						</tr>
+						
+						<tr>
+							<td>&nbsp;</td>
+							<td align="left">Total Deductions:</td>
+							<td align="left"></td>
+							<td align="center"><span th:text="${totalcount+4}"></span></td>
+							<!-- 					<td align="right"><span th:text="${totaldeduction}"></span></td> -->
+							<td align="right"><span
+								th:text="${deductionvalue+deduction1value+deduction2value}"></span></td>
+							<td>&nbsp;</td>
+
+						</tr>
+
+						<tr>
+							<td>&nbsp;</td>
+							<td align="left">Net Pay:</td>
+							<td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td align="center"><span th:text="${totalcount+5}"></span></td>
+							<!-- 					<td align="right"><span th:text="${netamount}"></span></td> -->
+							<td align="right"><span 
+								th:text="${#numbers.formatDecimal(totalNetAmount, 0, 2)}"></span></td><!-- th:text="${basicvalue-(deductionvalue+deduction1value+deduction2value)}" -->
+							<td>&nbsp;</td>
+
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td align="left">Fee Details</td>
+							<td align="left">&nbsp;</td>
+							<td align="center">&nbsp;<span th:text="${totalcount+6}"></span>
+							</td>
+							<td align="right">&nbsp;</td>
+							<td>&nbsp;</td>
+
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td align="left">Amount Recoverable during the year</td>
+							<td align="left">&nbsp;</td>
+							<td align="center">&nbsp;<span th:text="${totalcount+7}"></span>
+							</td>
+							<td align="right">&nbsp;</td>
+							<td>&nbsp;</td>
+
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td align="left">Total Amount Paid Till Last Month</td>
+							<td align="left">&nbsp;</td>
+							<td align="center">&nbsp;<span th:text="${totalcount+8}"></span>
+							</td>
+							<td align="right">&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td align="left">Balance To Be Credited</td>
+							<td align="left">&nbsp;</td>
+							<td align="center">&nbsp;<span th:text="${totalcount+9}"></span>
+							</td>
+							<td align="right">&nbsp;</td>
+							<td>&nbsp;</td>
+
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td align="left">Amount Credited During This Month</td>
+							<td align="left">&nbsp;</td>
+							<td align="center">&nbsp;<span th:text="${totalcount+10}"></span>
+							</td>
+							<td align="right">&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td align="left">Balance Fee Payable</td>
+							<td align="left">&nbsp;</td>
+							<td align="center">&nbsp;<span th:text="${totalcount+11}"></span>
+							</td>
+							<td align="right">&nbsp;</td>
+							<td>&nbsp;</td>
+
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+			</tr>
+
+
+
+
+			<table class="outertb8">
+				<br></br>
+				<tr>&nbsp;
+				</tr>
+				<tr>&nbsp;
+				</tr>
+				<tr style="padding-left: 80px">
+
+					<br>
+					<td>
+				<tr>&nbsp;
+				</tr>
+				<tr>&nbsp;
+				</tr>
+				<tr>&nbsp;
+				</tr>
+				<tr>&nbsp;
+				</tr>
+				Note :-
+				</td>
+				</tr>
+			</table>
+			<tr>
+				<td><pageBreak></td>
+			</tr>
+
+
+			<table class="outertb9">
+				<tr>&nbsp;
+				</tr>
+				<tr>&nbsp;
+				</tr>
+				<tr>&nbsp;
+				</tr>
+
+				<td><span>BILL GENERATION TIME:</span><span
+					th:text="${createddate}"> </span></td>
+				</tr>
+			</table>
+			<table class="outertb10">
+				<tr>
+					<td><p style="page-break-after: always"></p></td>
+				</tr>
+			</table>
+
+			<tr>
+				<td>
+					<hr /> Under Rupees (In words) &nbsp;<span th:text="${word}"></span>
+					<hr />
+				</td>
+			</tr>
+
+			<table cellpadding="4" cellspacing="0" border="1" align="CENTER"
+				width="100%" class="outertb11">
+
+				<tr height="75%">
+					<td width="25%" align="left" style="vertical-align: center"
+						rowspan="2">Allotment for &nbsp;<span th:text="${finyear}"></span></td>
+					<td width="25%">Rs.</td>
+					<td width="25%">Ps.</td>
+				</tr>
+				<tr height="50%">
+					<td colspan="2" width="25%">&nbsp;</td>
+				</tr>
+
+
+
+				<tr height="75%">
+					<td align="left" style="vertical-align: center">Expenditure
+						including this bill -- -- --</td>
+					<td colspan="2">&nbsp;</td>
+				</tr>
+				<tr height="75%">
+					<td align="left" style="vertical-align: center">Balance
+						available -- -- -- --</td>
+					<td colspan="2">&nbsp;</td>
+				</tr>
+
+			</table>
+
+			<br>
+			<br>
+
+			<table cellpadding="4" cellspacing="2" align="CENTER" width="100%" class="outertb12">
+
+				<tr>
+					<td colspan="3" align="right">Drawing Officer.&nbsp;&nbsp;</td>
+				</tr>
+				<tr height="20%">
+					<td colspan="3">&nbsp;</td>
+				</tr>
+				<tr height="20%">
+					<td colspan="3">&nbsp;</td>
+				</tr>
+				<tr>
+					<td width="100%" align="center" colspan="3">For use in
+						Treasury</td>
+				</tr>
+				<tr height="20%">
+					<td colspan="3">&nbsp;</td>
+				</tr>
+				<tr height="20%">
+					<td colspan="3">&nbsp;</td>
+				</tr>
+				<tr>
+					<td colspan="3">Pay
+						Rs.______________________________________(in words) Rupees
+						_______________________________________________________________________</td>
+				</tr>
+				<tr height="20%">
+					<td colspan="3">&nbsp;</td>
+				</tr>
+				<tr height="20%">
+					<td colspan="3">&nbsp;</td>
+				</tr>
+				<tr height="20%">
+					<td colspan="3">&nbsp;</td>
+				</tr>
+				<!-- <tr>
+					<td align="left">Treasury Accountant</td>
+					<td align="left">Dated</td>
+					<td align="center">Treasury Officer</td>
+				</tr> -->
+			</table>
+			<br>
+			<br>
+			<table cellpadding="4" cellspacing="2" align="center" width="100%"
+				class="outertb13">
+				<tr>
+					<td>Cheque Drawn :</td>
+					<td></td>
+					<td>Cheque Delivered :</td>
+					<td></td>
+				</tr>
+
+				<tr>
+					<td>No.:</td>
+					<td colspan="3"></td>
+				</tr>
+				<tr>
+					<td>Date :</td>
+					<td></td>
+					<td>Date :</td>
+					<td></td>
+				</tr>
+				<tr height="20%">
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<td></td>
+					<td></td>
+					<td align="left">A.T.O</td>
+					<td align="left">Try. Clerk</td>
+				</tr>
+			</table>
+			<br />
+			<br />
+			<br />
+
+			<table cellpadding="4" cellspacing="0" align="CENTER" width="100%" class="outertb14">
+				<tr>
+					<td align="center" width="100%" colspan="3">For use in Audit
+						Office</td>
+				</tr>
+				<tr height="20%">
+					<td colspan="3">&nbsp;</td>
+				</tr>
+				<tr>
+					<td colspan="3" width="100%">Admitted Rs.</td>
+				</tr>
+				<tr height="20%">
+					<td colspan="3">&nbsp;</td>
+				</tr>
+				<tr>
+					<td colspan="3" width="100%">Objected to Rs.</td>
+				</tr>
+				<tr height="20%">
+					<td colspan="3">&nbsp;</td>
+				</tr>
+				<tr>
+					<td colspan="3" width="100%">Reasons for objection</td>
+				</tr>
+				<tr height="20%">
+					<td colspan="3">&nbsp;</td>
+				</tr>
+				<tr height="20%">
+					<td colspan="3">&nbsp;</td>
+				</tr>
+				<tr>
+					<td align="center">Auditor</td>
+					<td align="center">Section Officer</td>
+					<td align="center">Accounts Officer</td>
+				</tr>
+
+			</table>
+
+
+		</table>
+		<br>
+		<p><b>Note:</b> <span th:utext="#{msg.thymeleaf.pagelabel.PrintNotefooter}"></span></p>
+	</div>
+	
+	<div style="break-after: page"></div>
+	<br />
+	<div class="text-center btniHideOnAllreport" style="text-align:center;">
+		<!-- <input name="Back" type="button" class="btn" Value="Back"
+			onclick="history.back();"></input> -->
+		<button id="print" onclick="printContent('print-content');"
+			class="btn">Print</button>
+	<!-- 	<input name="Save" value="Save" type="button" id="saveButton"
+			onclick=doSaveAs() class="btn"> -->
+		<!-- <td><input name="Print" type="button" value="Print"
+				onClick=printReport();></input></td> -->
+		<!-- <td><button id="print" onclick="printContent('print-content');"
+					class="btn">Print</button></td>
+			<td><input name="Save" value="Save" type="button"
+				id="saveButton" onclick=doSaveAs()></td> -->
+	</div>
+	<script>
+		function printContent(el){
+		var restorepage = $('body').html();
+		var printcontent = $('#' + el).clone();
+		$('body').empty().html(printcontent);
+		window.print();
+		$('body').html(restorepage);
+		}
+	
+		function capitalize(label) {
+			var words = label.split(' ');
+			var CapitalizedWords = [];
+			for (var i = 0; i < words.length; i++) {
+				var word = words[i];
+				var caps = word.charAt(0).toUpperCase() + word.slice(1);
+				CapitalizedWords.push(caps);
+			}
+			return CapitalizedWords.join(' ');
+		}
+		$(".capitalize").each(function() {
+			var text = $(this).text();
+			var dataType = typeof text;
+			if (dataType == "string" && text != null && text != '') {
+				text = text.split('_').join(' ');
+				$(this).text(capitalize(text.toLowerCase()));
+			}
+		});
+
+</script>
+</body>
+</html>
+

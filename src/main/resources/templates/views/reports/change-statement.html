@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{menu.master.sub.changeStmt}"></title>
+</head>
+<body class="change-statement">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.reportBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{menu.master.sub.changeStmt}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<div class="formMainwithNoborTb container">
+			<div class="text-center">
+				<h3 Class="PageHeading">
+					<span th:utext="#{menu.master.sub.changeStmt}"></span>
+				</h3>
+			</div>
+			<br />
+			<form method="POST" action="" name="ReportForm"
+				enctype="multipart/form-data">
+				<div id="tcontent1">
+					<table class="table bor-0">
+						<tbody>
+							<tr>
+								<td align="center" width="15%"><b>Department&nbsp;&nbsp;<label
+										class="mandatoryindicator">*</label></b></td>
+								<td width="30%"><select class="selecttag" name="Department"
+									id="Department">
+										<option value="-1">---------Select---------</option>
+										<option value="4000839">MAHARASHTRA
+											UNIVERSITY,THANE,NORTH MAHARASHTRA UNIVERSITY</option>
+								</select></td>
+								<td align="center" width="15%"><b>Month&nbsp;&nbsp;<label
+										class="mandatoryindicator">*</label></b></td>
+								<td width="35%"><select name="month" id="month"
+									class="selecttag mandatorycontrol">
+										<option value="-1">---------Select---------</option>
+										<option value="1">January</option>
+										<option value="2">February</option>
+								</select></td>
+							</tr>
+							<tr>
+								<td align="center" width="20%"><b>Year&nbsp;&nbsp;<label
+										class="mandatoryindicator">*</label></b></td>
+								<td width="30%"><select name="year" id="year"
+									class="selecttag mandatorycontrol">
+										<option value="-1">---------Select---------</option>
+										<option value="2022">2022</option>
+										<option value="2023">2023</option>
+										<option value="2024" selected="selected">2024</option>
+								</select></td>
+								<td class="captionTag" align="center"><b>Bill Type<font
+										color="RED">*</font></b></td>
+								<td colspan="1"><select class="selecttag"
+									name="billTypePara" id="billTypePara">
+										<option value="-1">-- Select --</option>
+										<option value="250015">Paybill</option>
+								</select></td>
+							</tr>
+							<tr>
+								<td width="20%" align="center"><b>Bill No&nbsp;&nbsp;<label
+										class="mandatoryindicator">*</label></b></td>
+								<td width="30%"><select id="billNo" name="billNo">
+										<option value="-1">---------Select---------</option>
+										<option value="9910000330"
+											title="Regular Vocational Osmanabad">Regular
+											Vocational Osmanabad</option>
+
+								</select></td>
+							</tr>
+
+							<tr bgcolor="#f3f3f3">
+								<td colspan="2" style="border-top: solid 1px #333333;"><i><b>Note:
+									</b>Parameter marked with a '<font face="Verdana" color="red">*</font>'
+										are mandatory</i> <br></td>
+								<td colspan="2" class="TableBorderTN"
+									style="padding: 5px; text-align: right">
+									<!-- <input
+								type="button" name="GenerateReport" id="rptBtn_GenerateReport"
+								value="Generate Report" class="btn"> --> <a
+									th:href="@{/ddoast/changeStatementReport}" class="btn"
+									id="rptBtn_GenerateReport">Generate Report</a> <input
+									type="reset" name="ResetParams" id="rptBtn_ResetBtn"
+									value="Reset" class="btn"> <input type="button"
+									name="btnBackAgain" id="btnBackAgain" onclick="history.back()"
+									value="Back" class="buttontag">
+								</td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+				<br>
+			</form>
+		</div>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

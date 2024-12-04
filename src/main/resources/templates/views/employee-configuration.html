@@ -1,0 +1,320 @@
+<!DOCtype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.employeeConfiguration}"></title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi">
+	
+</script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+	<script src="https://gisttrans.maharashtra.gov.in/Transliteration/js/CDAC-Typing.min.js" type="text/javascript"></script>
+<!-- <input class="phone_us" maxlength="12"> -->
+<style type="text/css">
+input[type="Date"] {
+	border-radius: 20px;
+	text-align: center;
+	padding-left: 20px;
+	border-color: green;
+	post
+}
+
+.error {
+	color: red !important;
+	font-size: 12px !important;
+}
+
+select.error, textarea.error, input.error {
+	border: 1px solid red !important;
+}
+input#uid1, input#uid2, input#uid3 {
+    width: 28% !important;
+}
+
+ul.nav.nav-tabs li.active a, .nav-tabs>li>a:hover {
+	background: #ffbb55 !important;
+}
+
+ul.nav.nav-tabs {
+	background: bisque;
+	border: 1px solid #cc6306;
+}
+
+.tab-content {
+	border: 1px solid #cc6306;
+	padding: 15px;
+	border-top: none;
+}
+
+input#uid1, input#uid2, input#uid3 {
+	width: 23% !important;
+}
+</style>
+</head>
+<body class="employee-configuration">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.employeeConfiguration}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.employeeConfiguration}"></span>
+		</h3>
+		<fieldset>
+			<form class="form-horizontal container" name="myForm" id="myForm"
+				th:action="@{/ddoast/saveEmployeeConfiguration}"
+				th:object="${mstEmployeeModel}" method="POST"
+				enctype="multipart/form-data">
+				<input type="hidden" name="deptNm" id="deptNm" th:field="*{deptNm}"
+					class="form-control" /> <input type="hidden" name="SubdeptNm"
+					id="SubdeptNm" th:field="*{subdeptNm}" class="form-control" /> <input
+					type="hidden" name="dcpsid" id="dcpsid" th:field="*{dcpsid}"
+					class="form-control" /> <input type="hidden" name="gpf_id"
+					id="gpf_id" th:field="*{gpf_id}" class="form-control" /> <input
+					type="hidden" name="nomineeid" id="nomineeid"
+					th:field="*{nomineeid}" class="form-control" /> <input
+					type="hidden" name="gisid" id="gisid" th:field="*{gisid}"
+					class="form-control" /> <input type="hidden"
+					name="photoAttachmentId" id="photoAttachmentId"
+					th:field="*{photoAttachmentId}" class="form-control" /> <input
+					type="hidden" name="signatureAttachmentId"
+					id="signatureAttachmentId" th:field="*{signatureAttachmentId}"
+					class="form-control" /> <input type="hidden" name="uidNo"
+					id="uidNo" th:field="*{uidNo}" class="form-control" /> <input
+					type="hidden" name="ddoCode" id="ddoCode" th:field="*{ddoCode}"
+					class="form-control" /> <input type="hidden" name="employeeId"
+					id="employeeId" th:field="*{employeeId}" class="form-control" />
+					 <input
+					type="hidden" name="action" id="action" th:field="*{action}"
+					class="form-control" />
+					
+					
+					 <input type="hidden" name="isActive"
+					id="isActive" th:field="*{isActive}" /> <input type="hidden"
+					name="language" id="language" th:value="${language}" /> <input
+					type="hidden" name="message" id="message" th:value="${message}" />
+
+				<input type="hidden" name="strArrNomineeName" id="strArrNomineeName"
+					th:field="*{strArrNomineeName}" class="form-control" /> <input
+					type="hidden" name="strArrAddress" id="strArrAddress"
+					th:field="*{strArrAddress}" class="form-control" /> <input
+					type="hidden" name="strArrDob" id="strArrDob"
+					th:field="*{strArrDob}" class="form-control" /> <input
+					type="hidden" name="strArrPercentShare" id="strArrPercentShare"
+					th:field="*{strArrPercentShare}" class="form-control" /> <input
+					type="hidden" name="strArrRelationship" id="strArrRelationship"
+					th:field="*{strArrRelationship}" class="form-control" />
+
+				<div id="tabContainer">
+					<ul class="nav nav-tabs">
+						<!-- <li ><a data-toggle="tab" href="#home">Sevaarth Id Detail</a></li> -->
+						<li class="active"><a data-toggle="tab" data-prev="0"
+							data-next="1" href="#menu1" class="tabClass"><b>Employee
+									Details</b></a></li>
+						<li><a data-toggle="tab" href="#menu2" data-prev="1"
+							data-next="1" class="tabClass"><b>Department Details</b></a></li>
+						<li><a data-toggle="tab" href="#menu3" data-prev="1"
+							data-next="1" class="tabClass"><b>Bank/DCPS/NPS/GPF
+									Details</b></a></li>
+						<li><a data-toggle="tab" href="#menu4" data-prev="1"
+							data-next="1" class="tabClass"><b>GIS Details</b></a></li>
+						<li><a data-toggle="tab" href="#menu5" data-prev="1"
+							data-next="1" class="tabClass"><b>DCPS/NPS Nominee
+									Details</b></a></li>
+						<li><a data-toggle="tab" href="#menu6" data-prev="1"
+							data-next="0" class="tabClass"><b>Photo/Signature</b></a></li>
+					</ul>
+
+
+					<div class="tab-content">
+						<div id="menu1" class="tab-pane fade in active">
+							<br />
+							<fieldset>
+								<legend>Employee Details </legend>
+							</fieldset>
+							<div
+								th:replace="views/employee-configuration-tabs :: EmployeeDetails"></div>
+						</div>
+						<div id="menu2" class="tab-pane fade">
+							<br />
+							<fieldset>
+								<legend>Department Details </legend>
+							</fieldset>
+							<div
+								th:replace="views/employee-configuration-tabs :: DepartmentDetails"></div>
+						</div>
+						<div id="menu3" class="tab-pane fade">
+							<br />
+							<fieldset>
+								<legend>Bank/DCPS/NPS/GPF Details </legend>
+							</fieldset>
+							<div
+								th:replace="views/employee-configuration-tabs :: BankDetails"></div>
+						</div>
+						<div id="menu4" class="tab-pane fade">
+							<br />
+							<fieldset>
+								<legend>GIS Details </legend>
+							</fieldset>
+							<div th:replace="views/employee-configuration-tabs :: GISDetails"></div>
+						</div>
+						<div id="menu5" class="tab-pane fade">
+							<br />
+							<fieldset>
+								<legend>DCPS/NPS Nominee Details </legend>
+							</fieldset>
+							<div
+								th:replace="views/employee-configuration-tabs :: NomineeDetails"></div>
+						</div>
+						<div id="menu6" class="tab-pane fade">
+							<br />
+							<fieldset>
+								<legend> Photo/Signature</legend>
+							</fieldset>
+							<div
+								th:replace="views/employee-configuration-tabs ::PhotoSignature "></div>
+							<div class="form-group text-center">
+								<hr />
+								<input type="submit" class="btn btn-primary" id="forward"
+									th:value="#{msg.thymeleaf.pagelabel.forwardToDDO}" /> <span
+									th:if="${mstEmployeeModel.employeeFNameEn != null}"> <input
+									type="button" name="btnCancel" onclick="history.back()"
+									id="btnCancel" value="Cancel" class="buttontag">
+								</span>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div class="form-group text-center">
+					<hr />
+
+					<!-- <input type="button" id="printpfA" th:onclick="'openPerformaA();'"
+							class="btn btn-primary"
+							th:value="#{msg.thymeleaf.pagelabel.printPerformaA}" /> -->
+					<!-- <a id="printpfA" th:href="@{/pdf/Proforma A.pdf}" target="_blank"
+						class="btn btn-primary"><span
+						th:text="#{msg.thymeleaf.pagelabel.printPerformaA}"></span></a>
+
+												 <a th:href="@{/images/Proforma A.pdf}" target="_blank">Link
+													Testing</a>
+					<input type="button" class="btn btn-primary"
+							th:onclick="'openPerformaB();'"
+							th:value="#{msg.thymeleaf.pagelabel.printPerformaB}"
+							ng-click="printPerformaB();" />
+					<a class="btn btn-primary" th:href="@{/pdf/Proforma B.pdf}"
+						target="_blank"><span
+						th:text="#{msg.thymeleaf.pagelabel.printPerformaB}"></span></a> -->
+<!-- 					<input -->
+<!-- 						type="button" id="btnSave" class="btn btn-primary" -->
+<!-- 						th:value="#{msg.thymeleaf.pagelabel.saveAsDraft}" -->
+<!-- 						th:onclick="'saveAsDraft();'" />  -->
+
+
+					<!-- 							ng-click="saveAsDraft();" /> -->
+						<input type="submit" class="btn btn-primary" id="forward"
+						th:value="#{msg.thymeleaf.pagelabel.forwardToDDO}" />
+					
+					
+<!-- 						<input type="button" id="btnPrevious" name="btnPrevious" -->
+<!-- 							value="Previous" class="btn" />  -->
+<!-- 							<input type="button" -->
+<!-- 							id="btnNext" name="btnNext" value="Next" class="btn" /> -->
+					
+
+<!-- 					<span th:if="${mstEmployeeModel.employeeFNameEn != null}"> <input -->
+<!-- 						type="button" class="btn btn-primary rejectbtnn" -->
+<!-- 						th:value="#{msg.thymeleaf.pagelabel.back}" -->
+<!-- 						th:onclick="'backlvlEmpDtls();'" /> -->
+<!-- 					</span>  -->
+<!-- 					<input type="button" id="btnSave" class="btn btn-primary" -->
+<!-- 						th:value="#{msg.thymeleaf.pagelabel.saveAsDraft}" -->
+<!-- 						th:onclick="'saveAsDraft();'" /> <input type="reset" -->
+<!-- 						id="btnReset" class="btn btn-primary" -->
+<!-- 						th:value="#{msg.thymeleaf.pagelabel.btnReset}" /> <a -->
+<!-- 					</span> -->
+					
+					
+<!--                  <input type="button" id="btnSave" class="btn btn-primary" -->
+
+
+					<input type="button" id="btnPrevious" name="btnPrevious"
+						value="Previous" class="btn" /> <input type="button" id="btnNext"
+						name="btnNext" value="Next" class="btn" />
+
+					<!-- 	<input type="submit" class="btn btn-primary" id="forward"
+						th:value="#{msg.thymeleaf.pagelabel.forwardToDDO}" />
+						
+						 -->
+
+					<span th:if="${mstEmployeeModel.employeeFNameEn != null}"> <input
+						type="button" class="btn btn-primary rejectbtnn"
+						th:value="#{msg.thymeleaf.pagelabel.back}"
+						th:onclick="'backlvlEmpDtls();'" />
+					</span>
+					
+					 <input type="button" id="btnSaveAsdraft" class="btn btn-primary btnSaveAsDraft" 
+						th:value="#{msg.thymeleaf.pagelabel.saveAsDraft}" />
+						
+						 <input type="reset"
+						id="btnReset" class="btn btn-primary"
+						th:value="#{msg.thymeleaf.pagelabel.btnReset}" /> <a
+						th:href="@{/user/home}" class="btn"><span
+						th:text="#{msg.thymeleaf.pagelabel.btnCancel}"></span></a>
+
+				</div>
+				<input type="hidden" name="${_csrf.parameterName}"
+					value="${_csrf.token}" />
+
+			</form>
+		</fieldset>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+
+	<script th:src="@{/js/jquery.validate.min.js}"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.min.js"></script>
+	<!-- <script th:src="@{/js/project/employee-configuration1.js}"></script> -->
+	<script th:src="@{/js/project/employee-configuration.js}"></script>
+	<script th:src="@{/js/project/census.js}"></script>
+	<script th:src="@{/js/validated.js}"></script>
+	<script th:src="@{/js/pramukhlib.js}"></script>
+	<script>
+		var pph = new PramukhPhoneticHandler();
+		pph.convertToIndicIME("fullNameInDevnagri", document
+				.getElementById('txtNameInDevanagari'), 'devanagari');
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			$("#subCorporationId").prop("disabled", true);
+			$("#isChangeParentDepartment1").prop("disabled", true);
+			$("#reasonForChngParentFieldDept").prop("disabled", true);
+		});
+	</script>
+
+
+
+</body>
+</html>

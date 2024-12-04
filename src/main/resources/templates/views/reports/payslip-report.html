@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title th:text="${currmonyernew}"></title>
+<style>
+.nobor *, .nobor {
+	border: none !important;
+}
+
+.width100 {
+	width: 100%
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table, th, td {
+	border: 1px solid black;
+}
+
+.table-bordered>thead>tr>th, .table-bordered>tbody>tr>th,
+	.table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td,
+	.table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td {
+	border: 1px solid #ddd;
+}
+
+.text-left {
+	text-align: left;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.table-responsive {
+	padding-right: 10px;
+}
+
+.borleftRightNone td:nth-child(2) {
+	border-left: none;
+}
+
+.borleftRightNone td:first-child {
+	border-right: none !important;
+}
+
+.pertb2 td {
+	line-height: 20px !important;
+}
+
+@media print {
+	div#print-content * {
+		font-size: 12px;
+		padding: 2px 1px;
+	}
+	h3 B {
+		FONT-SIZE: 20PX !IMPORTANT;
+	}
+	table.payslipMaintb {
+		page-break-after: always !important;
+	}
+	td {
+		vertical-align: top !important;
+	}
+	.vmiddel {
+		vertical-align: middle !important;
+	}
+	.menuHeader, button#print, a.btn, .container.footer-main {
+		display: none !IMPORTANT;
+	}
+	.container.min-height-600 {
+		border: none !important;
+	}
+	.pertb2 td {
+		line-height: 23px !important;
+	}
+	.break-word-100 {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		max-width: 100px;
+	}
+}
+</style>
+</head>
+
+<body class="payslip-report">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+	<div class="container min-height-600">
+		<div class="text-right"
+			style="padding-right: 15px; padding-bottom: 7px;">
+			<button id="print" onclick="printContent('print-content');"
+				class="btn orange">Print</button>
+		</div>
+		<div class="container">
+			<div id="print-content">
+				<table class="table payslipMaintb"
+					th:each="varlstEmp : ${ltsPayslipModel}">
+					<tbody>
+						<tr>
+							<td width="25%" style="text-align: center;"><img
+								th:src="@{/images/GOM.png}"
+								class="logo-img reportlogo" id="logo-img" style="width: 85px;"></td>
+							<td colspan="3" class="vmiddel">
+
+								<h3 style="text-align: center;">
+									<b><span th:text="#{msg.thymeleaf.pagelabel.MahaSevaarth}"></span></b>
+								</h3>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="4">
+								<table class="dttable table nobor">
+									<tr>
+										<td width="45%"><span>Pay and Accounts Office </span></td>
+										<td width="30%"><span>DDO CODE :<span
+												th:text="${ddoCode}"> </span></span></td>
+										<td width="25%"><span></span></td>
+									</tr>
+									<tr>
+										<td width="40%"><span>Employee Name: (<span
+												th:text="${varlstEmp.sevaarthId}"></span>) <span
+												class="empName" th:text="${varlstEmp.empName}"></span>
+										</span></td>
+										<td width="30%"><span>Designation</span>: <span
+											th:text="${varlstEmp.desgnName}"></span></td>
+										<td width="30%"><span>Salary Month</span>: <span
+											th:text="${paySlipHead}"></span></td>
+									</tr>
+									<tr>
+										<td width="40%"><span>Date of Birth: <span
+												th:text="${#dates.format(varlstEmp.dob, 'dd-MM-yyyy')}"></span></span></td>
+										<td width="30%"><span> Date of Joining: <span
+												th:text="${#dates.format(varlstEmp.doj, 'dd-MM-yyyy')}"></span></span></td>
+										<td width="30%"><span> Date of Retirement: <span
+												th:text="${#dates.format(varlstEmp.dor, 'dd-MM-yyyy')}"></span></span></td>
+									</tr>
+									<tr>
+										<td width="40%"><span>UID No: <span
+												th:text="${varlstEmp.uidNo}"></span>
+										</span></td>
+										<td width="30%"><span>Pay Commission : <span
+												th:text="${varlstEmp.payComm}"></span></span></td>
+										<td width="30%"><span> Level: <span
+												th:text="${varlstEmp.lvl}"></span></span></td>
+									</tr>
+									<tr>
+										<td width="40%"><span>GPF/DCPS AC No: <span
+												th:text="${varlstEmp.gpfNdcpsNo}"></span></span></td>
+										<td width="30%"><span> Bank A/c No:<span
+												th:text="${varlstEmp.accountNo}"></span>
+										</span></td>
+										<td width="30%"><span> IFSC Code: <span
+												th:text="${varlstEmp.ifsc}"></span>
+										</span></td>
+									</tr>
+									<tr>
+										<td width="40%"><span> Basic Pay: <span
+												th:text="${varlstEmp.basic}"></span>
+										</span></td>
+										<td width="30%"><span>Mobile No : <span
+												th:text="${varlstEmp.mobileNo1}"></span>
+										</span></td>
+										<td width="30%"><span> Pan No: <span
+												th:text="${varlstEmp.panNo}"></span>
+										</span></td>
+									</tr>
+
+								</table>
+							</td>
+						</tr>
+
+
+						<tr>
+							<td colspan="4">
+								<table class="width100 table table-bordered">
+									<tbody>
+										<tr>
+											<th colspan="2">Emoluments</th>
+											<th colspan="2">Govt. Recoveries</th>
+											<th colspan="2">Non Govt. Recoveries</th>
+										</tr>
+										<tr>
+											<td>Particulars</td>
+											<td>Amount(Rs.)</td>
+											<td>Particulars</td>
+											<td>Amount(Rs.)</td>
+											<!-- <td>Inst. No.</td> -->
+											<td>Particulars</td>
+											<td>Amount(Rs.)</td>
+											<!-- 	<td>Inst. No.</td> -->
+										</tr>
+										<tr>
+											<td style="border: none;">
+												<table class="nobor width100">
+													<tbody>
+														<tr>
+															<td>
+																<table id="" class="nobor width100">
+																	<tr
+																		th:each="row,iterationStatus : ${payslipReportModel.lstPayslipModel}"
+																		th:if="${varlstEmp.sevaarthId == row.sevaarthId} and ${row.isType}=='1'">
+																		<td class="Label2">
+																			<div
+																				th:if="${varlstEmp.sevaarthId== row.sevaarthId} and ${row.isType}=='1'">
+																				<div th:text="${row.componentname}"></div>
+																			</div>
+																		</td>
+																	</tr>
+																</table>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</td>
+											<td style="border: none; border-right: 1px solid #ddd;">
+												<table class="nobor width100">
+													<tbody>
+														<tr
+															th:each="dedctionagRow,iterationStatus : ${lstdedectionag}">
+															<td>
+																<table id="" class="nobor width100">
+																	<tr
+																		th:each="row,iterationStatus : ${payslipReportModel.lstPayslipModel}"
+																		th:if="${varlstEmp.sevaarthId == row.sevaarthId} and ${row.isType}=='1'">
+
+																		<td style="text-align: right; padding-right: 15px;">
+																			<div
+																				th:if="${varlstEmp.sevaarthId == row.sevaarthId} and ${row.isType}=='1'">
+																				<div th:text="${row.componentValue}"></div>
+																			</div>
+																		</td>
+																	</tr>
+																</table>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</td>
+											<td style="border: none;">
+												<table class="nobor width100">
+													<tr>
+														<td>
+															<table id="innertable" class="nobor width100">
+																<tr
+																	th:each="row,iterationStatus : ${payslipReportModel.lstPayslipModel}"
+																	th:if="${varlstEmp.sevaarthId == row.sevaarthId} and ${row.isType}=='2'">
+																	<td>
+																		<div class="break-word-100"
+																			th:if="${varlstEmp.sevaarthId == row.sevaarthId} and ${row.isType}=='2'">
+																			<div th:text="${row.componentname}"></div>
+																		</div>
+																	</td>
+
+																</tr>
+															</table>
+														</td>
+													</tr>
+												</table>
+											</td>
+											<td style="border: none; border-right: 1px solid #ddd;">
+												<table class="nobor width100 pertb1">
+													<tr>
+														<td>
+															<table id="innertable" class="nobor width100 pertb2">
+																<tr
+																	th:each="row,iterationStatus : ${payslipReportModel.lstPayslipModel}"
+																	th:if="${varlstEmp.sevaarthId == row.sevaarthId} and ${row.isType}=='2'">
+
+																	<td style="text-align: right; padding-right: 15px;"><span
+																		th:if="${row.installment==null}"
+																		th:text="${row.componentValue}"></span> <span
+																		th:if="${row.installment!=null}"
+																		th:text="${row.installment+' '+row.componentValue}"></span>
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+												</table>
+											</td>
+											<td style="border: none;">
+												<table class="nobor width100">
+													<tbody>
+														<tr>
+															<td>
+																<table id="" class="nobor width100">
+																	<tr
+																		th:each="row,iterationStatus : ${payslipReportModel.lstPayslipModel}"
+																		th:if="${varlstEmp.sevaarthId == row.sevaarthId} and ${row.isType}=='3'">
+																		<td class="Label2">
+																			<div class="break-word-100"
+																				th:if="${varlstEmp.sevaarthId== row.sevaarthId} and ${row.isType}=='3'">
+																				<div th:text="${row.componentname}"></div>
+																			</div>
+																		</td>
+																	</tr>
+																</table>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</td>
+											<td style="border: none; border-right: 1px solid #ddd;">
+												<table class="nobor width100">
+													<tbody>
+														<tr>
+															<td>
+																<table id="" class="nobor width100">
+																	<tr
+																		th:each="row,iterationStatus : ${payslipReportModel.lstPayslipModel}"
+																		th:if="${varlstEmp.sevaarthId == row.sevaarthId} and ${row.isType}=='3'">
+
+																		<td style="text-align: right; padding-right: 15px;">
+																			<div
+																				th:if="${varlstEmp.sevaarthId == row.sevaarthId} and ${row.isType}=='3'">
+																				<div th:text="${row.componentValue}"></div>
+																			</div>
+																		</td>
+																	</tr>
+																</table>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</td>
+										</tr>
+
+										<tr>
+											<td>Total Emoluments</td>
+											<td style="text-align: right; padding-right: 15px;"><span
+												th:text="${varlstEmp.grossTotalAmt}"></span></td>
+
+											<td style="text-align: right;" colspan="4">Total
+												Recoveries : <span th:text="${varlstEmp.totalDeduction}"></span>
+											</td>
+											<!-- <td></td> -->
+											<!-- <td>Total Non Govt. Recoveries</td>
+											<td style="text-align: right; padding-right: 15px;"></td> -->
+											<!-- <td></td> -->
+										</tr>
+										<tr>
+											<td colspan="6">Net Pay:- Rs. <span
+												th:text="${varlstEmp.totalNetAmt}"></span> (<label
+												th:text="${varlstEmp.netAmtInWord}"> </label>)
+
+
+											</td>
+										</tr>
+										<tr>
+											<td>Bill No:- <span th:text="${varlstEmp.billNo}"></span>
+											</td>
+											<td colspan="5">Bill Description:- <span
+												th:text="${varlstEmp.billGroupName}"></span></td>
+										</tr>
+										<tr>
+											<td colspan="2">Gross Amt:- <span
+												th:text="${varlstEmp.grossTotalAmt}"></span> &nbsp; Net
+												Amt.:- <span th:text="${varlstEmp.totalNetAmt}"></span></td>
+											<td colspan="2">Voucher No :- <span
+												th:text="${varlstEmp.voucherNo}"> </span>&nbsp; Voucher Date
+												:- <span
+												th:text="${#dates.format(varlstEmp.voucherDate, 'dd-MM-yyyy')}"></span></td>
+											<td colspan="2" align="center">Pay and Accounts Office</td>
+										</tr>
+										<tr>
+											<td colspan="6"><p>
+													<b>Note:</b> <span
+														th:utext="#{msg.thymeleaf.pagelabel.PrintNotefooter}"></span>
+												</p></td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+
+			</div>
+			<br />
+			<div class="text-center">
+				<!-- <button id="print" onclick="printContent('print-content');"
+					class="btn orange">Print</button> -->
+				<a th:href="@{/user/home}" class="btn"><span
+					th:text="#{msg.thymeleaf.pagelabel.btnCancel}"></span></a>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script>
+		function printContent(el) {
+			var restorepage = $('body').html();
+			var printcontent = $('#' + el).clone();
+			$('body').empty().html(printcontent);
+			setTimeout(function() {
+				window.print();
+				$('body').html(restorepage);
+			}, 250);
+
+		}
+
+		/* $(document).ready(function() {
+			function capitalize(span) {
+				var words = span.split(' ');
+				var CapitalizedWords = [];
+				for (var i = 0; i < words.length; i++) {
+					var word = words[i];
+					var caps = word.charAt(0).toUpperCase() + word.slice(1);
+					CapitalizedWords.push(caps);
+				}
+				return CapitalizedWords.join(' ');
+			}
+			$("#print-content span").each(function() {
+				var text = $(this).text();
+				var dataType = typeof text;
+				if (dataType == "string" && text != null && text != '') {
+					text = text.split('_').join(' ');
+					$(this).text(capitalize(text.toLowerCase()));
+				}
+			});
+		}); */
+	</script>
+</body>
+
+</html>

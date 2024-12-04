@@ -1,0 +1,696 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<!--   <link rel="stylesheet" href="../css/innerreports.css"></link> -->
+<!--   <link rel="stylesheet" href="../css/ReportHeader.css"></link> -->
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<style>
+@media print {
+	div#print-content {
+		height: 100% !important;
+	}
+	/* table.padded-table.innntb1 * {
+		font-size: 11px;
+	} */
+	table.padded-table.innntb1 * {
+		font-size: 9px !important;
+		padding: 0 !important;
+	}
+	header .deptname {
+		font-size: 18px !Important;
+	}
+	tr.pagination {
+    display: none !important;
+	}
+	table#dataTable0 * {
+    font-size: 10px !important;
+	}
+tr.pagination {
+    display: none !important;
+	}
+	.btn {
+		display: none !important;
+	}
+
+}
+td.TableRowFieldBBN.TableRowFieldRBN.Label2 span:nth-child(2) {
+    text-transform: uppercase !important;
+}
+table#dataTable0 * {
+    font-size: 12px !important;
+}
+tr.TablerowBG22.innerTr.dcsptr.innTR12 td span {
+		word-break: break-word;
+	}
+/* div#print-content {
+	height: 85vh;
+	overflow: auto !important;
+	border: 1px solid;
+}
+ */
+header .deptname {
+	color: #01013d !Important;
+}
+
+.RpHead {
+	margin-bottom: 0px !important;
+}
+div#print-content {
+    height: 97%;
+    overflow: auto!important;
+}
+@media print {
+	h1 {
+		page-break-before: always
+	}
+	div#print-content {
+    height: 100%;
+    overflow: visible !important;
+}
+}
+
+table#dataTable0 * {
+    text-transform: capitalize;
+}
+.loaderMainNew {
+	text-align: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 999999;
+	background: #ffffffd6;
+	width: 100%;
+	height: 100vh;
+}
+
+@ -webkit-keyframes spin {
+	0% {
+		-webkit-transform: rotate(0)
+	}
+
+	100% {
+		-webkit-transform:
+
+
+			rotate (360 deg)
+	}
+}
+
+@ keyframes spin {
+	0% {
+		transform: rotate(0)
+	}
+
+	100% {
+		transform:
+
+
+			rotate (360 deg)
+	}
+}
+
+input.hidearr::-webkit-outer-spin-button,
+input.hidearr::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+@keyframes loading {
+    0% {
+    transform: translateX(0);
+}
+25% {
+    transform: translateX(15px);
+}
+50% {
+    transform: translateX(-15px);
+}
+100% {
+    transform: translateX(0);
+}
+}
+
+@keyframes loading-text {
+    0% {
+        content: "Loading";
+    }
+
+    25% {
+        content:
+            "Loading .";
+
+    }
+
+    50% {
+        content:
+            "Loading ..";
+
+    }
+
+    75% {
+        content:
+            "Loading ...";
+
+    }
+}
+tr.TablerowBG1.innerTr.innTR7 td:nth-child(2) table#innertable tr td.Label2 span,
+tr.TablerowBG22.innerTr.innTR19 td:nth-child(2) table#innertable tr td.Label2 span,
+tr.TablerowBG22.innerTr.innTR22 td:nth-child(2) table#innertable tr td.Label2 span {
+    display: inline-block;
+    width: 130px;
+    ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-top: 0px;
+    padding-top: 0px;
+    float: left;
+    text-transform: uppercase !important;
+}
+body.innerreportDesign div#print-content {
+    padding: 0 10px;
+}
+</style>
+<style type="text/css">
+body {font-family: Verdana }.TableBorderN {border-style: solid;border-color: grey;border-width: 1px }.TableBorderBN {border-bottom-style: solid;border-bottom-color: grey;border-bottom-width: 1px }.TableBorderRN {border-right-style: solid;border-right-color: grey;border-right-width: 1px }.TableBorderLN {border-left-style: solid;border-left-color: grey;border-left-width: 1px }.TableBorderTN {border-top-style: solid;border-top-color: #375472;border-top-width: 1px }.TableBorderLTN {border-top-style: solid;border-top-color: grey;border-top-width: 1px;border-left-style: solid;border-left-color: grey;border-left-width: 1px }.TableBorderTRN {border-top-style: solid;border-top-color: grey;border-top-width: 1px;border-right-style: solid;border-right-color: grey;border-right-width: 1px }.TableBorderRBN {border-bottom-style: solid;border-bottom-color: grey;border-bottom-width: 1px;border-right-style: solid;border-right-color: grey;border-right-width: 1px }.TableBorderBLN {border-left-style: solid;border-left-color: grey;border-left-width: 1px;border-bottom-style: solid;border-bottom-color: grey;border-bottom-width: 1px }.TableBorderLRN {border-left-style: solid;border-left-color: grey;border-left-width: 1px;border-right-style: solid;border-right-color: grey;border-right-width: 1px }.TableBorderRLN {border-left-style: solid;border-left-color: grey;border-left-width: 1px;border-right-style: solid;border-right-color: grey;border-right-width: 1px }.TableBorderBTN {border-top-style: solid;border-top-color: grey;border-top-width: 1px;border-bottom-style: solid;border-bottom-color: grey;border-bottom-width: 1px }.TableBorderTBN {border-top-style: solid;border-top-color: grey;border-top-width: 1px;border-bottom-style: solid;border-bottom-color: grey;border-bottom-width: 1px }.TableBorderLTRN {border-top-style: solid;border-top-color: grey;border-top-width: 1px;border-left-style: solid;border-left-color: grey;border-left-width: 1px;border-right-style: solid;border-right-color: grey;border-right-width: 1px }.TableBorderTRBN {border-top-style: solid;border-top-color: grey;border-top-width: 1px;border-bottom-style: solid;border-bottom-color: grey;border-bottom-width: 1px;border-right-style: solid;border-right-color: grey;border-right-width: 1px }.TableBorderRBLN {border-bottom-style: solid;border-bottom-color: grey;border-bottom-width: 1px;border-left-style: solid;border-left-color: grey;border-left-width: 1px;border-right-style: solid;border-right-color: grey;border-right-width: 1px }.TableBorderBLTN {border-top-style: solid;border-top-color: grey;border-top-width: 1px;border-bottom-style: solid;border-bottom-color: grey;border-bottom-width: 1px;border-left-style: solid;border-left-color: grey;border-left-width: 1px }.TableBorderLTRBN {border-color: #4C4C4C;border-style: solid;border-width: 1px }.TableBorderTRBLN {border-color: grey;border-style: solid;border-width: 1px }.TableBorderRBLTN {border-color: grey;border-style: solid;border-width: 1px }.TableBorderBLTRN {border-color: grey;border-style: solid;border-width: 1px }.TableBorderH {border-color: #CCC #AEBAC6 #CCC #CCC;border-style: solid;border-width: 1px }.TableBorder {border-color: #F7F7F7 #fff #F7F7F7 #F7F7F7;border-style: solid;border-width: 1px }.TableBorder2 {border-color: #F7F7F7;border-style: solid;border-width: 1px }.TableBorder3 {border-right-color: #F5FCF4 }.TableExtraColBG1 {border-color: #F7F7F7;border-style: solid;border-width: 1px }.TableExtraColBG2 {border-color: #F7F7F7;border-style: solid;border-width: 1px }.TableBorder4 {border-right-color: #AEBAC6 }a.Unreadfile:link {text-decoration: underline;color: #000;font-weight: 700;size: 10 }a.Unreadfile:active {text-decoration: underline;color: #000;font-weight: 700;size: 10 }a.Unreadfile:visited {text-decoration: underline;color: #000;font-weight: 700;size: 10 }a.Unreadfile:hover {text-decoration: underline;color: #000;font-weight: 700;size: 10 }a.file:link {text-decoration: underline;color: #000;font-weight: 400;font-size: 10px }a.file:active {text-decoration: underline;color: #000;font-weight: 400;font-size: 10px }a.file:visited {text-decoration: underline;color: #000;font-weight: 400;font-size: 10px }a.file:hover {text-decoration: underline;color: navy;font-weight: 400;font-size: 10px }a.pagination:link {text-decoration: none;color: navy;font-weight: 400;font-size: 10px }a.pagination:active {text-decoration: none;color: navy;font-weight: 400;font-size: 10px }a.pagination:visited {text-decoration: none;color: navy;font-weight: 400;font-size: 10px }a.pagination:hover {text-decoration: none;color: #903;font-weight: 400;font-size: 10px }// .TitleBG {background: #FFF;text-decoration: none;font-size: 8pt;font-weight: 700;color: #000 }.FileInfoBG {background: #F3F3F3 }.TablerowBG1 {background: #FFF }.TablerowBG2 {background: #F7F7F7 }.TableRowFieldBBN {border-bottom-style: solid;border-bottom-color: #A0A0A0;border-bottom-width: 1px }.TableRowFieldTBN {border-top-style: solid;border-top-color: #A0A0A0;border-top-width: 1px }.TableRowFieldLBN {border-left-style: solid;border-left-color: #A0A0A0;border-left-width: 1px }.TableRowFieldRBN {border-right-style: solid;border-right-color: #A0A0A0;border-right-width: 1px }.TableHeaderBG {background: #DEDEDE;border-style: solid;border-color: #909090 }.TableHeaderFieldBBN {border-bottom-style: solid;border-bottom-color: #4C4C4C;border-bottom-width: 1px }.TableHeaderFieldTBN {border-top-style: solid;border-top-color: #4C4C4C;border-top-width: 1px }.TableHeaderFieldLBN {border-left-style: solid;border-left-color: #4C4C4C;border-left-width: 1px }.TableHeaderFieldRBN {border-right-style: solid;border-right-color: #4C4C4C;border-right-width: 1px }.HLabel {font-size: 10px;font-weight: 700;color: #000 }// .Label {text-decoration: none;font-size: 10px;font-weight: 700;color: #263765 }.Label {text-decoration: none;font-size: 11px;font-weight: 400;color: #000 }.Label2 {text-decoration: none;font-weight: 400;color: #000 }.Label3 {text-decoration: none;font-size: 11px;font-weight: 400;color: #000 }.Label1 {text-decoration: none;font-size: 6pt;color: Navy }.titles {font-size: 14px;font-weight: 700;color: #375472 }.HeaderLabel {text-decoration: none;font-size: 9pt;font-weight: 700;color: maroon }.EditableField {text-decoration: none;font-size: 8pt;font-weight: 700;color: #000 }.EditableField1 {text-decoration: none;font-size: 8pt;font-weight: 400;color: #000 }.ComputedField {text-decoration: none;font-size: 8pt;font-weight: 700;color: Gray }.FileInfoBG {background: #F3F3F3 }.UserText {text-decoration: none;font-size: 7pt;font-weight: 700;color: Red }.EditableFieldBBN {text-decoration: none;font-size: 8pt;font-weight: 700;color: #000;border-bottom-style: solid;border-bottom-color: navy;border-bottom-width: 1px }.EditableFieldTBN {text-decoration: none;font-size: 8pt;font-weight: 700;color: #000;border-top-style: solid;border-top-color: navy;border-top-width: 1px }.EditableFieldLBN {text-decoration: none;font-size: 8pt;font-weight: 700;color: #000;border-left-style: solid;border-left-color: navy;border-left-width: 1px }.EditableFieldRBN {text-decoration: none;font-size: 8pt;font-weight: 700;color: #000;border-right-style: solid;border-right-color: navy;border-right-width: 1px }.ComputedFieldBBN {text-decoration: none;font-size: 8pt;font-weight: 700;color: Gray;border-bottom-style: solid;border-bottom-color: navy;border-bottom-width: 1px }.ComputedFieldTBN {text-decoration: none;font-size: 8pt;font-weight: 700;color: Gray;border-top-style: solid;border-top-color: navy;border-top-width: 1px }.ComputedFieldLBN {text-decoration: none;font-size: 8pt;font-weight: 700;color: Gray;border-left-style: solid;border-left-color: navy;border-left-width: 1px }.ComputedFieldRBN {text-decoration: none;font-size: 8pt;font-weight: 700;color: Gray;border-right-style: solid;border-right-color: navy;border-right-width: 1px }.EditableFieldBBG {text-decoration: none;font-size: 8pt;font-weight: 700;color: #000;border-bottom-style: solid;border-bottom-color: Gray;border-bottom-width: 1px }.EditableFieldTBG {text-decoration: none;font-size: 8pt;font-weight: 700;color: #000;border-top-style: solid;border-top-color: Gray;border-top-width: 1px }.EditableFieldLBG {text-decoration: none;font-size: 8pt;font-weight: 700;color: #000;border-left-style: solid;border-left-color: Gray;border-left-width: 1px }.EditableFieldRBG {text-decoration: none;font-size: 8pt;font-weight: 700;color: #000;border-right-style: solid;border-right-color: Gray;border-right-width: 1px }.ComputedFieldBBG {text-decoration: none;font-size: 8pt;font-weight: 700;color: Gray;border-bottom-style: solid;border-bottom-color: Gray;border-bottom-width: 1px }.ComputedFieldTBG {text-decoration: none;font-size: 8pt;font-weight: 700;color: Gray;border-top-style: solid;border-top-color: Gray;border-top-width: 1px }.ComputedFieldLBG {text-decoration: none;font-size: 8pt;font-weight: 700;color: Gray;border-left-style: solid;border-left-color: Gray;border-left-width: 1px }.ComputedFieldRBG {text-decoration: none;font-size: 8pt;font-weight: 700;color: Gray;border-right-style: solid;border-right-color: Gray;border-right-width: 1px }.LabelFieldM {text-align: left;font-size: 8pt;color: #600;font-weight: 700;border-width: 0;background: #F3F3F3 }.LabelFieldB {text-align: left;font-size: 8pt;color: #000;font-weight: 400;border-width: 0;background: #F3F3F3 }.LabelFieldW {text-align: center;font-size: 8pt;color: #fff;font-weight: 700;border-width: 0;background: #FFF }.LabelFieldSM {text-align: center;font-size: 8pt;color: #600;font-weight: 700;border-width: 0;background: #999 }.ListBoxGUIA {text-decoration: none;font-size: 8pt;font-weight: 700;color: navy;width: 175px }.ListBoxGUI2 {text-decoration: none;font-size: 8pt;font-weight: 700;color: #000;width: 128px }.ListBoxGUI1 {text-decoration: none;font-size: 8pt;font-weight: 700;color: #000;text-decoration: none;font-size: 8pt;font-weight: bold;color: #000;width: 129px }.ListBoxGUI3 {text-decoration: none;font-size: 8pt;font-weight: 400;color: #000;width: 300px }.TableBorderNavy {border-style: solid;border-color: navy;border-width: 1px }.TableBorderWhite {border-style: solid;border-color: #fff;border-width: 1px }.TableBorderGray {border-style: solid;border-color: Gray;border-width: 1px }.TDPlain {text-decoration: none;font-size: 8pt }.ActionButton {font-size: 10px;width: 60px }.ActionButton1 {font-size: 10px;width: 80px }.FileActionButton {font-size: 10px;width: 200px }.FieldBlack {text-decoration: none;font-size: 8pt;font-weight: 400;color: #000;width: 135px }.FieldGrey {text-decoration: none;font-size: 8pt;font-weight: 700;color: Gray }.FieldBlack1 {text-decoration: none;font-size: 8pt;font-weight: 400;color: #000;width: 175px }.FieldBlackSrch {text-decoration: none;font-size: 8pt;font-weight: 400;color: #000;width: 300px }.FldHierarchy {font-size: 12px;font-weight: 700;color: #375472 }.LABLESAFE {background: #7FFF7F;text-decoration: none;font-size: 8pt;font-weight: 700;color: Navy }.LABLEUNSAFE {background: red;text-decoration: none;font-size: 8pt;font-weight: 700;color: Navy }.LABLEC {font-color: navy }#content {background: #999 }#currentApplication {display: none }</style> <style> .innerTr td:first-child table#innertable td, .innerTr td:last-child table#innertable td {text-align: center;width: 2%;}.innerTr td:first-child, .innerTr td:last-child {text-align: center;width: 2%;}.innerTr td:nth-child(2) table#innertable td {text-align: left;width: 11%;}.innerTr td:nth-child(2) {text-align: left;width: 11%;}.innerTr td:nth-child(3) table#innertable td, .innerTr td:nth-child(4) table#innertable td, .innerTr td:nth-child(5) table#innertable td, .innerTr td:nth-child(6) table#innertable td, .innerTr td:nth-child(7) table#innertable td, .innerTr td:nth-child(8) table#innertable td, .innerTr td:nth-child(9) table#innertable td, .innerTr td:nth-child(10) table#innertable td, .innerTr td:nth-child(11) table#innertable td {text-align: right;width: 9%;}.innerTr td:nth-child(3), .innerTr td:nth-child(4), .innerTr td:nth-child(5), .innerTr td:nth-child(6), .innerTr td:nth-child(7), .innerTr td:nth-child(8), .innerTr td:nth-child(9), .innerTr td:nth-child(10), .innerTr td:nth-child(11) {text-align: right;width: 9%;}.pagination {display: inline-block;}.pagination a {color: black;float: left;padding: 8px 16px;text-decoration: none;}.pagination a {padding: 3px 5px;border: 1px solid #ccc;font-size: 12px;}img.logo {max-width: 90px;}p.logo-sub-text {margin: 5px 0;}img.aadhaarlogo {max-width: 90px;}.flex {display: flex;}.col-md-6 {width: 50%;}.row {width: 100%;display: inline-flex;}.text-right {text-align: right;}.text-center {text-align: center;}header .deptname {color: #ef7c01;font-size: 26px;font-weight: bold;margin-bottom: 0;}.logo-title p {font-family: "Helvetica Neue", Helvetica, Arial !important;}.logo-title {margin: auto 10px;}.header {padding: 0px 22px;}header, .min-height-600 {border: none !important;}.left {float: left;}.right {float: right;}.width50 {width: 50%;}.text-left {text-align: left;}.row {display: inline-flex;}.btn {display: inline-block;padding: 6px 12px;margin-bottom: 0;font-size: 14px;font-weight: 400;line-height: 1.42857143;text-align: center;white-space: nowrap;vertical-align: middle;cursor: pointer;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;background-image: none;border: 1px solid transparent;border-radius: 4px;color: #fff;border: none !important;outline: none !important;box-shadow: none !important;}.btn, .swal-button {background: linear-gradient(45deg, #26b9bf, #157478) !important;border: none !important;outline: 0 !important;box-shadow: none !important;}#print-content {padding: 10px 30px;}body, table {font-family: "Helvetica Neue", Helvetica, Arial !important;font-size: 14px;}.RpHead {text-align: center;font-size: 20px !important;margin-bottom: 40px;font-weight: 600;font-family: 'Libre Baskerville', serif;}tr.TablerowBG1.innTR5 td {text-align: left !important;}tr.TablerowBG2.innTR6 td:nth-child(2), tr.TablerowBG2.innTR6 td:first-child, tr.TablerowBG2.innTR6 td:last-child, tr.TablerowBG2.innTR4 td:nth-child(2), tr.TablerowBG1.innTR3 td, tr.TablerowBG1.innTR5 td:nth-child(2) td {font-weight: bold;}
+</style>
+</head>
+<body class="innerreportDesign">
+<!-- <div class="loaderMainNew" id="loaderMainNew" >
+		<div class="loader1">
+			<span></span> <span></span> <span></span> <span></span> <span></span>
+			<span></span>
+		</div>
+</div> -->
+	<div class="text-center" id="print-content">
+	<!-- <div th:replace="header/reportHeader :: var-script-headerReport"></div>
+	<div th:replace="header/reportHeader :: varmenuheaderReport"></div> -->
+		<h3 class="RpHead" style="font-size: 20px;">
+			<span th:utext="#{msg.thymeleaf.pagelabel.PAYBILL}"></span>
+		</h3>
+			<div>
+				<b><label for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.aqureport}"></span></label> <span
+					th:text="${currmonyer}"></span></b>
+			</div>
+		<div class="text-right">
+				<b><label for="title"><span th:text="${ddoname}">
+					</span> <span th:utext="#{msg.thymeleaf.pagelabel.ofcname}"> </span></label> <span
+					th:text="${officeDetails}"></span></b>
+			</div>
+		<br/>
+		<table style="width: 100%" class="padded-table innntb1">
+			<!-- <tr>
+				<td style="padding: 5px;"><center>
+						<font class="titles"><span th:utext="#{msg.thymeleaf.pagelabel.PAYBILL}"></span></font>
+					</center></td>
+			</tr> -->
+			<tr th:if="${innerrptPage.totalPages > 0}" class="pagination"
+				th:each="pageNumber : ${pageNumbers}">
+				<td><a
+					th:href="@{|/ddoast/getinnerreport/${billNumber}/${innerrptPage.size}/${pageNumber}/1|}"><span
+						th:utext="${pageNumber}"></span></a></td>
+			</tr>
+
+			<span th:each="innerrptPagerow,iterationStatus : ${innerrptPage}">
+				<div class="text-center">
+					<tr class="innTR1">
+						<td valign="top" class="innTR1td1">
+							<table id="dataTable0"
+								class="TableBorderLTRBN padded-table innerreporttb1"
+								style="border-collapse: collapse;">
+								<tr class="innTR2">
+									<td width="2%"></td>
+
+									<td width="9%"></td>
+
+									<td width="9%"></td>
+
+									<td width="9%"></td>
+
+									<td width="9%"></td>
+
+									<td width="9%"></td>
+
+									<td width="9%"></td>
+
+									<td width="9%"></td>
+
+									<td width="9%"></td>
+
+									<td width="9%"></td>
+									<td width="9%"></td>
+									<td width="2%"></td>
+								</tr>
+								<tr class="TablerowBG1 innTR3">
+									<td colspan="12" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="border-right: none;"><span class="capitalize"
+										th:text="${innerrptPagerow.description}"></span></td>
+								</tr>
+
+								<tr class="TablerowBG2 innTR4">
+									<span
+										th:each="headerRow,iterationStatus : ${innerrptPagerow.headerRow}">
+										<td align="left" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="border-left: 1px solid black; border-right: none;">
+											<span th:text="${headerRow}"></span>
+									</td>
+									</span>
+								</tr>
+
+								<tr class="TablerowBG1 innTR5">
+									<span
+										th:each="orderdatarow,iterationStatus : ${innerrptPagerow.orderdataList}">
+										<td align="center" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: 200; text-align: center:;"><span
+											th:each="row,iterationStatus : ${orderdatarow}">
+												<table style="width: 100%; height: 100%; font-weight: 200;"
+													class="innerreporttb2">
+													<tr>
+														<td class="Label2" style="text-align: center;"><span
+															th:text="${row}"></span></td>
+													</tr>
+												</table>
+										</span></td>
+									</span>
+								</tr>
+ 
+								<tr class="TablerowBG2 innTR6">
+									<td align="center" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"><span
+										th:utext="#{msg.thymeleaf.pagelabel.SLNO}"></span></td>
+									<td align="left" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"><span
+										th:utext="#{msg.thymeleaf.pagelabel.REMARKS}"></span></td>
+									<td align="right" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"></td>
+									<td align="right" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"></td>
+									<td align="right" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"></td>
+									<td align="right" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"></td>
+									<td align="right" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"></td>
+									<td align="right" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"></td>
+									<td align="right" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"></td>
+									<td align="right" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"></td>
+									<td align="right" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"></td>
+									<td align="center" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"><span
+										th:utext="#{msg.thymeleaf.pagelabel.SLNO}"></span></td>
+								</tr>
+
+								<tr class="TablerowBG1 innerTr innTR7">
+									<span
+										th:each="allowanceRow,iterationStatus : ${innerrptPagerow.allowance}">
+										<td align="center" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: 200;">
+											<table id="innertable" border="0" cellspacing="0"
+												cellpadding="2" width="100%" height="100%"
+												style="font-weight: 200;" class="innerreporttb3">
+												<span th:each="row,iterationStatus : ${allowanceRow}">
+													<tr>
+														<td class="Label2"><span th:text="${row}"></span></td>
+													</tr>
+												</span>
+											</table>
+									</td>
+									</span>
+								</tr>
+
+								<tr class="TablerowBG2 innerTr innTR8">
+									<span
+										th:each="algrossamtRow,iterationStatus : ${innerrptPagerow.algrossamt}">
+										<td valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: 500;"><span
+											th:text="${algrossamtRow}"></span></td>
+									</span>
+								</tr>
+
+								<tr class="TablerowBG1 innerTr innTR9">
+									<span
+										th:each="algrosssaleRow,iterationStatus : ${innerrptPagerow.algrosssale}">
+										<td class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: 500;"><span
+											th:text="${algrosssaleRow}"></span></td>
+									</span>
+								</tr>
+
+
+								<tr class="TablerowBG1 innerTr innTR10">
+									<span
+										th:each="algrosstotalRow,iterationStatus : ${innerrptPagerow.algrosstotal}">
+										<td colspan="1"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: 500;"><span
+											th:text="${algrosstotalRow}"></span></td>
+									</span>
+								</tr>
+
+								<tr class="TablerowBG2 innTR11">
+									<td colspan="12" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: bolder;"><span
+										th:utext="#{msg.thymeleaf.pagelabel.FORAUDITOFFICE}"></span></td>
+								</tr>
+
+								<tr class="TablerowBG22 innerTr dcsptr innTR12">
+									<span
+										th:each="dcpsgpsnoRow,iterationStatus : ${innerrptPagerow.dcpsgpsno}">
+										<td colspan="1" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: 500;"><span th:text="${dcpsgpsnoRow}"></span>
+									</td>
+									</span>
+								</tr>
+
+								<tr class="TablerowBG2 innTR13">
+									<td colspan="12" align="left" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: bolder;"><span
+										th:utext="#{msg.thymeleaf.pagelabel.DEDUCTIONSADJUSTABLEBYAG}"></span>
+									</td>
+								</tr>
+
+								<tr class="TablerowBG22 innerTr innTR14">
+									<span
+										th:each="abcloansRow,iterationStatus : ${innerrptPagerow.abcloans}">
+										<td colspan="1" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: 500;"><span th:text="${abcloansRow}"></span></td>
+									</span>
+								</tr>
+
+								<tr class="TablerowBG22 innerTr innTR15">
+									<span
+										th:each="dedctionagRow,iterationStatus : ${innerrptPagerow.lstdedectionag}">
+										<td colspan="1" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: 200;">
+											<table id="innertable"
+												style="font-weight: 200; height: 100%; width: 100%;"
+												class="innerreporttb4">
+												<span th:each="row,iterationStatus : ${dedctionagRow}">
+													<tr>
+														<td class="Label2"><span th:text="${row}"></span></td>
+													</tr>
+												</span>
+
+											</table>
+									</td>
+									</span>
+								</tr>
+								<tr class="TablerowBG22 innerTr innTR17">
+									<span
+										th:each="deductionamtRow,iterationStatus : ${innerrptPagerow.deductionamt}">
+										<td colspan="1" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: 500;"><span
+											th:text="${deductionamtRow}"></span></td>
+									</span>
+								</tr>
+
+
+
+								<tr class="TablerowBG1 innTR18">
+									<td colspan="12" align="left" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: bolder;"><span
+										th:utext="#{msg.thymeleaf.pagelabel.DEDUCTIONSADJUSTABLEBYTRY}"></span>
+									</td>
+								</tr>
+
+								
+
+								<tr class="TablerowBG22 innerTr innTR19">
+									<span
+										th:each="dedctiontrsyRow,iterationStatus : ${innerrptPagerow.lstdeductrsy}">
+										<td colspan="1" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: 200;">
+											<table id="innertable" border="0" cellspacing="0"
+												cellpadding="2" width="100%" height="100%"
+												style="font-weight: 200;" class="innerreporttb5">
+												<span th:each="row,iterationStatus : ${dedctiontrsyRow}">
+													<tr>
+														<td colspan="1" class="Label2"><span th:text="${row}"></span>
+														</td>
+													</tr>
+												</span>
+											</table>
+									</td>
+									</span>
+								</tr>
+
+
+								<tr class="TablerowBG22 innerTr innTR20">
+									<span
+										th:each="aldeduct_adj_tryRow,iterationStatus : ${innerrptPagerow.aldeduct_adj_try}">
+										<td colspan="1" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: 500;"><span
+											th:text="${aldeduct_adj_tryRow}"></span></td>
+									</span>
+								</tr>
+
+
+								<tr class="TablerowBG1 innTR21">
+									<td colspan="12" align="left" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: bolder;"><span
+										th:utext="#{msg.thymeleaf.pagelabel.DEDUCTIONSADJUSTABLEBYOTHERS }"></span>
+									</td>
+								</tr>
+								
+							
+							
+
+								<tr class="TablerowBG22 innerTr innTR22">
+
+									<span
+										th:each="dedctionotherRow,iterationStatus : ${innerrptPagerow.lstdeducother}">
+										<td colspan="1" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: 200;">
+											<table id="innertable" border="0" cellspacing="0"
+												cellpadding="2" width="100%" height="100%"
+												style="font-weight: 200;" class="innerreporttb6">
+												<span th:each="row,iterationStatus : ${dedctionotherRow}">
+													<tr>
+														<td colspan="1" class="Label2"><span th:text="${row}"></span>
+														</td>
+													</tr>
+												</span>
+											</table>
+									</td>
+									</span>
+								</tr>
+								
+							
+								
+
+								<tr class="TablerowBG22 innerTr innTR23">
+									<span
+										th:each="aldeduct_adj_otrRow,iterationStatus : ${innerrptPagerow.aldeduct_adj_otr}">
+										<td colspan="1" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: 500;"><span
+											th:text="${aldeduct_adj_otrRow}"></span></td>
+									</span>
+								</tr>
+
+								<tr class="TablerowBG22 innerTr innTR24">
+									<span
+										th:each="alnetamtRow,iterationStatus : ${innerrptPagerow.alnetamt}">
+										<td colspan="1" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: 500;"><span th:text="${alnetamtRow}"></span>
+									</td>
+									</span>
+								</tr>
+								<tr class="TablerowBG1 innTR25">
+
+									<td colspan="1" align="left" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"></td>
+
+									<td colspan="1" align="left" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"><span
+										th:utext="#{msg.thymeleaf.pagelabel.NetPayable }"></span></td>
+
+									<td colspan="1" align="right" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2">-</td>
+
+									<td colspan="1" align="right" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2">-</td>
+
+									<td colspan="1" align="right" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: 500; text-align: center;"></td>
+
+									<td colspan="1" align="right" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"></td>
+
+									<td colspan="1" align="right" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"></td>
+
+									<td colspan="1" align="right" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"></td>
+
+									<td colspan="1" align="right" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"></td>
+
+									<td colspan="1" align="right" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"></td>
+
+									<td colspan="1" align="right" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"></td>
+									<td colspan="1" align="right" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"></td>
+								</tr>
+
+							</table>
+						</td>
+					</tr>
+				</div>
+			</span>
+			<tr>
+				<td align="left" class="borderNone"></td>
+			</tr>
+
+			<tr>
+				<td align="left" style="padding: 5px;" class="borderNone"></td>
+			</tr>
+
+		</table>
+		
+		
+		<div class="row clear">
+			<div class="col-md-6 text-left">
+				<span th:utext="#{msg.pagelabel.varificationdatetime}"></span> <span
+					th:text="${createddate}"></span>
+			</div>
+			<div class="col-md-6 text-right">
+				<span th:utext="#{msg.pagelabel.printingdatetime}"></span> <span
+					th:text="${systemdate}"></span>
+			</div>
+		</div>
+		<div class="clear">
+			<div class="text-center">
+				<div class="text-center">
+					<span th:utext="#{msg.thymeleaf.pagelabel.footerreport}"></span>
+				</div>
+			</div>
+		</div>
+<br>
+		<p><b>Note:</b> <span th:utext="#{msg.thymeleaf.pagelabel.PrintNotefooter}"></span></p>
+	</div>
+	
+	<div class="text-center btniHideOnAllreport">
+		<input type="hidden" hidden="billNumber" value="billNumber"></input>
+		<input type="hidden" hidden="size" value="size"></input> <input
+			type="hidden" hidden="page" value="page"></input>
+		<!-- <input type="button"
+				class="buttontag buttonDisplay orange btn" value="OK" onClick="getok()"></input> -->
+		<!-- <button id="print" 
+			class="btn orange">Print</button> -->
+		    
+		    
+		    
+		    <button id="print" onclick="printContent('print-content');"
+					class="btn orange">Print</button> 
+					
+		    
+		    
+		    <a       id="print"  target="_blank"
+				th:href="@{${'/innerreport/getinnerreportAllPages/'+billNumber+'/'+size+'/1/1'}}">
+					<input id="pdfbutton" type="button" value="Print ALL" class="orange btn"></input>
+			</a> 
+			
+			
+			
+			<!-- 
+			<a th:href="'javascript:w=window.open(\'../innerreport/getinnerreportAllPages/'+ ${billNumber}+'/1/1/1' +'\');'"  class="orange btn" >​​​​​​​​​​​​​​​​​print pdf</a>
+			
+			 -->
+			
+			
+		<!-- 	<button id="print" onclick="printContent('print-content');"
+			class="btn orange">Print</button> -->
+			
+			
+			<!-- <button id="printAllPages" 
+			class="btn orange">Print All</button> -->
+			
+			
+			
+	</div>
+
+	<script>
+	$(document).ready(function(){
+		$("#loaderMainNew").hide();
+		
+		$("#print").click(function(){
+			$("#loaderMainNew").show();
+		});
+		
+	}); 
+	
+		function printContent(el) {
+			var restorepage = $('body').html();
+			var printcontent = $('#' + el).clone();
+			$('body').empty().html(printcontent);
+			window.print();
+			$('body').html(restorepage);
+		}
+		
+		$("table#dataTable0 span").each(function(){  
+			var text=$(this).text();
+			var dataType=typeof text;
+			if(dataType=="string" && text!=null && text!=''){
+				 text=text.split('_').join(' ');
+				$(this).text(capitalize(text.toLowerCase()));
+			}
+		}); 
+		
+		
+		function capitalize(input) {  
+		    var words = input.split(' ');  
+		    var CapitalizedWords = [];      
+		    for(var i=0;i<words.length;i++){  
+		    	var word=words[i]; 
+		    	var caps=word.charAt(0).toUpperCase()+word.slice(1); 
+		    	CapitalizedWords.push(caps);  
+		    	}        
+		    return CapitalizedWords.join(' ');  
+		}  
+		function capitalize(label) {
+			var words = label.split(' ');
+			var CapitalizedWords = [];
+			for (var i = 0; i < words.length; i++) {
+				var word = words[i];
+				var caps = word.charAt(0).toUpperCase() + word.slice(1);
+				CapitalizedWords.push(caps);
+			}
+			return CapitalizedWords.join(' ');
+		}
+		$(".capitalize").each(function() {
+			var text = $(this).text();
+			var dataType = typeof text;
+			if (dataType == "string" && text != null && text != '') {
+				text = text.split('_').join(' ');
+				$(this).text(capitalize(text.toLowerCase()));
+			}
+		});
+	</script>
+</body>
+</html>

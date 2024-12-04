@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.qualification}"></title>
+<style>
+input#countryNameEn::placeholder {
+	font-size: 11px;
+	color: #ccccccb3;
+}
+
+.alert.alert-success {
+	display: block !important;
+}
+</style>
+</head>
+<body class="parameter-mst">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+	<div class="container min-height-600">
+
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.qualification}"></span>
+		</h3>
+		<div align="center" class="error">
+			<span th:utext="${message}"></span>
+		</div>
+		<!-- <div th:if="${savedSuccessfully.value} eq 'SAVED'">
+			<p>Saved Successfully !</p>
+		</div> -->
+		<fieldset class="container">
+			<!-- <legend th:utext="#{msg.thymeleaf.pageheading.addcountry}" th:style="${'color: orange;'}"></legend> -->
+
+			<!-- 		<h1 th:utext="#{common.label.title}"></h1> -->
+
+			<form class="form-horizontal" th:action="@{/mdc/saveNewQualification}"
+				id="chnagePassForm" th:object="${qualificationEntity}"
+				method="POST" name="qualification" enctype="multipart/form-data">
+
+				<input type="hidden" name="language" id="language"
+					th:value="${language}" /> <input type="hidden" name="errorCode"
+					id="errorCode" th:value="${errorCode}" /> <input type="hidden"
+					name="message" id="message" th:value="${message}" />
+
+				<fieldset class="container">
+
+					<div class="form-group">
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pageheading.qualificationname}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+						<div class="col-sm-3">
+							<input class="form-control"
+								id="qualification" th:field="*{qualification}"
+								style="margin-left: 65px;" />
+						</div>
+					</div>
+
+				</fieldset>
+
+				<div style="height: 5px"></div>
+
+				<div align="center">
+					<input type="submit" id="btnUpdatePass" class="btn btn-primary"
+						th:value="#{msg.thymeleaf.pagelabel.submit}" /> <input
+						onclick="history.back()" type="button" id="resetButton"
+						value="Cancel" class="buttontag">
+
+
+				</div>
+				<table id="tblDataTable" class="table table-striped table-bordered"
+					style="width: 100%">
+					<thead>
+						<tr>
+							<th th:utext="#{msg.thymeleaf.pagelabel.sNo}"></th>
+							<th th:utext="#{msg.thymeleaf.pagelabel.qualificationID}"
+								style="text-align: center;" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.qualification}"
+								style="text-align: center;" />
+							<th th:utext="#{msg.thymeleaf.datatablelabel.action}"
+								style="text-align: center;"></th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr th:each="varMenu : ${lstOfQualificationMst}">
+							<td th:text="${varMenuStat.index+1}"></td>
+							<td th:text="${varMenu.qId}"></td>
+							<td th:text="${varMenu.qualification}"></td>
+
+							<td>
+								<div class="form-group text-center flex">
+									<a data-toggle="tooltip" title="Edit"
+										th:href="@{'/mdc/editQualification/' + ${varMenu.qId}}"><span
+										class="glyphicon glyphicon-edit"></span></a>
+									<!-- <a data-toggle="tooltip" title="Delete"
+											th:onclick="${'ConfirmDeleteRecord('+varMenu.key+','+varMenu.isActive+');'}">
+											<span class="glyphicon glyphicon-trash"></span>
+										</a> -->
+									<a data-toggle="tooltipDelete" title="Delete"
+										th:onclick="'ConfirmDeleteRecord('+${varMenu.qId}+');'"><span
+										class="glyphicon glyphicon-trash"></span></a>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+
+				</table>
+
+
+			</form>
+		</fieldset>
+	</div>
+
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/datatable-common.js}"></script>
+	<script th:src="@{/js/jquery.validate.min.js}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.min.js"></script>
+	  	<script th:src="@{/js/project/qualification.js}"></script>
+
+
+</body>
+</html>

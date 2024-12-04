@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Revenue Stamp</title>
+<link rel="stylesheet" th:href="@{/css/print.css}" />
+<link rel="stylesheet" th:href="@{/css/styles.css}" />
+<style>
+table.table.table-striped.table-bordered a {
+	border: none !important;
+}
+</style>
+</head>
+<body class="revenue-stamp-report">
+	<div class="container-fluid">
+		<div th:replace="header/menuHeader :: var-script-header"></div>
+		<div id="print-content">
+			<fieldset>
+
+				<div class="text-center">
+					<h3 Class="PageHeading">Revenue Stamp</h3>
+				</div>
+				<table class="bor-0">
+					<tbody>
+						<tr>
+							<td colspan="2" class="Label2"
+								style="font-weight: bold; text-align: center;">Schedule for
+								the Recovery of Revenue Stamp<br>From Major Head 0030
+							</td>
+						</tr>
+						<tr>
+							<td class="Label2" style="font-weight: bold;">For the Month
+								of <span th:text="${currmonyer}"></span>
+							</td>
+							<td class="Label2" style="font-weight: bold; text-align: right;">Treasury
+								: <span th:text="${trsyCode}"></span> ( <span
+								th:text="${trsyName}"></span> )
+							</td>
+						</tr>
+						<tr>
+							<td class="Label2" style="font-weight: bold;">Name of the
+								Office : <span th:text="${officename}"></span>( <span
+								th:text="${ddoCode}"></span> )
+							</td>
+							<td class="Label2" style="font-weight: bold; text-align: right;">Head
+								Of Account Code :30046401</td>
+						</tr>
+						<tr>
+							<td class="Label2" style="font-weight: bold;">TAN NO. : <span
+								th:text="${tanNo}"></span></td>
+							<td class="Label2" style="font-weight: bold; text-align: right;">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<br />
+				<table class="table table-striped">
+
+					<thead>
+						<tr>
+							<th rowspan="2" th:utext="#{msg.thymeleaf.pagelabel.srno}" /></th>
+							<th rowspan="2" th:utext="#{msg.pagelabel.employeeName}" /></th>
+							<th rowspan="2" th:utext="#{msg.thymeleaf.pagelabel.grossAmount}" /></th>
+							<th rowspan="2" th:utext="#{msg.thymeleaf.label.amtofdeduc}" /></th>
+
+						</tr>
+
+
+					</thead>
+
+					<tbody>
+						<tr th:each="varEmp : ${revenueStampReport}">
+							<td class="text-center" th:text="${varEmpStat.index+1}"></td>
+							<td class="text-center" th:text="${varEmp.empName}"></td>
+							<td class="text-center" th:text="${varEmp.gross}"></td>
+							<td class="text-center" th:text="${varEmp.revenueStamp}"></td>
+							</tr>
+							<tr>
+							<td></td>
+							<td>Total Deduction (`): </td>
+							<td></td>
+							<td th:text="${totalDeduc}">/-</td>
+						</tr>
+							<tr>
+							<td></td>
+							<td>Total Deduction In Words (`): </td>
+							<td></td>
+							<td th:text="${word}"></td>
+						</tr>
+					</tbody>
+
+				</table>
+				<br />
+				<table class="table bor-0">
+					<tbody>
+						<tr>
+							<td valign="middle" style="font-weight: bold;"><br /> <b>Verification
+									Time:-</b><span th:text="${systemdate}"></span><br /> <span>* Generated
+									By <span th:text="#{msg.thymeleaf.pagelabel.hteCustSevaarth}"></span>
+							</span></td>
+						</tr>
+					</tbody>
+				</table>
+			</fieldset>
+		</div>
+		<div class="text-center">
+			<button id="print" onclick="printContent('print-content');"
+				class="btn">Print</button>
+			<input type="button" name="btnBackAgain" id="btnBackAgain"
+				onclick="window.close();" value="Back" class="buttontag">
+		</div>
+	</div>
+
+</body>
+</html>

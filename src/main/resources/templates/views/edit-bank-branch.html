@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.addbranch}"></title>
+</head>
+<body class="add-branch">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.dcpsBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.addbranch}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.addbranch}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<form method="POST" name="addBranch" th:object="${mstBankBranchEntity}" th:action="@{/mdc/updateBankBranch}">
+				<table class="table bor-0">
+					<tbody>
+						<tr>
+							<td align="right" width="15%"><b>Bank Name &nbsp;&nbsp;<label class="mandatoryindicator">*</label></b></td>
+							<td width="20%"><select name="cmbBankName" size="1"  th:field="*{bankid}"
+								id="bankID" class="selecttag mandatorycontrol">
+									<option value="-1">-- Select --</option>
+											<option th:each="varAllBankList : ${bankName}"
+												th:value="${varAllBankList.bankCode}"
+												th:text="${language=='mh' ? varAllBankList.bankName : varAllBankList.bankName}"></option>
+							</select></td>
+							<td align="right" width="15%"><b>Branch Name &nbsp;&nbsp;<label class="mandatoryindicator">*</label></b></td>
+							<td width="20%"><input type="text" name="txtBranchName"
+								id="branchName" class="texttag mandatorycontrol"  th:field="*{bankBranchName}"
+								maxlength="40" size="30/"></td>
+						</tr>
+						<tr>
+							<td align="right"><b>Code &nbsp;&nbsp;<label class="mandatoryindicator">*</label></b></td>
+							<td width="20%"><input type="text" name="txtMicrCode"
+								id="txtMicrCode" class="numbertag mandatorycontrol" th:field="*{micrCode}"
+								maxlength="20" size="30"></td>
+							<td align="right"><b>Address &nbsp;&nbsp;<label class="mandatoryindicator">*</label></b></td>
+							<td><textarea name="txtBranchAdd" class="textareatag" th:field="*{bankBranchAddress}"
+									cols="32" rows="3"></textarea></td>
+						</tr>
+						<tr>
+							<td align="right"><b>IFSC Code &nbsp;&nbsp;<label class="mandatoryindicator">*</label></b></td>
+							<td width="20%"><input type="text" name="txtBranchCode"  th:field="*{ifscCode}"
+								id="txtBranchCode" maxlength="20"></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div class="text-center">
+					<input type="submit" name="btnSave"
+						id="btnSave" value="Save" size="3" maxlength="3"
+						class="buttontag"> <input type="button" name="Close"
+						id="Close" value="Close" size="3" maxlength="3" class="buttontag" onclick="history.back()" >
+					<input type="reset" name="Reset" id="Reset" value="Reset" size="3"
+						maxlength="3" class="buttontag">
+				</div>
+
+			</form>
+		</div>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/consolidate-paybill.js}"></script>
+</body>
+</html>

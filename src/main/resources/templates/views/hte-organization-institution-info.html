@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.OrganisationInfo}"></title>
+</head>
+<style>
+input[type="button" i]:disabled {
+	pointer-events: none;
+	opacity: 0.6;
+}
+</style>
+<body class="hte-organization-institution-info">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.OrganisationInfo}"></span></li>
+				</ol>
+			</nav>
+		</div>
+
+		<div class="pageComtentNew container" th:fragment="orgInfo">
+			<div id="content">
+				<!-- <h3 Class="PageHeading">
+					<span th:utext="#{msg.thymeleaf.pageheading.OrganisationInfo}"></span>
+				</h3> -->
+				<input type="hidden" id="cmbDdoCode" name="cmbDdoCode">
+				<fieldset class="tabstyle">
+					<legend>
+						<b>Parent Department</b>
+					</legend>
+					<table class="table bor-0">
+						<tbody>
+							<tr>
+								<td width="15%" align="left">Administrative Department</td>
+								<td width="35%"><input type="text" id="txtAdminDept"
+									style="text-transform: uppercase;" size="48" maxlength="90"
+									readonly="readonly" name="txtAdminDept"
+									value="HIGHER AND TECHNICAL EDUCATION  DEPARTMENT."></td>
+								<td align="left" width="15%">Field Department/HOD
+									Department</td>
+								<td width="35%"><input type="text" id="txtFieldDept"
+									style="text-transform: uppercase;" size="40%" maxlength="90"
+									readonly="readonly" name="txtFieldDept"
+									value="DIRECTORATE OF HIGHER EDUCATION"> <!-- change size from 50% to 40% by Pratik 02-08-23 --></td>
+							</tr>
+							<tr>
+								<td id="instituteType1" width="15%" align="left">Institute
+									Type</td>
+								<td width="35%"><select name="instituteType"
+									th:field=*{instituteType} id="instituteType"
+									style="width: 360px">
+										<option th:value="0"
+											th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+										<option th:each="varPay : ${lstInstituteType}"
+											th:value="${varPay.instituteTypeId} "
+											th:text="${language=='mh' ? varPay.instituteTypeName : varPay.instituteTypeName}"></option>
+								</select></td>
+								<td colspan="2" width="50%">&nbsp;</td>
+							</tr>
+						</tbody>
+					</table>
+				</fieldset>
+				<br>
+				<fieldset class="tabstyle">
+					<legend>
+						<b>Signing Authority</b>
+					</legend>
+					<table class="table bor-0">
+						<tbody>
+							<tr>
+								<td width="15%" align="left">Name <font color="red"
+									size="4px;">*</font></td>
+								<td width="35%"><input type="text" id="txtDDOName"
+									th:field="*{ddoOffice}" style="text-transform: uppercase"
+									size="48" maxlength="99" name="txtDDOName"></td>
+								<td width="15%" align="left">Designation<font color="red"
+									size="4px;">*</font>
+								</td>
+								<td align="left" width="35%"><select class="form-control"
+									id="cmbDesignation" th:field="*{designationId}"
+									th:class="${organisationDtlsModel.designationId!=null}? 'readonly' : ''">
+
+										<option th:value="0"
+											th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+										<option th:each="varPay : ${lstdesgination}"
+											th:value="${varPay.designationId}"
+											th:text="${language=='mh' ? varPay.designation : varPay.designation}"></option>
+								</select></td>
+							</tr>
+							<tr>
+								<td colspan="2" align="left"
+									style="font-size: smaller; font-style: italic">Enter
+									Signing Authority i.e. DDO/Organization's Name</td>
+								<td colspan="2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="15%" align="left" class="ddoinfowdate">With
+									Effect From Date <font color="red" size="4px;">*</font>
+								</td>
+								<td align="left" width="35%"><input type="date"
+									th:max="${#dates.format(new java.util.Date(), 'yyyy-MM-dd')}"
+									th:attr="readonly=${organisationDtlsModel.designationId!=null}? 'true' : 'false'"
+									class="form-control" placeholder="dd/mm/yyyy"
+									th:field="*{startDate}" id="txtWEFDate" /></td>
+								<td width="15%">&nbsp;</td>
+								<td width="35%">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="15%" align="left">Tan No.</td>
+								<td align="left" width="35%"><input type="text"
+									class="form-control tan"
+									th:attr="readonly=${organisationDtlsModel.designationId!=null}? 'true' : 'false'"
+									id="txtTANNo" style="text-transform: uppercase" size="48"
+									maxlength="10" name="txtTANNo" th:field="*{tanNo}"></td>
+								<td width="15%" align="left">ITO/Ward/Circle</td>
+								<td align="left" width="35%"><input type="text"
+									th:attr="readonly=${organisationDtlsModel.designationId!=null}? 'true' : 'false'"
+									id="txtITWardCircle" style="text-transform: uppercase"
+									th:field="*{itaWardNo}" size="48" maxlength="10"
+									name="txtITWardCircle" class="form-control"></td>
+							</tr>
+						</tbody>
+					</table>
+				</fieldset>
+				<br>
+				<fieldset class="tabstyle">
+					<legend>
+						<b>Bank Details</b>
+					</legend>
+					<table class="table bor-0">
+						<tbody>
+							<tr>
+								<td width="15%" align="left">Bank Name <font color="red"
+									size="4px;">*</font>
+								</td>
+								<td width="35%" align="left"><select name="cmbBankName"
+									th:field="*{bankName}"
+									th:class="${organisationDtlsModel.designationId!=null}? 'readonly' : ''"
+									id="cmbBankName" style="width: 360px" class="form-control">
+										<option value="-1">-- Select --</option>
+										<option th:each="varAllBankList : ${bankName}"
+											th:value="${varAllBankList.bankCode}"
+											th:text="${language=='mh' ? varAllBankList.bankName : varAllBankList.bankName}"></option>
+
+								</select>
+								<td width="15%" align="left">Branch Name <font color="red"
+									size="4px;">*</font>
+								</td>
+								<td align="left" width="35%"><select name="cmbBranchName"
+									id="cmbBranchName" style="width: 360px"
+									th:field="*{branchName}"
+									th:class="${organisationDtlsModel.designationId!=null}? 'readonly' : ''">
+										<option value="-1">-- Select --</option>
+										<option
+											th:each="varAllBankbranchList : ${lstAllBankBranchList}"
+											th:value="${varAllBankbranchList[0]}"
+											th:text="${language=='mh' ? varAllBankbranchList[1] : varAllBankbranchList[1]}"></option>
+								</select></td>
+							</tr>
+							<tr>
+								<td width="15%" align="left">IFS Code</td>
+								<td align="left" width="35%"><input type="text" readonly
+									id="txtIFSCCode" style="text-transform: uppercase;"
+									th:field="*{ifscCode}" size="48" maxlength="20"
+									name="txtIFSCCode" class="form-control"></td>
+								<td width="15%" align="left">Bank Acc. No. <font
+									color="red" size="4px;">*</font>
+								</td>
+								<td align="left" width="35%"><input type="text"
+									th:attr="readonly=${organisationDtlsModel.designationId!=null}? 'true' : 'false'"
+									id="txtAccountNo" style="text-transform: uppercase"
+									th:field="*{accountNo}" size="48" maxlength="20"
+									name="txtAccountNo" class="form-control number"></td>
+							</tr>
+							<tr>
+								<td width="15%" align="left">Remarks</td>
+								<td align="left" width="35%"><input type="text"
+									th:attr="readonly=${organisationDtlsModel.designationId!=null}? 'true' : 'false'"
+									id="txtRemarks" style="text-transform: uppercase" size="48"
+									maxlength="100" th:field="*{remarks}" name="txtRemarks"
+									class="form-control"></td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+						</tbody>
+					</table>
+				</fieldset>
+				<br>
+				<fieldset class="tabstyle">
+					<legend> Verify Documents </legend>
+					<p>
+						<input type="checkbox" name="bankPass" id="bankPass" />&nbsp;&nbsp;&nbsp;<label>Bank
+							Passbook</label>
+					</p>
+					<p>
+						<input type="checkbox" name="bankCheque" id="bankCheque" />&nbsp;&nbsp;&nbsp;<label>Bank
+							Cheque</label>
+					</p>
+					<p>
+						<input type="checkbox" name="deptLetter" id="deptLetter" />&nbsp;&nbsp;&nbsp;<label>Department
+							Letter</label>
+					</p>
+				</fieldset>
+				<br>
+				<table class="table bor-0">
+					<tbody>
+						<tr>
+							<td align="center">
+								<!-- <input type="submit" name="btnSave"
+									class="btn hide"
+									id="btnSave" value="Save" size="3" maxlength="3"> --> <a
+								class="btn nxt" data-toggle="tab" id="btnNext" href="#menu1">Next</a>
+
+								<input type="button" name="btnedit" class="btn" id="btnedit"
+								value="Edit" size="3" maxlength="3"> <input
+								type="button" name="btnClose" id="btnClose" value="Back"
+								size="3" maxlength="3" class="buttontag">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/hte-organization-institution-info.js}"></script>
+</body>
+
+</html>

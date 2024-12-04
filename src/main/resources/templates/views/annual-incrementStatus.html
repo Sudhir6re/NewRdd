@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.annualIncrement}"></title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body class="annual-incrementStatus">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.TransactionBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.annualIncrement}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.annualIncrement}"></span>
+		</h3>
+		<div class="row">
+			<div class="col-md-7">
+				<h6 style="color: red; font-weight: bold; margin-left: 5px;">Note:Annual
+					Increment Details entered through this form will be reflected in
+					the service book</h6>
+			</div>
+		</div>
+		
+		<div class="col-md-7 text-right">
+	<!-- 			<button class="btn btn-warning btn-md" id="btnAddNewOrder">Add New Order</button> -->
+				<a class="btn btn-warning btn-md" id="btnAddNewOrder" th:href="@{/ddoast/annualIncrement}">Add New Order</a>
+			</div>
+
+		<div class="aNTBmain">
+			<table id="orderList" class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th class="datatableheader">Increment Order No</th>
+						<th class="datatableheader">Increment Order Date</th>
+						<th class="datatableheader">No.of employees in order</th>
+						<th class="datatableheader">Status</th>
+						<th class="datatableheader"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="odd" th:each="varEmp : ${lstAnnualIncrementStatus}">
+						<td style="text-align: center;" class="tablecelltext"
+							th:text="${varEmp.orderNo}"></td>
+						<td style="text-align: center;" class="tablecelltext" th:text="${varEmp.incrementOrderDate}"></td>
+						<td style="text-align: center;" class="tablecelltext" th:text="${varEmp.empCount}"></td>
+						<td th:switch="${varEmp.isActive}">
+								<span th:case="'1'">Forwarded For Approval</span>
+								<span th:case="'2'">Verified</span></td>
+								<td><a class="collapse-item"
+											th:href="@{'/ddoast/MTR21/'+${varEmp.orderNo}+'/'+ ${varEmp.incrementOrderDate}}"><span>Print Report</span></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+
+	<script th:src="@{/js/project/annual-increment.js}"></script>
+
+</body>
+</html>

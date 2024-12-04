@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.adddesignation}"></title>
+</head>
+<body class="edit-mst-designation">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.adddesignation}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.adddesignation}"></span>
+		</h3>
+		<fieldset class="container">
+			<!-- <legend th:utext="#{msg.thymeleaf.pageheading.adddesignation}"
+				th:style="${'color: orange;'}"></legend> -->
+
+			<!-- 		<h1 th:utext="#{common.label.title}"></h1> -->
+
+			<form class="form-horizontal" th:action="@{/mdc/editDesgSave}"
+				th:object="${mstDesgEntity}" name="mstDesg" method="POST"
+				enctype="multipart/form-data">
+
+				<input type="hidden" name="language" id="language"
+					th:value="${language}" /> <input type="hidden" id="desgination_id"
+					th:field="*{desginationId}" />
+
+				<div class="hide">
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.createdesignationCode}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="desgination_code"
+							th:field="*{desginationCode}" readonly></input>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<!-- <label class="control-label col-sm-2" for="title"
+						th:utext="#{msg.thymeleaf.pagelabel.fieldDepartmrnt}"></label>
+					<div class="col-sm-4">
+						<select class="form-control" id="field_department" th:field="*{field_department}">
+							<option selected="selected" th:value="0"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+							<option th:each="varFieldDept : ${lstFieldDepartment}"
+								th:value="${varFieldDept.subDepartmentId}"
+								th:text="${language=='mh' ? varFieldDept.subDepartmentNameMr : varFieldDept.subDepartmentNameEn}"></option>
+						</select>
+					</div> -->
+
+
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.createdesignation}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control alphacharspace"
+							id="designation" style="text-transform: uppercase"
+							th:field="*{desgination}" onblur="validateDesignationName();"></input>
+						<!--  th:text="${user.name}" -->
+					</div>
+
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.createdesignationmstShortName}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control alphacharspace"
+							id="designationShortName" style="text-transform: uppercase"
+							th:field="*{designationShortName}"></input>
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+
+
+
+
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.cadre}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+						<select class="form-control" th:field="*{cadreCode}">
+							<!--   -->
+							<option selected="selected" th:value="0"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+							<option th:each="varCadre : ${lstCadre}"
+								th:value="${varCadre.cadreCode}"
+								th:text="${varCadre.cadreDescription}"></option>
+						</select>
+					</div>
+					
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.status}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+						<select class="form-control" id="isActive" th:field="*{isActive}">
+							<option th:value="0"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+							<option th:value="1" th:selected="${isActive == 1}"
+								th:utext="#{msg.thymeleaf.pagelabel.dropdown.active}"></option>
+							<option th:value="0" th:selected="${isActive == 0}"
+								th:utext="#{msg.thymeleaf.pagelabel.dropdown.inactive}"></option>
+						</select>
+					</div>
+
+				<!-- 	<div id="cadreGroup" th:if="*{cadreGroup!=0? 'TRUE' : 'FALSE'}">
+						<label class="control-label col-sm-2" for="title"><span
+							th:utext="#{msg.thymeleaf.pagelabel.designationTypes}"></span>&nbsp;&nbsp;<b><font
+								color="red" size="4px;">*</font></b></label>
+						<div class="col-sm-3">
+							<span th:each="varCommon : ${cadreGroupsLst}"> <input
+								type="radio" class="form-check-input" name="cadreGroup"
+								id="cadreGroup" th:field="*{cadreGroup}"
+								th:value="${varCommon.commonValue}" /> <label
+								class="form-check-label"
+								th:text="${language=='mh' ? varCommon.commonValMarathi : varCommon.commonValEnglish}"></label>
+							</span>
+						</div>
+					</div> -->
+				</div>
+
+
+
+				<!-- <div class="form-group">
+					<label class="control-label col-sm-2" for="title"
+						th:utext="#{msg.thymeleaf.pagelabel.cadre}"></label>
+					<div class="col-sm-4">
+						<select class="form-control" id="cadre" th:field="*{cadre}"> cadreDescDD
+							<option th:value="0"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+							<option th:each="varEditDes : ${lstAllCadreDesc}"
+								th:value="${varEditDes.cadreId}"
+								th:text="${language=='mh' ? varEditDes.cadreDescription : varEditDes.cadreDescription}"></option>
+						</select>
+					</div>
+					<label class="control-label col-sm-2" for="title"
+						th:utext="#{msg.thymeleaf.pagelabel.payCommission}"></label>
+					<div class="col-sm-4">
+						<select class="form-control" id="payCommission" th:field="*{payCommission}">
+							<option selected="selected" th:value="0"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+							<option th:each="varPay : ${lstddcPayCommission}"
+								th:value="${varPay.id}"
+								th:text="${language=='mh' ? varPay.commission_name_mh : varPay.commission_name_en}"></option>
+						</select>
+					</div>
+
+				</div> -->
+
+				<div class="form-group"></div>
+
+				<div class="form-group text-center">
+					<hr />
+					<input type="submit" id="btnSave" class="btn btn-primary"
+						th:value="#{msg.thymeleaf.pagelabel.btnUpdate}" />
+					<!-- <div class="col-sm-offset-0 col-sm-1">
+						<input type="button" class="btn btn-info"
+							th:value="#{msg.thymeleaf.pagelabel.btnCancel}" />
+					</div> -->
+					<a th:href="@{/mdc/mstDesignation}"> <input type="button"
+						id="btnCancel" class="btn btn-info"
+						th:href="@{/mdc/mstDesignation}"
+						th:value="#{msg.thymeleaf.pagelabel.btnCancel}" />
+					</a>
+				</div>
+
+			</form>
+		</fieldset>
+	</div>
+
+	<div th:replace="header/newHeader :: varnewfooter"></div>
+
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script th:src="@{/js/project/edit-mst-designation.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.masterReport}"></title>
+
+</head>
+<body class="master-repor-search">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.reportBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.masterReport}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span>Master Report</span>
+		</h3>
+		<div class="formMainwithNoborTb container">
+			<table class="table bor-0">
+				<tbody>
+					<tr>
+						<td width="20%">List of Regions <font color="RED">*</font>
+						</td>
+						<td width="30%"><select name="listRegion" id="listRegion">
+								<option value="-1">-- Select --</option>
+								<option value="9">All Regions</option>
+								<option value="1">Konkan</option>
+								<option value="2">Nashik</option>
+								<option value="3">Pune</option>
+								<option value="4">Kolhapur</option>
+								<option value="5">Aurangabad</option>
+								<option value="6">Latur</option>
+								<option value="7">Nagpur</option>
+								<option value="8">Amravati</option>
+						</select></td>
+						<td class="captionTag">Month <font color="RED">*</font>
+						</td>
+						<td colspan="1"><select class="selecttag" size="1"
+							name="listmonth" id="listmonth">
+								<option value="-1">-- Select --</option>
+								<option value="1">January</option>
+								<option value="2">February</option>
+								<option value="3">March</option>
+								<option value="4">April</option>
+								<option value="5">May</option>
+								<option value="6">June</option>
+								<option value="7">July</option>
+								<option value="8">August</option>
+								<option value="9">September</option>
+								<option value="10">October</option>
+								<option value="11">November</option>
+								<option value="12">December</option>
+						</select></td>
+					</tr>
+					<tr>
+						<td>Year <font color="RED">*</font>
+						</td>
+						<td><select class="selecttag" size="1" name="listYear"
+							id="listYear">
+								<option value="-1">-- Select --</option>
+								<option value="2007">2007</option>
+								<option value="2008">2008</option>
+								<option value="2009">2009</option>
+								<option value="2010">2010</option>
+								<option value="2011">2011</option>
+								<option value="2012">2012</option>
+								<option value="2013">2013</option>
+								<option value="2014">2014</option>
+								<option value="2015">2015</option>
+								<option value="2016">2016</option>
+								<option value="2017">2017</option>
+								<option value="2018">2018</option>
+						</select></td>
+					</tr>
+					<tr bgcolor="#f3f3f3">
+						<td colspan="2" style="border-top: solid 1px #333333;"><i><b>Note:
+							</b>Parameter marked with a '<font face="Verdana" color="red">*</font>'
+								are mandatory</i> <br></td>
+						<td colspan="2" style="padding: 5px; text-align: right"><input
+							type="button" name="GenerateReport" id="rptBtn_GenerateReport"
+							value="Generate Report" class="buttontag"> <input
+							type="reset" name="ResetParams" id="rptBtn_ResetBtn"
+							value="Reset" class="buttontag"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

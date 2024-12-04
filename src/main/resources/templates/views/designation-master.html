@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.designationmaster}"></title>
+
+</head>
+<body class="designation-master">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.dcpsBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.designationmaster}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.designationmaster}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<form method="POST" name="DDOOfficeView">
+				<input type="button" name="btnaddqualification"
+					onclick="fieldDisplay();" id="btnaddqualification"
+					value="Add Qualification" size="3" maxlength="3" class="buttontag">
+				<br />
+				<br />
+				<table class="table bor-0 width-60 tbBold">
+					<tbody>
+						<tr>
+							<td width="50%">Field Department</td>
+							<td width="50%"><select name="cmbFieldDepartment"
+								id="cmbFieldDepartment" onchange="getCadresForTheFieldDept();">
+									<option value="-1">-- Select --</option>
+									<option value="10546" selected="selected">ADDITIONAL
+										COLLECTOR B.S.D. REHABILITATION BRANCH,</option>
+									<option value="10606">ADDITIONAL GOVERNMENT PLEADER,
+										HIGH COURT, NAGPUR</option>
+									<option value="10615">ADMINISTRATOR GENERAL AND
+										OFFICIAL TRUSTEE, MUMBAI</option>
+									<option value="10547">ADMINISTRATOR, ULHASNAGAR
+										TOWNSHIP</option>
+									<option value="10573">ADVISOR TO GOVERNMENT OF
+										MAHARASHTRA,STATE FIRE TR</option>
+							</select> <label class="mandatoryindicator">*</label></td>
+						</tr>
+						<tr>
+							<td width="50%">Designation Code</td>
+							<td width="50%"><input type="text" size="50%"
+								name="txtDesigCode" id="txtDesigCode" value="19"> <label
+								class="mandatoryindicator">*</label></td>
+						</tr>
+						<tr>
+							<td width="50%">Designation</td>
+							<td width="50%"><input type="text" size="50%"
+								name="txtDesig" id="txtDesig"> <label
+								class="mandatoryindicator">*</label></td>
+						</tr>
+						<tr>
+							<td width="50%">Designation Short Name</td>
+							<td width="50%"><input type="text" size="50%"
+								name="txtDesigShort" id="txtDesigShort"> <label
+								class="mandatoryindicator">*</label></td>
+						</tr>
+						<tr>
+							<td width="50%" valign="top">Post</td>
+							<td width="50%"><select name="cmbCadre" id="cmbCadre">
+									<option value="-1">--Select--</option>
+									<option value="21">Group-A(Exact Cadre not known)</option>
+									<option value="22">Group-B-Gaz(Exact Cadre not known)</option>
+									<option value="23">Group-B-Non-Gaz(Exact Cadre Not
+										Known)</option>
+									<option value="24">Group-C(Exact Cadre not known)</option>
+									<option value="25">Group-D(Exact Cadre not known)</option>
+							</select> <label class="mandatoryindicator">*</label></td>
+						</tr>
+						<tr>
+							<td width="15%">Qualification</td>
+							<td width="50%"><select name="qualification"
+								id="qualification">
+									<option value="-1">-- Select --</option>
+									<option value="P.G. Diploma in Travel and Tourism">P.G.
+										Diploma in Travel and Tourism</option>
+									<option value="Diploma Electronic and Radio Engg (DERE)">Diploma
+										Electronic and Radio Engg (DERE)</option>
+									<option value="Chartered Accountant (C.A.)">Chartered
+										Accountant (C.A.)</option>
+									<option value="M.Sc. Agriculture">M.Sc. Agriculture</option>
+									<option value="Diploma in Travel and Tourism">Diploma
+										in Travel and Tourism</option>
+									<option value="M.Sc. (Food Science and Nutrition)">M.Sc.
+										(Food Science and Nutrition)</option>
+									<option value="D.Lib">D.Lib</option>
+									<option value="Master of Mass Communication and Journalism">Master
+										of Mass Communication and Journalism</option>
+									<option value="Master of Tourism Administration (MTA)">Master
+										of Tourism Administration (MTA)</option>
+									<option value="D.I.E.(Diploma in Industrial Electronics)">D.I.E.(Diploma
+										in Industrial Electronics)</option>
+									<option value="MMS (Master In Management Science)">MMS
+										(Master In Management Science)</option>
+									<option value="MJ (Master In Journalism)">MJ (Master
+										In Journalism)</option>
+									<option value="BAMS">BAMS</option>
+									<option value="D.C.M. (Diploma In Computer Management)">D.C.M.
+										(Diploma In Computer Management)</option>
+									<option value="D.C.T. (Diploma in Construction Technology)">D.C.T.
+										(Diploma in Construction Technology)</option>
+									<option
+										value="D.C.R.E. (Diploma in Civil and Rural Engineering)">D.C.R.E.
+										(Diploma in Civil and Rural Engineering)</option>
+									<option value="4th Std">4th Std</option>
+									<option value="5th Std">5th Std</option>
+							</select></td>
+						</tr>
+						<tr>
+						</tr>
+						<tr id="moreQualification">
+							<td width="50%">Add Qualification</td>
+							<td width="50%"><select id="moreQualification"
+								onchange="onchangevalues();">
+									<option value="-1">-- Select --</option>
+									<option value="P.G. Diploma in Travel and Tourism">P.G.
+										Diploma in Travel and Tourism</option>
+									<option value="Diploma Electronic and Radio Engg (DERE)">Diploma
+										Electronic and Radio Engg (DERE)</option>
+									<option value="Chartered Accountant (C.A.)">Chartered
+										Accountant (C.A.)</option>
+									<option value="M.Sc. Agriculture">M.Sc. Agriculture</option>
+									<option value="Diploma in Travel and Tourism">Diploma
+										in Travel and Tourism</option>
+									<option value="M.Sc. (Food Science and Nutrition)">M.Sc.
+										(Food Science and Nutrition)</option>
+									<option value="D.Lib">D.Lib</option>
+									<option value="PGDFM">PGDFM</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td width="50%">Pay Commission</td>
+							<td width="50%"><select name="cmbPayCommission"
+								id="cmbPayCommission">
+									<option value="-1">-- Select --</option>
+									<option value="700338">Non Govt. Scales</option>
+									<option value="700339">Padmanabhan Comm.</option>
+									<option value="700340">Fourth ( IV )</option>
+									<option value="700015">5th Pay Commission</option>
+									<option value="700005">7th Pay Commission</option>
+									<option value="700016">6th Pay Commission</option>
+									<option value="700337">Consolidated Pay</option>
+									<option value="700345">Shetty Commission</option>
+									<option value="10001198186">6th Pay Comission UGC</option>
+							</select> <label class="mandatoryindicator">*</label></td>
+						</tr>
+					</tbody>
+				</table>
+				<br />
+				<div class="text-center">
+					<input type="button" name="btnSaveData" id="btnSaveData"
+						value="Save" size="3" maxlength="3" class="buttontag"> <input
+						type="button" name="btnCancel" onclick="history.back()"
+						id="btnCancel" value="Cancel" size="3" maxlength="3"
+						class="buttontag">
+				</div>
+				<br />
+				<fieldset class="posttable">
+					<legend>Designations Added</legend>
+					<br>
+					<table class="table table-bordered" id="datatableNew">
+						<thead>
+							<tr>
+								<th>Code</th>
+								<th>Field Department</th>
+								<th>Designation</a></th>
+								<th>Group</th>
+								<th>Pay Commission</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>ADDITIONAL COLLECTOR B.S.D. REHABILITATION BRANCH,</td>
+								<td>Rehabilitation Tahsildar</td>
+								<td>A</td>
+								<td>5th Pay Commission</td>
+							</tr>
+							<tr class="even">
+								<td>2</td>
+								<td>ADDITIONAL COLLECTOR B.S.D. REHABILITATION BRANCH,</td>
+								<td>officer In Charge</td>
+								<td>BnGz</td>
+								<td>5th Pay Commission</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>ADDITIONAL COLLECTOR B.S.D. REHABILITATION BRANCH,</td>
+								<td>head Clerk</td>
+								<td>C</td>
+								<td>5th Pay Commission</td>
+
+							</tr>
+							<tr class="even">
+								<td>4</td>
+								<td>ADDITIONAL COLLECTOR B.S.D. REHABILITATION BRANCH,</td>
+								<td>aval Karkoon</td>
+								<td>C</td>
+								<td>5th Pay Commission</td>
+
+							</tr>
+							<tr>
+								<td>5</td>
+								<td>ADDITIONAL COLLECTOR B.S.D. REHABILITATION BRANCH,</td>
+								<td>senior Clerk</td>
+								<td>C</td>
+								<td>5th Pay Commission</td>
+
+							</tr>
+							<tr class="even">
+								<td>6</td>
+								<td>ADDITIONAL COLLECTOR B.S.D. REHABILITATION BRANCH,</td>
+								<td>deputy Accountant</td>
+								<td>C</td>
+								<td>5th Pay Commission</td>
+
+							</tr>
+						</tbody>
+					</table>
+					<br>
+				</fieldset>
+
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script>
+		$(".posttable").hide();
+		function getCadresForTheFieldDept() {
+			$(".posttable").fadeIn(100);
+		}
+		$("#moreQualification").hide();
+		function fieldDisplay() {
+			$("#moreQualification").fadeIn(100);
+		}
+	</script>
+</body>
+</html>

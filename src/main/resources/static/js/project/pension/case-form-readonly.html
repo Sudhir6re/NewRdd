@@ -1,0 +1,2952 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title th:utext="#{msg.thymeleaf.pageheading.CasesForm}"></title>
+<script th:src="@{/js/jquery-3.3.1.js}"></script>
+<link rel="stylesheet"
+	href="https://code.jquery.com/ui/1.8.3/themes/base/jquery-ui.css" />
+<link rel="stylesheet" th:href="@{/css/jquery-ui.css}" />
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-duration-format/2.2.2/moment-duration-format.min.js" ></script>
+<style>
+table.table, tr, td, th {
+	border: none !important;
+}
+
+td {
+	vertical-align: middle !important;
+}
+
+.table-bordered td, .table-bordered th {
+	border: 1px solid #ccc !IMPORTANT;
+	border-collapse: collapse;
+}
+
+table.table.pstb11 * {
+	font-size: 8px;
+}
+
+.btn {
+	margin: 10px !important;
+}
+
+.mms {
+	font-size: 18px !important;
+}
+
+.mms2 {
+	font-size: 18px;
+	position: relative;
+	top: 4px;
+}
+
+.width80IP {
+	width: 80% !important;
+	float: left;
+}
+
+.PadLf0 {
+	padding-right: 0 !important;
+}
+
+.form-control-date {
+	height: 30px;
+	padding: 5px 1px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgb(0 0 0/ 8%);
+	box-shadow: inset 0 1px 1px rgb(0 0 0/ 8%);
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow
+		ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out
+		.15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+table#tblFamilyDtls th, table#tblPrvsnlPnsnDtls th {
+	min-width: 201px;
+}
+
+li.ui-state-default.ui-corner-top {
+	background: transparent;
+	border-color: #289599;
+}
+
+li.ui-state-default.ui-corner-top a {
+	color: #000;
+}
+
+td {
+	min-width: 200px;
+}
+
+div#checkboxdepend table {
+	width: 50%;
+}
+
+table.table.cfmnm2 {
+	width: 65%;
+}
+
+.row.form-group.TSBmain .col-md-2 {
+	font-size: 13px;
+}
+.dis {
+	background: #eee !important;
+	pointer-events: none;
+}
+
+/* .toDate,.withEffDate  {
+    position: relative;
+}
+
+.toDate::-webkit-calendar-picker-indicator ,.withEffDate ::-webkit-calendar-picker-indicator {
+background: transparent;
+bottom: 0;
+color: transparent;
+cursor: pointer;
+height: auto;
+left: 0;
+position: absolute;
+right: 0;
+top: 0;
+width: auto;
+} */
+
+
+</style>
+</head>
+<body class="CasesForm case-form-readonly">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.pensionBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.CasesForm}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.CasesForm}"></span>
+		</h3>
+		<fieldset class="">
+			<form class="form-horizontal" th:object="${pensionModel}"
+				th:action="@{/pension/savePensDtls}" method="POST" id="caseForm"
+				enctype="multipart/form-data" name="caseForm" novalidate>
+				<input type="hidden" name="language" id="language"
+					th:value="${language}" /> <input type="hidden" name="message"
+					id="message" th:value="${message}" /> <input type="hidden"
+					name="empId" id="empId" th:value="${empId}" /> <input
+					type="hidden" name="isActive" id="isActive" th:value="${isActive}" />
+
+				<input type="hidden" name="roleId" id="roleId" th:value="${roleId}" />
+				
+				
+				
+				<input type="hidden"  id="tServDays"  />
+				<input type="hidden"  id="tServMonths"  />
+				<input type="hidden"  id="tServYears" />
+				
+				
+				
+				<input type="text"  class="hide" id="actualDate"   />
+				<input type="hidden"  class="context" id="context"   th:value="${context}" />
+				
+
+
+				<input type="hidden" name="message" id="hdnCvpRate"
+					th:value="${hdnCvpRate}" /> <input type="hidden" id="age"
+					th:field="*{age}" />
+					
+					
+					
+					
+					
+					
+				<!-- 	 <input type="hidden" id="religionCode"
+					th:field="*{religionCode}" /> -->
+
+
+				<div class="caseformmain">
+
+					<!-- <script type="text/javascript"
+						src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+					<script type="text/javascript"
+						src="http://code.jquery.com/ui/1.8.3/jquery-ui.js"></script> -->
+
+					<div id="tabs">
+						<ul>
+							<li><a href="#tabs-0">Form Details</a></li>
+							<li><a href="#tabs-1">Basic Details</a></li>
+							<li><a href="#tabs-2">Pay and Service Details</a></li>
+							<li><a href="#tabs-3">Family Details</a></li>
+							<li><a href="#tabs-4">Recovery</a></li>
+							<li><a href="#tabs-5">Checklist</a></li>
+							<li><a href="#tabs-6">Pension Calculation</a></li>
+							<!-- <li><a href="#tabs-7">Authority Details</a></li> -->
+						</ul>
+						<div id="tabs-0">
+							<br>
+							<div id="tcontent0" class="tabcontent">
+								<fieldset style="width: 100%" class="tabstyle">
+									<legend id="headingMsg">
+										<b> Form Details</b>
+									</legend>
+									<div class="comndtpnmain ">
+										<table class="table">
+											<tbody>
+												<tr>
+													<td width="20%" align="left">Transaction Type</td>
+													<td width="30%" align="left"><select
+														name="cmbCaseType" id="cmbCaseType"
+														class="form-control ReadonltDD" th:field="*{transcType}">
+															<!-- <option value="-1">-- Select --</option> -->
+															<option value="1" selected="selected">New</option>
+															<option value="2">Revision</option>
+															<!--  -->
+													</select></td>
+													<td width="20%" align="left">Pay Commission <b><font
+															color="red" size="4px;">*</font></b></td>
+													<td width="30%" align="left"><select
+														class="form-control ReadonltDD"
+														th:field="*{payCommissionCode}">
+														
+															<option th:value="0"
+																th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+															<option th:each="varPayComm : ${lstPayComm}"
+																th:value="${varPayComm.id}" th:selected="selected"
+																th:text="${language=='mh' ? varPayComm.commission_name_mh : varPayComm.commission_name_en}"></option>
+													</select></td>
+
+												</tr>
+												<tr>
+													<td width="20%" align="left">State Category</td>
+													<td width="30%" align="left"><select id="cmbState"
+														name="cmbState" class="form-control ReadonltDD"
+														th:field="*{stateCtgry}">
+															<option value="27" selected="selected">Maharashtra</option>
+															<option value="2">AIS/IAS/IPS</option>
+															<option value="3">Dist-judge</option>
+															<option value="4">High Court Judge</option>
+													</select></td>
+													<td width="20%" align="left">Class of Pension <b><font
+															color="red" size="4px;">*</font></b></td>
+													<!-- disabledDeathDate(); -->
+													<td width="30%" align="left"><select
+														class="form-control ReadonltDD" id="cmbClassOfPnsn"
+														th:field="*{classOfPension}">
+															<option th:value="0"
+																th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+															<option th:each="varClassOfPnsn : ${lstClsOfPens}"
+																th:value="${varClassOfPnsn.commonId}"
+																th:selected="selected"
+																th:text="${language=='mh' ? varClassOfPnsn.commonValMarathi : varClassOfPnsn.commonValEnglish}"></option>
+													</select></td>
+												</tr>
+												<tr>
+													<!-- <td width="20%" align="left">Inward ID</td>
+								<td width="30%" align="left"><input type="text"
+									id="txtInwardId" size="18" name="txtInwardId"
+									th:field="*{inwardId}" class="form-control ReadonltDD"></td> -->
+													<!-- <td width="20%" align="left">Class of Pension <b><font
+										color="red" size="4px;">*</font></b></td>
+								<td width="30%" align="left"><select class="form-control ReadonltDD"
+									id="cmbClassOfPnsn" th:field="*{classOfPension}">
+										<option th:value="0"
+											th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+										<option th:each="varClassOfPnsn : ${lstClsOfPens}"
+											th:value="${varClassOfPnsn.commonId}" th:selected="selected"
+											th:text="${language=='mh' ? varClassOfPnsn.commonValMarathi : varClassOfPnsn.commonValEnglish}"></option>
+								</select></td> -->
+												</tr>
+												<tr>
+													<td width="20%" align="left">Sevaarth ID <!-- b><font
+															color="red" size="4px;">*</font></b> --></td>
+													<td width="30%" align="left"><input type="text"
+														id="txtSevaarthId" style="text-transform: uppercase;"
+														size="15" maxlength="11" name="txtSevaarthId"
+														th:field="*{sevaarthId}" class="form-control ReadonltDD"></td>
+													<!--value="DATADRM6513"  -->
+													<td width="20%" align="left">Pensioner Type <b><font
+															color="red" size="4px;">*</font></b></td>
+													<td width="30%" align="left"><select
+														class="form-control" id="cmbPnsnCatg"
+														th:field="*{pnsnType}">
+															<option th:value="0"
+																th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+															<option th:each="varClassOfPnsn : ${lstPensType}"
+																th:value="${varClassOfPnsn.commonId}"
+																th:selected="selected"
+																th:text="${language=='mh' ? varClassOfPnsn.commonValMarathi : varClassOfPnsn.commonValEnglish}"></option>
+													</select></td>
+												</tr>
+												<tr>
+													<td width="20%" align="left">Current DDO Code of
+														Employee <!-- <b><font color="red" size="4px;">*</font></b> -->
+													</td>
+													<td width="30%" align="left"><input type="text"
+														size="10" th:field="*{currDDOCode}"
+														class="form-control ReadonltDD"></td>
+
+												</tr>
+												<tr>
+													<td width="20%" align="left">Do you want to commute?</td>
+													<td width="30%" align="left" colspan="3"><input
+														type="radio" id="radioDoWantCommuteYes"
+														th:field="*{commuteOrNot}" name="radioDoWantCommute"
+														value="Y" th:checked="true" /> Yes <input type="radio"
+														id="radioDoWantCommuteNo" th:field="*{commuteOrNot}"
+														name="radioDoWantCommute" value="N" /> No
+														&nbsp;&nbsp;&nbsp;&nbsp; (Note: If you don’t want to
+														commute click "No")</td>
+
+
+													<!-- <td width="20%" align="left"><div id="divForCom"
+															style="display: inline;">Percentage of Commutation</div>
+														<label id="commuteOrNot-error" class="error"
+														for="commuteOrNot" style="display: none;">Please
+															select commute yes or no</label> <input type="text"
+														id="txtDoWantCommute" maxlength="5"
+														name="txtDoWantCommute" value="40"
+														class="form-control float"></td> -->
+
+												</tr>
+												<tr   id="commutePercentageRow"   >
+													<td width="20%" align="left"><div id="divForCom"
+															style="display: flex;">
+															Percentage of Commutation <label id="commuteOrNot-error"
+																class="error" for="commuteOrNot" style="display: none;">Please
+																select commute yes or no</label>
+														</div></td>
+													<td width="30%" align="left">
+													
+													<input type="text"
+														id="txtDoWantCommute" maxlength="5"
+														name="txtDoWantCommute" value="40"
+														class="form-control float"></td>
+													<td width="20%"></td>
+													<td width="30%" align="left"></td>
+												</tr>
+												<!-- <tr>
+													<td width="20%" align="left">Current DDO Office Name</td>
+													<td width="15%" align="left"><input type="text"
+														id="txtDdoOfficeName" size="40"
+														th:field="*{currDDOoffcName}"
+														class="form-control ReadonltDD"></td>
+													<td width="20%" align="left">Designation of Current
+														DDO</td>
+													<td width="15%" align="left"><input type="text"
+														id="txtDdoDesigName" name="txtDdoDesigName"
+														th:field="*{currdesgName}" class="form-control ReadonltDD"
+														size="40" value="Asst Solicitor and Dy Secretar"></td>
+												</tr>
+												<tr>
+													<td width="20%" align="left">Pension Case DDO Code <b><font
+															color="red" size="4px;">*</font></b></td>
+													<td width="30%" align="left"><input type="text"
+														id="txtPenDDOCode" size="10" maxlength="15"
+														name="txtPenDDOCode" th:field="*{pensCaseDDOCode}"
+														class="form-control ReadonltDD"></td>
+													<td width="20%" align="left">Pension Case DDO Office
+														Name</td>
+													<td width="15%"><input type="text"
+														id="txtPenDdoOfficeName" name="txtPenDdoOfficeName"
+														size="40" th:field="*{pensCaseDDOOfcName}"
+														class="form-control"></td>
+												</tr>
+												<tr>
+													<td width="20%" align="left">Designation of Pension
+														Case DDO</td>
+													<td width="15%"><input type="text"
+														id="txtPenDdoDesigName" name="txtPenDdoDesigName"
+														size="40" th:field="*{desgPensCaseDDO}"
+														class="form-control ReadonltDD"></td>
+												</tr> -->
+												<!-- <tr>
+								<td width="20%" align="left">Gratuity DDO Code <b><font
+										color="red" size="4px;">*</font></b></td>
+								<td width="30%" align="left"><input type="text"
+									th:field="*{gratuityDDOCode}"  size="10"
+									  name="txtGratDDOCode" class="form-control ReadonltDD"></td>
+								<td width="20%" align="left">Gratuity DDO Office Name</td>
+								<td width="15%"><input type="text"
+									id="txtGratDdoOfficeName" name="txtGratDdoOfficeName" size="40"
+									th:field="*{gratuityDDOOffcName}" class="form-control ReadonltDD"></td>
+							</tr> -->
+											</tbody>
+										</table>
+									</div>
+								</fieldset>
+							</div>
+						</div>
+
+						<div id="tabs-1">
+							<br>
+							<div id="tcontent1" class="tabcontent">
+								<fieldset style="width: 100%" class="tabstyle">
+									<legend id="headingMsg">
+										<b> Pensioner Details</b>
+									</legend>
+									<table class="table cstb1">
+										<tbody>
+											<tr>
+												<td width="20%" align="left">Name &nbsp;&nbsp;<b> <font
+														color="red" size="4px;">*</font>
+												</b>
+												</td>
+												<td width="30%" align="left"><input type="text"
+													id="txtPnsnrName" class="form-control ReadonltDD"
+													style="text-transform: uppercase" size="40" maxlength="99"
+													name="txtPnsnrName" th:field="*{empName}"></td>
+												<td width="20%" align="left">Name (in Marathi)</td>
+												<td width="30%" align="left"><input type="text"
+													id="txtPnsnrNameInMarathi" class="form-control ReadonltDD"
+													style="text-transform: uppercase" size="20" maxlength="99"
+													name="txtPnsnrNameInMarathi" th:field="*{empNameMr}">
+												</td>
+											</tr>
+											<tr>
+												<td width="20%" align="left" style="text-align: left">
+													Gender</td>
+												<td width="30%" align="left"><input type="radio"
+													id="radioMaleFemale" name="gender" value="M" maxlength="1"
+													th:field="*{gender}"> Male <input type="radio"
+													id="radioMaleFemale" name="gender" value="F"
+													checked="checked" maxlength="1" th:field="*{gender}">
+													Female <input type="radio" id="radioMaleFemale"
+													name="gender" th:field="*{gender}" value="T" maxlength="1">
+													Transgender <label id="gender-error" class="error"
+													for="gender" style="display: none;">Please select
+														gender</label></td>
+												<td width="20%" align="left">Height</td>
+												<td><input type="text" id="txtHeight"
+													style="width: 40px" name="feet" th:field="*{feet}"
+													maxlength="2" value=""> Feet <input type="text"
+													id="txtInches" style="width: 40px" name="inches"
+													th:field="*{inches}" maxlength="2" value=""> inches</td>
+											</tr>
+											<tr>
+												<td width="20%" align="left">Date of Birth &nbsp;&nbsp;<b>
+														<font color="red" size="4px;">*</font>
+												</b>
+												</td>
+												<td width="30%" align="left"><input type="date"
+													name="txtDateOfBirth" id="txtDateOfBirth" th:field="*{dob}"
+													class="form-control ReadonltDD"></td>
+												<td width="20%" align="left">Date Of Joining Government
+													Service &nbsp;&nbsp;<b> <font color="red" size="4px;">*</font>
+												</b>
+												</td>
+												<td width="30%" align="left"><input type="date"
+													name="txtDateOfStartingService"
+													class="form-control ReadonltDD"
+													id="txtDateOfStartingService" th:field="*{dojGovSrvc}">
+													<!-- <input type="radio" id="radioJoinBn" name="radioJoinBnOrAn"
+													value="BN" checked="checked"> BN <input
+													type="radio" id="radioJoinAn" name="radioJoinBnOrAn"
+													value="AN"> AN  --> <input type="hidden" id="bnOrAnJoin"
+													name="bnOrAnJoin"></td>
+											</tr>
+
+											<tr>
+												<td width="20%" align="left">Date of
+													Retirement&nbsp;&nbsp;<b> <font color="red" size="4px;">*</font>
+												</b>
+												</td>
+												<td width="30%" align="left"><input type="date"
+													name="txtDateOfRetiremt" th:field="*{dor}"
+													id="txtDateOfRetiremt" class="form-control"></td>
+
+
+												<td width="20%" align="left">Date of Next Birth
+													Day<!-- &nbsp;&nbsp;<b> <font color="red" size="4px;">*</font>
+												</b> -->
+												</td>
+												<td width="30%" align="left"><input type="date"
+													name="dateofNextBirthDay" th:field="*{dateofNextBirthDay}"
+													id="dateofNextBirthDay" class="form-control"></td>
+											</tr>
+
+
+											<tr>
+												<td width="20%" align="left">Pension Commencement
+													Date&nbsp;&nbsp;<b> <font color="red" size="4px;">*</font>
+												</b>
+												</td>
+												<td width="30%" align="left"><input type="date"
+													name="txtDateOfCommencement" id="txtDateOfCommencement"
+													th:field="*{pensCommDate}" class="form-control"></td>
+												<td width="20%" align="left">EFP upto 7 years?</td>
+												<td width="30%" align="left"><input type="radio"
+													id="radioEfpYes" name="radioEfp" value="Y"> Yes <input
+													type="radio" id="radioEfpNo" name="radioEfp" value="N">
+													No <label id="radioEfp-error" class="error" for="radioEfp"
+													style="display: none;">Please select EFP upto 10
+														years</label></td>
+											</tr>
+											<tr>
+												<td width="20%" align="left">Date of Death</td>
+												<td width="30%" align="left"><input type="date"
+													name="txtDateOfExpiry" id="txtDateOfExpiry"
+													th:field="*{dateOfDeath}" class="form-control"></td>
+												<td width=" 20%" align="left">Designation&nbsp;&nbsp;<b>
+														<font color="red" size="4px;">*</font>
+												</b>
+												</td>
+												<td width="30%" align="left"><select
+													class="form-control ReadonltDD" th:field="*{empDesg}">
+														<option th:value="0"
+															th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+														<option th:each="varDesg : ${lstAllDesg}"
+															th:value="${varDesg.desgination_code}"
+															th:selected="selected"
+															th:text="${language=='mh' ? varDesg.desgination : varDesg.desgination}"></option>
+												</select></td>
+											</tr>
+											<tr>
+												<td width="20%" align="left">Date of Confirmation</td>
+												<td width="30%" align="left"><input type="date"
+													name="txtDateOfConfirmation" id="txtDateOfConfirmation"
+													th:field="*{dateOfConfrm}" class="form-control"></td>
+
+
+												<td width="20%" align="left"><span
+														th:utext="#{msg.thymeleaf.pagelabel.religion}"></span>&nbsp;&nbsp;<b><font
+															color="red" size="4px;">*</font></b></td>
+
+												<td width="30%" align="left"><select
+													class="form-control" id="religionCode"
+													th:field="*{religionCode}">
+														<option th:value="0"
+															th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+														<option th:each="varCommon : ${mstReligionLst}"
+															th:value="${varCommon.religionId}"
+															th:text="${language=='mh' ?  varCommon.religionNameMarathi:varCommon.religionNameEnglish}"></option>
+												</select></td>
+
+											</tr>
+											<tr>
+												<td width="20%">UID No. <!-- &nbsp;&nbsp;<b> <font
+														color="red" size="4px;">*</font>
+												</b> -->
+												</td>
+												<td width="30%"><input type="text" id="txtUidNo1"
+													name="txtUidNo1" th:field="*{uidNo1}" size="4"
+													tabindex="32" maxlength="4" class="ReadonltDD"> <input
+													type="text" id="txtUidNo2" name="txtUidNo2"
+													th:field="*{uidNo2}" size="4" tabindex="33" maxlength="4"
+													class="ReadonltDD"> <input type="text"
+													id="txtUidNo3" name="txtUidNo3" th:field="*{uidNo3}"
+													size="4" tabindex="34" maxlength="4" class="ReadonltDD"></td>
+												<td width="20%">EID No.</td>
+												<td width="30%"><input type="text" id="txtEID"
+													name="txtEID" value="" size="25" class="form-control"
+													tabindex="35" style="display:; text-transform: uppercase;"
+													maxlength="20"></td>
+											</tr>
+											<tr>
+												<td width="20%">PAN No.<!-- &nbsp;&nbsp;<b> <font
+														color="red" size="4px;">*</font>
+												</b> -->
+												</td>
+												<td width="30%"><input type="text" id="txtPANNo"
+													name="txtPANNo" th:field="*{panNo}"
+													style="display:; text-transform: uppercase;" tabindex=""
+													maxlength="10" pattern="[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}"
+													title="Please enter valid PAN number. E.g. AAAAA9999A"
+													class="form-control"></td>
+												<td width="20%" align="left">Personal Identification
+													mark</td>
+												<td width="30%" align="left"><textarea
+														id="txtPersRemarks" name="txtPersRemarks"
+														th:field="*{persIdentiMark}" style="height: 40px"
+														class="form-control"></textarea></td>
+											</tr>
+
+											<tr>
+												<td width="25%" align="left">Blood Group</td>
+												<td width="25%" align="left"><select
+													class="form-control ReadonltDD" th:field="*{bloodGrp}">
+														<option th:value="0"
+															th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+														<option value="A+">A+</option>
+														<option value="A-">A-</option>
+														<option value="B+">B+</option>
+														<option value="B-">B-</option>
+														<option value="AV+">AB+</option>
+														<option value="AB-">AB-</option>
+														<option value="O+">O+</option>
+														<option value="O-">O-</option>
+														<option value="Unknown">Unknown</option>
+												</select></td>
+												<td width="25%" align="left">Special Illness if Any?</td>
+												<td width="25%" align="left"><input type="text"
+													id="spouseName" maxlength="99" name="spouseName" value="NA"
+													th:field="*{spclIllness}" class="form-control"></td>
+											</tr>
+											
+											<tr>
+												<td width="25%" align="left">CR Number &nbsp;&nbsp;<b> <font color="red" size="4px;">*</font></td>
+												<td width="25%" align="left">
+												<input type="text"	id="crNumber" maxlength="99" name="crNumber" 
+													th:field="*{crNumber}" class="form-control"></td> 
+											</tr>
+
+
+
+										</tbody>
+									</table>
+									<fieldset style="width: 100%" class="tabstyle">
+										<legend id="headingMsg">
+											<b> Retiring Office Details</b>
+										</legend>
+										<table class="table cstb2">
+											<tbody>
+												<tr>
+													<td width="20%" align="left">Admin
+														Department&nbsp;&nbsp;<b> <font color="red"
+															size="4px;">*</font>
+													</b>
+													</td>
+													<td width="30%" align="left"><select
+														class="form-control ReadonltDD" id="cmbHeadOfOff"
+														th:field="*{retireAdminDept}">
+															<option th:value="0"
+																th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+															<option th:each="varDept : ${lstAllDept}"
+																th:value="${varDept.departmentCode}"
+																th:selected="selected"
+																th:text="${language=='mh' ? varDept.departmentNameMr : varDept.departmentNameEn}"></option>
+													</select></td>
+													<td width="20%" align="left">Field Department
+														&nbsp;&nbsp;<b> <font color="red" size="4px;">*</font>
+													</b>
+													</td>
+													<td width="30%" align="left"><select
+														class="form-control" id="cmbFieldDept"
+														th:field="*{retireFieldDept}">
+															<option th:value="0"
+																th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+															<option th:each="varSubDept : ${lstAllSubDept}"
+																th:value="${varSubDept.subDepartmentCode}"
+																th:selected="selected"
+																th:text="${language=='mh' ? varSubDept.subDepartmentNameMr : varSubDept.subDepartmentNameEn}"></option>
+													</select></td>
+												</tr>
+												<tr>
+													<td width="20%" align="left">Address
+														Building&nbsp;&nbsp;<b> <font color="red" size="4px;">*</font></b>
+													</td>
+													<td width="30%" align="left"><input type="text"
+														name="txtOffFlatDoorBlk" maxlength="150"
+														id="txtOffFlatDoorBlk" th:field="*{RetireAddrBldg}"
+														value="" class="form-control ReadonltDD"></td>
+													<td width="20%" align="left">Landline Number</td>
+													<td width="30%" align="left"><input type="text"
+														name="txtOffLandlineNo" id="txtOffLandlineNo"
+														th:field="*{retireLandlineNo}" maxlength="10" value=""
+														class="form-control"></td>
+												</tr>
+												<tr>
+													<td width="20%" align="left">Address Street</td>
+													<td width="30%" align="left"><input type="text"
+														name="txtOffRoadPostOff" maxlength="150"
+														id="txtOffRoadPostOff" th:field="*{retireAddrStreet}"
+														value="" class="form-control ReadonltDD"></td>
+													<td width="20%" align="left">Mobile Number</td>
+													<td width="30%" align="left"><input type="text"
+														name="txtOffMobileNo" id="txtOffMobileNo"
+														th:field="*{retireMobNo}" maxlength="10" value=""
+														class="form-control ReadonltDD"></td>
+												</tr>
+												<tr>
+													<td width="20%" align="left">Locality</td>
+													<td width="30%" align="left"><input type="text"
+														name="txtOffAreaLocality" id="txtOffAreaLocality"
+														th:field="*{retireLocality}" maxlength="30" value=""
+														class="form-control"></td>
+													<td width="20%" align="left">Pin Code&nbsp;&nbsp;<b>
+															<font color="red" size="4px;">*</font>
+													</b>
+													</td>
+													<td width="30%" align="left"><input type="text"
+														name="txtOffPincode" id="txtOffPincode"
+														th:field="*{retirePincode}" maxlength="6"
+														class="form-control"></td>
+												</tr>
+												<tr>
+													<td width="20%" align="left">State</td>
+													<td width="30%" align="left"><select
+														class="form-control ReadonltDD" th:field="*{retireState}">
+															<option th:value="0"
+																th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+															<option th:each="varState : ${lstStateTable}"
+																th:value="${varState.StateCode}" th:selected="selected"
+																th:text="${language=='mh' ? varState.stateNameMr : varState.stateNameEn}"></option>
+													</select></td>
+													<td width="20%" align="left">Town/City/District</td>
+													<td width="30%" align="left"><select
+														class="form-control ReadonltDD"
+														th:field="*{retireDistrict}">
+															<option th:value="0"
+																th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+															<option th:each="varDistr : ${lstDistrict}"
+																th:value="${varDistr.districtId}" th:selected="selected"
+																th:text="${language=='mh' ? varDistr.districtNameMr : varDistr.districtNameEn}"></option>
+													</select></td>
+												</tr>
+												<tr>
+													<td width="20%" align="left">Email Id</td>
+													<td width="30%" align="left"><input type="text"
+														name="txtOffEmailId" id="txtOffEmailId" maxlength="50"
+														th:field="*{retireEmailId}"
+														class="form-control ReadonltDD "></td>
+												</tr>
+											</tbody>
+										</table>
+									</fieldset>
+									<fieldset class="tabstyle" style="width: 100%">
+										<legend id="headingMsg">
+											<b> Residence Address</b>
+										</legend>
+										<table class="table cstb3">
+											<tbody>
+												<tr>
+													<td width="20%" align="left">Address &nbsp;&nbsp;<b>
+															<font color="red" size="4px;">*</font>
+													</b>
+													</td>
+													<td width="30%" colspan="3" align="left">
+														<!-- <input type="text"
+														 maxlength="30"
+														id="txtPrFlatDoorBlk" 
+														class="form-control"> --> <textarea id="txtPrFlatDoorBlk"
+															name="txtPrFlatDoorBlk" rows="2" class="form-control"
+															th:field="*{residenceAddrBldg}"></textarea>
+
+													</td>
+													<!-- <td width="20%" align="left">Address Street</td>
+													<td width="30%" align="left"><input type="text"
+														name="txtPrRoadPostOff" maxlength="50"
+														id="txtPrRoadPostOff" th:field="*{residenceAddrStreet}"
+														class="form-control"></td> -->
+												</tr>
+												<tr>
+													<!-- <td width="20%" align="left">Locality</td>
+													<td width="30%" align="left"><input type="text"
+														name="txtPrAreaLocality" maxlength="30"
+														id="txtPrAreaLocality" th:field="*{residenceLocality}"
+														class="form-control"></td> -->
+													<td width="20%" align="left">State&nbsp;&nbsp;<b>
+															<font color="red" size="4px;">*</font>
+													</b>
+													</td>
+													<td width="30%" align="left"><select
+														class="form-control ReadonltDD"
+														th:field="*{residenceState}">
+															<option th:value="0"
+																th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+															<option th:each="varState : ${lstStateTable}"
+																th:value="${varState.StateId}" th:selected="selected"
+																th:text="${language=='mh' ? varState.stateNameMr : varState.stateNameEn}"></option>
+													</select></td>
+													<td width="20%" align="left">
+														Town/City/District&nbsp;&nbsp;<b> <font color="red"
+															size="4px;">*</font>
+													</b>
+													</td>
+													<td width="30%" align="left"><select
+														class="form-control" th:field="*{residenceDistrict}">
+															<option th:value="0"
+																th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+															<option th:each="varDistr : ${lstDistrict}"
+																th:value="${varDistr.districtId}" th:selected="selected"
+																th:text="${language=='mh' ? varDistr.districtNameMr : varDistr.districtNameEn}"></option>
+													</select></td>
+												</tr>
+												<tr>
+
+													<td width="20%" align="left">Pin Code&nbsp;&nbsp;<b>
+															<font color="red" size="4px;">*</font>
+													</b>
+													</td>
+													<td width="30%" align="left"><input type="text"
+														name="txtPrPincode" id="txtPrPincode"
+														th:field="*{residencePincode}" maxlength="6"
+														class="form-control"></td>
+													<td width="20%" align="left">Landline Number</td>
+													<td width="30%" align="left"><input type="text"
+														name="txtLandlineNo" id="txtLandlineNo" maxlength="10"
+														th:field="*{residenceLandlineNo}" class="form-control"></td>
+												</tr>
+												<tr>
+
+													<td width="20%" align="left">Mobile Number</td>
+													<td width="30%" align="left"><input type="text"
+														name="txtMobileNo" id="txtMobileNo" maxlength="10"
+														th:field="*{residenceMobNo}" class="form-control"></td>
+													<td width="20%" align="left">Email Id</td>
+													<td width="30%" align="left"><input type="text"
+														name="txtEmailId" id="txtEmailId" maxlength="50"
+														th:field="*{residenceEmailId}" class="form-control email"></td>
+												</tr>
+												<!-- <tr>
+													<td width="20%" align="left">Is address after
+														retirement is same as above?</td>
+													<td><input type="checkbox" id="radioIsAddrAfterRet"
+														name="radioIsAddrAfterRet" /> <input type="radio" id="radioIsAddrAfterRet"
+														name="radioIsAddrAfterRet"   value="Y"
+														checked="checked"> Yes <input type="radio"
+														id="radioIsAddrAfterRet" name="radioIsAddrAfterRet"
+														value="N"  > No</td>
+												</tr> -->
+											</tbody>
+										</table>
+									</fieldset>
+									<fieldset class="tabstyle" id="fsAddrAfterRetmnt">
+										<legend id="headingMsg">
+											<b> Residence Address after Retirement</b>
+										</legend>
+										<table class="table cstb4">
+											<tr>
+												<td width="20%" align="left">Is address after
+													retirement is same as above?</td>
+												<td colspan="3"><input type="checkbox"
+													id="radioIsAddrAfterRet" name="radioIsAddrAfterRet" /> <!-- <input type="radio" id="radioIsAddrAfterRet"
+														name="radioIsAddrAfterRet"   value="Y"
+														checked="checked"> Yes <input type="radio"
+														id="radioIsAddrAfterRet" name="radioIsAddrAfterRet"
+														value="N"  > No</td> -->
+											</tr>
+											<tbody>
+												<tr>
+													<td width="20%" align="left">Address &nbsp;&nbsp;<b>
+															<font color="red" size="4px;">*</font>
+													</b></td>
+													<td width="30%" align="left" colspan="3">
+														<!-- <input type="text"
+														name="txtARFlatDoorBlk" maxlength="30"
+														id="resiAddrBldgAftrRetire"
+														 class="form-control"> --> <textarea
+															name="resiAddrBldgAftrRetire" id="resiAddrBldgAftrRetire"
+															rows="2" class="form-control"
+															th:field="*{resiAddrBldgAftrRetire}"></textarea>
+													</td>
+													<!-- <td width="20%" align="left">Address Street</td>
+													<td width="30%" align="left"><input type="text"
+														name="resiAddrStreetAfterRetire"
+														id="resiAddrStreetAfterRetire"
+														th:field="*{resiAddrStreetAfterRetire}" maxlength="50"
+														class="form-control"></td> -->
+												</tr>
+												<tr>
+													<!-- <td width="20%" align="left">Locality</td>
+													<td width="30%" align="left"><input type="text"
+														th:field="*{resiLocalityAfterRetire}"
+														name="resiLocalityAfterRetire"
+														id="resiLocalityAfterRetire" maxlength="30" value=""
+														class="form-control"></td> -->
+													<td width="20%" align="left">State</td>
+													<td width="30%" align="left"><select
+														class="form-control ReadonltDD"
+														th:field="*{resiStateAfterRetire}">
+															<option th:value="0"
+																th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+															<option th:each="varState : ${lstStateTable}"
+																th:value="${varState.StateId}" th:selected="selected"
+																th:text="${language=='mh' ? varState.stateNameMr : varState.stateNameEn}"></option>
+													</select></td>
+													<td width="20%" align="left">Town/City/District</td>
+													<td width="30%" align="left"><select
+														class="form-control" th:field="*{resiDistrictAfterretire}">
+															<option th:value="0"
+																th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+															<option th:each="varDistr : ${lstDistrict}"
+																th:value="${varDistr.districtId}" th:selected="selected"
+																th:text="${language=='mh' ? varDistr.districtNameMr : varDistr.districtNameEn}"></option>
+													</select></td>
+												</tr>
+												<tr>
+
+													<td width="20%" align="left">Pin Code</td>
+													<td width="30%" align="left"><input type="text"
+														name="txtARPincode" id="txtARPincode"
+														th:field="*{resiPincodeAfterRetire}" maxlength="6"
+														class="form-control"></td>
+													<td width="20%" align="left">Landline Number</td>
+													<td width="30%" align="left"><input type="text"
+														name="txtARLandlineNo" id="txtARLandlineNo" maxlength="10"
+														th:field="*{resiLandlineNoAfterRetire}"
+														class="form-control"></td>
+												</tr>
+												<tr>
+
+													<td width="20%" align="left">Mobile Number</td>
+													<td width="30%" align="left"><input type="text"
+														name="txtARMobileNo" id="txtARMobileNo" maxlength="10"
+														th:field="*{resiMobNoAfterRetire}"
+														class="form-control mobile"></td>
+													<td width="20%" align="left">Email Id</td>
+													<td width="30%" align="left"><input type="text"
+														name="txtAREmailId" id="txtAREmailId" maxlength="50"
+														th:field="*{resiEmailIdAfterRetire}"
+														class="form-control email"></td>
+												</tr>
+											</tbody>
+										</table>
+									</fieldset>
+									<!-- 	<fieldset style="width: 100%;" class="tabstyle">
+										<legend id="headingMsg">
+											<b> Treasury For </b>
+										</legend>
+										<table class="table cstb5">
+											<tbody>
+												<tr>
+													<td width="20%" align="left">Do you want to Change
+														Treasury after first Pension?</td>
+													<td width="30%" align="left"><input type="radio"
+														id="radioIsTreasuryChangeYes"  
+														th:field="*{chngTrsyAfterPension}"
+														name="radioIsTreasuryChange" value="Y"> Yes <input
+														type="radio" id="radioIsTreasuryChangeNo"
+														th:field="*{chngTrsyAfterPension}"  
+														name="radioIsTreasuryChange" value="N"> No</td>
+													<td width="20%" align="left"></td>
+													<td width="30%" align="left"></td>
+												</tr>
+												<tr>
+													<td width="20%" align="left">AG Office&nbsp;&nbsp;<b>
+															<font color="red" size="4px;">*</font>
+													</b></td>
+													<td width="10%" align="left"><select
+														name="cmbAgOfficeForPension" id="cmbAgOfficeForPension"
+														th:field="*{agOffcId}" tabindex="5" class="form-control">
+															<option value="-1">-- Select --</option>
+															<option value="1">AG Mumbai</option>
+															<option value="2">AG Nagpur</option>
+													</select></td>
+													<td width="20%" align="left">AG Office After First
+														Payment</td>
+													<td width="10%" align="left"><select
+														name="cmbAgOffice" id="cmbAgOffice" tabindex="5"
+														class="form-control" th:field="*{agOffcIdAfterFirstPay}">
+															<option value="-1">-- Select --</option>
+															<option value="1">AG Mumbai</option>
+															<option value="2">AG Nagpur</option>
+													</select></td>
+												</tr>
+												<tr>
+													<td width="20%" align="left">Treasury For
+														Pension&nbsp;&nbsp;<b> <font color="red" size="4px;">*</font>
+													</b>
+													</td>
+													<td width="30%" align="left"><select
+														name="cmbTreasuryForPension" id="cmbTreasuryForPension"
+														class="form-control" th:field="*{trsyPensionId}">
+															<option value="-1">-- Select --</option>
+															<option value="5401">AHMEDNAGAR ,DISTRICT
+																TREASURY OFFICE</option>
+															<option value="6201">AKOLA ,DISTRICT TREASURY
+																OFFICE</option>
+															<option value="6101">AMRAVATI ,DISTRICT TREASURY
+																OFFICE</option>
+															<option value="3101">AURANGABAD ,DISTRICT
+																TREASURY OFFICE</option>
+															<option value="3301">BEED ,DISTRICT TREASURY
+																OFFICE</option>
+													</select></td>
+													<td width="20%" align="left">Treasury After First
+														Payment</td>
+													<td width="30%" align="left"><select
+														name="cmbTreasury" id="cmbTreasury" class="form-control"
+														th:field="*{trsyIdAfterFirstPay}">
+															<option value="-1">-- Select --</option>
+															<option value="5401">AHMEDNAGAR ,DISTRICT
+																TREASURY OFFICE</option>
+															<option value="6201">AKOLA ,DISTRICT TREASURY
+																OFFICE</option>
+															<option value="6101">AMRAVATI ,DISTRICT TREASURY
+																OFFICE</option>
+															<option value="3101">AURANGABAD ,DISTRICT
+																TREASURY OFFICE</option>
+															<option value="3301">BEED ,DISTRICT TREASURY
+																OFFICE</option>
+															<option value="4701">BHANDARA ,DISTRICT TREASURY
+																OFFICE</option>
+													</select></td>
+												</tr>
+											</tbody>
+										</table>
+									</fieldset> -->
+									<fieldset style="width: 100%" class="tabstyle">
+										<legend id="headingMsg">
+											<b> Bank Details</b>
+										</legend>
+										<table class="table cstb6">
+											<tbody>
+												<tr>
+													<td width="20%" align="left">Bank&nbsp;&nbsp;<b> <font
+															color="red" size="4px;">*</font>
+													</b>
+													</td>
+													<td width="30%" align="left"><select
+														class="form-control ReadonltDD" id="bankId"
+														th:field="*{bankId}">
+															<option th:value="0"
+																th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+															<option th:each="varBank : ${lstBank}"
+																th:value="${varBank.bankId}"
+																th:text="${language=='mh' ? varBank.bankName : varBank.bankName}"></option>
+													</select></td>
+													<td width="20%" align="left">Branch&nbsp;&nbsp;<b>
+															<font color="red" size="4px;">*</font>
+													</b>
+													</td>
+													<td width="30%" align="left"><select
+														class="form-control ReadonltDD" id="cmbTargetBranchName"
+														th:field="*{branchId}">
+															<option th:value="0"
+																th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+															<option th:each="varBank : ${lstBankBranch}"
+																th:value="${varBank.bankBranchId}"
+																th:text="${language=='mh' ? varBank.bankBranchName : varBank.bankBranchName}"></option>
+													</select></td>
+												</tr>
+												<tr>
+													<td width="20%" align="left">IFSC Code</td>
+													<td width="30%" align="left"><input type="text"
+														id="txtIFSCCode" maxlength="20" th:field="*{ifscCode}"
+														style="text-transform: uppercase" size="20"
+														name="txtIFSCCode" class="form-control ReadonltDD" readonly></td>
+													<td width="20%" align="left">Bank Address</td>
+													<td width="30%" align="left"><textarea
+															id="txtBankAddress" name="txtBankAddress"
+															th:field="*{bankBranchAddr}" style="height: 40px"
+															class="form-control ReadonltDD"></textarea></td>
+												</tr>
+												<tr>
+													<td width="20%" align="left">Account No&nbsp;&nbsp;<b>
+															<font color="red" size="4px;">*</font>
+													</b>
+													</td>
+													<td width="30%" align="left"><input type="text"
+														id="txtActNo" maxlength="20" th:field="*{accNo}"
+														style="text-transform: uppercase"
+														class="form-control numeric"></td>
+												</tr>
+											</tbody>
+										</table>
+									</fieldset>
+									<fieldset class="tabstyle">
+										<legend id="headingMsg">
+											<b>Photo/Signature</b>
+										</legend>
+										<table class="table cstb7">
+											<tbody>
+												<tr>
+													<td>
+														<div id="divPhoto">
+														
+														<!-- 	<p style="color: red">Note: Photo has to be a joint
+																photograph of the employee along with his/her spouse.</p> -->
+																
+																
+															<fieldset id="Photo" class="fieldGroupTag">
+																<p id="">
+																	<b><span>Photo </span></b>
+																</p>
+																<div id="" style="display: block; width: 100%;">
+																	<table id="formTable1Photo" class="table cstb8">
+																		<thead>
+																			<tr>
+																				<td><label class="captionTag"
+																					id="FILE_DESCRIPTION">File Description</label>&nbsp;
+																					<input type="text" name="descPhoto" id="descPhoto"
+																					class="texttag form-control" value=""
+																					maxlength="40" size="40/"></td>
+																				<td id="formTable1FILETDPhoto"><label
+																					class="captionTag" id="ATTACH_FILE">Attach
+																						File</label>&nbsp; <input type="file" maxlength="40"
+																					name="files"  accept="image/jpeg"
+																					class="filetag form-control" id="importFilePhoto"></td>
+																				<td style="vertical-align: bottom !IMPORTANT;"><input
+																					type="button" name="submitButtonPhoto"
+																					id="submitButtonPhoto" value="UploadPhoto"
+																					class="buttontag btn"></td>
+																			</tr>
+																			<tr>
+																				<td colspan="3">
+																					<table id="myTablePhoto"
+																						class="datatable table table-bordered table-striped cstb10">
+																						<tbody>
+																							<tr>
+																								<!--  <td><div class="text-center">Sr No</div></td>     -->
+																								<td class="datatableheader">
+																									<div class="text-center">
+																										<label class="captionTag" id="DESCRIPTION">Description</label>
+																									</div>
+																								</td>
+																								<td class="datatableheader">
+																									<div class="text-center">
+																										<label class="captionTag" id="FILE_NAME">File
+																											Name</label>
+																									</div>
+																								</td>
+																								<td class="datatableheader">
+																									<div class="text-center">
+																										<label class="captionTag" id="ACTIONS">Actions</label>
+																									</div>
+																								</td>
+																							</tr>
+																						</tbody>
+																					</table>
+																				</td>
+																			</tr>
+																		</thead>
+																		<tbody>
+																		</tbody>
+																	</table>
+																	<br>
+																</div>
+															</fieldset>
+														</div>
+													</td>
+													<td>
+														<fieldset class="tabstyle" style="width: 80%;">
+															<label id="headingMsg"> <b> Photo</b>
+															</label>
+															
+															<!--  <img id="prewPhoto" style="width: 100px; height: 100px; border: 1px solid #ccc;" /> -->
+															 
+															
+																  <img th:if="${pensionModel.ppoNo!=null}"  id="prewPhoto" th:src="@{${'/master/viewPhotoSign/' +pensionModel.ppoNo+'/photo.jpg'}}"  
+											style="width: 100px; height: 100px; border: 1px solid #ccc;"  />
+											
+											
+															 
+															 
+												 <img  id="prewPhoto"  th:if="${pensionModel.ppoNo==null}"
+											style="width: 100px; height: 100px; border: 1px solid #ccc;"   th:src="@{/images/profile/profile_photo.jpg}" 
+											   />
+															 
+															 
+															&nbsp;&nbsp;&nbsp;
+														</fieldset>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<div id="divSign">
+															<fieldset id="Signature" class="fieldGroupTag">
+																<p id="">
+																	<b><span>Signature </span></b>
+																</p>
+																<div id="">
+																	<table id="formTable1Sign" class="table cstb11 ">
+																		<thead>
+																			<tr>
+																				<td><label class="captionTag"
+																					id="FILE_DESCRIPTION">File Description</label>&nbsp;
+																					<input type="text" name="descSign" id="descSign"
+																					class="texttag form-control" value=""
+																					maxlength="40" size="40/"></td>
+																				<td id="formTable1FILETDSign"><label
+																					class="captionTag" id="ATTACH_FILE">Attach
+																						File</label>&nbsp; <input type="file"    
+																					name="files" maxlength="40"   accept="image/jpeg"
+																					class="filetag form-control" id="importFileSign">
+																				</td>
+																				<td style="vertical-align: bottom !IMPORTANT;"><input
+																					type="button" name="submitButtonSign"
+																					id="submitButtonSign" value="UploadSign"
+																					class="btn buttontag"></td>
+																			</tr>
+																			<tr>
+																				<td colspan="3">
+																					<table id="myTableSign"
+																						class="datatable table table-bordered cstb14 table-striped">
+																						<tbody>
+																							<tr>
+																								<td class="datatableheader">
+																									<div class="text-center">
+																										<label class="captionTag" id="DESCRIPTION">Description</label>
+																									</div>
+																								</td>
+																								<td class="datatableheader">
+																									<div class="text-center">
+																										<label class="captionTag" id="FILE_NAME">File
+																											Name</label>
+																									</div>
+																								</td>
+																								<td class="datatableheader">
+																									<div class="text-center">
+																										<label class="captionTag" id="ACTIONS">Actions</label>
+																									</div>
+																								</td>
+																							</tr>
+																						</tbody>
+																					</table>
+																				</td>
+																			</tr>
+																		</thead>
+																		<tbody>
+																		</tbody>
+																	</table>
+																	<br>
+																</div>
+															</fieldset>
+														</div>
+													</td>
+													<td>
+														<fieldset class="tabstyle" style="width: 80%;">
+															<label id="headingMsg"> <b>Signature </b>
+															</label> 
+															
+															<!-- <img id="prewSign" style="width: 100px; height: 100px; border: 1px solid #ccc;" /> -->
+															
+															
+															
+															 <img th:if="${pensionModel.ppoNo!=null}"  id="prewSign" th:src="@{${'/master/viewPhotoSign/' +pensionModel.ppoNo+'/signature.jpg'}}"  
+											style="width: 100px; height: 100px; border: 1px solid #ccc;"  />
+											
+															
+															
+															
+		                        <img id="prewSign"  th:if="${pensionModel.ppoNo==null}"  style="width: 100px; height: 100px; border: 1px solid #ccc;"
+											 th:src="@{/images/profile/signature.png}" 
+											  />
+																
+																
+														</fieldset>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</fieldset>
+								</fieldset>
+							</div>
+						</div>
+						<div id="tabs-2">
+							<div id="tcontent2" class="tabcontent" align="left">
+								<fieldset class="tabstyle">
+									<legend id="headingMsg">
+										<b> Pay Details</b>
+									</legend>
+									<table class="table pstb1">
+										<tbody>
+											<tr>
+												<td width="20%" align="left">Pay Scale/Pay Band <b>
+														<font color="red" size="4px;">*</font>
+												</b></td>
+												<td width="30%" align="left"><select
+													class="form-control" name="cmbPayScale" id="cmbPayScale"
+													th:field="*{payscaleId}">
+														<option th:value="0"
+															th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+
+																<option th:each="varPayComm : ${lstHrEisScaleMstEntity}"
+																th:value="${varPayComm.scaleId}"  th:data="${varPayComm.scaleGradePay}"    th:selected="selected"
+																th:text="${varPayComm.scaleDesc}"></option>
+
+												</select></td>
+												<td width="20%" align="left">Grade Pay</td>
+												<td width="30%" align="left"><input type="text"
+													name="txtGradePay" id="txtGradePay" maxlength="50"
+													th:field="*{gradePay}" value="2800.00"
+													style="text-align: right;" class="form-control"></td>
+											</tr>
+											<tr class="hide">
+												<td width="20%" align="left">Non Practicing Allowance
+													(NPA)</td>
+												<td width="30%" align="left"><input type="hidden"
+													name="txtNPAAmt1" id="txtNPAAmt1" maxlength="50"
+													th:field="*{npa}" class="form-control"
+													style="text-align: right;" value="0"></td>
+											</tr>
+											<tr>
+												<td width="20%" align="left">Basic Pay <!-- <b> <font
+														color="red" size="4px;">*</font>
+												</b> --></td>
+												<td width="30%" align="left"><input type="text"
+													name="txtBasicPay" id="txtBasicPay"
+													style="text-align: right;" maxlength="10"
+													class="form-control" th:field="*{basicPay}"></td>
+												<td width="20%" align="left">DP</td>
+												<td width="30%" align="left"><input type="text"
+													name="txtDP" class="form-control" id="txtDP"
+													style="text-align: right;" maxlength="10" th:field="*{dp}"
+													th:value="0"></td>
+											</tr>
+											<tr>
+												<td width="20%" align="left">Provisional Gratuity Paid
+													?</td>
+												<td width="30%" align="left"><input type="radio"
+													id="radioPrvsnlGrtyPaid" name="radioPrvsnlGrtyPaid"
+													value="Y" th:field="*{provGratuityPay}"> Yes <input
+													type="radio" id="radioPrvsnlGrtyPaid"
+													name="radioPrvsnlGrtyPaid" value="N"
+													th:field="*{provGratuityPay}"> No</td>
+												<td width="20%" align="left">Amount</td>
+												<td width="30%" align="left"><input type="text"
+													name="txtPnsnGrtyAmount" id="txtPnsnGrtyAmount"
+													maxlength="10" style="text-align: right;"
+													th:field="*{amount}" class="form-control number"
+													value="0.00"></td>
+											</tr>
+											<tr>
+												<td width="20%" align="left">Order No.</td>
+												<td width="30%" align="left"><input type="text"
+													name="txtOrderNo" id="txtOrderNo"
+													style="text-align: right;" class="form-control"
+													th:field="*{orderNo}"></td>
+												<td width="20%" align="left">Order Date</td>
+												<td width="30%" align="left"><input type="Date"
+													name="txtOrderDate" id="txtOrderDate"
+													style="text-align: right;" class="form-control"
+													th:field="*{orderDate}"></td>
+											</tr>
+											<tr>
+												<td width="20%" align="left">Voucher No.</td>
+												<td width="30%" align="left"><input type="text"
+													name="txtvoucherNo" id="txtvoucherNo"
+													style="text-align: right;" class="form-control"
+													th:field="*{voucherNo}"></td>
+												<td width="20%" align="left">Voucher Date</td>
+												<td width="30%" align="left"><input type="Date"
+													name="txtvoucherDate" id="txtvoucherDate"
+													th:field="*{voucherDate}" class="form-control"
+													style="text-align: right;" value=""></td>
+											</tr>
+										</tbody>
+									</table>
+								</fieldset>
+								<!-- 	<fieldset class="tabstyle">
+									<legend>
+										<b> Foreign Services Detail(For Information Only)</b>
+									</legend>
+									<table class="table pstb2">
+										<tbody>
+											<tr>
+												<td width="10%" align="left">Foreign
+													Service/Deputation?</td>
+												<td width="10%" align="left"><input type="radio"
+													id="radioServRenderForeignYes" name="foreignSrvcOrDeput"
+													value="Y"   th:field="*{foreignSrvcOrDeput}">
+													Yes <input type="radio" id="radioServRenderForeignNo"
+													  name="foreignSrvcOrDeput" value="N"
+													th:field="*{foreignSrvcOrDeput}"> No</td>
+											</tr>
+											<tr>
+												<td></td>
+												<td><select name="cmbRecoveryType" id="cmbRecoveryType"
+													style="width: 200px;" onchange="" class="form-control">
+														<option value="-1">-- Select --</option>
+														<option value="PC">Pension Contribution</option>
+														<option value="LS">Leave Salary</option>
+												</select></td>
+											</tr>
+										</tbody>
+									</table>
+									<input type="button" name="addForeignServiceDtlRow"
+										id="addForeignServiceDtlRow" value="Add Row"  
+										  class="buttontag btn">
+									<div
+										style="border: 1px solid rgb(0, 0, 0); padding: 10px; height: 250px; overflow: scroll;">
+										<table id="tblForeignServDtls"
+											class="table pstb3 table-bordered table-striped">
+											<thead>
+												<tr class="datatableheader">
+													<th width="5%" class="HLabel" align="center">Sr No.</th>
+													<th width="12%" class="HLabel" align="center">Duration
+														From Date</th>
+													<th width="13%" class="HLabel" align="center">Duration
+														To Date</th>
+													<th width="10%" class="HLabel" align="center">Total
+														Amount</th>
+													<th width="10%" class="HLabel" align="center">Paid
+														Amount</th>
+													<th width="13%" class="HLabel" align="center">Challan
+														No/DD No</th>
+													<th width="12%" class="HLabel" align="center">Challan
+														Date</th>
+													<th width="23%" class="HLabel" align="center">Deputed
+														Office Name</th>
+													<th width="5%" class="HLabel" align="center">Delete</th>
+												</tr>
+
+
+											</thead>
+											<tbody>
+												<tr
+													th:each="att, itemStat : ${pensionModel.lstPensionEmpForeignServiceDtlsModel}">
+													<td th:text="${itemStat.count}" style="text-align: center;">1</td>
+
+													<td><input type="hidden"
+														th:field="${pensionModel.lstPensionEmpForeignServiceDtlsModel[__${itemStat.index}__].penForSrvId}" />
+														<input type="date" class="form-control durationFromDate"
+														th:field="${pensionModel.lstPensionEmpForeignServiceDtlsModel[__${itemStat.index}__].durationFromDate}" /></td>
+													<td><input type="text"
+														class="form-control durationToDate"
+														th:field="${pensionModel.lstPensionEmpForeignServiceDtlsModel[__${itemStat.index}__].durationToDate}" /></td>
+													<td><input type="text"
+														class="form-control totalAmount"
+														th:field="${pensionModel.lstPensionEmpForeignServiceDtlsModel[__${itemStat.index}__].totalAmount}" /></td>
+													<td><input type="text" class="form-contro paidAmount"
+														th:field="${pensionModel.lstPensionEmpForeignServiceDtlsModel[__${itemStat.index}__].paidAmount}" /></td>
+													<td><input type="text"
+														class="form-control challanOrDDNo"
+														th:field="${pensionModel.lstPensionEmpForeignServiceDtlsModel[__${itemStat.index}__].challanOrDDNo}" /></td>
+													<td><input type="text"
+														class="form-control challanDate"
+														th:field="${pensionModel.lstPensionEmpForeignServiceDtlsModel[__${itemStat.index}__].challanDate}" /></td>
+													<td><input type="text"
+														class="form-control deputedOffcName"
+														th:field="${pensionModel.lstPensionEmpForeignServiceDtlsModel[__${itemStat.index}__].deputedOffcName}" /></td>
+												<td><span class="glyphicon glyphicon-trash"></span></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</fieldset> -->
+								<!-- 	<fieldset style="width: 100%;" class="tabstyle">
+									<legend>
+										<b> Provisional Pension Details(For Information Only)</b>
+									</legend>
+									<table class="table pstb4">
+										<tbody>
+											<tr>
+												<td width="20%" align="left">Provisional Pension Paid ?</td>
+												<td width="30%" align="left"><input type="radio"
+													id="radioPrvsnlPnsnPaidYes" name="radioPrvsnlPnsnPaid"
+													th:field="*{provPensionPay}" value="Y"> Yes <input
+													type="radio" id="radioPrvsnlPnsnPaidNo"
+													th:field="*{provPensionPay}" name="radioPrvsnlPnsnPaid"
+													value="N" checked="checked"> No</td>
+												<td width="20%" align="left"></td>
+												<td width="30%" align="left"></td>
+											</tr>
+										</tbody>
+									</table>
+									<table class="table pstb5">
+										<tbody>
+											<tr>
+												<td width="20%" align="left">From Date</td>
+												<td width="30%" align="left"><input type="date"
+													name="txtFromDatePrvsnlPnsn" id="txtFromDatePrvsnlPnsn"
+													th:field="*{provPenFromDate}" maxlength="10" class="form-control"></td>
+												<td width="20%" align="left">To Date</td>
+												<td width="30%" align="left"><input type="date"
+													name="txtToDatePrvsnlPnsn" id="txtToDatePrvsnlPnsn"
+													th:field="*{provPenToDate}" maxlength="10" class="form-control"></td>
+											</tr>
+											<tr>
+												<td width="20%" align="left">Sanctioning Authority No.</td>
+												<td width="30%" align="left"><input type="text"
+													name="txtSancAuthNo" id="txtSancAuthNo" th:field="*{provPenSancAuthNo}"
+													class="form-control"></td>
+												<td width="20%" align="left">Sanctioning Authority Name</td>
+												<td width="30%" align="left"><input type="text"
+													name="txtSancAuthName" style="text-transform: uppercase;"
+													id="txtSancAuthName" th:field="*{provPenSancAuthName}" class="form-control">
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<br> <input type="button" name="PrvsnlPnsnAddRow"
+										id="PrvsnlPnsnAddRow" onclick="provisionalPaidTableAddRow()"
+										value="Add Row"     class="buttontag btn">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button"
+										name="PrvsnlPnsnReport" onclick="calDayMonthYear()"
+										id="PrvsnlPnsnReport" value="Report"    
+										class="buttontag btn">
+									<br />
+									<div
+										style="float: inherit; border: 1px solid rgb(0, 0, 0); background-color: transparent; width: 99%; padding: 10px; height: 250px; overflow: scroll;">
+										<table id="tblPrvsnlPnsnDtls"
+											class="table pstb6 table-bordered table-striped">
+											<thead>
+												<tr class="datatableheader">
+													<th width="15%" class="datatableheader">Sanctioning
+														Authority Name <b> <font color="red" size="4px;">*</font>
+													</b>
+													</th>
+													<th width="10%" class="datatableheader">Sanctioning
+														Authority No. <b> <font color="red" size="4px;">*</font>
+													</b>
+													</th>
+													<th width="11%" class="datatableheader">Sanctioned
+														Date <b> <font color="red" size="4px;">*</font>
+													</b>
+													</th>
+													<th width="10%" class="datatableheader">Bill Type <b>
+															<font color="red" size="4px;">*</font>
+													</b></th>
+													<th width="5%" class="datatableheader">Amount <b>
+															<font color="red" size="4px;">*</font>
+													</b></th>
+													<th width="10%" class="datatableheader">Voucher No. <b>
+															<font color="red" size="4px;">*</font>
+													</b></th>
+													<th width="11%" class="datatableheader">Voucher Date <b>
+															<font color="red" size="4px;">*</font>
+													</b></th>
+													<th width="1%" class="datatableheader">Delete</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr
+													th:each="att, itemStat : ${pensionModel.lstPensionEmpProvisionalDtlsModel}">
+													<td th:text="${itemStat.count}" style="text-align: center;">1</td>
+
+													<td><input type="text"
+														class="form-control sancAuthName"
+														th:field="${pensionModel.lstPensionEmpProvisionalDtlsModel[__${itemStat.index}__].sancAuthName}" />
+														<input type="hidden"
+														th:field="${pensionModel.lstPensionEmpProvisionalDtlsModel[__${itemStat.index}__].penProvId}" /></td>
+													<td><input type="text" class="form-control sancAuthNo"
+														th:field="${pensionModel.lstPensionEmpProvisionalDtlsModel[__${itemStat.index}__].sancAuthNo}" /></td>
+													<td><input type="text"
+														class="form-control sanctionDate"
+														th:field="${pensionModel.lstPensionEmpProvisionalDtlsModel[__${itemStat.index}__].sanctionDate}" /></td>
+													<td><input type="text" class="form-contro billType"
+														th:field="${pensionModel.lstPensionEmpProvisionalDtlsModel[__${itemStat.index}__].billType}" /></td>
+													<td><input type="text" class="form-control amount"
+														th:field="${pensionModel.lstPensionEmpProvisionalDtlsModel[__${itemStat.index}__].amount}" /></td>
+													<td><input type="text" class="form-control voucherNo"
+														th:field="${pensionModel.lstPensionEmpProvisionalDtlsModel[__${itemStat.index}__].voucherNo}" /></td>
+													<td><input type="text"
+														class="form-control voucherDate"
+														th:field="${pensionModel.lstPensionEmpProvisionalDtlsModel[__${itemStat.index}__].voucherDate}" /></td>
+												<td><span class="glyphicon glyphicon-trash"></span></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<table class="table pstb7">
+										<tbody>
+											<tr>
+												<td width="20%" align="left">Pension/Gratuity
+													Contribution Paid ?</td>
+												<td width="30%" align="left"><input type="radio"
+													id="radioPnsnGrtyPaid" name="radioPnsnGrtyPaid" value="Y"
+													th:field="*{provGratuityPay}" onclick=""  >
+													Yes <input type="radio" id="radioPnsnGrtyPaid"
+													name="radioPnsnGrtyPaid" value="N"
+													th:field="*{provGratuityPay}" onclick="" checked="checked"
+													 > No</td>
+												<td width="20%" align="left"></td>
+												<td width="30%" align="left"></td>
+											</tr>
+											<tr>
+												<td width="20%" align="left">Date</td>
+												<td width="30%" align="left"><input type="date"
+													name="txtDateOfPnsnGrtyPaid" id="txtDateOfPnsnGrtyPaid"
+													maxlength="10" class="form-control" th:field="*{penGratuDate}"></td>
+												<td width="20%" align="left">Voucher No.</td>
+												<td width="30%" align="left"><input type="text"
+													name="txtPrvsnlGrtyVoucherNo" id="txtPrvsnlGrtyVoucherNo"
+													th:field="*{penGratuVoucherNo}" maxlength="5" class="form-control"
+													style="text-align: right;"></td>
+											</tr>
+											<tr>
+												<td width="20%" align="left">Amount</td>
+												<td width="30%" align="left"><input type="text"
+													name="txtPrvsnlGrtyAmount" id="txtPrvsnlGrtyAmount"
+													maxlength="10" style="text-align: right;"
+													class="form-control" th:field="*{penGratuAmt}"></td>
+												<td width="20%" align="left"></td>
+												<td width="30%" align="left"></td>
+											</tr>
+										</tbody>
+									</table>
+								</fieldset> -->
+								<!-- <fieldset style="width: 100%;" class="tabstyle">
+									<legend id="headingMsg">
+										<b> Event Details(For Information Only)</b>
+									</legend>
+									<input type="button" name="EventDtlsAddRow"
+										onclick="eventDtlsTableAddRow();" id="EventDtlsAddRow"
+										value="Add Row"     class="buttontag btn">
+									<div
+										style="border: 1px solid rgb(0, 0, 0); padding: 10px; height: 250px; overflow: scroll;">
+										<table id="tblEventDtls"
+											class="table pstb8 table-bordered table-striped">
+											<thead>
+												<tr class="datatableheader" style="">
+													<th width="15%" class="HLabel">Event <b> <font
+															color="red" size="4px;">*</font>
+													</b></th>
+													<th width="10%" class="HLabel">Pay Scale/Pay Band <b>
+															<font color="red" size="4px;">*</font>
+													</b></th>
+													<th width="10%" class="HLabel">Basic <b> <font
+															color="red" size="4px;">*</font>
+													</b></th>
+													<th width="10%" class="HLabel">DP/GP <b> <font
+															color="red" size="4px;">*</font>
+													</b></th>
+													<th width="20%" class="HLabel">From Date <b> <font
+															color="red" size="4px;">*</font>
+													</b></th>
+													<th width="20%" class="HLabel">To Date <b> <font
+															color="red" size="4px;">*</font>
+													</b></th>
+													<th width="10%" class="HLabel">Delete</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr
+													th:each="att, itemStat : ${pensionModel.lstPensionEmpEventDtlsModel}">
+
+													<td><input type="hidden"
+														th:field="${pensionModel.lstPensionEmpEventDtlsModel[__${itemStat.index}__].penEventId}" />
+														<input type="text" class="form-control txtPeriodFromDate"
+														th:field="${pensionModel.lstPensionEmpEventDtlsModel[__${itemStat.index}__].event}" /></td>
+													<td><input type="text"
+														class="form-control txtAvgPayBasic"
+														th:field="${pensionModel.lstPensionEmpEventDtlsModel[__${itemStat.index}__].payscaleId}" /></td>
+													<td><input type="text"
+														class="form-control txtAvgPayDP"
+														th:field="${pensionModel.lstPensionEmpEventDtlsModel[__${itemStat.index}__].basic}" /></td>
+													<td><input type="text" class="form-contro txtNPA"
+														th:field="${pensionModel.lstPensionEmpEventDtlsModel[__${itemStat.index}__].dpOrGp}" /></td>
+													<td><input type="text" class="form-control txtTotal"
+														th:field="${pensionModel.lstPensionEmpEventDtlsModel[__${itemStat.index}__].fromDate}" /></td>
+													<td><input type="text" class="form-control txtTotal"
+														th:field="${pensionModel.lstPensionEmpEventDtlsModel[__${itemStat.index}__].toDate}" /></td>
+												<td><span class="glyphicon glyphicon-trash"></span></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</fieldset> -->
+
+
+
+								<fieldset style="width: 100%;" class="tabstyle">
+
+									<legend id="headingMsg">
+										<b> Non-Qualifying Services(Considered For Calculation)</b>
+									</legend>
+
+									<input type="button" name="nonQualifyingService"
+										onclick="nonQualifyingServiceAddRow();" id="ServBrkDtlsAddRow"
+										value="Add Row" class="buttontag btn">
+									<div
+										style="border: 1px solid rgb(0, 0, 0); padding: 10px; height: 250px; overflow: scroll;">
+										<table id="tblNonQualifyingService"
+											class="table pstb9 table-bordered table-striped">
+											<thead>
+												<tr class="datatableheader" style="">
+													<th width="20%" class="HLabel">Type of Break <b> <font
+															color="red" size="4px;">*</font>
+													</b></th>
+													<th width="20%" class="HLabel">With Effective From
+														Date <b> <font color="red" size="4px;">*</font>
+													</b>
+													</th>
+													<th width="20%" class="HLabel">To Date <b> <font
+															color="red" size="4px;">*</font>
+													</b></th>
+													<th width="10%" class="HLabel">Remarks <!-- <b> <font
+															color="red" size="4px;">*</font>
+													</b> --></th>
+													<th width="5%" class="HLabel">Delete</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr
+													th:each="att, itemStat : ${pensionModel.lstPensionEmpNonQualSrvcModel}">
+
+													<td><input type="hidden"
+														th:field="${pensionModel.lstPensionEmpNonQualSrvcModel[__${itemStat.index}__].penNonQualId}" /><input
+														type="text" class="form-control sancAuthName"
+														th:field="${pensionModel.lstPensionEmpNonQualSrvcModel[__${itemStat.index}__].typeOfBreak}" /></td>
+													<td><input type="date" class="form-control sancAuthNo"
+														th:field="${pensionModel.lstPensionEmpNonQualSrvcModel[__${itemStat.index}__].withEffDate}" /></td>
+													<td><input type="date"
+														class="form-control sanctionDate"
+														th:field="${pensionModel.lstPensionEmpNonQualSrvcModel[__${itemStat.index}__].toDate}" /></td>
+													<td><input type="text" class="form-contro billType"
+														th:field="${pensionModel.lstPensionEmpNonQualSrvcModel[__${itemStat.index}__].remark}" /></td>
+													<td><span class="glyphicon glyphicon-trash"></span></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</fieldset>
+								<fieldset style="width: 100%;" class="tabstyle">
+									<!-- <legend id="headingMsg">
+										<b> Non-Qualifying Services(Considered For Calculation)</b>
+									</legend> -->
+									<legend id="headingMsg">
+										<b>Calculation</b>
+									</legend>
+									<!-- <input type="button" name="nonQualifyingService"
+										onclick="nonQualifyingServiceAddRow();" id="ServBrkDtlsAddRow"
+										value="Add Row"     class="buttontag btn">
+									<div
+										style="border: 1px solid rgb(0, 0, 0); padding: 10px; height: 250px; overflow: scroll;">
+										<table id="tblNonQualifyingService"
+											class="table pstb9 table-bordered table-striped">
+											<thead>
+												<tr class="datatableheader" style="">
+													<th width="20%" class="HLabel">Type of Break <b> <font
+															color="red" size="4px;">*</font>
+													</b></th>
+													<th width="20%" class="HLabel">With Effective From
+														Date <b> <font color="red" size="4px;">*</font>
+													</b>
+													</th>
+													<th width="20%" class="HLabel">To Date <b> <font
+															color="red" size="4px;">*</font>
+													</b></th>
+													<th width="10%" class="HLabel">Remarks <b> <font
+															color="red" size="4px;">*</font>
+													</b></th>
+													<th width="5%" class="HLabel">Delete</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr
+													th:each="att, itemStat : ${pensionModel.lstPensionEmpNonQualSrvcModel}">
+
+													<td><input type="hidden"
+														th:field="${pensionModel.lstPensionEmpNonQualSrvcModel[__${itemStat.index}__].penNonQualId}" /><input
+														type="text" class="form-control sancAuthName"
+														th:field="${pensionModel.lstPensionEmpNonQualSrvcModel[__${itemStat.index}__].typeOfBreak}" /></td>
+													<td><input type="date" class="form-control sancAuthNo"
+														th:field="${pensionModel.lstPensionEmpNonQualSrvcModel[__${itemStat.index}__].withEffDate}" /></td>
+													<td><input type="date"
+														class="form-control sanctionDate"
+														th:field="${pensionModel.lstPensionEmpNonQualSrvcModel[__${itemStat.index}__].toDate}" /></td>
+													<td><input type="text" class="form-contro billType"
+														th:field="${pensionModel.lstPensionEmpNonQualSrvcModel[__${itemStat.index}__].remark}" /></td>
+												<td><span class="glyphicon glyphicon-trash"></span></td>
+												</tr>
+											</tbody>
+										</table>
+									</div> -->
+									<fieldset style="width: 100%;" class="tabstyle">
+										<!-- <legend id="headingMsg">
+											<b> Additional Qualifying Service</b>
+										</legend>
+										<input type="button" name="tblQualifyingService"
+											onclick="tblQualifyingServiceAddRow();"
+											id="QlyServDtlsAddRow" value="Add Row"    
+											class="buttontag btn">
+										<div
+											style="border: 1px solid rgb(0, 0, 0); padding: 10px; height: 250px; overflow: scroll;">
+											<table id="tblQualifyingService"
+												class="table pstb10 table-bordered table-striped">
+												<thead>
+													<tr class="datatableheader" style="">
+														<th width="20%" class="HLabel">GR No./Rule <b> <font
+																color="red" size="4px;">*</font>
+														</b></th>
+														<th width="20%" class="HLabel">GR Date</th>
+														<th width="20%" class="HLabel">Additional Qualify
+															Year <b> <font color="red" size="4px;">*</font>
+														</b>
+														</th>
+														<th width="20%" class="HLabel">Additional Qualify
+															Month <b> <font color="red" size="4px;">*</font>
+														</b>
+														</th>
+														<th width="20%" class="HLabel">Additional Qualify Day
+															<b> <font color="red" size="4px;">*</font>
+														</b>
+														</th>
+														<th width="10%" class="HLabel">Remarks <b> <font
+																color="red" size="4px;">*</font>
+														</b></th>
+														<th width="5%" class="HLabel">Delete</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr
+														th:each="att, itemStat : ${pensionModel.lstPensionEmpAddQualModel}">
+
+														<td><input type="hidden"
+															th:field="${pensionModel.lstPensionEmpAddQualModel[__${itemStat.index}__].penEmpQualId}" /><input
+															type="text" class="form-control sancAuthName"
+															th:field="${pensionModel.lstPensionEmpAddQualModel[__${itemStat.index}__].grNoRule}" /></td>
+														<td><input type="date"
+															class="form-control sancAuthNo"
+															th:field="${pensionModel.lstPensionEmpAddQualModel[__${itemStat.index}__].grDate}" /></td>
+														<td><input type="date"
+															class="form-control sanctionDate"
+															th:field="${pensionModel.lstPensionEmpAddQualModel[__${itemStat.index}__].addQualYear}" /></td>
+														<td><input type="text" class="form-contro billType"
+															th:field="${pensionModel.lstPensionEmpAddQualModel[__${itemStat.index}__].addQualMonth}" /></td>
+														<td><input type="text" class="form-contro billType"
+															th:field="${pensionModel.lstPensionEmpAddQualModel[__${itemStat.index}__].addQualDay}" /></td>
+														<td><input type="text" class="form-contro billType"
+															th:field="${pensionModel.lstPensionEmpAddQualModel[__${itemStat.index}__].remark}" /></td>
+												<td><span class="glyphicon glyphicon-trash"></span></td>
+													</tr>
+												</tbody>
+											</table>
+										</div> -->
+										<br /> <br />
+										<!-- <div class="row form-group TSBmain">
+											<div class="col-md-3">
+												<label><b>Total Service Break</b></label>
+											</div>
+											<div class="col-md-3">
+												Year&nbsp;<input type="text" id="txtTotSerBreakYear"
+													name="txtTotSerBreakYear" value="0" size="2"
+													class="form-control-date"> Month&nbsp;<input
+													type="text" id="txtTotSerBreakMonth"
+													name="txtTotSerBreakMonth" value="0" size="2"
+													class="form-control-date"> Day&nbsp;<input
+													type="text" id="txtTotSerBreakDay" name="txtTotSerBreakDay"
+													value="0" size="2" class="form-control-date">
+											</div>
+											<div class="col-md-3">
+												<label><b>Additional Qualifying Service</b></label>
+											</div>
+											<div class="col-md-3">
+												Year&nbsp;<input type="text" id="txtTotQlyServYear"
+													name="txtTotQlyServYear" value="0" size="2"
+													class="form-control-date"> Month&nbsp;<input
+													type="text" id="txtTotQlyServMonth"
+													name="txtTotQlyServMonth" value="0" size="2"
+													class="form-control-date"> Day&nbsp;<input
+													type="text" id="txtTotQlyServDay" name="txtTotQlyServDay"
+													value="0" size="2" class="form-control-date">
+											</div>
+										</div> -->
+										<br />
+										<div class="row form-group TSBmain">
+											<div class="col-md-2">
+												<b>Qualifying Service <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= --></b>
+											</div>
+											<div class="col-md-6">
+												<input type="hidden" onkeypress="amountFormat(this,event)"
+													name="txtActualSer" id="txtActualSer"
+													style="text-align: right;"
+													class="form-control width80IP number">
+												<!-- &nbsp;&nbsp;&nbsp; <strong class="mms">-</strong> -->
+
+												<!-- 	<label id="qualifyingLabel"></label> -->
+
+
+												<input type="text" class="form-control"
+													th:field="*{qualifyingLabel}" id="qualifyingLabel" readOnly>
+
+
+												<input type="hidden" class="form-control"
+													th:field="*{qualifyingYear}" id="qualifyingYear">
+
+
+
+
+
+											</div>
+											<div class="col-md-2 hide">
+												<b>Actual Service </b>
+											</div>
+											<div class="col-md-3 hide">
+												<b>Non-Qualifying Service &nbsp;&nbsp;&nbsp; Plus</b>
+											</div>
+											<div class="col-md-3 hide">
+												<b>Additional Qualifying Service</b>
+											</div>
+											<div class="col-md-3 hide">
+												<input type="text" name="txtQualifyingServ"
+													id="txtQualifyingServ"
+													class="form-control width80IP number"
+													style="text-align: right;" value="0">
+												&nbsp;&nbsp;&nbsp; <strong class="mms">=</strong>
+											</div>
+											<div class="col-md-2 hide">
+												<input type="hidden" onkeypress="amountFormat(this,event)"
+													name="txtActualSer" id="txtActualSer"
+													style="text-align: right;" value="0"
+													class="form-control width80IP number">
+												<!-- &nbsp;&nbsp;&nbsp; <strong class="mms">-</strong> -->
+											</div>
+											<div class="col-md-3 hide">
+												<input type="text" name="txtNonQualifyingServ"
+													id="txtNonQualifyingServ" style="text-align: right;"
+													value="0" class="form-control width80IP number">
+												&nbsp;&nbsp;&nbsp; <strong class="mms">+</strong>
+											</div>
+											<div class="col-md-3 hide">
+												<input type="text" class="form-control number"
+													name="txtQlyService" id="txtQlyService"
+													style="text-align: right;" value="0">
+											</div>
+										</div>
+										<br />
+										<div class="row form-group TSBmain hide">
+											<div class="col-md-3 PadLf0">
+												Year&nbsp;<input type="text" id="txtQualifyingServYear"
+													th:field="*{txtQualifyingServYear}" value="0" size="2"
+													class="form-control-date"> Month&nbsp;<input
+													type="text" id="txtQualifyingServMonth"
+													th:field="*{txtQualifyingServMonth}" value="0" size="2"
+													class="form-control-date"> Day&nbsp;<input
+													type="text" id="txtQualifyingServDay"
+													th:field="*{txtQualifyingServDay}" value="0" size="2"
+													class="form-control-date">
+												<!-- &nbsp;<strong
+													class="mms2"> <font>=</font><strong></strong>
+												</strong> -->
+											</div>
+											<div class="col-md-3 col-md-push-2 PadLf0  hide">
+												Year&nbsp;<input type="text" id="txtActualSerYear"
+													th:field="*{txtActualSerYear}" value="0" size="2"
+													class="form-control-date"> Month&nbsp;<input
+													type="text" id="txtActualSerMonth"
+													th:field="*{txtActualSerMonth}" value="0" size="2"
+													class="form-control-date"> Day&nbsp;<input
+													type="text" id="txtActualSerDay"
+													th:field="*{txtActualSerDay}" value="0" size="2"
+													class="form-control-date">
+												<!-- &nbsp;<strong
+													class="mms2"> <font>-</font>&nbsp;
+												</strong> -->
+											</div>
+											<div class="col-md-3 PadLf0 hide">
+												Year&nbsp;<input type="text" id="txtNonQualifyingServYear"
+													name="txtNonQualifyingServYear" value="0" size="2"
+													class="form-control-date"> Month&nbsp;<input
+													type="text" id="txtNonQualifyingServMonth"
+													name="txtNonQualifyingServMonth" value="0" size="2"
+													class="form-control-date"> Day&nbsp;<input
+													type="text" id="txtNonQualifyingServDay"
+													name="txtNonQualifyingServDay" value="0" size="2"
+													class="form-control-date">&nbsp;<strong
+													class="mms2"> <font>+</font>&nbsp;
+												</strong>
+											</div>
+											<div class="col-md-3 hide">
+												Year&nbsp;<input type="text" id="txtQualiServYear"
+													name="txtQualiServYear" value="0" size="2"
+													class="form-control-date"> Month&nbsp;<input
+													type="text" id="txtQualiServMonth" name="txtQualiServMonth"
+													value="0" size="2" class="form-control-date">
+												Day&nbsp;<input type="text" id="txtQualiServDay"
+													name="txtQualiServDay" value="0" size="2"
+													class="form-control-date">
+											</div>
+										</div>
+										<br />
+									</fieldset>
+								</fieldset>
+								<fieldset style="width: 100%;" class="tabstyle">
+									<legend id="headingMsg">
+										<b> Average Pay Calculator(Considered For Calculation)</b>
+									</legend>
+									<input type="hidden" name="hidCalcGridSize"
+										id="hidCalcGridSize" value="10">
+									<table class="table pstb12">
+										<tbody>
+											<tr>
+												<!-- <td><input type="button" name="AvgPayCalcAddRow"
+													id="AvgPayCalcAddRow" value="Add Row" class="buttontag btn"></td> -->
+												<td>From Date <input type="date"
+													th:field="*{txtEmolumentFromDate}"
+													id="txtEmolumentFromDate" size="20" class="form-control">
+												</td>
+												<td>To Date <input type="date"
+													th:field="*{txtEmolumentToDate}" id="txtEmolumentToDate"
+													size="20" class="form-control">
+												</td>
+												<!-- <td>
+													<div id="npaAllow">
+														NPA Allowed ?&nbsp;&nbsp; <input type="checkbox"
+															name="chkBoxNPA" id="chkBoxNPA">
+													</div>
+												</td> -->
+											</tr>
+										</tbody>
+									</table>
+									<div>
+										<table id="tblAvgPayCalc"
+											class="table pstb13 table-bordered table-striped">
+											<thead>
+												<tr class="datatableheader">
+													<th width="10%" class="HLabel">Sr No.</th>
+													<th width="10%" class="HLabel">From Date <b> <font
+															color="red" size="4px;">*</font>
+													</b></th>
+													<th width="10%" class="HLabel">Pay in Pay Band <b>
+															<font color="red" size="4px;">*</font>
+													</b></th>
+													<th width="10%" class="HLabel">DP/GP <b> <font
+															color="red" size="4px;">*</font>
+													</b></th>
+													<th width="10%" class="HLabel hide">NPA</th>
+													<th width="10%" class="HLabel">Total</th>
+												</tr>
+											</thead>
+											<tbody>
+
+												<tr th:each="att, itemStat : ${pensionModel.lstbilllstObj}">
+													<td th:text="${itemStat.count}" style="text-align: center;">1</td>
+
+													<td><input type="hidden"
+														th:field="${pensionModel.lstbilllstObj[__${itemStat.index}__].pensionEmpAvgPayCalId}" /><input
+														type="date" class="form-control txtPeriodFromDate"
+														th:field="${pensionModel.lstbilllstObj[__${itemStat.index}__].txtPeriodFromDate}"
+														th:id="'txtPeriodFromDate'+${itemStat.index}" /></td>
+													<td><input type="text"
+														class="form-control txtAvgPayBasic"
+														th:id="'txtAvgPayBasic'+${itemStat.index}"
+														th:field="${pensionModel.lstbilllstObj[__${itemStat.index}__].txtAvgPayBasic}" /></td>
+													<td><input type="text"
+														class="form-control txtAvgPayDP"
+														th:id="'txtAvgPayDP'+${itemStat.index}"
+														th:field="${pensionModel.lstbilllstObj[__${itemStat.index}__].txtAvgPayDP}" /></td>
+													<td class="hide"><input type="text"
+														class="form-contro txtNPA"
+														th:id="'txtNPA'+${itemStat.index}"
+														th:field="${pensionModel.lstbilllstObj[__${itemStat.index}__].txtNPA}" /></td>
+													<td><input type="text" class="form-control txtTotal"
+														th:id="'txtTotal'+${itemStat.index}"
+														th:field="${pensionModel.lstbilllstObj[__${itemStat.index}__].txtTotal}" /></td>
+												</tr>
+
+
+
+
+											</tbody>
+										</table>
+									</div>
+									<table class="table pstb14">
+										<tbody>
+											<tr>
+												<td width="20%" align="right"></td>
+												<td width="20%" align="right" class="datatableheader">Grand
+													Total</td>
+												<td width="20%" align="right"><input type="text"
+													name="txtGrandTotal" id="txtGrandTotal" maxlength="10"
+													size="20" class="form-control"
+													th:field="*{avgPayCalGrandTotal}"></td>
+												<td width="35%" align="right"></td>
+											</tr>
+											<tr>
+												<td width="20%" align="right"></td>
+												<td width="20%" align="right" class="datatableheader">Avg.
+													Pay</td>
+												<td width="20%" align="right"><input type="text"
+													name="txtAvgPay" maxlength="10" class="form-control"
+													id="txtAvgPay" size="20" th:field="*{avgPay}"></td>
+												<td width="35%" align="right"></td>
+											</tr>
+										</tbody>
+									</table>
+								</fieldset>
+							</div>
+						</div>
+						<div id="tabs-3">
+							<div id="tcontent4" class="tabcontent">
+								<fieldset class="tabstyle">
+									<legend id="headingMsg">
+										<b> Nominee Details </b>
+									</legend>
+									<table class="table hide">
+										<tbody>
+											<tr>
+												<td width="20%" align="left">Is the Retirement Report
+													an employee's family?</td>
+												<td width="30%" align="left"><input type="radio"
+													id="radioFamilyPenYes" name="retireReportEmpFam"
+													th:field="*{retireReportEmpFam}" value="Y"
+													checked="checked"> Yes <input type="radio"
+													id="retireReportEmpFam" th:field="*{retireReportEmpFam}"
+													name="radioFamilyPen" value="N"> No</td>
+												<td width="20%" align="left"></td>
+												<td width="30%" align="left"></td>
+											</tr>
+										</tbody>
+									</table>
+									<input type="button" name="familyDtlsAddRow"
+										id="familyDtlsAddRow" value="Add Row" class="buttontag btn">
+										
+										
+										
+										
+								<table class="table">
+									<tbody>
+										<tr>
+											<td width="30%" align="left">Nominee Available
+												?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" id="nomineeAvailableY" name="nomineeAvailable"  th:field="*{nomineeAvailable}" value="Y" maxlength="1"> Yes <input type="radio" id="nomineeAvailableN" th:field="*{nomineeAvailable}" name="nomineeAvailable" value="N" maxlength="1">
+												No
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								
+										
+										
+										
+										
+										
+									<div
+										style="float: inherit; border: 1px solid rgb(0, 0, 0); background-color: transparent; width: 100%; padding: 10px; height: 250px; overflow: scroll;">
+										<table id="tblFamilyDtls"
+											class="table table-bordered table-striped">
+											<thead>
+												<tr class="datatableheader">
+
+													<th width="7%" class="HLabel">Nominee <b> <font
+															color="red" size="4px;">*</font>
+													</b></th>
+
+
+
+													<th width="12%" class="HLabel">Relation <b> <font
+															color="red" size="4px;">*</font>
+													</b></th>
+													<th width="3%" class="HLabel">Percentage <b> <font
+															color="red" size="4px;">*</font>
+													</b></th>
+													<th width="10%" class="HLabel">Physically
+														Handicapped/Mentally Challanged</th>
+													<th width="7%" class="HLabel">Date of Birth <b> <font
+															color="red" size="4px;">*</font>
+													</b></th>
+
+													<th width="15%" class="HLabel hide">Name of Family Member <b>
+															<font color="red" size="4px;">*</font>
+													</b></th> 
+
+
+													<th width="3%" class="HLabel">Minor</th>
+													<th width="3%" class="HLabel">Married</th>
+													<th width="5%" class="HLabel hide">Salary</th>
+													<th width="15%" class="HLabel">Guardian Name</th>
+													<th width="10%" class="HLabel">Date Of Death</th>
+													<th width="1%" class="HLabel">Delete</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr
+													th:each="att, itemStat : ${pensionModel.lstPensionEmpFamilyDtlsModel}">
+
+													<td><input type="hidden"
+														class="form-control penEmpFamDtlsId"
+														th:field="${pensionModel.lstPensionEmpFamilyDtlsModel[__${itemStat.index}__].penEmpFamDtlsId}" /><input
+														type="text"
+														class="form-control nameOfFamMemb removeErrorFromInput"
+														th:id="'nameOfFamMemb'+${itemStat.index}"
+														th:field="${pensionModel.lstPensionEmpFamilyDtlsModel[__${itemStat.index}__].nameOfFamMemb}" /></td>
+													<td><select th:id="'relation'+${itemStat.index}"
+														th:field="${pensionModel.lstPensionEmpFamilyDtlsModel[__${itemStat.index}__].relation}"
+														class="form-control removeErrorFromDropdown relation">
+
+															<option value="0">Please Select</option>
+															<option value="Husband">Husband</option>
+															<option value="Wife">Wife</option>
+															<option value="Daughter">Daughter</option>
+															<option value="Son">Son</option>
+															<option value="Other">Other</option>
+															<option value="Sister">Sister</option>
+															<option value="Brother">Brother</option>
+															<option value="Father">Father</option>
+															<option value="Mother">Mother</option>
+															<option value="DG">Defecto Guardian</option>
+															<option value="CPDS">Children of Predeceased Son</option>
+															<option value="WDAU">Widowed Daughters</option>
+															<option value="WSIS">Widow Sister</option>
+															<option value="Spouse">Spouse</option>
+
+													</select></td>
+													<td><input type="text"
+														class="form-control percentage removeErrorFromInput"
+														th:id="'percentage'+${itemStat.index}"
+														th:field="${pensionModel.lstPensionEmpFamilyDtlsModel[__${itemStat.index}__].percentage}" /></td>
+													<td>
+														<!-- <input type="text"
+														class="form-contro phyhandMentChal"
+														th:field="${pensionModel.lstPensionEmpFamilyDtlsModel[__${itemStat.index}__].phyhandMentChal}" />
+														 --> <select th:id="'phyhandMentChal'+${itemStat.index}"
+														th:field="${pensionModel.lstPensionEmpFamilyDtlsModel[__${itemStat.index}__].phyhandMentChal}"
+														class="form-control removeErrorFromDropdown phyhandMentChal">
+															<option value="0">Please Select</option>
+															<option value="Y">Yes</option>
+															<option value="N" selected="selected">No</option>
+													</select>
+													</td>
+													<td><input type="date"
+														class="form-control dob removeErrorFromDate"
+														th:id="'dob'+${itemStat.index}"
+														th:field="${pensionModel.lstPensionEmpFamilyDtlsModel[__${itemStat.index}__].dob}" /></td>
+												
+												 	<td><input type="text"
+														class="form-control famPensioner removeErrorFromInput hide"
+														th:id="'famPensioner'+${itemStat.index}"
+														th:field="${pensionModel.lstPensionEmpFamilyDtlsModel[__${itemStat.index}__].famPensioner}" /></td> 
+														
+														
+													<td><input type="checkbox" class="minor"
+														th:id="'minor'+${itemStat.index}"
+														th:field="${pensionModel.lstPensionEmpFamilyDtlsModel[__${itemStat.index}__].minor}" /></td>
+													<td><input type="checkbox" class="married"
+														th:id="'married'+${itemStat.index}"
+														th:field="${pensionModel.lstPensionEmpFamilyDtlsModel[__${itemStat.index}__].married}" /></td>
+													<td class="hide"><input type="text" class="form-control salary "
+														th:id="'salary'+${itemStat.index}"
+														th:field="${pensionModel.lstPensionEmpFamilyDtlsModel[__${itemStat.index}__].salary}" /></td>
+													<td><input type="text"
+														class="form-control guardianName "
+														th:id="'guardianName'+${itemStat.index}"
+														th:field="${pensionModel.lstPensionEmpFamilyDtlsModel[__${itemStat.index}__].guardianName}" /></td>
+													<td><input type="date"
+														class="form-control dateOfDeath removeErrorFromDate"
+														th:id="'dateOfDeath'+${itemStat.index}"
+														th:field="${pensionModel.lstPensionEmpFamilyDtlsModel[__${itemStat.index}__].dateOfDeath}" /></td>
+													<td><span class="glyphicon glyphicon-trash"
+														onClick="$(this).closest('tr').remove();"></span></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</fieldset>
+								<!-- <fieldset class="tabstyle">
+									<legend id="headingMsg">
+										<b> Nominee Details(For Pension)</b>
+									</legend>
+									<input type="button" name="NomineeDtlsAddRow"
+										id="NomineeDtlsAddRow" value="Add Row" class="buttontag btn">
+									<div
+										style="float: inherit; border: 1px solid rgb(0, 0, 0); background-color: transparent; width: 100%; padding: 10px; height: 250px; overflow: scroll;">
+										<table id="tblNomineeDtls"
+											class="table table-bordered table-striped">
+											<thead>
+												<tr class="datatableheader">
+													<td width="15%" class="HLabel">Name of Family Member <b>
+															<font color="red" size="4px;">*</font>
+													</b></td>
+													<td width="12%" class="HLabel">Relation <b> <font
+															color="red" size="4px;">*</font>
+													</b></td>
+													<td width="3%" class="HLabel">Percentage <b> <font
+															color="red" size="4px;">*</font>
+													</b></td>
+													<td width="12%" class="HLabel">Alternate Nominee <b>
+															<font color="red" size="4px;">*</font>
+													</b></td>
+													<td width="1%" class="HLabel">Delete</td>
+												</tr>
+											</thead>
+											<tbody>
+												<tr
+													th:each="att, itemStat : ${pensionModel.lstPensionEmpNomineeDtlsModel}">
+
+													<td><input type="hidden"
+														class="form-control nameOfFamMemb"
+														th:field="${pensionModel.lstPensionEmpNomineeDtlsModel[__${itemStat.index}__].penEmpNomId}" /><input
+														type="text" class="form-control nameOfFamMemb"
+														th:field="${pensionModel.lstPensionEmpNomineeDtlsModel[__${itemStat.index}__].nameOfFamMemb}" /></td>
+													<td><input type="text" class="form-control relation"
+														th:field="${pensionModel.lstPensionEmpNomineeDtlsModel[__${itemStat.index}__].relation}" /></td>
+													<td><input type="text" class="form-control percentage"
+														th:field="${pensionModel.lstPensionEmpNomineeDtlsModel[__${itemStat.index}__].percentage}" /></td>
+													<td><input type="text"
+														class="form-contro phyhandMentChal"
+														th:field="${pensionModel.lstPensionEmpNomineeDtlsModel[__${itemStat.index}__].alternateNominee}" /></td>
+													<td><span class="glyphicon glyphicon-trash"></span></td>
+												</tr>
+
+											</tbody>
+										</table>
+									</div>
+								</fieldset> -->
+							</div>
+						</div>
+						<div id="tabs-4">
+							<div id="tcontent5" class="tabcontent">
+								<table class="table">
+									<tbody>
+										<tr>
+											<td width="30%" align="left"><b>Items</b></td>
+											<td width="30%" align="left"><b>Amount (in Rs.)</b></td>
+										</tr>
+										<tr>
+											<td width="30%" align="left">Balance of Advance
+												?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio"
+												id="radioBalOfAdvY" name="balOfAdv" value="Y"
+												th:field="*{balOfAdv}" maxlength="1"> Yes <input
+												type="radio" id="radioBalOfAdvN" name="balOfAdv" value="N"
+												th:field="*{balOfAdv}" maxlength="1" checked="checked">
+												No
+											</td>
+											<td><input type="text" name="txtTotalAdvanceBalAmt"
+												maxlength="10" id="txtTotalAdvanceBalAmt" value=""
+												style="text-align: right;" class="form-control"></td>
+										</tr>
+										<!-- <tr>
+											<td width="30%" align="left">Recovery From
+												Pension/Gratuity ?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
+												type="radio" id="fromPension" name="recoveryFromPension"
+												value="Y" th:field="*{recoveryFromPension}" maxlength="1">
+												Yes <input type="radio" id="fromGratuity"
+												name="recoveryFromPension" value="N"
+												th:field="*{recoveryFromPension}" maxlength="1"
+												checked="checked"> No
+											</td>
+
+										</tr> -->
+									</tbody>
+								</table>
+								<br> <br>
+								<div>
+									<input type="button" name="btnAdvDtlsAddRow"
+										id="btnAdvDtlsAddRow" value="Add Row" class="buttontag btn">
+									<div
+										style="float: inherit; border: 1px solid rgb(0, 0, 0); background-color: transparent; padding: 10px; height: 250px; overflow: scroll;">
+										<table id="tblTypeAdvDtls"
+											class="table table-bordered table-striped">
+											<thead>
+												<tr class="datatableheader">
+													<th width="20%" class="datatableheader" align="left">Recovery
+														From Pension/Gratuity ?</th>
+													<th width="20%" class="datatableheader" align="left">Type
+														of Recovery
+													<th width="10%" class="datatableheader" align="left">Amount
+														<b> <font color="red" size="4px;">*</font>
+													</b>
+													<th width="10%" class="datatableheader" align="left">From
+														Date <b> <font color="red" size="4px;">*</font>
+													</b>
+													<th width="10%" class="datatableheader" align="left">To
+														Date <b> <font color="red" size="4px;">*</font>
+													</b>
+													</th>
+
+													<th width="5%" class="datatableheader" align="left">Delete</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr
+													th:each="att, itemStat : ${pensionModel.lstPensionEmpRecovDtlsModel}">
+
+													<td><select
+														th:field="${pensionModel.lstPensionEmpRecovDtlsModel[__${itemStat.index}__].recoveryFromPension}"
+														class="form-control removeErrorFromDropdown recoveryFromPension">
+
+															<option value="0">Please Select</option>
+															<option value="P">Pension</option>
+															<option value="G">No</option>
+													</select></td>
+													<td><input type="hidden"
+														class="form-control penEmpRecId"
+														th:field="${pensionModel.lstPensionEmpRecovDtlsModel[__${itemStat.index}__].penEmpRecId}" />
+														
+														
+													<!-- 	<input
+														type="text" class="form-control nameOfFamMemb"
+														th:field="${pensionModel.lstPensionEmpRecovDtlsModel[__${itemStat.index}__].typeOfRec}" /> -->
+														
+														
+														<select  th:field="${pensionModel.lstPensionEmpRecovDtlsModel[__${itemStat.index}__].typeOfRec}" 
+														  class="form-control removeErrorFromDropdown"><option value="0">--Select--</option>
+														  <option value="Government Accommodation" title="Government Accommodation">Government Accommodation</option>
+														  <option value="Balance of House Building Advance" title="Balance of House Building Advance">Balance of House Building Advance</option>
+														  <option value="Interest on House Building Advance" title="Interest on House Building Advance">Interest on House Building Advance</option>
+														  <option value="Balance of Conveyance Advance" title="Balance of Conveyance Advance">Balance of Conveyance Advance</option>
+														  <option value="Interest on Conveyance Advance" title="Interest on Conveyance Advance">Interest on Conveyance Advance</option>
+														  <option value="over payment of pay and allowances" title="Over payment of pay and allowances">Over payment of pay and allowances</option>
+														  <option value="Income tax" title="Income tax">Income tax</option>
+														  <option value="Dues referred to in Rule 134 of M.C.S" title="Dues referred to in Rule 134 of M.C.S">Dues referred to in Rule 134 of M.C.S</option>
+														  <option value="Recovery of share of Management contribution to Provident Fund" title="Recovery of share of Management contribution to Provident Fund">Recovery of share of Management contribution to Provident Fund</option>
+														  <option value="Other" title="Others">Others</option>
+														  </select>
+	
+														
+														</td>
+													<td><input type="text" class="form-control amount"
+														th:field="${pensionModel.lstPensionEmpRecovDtlsModel[__${itemStat.index}__].amount}" /></td>
+
+													<td><input type="text" class="form-control amount"
+														th:field="${pensionModel.lstPensionEmpRecovDtlsModel[__${itemStat.index}__].recoveryFromDate}" /></td>
+
+													<td><input type="text" class="form-control amount"
+														th:field="${pensionModel.lstPensionEmpRecovDtlsModel[__${itemStat.index}__].recoveryToDate}" /></td>
+
+
+													<td><span class="glyphicon glyphicon-trash"
+														th:onClick="$(this).closest('tr').remove();"></span></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="tabs-5">
+							<div id="tcontent6" class="tabcontent" align="left">
+								<table class="table">
+									<tbody>
+										<tr>
+											<td width="30%">Government Accomodation</td>
+											<td><input type="radio" id="radioGovtAcmdn"
+												name="radioGovtAcmdn" value="Y" maxlength="1"
+												th:field="*{govAccom}"> Yes <input type="radio"
+												id="radioGovtAcmdn" name="radioGovtAcmdn"
+												th:field="*{govAccom}" value="N" checked="checked"
+												maxlength="1"> No</td>
+										</tr>
+										<tr>
+											<td width="30%">NOC Obtained ?</td>
+											<td><input type="radio" id="radioNocObtained"
+												name="radioNocObtained" value="Y" maxlength="1"
+												th:field="*{nocObtained}"> Yes <input type="radio"
+												id="radioNocObtained" name="radioNocObtained" value="N"
+												checked="checked" th:field="*{nocObtained}" maxlength="1">
+												No</td>
+										</tr>
+									</tbody>
+								</table>
+								<fieldset class="tabstyle">
+									<legend id="headingMsg">
+										<b> Certificate Details</b>
+									</legend>
+									<table class="table">
+										<tbody>
+											<tr>
+												<td>Certificate <!-- <b> <font color="red" size="4px;">*</font>
+												</b> --></td>
+												<td>
+													<!-- <select name="cmbCertificate" id="cmbCertificate"
+													class="form-control" th:field="*{certificate}">
+														<option value="-1">-- Select --</option>
+														<option selected="selected" value="10000012">NO
+															DE</option>
+														<option value="10000013">NO DUES</option>
+														<option value="10000014">LICENSE FEE</option>
+												</select> --> <input type="checkbox" id="cmbCertificate"
+													name="cmbCertificate" value="10000012"
+													th:field="*{certificate}" />NO DE <input type="checkbox"
+													name="cmbCertificate" th:field="*{certificate}"
+													id="cmbCertificate1" value="10000013" />NO DUES
+
+												</td>
+											</tr>
+											<tr>
+												<td width="20%" align="left">Issuing Authority <!-- <b>
+														<font color="red" size="4px;">*</font>
+												</b> --></td>
+												<td width="20%" align="left"><input type="text"
+													id="txtCheckListOffName" name="txtCheckListOffName"
+													th:field="*{issuingAuth}" value="SFSF" class="form-control"></td>
+											</tr>
+											<tr>
+												<td width="20%" align="left">Duration</td>
+												<td width="35%">From Date <input type="date"
+													name="txtFromDate" id="txtFromDate" maxlength="10"
+													th:field="*{fromDate}" value="" class="form-control">
+												</td>
+												<td width="35%">To Date <input type="date"
+													name="txtToDate" id="txtToDate" maxlength="10"
+													th:field="*{toDate}" value="" class="form-control"></td>
+											</tr>
+										</tbody>
+									</table>
+								<!-- 	<br> <br> <input type="button" name="update"
+										id="update" value="Update" class="buttontag btn"> <input
+										type="button" name="CertDtlsAddRow" id="CertDtlsAddRow"
+										value="Add Certificate" class="buttontag btn">
+									<div
+										style="float: inherit; border: 1px solid rgb(0, 0, 0); background-color: transparent; padding: 10px; height: 250px; overflow: scroll;">
+										<table id="tblCertDtls"
+											class="table table-bordered table-striped">
+											<thead>
+												<tr class="datatableheader">
+													<th width="20%" class="HLabel">Description <b> <font
+															color="red" size="4px;">*</font>
+													</b></th>
+													<th width="20%" class="HLabel">Office Name <b> <font
+															color="red" size="4px;">*</font>
+													</b></th>
+													<th width="20%" class="HLabel">Delete Row</th>
+
+
+													<th width="20%" class="HLabel">Update Row</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td class="tds" align="center"><input type="text"
+														name="txt*Cert" id="txtCert0" size="20"
+														th:field="*{description}" class="form-control"></td>
+													<td class="tds" align="center"><input type="text"
+														name="txtOfficeName" id="txtOfficeName0"
+														th:field="*{offcName}" class="form-control"></td>
+													<td class="tds" align="center"><a
+														onClick="$(this).closest('tr').remove();"
+														class="glyphicon glyphicon-trash"></a></td>
+													<td class="tds" align="center"><input type="button"
+														id="btnUpdate0" class="btn" name="btnUpdate"
+														value="Update"></td>
+												</tr>
+											</tbody>
+										</table>
+									</div> -->
+								</fieldset>
+								<fieldset class="tabstyle">
+									<fieldset id="Certificates" class="fieldGroupTag">
+										<p id="">
+											<span><b>Certificates</b> </span>
+										</p>
+										<div id="">
+										
+										<h5 class="form-section">
+										<i class="ft-user"></i> <label style="padding: 20px;">
+											Upload Required Documents (Upload Format in JPG,JPEG &amp;
+											PDF with Max 2MB Size) </label> <span style="float: right;">
+											<a class="btn btn-social btn-min-width mr-1 mb-1 btn-facebook" id="addDoc" >Add Certificate</a> </span>
+									</h5>
+									<hr>
+											<table id="certificateTbl"
+												class="table table-bordered table-striped">
+												
+												
+													<thead>
+											<tr class="silverhead">
+												<th style="width: 10%;">File Description</th>
+												<th>File</th>
+												<th style="width: 10%;">Delete</th>
+											</tr>
+										</thead>
+										
+										
+												
+												
+												<tbody>
+													<tr th:each="att, itemStat : ${pensionModel.lstPensionDocumentsModel}">
+														<td><label class="captionTag" id="FILE_DESCRIPTION">File
+																Description</label>&nbsp;
+														     <input type="text"
+														class="form-control fileDescription removeErrorFromInput"
+														th:id="'fileDescription'+${itemStat.index}"
+														th:field="${pensionModel.lstPensionDocumentsModel[__${itemStat.index}__].fileDescription}"  maxlength="40" size="30"
+															></td>
+														<td id="formTable1FILETDscan">
+														<label
+															class="captionTag" id="ATTACH_FILE">Attach File</label>&nbsp;
+															<input type="file" name="importFilescan" maxlength="40"
+															class="filetag btn" id="importFilescan"></td>
+															
+															
+															<td class="datatableheader">
+																			<div class="text-center">
+																				<label class="captionTag" id="ACTIONS">Actions</label>
+																			</div>
+																		</td>
+													</tr>
+													<!-- <tr>
+														<td colspan="3" align="center"><input type="button"
+															name="submitButtonscan" id="submitButtonscan"
+															value="Add Attachment" class="bigbutton btn"></td>
+													</tr> -->
+												<!-- 	<tr>
+														<td colspan="3">
+															<div id="statusscan"></div> <br>
+															<table id="myTablescan"
+																class="table table-bordered table-striped">
+																<tbody>
+																	<tr>
+																		<td class="datatableheader">
+																			<div class="text-center">
+																				<label class="captionTag" id="DESCRIPTION">Description</label>
+																			</div>
+																		</td>
+																		<td class="datatableheader">
+																			<div class="text-center">
+																				<label class="captionTag" id="FILE_NAME">File
+																					Name</label>
+																			</div>
+																		</td>
+																		<td class="datatableheader">
+																			<div class="text-center">
+																				<label class="captionTag" id="ACTIONS">Actions</label>
+																			</div>
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+														</td>
+													</tr> -->
+												</tbody>
+											</table>
+											<br>
+										</div>
+									</fieldset>
+								</fieldset>
+							</div>
+						</div>
+						<div id="tabs-6">
+							<div id="tcontent3" class="tabcontent">
+								<div>&nbsp;</div>
+								<fieldset class="tabstyle">
+									<legend id="headingMsg">
+										<b> Commuted Value of Pension</b>
+									</legend>
+									<table class="table cfmnm2">
+										<tbody>
+											<tr>
+												<td width="20%" align="left">CVP Rate&nbsp; <!-- <b> <font
+														color="red" size="4px;">*</font>
+												</b> --></td>
+												<td width="15%" align="left"><input type="text"
+													id="txtCvpRate" maxlength="20" name="txtCvpRate"
+													th:field="*{cvpRate}" style="text-align: right;"
+													class="form-control readonly"></td>
+												<!-- <td width="20%" align="left"></td>
+												<td width="15%" align="left"></td>
+												<td width="10%" align="left"></td>
+												<td width="20%" align="left"></td> -->
+											</tr>
+											<tr>
+												<td width="20%" align="left">CVP Application Date&nbsp;
+													<!-- <b> <font color="red" size="4px;">*</font> 
+												</b>-->
+												</td>
+												<td width="15%" align="left"><input type="date"
+													name="txtCvpAppDate" id="txtCvpAppDate"
+													th:field="*{cvpAppDate}" class="form-control"></td>
+												<!-- <td width="20%" align="left"></td>
+												<td width="15%" align="left"></td>
+												<td width="10%" align="left"></td>
+												<td width="20%" align="left"></td> -->
+											</tr>
+											<!-- <tr>
+												<td width="20%" align="left">CPO No.&nbsp; <b> <font
+														color="red" size="4px;">*</font>
+												</b></td>
+												<td width="30%" align="left"><input type="text"
+													id="txtCpoNo" maxlength="20" name="txtCpoNo"
+													th:field="*{cpoNo}" style="text-align: right;"
+													class="form-control"></td>
+											</tr>
+											<tr>
+												<td width="20%" align="left">CPO Date&nbsp; <b> <font
+														color="red" size="4px;">*</font>
+												</b></td>
+												<td width="30%" align="left"><input type="date"
+													name="txtCpoDate" id="txtCpoDate" th:field="*{cpoDate}"
+													class="form-control"></td>
+											</tr> -->
+											<tr>
+												<td width="20%" align="left">Commuted Monthly Pension
+													amount&nbsp;<!--  <b> <font color="red" size="4px;">*</font>
+												</b> -->
+												</td>
+												<td width="30%" align="left"><input type="text"
+													id="txtMonthAmt" maxlength="10" name="txtMonthAmt"
+													th:field="*{commMonthlyPension}" style="text-align: right;"
+													class="form-control readonly"></td>
+											</tr>
+											<tr>
+												<td width="20%" align="left">Commuted Value of
+													Pension&nbsp;<!--  <b> <font color="red" size="4px;">*</font>
+												</b> -->
+												</td>
+												<td width="30%" align="left"><input type="text"
+													maxlength="10" id="txtCVPAmt" name="txtCVPAmt"
+													th:field="*{commValueOfPension}" style="text-align: right;"
+													class="form-control readonly"></td>
+											</tr>
+										</tbody>
+									</table>
+								</fieldset>
+								<fieldset style="width: 100%;" class="tabstyle">
+									<legend id="headingMsg">
+										<b> Pension</b>
+									</legend>
+									<table class="table">
+										<tbody>
+											<tr>
+												<td width="20%" align="left">PPO No <!-- &nbsp; <b> <font
+														color="red" size="4px;">*</font>
+												</b> --></td>
+												<td width="30%" align="left"><input type="text"
+													id="txtPpoNo" maxlength="20" name="txtPpoNo"
+													th:field="*{ppoNo}" style="text-align: right;"
+													class="form-control"></td>
+													
+													
+												<td  width="20%" align="left">
+													<b> <a id="genPpoNoLink" style="color:blue;">Don't have PPO NO&nbsp;&nbsp;</a></b>
+												</td>	
+													
+											</tr>
+											<tr>
+												<td width="20%" align="left">PPO Date&nbsp; <b> <font
+														color="red" size="4px;">*</font>
+												</b></td>
+												<td width="30%" align="left"><input type="date"
+													name="txtPpoDate" class="form-control"
+													th:field="*{ppoDate}" id="txtPpoDate"></td>
+											</tr>
+											<tr>
+												<td width="20%" align="left">Total Pension Amount&nbsp;
+													<!-- <b> <font color="red" size="4px;">*</font>
+												</b> -->
+												</td>
+												<td width="30%" align="left"><input type="text"
+													maxlength="10" id="txtTotPnsnAmt" name="txtTotPnsnAmt"
+													th:field="*{totalPensionAmt}" style="text-align: right;"
+													class="form-control readonly"></td>
+											</tr>
+											<tr>
+												<td width="20%" align="left">Reduced Pension Amount
+													=&nbsp; <!-- <b> <font color="red" size="4px;">*</font>
+												</b> -->
+												</td>
+												<td width="20%" align="left">Total Pension Amount&nbsp;
+													<!-- <b> <font color="red" size="4px;">*</font>
+												</b> -->
+												</td>
+												<td width="10%" align="left">Minus<!-- <b> <font
+														color="red" size="4px;">*</font>
+												</b> --></td>
+												<td width="20%" align="left">Commuted Monthly Pension
+													amount&nbsp; <!-- <b> <font color="red" size="4px;">*</font>
+												</b> -->
+												</td>
+											</tr>
+											<tr>
+												<td width="30%" align="left"><input type="text"
+													maxlength="10" id="txtRedsPnsnAmt" name="txtRedsPnsnAmt"
+													th:field="*{reducedPensionAmt}"
+													class="form-control readonly" style="text-align: right;"></td>
+												<td width="30%" align="left"><input type="text"
+													maxlength="10" id="txtTotlPnsnAmt" name="txtTotlPnsnAmt"
+													class="form-control readonly"
+													th:field="*{totalPensionAmtnew}" style="text-align: right;"></td>
+												<td></td>
+												<td width="30%" align="left"><input type="text"
+													maxlength="10" id="txtComPnsnAmt"
+													th:value="*{commMonthlyPensionnew}"
+													class="form-control readonly" style="text-align: right;"></td>
+											</tr>
+										</tbody>
+									</table>
+								</fieldset>
+								<fieldset style="width: 100%;" class="tabstyle">
+									<legend id="headingMsg">
+										<b> Death Gratuity/Retirement Gratuity</b>
+									</legend>
+									<table class="table">
+										<tbody>
+											<tr>
+												<td width="20%" align="left">GPO No.<b>
+												<!--  <font
+														color="red" size="4px;">*</font> -->
+												</b></td>
+												<td width="30%" align="left"><input type="text"
+													id="txtGpoNo" maxlength="20" name="txtGpoNo"
+													th:field="*{gpoNo}" style="text-align: right;"
+													class="form-control"></td>
+											</tr>
+											<tr>
+												<td width="20%" align="left">GPO Date<b>
+												<!--  <font
+														color="red" size="4px;">*</font> -->
+												</b></td>
+												<td width="30%" align="left"><input type="date"
+													name="txtGpoDate" class="form-control" id="txtGpoDate"
+													th:field="*{gpoDate}"></td>
+											</tr>
+											<tr>
+												<td><input type="checkbox" name="radiogratuity"
+													id="deathgratuity">Death Gratuity<!-- <b> <font
+														color="red" size="4px;">*</font>
+												</b> --></td>
+												<td><input type="checkbox" name="radiogratuity"
+													id="retiregratuity">Retirement Gratuity<!-- <b> <font
+														color="red" size="4px;">*</font>
+												</b> --></td>
+												<td><!-- <input type="checkbox" name="radiogratuity"
+													id="servicegratuity">Service Gratuity<b> <font
+														color="red" size="4px;">*</font>
+												</b> --></td>
+											</tr>
+										</tbody>
+									</table>
+									<br> <br>
+									<div id="checkboxdepend" align="left">
+										<table class="table">
+											<tbody>
+												<tr>
+													<td width="20%" align="left">DCRG Application Date<b>
+															<!-- <font color="red" size="4px;">*</font> -->
+													</b></td>
+													<td width="30%" align="left"><input type="date"
+														name="txtDCRGAppDate" class="form-control"
+														id="txtDCRGAppDate" th:field="*{dcrgAppDate}"></td>
+												</tr>
+												<tr>
+													<td width="20%" align="left">Gratuity Amount<!-- <b> <font
+															color="red" size="4px;">*</font>
+													</b> --></td>
+													<td width="30%" align="left"><input type="text"
+														maxlength="10" id="txtServGratyAmt" name="txtServGratyAmt"
+														th:field="*{gratuityAmt}" class="form-control readonly"
+														style="text-align: right;"></td>
+												</tr>
+												<tr>
+													<td width="20%" align="left">Witheld Gratuity<b> <font
+															color="red" size="4px;"></font>
+													</b></td>
+													<td width="30%" align="left"><input type="text"
+														maxlength="10" id="txtWitheldGratuity" value="0"
+														name="txtWitheldGratuity" th:field="*{witheldGratuity}"
+														class="form-control" style="text-align: right;"></td>
+												</tr>
+												<tr>
+													<td width="20%" align="left">Net Gratuity<!-- <b> <font
+															color="red" size="4px;">*</font>
+													</b> --></td>
+													<td width="30%" align="left"><input type="text"
+														maxlength="10" id="txtTotDCRGAmt" name="txtTotDCRGAmt"
+														th:field="*{netGratuity}" class="form-control readonly"
+														style="text-align: right;"></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</fieldset>
+								<fieldset style="width: 100%;" class="tabstyle">
+									<legend id="headingMsg">
+										<b> Family Pension</b>
+									</legend>
+									<table class="table">
+										<tbody>
+											<tr>
+												<td width="20%" align="left">Enhanced Family Pension
+													Date&nbsp; <!-- <b> <font color="red" size="4px;">*</font>
+												</b> -->
+												</td>
+												<td width="20%" align="left"><input type="date"
+													name="txtFP1Date" class="form-control readonly"
+													id="txtFP1Date" th:field="*{enhFamPensDate}"></td>
+												<td width="20%" align="left">Enhanced Family Pension
+													Amount&nbsp;<!--  <b> <font color="red" size="4px;">*</font>
+												</b> -->
+												</td>
+												<td width="20%" align="left"><input type="text"
+													maxlength="10" id="txtFP1TotlAmt" name="txtFP1TotlAmt"
+													th:field="*{enhFamPensAmt}" class="form-control readonly"
+													style="text-align: right;"></td>
+											</tr>
+											<tr>
+												<td width="20%" align="left">Family Pension Date&nbsp;
+													<!-- <b> <font color="red" size="4px;">*</font>
+												</b> -->
+												</td>
+												<td width="20%" align="left"><input type="date"
+													class="form-control readonly" id="txtFP2Date"
+													name="txtFP2Date" th:field="*{famPensDate}"></td>
+												<td width="20%" align="left">Family Pension
+													Amount&nbsp; <!-- <b> <font color="red" size="4px;">*</font>
+												</b> -->
+												</td>
+												<td width="20%" align="left"><input type="text"
+													maxlength="10" id="txtFP2TotlAmt" name="txtFP2TotlAmt"
+													th:field="*{famPensAmt}" class="form-control readonly"
+													style="text-align: right;"></td>
+											</tr>
+										</tbody>
+									</table>
+									<div class="text-center">
+										<input type="button" name="btnCalculateBottom"
+											onclick="newPensionCalculation();" id="btnCalculateBottom"
+											value="Calculate" class="buttontag btn">
+									</div>
+									<hr />
+								</fieldset>
+								<div align="center">
+									<th:block th:switch="${roleId}">
+										<div class="text-center" th:case="'15'">
+											<!-- <input type="submit" name="btnSavedraft" id="btnSavedraft"
+												value="Save as Draft" class="btn"> -->
+											<!--  <input
+												type=submit name="btnFrwrd2AG" id="btnFrwrd2AG"
+												value="Forward To AG" class="btn">  -->
+											<input type="submit" name="btnSaveForward"
+												id="btnSaveForward" value="Forward To Next Authority" class="btn">
+											<!-- <input
+												type="button" name="btnClose" id="btnClose" value="Close"
+												class="btn"> -->
+
+										</div>
+										<div class="text-center" th:case="'12'">
+
+											<!-- 	<input type=button name="btnFrwrd2AG" id="btnFrwrd2AG"
+												value="Forward To AG" class="btn"> -->
+											<input type=submit name="btnApproved" id="btnApproved"
+												value="Approve" class="btn"> <input type="submit"
+												name="btnReject" id="btnReject" value="Reject" class="btn">
+
+											<!-- <input type="button" name="btnClose" id="btnClose"
+												value="Close" class="btn"> -->
+										</div>
+									</th:block>
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="text-center">
+					  <input class="btn cancel" type="submit" value="Save As Draft" />
+						<input type="button" id="btnPrevious" name="btnPrevious"
+							value="Previous" class="btn" />
+							 <input type="button" id="btnNext" name="btnNext" value="Next" class="btn" />
+					        <!--   <input class="btn cancel" type="submit" value="Save As Draft" /> -->
+					</div>
+				</div>
+
+			</form>
+		</fieldset>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/jquery.validate.min.js}"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.min.js"></script>
+	<script th:src="@{/js/validated.js}"></script>
+	<script th:src="@{/js/project/CaseForm.js}"></script>
+	<script th:src="@{/js/pramukhlib.js}"></script>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+	<script th:src="@{/js/jquery-ui.js}"></script>
+	<script>
+	$(document).ready(function() {
+		if (window.location.href.indexOf("ApproveCasesForm") > -1 || window.location.href.indexOf("DraftCasesForm") > -1) {
+            $('form#caseForm input, form#caseForm select, form#caseForm textarea').addClass('dis');
+            $('.btn').removeClass('dis');
+        }
+	  });
+	</script>
+		<script>
+	     	  var pph = new PramukhPhoneticHandler();
+		      pph.convertToIndicIME("txtPnsnrNameInMarathi", document.getElementById('txtNameInDevanagari'),'devanagari');
+		</script>
+</body>
+</html>

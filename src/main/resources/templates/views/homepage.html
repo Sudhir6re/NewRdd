@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<link rel="stylesheet" th:href="/css/payrollStyles.css" />
+<link rel="stylesheet" href="/css/dept.css" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Welcome</title>
+<meta charset="utf-8"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"></link>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script
+	src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
+<script
+	src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" href="../static/css/animate.css"
+	th:href="@{/css/animate.css}" />
+<script th:src="@{/js/wow.js}"></script>
+<script th:src="@{/js/dept.js}"></script>
+<script th:src="@{/js/script.js}"></script>
+<script type="text/javascript">
+	new WOW().init();
+</script>
+<link rel="stylesheet" href="../static/css/styles.css"
+	th:href="@{/css/styles.css}" />
+<link rel="stylesheet" href="../static/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/script.js}"></script>
+
+</head>
+<body class="HomePage">
+	<div th:replace="header/indexHeader :: varmenuheader"></div>
+	<section id="banner" class="homepage">
+		<!-- <th:block th:switch="${levelRoleVal}"> -->
+
+		<div class="Banner-main Homepage tt2" th:fragment="varslider"  th:if="${session.levelRoleVal}!=null">
+			<div th:if="${session.levelRoleVal}<='8'">
+				<div id="payrollBlock">
+					<!-- <span th:text="${levelRoleVal}"></span> -->
+					<div class="tarinmaindiv">
+						<nav class="navFirstrow">
+							<ol class="cd-multi-steps text-center">
+								<li class="visited blk2">
+									<!-- <a href="#0"><span
+								class="empcount">1,50,000</span><br>Approved by<br>
+								TreasuryNet</a> -->
+									<div class="bkConMain bkConMain10 ">
+										<div class="CoutIconMain">
+											<div class="IconImgMain">
+												<img class="Iconimg" src="../images/treasuryblue.png">
+											</div>
+											<div class="StepTitle">
+												<span th:utext="#{msg.thymeleaf.pagelabel.Paybill}">
+												</span><br> <span
+													th:utext="#{msg.thymeleaf.pagelabel.ApprovefromBeams}">
+												</span>
+											</div>
+
+										</div>
+										<div class="Indexnum">9</div>
+										<div class="IndexNumTextMainP b7">
+											<div class="IndexNumTextMain blueMain">
+												<p class="blkCount dasboardPaybillEmpCount" data-type="6"  data-val="PayBill
+Approve from Beams">
+													<span th:text="${acknowledgedBEAMS}"> </span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="visited blk1">
+									<!-- <a href="#0"><span
+								class="empcount">1,00,000</span><br>Acknowledged<br>
+								by CMP-SBI</a> -->
+									<div class="bkConMain bkConMain8 ">
+										<div class="CoutIconMain">
+											<div class="IconImgMain">
+												<img class="Iconimg" src="../images/bank.png">
+											</div>
+											<div class="StepTitle">
+												<span th:utext="#{msg.thymeleaf.pagelabel.Acknowledged}">
+												</span> <br> <span
+													th:utext="#{msg.thymeleaf.pagelabel.byCMPSBI}"></span>
+											</div>
+
+										</div>
+										<div class="Indexnum">10</div>
+										<div class="IndexNumTextMainP b8">
+											<div class="IndexNumTextMain">
+												<p class="blkCount dasboardPaybillEmpCount" data-type="6" data-val="PayBill
+Approve from Beams">
+													<span th:text="${salarycrediteds}"> </span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</li>
+
+								<li class="visited blk3">
+									<!-- <a href="#0"><span
+								class="empcount">1,00,000</span><br>Salary <br>
+								Credited</a> -->
+									<div class="bkConMain bkConMain9 ">
+										<div class="CoutIconMain">
+											<div class="IconImgMain">
+												<img class="Iconimg" src="../images/sallblue.png">
+											</div>
+											<div class="StepTitle">
+												<span th:utext="#{msg.thymeleaf.pagelabel.Salary}"> </span><br>
+												<span th:utext="#{msg.thymeleaf.pagelabel.Credited}">
+												</span>
+											</div>
+
+										</div>
+										<div class="Indexnum">11</div>
+										<div class="IndexNumTextMainP b9">
+											<div class="IndexNumTextMain blueMain">
+												<p class="blkCount dasboardPaybillEmpCount" data-type="7">
+													<span th:text="${salarycrediteds}"> </span>
+												<p>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="visited blkimgmain"><img class="trainImg b10"
+									src="../images/train-ride4.png"></li>
+							</ol>
+						</nav>
+						<nav class="navSecondrow">
+							<ol class="cd-multi-steps text-center reverseArrowMain">
+
+
+								<li class="visited blk6">
+									<!-- <a href="#0"><span
+								class="empcount">3,50,000</span><br>Consolated<br> by
+								Level 2</a> -->
+									<div class="bkConMain bkConMain6 ">
+										<div class="CoutIconMain">
+											<div class="IconImgMain">
+												<img class="Iconimg" src="../images/forwardpb.png">
+											</div>
+											<div class="StepTitle">
+												<span th:utext="#{msg.thymeleaf.pagelabel.Paybill}">
+												</span><br /> <span
+													th:utext="#{msg.thymeleaf.pagelabel.ForwardtoBEAMS}">
+												</span>
+											</div>
+
+										</div>
+										<div class="Indexnum">6</div>
+										<div class="IndexNumTextMainP b6">
+											<div class="IndexNumTextMain">
+												<p class="blkCount dasboardPaybillEmpCount" data-type="6">
+													<span th:text="${forwordedtolevel2}"> </span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="visited blk7">
+									<!-- <a href="#0"><span
+								class="empcount">3,50,000</span><br>Forworeded<br> to
+								Level2</a> -->
+									<div class="bkConMain bkConMain5">
+										<div class="CoutIconMain">
+											<div class="IconImgMain">
+												<!-- <img class="Iconimg" src="../images/forL2blue.png"> -->
+												<img class="Iconimg" src="../images/genpb.png">
+											</div>
+											<div class="StepTitle">
+												<span th:utext="#{msg.thymeleaf.pagelabel.Generate}">
+												</span><br /> <span th:utext="#{msg.thymeleaf.pagelabel.Paybill}">
+												</span>
+											</div>
+
+										</div>
+										<div class="Indexnum">5</div>
+										<div class="IndexNumTextMainP b5">
+											<div class="IndexNumTextMain blueMain">
+												<p class="blkCount dasboardPaybillEmpCount" data-type="5">
+													<span th:text="${paybillgenerate}"> </span>
+												</p>
+											</div>
+										</div>
+									</div>
+
+								</li>
+								<li class="visited blk11">
+									<!-- <a href="#0"><span class="empcount">3,50,000</span><br>Paybill<br>
+                                Generated</a> -->
+									<div class="bkConMain bkConMain4 ">
+										<div class="CoutIconMain">
+											<div class="IconImgMain">
+												<img class="Iconimg" src="../images/approval1.png">
+											</div>
+											<div class="StepTitle">
+												<span th:utext="#{msg.thymeleaf.pagelabel.ChangeStatement}">
+												</span><br /> <span th:utext="#{msg.thymeleaf.pagelabel.Approved}">
+												</span>
+											</div>
+										</div>
+										<div class="Indexnum">4</div>
+										<div class="IndexNumTextMainP b4">
+											<div class="IndexNumTextMain">
+												<p class="blkCount dasboardPaybillEmpCount" data-type="4">
+													<span th:text="${chagestateapp}"> </span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ol>
+						</nav>
+						<nav class="navThirdrow">
+							<ol class="cd-multi-steps text-center">
+								<li class="visited blk8">
+									<!-- <a href="#0"><span class="empcount">7,50,000</span><br>Total<br> Employee</a> -->
+									<div class="bkConMain bkConMain1 ">
+										<div class="CoutIconMain">
+											<div class="IconImgMain">
+												<img class="Iconimg" src="../images/employee1blue.png">
+											</div>
+											<div class="StepTitle"  >
+												<span th:utext="#{msg.thymeleaf.pagelabel.Total}"> </span><br />
+												<span th:utext="#{msg.thymeleaf.pagelabel.Employee}">
+												</span>
+											</div>
+
+										</div>
+										<div class="Indexnum">1</div>
+										<div class="IndexNumTextMainP b1">
+											<div class="IndexNumTextMain blueMain">
+												<p class="blkCount dasboardEmpCount" data-type="1">
+													<span th:text="${activeeml}"> </span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="visited blk9">
+									<!-- <a href="#0"><span class="empcount">5,50,000</span><br>Change<br>
+                                Statement</a> -->
+									<div class="bkConMain bkConMain2 ">
+										<div class="CoutIconMain">
+											<div class="IconImgMain">
+												<img class="Iconimg" src="../images/statement1.png">
+											</div>
+											<div class="StepTitle">
+												<span th:utext="#{msg.thymeleaf.pagelabel.ChangeStatement}">
+												</span><br /> <span
+													th:utext="#{msg.thymeleaf.pagelabel.Generated}"> </span>
+											</div>
+										</div>
+										<div class="Indexnum">2</div>
+										<div class="IndexNumTextMainP b2">
+											<div class="IndexNumTextMain">
+												<p class="blkCount dasboardPaybillEmpCount" data-type="2">
+													<span th:text="${changestatementgenerated}"> </span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="visited blk10">
+									<!-- <a href="#0"><span class="empcount">4,00,000</span><br>Approved<br> by
+                                Level 2</a> -->
+									<div class="bkConMain bkConMain3 ">
+										<div class="CoutIconMain">
+											<div class="IconImgMain">
+												<img class="Iconimg" src="../images/approve1blue.png">
+											</div>
+											<div class="StepTitle">
+												<span th:utext="#{msg.thymeleaf.pagelabel.ChangeStatement}">
+												</span><br /> <span
+													th:utext="#{msg.thymeleaf.pagelabel.Forwarded}"> </span>
+											</div>
+										</div>
+										<div class="Indexnum">3</div>
+										<div class="IndexNumTextMainP b3">
+											<div class="IndexNumTextMain blueMain">
+												<p class="blkCount dasboardPaybillEmpCount" data-type="3"  data-val="Total Employee">
+													<span th:text="${chagestatefor}"> </span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</li>
+
+							</ol>
+						</nav>
+					</div>
+					<div class=" form-mm clear">
+						<div class="tabs-holder">
+							<div id="tab-1">
+								<!-- <h2 class="sec-title gri-tit">Home</h2> -->
+								<!-- Task Info -->
+								<div class="row clearfix">
+									<div class="col-md-3 col-xs-12 dasboardEmpCount" data-type="0" th:attr="data-val=#{msg.thymeleaf.pagelabel.TotalEmployee}">
+										<div class="info-box bg-pink hover-expand-effect wow bounceIn">
+											<div class="icon">
+												<span class="glyphicon glyphicon-user"></span>
+											</div>
+											<div class="content">
+												<div class="text">
+
+													<p class="conText ct1">
+														<span th:utext="#{msg.thymeleaf.pagelabel.TotalEmployee}"></span>
+													</p>
+													<p class="count">
+														<span th:text="${Totalemp}"> </span>
+													</p>
+
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-3 col-xs-12 dasboardEmpCount" data-type="1" th:attr="data-val=#{msg.thymeleaf.pagelabel.TotalEmployee}">
+										<div class="info-box bg-cyan hover-expand-effect wow bounceIn">
+											<div class="icon">
+												<span class="glyphicon glyphicon-user"></span>
+											</div>
+											<div class="content">
+												<div class="text">
+
+													<p class="conText ct2">
+														<span
+															th:utext="#{msg.thymeleaf.pagelabel.ActiveEmployees}">
+														</span>
+													</p>
+													<p class="count">
+														<span th:text="${activeeml}"> </span>
+													</p>
+
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-3 col-xs-12">
+										<div
+											class="info-box bg-light-green hover-expand-effect wow bounceIn">
+											<div class="icon">
+												<span class="glyphicon glyphicon-list-alt"></span>
+											</div>
+											<div class="content">
+												<div class="text">
+
+													<p class="conText ct3">
+														<span th:utext="#{msg.thymeleaf.pagelabel.TotalDDOs}">
+														</span>
+													</p>
+													<p class="count">
+														<span th:text="${totalDDOS}"> </span>
+													</p>
+
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-3 col-xs-12">
+										<div
+											class="info-box bg-light-aqua hover-expand-effect wow bounceIn">
+											<div class="icon">
+												<span class="glyphicon glyphicon-home"></span>
+											</div>
+											<div class="content">
+												<div class="text">
+
+													<p class="conText ct4">
+														<span th:utext="#{msg.thymeleaf.pagelabel.TotalOffices}">
+														</span>
+													</p>
+													<p class="count">
+														<span th:text="${totalOFCcount}"> </span>
+													</p>
+
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="payroll" id="payrollsearchTable" >
+					<div class="payroll">
+				            	<fieldset class="tabstyle">
+									<legend id="payrollheadingMsg">
+										<b id="payrolltblHeading"> </b>
+									</legend>
+
+								</fieldset>
+					
+						<table style="width: 100%" id="payrolltblDataTable"
+							class="datatable table table-striped table-bordered">
+							<thead>
+								<tr class="text-center">
+									<th class="align-middle">SR NO</th>
+									<th class="align-middle">SevaarthID</th>
+									<th class="align-middle">Name of Employee</th>
+									<!-- <th class="align-middle">Type of Pension</th> -->
+									<th class="align-middle">Designation</th>
+									<th class="align-middle">Date Of Joining Government
+										Service</th>
+									<th class="align-middle">Date of Retirement</th>
+									<!-- <th class="align-middle">Case Status</th> -->
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+			</div>
+									<div class="payroll" id="paybillsearchTable" >
+					<div class="paybill">
+				            	<fieldset class="tabstyle">
+									<legend id="paybillheadingMsg">
+										<b id="paybilltblHeading"> </b>
+									</legend>
+
+								</fieldset>
+					
+						<table style="width: 100%" id="paybilltblDataTable"
+							class="datatable table table-striped table-bordered">
+							<thead>
+							
+								<tr class="text-center">
+									<th class="align-middle">SR NO</th>
+									<th class="align-middle">SevaarthID</th>
+									<th class="align-middle">Name of Employee</th>
+									<th class="align-middle">Designation</th>
+									<th class="align-middle">Gross Amount</th>
+									<th class="align-middle">Net Amount</th>
+									<th class="align-middle">Total Deduction</th>
+									<!-- <th class="align-middle">Case Status</th> -->
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+			</div>
+									<!-- <div class="col-md-3 col-xs-12">
+								<div class="info-box bg-pink2 hover-expand-effect wow bounceIn">
+									<div class="icon">
+										<span class="glyphicon glyphicon-briefcase"></span>
+									</div>
+									<div class="content">
+										<div class="text">
+											<p class="conText ct5">Total Posts</p>
+											<p class="count">14035</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3 col-xs-12">
+								<div class="info-box bg-cyan2 hover-expand-effect wow bounceIn">
+									<div class="icon">
+										<span class="glyphicon glyphicon-retweet"></span>
+									</div>
+									<div class="content">
+										<div class="text">
+											<p class="conText ct6">Test Count</p>
+											<p class="count">12325</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3 col-xs-12">
+								<div
+									class="info-box bg-light-green2 hover-expand-effect wow bounceIn">
+									<div class="icon">
+										<span class="glyphicon glyphicon-ok"></span>
+									</div>
+									<div class="content">
+										<div class="text">
+											<p class="conText ct7">Test Count</p>
+											<p class="count">65489</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3 col-xs-12">
+								<div
+									class="info-box bg-light-aqua2 hover-expand-effect wow bounceIn">
+									<div class="icon">
+										<span class="glyphicon glyphicon-time"></span>
+									</div>
+									<div class="content">
+										<div class="text">
+											<p class="conText ct8">Test Count</p>
+											<p class="count">88654</p>
+										</div>
+									</div>
+								</div>
+							</div> -->
+									<script>
+										/* 
+										$(document).ready(function(){
+											 var roleId=parseInt($("#levelRoleVal").val());
+											 if(roleId<=8){
+												 $("#payrollBlock").show();
+											 }else if(roleId==12 ||  roleId==13 ||  roleId==15 ||  roleId==17){
+												 $("#payrollBlock").show();
+											 }else{
+												 $("#payrollBlock").hide();
+												 $("#pensionBlock").hide();
+											 }
+											 
+											 
+										 });
+										 */
+										$('.count')
+												.each(
+														function() {
+															$(this)
+																	.prop(
+																			'Counter',
+																			0)
+																	.animate(
+																			{
+																				Counter : $(
+																						this)
+																						.text()
+																			},
+																			{
+																				duration : 500,
+																				easing : 'swing',
+																				step : function(
+																						now) {
+																					var n2 = Math
+																							.ceil(now);
+																					var formatter = new Intl.NumberFormat(
+																							'en-IN',
+																							{
+																								minimumFractionDigits : 0,
+																							});
+
+																					$(
+																							this)
+																							.text(
+																									formatter
+																											.format(n2));
+
+																				}
+																			});
+														});
+									</script>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="pensionDashboard" id="pensionBlock">
+				<div class="tarinmaindiv">
+					<!-- <nav class="navFirstrow">
+						<ol class="cd-multi-steps text-center">
+							<li class="visited blkimgmain"><img class="trainImg b10"
+								src="../images/train-ride4.png"></li>
+						</ol>
+					</nav> -->
+					<nav class="navSecondrow">
+						<ol class="cd-multi-steps text-center reverseArrowMain">
+							<li class="visited blk15">
+								<div class="bkConMain ">
+									<div class="visited blkimgmain">
+										<img class="trainImg b10" src="../images/train-ride4.png">
+									</div>
+								</div>
+							</li>
+							<li class="visited blk6">
+								<div class="bkConMain bkConMain6 ">
+
+									<div class="CoutIconMain">
+										<div class="IconImgMain">
+											<img class="Iconimg" src="../images/sallblue.png">
+										</div>
+										<div class="StepTitle">
+											<span th:utext="#{msg.thymeleaf.pagelabel.penSalary}">
+											</span><br> <span
+												th:utext="#{msg.thymeleaf.pagelabel.Credited}"> </span>
+										</div>
+									</div>
+									<div class="Indexnum">11</div>
+									<div class="IndexNumTextMainP b9">
+										<div class="IndexNumTextMain blueMain">
+											<p class="blkCount">
+												<span th:text="${salarycrediteds}"> </span>
+											<p>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="visited blk7">
+								<div class="bkConMain bkConMain5">
+									<div class="CoutIconMain">
+										<div class="IconImgMain">
+											<img class="Iconimg" src="../images/genpb.png">
+										</div>
+										<div class="StepTitle">
+											<span th:utext="#{msg.thymeleaf.pagelabel.Generate}">
+											</span><br /> <span
+												th:utext="#{msg.thymeleaf.pagelabel.PenPaybill}"> </span>
+										</div>
+									</div>
+									<div class="Indexnum">5</div>
+									<div class="IndexNumTextMainP b5">
+										<div class="IndexNumTextMain blueMain">
+											<p class="blkCount">
+												<span th:text="${paybillgenerate}"> </span>
+											</p>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="visited blk11">
+								<div class="bkConMain bkConMain4 ">
+									<div class="CoutIconMain">
+										<div class="IconImgMain">
+											<img class="Iconimg" src="../images/approval1.png">
+										</div>
+										<div class="StepTitle">
+											<span th:utext="#{msg.thymeleaf.pagelabel.ChangeStatement}">
+											</span><br /> <span th:utext="#{msg.thymeleaf.pagelabel.Approved}">
+											</span>
+										</div>
+									</div>
+									<div class="Indexnum">4</div>
+									<div class="IndexNumTextMainP b4">
+										<div class="IndexNumTextMain">
+											<p class="blkCount">
+												<span th:text="${chagestateapp}"> </span>
+											</p>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ol>
+					</nav>
+					<nav class="navThirdrow">
+						<ol class="cd-multi-steps text-center">
+							<!-- not for code Strat-->
+							<li class="visited blk7 onlytohide">
+								<div class="bkConMain bkConMain5">
+									<div class="CoutIconMain">
+										<div class="IconImgMain">
+											<img class="Iconimg" src="../images/genpb.png">
+										</div>
+										<div class="StepTitle">
+											<span th:utext="#{msg.thymeleaf.pagelabel.Generate}">
+											</span><br /> <span
+												th:utext="#{msg.thymeleaf.pagelabel.PenPaybill}"> </span>
+										</div>
+									</div>
+									<div class="Indexnum">5</div>
+									<div class="IndexNumTextMainP b5">
+										<div class="IndexNumTextMain blueMain">
+											<p class="blkCount">
+												<span th:text="${paybillgenerate}"> </span>
+											</p>
+										</div>
+									</div>
+								</div>
+							</li>
+							<!-- not for code End-->
+							<li class="visited blk8">
+								<div class="bkConMain bkConMain1 ">
+									<div class="CoutIconMain">
+										<div class="IconImgMain">
+											<img class="Iconimg" src="../images/employee1blue.png">
+										</div>
+										<div class="StepTitle">
+											<span th:utext="#{msg.thymeleaf.pagelabel.Total}"> </span><br />
+											<span th:utext="#{msg.thymeleaf.pagelabel.pensioner}">
+											</span>
+										</div>
+									</div>
+									<div class="Indexnum">1</div>
+									<div class="IndexNumTextMainP b1">
+										<div class="IndexNumTextMain blueMain">
+											<p class="blkCount">
+												<span th:text="${activeeml}"> </span>
+											</p>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="visited blk9">
+								<div class="bkConMain bkConMain2 ">
+									<div class="CoutIconMain">
+										<div class="IconImgMain">
+											<img class="Iconimg" src="../images/statement1.png">
+										</div>
+										<div class="StepTitle">
+											<span th:utext="#{msg.thymeleaf.pagelabel.ChangeStatement}">
+											</span><br /> <span th:utext="#{msg.thymeleaf.pagelabel.Generated}">
+											</span>
+										</div>
+									</div>
+									<div class="Indexnum">2</div>
+									<div class="IndexNumTextMainP b2">
+										<div class="IndexNumTextMain">
+											<p class="blkCount">
+												<span th:text="${changestatementgenerated}"> </span>
+											</p>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="visited blk10">
+								<div class="bkConMain bkConMain3 ">
+									<div class="CoutIconMain">
+										<div class="IconImgMain">
+											<img class="Iconimg" src="../images/approve1blue.png">
+										</div>
+										<div class="StepTitle">
+											<span th:utext="#{msg.thymeleaf.pagelabel.ChangeStatement}">
+											</span><br /> <span th:utext="#{msg.thymeleaf.pagelabel.Forwarded}">
+											</span>
+										</div>
+									</div>
+									<div class="Indexnum">3</div>
+									<div class="IndexNumTextMainP b3">
+										<div class="IndexNumTextMain blueMain">
+											<p class="blkCount">
+												<span th:text="${chagestatefor}"> </span>
+											</p>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ol>
+					</nav>
+				</div>
+				<div class=" form-mm clear">
+					<div class="tabs-holder">
+						<div id="tab-1">
+							<div class="row clearfix">
+								<div class="col-md-4 col-xs-12 dashboardcCount" data-type="0"  th:attr="data-val=#{msg.thymeleaf.pagelabel.TotalpenEmployee}">
+									<div class="info-box bg-pink hover-expand-effect wow bounceIn">
+										<div class="icon">
+											<span class="glyphicon glyphicon-user"></span>
+										</div>
+										<div class="content">
+											<div class="text">
+												<p class="conText ct1">
+													<span
+														th:utext="#{msg.thymeleaf.pagelabel.TotalpenEmployee}"></span>
+												</p>
+												<p class="count">
+													<span th:text="${Totalemp}"> </span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4  col-xs-12 dashboardcCount" data-type="1"  th:attr="data-val=#{msg.thymeleaf.pagelabel.ActivepenEmployees}">
+									<div class="info-box bg-cyan hover-expand-effect wow bounceIn">
+										<div class="icon">
+											<span class="glyphicon glyphicon-user"></span>
+										</div>
+										<div class="content">
+											<div class="text">
+												<p class="conText ct2">
+													<span
+														th:utext="#{msg.thymeleaf.pagelabel.ActivepenEmployees}">
+													</span>
+												</p>
+												<p class="count">
+													<span th:text="${activeeml}"> </span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-xs-12 dashboardcCount" data-type="2" th:attr="data-val=#{msg.thymeleaf.pagelabel.TotalfamPen}" >
+									<div 
+										class="info-box bg-light-green hover-expand-effect wow bounceIn">
+										<div class="icon">
+											<span class="glyphicon glyphicon-list-alt"></span>
+										</div>
+										<div class="content">
+											<div class="text">
+												<p class="conText ct3">
+													<span th:utext="#{msg.thymeleaf.pagelabel.TotalfamPen}">
+													</span>
+												</p>
+												<p class="count">
+													<span th:text="${totalFamilyPensner}"> </span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								
+								
+								
+								
+								
+								<div id="piechartmain" style="display:none;">
+									<div id="pieChartContainer"></div>
+								</div>
+								
+								
+								
+								
+								<!-- <div class="col-md-3 col-xcol-md-2 col-sm-push-1  <div
+										class="info-box bg-light-aqua hover-expand-effect wow bounceIn">
+										<div class="icon">
+											<span class="glyphicon glyphicon-home"></span>
+										</div>
+										<div class="content">
+											<div class="text">
+												<p class="conText ct4">
+													<span th:utext="#{msg.thymeleaf.pagelabel.TotalOffices}">
+													</span>
+												</p>
+												<p class="count">
+													<span th:text="${totalOFCcount}"> </span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div> -->
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				
+			<div class="pgCon" id="searchTable" >
+					<div class="RejectrequirstTbMain">
+				            	<fieldset class="tabstyle">
+									<legend id="headingMsg">
+										<b id="tblHeading"> </b>
+									</legend>
+
+								</fieldset>
+					
+						<table style="width: 100%" id="tblDataTable"
+							class="datatable table table-striped table-bordered">
+							<thead>
+								<tr class="text-center">
+									<th class="align-middle">SR NO</th>
+									<th class="align-middle">PPO NO</th>
+									<th class="align-middle">Name of Pensioner</th>
+									<th class="align-middle">Type of Pension</th>
+									<th class="align-middle">Department</th>
+									<th class="align-middle">Date Of Joining Government
+										Service</th>
+									<th class="align-middle">Date of Retirement</th>
+									<th class="align-middle">Case Status</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+			</div>
+			<div class="payroll" id="payrollsearchTable" >
+					<div class="payroll">
+				            	<fieldset class="tabstyle">
+									<legend id="payrollheadingMsg">
+										<b id="payrolltblHeading"> </b>
+									</legend>
+
+								</fieldset>
+					
+						<table style="width: 100%" id="payrolltblDataTable"
+							class="datatable table table-striped table-bordered">
+							<thead>
+								<tr class="text-center">
+									<th class="align-middle">SR NO</th>
+									<th class="align-middle">SevaarthID</th>
+									<th class="align-middle">Name of Employee</th>
+									<!-- <th class="align-middle">Type of Pension</th> -->
+									<th class="align-middle">Designation</th>
+									<th class="align-middle">Date Of Joining Government
+										Service</th>
+									<th class="align-middle">Date of Retirement</th>
+									<!-- <th class="align-middle">Case Status</th> -->
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+			</div>
+			</div>
+			<div class="GPFDashboard" id="GPFBlock">
+				<div class=" form-mm clear">
+					<div class="tabs-holder">
+						<div id="tab-1">
+							<div class="row clearfix">
+								<div class="col-md-2 col-sm-push-1 col-xs-12">
+									<div class="info-box bg-pink hover-expand-effect wow bounceIn">
+										<div class="icon">
+											<span class="glyphicon glyphicon-user"></span>
+										</div>
+										<div class="content">
+											<div class="text">
+												<p class="conText ct1">
+													<span
+														th:utext="#{msg.thymeleaf.pagelabel.GPFTotalpenEmployee}"></span>
+												</p>
+												<p class="count">
+													<span th:text="${totalGpfEmp}"> </span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-2 col-sm-push-1 col-xs-12">
+									<div class="info-box bg-cyan hover-expand-effect wow bounceIn">
+										<div class="icon">
+											<span class="glyphicon glyphicon-list-alt"></span>
+										</div>
+										<div class="content">
+											<div class="text">
+												<p class="conText ct2">
+													<span th:utext="#{msg.thymeleaf.pagelabel.TotalopeningBal}">
+													</span>
+												</p>
+												<p class="count">
+													<span th:text="${totalOpeningBal}"> </span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-2 col-sm-push-1 col-xs-12">
+									<div
+										class="info-box bg-light-green hover-expand-effect wow bounceIn">
+										<div class="icon">
+											<span class="glyphicon glyphicon-list-alt"></span>
+										</div>
+										<div class="content">
+											<div class="text">
+												<p class="conText ct3">
+													<span
+														th:utext="#{msg.thymeleaf.pagelabel.GpfFinalWithdrawal}">
+													</span>
+												</p>
+												<p class="count">
+													<span th:text="${gpfAdvance}"> </span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-2 col-sm-push-1 col-xs-12">
+									<div
+										class="info-box bg-light-aqua hover-expand-effect wow bounceIn">
+										<div class="icon">
+											<span class="glyphicon glyphicon-list-alt"></span>
+										</div>
+										<div class="content">
+											<div class="text">
+												<p class="conText ct4">
+													<span th:utext="#{msg.thymeleaf.pagelabel.gpfadvan}">
+													</span>
+												</p>
+												<p class="count">
+													<span th:text="${gpfWithdrawal}"> </span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-2 col-sm-push-1 col-xs-12">
+									<div
+										class="info-box bg-light-aqua1 hover-expand-effect wow bounceIn">
+										<div class="icon">
+											<span class="glyphicon glyphicon-list-alt"></span>
+										</div>
+										<div class="content">
+											<div class="text">
+												<p class="conText ct4">
+													<span th:utext="#{msg.thymeleaf.pagelabel.gpfnonRef}">
+													</span>
+												</p>
+												<p class="count">
+													<span th:text="${finalWithdrawal}"> </span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+<!-- 
+ <script src="https://code.highcharts.com/highcharts.js"></script> -->
+ 
+ <script th:src="@{/js/highcharts.js}"></script>
+<script th:src="@{/js/dashboard.js}"></script>
+
+		</div>
+	</section>
+
+	<div class="container">
+		<footer>
+			<div class="footer">
+				<span th:utext="#{msg.thymeleaf.pagelabel.footerText}"> </span>
+				<div class="foot-log-main flex float-right">
+					<span th:utext="#{msg.thymeleaf.pagelabel.developByText}"></span> <img
+						th:src="@{/images/footer-logo.png}" alt="Maharashtra Government" />
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="clear"></div>
+		</footer>
+	</div>
+
+</body>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.deptmaster}"></title>
+<style type="text/css">
+</style>
+</head>
+<body class="department-master">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.deptmaster}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.deptmaster}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<div id="content">
+				<legend>Admin Office Name</legend>
+				
+				<form method="POST" name="deptmaster"
+					action="">
+
+					<div id="tcontent1">
+						<br>&nbsp; <a th:href="@{/mdc/addDeptMaster}"
+							class='btn'> Add new Entry For Department Master  </a> <br/><br/>
+						<table class="datatable table table-bordered width-50-auto" id="row">
+							<thead>
+								<tr>
+									<th>Department Code</th>
+									<th>Department Name</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="varDept : ${deptList}">
+
+								<td><a th:href="@{'/mdc/editDept/' + ${varDept.departmentId}}"><span
+										th:text="${varDept.departmentCode}"></span></a></td>
+								<td th:text="${varDept.departmentNameEn}"></td>
+
+							</tr>
+							</tbody>
+						</table>
+						<br />
+						<div class="text-center">
+							<input type="button" name="btnCancel"
+								id="btnCancel" value="Cancel" size="3" maxlength="3"
+								class="buttontag">
+						</div>
+						<br>&nbsp;
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.annualIncrement}"></title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body class="approvalAnnual-increment">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.annualIncrement}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.annualIncrement}"></span>
+		</h3>
+		<div class="row">
+			<div class="col-md-7">
+				<h6 style="color: red; font-weight: bold; margin-left: 5px;">Note:
+					Annual Increment details entered through this form will be
+					reflected in the Service Book</h6>
+			</div>
+			<div class="col-md-5 text-right">
+				<button class="btn btn-warning btn-md">Add New Order</button>
+			</div>
+		</div>
+
+
+		<fieldset class="container">
+			<form th:action="@{/transaction/approveAnnualIncrement}"
+				th:object="${annualIncrementModel}" method="POST"
+				name="approveAnnualIncrement" enctype="multipart/form-data"
+				class="form-horizontal container">
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="title"><span>Year</span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label>
+					<div class="col-sm-3">
+						<select class="form-control" id="paybillYear">
+							<option selected="selected" th:value="0"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+							<option th:each="varGetAllYear : ${lstGetAllYear}"
+								th:value="${varGetAllYear.yearId}"
+								th:text="${language=='mh' ? varGetAllYear.yearMarathi : varGetAllYear.yearEnglish}"></option>
+
+						</select>
+					</div>
+					<div class="col-sm-3 text-center">
+						<input id="btnFilter" class="btn" type="button" value="Filter"
+							name="btnFilter">
+					</div>
+				</div>
+				<hr />
+				<div id="tcontent1" class="halftabcontent">
+					<table id="orderList" class="table table-bordered">
+						<thead>
+							<tr>
+								<th class="datatableheader">Select</th>
+								<th class="datatableheader">Increment Order No</th>
+								<th class="datatableheader">Increment Order Date</th>
+								<th class="datatableheader">DDO Code</th>
+								<th class="datatableheader">DDO Office</th>
+								<th class="datatableheader">Status</th>
+								<th class="datatableheader">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="odd" th:each="varEmp : ${incrementOrderempLst}">
+								<td style="text-align: center;"><input name="radio"
+									id="radioId1" type="radio" th:value="${varEmp.orderNo}"
+									th:field="*{orderNo}"></td>
+								<!-- <td class="collapse-item"><span th:text="${varEmp.orderNo}"></span></td> -->
+
+
+								<td>
+									<!-- Using JavaScript to handle the conversion for scientific notation -->
+									<span th:text="${varEmp.orderNo}"
+									th:if="${varEmp.orderNo.matches('[0-9.Ee]+')}"> </span> 
+<script>
+    const number = parseFloat([[${varEmp.orderNo}]]);
+    if (!isNaN(number)) {
+      document.write(number.toLocaleString('fullwide', {useGrouping:false}));
+    }
+</script> <!-- If not a number, show the string --> <span
+									th:if="${not varEmp.orderNo.matches('[0-9.Ee]+')}"
+									th:text="${varEmp.orderNo}"> </span>
+								</td>
+
+
+
+								<td th:text="${varEmp.incrementOrderDate}"></td>
+								<td th:text="${varEmp.ddoCode}"></td>
+								<td th:text="${varEmp.officeName}"></td>
+								<td style="text-align: center;">Forwarded</td>
+								<td><a class="collapse-item"
+									th:href="@{'/ddo/MTR21/'+${varEmp.orderNo}}"><span>Print
+											Report</span></a></td>
+
+							</tr>
+						</tbody>
+					</table>
+
+					<div class="text-center">
+						<!-- 	<button class="btn btn-warning btn-md" style="margin-top:10px;" id="save">Save</button></div> -->
+						<input type="submit" name="btnApprove" class="btn" id="btnApprove"
+							value="Approve" />
+					</div>
+				</div>
+			</form>
+		</fieldset>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/datatable-common.js}"></script>
+	<script th:src="@{/js/validated.js}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<script th:src="@{/js/project/annual-increment.js}"></script>
+
+</body>
+</html>

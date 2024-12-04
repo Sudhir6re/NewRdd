@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pagelabel.resetpasstitle}">Reset Password</title>
+<link rel="stylesheet" href="css/login.css" th:href="@{/static/css/login.css}" />
+<link rel="stylesheet" href="../static/css/payrollStyles.css"
+	th:href="@{/static/css/payrollStyles.css}" />
+</head>
+<body class="message">
+	<div th:replace="/header/indexheader :: varmenuheader"></div>
+	
+	<div class="page_Height container">
+		
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pagelabel.resetPassword}"></span>
+		</h3>
+<br/>
+		<div th:if="${error != null}" class="text-center">
+			<p class="text-danger">[[${error}]]</p>
+		</div>
+		<div th:if="${message != null}" class="text-center">
+			<p class="text-warning">[[${message}]]</p>
+		</div>
+
+
+
+	</div>
+	<div class="container" th:replace="header/footer :: varfooter"></div>
+</body>
+
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Gross Report</title>
+<link rel="stylesheet" th:href="@{/css/print.css}" />
+<link rel="stylesheet" th:href="@{/css/styles.css}" />
+<style>
+@media print {
+	@page {
+		size: landscape;
+	}
+	table {
+		width: 100%;
+		table-layout: fixed;
+	}
+	th, td {
+		word-wrap: break-word;
+	}
+}
+</style>
+</head>
+<body class="gross-report">
+	<div class="container-fluid">
+		<div th:replace="header/menuHeader :: var-script-header"></div>
+		<fieldset>
+			<div id="print-content">
+				<form id="rptForm_ID" name="rptForm_Name" method="POST" action="">
+					<h3 Class="PageHeading text-center">
+						<span>Gross Report</span>
+					</h3>
+					<legend>Employee Configuration Report </legend>
+					<table id="vo" class="table table-bordered table-striped"
+						style="table-layout: fixed; overflow-wrap: break-word;">
+						<thead>
+							<tr>
+								<th>Department Name</th>
+								<th>District Name</th>
+								<th>Institution Name</th>
+								<th>Sevarth Id</th>
+								<th>Designation</th>
+								<th>Dob/Age</th>
+								<th>Gender</th>3
+								<th>Gross Amount</th>
+								<th>Basic Arrear</th>
+								<th>Da Arrear</th>
+								<th>SevenPc GpfArr</th>
+								<th>SevenPc DcpsArr</th>
+								<th>Transport Arr</th>
+								<th>SevenPc TA Arr</th>
+								<th>HRA Arr</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+
+			</div>
+			<br /> <br />
+			<div class="text-center">
+				<button id="print" onclick="printContent('print-content');"
+					class="btn">Print</button>
+				<input type="button" name="btnBackAgain" id="btnBackAgain"
+					onclick="history.back()" value="Back" class="buttontag">
+
+			</div>
+	</div>
+
+</body>
+</html>

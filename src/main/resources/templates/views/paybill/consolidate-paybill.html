@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{menu.mapping.consolidatePayBill}"></title>
+</head>
+<body class="consolidate-paybill">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.TransactionBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{menu.mapping.consolidatePayBill}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{menu.mapping.consolidatePayBill}"></span>
+		</h3>
+		<fieldset class="container">
+			<!-- <legend th:utext="#{menu.mapping.consolidatePayBill}"
+				th:style="${'color: orange;'}"></legend> -->
+
+			<form class="form-horizontal" th:object="${consolidatePayBillModel}"
+				method="POST" enctype="multipart/form-data"
+				th:action="@{/ddo/searchConsolidatedPaybill}">
+
+				<input type="hidden" name="language" id="language"
+					th:value="${language}" /> <input type="hidden" name="message"
+					id="message" th:value="${message}" /> <input type="hidden"
+					name="userId" id="userId" th:value="${userId}" />
+
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.selectmonth}"></span></label>
+					<div class="col-sm-3">
+						<select class="form-control" th:field="*{monthName}"
+							id="monthName">
+							<option selected="selected" th:value="0"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+							<option th:each="varMonth : ${lstMonths}"
+								th:value="${varMonth.monthId}"
+								th:text="${language=='mh' ? varMonth.monthMarathi : varMonth.monthEnglish}"></option>
+						</select>
+					</div>
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.selectyear}"></span></label>
+					<div class="col-sm-3">
+						<select class="form-control" th:field="*{yearName}" id="yearName">
+							<option selected="selected" th:value="0"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+							<option th:each="varYear : ${lstYears}"
+								th:value="${varYear.yearId}"
+								th:text="${language=='mh' ? varYear.yearMarathi : varYear.yearEnglish}"></option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.schemeName}"></span></label>
+					<div class="col-sm-3">
+						<select class="form-control" th:field="*{schemeCode}"
+							id="schemeCode">
+							<option selected="selected" th:value="0"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+							<option th:each="varddoCode : ${lstSchemeCode}"
+								th:value="${varddoCode.schemeCode}"
+								th:text="${language=='mh' ? varddoCode.schemeName  +' ('+ varddoCode.schemeCode +')': varddoCode.schemeName +' ('+ varddoCode.schemeCode +')'}"></option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="title"><span>Institution
+							Details</span></label>
+					<div class="col-sm-9">
+						<table class="table table-bordered"> 
+							<thead>
+								<tr>
+									<th class="datatableheader selectAll"><input type="checkbox" name='selectAll' id="selectAll"
+								data-pid="0"></th>
+									<th class="datatableheader">DDO Code</th>
+									<th class="datatableheader"><b>DDO Office Name</b></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="att, itemStat : ${consolidatePayBillModel.lstCons}">
+							<td><input type="checkbox" name="checkboxid" id="checkboxid"
+								class="checkbox"
+								th:value="${consolidatePayBillModel.lstCons[__${itemStat.index}__].checkboxid}"
+								th:field="${consolidatePayBillModel.lstCons[__${itemStat.index}__].checkboxid}" />
+								<input type="hidden" name="checkboxid2" th:id="${'checkboxid2'+itemStat.index}" 
+								class="checkboxorg checkbox"
+								th:value="${consolidatePayBillModel.lstCons[__${itemStat.index}__].checkboxid}"
+								th:field="${consolidatePayBillModel.lstCons[__${itemStat.index}__].checkboxid}" />
+								<input type="hidden" th:id="ddoCode" th:value="${att.ddoCode}" th:field="${consolidatePayBillModel.lstCons[__${itemStat.index}__].ddoCode}">
+							</td>
+									<td th:text="${att.ddoCode}"></td>
+									<td th:text="${att.officeName}"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="form-group text-center">
+					<input type="submit" id="btnSearch" class="btn btn-primary"
+						th:value="#{msg.thymeleaf.pagelabel.btnSearch}" /> 
+				</div>
+				<hr />
+			</form>
+		</fieldset>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/datatable-common.js}"></script>
+	<script th:src="@{/js/project/consolidate-paybill.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.viewApproveDeleteBill}"></title>
+</head>
+<body class="view-approve-delete-bill">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.payrollBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.viewApproveDeleteBill}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.viewApproveDeleteBill}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+
+			<form method="POST" action="" name="TokenNumber">
+				<table class="table table-bordered table-striped">
+					<tbody>
+						<tr>
+							<th>MONTH</th>
+							<th>YEAR</th>
+							<th>BILL NUMBER</th>
+							<th>Bill Type</th>
+							<th>Bill Status</th>
+						</tr>
+						<tr>
+							<td align="center"><select name="selMonth" id="selMonth"
+								class="selecttag">
+									<option value="">-------Selected--------</option>
+									<option value="1">January</option>
+									<option value="2">February</option>
+									<option value="3">March</option>
+									<option value="4">April</option>
+									<option value="5">May</option>
+									<option value="6">June</option>
+									<option value="7" selected="selected">July</option>
+									<option value="8">August</option>
+									<option value="9">September</option>
+									<option value="10">October</option>
+									<option value="11">November</option>
+									<option value="12">December</option>
+							</select></td>
+							<td align="center"><select name="selYear" id="selYear"
+								class="selecttag">
+									<option value="">-------Selected--------</option>
+									<option value="2021">2021</option>
+									<option value="2022">2022</option>
+									<option value="2023">2023</option>
+									<option value="2024" selected="selected">2024</option>
+							</select></td>
+							<td align="center"><select name="billNo" id="billNo"
+								class="selecttag">
+									<option value="" selected="selected">-------Selected--------
+									</option>
+									<option value="99201790770">99201790770</option>
+									<option value="992017907106">992017907106</option>
+							</select></td>
+							<td align="center"><select name="selBillType" id="selType"
+								class="selecttag">
+									<option value="">-------Selected--------</option>
+									<option value="2500337">PayBill</option>
+							</select></td>
+							<td align="center"><select name="selBillStatus"
+								id="selStatus" class="selecttag">
+									<option value="">-------Selected--------</option>
+									<option value="0">Created</option>
+									<option value="1">Approved</option>
+									<option value="2">Rejected</option>
+							</select></td>
+						</tr>
+					</tbody>
+				</table>
+				<br>
+				<div>
+					<input type="button" name="btn" onclick="getEmpInfo()"
+						id="tokenview" value="Show Pay bills" class="btn">
+				</div>
+				<br> <br>
+				<fieldset class="empdetails">
+					<div class="text-center">No Records To Display ! ! !</div>
+
+					<div class="text-center">
+						<input type="button" name="btnApprove" id="btnApprove"
+							value="Voucher Entry" class="btn"> <input type="button"
+							name="btnDiscard" id="btnDiscard" value="Delete Bill" class="btn">
+						<input type="button" name="formSubmitButton" id="formSubmitButton"
+							value="Generate Bill" class="btn"> <input type="button"
+							name="formForwardButton" id="formForwardButton" value="Forward"
+							class="btn"> <input type="button" name="btnBackAgain"
+							id="btnBackAgain" onclick="history.back()" value="Back"
+							class="buttontag">
+
+					</div>
+
+
+					<br />
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script>
+		$(".empdetails").hide();
+		function getEmpInfo() {
+			$(".empdetails").fadeIn(100);
+		}
+	</script>
+</body>
+</html>

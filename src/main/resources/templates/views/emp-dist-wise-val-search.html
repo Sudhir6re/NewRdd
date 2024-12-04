@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.empDistVal}"></title>
+</head>
+<body class="emp-dist-wise-val-search">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.reportBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.empDistVal}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.empDistVal}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<form method="post" action="" name="" enctype="multipart/form-data">
+				<fieldset class="tabstyle">
+					<legend>Filter Reports BY District and Office </legend>
+					<table class="table bor-0 width-50">
+						<tbody>
+							<tr>
+								<td width="30%"><b><b>Select District :</b></b></td>
+								<td><select name="demoViewLst" id="demoViewLst" class="form-control">
+										<option value="-1">Select</option>
+										<option value="1">All</option>
+								</select></td>
+								<td><a th:href="@{/mdc/empDistWiseValReport}"
+									class="btn">Search</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.allowdeducrulemaster}"></title>
+
+<style>
+table#tblNonGovDuesDeduct td:last-child, table#tblNonGovDuesDeduct td:nth-child(8),
+	table#tblNonGovDuesDeduct th:nth-child(8), table#tblNonGovDuesDeduct th:nth-child(7),
+	table#tblNonGovDuesDeduct td:nth-child(7) {
+	display: none !important;
+}
+
+table#tblNonGovDuesDeduct td:first-child input, table#tblNonGovDuesDeduct td:nth-child(2) input
+	{
+	pointer-events: none;
+}
+
+table#tblNonGovDuesDeduct th:nth-child(2) {
+	min-width: 150px
+}
+
+.netAmount, input.existingAmount {
+	max-width: 120px;
+}
+</style>
+</head>
+<body class="NonGovernmentDuesAndDeduction">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+
+
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.allowdeducrulemaster}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.allowdeducrulemaster}"></span>
+		</h3>
+
+		<form class="form-horizontal" id="ruleMasterForm"
+			th:action="@{/mdc/saveAllowanceDeductionRulesMaster}"
+			th:object="${allowanceDeductionRuleMstEntity}" method="POST"
+			enctype="multipart/form-data">
+
+			<input type="hidden" name="language" id="language"
+				th:value="${language}" /> <input type="hidden" name="message"
+				id="message" th:value="${message}" />
+
+			<div class="form-group">
+
+				<label class="control-label col-sm-2" for="isType"><span
+					th:utext="#{msg.thymeleaf.datatablelabel.typeAllowanceDeduction}"></span>&nbsp;&nbsp;<b><font
+						color="red" size="4px;">*</font></b></label>
+				<div class="col-sm-3" readonly>
+					<select class="form-control" th:field="*{isType}" id="isType">
+						<option th:value="0">Please Select</option>
+						<option th:value="1">Allowances</option>
+						<option th:value="2">Deductions</option>
+						<!-- <option th:value="3">Non Gov Deduction</option>
+						<option th:value="4">Loans And Advances</option> -->
+					</select>
+				</div>
+
+
+				<label class="control-label col-sm-2" for="title"><span
+					th:utext="#{msg.thymeleaf.pagelabel.typeOfComponent}"></span>&nbsp;&nbsp;<b><font
+						color="red" size="4px;">*</font></b></label>
+				<div class="col-sm-3">
+					<!-- 					 <select class="form-control" id="componentId"  th:field = "*{isType}">  -->
+					<select class="form-control" th:field="*{departmentAllowdeducCode}"
+						id="departmentAllowdeducCode">
+						<option selected="selected" th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option
+							th:each="lstdeptEligibilityForAllowAndDeduct : ${lstdeptEligibilityForAllowAndDeduct}"
+							th:data2="${lstdeptEligibilityForAllowAndDeduct.departmentAllowdeducName}"
+							th:data="${lstdeptEligibilityForAllowAndDeduct.departmentAllowdeducId}"
+							th:data1="${lstdeptEligibilityForAllowAndDeduct.isType}"
+							th:value="${lstdeptEligibilityForAllowAndDeduct.departmentAllowdeducCode}"
+							th:text="${language=='mh' ? lstdeptEligibilityForAllowAndDeduct.departmentAllowdeducName : lstdeptEligibilityForAllowAndDeduct.departmentAllowdeducName}"></option>
+
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="payCommissionCode"><span
+					th:utext="#{msg.thymeleaf.pagelabel.paycommission}"></span>&nbsp;&nbsp;<b><font
+						color="red" size="4px;">*</font></b></label>
+				<div class="col-sm-3">
+					<select class="form-control" id="payCommissionCode"
+						th:field="*{payCommissionCode}">
+						<option th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option th:each="varPay : ${lstddcPayCommission}"
+							th:value="${varPay.id}"
+							th:text="${language=='mh' ? varPay.commission_name_mh : varPay.commission_name_en}"></option>
+					</select>
+				</div>
+
+				<label class="control-label col-sm-2" for="amount"><span
+					th:utext="#{msg.thymeleaf.label.amount}"></span>&nbsp;&nbsp;<b><font
+						color="red" size="4px;">*</font></b></label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" id="amount"
+						th:field="*{amount}" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="startDate"><span
+					th:utext="#{msg.thymeleaf.label.startDate}"></span>&nbsp;&nbsp;<b><font
+						color="red" size="4px;">*</font></b></label>
+				<div class="col-sm-3">
+					<input type="date" class="form-control" id="startDate"
+						th:field="*{startDate}" />
+				</div>
+
+				<label class="control-label col-sm-2" for="endDate"><span
+					th:utext="#{msg.thymeleaf.label.endDate}"></span>&nbsp;&nbsp;<b><font
+						color="red" size="4px;">*</font></b></label>
+				<div class="col-sm-3">
+					<input type="date" class="form-control" id="endDate"
+						th:field="*{endDate}" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="percentage"><span
+					th:utext="#{msg.thymeleaf.label.percentage}"></span>&nbsp;&nbsp;<b><font
+						color="red" size="4px;">*</font></b></label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control numericdot" id="percentage"
+						th:field="*{percentage}" />
+				</div>
+
+				<label class="control-label col-sm-2" for="minBasic"><span
+					th:utext="#{msg.thymeleaf.label.minBasic}"></span></label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" id="minBasic"
+						th:field="*{minBasic}" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="maxBasic"><span
+					th:utext="#{msg.thymeleaf.label.maxBasic}"></span></label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" id="maxBasic"
+						th:field="*{maxBasic}" />
+				</div>
+
+				<label class="control-label col-sm-2" for="cityClass"><span
+					th:utext="#{msg.thymeleaf.label.cityClass}"></span></label>
+				<div class="col-sm-3">
+
+					<select class="form-control" id="cityClass" th:field="*{cityClass}">
+						<option th:value="0">Please Select</option>
+						<option th:value="X">X</option>
+						<option th:value="Y">Y</option>
+						<option th:value="Z">Z</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="gradePayLower"><span
+					th:utext="#{msg.thymeleaf.label.gradePayLower}"></span></label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" id="gradePayLower"
+						th:field="*{gradePayLower}" />
+				</div>
+
+				<label class="control-label col-sm-2" for="gradePayHigher"><span
+					th:utext="#{msg.thymeleaf.label.gradePayHigher}"></span></label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" id="gradePayHigher"
+						th:field="*{gradePayHigher}" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="premiumAmount"><span
+					th:utext="#{msg.thymeleaf.label.premiumAmount}"></span></label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" id="premiumAmount"
+						th:field="*{premiumAmount}" />
+				</div>
+
+
+
+				<label class="control-label col-sm-2" for="cityGroup"><span
+					th:utext="#{msg.thymeleaf.label.cityGroup}"></span></label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" id="cityGroup"
+						th:field="*{cityGroup}" />
+				</div>
+
+			</div>
+
+
+
+
+			<div class="form-group text-center">
+				<hr />
+				<input type="submit" id="btnSave" class="btn btn-primary"
+					th:value="#{msg.thymeleaf.pagelabel.btnSave}" /> <input
+					type="reset" id="btnReset" class="btn btn-primary"
+					th:value="#{msg.thymeleaf.pagelabel.btnReset}" /> <a
+					th:href="@{/user/home}" class="btn"> <span
+					th:text="#{msg.thymeleaf.pagelabel.btnCancel}"></span></a> <input
+					type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			</div>
+		</form>
+
+
+
+		<table id="tblDataTable" class="table table-striped table-bordered"
+			style="width: 100%">
+			<thead>
+				<tr>
+					<th th:utext="#{msg.thymeleaf.pagelabel.srno}"></th>
+					<th th:utext="#{msg.thymeleaf.datatablelabel.allowanceDeduction}"></th>
+					<th th:utext="#{msg.thymeleaf.pagelabel.paycommission}"></th>
+					<th th:utext="#{msg.thymeleaf.label.startDate}"></th>
+					<th th:utext="#{msg.thymeleaf.label.endDate}"></th>
+					<th th:utext="#{msg.thymeleaf.label.amount}"></th>
+					<th th:utext="#{msg.thymeleaf.label.percentage}"></th>
+					<th th:utext="#{msg.thymeleaf.label.minBasic}"></th>
+					<th th:utext="#{msg.thymeleaf.label.maxBasic}"></th>
+					<th th:utext="#{msg.thymeleaf.label.cityClass}"></th>
+					<th th:utext="#{msg.thymeleaf.label.gradePayLower}"></th>
+					<th th:utext="#{msg.thymeleaf.label.gradePayHigher}"></th>
+					<th th:utext="#{msg.thymeleaf.label.premiumAmount}"></th>
+					<th th:utext="#{msg.thymeleaf.label.cityGroup}"></th>
+					<th th:utext="#{msg.thymeleaf.pagelabel.status}"></th>
+					<th th:utext="#{msg.thymeleaf.datatablelabel.action}"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="varlstAlloDeduMst: ${lstAllowanceDeductionMstEntity}">
+					<td th:text="${varlstAlloDeduMstStat.index + 1}"></td>
+					<td th:text="${varlstAlloDeduMst.departmentAllowdeducName}"></td>
+					<td th:text="${varlstAlloDeduMst.payCommisionName}"></td>
+					<td
+						th:text="${#dates.format(varlstAlloDeduMst.startDate, 'dd-MM-yyyy')}"></td>
+					<td
+						th:text="${#dates.format(varlstAlloDeduMst.endDate, 'dd-MM-yyyy')} ?: '------'"></td>
+					<td class="text-right" th:text="${varlstAlloDeduMst.amount}"></td>
+					<td class="text-right" th:text="${varlstAlloDeduMst.percentage}"></td>
+					<td class="text-right"    th:text="${#numbers.formatDecimal(varlstAlloDeduMst.minBasic, 0, 0)}"></td>
+					<td class="text-right"   th:text="${#numbers.formatDecimal(varlstAlloDeduMst.maxBasic, 0, 0)}"></td>
+					<td th:text="${varlstAlloDeduMst.cityClass}"></td>
+					<td class="text-right" th:text="${varlstAlloDeduMst.gradePayLower}"></td>
+					<td class="text-right" th:text="${varlstAlloDeduMst.gradePayHigher}"></td>
+					
+					<td class="text-right" th:text="${varlstAlloDeduMst.premiumAmount}"></td>
+					<td class="text-right" th:text="${varlstAlloDeduMst.cityGroup}"></td>
+					<td class="text-center"><span
+						th:if="${varlstAlloDeduMst.isActive} == '1'"> <span
+							class="label label-success"
+							th:utext="#{msg.thymeleaf.status.active}"></span>
+					</span> <span th:if="${varlstAlloDeduMst.isActive} == '0'"> <span
+							class="label label-danger"
+							th:utext="#{msg.thymeleaf.status.inactive}"></span>
+					</span></td>
+					<td>
+						<div class="form-group text-center flex">
+							<a data-toggle="tooltipEdit" title="Edit"
+								th:href="@{'/mdc/editAllowanceDeductionRulesMaster/' + ${varlstAlloDeduMst.allowanceDeductionWiseRuleId}}">
+								<span class="glyphicon glyphicon-edit"></span>
+							</a> <a data-toggle="tooltipDelete" title="Delete"
+								th:href="@{'/mdc/deleteRule/' + ${varlstAlloDeduMst.allowanceDeductionWiseRuleId} + '/' + ${varlstAlloDeduMst.isActive}}"
+								class="delete"> <span class="glyphicon glyphicon-trash"></span>
+							</a>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+
+
+
+
+		<div class="form-group text-center">
+			<hr />
+			<input type="submit" id="btnSave" class="btn btn-primary"
+				th:value="#{msg.thymeleaf.pagelabel.btnSave}" /> <input
+				type="reset" id="btnReset" class="btn btn-primary"
+				th:value="#{msg.thymeleaf.pagelabel.btnReset}" /> <a
+				th:href="@{/user/home}" class="btn"><span
+				th:text="#{msg.thymeleaf.pagelabel.btnCancel}"></span></a>
+		</div>
+
+		<input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" />
+
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+
+	<script th:src="@{/js/hte/allow-deduc-rule-master.js}"></script>
+
+
+</body>
+</html>

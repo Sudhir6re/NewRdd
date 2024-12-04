@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.statistics}"></title>
+</head>
+<body class="statistics">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.dcpsBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.statistics}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.statistics}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<form method="post" action="" name="" enctype="multipart/form-data">
+				<table align="center" class="table table-bordered table-striped width-50-auto">
+					<tbody>
+						<tr>
+							<td colspan="6"><font
+								style="font-size: 13px; font-weight: bold; color: #FF3333;">
+									Total No. of Users Loged In: </font></td>
+							<td>
+								<div id="divUsrLogIn">--</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6"><font
+								style="font-size: 13px; font-weight: bold; color: #FF3333;">
+									Total No Of DDOs: </font></td>
+							<td>
+								<div id="divDDO">--</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6"><font
+								style="font-size: 13px; font-weight: bold; color: #FF3333;">
+									Total No Of Employees Covered: </font></td>
+							<td>
+								<div id="divEMP">--</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6"><font
+								style="font-size: 13px; font-weight: bold; color: #FF3333;">
+									Total No Of Bills Drawn (<label id="lBlMonth"></label>-<label
+									id="lblYear"></label>):
+							</font></td>
+							<td>
+								<div id="divBills">--</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6"><font
+								style="font-size: 13px; font-weight: bold; color: #FF3333;">
+									Total No. of Employees Covered in Bills (<label id="lBlMonth1"></label>-<label
+									id="lblYear1"></label>):
+							</font></td>
+							<td>
+								<div id="divEmpInBill">--</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<br />
+				<div class="text-center">
+					<input type="button" name="backButton" id="backButton"
+						value="Close" size="3" maxlength="3" class="buttontag"
+						onclick="history.back()">
+
+
+				</div>
+			</form>
+		</div>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{menu.mapping.consolidatePayBill}"></title>
+<script type="text/javascript">
+	//Inner report method started
+	function showinnerreport(billNumber,ddoCode) {
+		var billnm = billNumber;
+		var ddoCode=$("#ddoCode").val();
+		
+		$("#loaderMainNew").show();
+		
+		$
+				.ajax({
+					type : "GET",
+					url : "../ddo/getinnerreport/" + billNumber + "/"
+							+ 1 + "/" + 1+"/"+ddoCode,
+					async : true,
+					contentType : 'application/json',
+					error : function(data) {
+						alert("error");
+						console.log(data);
+					},
+					success : function(data) {
+						$("#loaderMainNew").hide();
+						var urlstyle = 'height=600,width=1400,toolbar=no,minimize=yes,resizable=yes,header=no,status=no,menubar=no,directories=no,fullscreen=no,location=no,scrollbars=yes,top=20,left=200';
+						var win = window.open("", "", urlstyle);
+						win.document.write(data);
+						win.focus();
+
+						// self.close();
+
+					}
+				});
+	}
+	// inner report method ended
+</script>
+</head>
+<body class="consolidate-paybill-details">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.TransactionBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{menu.mapping.consolidatePayBill}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{menu.mapping.consolidatePayBill}"></span>
+		</h3>
+		<fieldset class="container">
+			<!-- <legend th:utext="#{menu.mapping.consolidatePayBill}"
+				th:style="${'color: orange;'}"></legend> -->
+
+			<form class="form-horizontal" th:object="${consolidatePayBillModel}"
+				method="POST" enctype="multipart/form-data"
+				th:action="@{/ddo/saveConsolidatePayBill}">
+
+				<input type="hidden" name="language" id="language"
+					th:value="${language}" /> <input type="hidden" name="message"
+					id="message" th:value="${message}" /> 
+					
+					
+					<input type="hidden"
+					name="userId" id="userId" th:value="${userId}" />
+					
+					<input type="hidden"
+					name="monthName" id="monthName" th:field="*{monthName}" />
+					<input type="hidden"
+					name="schemeCode" id="schemeCode" th:field="*{schemeCode}" />
+				<input type="hidden"
+					name="yearName" id="yearName" th:field="*{yearName}" />
+
+
+				<table id="tblShowPayBill"
+					class="table table-striped table-bordered" style="width: 100%">
+					<thead>
+						<tr>
+							<th th:utext="#{msg.thymeleaf.pagelabel.ddoCode}" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.paybillGenrtId}" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.billDesc}" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.grossAmount}" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.netAmount}" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.status}"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="att, itemStat : ${consolidatePayBillModel.lstCons}">
+									<td>
+									<span  th:text="${att.ddoCode}"></span>
+									<input type="hidden" th:id="ddoCode" th:value="${att.ddoCode}" th:field="${consolidatePayBillModel.lstCons[__${itemStat.index}__].ddoCode}">
+										<input type="hidden" th:id="billGrossAmt" th:value="${att.billGrossAmt}" th:field="${consolidatePayBillModel.lstCons[__${itemStat.index}__].billGrossAmt}">
+										<input type="hidden" th:id="billNetAmt" th:value="${att.billNetAmt}" th:field="${consolidatePayBillModel.lstCons[__${itemStat.index}__].billNetAmt}">
+									
+									</td>
+									<td><a th:onclick="|showinnerreport(${att.billNo})|" class="billNo" th:text=${att.billNo} th:value="${att.billNo}" th:field="${consolidatePayBillModel.lstCons[__${itemStat.index}__].billNo}"></a></td>
+									<td th:text="${att.billDesc}" th:value="${att.billDesc}" th:field="${consolidatePayBillModel.lstCons[__${itemStat.index}__].billDesc}"></td>
+									<td th:text="${att.billGrossAmt}">
+								</td>
+									<td th:text="${att.billNetAmt}" >   
+									</td>
+									 <td style="text-align: left"><a th:href="@{'/ddo/rejectConsolidatePaybill/' + ${att.ddoCode} + '/' + ${att.billNo}}"><input type="button" value="Reject"></a></td>
+								</tr>
+							</tbody>
+							
+							
+							
+
+
+					</tbody>
+				</table>
+				<div class="text-center">
+					<input type="submit" value="Consolidated Paybill"
+						class="btn btn-primary" id="btnConsolidatePaybill" />
+
+				</div>
+			</form>
+		</fieldset>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/datatable-common.js}"></script>
+	<script th:src="@{/js/project/consolidate-paybill.js}"></script>
+
+</body>
+</html>

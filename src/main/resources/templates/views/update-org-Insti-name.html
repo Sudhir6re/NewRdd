@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.updateOrgInstiName}"></title>
+
+</head>
+<body class="update-org-Insti-name">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.dcpsBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.updateOrgInstiName}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.updateOrgInstiName}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<form method="post" action="" name="frmUpdateInstitutionName"
+				enctype="multipart/form-data" id="DDOEmpSelect">
+				<fieldset>
+					<table class='table bor-0 width-50'>
+						<tbody>
+							<tr align="center">
+								<td width="25%" align="left">DDO Code</td>
+								<td width="50%" align="left"><input type="text"
+									id="ddoCodeForSearch" size="30" name="ddoCodeForSearch">
+									<div class="text-center"><small style="color: red">(Please
+										Enter the DDO Code for the Search)</small></div>
+								</td>
+							</tr>
+							
+						</tbody>
+					</table>
+					<br />
+					<div class="text-center">
+						<input type="button" name="btnSearch" id="btnSearch"
+							value="Search" onclick="getOrgInfo()" class="buttontag">
+					</div>
+				</fieldset>
+				<br> <br>
+				<fieldset class="orgdetails">
+					<legend id="headingMsg">
+						<b>Update Name Of Institution</b>
+					</legend>
+					<table  id="datatableNew" class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th class="datatableheader sortable">DDO Code</th>
+								<th class="datatableheader sortable">Organization
+									Institution Name</th>
+								<th class="datatableheader sortable">Organization Updated
+									Name</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>20541200001</td>
+								<td>MAHARASHTRA UNIVERSITY,THANE,NORTH MAHARASHTRA
+									UNIVERSITY</td>
+								<td><input type="text" id="OrgUpdatedName"
+									name="hdnOrgUpdatedName" size="70"></td>
+							</tr>
+						</tbody>
+					</table>
+
+					<br>
+					<div class="text-center">
+						<input type="button" name="btnSelect" id="btnDDOEmpSelect"
+							value="Update" size="3" maxlength="3" class="bigbutton">
+						<input type="button" name="btnBackAgain" id="btnBackAgain"
+							onclick="history.back()" value="Back" class="buttontag">
+					</div>
+				</fieldset>
+
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script>
+		$(".orgdetails").hide();
+		function getOrgInfo() {
+			$(".orgdetails").fadeIn(100);
+		}
+	</script>
+</body>
+</html>

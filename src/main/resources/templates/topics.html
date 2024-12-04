@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+	
+	<div th:replace="views/homepage :: varslider"></div>
+	<!-- <h3>
+		<b><center>+++++</center></b>
+	</h3> -->
+	<form>
+
+		<input type="hidden" name="menuList" id="menuList"
+			th:value="${menuList}" /> <input type="hidden" name="SubMenuList"s
+			id="SubMenuList" th:value="${SubMenuList}" /> <input type="hidden"
+			name="lstDDOTOBeApprovedSize" id="lstDDOTOBeApprovedSize"
+			th:value="${lstDDOTOBeApprovedSize}" /> <input type="hidden"
+			name="lstApprovedDDOSize" id="lstApprovedDDOSize"
+			th:value="${lstApprovedDDOSize}" />
+			
+			
+			<input type="hidden"
+			name="levelRoleVal" id="levelRoleVal" th:value="${levelRoleVal}" /> 
+		<!-- menuList -->
+		<div class="container">
+			<!-- <div>
+	    Logged in user: <b th:inline="text"  class="user"  th:text="${remoteUser}">> </b>
+   </div>  -->
+
+
+			<!-- <div class="container-fluid">
+
+				<div
+					sec:authorize="hasAnyRole('ROLE_MODERATOR','ROLE_USER','ROLE_HOD','ROLE_OPERATOR')">
+					<div class="row">
+
+						<div class="col-sm-4" style="display: none;">
+							<div class="card-deck">
+								<div class="card bg-info">
+									<div class="card-body text-center">
+										<ul class="list-group">
+											<li class="list-group-item active"
+												style="color: #FFFFFF; background-color: #90EE90; color: black;"><span
+												th:utext="#{msg.thymeleaf.pagelabel.taskCompleted}">
+											</span></li>
+											<li class="list-group-item text-left"><a
+												th:href="@{'/home/dashboard/getTskComp/approvedDDO'}"
+												th:utext="#{msg.thymeleaf.pagelabel.approvedDDO}"></a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-8">
+							<div class="card-deck">
+								<div class="card bg-warning">
+									<div class="card-body text-center">
+
+										href="mstUserDesk"   href="mstUserLocation"   href="mstUserBank"
+
+										<ul class="list-group">
+
+											<li class="list-group-item active"
+												th:utext="#{msg.thymeleaf.pagelabel.departmentDesk}"
+												style="color: black; background-color: #f8bb86; border-color: white; border: 1px solid #ddd; color: black;"></li>
+
+
+											<li class="list-group-item text-left"
+												id="departmentDeskLevel3"><a th:href="@{''}"
+												th:utext="#{msg.thymeleaf.pagelabel.level3}"></a></li>
+
+
+											<li class="list-group-item text-left"
+												id="departmentDeskLevel2"><a th:href="@{''}"
+												th:utext="#{msg.thymeleaf.pagelabel.level2}"></a></li>
+
+
+											<li class="list-group-item text-left"
+												id="departmentDeskLevel1"><a th:href="@{''}"
+												th:utext="#{msg.thymeleaf.pagelabel.level1}"></a></li>
+
+
+
+
+
+										</ul>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+						third div start
+
+						<div class="col-sm-4">
+							<div class="card-deck">
+								<div class="card bg-warning">
+									<div class="card-body text-center">
+
+										href="mstUserDesk"   href="mstUserLocation"   href="mstUserBank"
+
+										<ul class="list-group">
+
+											<li class="list-group-item active"
+												th:utext="#{msg.thymeleaf.pagelabel.myDesk}"
+												style="background-color: #ffa38a; border: 1px solid #ddd; color: black;"></li>
+											<li class="list-group-item text-left"><a
+												th:href="@{'/home/dashboard/getTskPending/toBeApprovedDDO'}"
+												th:utext="#{msg.thymeleaf.pagelabel.profile}"></a></li>
+
+											<li class="list-group-item text-left" style="display: none;"><a
+												th:href="@{'/home/dashboard/getTskComp/approvedDDO'}"
+												th:utext="#{msg.thymeleaf.pagelabel.approvedDDO}"></a></li>
+
+											<li class="list-group-item text-left" style="display: none;"><a
+												th:href="@{'/home/dashboard/getTskPending/toBeApprovedDDO'}"
+												th:utext="#{msg.thymeleaf.pagelabel.pendingDDOApproval}"></a>
+											</li>
+
+											<li class="list-group-item text-left"><a
+												th:href="@{'/home/dashboard/getTskPending/toBeApprovedDDO'}"
+												th:utext="#{msg.thymeleaf.pagelabel.empConfig}"></a></li>
+											<li class="list-group-item text-left"><a
+												th:href="@{'/home/dashboard/getTskPending/toBeApprovedDDO'}"
+												th:utext="#{msg.thymeleaf.pagelabel.changeStatement}"></a></li>
+											<li class="list-group-item text-left"><a
+												th:href="@{'/home/dashboard/getTskPending/toBeApprovedDDO'}"
+												th:utext="#{msg.thymeleaf.pagelabel.paybillStatus}"></a></li>
+
+
+										</ul>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+						third div end
+
+
+
+
+					</div>
+				</div>
+
+				<table id="tblApprovedDDO"
+					class="table table-striped table-bordered" style="width: 100%">
+					<thead>
+						<tr>
+							<th class="text-center" colspan="7"
+								style="color: black; background-color: #90EE90;">Approved</th>
+
+						</tr>
+						<tr>
+							<th th:utext="#{msg.thymeleaf.pagelabel.ddoScreenId}"
+								class="text-center"></th>
+							<th th:utext="#{msg.thymeleaf.pagelabel.parentDept}"
+								class="text-center" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.subDeptName}"
+								class="text-center" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.ddoname}"
+								class="text-center" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.ddocode}"
+								class="text-center" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.level}"
+								class="text-center" />
+							<th th:utext="#{msg.thymeleaf.datatablelabel.action}"
+								class="text-center"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="varApprovedDDO : ${lstDDOTOBeApproved}">
+							<td th:text="${varApprovedDDO.ddoRegID}" class="text-center"></td>
+							<td th:text="${varApprovedDDO.deptName}"></td>
+							<td th:text="${varApprovedDDO.subDeptName}"></td>
+							<td th:text="${varApprovedDDO.ddoName}"></td>
+							<td th:text="${varApprovedDDO.ddoCode}"></td>
+							<td th:text="${varApprovedDDO.levelHier}" class="text-center"></td>
+
+
+							<td style="width: 10%">
+								<div class="form-group">
+									<div class="col-sm-offset-1 col-sm-2">
+										<a data-toggle="tooltip" title="Approve"
+											th:onclick="${'ConfirmApprove('+varApprovedDDO.ddoRegID+');'}"><span
+											class="glyphicon glyphicon-ok"> </span></a>
+									</div>
+									<div class="col-sm-offset-1 col-sm-2">
+										<a data-toggle="tooltip" title="Reject"
+											th:onclick="${'ConfirmDeleteRecord('+varApprovedDDO.ddoRegID+','+varDDOToBeAppr.isActive+');'}">
+											<span class="glyphicon glyphicon-remove"></span>
+										</a>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<table id="tblPendingDDOApproval"
+					class="table table-striped table-bordered" style="width: 100%">
+					<thead>
+						<tr>
+							<th class="text-center" colspan="7"
+								style="color: black; background-color: #f8bb86;">Pending</th>
+
+						</tr>
+						<tr>
+							<th th:utext="#{msg.thymeleaf.pagelabel.ddoScreenId}"
+								class="text-center"></th>
+							<th th:utext="#{msg.thymeleaf.pagelabel.parentDept}"
+								class="text-center" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.subDeptName}"
+								class="text-center" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.ddoname}"
+								class="text-center" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.ddocode}"
+								class="text-center" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.level}"
+								class="text-center" />
+							<th th:utext="#{msg.thymeleaf.datatablelabel.action}"
+								class="text-center"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="varDDOToBeAppr : ${lstDDOTOBeApproved}">
+							<td th:text="${varDDOToBeAppr.ddoRegID}" class="text-center"></td>
+							<td th:text="${varDDOToBeAppr.deptName}"></td>
+							<td th:text="${varDDOToBeAppr.subDeptName}"></td>
+							<td th:text="${varDDOToBeAppr.ddoName}"></td>
+							<td th:text="${varDDOToBeAppr.ddoCode}"></td>
+							<td th:text="${varDDOToBeAppr.levelHier}" class="text-center"></td>
+
+
+							<td style="width: 10%">
+								<div class="form-group">
+									<div class="col-sm-offset-1 col-sm-2">
+										<a data-toggle="tooltip" title="Approve"
+											th:onclick="${'ConfirmApprove('+varDDOToBeAppr.ddoRegID+');'}"><span
+											class="glyphicon glyphicon-ok"> </span></a>
+									</div>
+									<div class="col-sm-offset-1 col-sm-2">
+										<a data-toggle="tooltip" title="Reject"
+											th:onclick="${'ConfirmDeleteRecord('+varDDOToBeAppr.ddoRegID+','+varDDOToBeAppr.isActive+');'}">
+											<span class="glyphicon glyphicon-remove"></span>
+										</a>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div> -->
+		</div>
+	</form>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/datatable-common.js}"></script>
+	<script th:src="@{/js/project/topics.js}"></script>
+	
+</body>
+</html>

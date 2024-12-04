@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Employee Basic Details Report</title>
+<link rel="stylesheet" th:href="@{/css/print.css}" />
+<link rel="stylesheet" th:href="@{/css/styles.css}" />
+<style>
+table.table.table-striped.table-bordered a {
+	border: none !important;
+}
+</style>
+</head>
+<body class="revenue-stamp-report">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.reportBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.empchangebasicrpt}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		
+		<div id="print-content"  class="container">
+			<fieldset>
+
+				<div class="text-center">
+					<h3 Class="PageHeading">Employee Basic Details Report</h3>
+				</div>
+				<table class="bor-0">
+					<tbody>
+						<tr>
+							<td colspan="2" class="Label2"
+								style="font-weight: bold; text-align: center;">MAHARASHTRA UNIVERSITY,THANE,NORTH MAHARASHTRA UNIVERSITY<br>
+							</td>
+						</tr>
+						<tr>
+							<td class="Label2" style="font-weight: bold;">Details Of Employee for the Month of  <span th:text="${currmonyer}"></span>
+							</td>
+						</tr>
+						<tr>
+							<td class="Label2" style="font-weight: bold;">Bill No:<span
+								th:text="${billno}"></span></td>
+							<td class="Label2" style="font-weight: bold; text-align: right;">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<br />
+				<table class="table table-striped">
+
+					<thead>
+						<tr>
+							<th rowspan="2" th:utext="#{msg.thymeleaf.pagelabel.srno}" /></th>
+							<th rowspan="2" th:utext="#{msg.pagelabel.employeeName}" /></th>
+							<th rowspan="2" th:utext="#{msg.thymeleaf.pagelabel.designation}" /></th>
+							<th rowspan="2" th:utext="#{msg.thymeleaf.pagelabel.GPF/DCPSno}" /></th>
+							<th rowspan="2" th:utext="#{msg.thymeleaf.pagelabel.panno}" /></th>
+							<th rowspan="2" th:utext="#{msg.thymeleaf.pagelabel.bankacno}" /></th>
+							<th rowspan="2" th:utext="#{msg.thymeleaf.pagelabel.branchname}" /></th>
+							
+						</tr>
+
+
+					</thead>
+
+					<tbody>
+						<tr th:each="varEmp : ${empDtls}">
+							<td class="text-center" th:text="${varEmpStat.index+1}"></td>
+							<td class="text-center" th:text="${varEmp.name}"></td>
+							<td class="text-center" th:text="${varEmp.desgName}"></td>
+							<td class="text-center" th:text="${varEmp.dcpsNo}"></td>
+							<td class="text-center" th:text="${varEmp.panNo}"></td>
+							<td class="text-center" th:text="${varEmp.bankAccNo}"></td>
+							<td class="text-center" th:text="${varEmp.branchName}"></td>
+							</tr>
+					</tbody>
+
+				</table>
+				<br />
+				<table class="table bor-0">
+					<tbody>
+						<tr>
+							<td valign="middle" style="font-weight: bold;"><br /> <b>Verification
+									Time:-</b><span th:text="${systemdate}"></span><br /> <span>* Generated
+									By <span th:text="#{msg.thymeleaf.pagelabel.hteCustSevaarth}"></span>
+							</span></td>
+						</tr>
+					</tbody>
+				</table>
+			</fieldset>
+		</div>
+		<div class="text-center">
+			<button id="print" onclick="printContent('print-content');"
+				class="btn">Print</button>
+			<input type="button" name="btnBackAgain" id="btnBackAgain"
+				onclick="history.back()" value="Back" class="buttontag">
+		</div>
+	</div><div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

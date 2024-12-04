@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.createadminoffice}"></title>
+<style type="text/css">
+</style>
+</head>
+<body class="create-admin-office">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.createadminoffice}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.createadminoffice}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<div id="content">
+				<div id="content" style="background: :#f0ebe8;">
+					<script type="text/javascript">
+						function preventBack() {
+							window.history.forward();
+						}
+						setTimeout("preventBack()", 0);
+						window.onunload = function() {
+							null
+						};
+					</script>
+					<script type="text/javascript"
+						src="/script/common/commonfunctions.js"></script>
+
+					<script type="text/javascript">
+						
+					</script>
+
+
+					<form method="POST" name="DDOOfficeView"
+						th:action="@{/mdc/saveCreateAdminOffice}">
+						<input type="hidden" id="ddoCode" name="ddoCode"
+							th:value="${ddoCode}"> <input type="hidden"
+							id="uniqeInstituteId" name="uniqeInstituteId"
+							th:value="${uniqeInstituteId}" />
+
+
+						<fieldset class="tabstyle">
+							<legend>
+								<b>Filter Institute</b>
+							</legend>
+							<table class="table bor-0">
+								<tbody>
+									<tr>
+										<td align="center" width="15%">Admin Type</td>
+										<td width="18%"><select id="cmbAdminType"
+											style="width: 85%, display: inline;">
+												<option title="Select All" value="-1">Select</option>
+												<option th:each="zpAdminNameMst : ${lstZpAdminNameMst}"
+													th:value="${zpAdminNameMst.adminCode}"
+													th:text="${zpAdminNameMst.adminName}"></option>
+										</select></td>
+										<td align="center" width="15%">Distrct</td>
+										<td width="18%"><select name="cmbDistrict"
+											id="cmbDistrict" style="width: 85%, display: inline;">
+												<option title="Select All" value="-1">Select</option>
+
+												<option th:each="cmnDistrctMst : ${lstCmnDistrctMst}"
+													th:value="${cmnDistrctMst.districtId}"
+													th:text="${cmnDistrctMst.districtName}"></option>
+
+										</select></td>
+										<td align="center" width="15%">Taluka</td>
+										<td width="18%"><select name="cmbTaluka" id="cmbTaluka"
+											style="width: 85%, display: inline;">
+												<option title="Select All" value="-1">Select</option>
+												<option th:each="cmnTalukaMst : ${lstCmnTalukaMst}"
+													th:value="${cmnTalukaMst.talukaId}"
+													th:text="${cmnTalukaMst.talukaName}"></option>
+
+										</select></td>
+									</tr>
+									<tr>
+										<td colspan="6" align="center"><input id="btnFilter"
+											class="buttontag" type="button" size="5" maxlength="5"
+											value="Filter" name="btnFilter" style="width: 120px;"></td>
+									</tr>
+								</tbody>
+							</table>
+						</fieldset>
+						<div id="tabmenu">
+							<legend><b>DDO OFFICE</b></legend>
+						</div>
+						<div id="tcontent1">
+							<div align="center">
+								<h1></h1>
+							</div>
+							<br>&nbsp; <a th:href="@{/mdc/createAdminOfficeMaster}"
+								class="btn">Add new Entry</a> <br>
+							<table class="table" id="ddoMapTable" style="width: 100%">
+								<thead>
+									<tr>
+										<th class="datatableheader"
+											style="text-align: center; font-size: 12px;">DDO Code</th>
+										<th class="datatableheader"
+											style="text-align: center; font-size: 12px;">Level2 DDO
+											Code</th>
+										<!-- 	<th class="datatableheader"
+										style="text-align: center; font-size: 12px;">Level3 DDO
+										Code</th>
+									<th class="datatableheader"
+										style="text-align: center; font-size: 12px;">Level4 DDO
+										Code</th> -->
+										<th class="datatableheader"
+											style="text-align: center; font-size: 12px;">Hierarchy
+											Level</th>
+
+
+										<th class="datatableheader"
+											style="text-align: center; font-size: 12px;">Created
+											Date</th>
+
+
+										<th class="datatableheader hide"
+											style="text-align: center; font-size: 12px;">Zp Map Id</th>
+
+
+										<th class="datatableheader"
+											style="text-align: center; font-size: 12px;">Status</th>
+
+
+									</tr>
+								</thead>
+								<tbody>
+
+									<tr th:each="zpRltDdoMapRlt, rowStat : ${lstZpRltDdoMapRlt}">
+										<td><span th:id="|${rowStat.index}${zpRltDdoMapRlt[0]}|">
+												<a href="#" class="ddoCode"
+												th:data-ddocode="${zpRltDdoMapRlt[0]}"
+												th:data-srno="${rowStat.index}"
+												th:attr="data-target='${zpRltDdoMapRlt[0]}', data-index='${rowStat.index}'"
+												th:text="${zpRltDdoMapRlt[0]}"> 3401002205
+											</a>
+										</span> <!-- 	   <span  th:id="${zpRltDdoMapRlt[0]}"  >
+							      <a href="#" th:onclick="'popupDtls(\'' + ${zpRltDdoMapRlt[0]} + '\', \'' + ${rowStat.index} + '\');'" th:text="${zpRltDdoMapRlt[0]}" >3401002205</a>
+							   </span>  --></td>
+										<td><span th:id="|${rowStat.index}${zpRltDdoMapRlt[1]}|">
+												<a href="#" class="ddoCode"
+												th:attr="data-target='${zpRltDdoMapRlt[1]}', data-index='${rowStat.index}'"
+												th:text="${zpRltDdoMapRlt[1]}"
+												th:data-ddocode="${zpRltDdoMapRlt[1]}"
+												th:data-srno="${rowStat.index}"> 3401002205 </a>
+										</span></td>
+										<!-- 	   <td><span th:text="${zpRltDdoMapRlt[2]}"></span> </td>
+							   <td><span th:text="${zpRltDdoMapRlt[3]}"></span> </td> -->
+										<td><span th:text="${zpRltDdoMapRlt[4]}"></span></td>
+										<!--    <td><span th:text="${zpRltDdoMapRlt[5]}"></span> -->
+
+
+										<td
+											th:text="${#dates.format(zpRltDdoMapRlt[7], 'dd-MM-yyyy')}?:'------'"></td>
+
+
+										<td th:text="${zpRltDdoMapRlt[6]}" class="hide"></td>
+
+										<td><span th:switch="${zpRltDdoMapRlt[5]}"> <span
+												th:case="0" class="bg-warning">Pending</span> <span
+												th:case="1" class="bg-success">Approved</span> <span
+												th:case="*" class="bg-danger">Rejected</span>
+										</span></td>
+
+
+
+									</tr>
+								</tbody>
+							</table>
+							<br>&nbsp; <br> <br>
+
+							<script type="text/javascript">
+								
+							</script>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/hte/create-admin-office.js}"></script>
+</body>
+</html>

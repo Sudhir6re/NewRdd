@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.annualIncrement}"></title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body class="annual-increment">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.annualIncrement}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.annualIncrement}"></span>
+		</h3>
+		<div class="row">
+			<div class="col-md-7">
+				<h6 style="color: red; font-weight: bold; margin-left: 5px;">Note:Annual
+					Increment Details entered through this form will be reflected in
+					the service book</h6>
+			</div>
+			<!-- <div class="col-md-5 text-right">
+				<button class="btn btn-warning btn-md" id="btnAddNewOrder">Add New Order</button>
+				<a class="btn btn-warning btn-md" id="btnAddNewOrder" th:href="@{/transaction/annualIncrementStatus}">View Increment Order Status</a>
+			</div>
+		</div> -->
+
+
+
+
+			<fieldset class="container">
+				<form class="form-horizontal container" method="POST"
+					enctype="multipart/form-data">
+					<div class="addrowmain">
+						<div class="row">
+							<div class="col-md-2">Increment Certificate Order No.</div>
+							<div class="col-md-3">
+								<input type="text" id="certificateNumber" class="form-control" 
+									name="certificateNumber" /> <!-- onblur="checkOrderNoAlreadyExists();" -->
+							</div>
+							<div class="col-md-2">Order Date</div>
+							<div class="col-md-3">
+								<input type="date" id="orderDate" class="form-control"
+									name="orderDate" />
+							</div>
+						</div>
+
+						<br>
+						<div class="row">
+							<div class="col-md-2">Bill Group Name.</div>
+							<div class="col-md-3">
+
+								<select class="form-control" id="billNo">
+									<option selected="selected" th:value="0"
+										th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+									<option th:each="varAllBillGroup : ${lstAllBillGroup}"
+								th:value="${varAllBillGroup.dcpsDdoBillGroupId}"
+								th:text="${language=='mh' ? varAllBillGroup.description : varAllBillGroup.description}"></option>
+								</select>
+							</div>
+							<div class="col-md-2">Pay Commsion</div>
+							<div class="col-md-3">
+								<select class="form-control" id="payCommision">
+									<option selected="selected" th:value="0"
+										th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+									<option
+										th:each="payCommssionEntityLst: ${payCommssionEntityList}"
+										th:value="${payCommssionEntityLst.id}"
+										th:data="${payCommssionEntityLst.id}"
+										th:text="${language=='mh' ? payCommssionEntityLst.commission_name_mh : payCommssionEntityLst.commission_name_en}"></option>
+								</select>
+							</div>
+						</div>
+
+						<br>
+						<div class="row">
+							<div class="col-md-2">Select Month</div>
+							<div class="col-md-3">
+								<select class="form-control" id="month">
+									<option selected="selected" th:value="0"
+										th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+									<option value="1">January</option>
+									<option value="2">July</option>
+								</select>
+							</div>
+
+							<div class="col-md-3">
+								<input type="button" name="go" class="btn" id="btnGo" value="GO" />
+							</div>
+
+
+						</div>
+					</div>
+
+					<div class="row dispFlx" style="margin-top: 50px;">
+						<div class="col-md-5 ">
+							<div class="table table-responsive">
+								<div>List of Employees due for Increment</div>
+								<table class="table table-striped table-bordered"
+									id="pendingIncrement">
+									<thead>
+										<tr>
+											<td>Check Box</td>
+											<td>User Id</td>
+											<td>Emp Name</td>
+											<td>Basic Salary(Pay in PB+GP)()</td>
+											<td>Inc Order Date</td>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+
+						</div>
+						<div class="col-md-2 marauto text-center annbtns">
+							<button class="btn btn-warning btn-md" style="margin-top: 10px;"
+								id="add">Add To List</button>
+							<button class="btn btn-warning btn-md" style="margin-top: 10px;"
+								id="remove">Remove</button>
+						</div>
+						<div class="col-md-5 ">
+							<div class="table table-responsive">
+								<div>List of Employees Release Increment</div>
+								<table class="table table-striped table-bordered"
+									id="releaseIncrement">
+									<thead>
+										<tr>
+											<td>Check Box</td>
+											<td>Emp Name</td>
+											<td>Basic Salary(Pay in PB+GP)</td>
+											<td>WEF Date</td>
+											<td>Next Inc Date</td>
+											<td>Remark</td>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="text-center">
+						<!-- 	<button class="btn btn-warning btn-md" style="margin-top:10px;" id="save">Save</button></div> -->
+						<input type="button" name="btnSave" class="btn" id="btnSave"
+							value="Save" />
+					</div>
+		<input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" />
+		</form>
+		</fieldset>
+	</div>
+</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+
+	<script th:src="@{/js/project/annual-increment.js}"></script>
+
+</body>
+</html>

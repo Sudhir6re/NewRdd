@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Income Tax Report</title>
+<link rel="stylesheet" th:href="@{/css/print.css}" />
+<link rel="stylesheet" th:href="@{/css/styles.css}" />
+<style>
+</style>
+</head>
+<body class="income-tax-report">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.reportBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.empchangebasicrpt}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<div id="print-content" class="container">
+			<fieldset>
+
+				<div class="text-center">
+					<h3 Class="PageHeading">Income Tax</h3>
+				</div>
+
+				<table class="bor-0">
+					<tbody>
+						<tr>
+							<td colspan="2" style="font-weight: bold; text-align: center;">Schedule
+								for the Recovery of Income Tax<br>From Major Head 8658
+							</td>
+						</tr>
+						<tr>
+							<td style="font-weight: bold; text-align: left;">For the
+								Month of <span th:text="${currmonyer}"></span></td>
+							<td style="font-weight: bold; text-align: right;">Treasury : <span th:text="${trsyName}"></span>( <span th:text="${trsyCode}"></span> )
+								</td>
+						</tr>
+						<tr>
+							<td style="font-weight: bold; text-align: left;">Name of the
+								Office : <span th:text="${officename}"></span>(<span th:text="${ddoCode}"></span>)</td>
+							<td style="font-weight: bold; text-align: right;"></td>
+						</tr>
+						<tr>
+							<td style="font-weight: bold; text-align: left;">TAN NO. :<span th:text="${tanNo}"></span></td>
+							<td style="font-weight: bold; text-align: right;"></td>
+						</tr>
+					</tbody>
+				</table>
+				<br />
+				<table class="table table-striped">
+
+					<thead>
+						<tr>
+							<th rowspan="2" th:utext="#{msg.thymeleaf.pagelabel.srno}" /></th>
+							<th rowspan="2" th:utext="#{msg.pagelabel.employeeName}" /></th>
+							<th rowspan="2" th:utext="#{msg.thymeleaf.pagelabel.panno}" /></th>
+							<th rowspan="2" th:utext="#{msg.thymeleaf.pagelabel.grossAmount}" /></th>
+							<th rowspan="2" th:utext="#{msg.thymeleaf.label.amtofdeduc}" /></th>
+
+						</tr>
+
+
+					</thead>
+
+					<tbody>
+						<tr th:each="varEmp : ${empDtls}">
+							<td class="text-center" th:text="${varEmpStat.index+1}"></td>
+							<td class="text-center" th:text="${varEmp.name}"></td>
+							<td class="text-center" th:text="${varEmp.panNo}"></td>
+							<td class="text-center" th:text="${varEmp.grossAmount}"></td>
+							<td class="text-center" th:text="${varEmp.incometax}"></td>
+							</tr>
+							<tr>
+							<td></td>
+							<td>Total Deduction (`): </td>
+							<td></td>
+							<td></td>
+							<td th:text="${totalDeduc}">/-</td>
+						</tr>
+							<tr>
+							<td></td>
+							<td>Total Deduction In Words (`): </td>
+							<td></td>
+							<td></td>
+							<td th:text="${word}"></td>
+						</tr>
+					</tbody>
+
+				</table>
+				<br />
+				<table class="bor-0">
+					<tbody>
+
+						<tr>
+							<td colspan="2" valign="middle"
+								style="font-weight: bold; text-align: Right; border: 0px;">
+								<br /> <br /> <br /> <br />Incharge HM
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" valign="middle"
+								style="font-weight: bold; text-align: Right; border: 0px;">
+								MAHARASHTRA UNIVERSITY,THANE,NORTH MAHARASHTRA UNIVERSITY</td>
+						</tr>
+						<tr>
+							<td colspan="2" valign="middle"
+								style="font-weight: bold; text-align: Left; border: 0px;">
+								Portion for Treasury Office</td>
+						</tr>
+						<tr>
+							<td colspan="2" valign="middle"
+								style="font-weight: bold; text-align: Left; border: 0px;">
+								Treasury Voucher No. and Date</td>
+						</tr>
+						<tr>
+							<td colspan="2" valign="middle"
+								style="font-weight: bold; text-align: Left; border: 0px;">
+								Challan no. and Date</td>
+						</tr>
+
+						<tr>
+							<td colspan="2" valign="middle"
+								style="font-weight: bold; text-align: Right; border: 0px;">
+								Treasury Officer / Pay and Accounts Officer</td>
+						</tr>
+						<tr>
+							<td colspan="2" valign="middle"
+								style="font-weight: bold; text-align: Left; border: 0px;">
+								VERIFICATION TIME : <span th:text="${systemdate}"></span></td>
+						</tr>
+					</tbody>
+				</table>
+				<br />
+				<table class="table bor-0">
+					<tbody>
+						<tr>
+							<td valign="middle" style="font-weight: bold;"><br /> <b>Verification
+									Time:-</b>19-07-2024 11:55:29.372<br /> <span>* Generated
+									By <span th:text="#{msg.thymeleaf.pagelabel.hteCustSevaarth}"></span>
+							</span></td>
+						</tr>
+					</tbody>
+				</table>
+			</fieldset>
+		</div>
+		<div class="text-center">
+			<button id="print" onclick="printContent('print-content');"
+				class="btn">Print</button>
+			<input type="button" name="btnBackAgain" id="btnBackAgain"
+				onclick="history.back()" value="Back" class="buttontag">
+		</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>GIS Report</title>
+<link rel="stylesheet" th:href="@{/css/print.css}" />
+<link rel="stylesheet" th:href="@{/css/styles.css}" />
+<style>
+table.table.table-striped.table-bordered a {
+	border: none !important;
+}
+</style>
+</head>
+<body class="gis-report">
+	<div class="container-fluid">
+		<div th:replace="header/menuHeader :: var-script-header"></div>
+		<div id="print-content">
+			<fieldset>
+
+				<div class="text-center">
+					<h3 Class="PageHeading">GIS Report</h3>
+				</div>
+				<table class="bor-0">
+					<tbody>
+						<tr align="center">
+							<td align="center" colspan="2"><b>Schedule For Recovery
+									of GIS</b></td>
+						</tr>
+						<tr align="center">
+							<td align="center" colspan="2"><b>From Major Head 8011</b><br /></td>
+						</tr>
+						<tr>
+							<td colspan="2">For the Month of &nbsp;<span
+								th:text="${currmonyer}"></span></td>
+						</tr>
+						<tr>
+							<td>Name of the Office : <span th:text="${officename}"></span></td>
+							<td align="right">Treasury : <span th:text="${treasury}"></span></td>
+						</tr>
+					</tbody>
+				</table>
+				<br />
+				<table class="table table-striped">
+					<tbody>
+						<tr>
+							<td align="center" width="5%">SrNo.</td>
+							<td align="center" width="15%">Particular Of Group</td>
+							<td width="25%">
+								<table class="bor-0">
+									<tbody>
+										<tr>
+											<td width=" 100%" colspan="3" align="center">Recovery
+												made at Composite Rate</td>
+										</tr>
+										<tr align="center">
+											<td width="30%">No. of Emp</td>
+											<td width="30%">Rate (<font face="Rupee Foradian">`</font>)
+											</td>
+											<td width="40%">Amount (<font face="Rupee Foradian">`</font>)
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+							<td width="25%">
+								<table class="bor-0">
+									<tbody>
+										<tr>
+											<td width="100%" colspan="3" align="center">Recovery
+												made at Premium Rate</td>
+										</tr>
+										<tr align="center">
+											<td width="30%">No. of Emp</td>
+											<td width="30%">Rate (<font face="Rupee Foradian">`</font>)
+											</td>
+											<td width="40%">Amount (<font face="Rupee Foradian">`</font>)
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+							<td align="center" width="15%">Arrears (<font
+								face="Rupee Foradian">`</font>)
+							</td>
+							<td align="center" width="15%">Total Recovery (<font
+								face="Rupee Foradian">`</font>)
+							</td>
+						</tr>
+						<tr align="center">
+							<td align="center" width="5%">1</td>
+							<td align="center" width="15%">Group A</td>
+							<td width="25%">
+								<table class="bor-0">
+									<tbody>
+										<tr th:each="varDtls : ${lstComposite}"
+											th:if="${varDtls.cadreGroup == 'A'}">
+											<td width="30%" align="center"
+												th:text="${varDtls.countGisEmp}"></td>
+											<td width="40%" align="center" th:text="${varDtls.gisRate}"></td>
+											<td width="30%" align="right" th:text="${varDtls.gisAmount}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+							<td width="25%">
+								<table class="bor-0">
+									<tbody>
+										<tr th:each="varDtls : ${lstPremium}"
+											th:if="${varDtls.cadreGroup == 'A'}">
+											<td width="30%" align="center"
+												th:text="${varDtls.countGisEmp}"></td>
+											<td width="40%" align="center" th:text="${varDtls.gisRate}"></td>
+											<td width="30%" align="right" th:text="${varDtls.gisAmount}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+							<td align="center" width="15%">0.0</td>
+							<td align="center" width="15%"></td>
+						</tr>
+						<tr align="center">
+							<td align="center" width="5%">2</td>
+							<td align="center" width="15%">Group B</td>
+							<td width="25%">
+								<table class="bor-0">
+									<tbody>
+										<tr th:each="varDtls : ${lstComposite}"
+											th:if="${varDtls.cadreGroup == 'B'}">
+											<td width="30%" align="center"
+												th:text="${varDtls.countGisEmp}"></td>
+											<td width="40%" align="center" th:text="${varDtls.gisRate}"></td>
+											<td width="30%" align="right" th:text="${varDtls.gisAmount}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+							<td width="25%">
+								<table class="bor-0">
+									<tbody>
+										<tr th:each="varDtls : ${lstPremium}"
+											th:if="${varDtls.cadreGroup == 'B'}">
+											<td width="30%" align="center"
+												th:text="${varDtls.countGisEmp}"></td>
+											<td width="40%" align="center" th:text="${varDtls.gisRate}"></td>
+											<td width="30%" align="right" th:text="${varDtls.gisAmount}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+							<td align="center" width="15%">0.0</td>
+							<td align="center" width="15%">0.0</td>
+						</tr>
+						<tr align="center">
+							<td align="center" width="5%">3</td>
+							<td align="center" width="15%">Group B nGz</td>
+							<td align="right" width="25%">
+								<table class="bor-0">
+									<tbody>
+										<tr th:each="varDtls : ${lstComposite}"
+											th:if="${varDtls.cadreGroup == 'BnGZ'}">
+											<td width="30%" align="center"
+												th:text="${varDtls.countGisEmp}"></td>
+											<td width="40%" align="center" th:text="${varDtls.gisRate}"></td>
+											<td width="30%" align="right" th:text="${varDtls.gisAmount}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+							<td width="25%">
+								<table class="bor-0">
+									<tbody>
+										<tr th:each="varDtls : ${lstPremium}"
+											th:if="${varDtls.cadreGroup == 'BnGZ'}">
+											<td width="30%" align="center"
+												th:text="${varDtls.countGisEmp}"></td>
+											<td width="40%" align="center" th:text="${varDtls.gisRate}"></td>
+											<td width="30%" align="right" th:text="${varDtls.gisAmount}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+							<td align="center" width="15%">0.0</td>
+							<td align="center" width="15%">0.0</td>
+						</tr>
+						<tr align="center">
+							<td align="center" width="5%">4</td>
+							<td align="center" width="15%">Group C</td>
+							<td align="right" width="25%">
+								<table class="bor-0">
+									<tbody>
+										<tr th:each="varDtls : ${lstComposite}"
+											th:if="${varDtls.cadreGroup == 'C'}">
+											<td width="30%" align="center"
+												th:text="${varDtls.countGisEmp}"></td>
+											<td width="40%" align="center" th:text="${varDtls.gisRate}"></td>
+											<td width="30%" align="right" th:text="${varDtls.gisAmount}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+							<td align="right" width="25%">
+								<table class="bor-0">
+									<tbody>
+										<tr th:each="varDtls : ${lstPremium}"
+											th:if="${varDtls.cadreGroup == 'C'}">
+											<td width="30%" align="center"
+												th:text="${varDtls.countGisEmp}"></td>
+											<td width="40%" align="center" th:text="${varDtls.gisRate}"></td>
+											<td width="30%" align="right" th:text="${varDtls.gisAmount}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+							<td align="center" width="15%">0.0</td>
+							<td align="center" width="15%">0.0</td>
+						</tr>
+						<tr align="center">
+							<td align="center" width="5%">5</td>
+							<td align="center" width="15%">Group D</td>
+							<td align="right" width="25%">
+								<table class="bor-0">
+									<tbody>
+										<tr th:each="varDtls : ${lstComposite}"
+											th:if="${varDtls.cadreGroup == 'D'}">
+											<td width="30%" align="center"
+												th:text="${varDtls.countGisEmp}"></td>
+											<td width="40%" align="center" th:text="${varDtls.gisRate}"></td>
+											<td width="30%" align="right" th:text="${varDtls.gisAmount}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+							<td width="25%">
+								<table class="bor-0">
+									<tbody>
+										<tr th:each="varDtls : ${lstPremium}"
+											th:if="${varDtls.cadreGroup == 'D'}">
+											<td width="30%" align="center"
+												th:text="${varDtls.countGisEmp}"></td>
+											<td width="40%" align="center" th:text="${varDtls.gisRate}"></td>
+											<td width="30%" align="right" th:text="${varDtls.gisAmount}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+							<td align="center" width="15%">0.0</td>
+							<td align="center" width="15%">0.0</td>
+						</tr>
+						<tr>
+							<td width="5%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td align="center" width="15%">Total (<font
+								face="Rupee Foradian">`</font>)
+							</td>
+							<td align="right" width="25%">
+								<table class="bor-0">
+									<tbody>
+										<tr align="center">
+											<td width="30%">2</td>
+											<td width="30%"></td>
+											<td width="40%" th:text="${totalCompositeSum}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+							<td width="25%">
+								<table class="bor-0">
+									<tbody>
+										<tr align="center">
+											<td width="30%">0</td>
+											<td width="30%"></td>
+											<td width="40%">0</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+							<td align="center" width="15%">0</td>
+							<td align="center" width="15%" th:text="${totalPremiumSum}"></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<table class="bor-0">
+					<tbody>
+						<tr>
+							<td>Total Deduction In Words (<font face="Rupee Foradian">`</font>):
+								<span th:text="${totalDeducInWords}"></span>.
+							</td>
+						</tr>
+						<tr>
+							<td align="center"><br /> <b>CERTIFICATE</b></td>
+						</tr>
+						<tr>
+							<td>1.Certified that total Recoveries shown in column (10)
+								above agree with the amount actually recovered and shown in the
+								body of the bill.<br /> <br />
+							</td>
+						</tr>
+
+						<tr>
+							<td>Dated: <span th:text="${date}"></span></td>
+						</tr>
+
+						<tr>
+							<td align="right"><br /> <br />Incharge HM</td>
+						</tr>
+						<tr>
+							<td align="right">MAHARASHTRA UNIVERSITY,THANE,NORTH
+								MAHARASHTRA UNIVERSITY</td>
+						</tr>
+						<tr>
+							<td>Portion for Treasury Office<br> Treasury Voucher
+								No. and Date<br> Challan no. and Date
+							</td>
+						</tr>
+						<tr>
+							<td align="right">Treasury Officer / Pay and Accounts
+								Officer</td>
+						</tr>
+						<tr>
+							<td>VERIFICATION TIME:<span th:text="${sysDate}"></span></td>
+						</tr>
+					</tbody>
+				</table>
+			</fieldset>
+		</div>
+		<div class="text-center">
+			<button id="print" onclick="printContent('print-content');"
+				class="btn">Print</button>
+			<input type="button" name="btnBackAgain" id="btnBackAgain"
+				onclick="history.back()" value="Back" class="buttontag">
+		</div>
+	</div>
+
+</body>
+</html>

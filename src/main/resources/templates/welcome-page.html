@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+<title th:utext="#{msg.thymeleaf.pagelabel.MahaSevaarth}"></title>
+<link rel="stylesheet" href="../../static/css/captcha.css"
+	th:href="@{/css/captcha.css}" />
+<link rel="icon" th:href="@{/images/GOM.png}" type="image/png"
+	sizes="16x16">
+<style>
+.contactlist p {
+	font-size: 14px;
+}
+
+.tab {
+	background: linear-gradient(0deg, #993b3b, #f5c741);
+	margin: 5px 0;
+}
+
+button.tablinks:hover, .activetab, .submit, .btn, loginBtn {
+	background: linear-gradient(26deg, #000000, #0d64a9) !important;
+}
+
+.tablinks {
+	background: transparent;
+	border: transparent;
+	color: #fff;
+	padding: 3px 15px;
+	border-right: 1px solid #cccccc54;
+	font-size: 17px;
+	letter-spacing: 0.5px;
+}
+
+.tabcontent {
+	min-height: 68vh;
+}
+
+.tabcontent h4 {
+	text-align: center;
+	font-size: 20px;
+	font-weight: bolder;
+	margin-top: 20px;
+}
+
+.iIconmaon {
+	position: absolute;
+	top: 2px;
+	right: 15%;
+}
+
+.iccn {
+	cursor: pointer;
+}
+
+.footer-main {
+	background: linear-gradient(0deg, #993b3b, #f5c741);
+}
+/* body {
+    background: url(../images/bodyBg.jpg) !important;
+    background-repeat: no-repeat !important;
+    background-size: 100% 100% ! IMPORTANT;
+    background-attachment: fixed !important;
+    background-blend-mode: color-dodge ! IMPORTANT;
+} */
+</style>
+</head>
+
+<body class="custom-login welcome-page">
+
+	<div class="container body-contents">
+		<div th:replace="header/header :: var-script-header"></div>
+		<div class=" body-contents">
+			<input type="hidden" name="levelRoleVal" id="levelRoleVal"
+				th:value="${session.levelRoleVal}" /> <input type="hidden"
+				id="enCaptcha" />
+			<!-- <div class="hearder-top">
+				<marquee style="color: transparent;">Welcome to
+				<span th:utext="#{msg.thymeleaf.pagelabel.MahaSevaarth}"></span></marquee>
+			</div> -->
+			<div class=" logo-mainn">
+				<div class="logo-row">
+					<div class="logobar ">
+						<a class="logo" th:href="@{/}"><img
+							th:src="@{/images/logo.jpg}" class="logo-img newlogo"
+							id="logo-img" /></a>
+					</div>
+				</div>
+			</div>
+			<header>
+				<img th:src="@{/images/maha-logo_old.png}" class="hide" id="favicon">
+
+
+				<div class="tab">
+					<button class="tablinks activetab" onclick="openCity(1)">Home</button>
+					<!-- <button class="tablinks" onclick="openCity(2)">About</button> -->
+					<!-- <button class="tablinks" onclick="openCity(3)">Notification</button> -->
+					<button class="tablinks" onclick="openCity(4)">Contact</button>
+					<button class="tablinks" onclick="openCity(5)">Help</button>
+					<!-- <button class="tablinks" onclick="openCity(1)" id="log">Login</button> -->
+				</div>
+				<div id="Home" class="tabcontent">
+				<br>
+					<div class="LoginsecMain">
+						<div class="main-bg1" th:fragment="varlogin">
+							<div class="container con2221">
+								<div th:replace="header/header :: var-script-header"></div>
+								<!--<div th:replace="header/header:: varheader"></div> -->
+								<div class="container maindv">
+									<img alt="" th:src="@{/images/captchabg7.png}" class="hide"
+										id="captchImg" />
+									<div class="sub-main-w3">
+										<div class="bg-content-w3pvt">
+											<div class="top-content-style">
+												<!-- <img src="images/user.jpg" alt="" /> -->
+												<i
+													class="fa fa-user-circle animate__animated animate__backInDown"></i>
+											</div>
+											<form th:action="@{/login}" method="POST" autocomplete="off">
+												<input autocomplete="false" name="hidden" type="text"
+													style="display: none;">
+												<div class="alDv">
+													<p th:if="${param.error}" class="error">Invalid
+														UserName, Password</p>
+													<p th:if="${param.logout}" class="success">User Logout
+														Succesfully</p>
+													<p th:if="${param.expired}" class="success">Session
+														Expired</p>
+													<p th:if="${param.unauthorize}" class="text-danger">You
+														are not authorized for the requested data. Please login
+														!!!</p>
+												</div>
+												<p class="legend">
+													Login Here<span class="fa fa-hand-o-down"></span>
+												</p>
+												<div class="input animate__animated animate__backInLeft">
+													<input type="text" placeholder="Enter UserName"
+														name="username" autocomplete="off" /> <span
+														class="fa fa-user"></span>
+
+
+												</div>
+												<div
+													class="input passwordDvmain passsShow animate__animated animate__backInRight">
+													<input type="password" id="password"
+														placeholder="Enter Password" name="password" required />
+													<span class="fa fa-unlock"></span>
+													<div class="iIconmaon">
+														<span class="fa fa-eye-slash iccn"></span> <span
+															class="fa fa-eye iccn"></span>
+													</div>
+												</div>
+												<div class="cpmain animate__animated animate__backInLeft">
+													<fieldset class="captchaMain">
+														<!-- <span id="SuccessMessage" style="display:none;" class="success">
+													</span>  -->
+														<input type="text" id="UserCaptchaCode"
+															onkeyup="myFunction();"
+															class="CaptchaTxtField form-control" maxlength="6"
+															placeholder='Enter Captcha - Case Sensitive'> <span
+															id="WrongCaptchaError" class="error"></span>
+														<div class='CaptchaWrap'>
+															<div id="CaptchaImageCode" class="CaptchaTxtField">
+																<canvas id="CapCode" class="capcode" width="300"
+																	height="80"></canvas>
+															</div>
+															<input type="button" class="ReloadBtn"
+																onclick='CreateCaptcha();'>
+														</div>
+													</fieldset>
+													<input type=hidden name="appCode"
+														th:each="lstApplicationAdminTable : ${lstApplicationAdminTable}"
+														th:value="${lstApplicationAdminTable.applicationCode}"></input>
+												</div>
+												<button type="submit"
+													class="btn submit animate__animated animate__backInUp"
+													id="submit">
+													<span class="fa fa-sign-in"> Login</span>
+												</button>
+											</form>
+											<a href="/forgot-pass/resetPassword"
+												th:href="@{/forgotPassword}" class="forgorpasslink">Forgot
+												Password</a>
+										</div>
+									</div>
+									<!-- <div th:replace="header/header :: varfooter"></div> -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div id="Contact" class="tabcontent">
+					<h4 class="panel-title">Contact Us</h4>
+					<div id="collapse3" class="panel-collapse">
+						<div class="panel-body">
+							<div class="contactlist">
+								<div class="form-group row">
+									<div class="col-md-12">
+										<ul>
+											<li><a href="mailto:panchayatrajsevaarth@gmail.com"
+												class="underline"
+												style="font-size: 12px; font-weight: bold; text-decoration: none;">Level
+													No 1 :<br>test@gmail.com Contact No:-
+													022-0000000
+											</a></li>
+											<li><a href="mailto:Shivakrushna.Yenaganti@mahait.org"
+												class="underline"
+												style="font-size: 12px; font-weight: bold; text-decoration: none;">Level
+													No 2:<br> test@mahait.org <!-- 022-66364340 -->
+											</a></li>
+											<li><a href="mailto:nilima.shinde@nic.in"
+												style="font-size: 12px; font-weight: bold; text-decoration: none;">Nodal
+													Officer Details:- <br> xyz@nic.in
+											</a></li>
+										</ul>
+										<hr />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="help" class="tabcontent">
+					<h4 class="panel-title">Help</h4>
+					<div id="collapse4" class="panel-collapse">
+						<div class="panel-body">
+							<div class="contactlist">
+								<table class="table table-bordered">
+									<tbody>
+										<tr>
+											<td><span>User Manual :</span></td>
+											<td class="text-center"><a title="click to download"
+												download="download" class="btn btn-sm">Download</a></td>
+											<!-- 											<td class="text-center"><a title="click to download"
+												th:href="@{/master/viewVideo/MJP_Payroll_Process_Manual.pdf}"
+												download="download" class="btn btn-sm">Download</a></td> -->
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</header>
+
+		</div>
+
+
+
+
+		<div th:replace="header/header :: varfooter"></div>
+	</div>
+	<script>
+		$(document).ready(function() {
+			//hideAllTabContent();
+			openCity(1);
+			$(".tablinks").click(function() {
+				$(".tablinks").removeClass("activetab");
+				$(this).addClass("activetab");
+
+			})
+			$("#log").click(function() {
+				$('html, body').animate({
+					scrollTop : $(".maindv").offset().top
+				}, 1000);
+			});
+		});
+
+		function hideAllTabContent() {
+			var taId = [ "Home", "About", "notification", "Contact", "help" ];
+			for (var i = 0; i < taId.length; i++) {
+				$("#" + taId[i]).hide();
+			}
+		}
+
+		function openCity(menuNumber) {
+			hideAllTabContent();
+			switch (menuNumber) {
+			case 1:
+				$("#Home").show();
+				break;
+			case 2:
+				$("#About").show();
+				break;
+			case 3:
+				$("#notification").show();
+				break;
+			case 4:
+				$("#Contact").show();
+				break;
+			case 5:
+				$("#help").show();
+				break;
+			default:
+				$("#Home").show();
+				break;
+			}
+		}
+		/* 
+			
+			var i, tabcontent, tablinks;
+			tabcontent = document.getElementsByClassName("tabcontent");
+			for (i = 0; i < tabcontent.length; i++) {
+				tabcontent[i].style.display = "none";
+			}
+			tablinks = document.getElementsByClassName("tablinks");
+			for (i = 0; i < tablinks.length; i++) {
+				tablinks[i].className = tablinks[i].className.replace(
+						" active", "");
+			}
+			document.getElementById(cityName).style.display = "block";
+			evt.currentTarget.className += " active"; */
+	</script>
+	<script>
+		$(document).ready(function() {
+			$("span.fa.fa-eye-slash.iccn").hide();
+			$('.iccn').on('click', function() {
+				var passInput = $("#password");
+				if (passInput.attr('type') === 'password') {
+					passInput.attr('type', 'text');
+				} else {
+					passInput.attr('type', 'password');
+				}
+				$(".iccn").toggle(300);
+			})
+		})
+	</script>
+	<script th:src="@{/js/captcha.js}"></script>
+</body>
+
+</html>

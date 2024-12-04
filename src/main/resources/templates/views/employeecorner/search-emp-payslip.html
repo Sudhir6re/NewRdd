@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>  
+<title th:utext="#{msg.thymeleaf.pageheading.paybill}"></title>
+<style>
+.disableTillyear, .monthhide, .billgphide {
+	visibility: hidden;
+}
+
+h2#swal2-title {
+	word-break: break-word;
+}
+</style>
+
+
+</head>
+<body class="payslip-generate">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+	<div class="container min-height-600 paybill_generate">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.ReportBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.payslip}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.payslipReport}"></span>
+		</h3>
+
+		<fieldset class="container">
+
+
+			<form class="form-horizontal" id="savePaybill"
+				th:action="@{/user/viewEmployeePayslip}"
+				th:object="${PayslipReportModel}" method="POST"
+				enctype="multipart/form-data">
+
+				<input type="hidden" name="language" id="language"
+					th:value="${language}" /> <input type="hidden" name="message"
+					id="message" th:value="${message}" /> <input type="hidden"
+					name="returnId" id="returnId" th:value="${returnId}" /> <input
+					type="hidden" name="isCityCategory" id="isCityCategory"
+					th:value="${isCityCategory}" />
+
+
+				<div class="form-group">
+					<label class="control-label col-sm-2 " for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.paybillYear}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-2">
+						<select class="form-control removeErrorFromDropdown" id="paybillYear"
+							th:field="*{paybillYear}">
+							<option selected="selected" th:value="0"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+							<!-- <option th:each="varGetAllYear : ${lstGetAllYear}"
+								th:value="${varGetAllYear.yearId}"
+								th:text="${language=='mh' ? varGetAllYear.yearMarathi : varGetAllYear.yearEnglish}"></option>  -->
+							<option th:each="varGetAllYear : ${lstGetAllYear}"
+								th:value="${varGetAllYear.yearId}"
+								th:text="${language=='mh' ? varGetAllYear.yearMarathi : varGetAllYear.yearEnglish}"></option>
+
+						</select>
+					</div>
+					<div class="disableTillyear1">
+						<label class="control-label col-sm-2 monthhide" for="title"><span
+							th:utext="#{msg.thymeleaf.pagelabel.paybillMonth}"></span>&nbsp;&nbsp;<b><font
+								color="red" size="4px;">*</font></b></label>
+						<div class="col-sm-2 monthhide">
+							<select class="form-control removeErrorFromDropdown" th:field="*{paybillMonth}"
+								id="paybillMonth">
+								<option selected="selected" th:value="0"
+									th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+								<option th:each="varGetAllMonths : ${lstGetAllMonths}"
+									th:value="${varGetAllMonths.monthId}"
+									th:text="${language=='mh' ? varGetAllMonths.monthMarathi : varGetAllMonths.monthEnglish}"></option>
+							</select>
+						</div>
+
+						<label class="control-label col-sm-2 billgphide" for="title"><span
+							th:utext="#{msg.thymeleaf.pagelabel.billGroup}"></span>&nbsp;&nbsp;<b><font
+								color="red" size="4px;">*</font></b></label>
+						<div class="col-sm-2 billgphide">
+							<select class="form-control removeErrorFromDropdown" id="schemeBillGroupId"
+								th:field="*{schemeBillgroupId}">
+								<option selected="selected" th:value="0" th:data="0"
+									th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+								<option th:each="varSchemeBillGroup : ${lstBillDesc}"
+									th:value="${varSchemeBillGroup.dcpsDdoBillGroupId}"
+										th:text="${language=='mh' ? varSchemeBillGroup.description : varSchemeBillGroup.description}"></option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group text-center">
+					<hr />
+					<input type="submit" id="GenerateReport" name="GenerateReport" class="btn btn-primary"
+						th:value="#{msg.thymeleaf.pagelabel.btnShowReport}" /> 
+						<input
+						type="reset" id="btnReset" class="btn btn-primary"
+						th:value="#{msg.thymeleaf.pagelabel.btnReset}" /> <a
+						th:href="@{/user/home}" class="btn"><span
+						th:text="#{msg.thymeleaf.pagelabel.btnCancel}"></span></a>
+
+				</div>
+
+				<input type="hidden" name="${_csrf.parameterName}"
+					value="${_csrf.token}" /> <input type="hidden" name="ddoCode"
+					id="ddoCode" th:value="*{ddoCode}" />
+
+			</form>
+		</fieldset>
+	</div>
+
+
+	<div class="container">
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<p id="modalContent">This sevaarth id 123,456 has not mapped
+							with allowance deduction</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/employeecorner/emp-payslip.js}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.OrganisationInfo}"></title>
+</head>
+<style>
+input[type="button" i]:disabled {
+	pointer-events: none;
+	opacity: 0.6;
+}
+</style>
+<body class="edit-hte-organization-institution-info">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.OrganisationInfo}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.OrganisationInfo}"></span>
+		</h3>
+		<div class="pageComtentNew container">
+			<div id="content">
+
+
+				<form method="post" th:action="@{/ddoast/updateorgInstituteInfo}"
+					th:object="${orgDdoMstModel}" name="DDOInfo"
+					enctype="multipart/form-data" id="DDOInfo">
+					<input type="hidden" id="cmbDdoCode" name="cmbDdoCode">
+					<fieldset class="tabstyle">
+						<legend>
+							<b>Parent Department</b>
+						</legend>
+						<table class="table bor-0">
+							<tbody>
+								<tr>
+									<td width="15%" align="left">Administrative Department</td>
+									<td width="35%"><input type="text" id="txtAdminDept"
+										style="text-transform: uppercase;" size="48" maxlength="90" 
+										name="txtAdminDept"
+										value="HIGHER AND TECHNICAL EDUCATION  DEPARTMENT."></td>
+									<td align="left" width="15%">Field Department/HOD
+										Department</td>
+									<td width="35%"><input type="text" id="txtFieldDept"
+										style="text-transform: uppercase;" size="40%" maxlength="90"
+										name="txtFieldDept" value="DIRECTORATE OF HIGHER EDUCATION">
+									<!-- change size from 50% to 40% by Pratik 02-08-23 --></td>
+								</tr>
+								<tr>
+									<td id="instituteType1" width="15%" align="left">Institute
+										Type</td>
+									<td width="35%"><select name="instituteType" th:field=*{instituteType}
+										id="instituteType" style="width: 360px">
+											<option th:value="0"
+												th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+											<option th:each="varPay : ${lstInstituteType}"
+												th:value="${varPay.instituteTypeId}"
+												th:text="${language=='mh' ? varPay.instituteTypeName : varPay.instituteTypeName}"></option>
+									</select></td>
+									<td colspan="2" width="50%">&nbsp;</td>
+								</tr>
+							</tbody>
+						</table>
+					</fieldset>
+					<br>
+					<fieldset class="tabstyle">
+						<legend>
+							<b>Signing Authority</b>
+						</legend>
+						<table class="table bor-0">
+							<tbody>
+								<tr>
+									<td width="15%" align="left">Name <font color="red"
+										size="4px;">*</font></td>
+									<td width="35%"><input type="text" id="txtDDOName"
+										th:field="*{ddoOffice}" style="text-transform: uppercase"
+										size="48" maxlength="99" name="txtDDOName"></td>
+									<td width="15%" align="left">Designation<font color="red"
+										size="4px;">*</font>
+									</td>
+									<td align="left" width="35%"><select class="form-control"
+										id="cmbDesignation" th:field="*{designationId}">
+											<option th:value="0"
+												th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+											<option th:each="varPay : ${lstdesgination}"
+												th:value="${varPay.designationId}"
+												th:text="${language=='mh' ? varPay.designation : varPay.designation}"></option>
+									</select></td>
+								</tr>
+								<tr>
+									<td colspan="2" align="left"
+										style="font-size: smaller; font-style: italic">Enter
+										Signing Authority i.e. DDO/Organization's Name</td>
+									<td colspan="2">&nbsp;</td>
+								</tr>
+								<tr>
+									<td width="15%" align="left" class="ddoinfowdate">With
+										Effect From Date <font color="red" size="4px;">*</font>
+									</td>
+									<td align="left" width="35%"><input type="date"
+										class="form-control" placeholder="dd/mm/yyyy"
+										th:field="*{startDate}" id="txtWEFDate" /></td>
+									<td width="15%">&nbsp;</td>
+									<td width="35%">&nbsp;</td>
+								</tr>
+								<tr>
+									<td width="15%" align="left">Tan No.</td>
+									<td align="left" width="35%"><input type="text"
+										id="txtTANNo" style="text-transform: uppercase" size="48"
+										maxlength="10" name="txtTANNo" th:field="*{tanNo}"></td>
+									<td width="15%" align="left">ITO/Ward/Circle</td>
+									<td align="left" width="35%"><input type="text" th:field="*{itaWardNo}"
+										id="txtITWardCircle" style="text-transform: uppercase"
+										size="48" maxlength="10" name="txtITWardCircle"></td>
+								</tr>
+							</tbody>
+						</table>
+					</fieldset>
+					<br>
+					<fieldset class="tabstyle">
+						<legend>
+							<b>Bank Details</b>
+						</legend>
+						<table class="table bor-0">
+							<tbody>
+								<tr>
+									<td width="15%" align="left">Bank Name <font color="red"
+										size="4px;">*</font>
+									</td>
+									<td width="35%" align="left"><select name="cmbBankName" th:field="*{bankName}"
+										id="cmbBankName" style="width: 360px">
+											<option value="-1">-- Select --</option>
+											<option th:each="varAllBankList : ${bankName}"
+												th:value="${varAllBankList.bankCode}"
+												th:text="${language=='mh' ? varAllBankList.bankName : varAllBankList.bankName}"></option>
+
+									</select>
+									<td width="15%" align="left">Branch Name <font color="red"
+										size="4px;">*</font>
+									</td>
+									<td align="left" width="35%">
+								  <select name="cmbBranchName" id="cmbBranchName" style="width:360px" th:field="*{branchName}">
+                                 <!-- <option
+													th:each="varAllBankbranchList : ${lstAllBankBranchList}"
+													th:value="${varAllBankbranchList[0]}"
+													th:text="${language=='mh' ? varAllBankbranchList[1] : varAllBankbranchList[1]}"></option> -->
+                            </select> 
+									</td>
+								</tr>
+								<tr>
+									<td width="15%" align="left">IFS Code</td>
+									<td align="left" width="35%"><input type="text" readonly
+										id="txtIFSCCode" style="text-transform: uppercase;"
+										th:field="*{ifscCode}" size="48" maxlength="20"
+										name="txtIFSCCode"></td>
+									<td width="15%" align="left">Bank Acc. No. <font
+										color="red" size="4px;">*</font>
+									</td>
+									<td align="left" width="35%"><input type="text"
+										id="txtAccountNo" style="text-transform: uppercase"
+										th:field="*{accountNo}" size="48" maxlength="20"
+										name="txtAccountNo"></td>
+								</tr>
+								<tr>
+									<td width="15%" align="left">Remarks</td>
+									<td align="left" width="35%"><input type="text"
+										id="txtRemarks" style="text-transform: uppercase" size="48"
+										maxlength="100" th:field="*{remarks}" name="txtRemarks">
+									</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+								</tr>
+							</tbody>
+						</table>
+					</fieldset>
+					<br>
+					<table class="table bor-0">
+						<tbody>
+							<tr>
+								<td align="center"><input type="submit" name="btnUpdate"
+									id="btnUpdate" value="Update" size="3" maxlength="3"
+									class="buttontag"> 
+									 <input type="button" name="btnClose"
+									id="btnClose" value="Back" size="3" maxlength="3"
+									class="buttontag"></td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/edit-hte-organization-institution-info.js}"></script>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<link
+	href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+<link
+	href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css" />
+<title th:utext="#{msg.thymeleaf.pagelabel.closerofpensionacc}"></title>
+<style>
+.table-bordered {
+	border: 1px solid #ddd;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table, th, td {
+	border: 1px solid black;
+}
+
+.table-bordered>thead>tr>th, .table-bordered>tbody>tr>th,
+	.table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td,
+	.table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td {
+	border: 1px solid #ddd;
+}
+
+.text-left {
+	text-align: left;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.no-border-in-out, .no-border-in-out * {
+	border: none !IMPORTANT;
+}
+</style>
+</head>
+<body class="pension-header">
+	<div class="pension-header container" th:fragment="varPensionHeader">
+		<table class="table penheadertbmain no-border-in-out">
+			<tbody>
+				<tr>
+					<td colspan="3" align="center"><h4><span th:text="#{msg.thymeleaf.pagelabel.MahaSevaarth}"></span></h4></td>
+				</tr>
+				<tr>
+					<td width="32%" align="left">
+						<p style="line-height: 25px !important;">
+							<b> CIDCO Bhavan(South Wing),<br />3rd Floor Belapur,<br />
+								Navi Mumbai - 400614<br />
+
+							</b>
+						</p>
+					</td>
+					<td width="20%" align="right">
+						<!-- <img
+						th:src="@{/images/logo-v16.png}" alt="MJP" class="reportlogo"
+						style="width: 85px;" /> --> <img th:src="@{/images/GOM.png}"
+						class="logo-img reportlogo" id="logo-img" style="width: 85px;" />
+					</td>
+					<td width="45%" align="right">
+						<p style="line-height: 25px !important;">
+							<b>Tel. No.:022-27561569, 27570591, 27570370 <br /> Fax:
+								27570969, 27571666<br />Email: finance@mjp.gov.in<br />Website:
+								mjp.gov.in
+							</b>
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<hr style="border-bottom: 1px solid #ccc !important; margin: 0 0;" />
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

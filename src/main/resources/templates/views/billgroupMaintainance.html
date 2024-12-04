@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.billgroupMaintainance}"></title>
+</head>
+<body class="billgroupMaintainance">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.billgroupMaintainance}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.billgroupMaintainance}"></span>
+		</h3>
+		<div class="container">
+			<form method="post" th:action="@{/ddoast/saveBillgroupMaintainance}"
+				th:object="${billgroupMaintainanceModel}"  name="frmDdoGroupBill" id="frmDdoGroupBill"
+				enctype="multipart/form-data" class="form-horizontal">
+				<input type="hidden"
+				name="message" id="message" th:value="${message}" />
+		
+				<!-- <fieldset>
+					<legend>Search by Bill Name </legend>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="title"><span>Bill
+								Name</span> </label>
+						<div class="col-sm-3">
+							<input type="text" id="txtBillName" class="form-control"
+								name="txtBillName" autocomplete="off">
+						</div>
+						<div class="col-sm-3">
+							<input type="button" name="btnSubmitData" id="btnSubmitData"
+								value="Search" size="3" maxlength="3" class="btn">
+						</div>
+					</div>
+				</fieldset> -->
+				<fieldset class="tabstyle">
+					<legend> Already Added BillGroups</legend>
+					<br>
+					<table id="tblDataTable" class="table table-bordered table-striped">
+						<thead>
+							<tr class="datatableheader">
+								<th>Bill Group Id</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="varBill : ${lstBillName}">
+									<td><a class="collapse-item billGrpId" id ="billGrpId" target='_blank' th:value="${varBill.dcpsDdoBillGroupId}" th:text="${varBill.dcpsDdoBillGroupId}" ><span
+									></span></a></td>
+								<td th:text="${varBill.description}"></td>
+							</tr>
+						</tbody>
+					</table>
+
+
+				</fieldset>
+				<fieldset class="tabstyle">
+					<legend> Create Additional Bill Group</legend>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="title"><span>Scheme
+								Name</span> <b> <font color="red" size="4px;">*</font>
+						</b> </label>
+						<div class="col-sm-3">
+							<select name="cmbSchemeName" id="cmbSchemeName" th:onChange="funDdo1(this)"
+								class="form-control" th:field="*{dcpsDdoSchemeCode}">
+								<option selected="selected" th:value="0"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+								<option th:each="varAllScheme : ${lstAllScheme}"
+								th:value="${varAllScheme.dcpsDdoSchemeCode}"
+								th:text="${language=='mh' ? varAllScheme.schemeName : varAllScheme.schemeName}"></option>
+							</select>
+						</div>
+						<label class="control-label col-sm-3" for="title"><span>Scheme
+								Code</span></label>
+						<div class="col-sm-3">
+							<input type="text" name="txtSchemeCode" id="txtSchemeCode"  th:text="${dcpsDdoSchemeCode}"
+								readonly="readonly" class="form-control txtSchemeCode">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="title"><span>Subscheme
+								Name</span> <b> <font color="red" size="4px;">*</font>
+						</b> </label>
+						<div class="col-sm-3">
+							<select name="cmbSubschemeName" id="cmbSubschemeName" th:text="${dcpsDdoSchemeCode}"
+								class="form-control" disabled="disabled">
+								<option value="-1">-- Select --</option>
+							</select>
+						</div>
+						<label class="control-label col-sm-3" for="title"><span>Subscheme
+								Code</span></label>
+						<div class="col-sm-3">
+							<input type="text" name="txtSubSchemeCode" id="txtSubSchemeCode" 
+								class="form-control" readonly="readonly" disabled="disabled">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="title"><span>Bill
+								Group Id</span> </label>
+						<div class="col-sm-3">
+							<input type="text" name="txtBillGroupNo" id="txtBillGroupNo" th:field="*{billGroupId}"
+								class="form-control" readonly="readonly">
+						</div>
+						<label class="control-label col-sm-3" for="title"><span>Description</span></label>
+						<div class="col-sm-3">
+							<input type="text" name="txtDescription" id="txtDescription" th:field="*{description}"
+								style="text-transform: uppercase" class="form-control">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="title"><span>Type
+								of Post</span> <b> <font color="red" size="4px;">*</font>
+						</b></label>
+						<div class="col-sm-3">
+							<input type="radio" name="RadioPermenantTempBoth" th:field="*{dcpsDdoBillTypeOfPost}"
+								id="RadioPermenantTempBothP" value="P" >Permanent &nbsp;<input
+								type="radio" name="RadioPermenantTempBoth"  th:field="*{dcpsDdoBillTypeOfPost}"
+								id="RadioPermenantTempBothT" value="T">Temporary &nbsp;<input
+								type="radio" name="RadioPermenantTempBoth"  th:field="*{dcpsDdoBillTypeOfPost}"
+								id="RadioPermenantTempBothT" value="S">Statutory &nbsp;<input
+								type="radio" name="RadioPermenantTempBoth"  th:field="*{dcpsDdoBillTypeOfPost}"
+								id="RadioPermenantTempBothB" value="B" checked="checked">Both
+								
+								<br>
+								<label id="dcpsDdoBillTypeOfPost-error" class="error " for="dcpsDdoBillTypeOfPost"></label>
+						</div>
+						<label class="control-label col-sm-3" for="title"><span>Group</span>
+							<b> <font color="red" size="4px;">*</font>
+						</b></label>
+						<div class="col-sm-3">
+							<input type="checkbox" name="Group" id="GroupNA" th:field="*{billgroupclass[0].billgroupclass}" value="NA"
+								onclick="disable();" readonly="readonly">NA &nbsp;&nbsp;<input
+								type="checkbox" name="Group" id="GroupA" th:field="*{billgroupclass[1].billgroupclass}" value="A">A
+							&nbsp;&nbsp;<input type="checkbox" name="Group" id="GroupB"
+							th:field="*{billgroupclass[2].billgroupclass}"	value="B">B &nbsp;&nbsp;<input type="checkbox"
+								name="Group" id="GroupBnGz" th:field="*{billgroupclass[3].billgroupclass}" value="BnGz">BnGz
+							&nbsp;&nbsp;<input type="checkbox" name="Group" id="GroupC"
+								th:field="*{billgroupclass[4].billgroupclass}" value="C">C &nbsp;&nbsp;
+								
+								<input type="checkbox"
+							th:field="*{billgroupclass[5].billgroupclass}"	name="Group" id="GroupD" value="D">D
+							
+							
+							
+							<label id="errorClass"></label>
+						</div>
+					</div>
+				</fieldset>
+				
+				
+				<br>
+				<div class="text-center">
+					<input type="submit" name="btnSave" id="btnSave" value="Save"
+						 class="btn"> <input type="button"
+						name="btnDelete" id="btnDelete" value="Delete"  class="btn"> <a th:href="@{/user/home}"
+						class="btn"><span
+						th:text="#{msg.thymeleaf.pagelabel.btnCancel}"></span></a>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/billGroup-maintainance.js}"></script>
+</body>
+</html>

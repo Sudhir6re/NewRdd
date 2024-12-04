@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.viewdeduction}"></title>
+</head>
+<body class="view-deduction">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.dcpsBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.viewdeduction}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.viewdeduction}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<div id="content">
+				<form method="POST" name="" action="">
+					<table class="datatable table table-bordered" id="row">
+						<thead>
+							<tr>
+								<th>Short Name</th>
+								<th>Full Name</th>
+								<th>Deduction Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="odd">
+								<td style="text-align: center;">7th PC DCPS Recovery</td>
+								<td style="text-align: center;">7th PC DCPS Recovery</td>
+								<td style="text-align: center;">7th PC DCPS Recovery</td>
+							</tr>
+							<tr class="even">
+								<td style="text-align: center;">7th PC GPF Arrear</td>
+								<td style="text-align: center;">7th PC GPF Arrear</td>
+								<td style="text-align: center;">7th PC GPF Arrear</td>
+							</tr>
+							<tr class="odd">
+								<td style="text-align: center;">7th PC GPF Recovery</td>
+								<td style="text-align: center;">7th PC GPF Recovery</td>
+								<td style="text-align: center;">7th PC GPF Recovery</td>
+							</tr>
+							<tr class="even">
+								<td style="text-align: center;">CGEGIS</td>
+								<td style="text-align: center;">Central GIS</td>
+								<td style="text-align: center;">CGEGIS</td>
+							</tr>
+							<tr class="odd">
+								<td style="text-align: center;">CO-OP Bank</td>
+								<td style="text-align: center;">CO-OP Bank</td>
+								<td style="text-align: center;">CO-OP Bank</td>
+							</tr>
+							<tr class="even">
+								<td style="text-align: center;">CON.STORE</td>
+								<td style="text-align: center;">CON.STORE</td>
+								<td style="text-align: center;">CON.STORE</td>
+							</tr>
+							<tr class="odd">
+								<td style="text-align: center;">CPF(Employee)</td>
+								<td style="text-align: center;">CPF(Employee)</td>
+								<td style="text-align: center;">CPF(Employee)</td>
+							</tr>
+							<tr class="even">
+								<td style="text-align: center;">(Employer)</td>
+								<td style="text-align: center;">CPF(Employer)</td>
+								<td style="text-align: center;">CPF(Employer)</td>
+							</tr>
+							<tr class="odd">
+								<td style="text-align: center;">CREDIT SOC.</td>
+								<td style="text-align: center;">CREDIT SOC.</td>
+								<td style="text-align: center;">CREDIT SOC.</td>
+							</tr>
+							<tr class="even">
+								<td style="text-align: center;">DCPS</td>
+								<td style="text-align: center;">DCPS Regular Recovery</td>
+								<td style="text-align: center;">Pension Scheme</td>
+							</tr>
+						</tbody>
+					</table>
+					<br />
+					<div class="text-center">
+						<input type="button" name="Close" id="Close" value="Close"
+							size="3" maxlength="3" class="buttontag" onclick="history.back()">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

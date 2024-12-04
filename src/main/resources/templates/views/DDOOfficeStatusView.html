@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title th:utext="#{msg.thymeleaf.pagelabel.statusView}"></title>
+</head>
+<body class="DDOOfficeStatusView">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600 ">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pagelabel.statusView}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pagelabel.statusView}"></span>
+		</h3>
+		<div class="newpagecontent container">
+
+			<form method="POST" name="DDOOfficeStatusView">
+				<div>
+					<table class="bor-0 table">
+						<tbody>
+							<tr>
+								<td align="center" colspan="2">
+									<div class="text-center">
+									
+									<a class="collapse-item btn"
+											th:href="@{'/ddo/getApprovedOfficesLst'}"><span>View Approved Offices</span></a>
+									<a class="collapse-item btn"
+											th:href="@{'/ddo/getRejectedOfficesLst'}"><span>View Rejected Offices</span></a>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+			</form>
+		</div>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/approveReject.js}"></script>
+</body>
+
+</html>

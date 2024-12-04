@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.UpdateQualification}"></title>
+</head>
+<body class="edit-component-parameter-mst">
+	
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+	<div class="breadcrumbMain">
+				<nav aria-label="breadcrumb">
+				  <ol class="breadcrumb">
+				<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+				    <li class="breadcrumb-item"><a href="#"><span  th:utext="#{msg.thymeleaf.pagelabel.UtilitiesBD}"></span></a></li>
+				    <li class="breadcrumb-item active" aria-current="page"><span th:utext="#{msg.thymeleaf.pagelabel.UpdateQualification}"></span></li>
+				  </ol>
+				</nav>
+			</div>
+			<h3 Class="PageHeading"><span th:utext="#{msg.thymeleaf.pagelabel.UpdateQualification}"></span></h3>
+
+		<fieldset class="container">
+			<!-- <b><legend th:utext="#{msg.thymeleaf.pagelabel.menuUpdateScreen}"
+					th:style="${'color: orange;'}"></legend></b> -->
+
+			<form class="form-horizontal" th:action="@{/mdc/saveEditQualification}"
+				th:object="${qualificationEntity}" method="POST"
+				enctype="multipart/form-data">
+
+				<input type="hidden" name="language" id="language"
+					th:value="${language}" /> <input type="hidden" name="message"
+					id="message" th:value="${message}" /> 
+
+				<input type="hidden" id="qId" th:field="*{qId}"/>
+				
+				<div class="form-group">
+
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.qualificationID}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="qId"
+							th:field="*{qId}" readonly />
+					</div>
+
+
+
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pageheading.qualificationname}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="qualification"
+							th:field="*{qualification}" />
+					</div>
+
+				</div>
+
+				
+				<div class="form-group">
+					<hr />
+					<div class="col-sm-offset-5 col-sm-1">
+						<input type="submit" id="btnSave" class="btn btn-primary"
+							th:value="#{msg.thymeleaf.pagelabel.btnUpdate}" />
+					</div>
+					<div class="col-sm-offset-0 col-sm-1">
+						<input type="button" class="btn btn-info"
+							th:value="#{msg.thymeleaf.pagelabel.btnCancel}" />
+					</div>
+				</div>
+
+				<input type="hidden" name="${_csrf.qualification}"
+					value="${_csrf.token}" />
+
+			</form>
+		</fieldset>
+	</div>
+	
+<div th:replace="header/newHeader :: varnewfooter"></div>
+  	<script th:src="@{/js/project/qualification.js}"></script> 
+
+</body>
+</html>

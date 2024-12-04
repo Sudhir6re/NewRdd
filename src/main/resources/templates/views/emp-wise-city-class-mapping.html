@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.empWiseCityClassMap}"></title>
+<style type="text/css">
+.checkbox {
+	margin-left: 13px !important;
+}
+</style>
+</head>
+<body class="emp-wise-city-class-mapping">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.empWiseCityClassMap}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.empWiseCityClassMap}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<form method="post" action="" name="frmCityClassUpdation"
+				enctype="multipart/form-data">
+				<fieldset class="tabstyle">
+					<legend>
+						<b>City Class Updation</b>
+					</legend>
+					<div class="scrollablediv">
+						<table class="table table-bodered">
+							<thead>
+								<tr>
+									<th><input name="chkSelect" type="checkbox"></th>
+									<th>Sevaarth Id</th>
+									<th>Employee Name</th>
+									<th>City Class</th>
+									<th>District</th>
+									<th>Taluka</th>
+									<th>City Class</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td style="text-align: center; width: 5%"><input
+										type="checkbox" name="checkbox1" id="checkbox1"
+										class="checkbox"></td>
+									<td>20DHERRRM8001</td>
+									<td>RAM RAJESH ROY</td>
+									<td>Z_-_Class_D</td>
+									<td style="text-align: center;"><select
+										disabled="disabled" id="dictrictName1" name="dictrictName1">
+											<option value="-1" title="-- Select --">-- Select --</option>
+											<option value="100080" title="Palghar">Palghar</option>
+											<option value="343" title="Ahmednagar">Ahmednagar</option>
+											<option value="344" title="Akola">Akola</option>
+									</select></td>
+									<td style="text-align: center;"><select
+										disabled="disabled" id="talukaName1" name="talukaName1">
+											<option value="-1" title="-- Select --">-- Select --</option>
+											<option value="414" title="JIWATI">JIWATI</option>
+											<option value="412" title="Not Applicable">Not
+												Applicable</option>
+											<option value="413" title="Not Applicable">Not
+												Applicable</option>
+											<option value="1" title="Akkalkuwa">Akkalkuwa</option>
+											<option value="10" title="Sindkhede">Sindkhede</option>
+											<option value="100" title="Tumsar">Tumsar</option>
+									</select></td>
+									<td style="text-align: center;"><select
+										disabled="disabled" id="cityClassName1" name="cityClassName1">
+											<option value="-1">-- Select --</option>
+											<option value="Y_-_Class_A">Y_-_Class_A</option>
+											<option value="X_-_Class_A1">X_-_Class_A1</option>
+											<option value="Y_-_Class_B">Y_-_Class_B</option>
+											<option value="Y_-_Class_B1">Y_-_Class_B1</option>
+											<option value="Y_-_Class_B2">Y_-_Class_B2</option>
+											<option value="Z_-_Class_C">Z_-_Class_C</option>
+											<option value="Z_-_Class_D">Z_-_Class_D</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td style="text-align: center; width: 5%"><input
+										type="checkbox" name="checkbox2" id="checkbox2"
+										class="checkbox"></td>
+									<td>20DHEVLTM6901</td>
+									<td>VIJAY LAXMAN TAYDE</td>
+									<td></td>
+									<td style="text-align: center;"><select
+										disabled="disabled" id="dictrictName2" name="dictrictName2">
+											<option value="-1" title="-- Select --">-- Select --</option>
+											<option value="100080" title="Palghar">Palghar</option>
+											<option value="343" title="Ahmednagar">Ahmednagar</option>
+											<option value="344" title="Akola">Akola</option>
+											<option value="345" title="Amravati">Amravati</option>
+											<option value="346" title="Aurangabad">Aurangabad</option>
+											<option value="128" title="Sironcha">Sironcha</option>
+									</select></td>
+									<td style="text-align: center;"><select
+										disabled="disabled" id="cityClassName2" name="cityClassName2">
+											<option value="-1">-- Select --</option>
+											<option value="Y_-_Class_A">Y_-_Class_A</option>
+											<option value="X_-_Class_A1">X_-_Class_A1</option>
+											<option value="Y_-_Class_B">Y_-_Class_B</option>
+											<option value="Y_-_Class_B1">Y_-_Class_B1</option>
+											<option value="Y_-_Class_B2">Y_-_Class_B2</option>
+											<option value="Z_-_Class_C">Z_-_Class_C</option>
+											<option value="Z_-_Class_D">Z_-_Class_D</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td style="text-align: center; width: 5%"><input
+										type="checkbox" name="checkbox3" id="checkbox3"
+										class="checkbox"></td>
+									<td>20DHEHJRF9601</td>
+									<td>HEMA JITENDRA RAHANGDALE</td>
+									<td></td>
+									<td style="text-align: center;"><select
+										disabled="disabled" id="dictrictName3" name="dictrictName3">
+											<option value="-1" title="-- Select --">-- Select --</option>
+											<option value="100080" title="Palghar">Palghar</option>
+											<option value="343" title="Ahmednagar">Ahmednagar</option>
+											<option value="344" title="Akola">Akola</option>
+									</select></td>
+									<td style="text-align: center;"><select
+										disabled="disabled" id="talukaName3" name="talukaName3">
+											<option value="-1" title="-- Select --">-- Select --</option>
+											<option value="414" title="JIWATI">JIWATI</option>
+											<option value="412" title="Not Applicable">Not
+												Applicable</option>
+											<option value="413" title="Not Applicable">Not
+												Applicable</option>
+											<option value="1" title="Akkalkuwa">Akkalkuwa</option>
+											<option value="10" title="Sindkhede">Sindkhede</option>
+											<option value="100" title="Tumsar">Tumsar</option>
+									</select></td>
+									<td style="text-align: center;"><select
+										disabled="disabled" id="cityClassName3" name="cityClassName3">
+											<option value="-1">-- Select --</option>
+											<option value="Y_-_Class_A">Y_-_Class_A</option>
+											<option value="X_-_Class_A1">X_-_Class_A1</option>
+											<option value="Y_-_Class_B">Y_-_Class_B</option>
+											<option value="Y_-_Class_B1">Y_-_Class_B1</option>
+											<option value="Y_-_Class_B2">Y_-_Class_B2</option>
+											<option value="Z_-_Class_C">Z_-_Class_C</option>
+											<option value="Z_-_Class_D">Z_-_Class_D</option>
+									</select></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</fieldset>
+				<div class="text-center">
+					<br> <input type="button" name="BTN.UpdateBasic"
+						id="btnUpdate" value="Update Details" class="btn">&nbsp; <input
+						type="reset" name="reset" id="btnReset" value="Reset" class="btn">
+					<input type="button" name="btnBackAgain" id="btnBackAgain"
+						onclick="history.back()" value="Back" class="buttontag">
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script>
+		$(document).ready(function() {
+			$('.checkbox').on('change', function() {
+				var row = $(this).closest('tr');
+				if ($(this).is(':checked')) {
+					row.find('select').prop('disabled', false);
+				} else {
+					row.find('select').prop('disabled', true);
+				}
+			});
+		});
+	</script>
+</body>
+</html>
