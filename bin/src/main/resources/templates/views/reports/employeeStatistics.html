@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<style>
+.branch-name, .bank-name, .gis-val {
+	min-width: 400px ! IMPORTANT;
+}
+
+.emp-name {
+	min-width: 250px ! IMPORTANT;
+}
+
+table#employeeStatisticsReportTable td {
+	min-width: 150px;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.fixed_header th {
+	background: #eee;
+}
+
+.fixed_header th {
+	vertical-align: middle !important;
+}
+
+table#employeeStatisticsReportTable {
+	border: none;
+	border-top: 1px solid;
+}
+
+table.dataTable {
+	clear: both;
+	margin-top: 6px !important;
+	margin-bottom: 6px !important;
+	max-width: none !important;
+	border-collapse: separate !important;
+	border-spacing: 0;
+	width: 100%;
+}
+
+.table-bordered {
+	border: 1px solid #ddd;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table, th, td {
+	border: 1px solid black;
+}
+
+.table-bordered>thead>tr>th, .table-bordered>tbody>tr>th,
+	.table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td,
+	.table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td {
+	border: 1px solid #ddd;
+}
+
+.text-left {
+	text-align: left;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.table-responsive {
+	padding-right: 10px;
+}
+
+.employeeStatisticsReportTableMain.CbTbResponsive {
+	max-height: 40vh !important;
+}
+
+.showprintt {
+	display: none;
+}
+
+@media print {
+	table#employeeStatisticsReportTable * {
+		font-size: 9px;
+		padding: 2px;
+	}
+	.employeeStatisticsReportTableMain.CbTbResponsive {
+		margin-bottom: 90px;
+	}
+	.showprintt {
+		display: block;
+	}
+	.hide, .btn {
+		display: none !important;
+	}
+}
+</style>
+
+</head>
+<body class="employeeStatistics">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.ReportBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pagelabel.empstsname}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<div id="dvContainer" class="container">
+
+			<div id="print-content">
+				<div class="showprintt">
+					<div th:replace="header/reportHeader :: var-script-headerReport"></div>
+					<div th:replace="header/reportHeader :: varmenuheaderReport"></div>
+				</div>
+				<h3 Class="PageHeading text-center">
+					<span th:utext="#{msg.thymeleaf.pagelabel.empstsname}"></span>
+				</h3>
+				<div class="container ">
+					<!-- <div class=" table-responsive employeeStatisticsReportTableMain tableFixHead1 "> -->
+					<div class="employeeStatisticsReportTableMain table-responsive">
+
+						<table id="employeeStatisticsReportTable"
+							class="table fixed_header table-excel">
+							<thead>
+								<tr class="hide">
+									<th>
+										<h3 Class="PageHeading text-center">
+											<span th:utext="#{msg.thymeleaf.pagelabel.empstsname}"></span>
+										</h3>
+									</th>
+								</tr>
+								<tr>
+									<th class="text-center emp-name"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.empstsempname}"></span></label></b></th>
+									<th class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.empstasavaarthid}"></span></label></b></th>
+									<th class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.empstadob}"></span></label></b></th>
+									<th class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.empstaemptype}"></span></label></b></th>
+									<th class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.empstacarde}"></span></label></b></th>
+									<th class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.empstapostname}"></span></label></b></th>
+									<th class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.empstaposttype}"></span></label></b></th>
+									<th class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.empstapoststartDate}"></span></label></b></th>
+									<th class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.empstapostendDate}"></span></label></b></th>
+									<th class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.empstadateofjoining}"></span></label></b></th>
+									<th class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.empstadateofserviceexpiry}"></span></label></b></th>
+									<th class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.empstascaledes}"></span></label></b></th>
+									<th class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.empstabasicsal}"></span></label></b></th>
+									<th class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.empstasevenpcbasic}"></span></label></b></th>
+									<th class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.empstasevenpcbasicLvl}"></span></label></b></th>
+									<th class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.empstapfseries}"></span></label></b></th>
+									<th class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.empstagpfdcpsaccno}"></span></label></b></th>
+									<th class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.empstagisgroup}"></span></label></b></th>
+									<th class="text-center gis-val"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.empstagisvalue}"></span></label></b></th>
+									<th class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.empstaphyhand}"></span></label></b></th>
+									<th class="text-center bank-name"><b><label
+											for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.empstabankname}"></span></label></b></th>
+									<th class="text-center branch-name"><b><label
+											for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.empstabankbranchname}"></span></label></b></th>
+									<th class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.empstaaccno}"></span></label></b></th>
+									<th class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.empstapranno}"></span></label></b></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="varData : ${empList}">
+									<td align="left" th:text="${varData.empname}"></td>
+									<td align="center" th:text="${varData.sevaarthId}"></td>
+									<td align="center" th:text="${varData.dob}"></td>
+									<td align="center" th:text="${varData.sevaarthId}"></td>
+									<td align="center" th:text="${varData.cadre}"></td>
+									<td align="left" th:text="${varData.postname}"></td>
+									<td align="left" th:text="${varData.postType}"></td>
+									<td align="center"
+										th:text="${#dates.format(varData.poststartdate, 'dd-MM-yyyy')}"></td>
+									<td align="center"
+										th:text="${#dates.format(varData.postenddate, 'dd-MM-yyyy')}"></td>
+									<td align="center"
+										th:text="${#dates.format(varData.dateofjoining, 'dd-MM-yyyy')}"></td>
+									<td align="center"
+										th:text="${#dates.format(varData.dateofexipry, 'dd-MM-yyyy')}"></td>
+									<td align="center" th:text="${varData.scaledec}"></td>
+									<td align="right" th:text="${varData.basicpay}"></td>
+									<td align="right" th:text="${varData.sevenbasicpay}"></td>
+									<td align="center" th:text="${varData.sevenPcLvl}"></td>
+									<td align="center" th:text="${varData.pfserives}"></td>
+									<td align="left" th:text="${varData.gpfdcps}"></td>
+									<td align="center" th:text="${varData.gisgroup}"></td>
+									<td align="left" th:text="${varData.gisvalue}"></td>
+									<td align="left" th:text="${varData.handicap}"></td>
+									<td align="left" th:text="${varData.bankname}"></td>
+									<td align="left" th:text="${varData.bankbarname}"></td>
+									<td align="left" th:text="${varData.accno}"></td>
+									<td align="left" th:text="${varData.pranNo}"></td>
+
+
+
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+					<br />
+					<div class="row">
+						<div class="text-left col-md-6">
+							<span th:utext="#{msg.pagelabel.varificationdatetime}"></span> <span
+								th:text="${createddate}"> </span>
+						</div>
+						<div class="text-right col-md-6">
+							<span th:utext="#{msg.pagelabel.printingdatetime}"></span> <span
+								th:text="${systemdate}"> </span>
+
+						</div>
+					</div>
+					<div class="clear">
+						<div class="text-center">
+							<span th:utext="#{msg.thymeleaf.pagelabel.footerreport}"></span>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="text-center">
+				<br />
+				<button id="print" onclick="printContent('print-content');"
+					class="btn orange">Print</button>
+				<button id="btnExcel" class="btn">Excel</button>
+				<a th:href="@{/user/home}" class="btn"><span
+					th:text="#{msg.thymeleaf.pagelabel.btnCancel}"></span></a>
+
+			</div>
+
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+
+</body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('body').on('click', '#pdfbutton', function() {
+			$('#printpagebutton').hide();
+			$('#pdfbutton').hide();
+			$('#printpagebuttonnew').hide();
+			window.print()
+			$('#printpagebutton').show();
+			$('#pdfbutton').show();
+			$('#printpagebuttonnew').show();
+
+		});
+
+	});
+</script>
+<script>
+	function printContent(el) {
+		var restorepage = $('body').html();
+		var printcontent = $('#' + el).clone(true);
+		$('body').empty().html(printcontent);
+		window.print();
+		$('body').html(restorepage);
+	}
+
+	$("#btnExcel").click(function() {
+		$(".table-excel").table2excel({
+			filename : "EmployeesStatastics.xls"
+		});
+	});
+</script>
+</html>

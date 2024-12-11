@@ -1,7 +1,5 @@
 package com.mahait.gov.in.configuration;
 
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -10,11 +8,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -27,38 +22,33 @@ import com.mahait.gov.in.customfilter.CustomAuthenticationFilter;
 import com.mahait.gov.in.customfilter.CustomLogoutSuccessHandler;
 import com.mahait.gov.in.customfilter.CustomSimpleUrlAuthenticationSuccessHandler;
 import com.mahait.gov.in.customfilter.UsernameDecryptFilter;
-import com.mahait.gov.in.entity.MstRoleEntity;
-import com.mahait.gov.in.entity.OrgUserMst;
 import com.mahait.gov.in.service.UserService;
 @Configuration
 public class SecurityConfig {
 
 	@Autowired
-    UserService userService;
+	UserService userServiceImpl;
 
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
   
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return username -> {
-            OrgUserMst user = userService.getUserIdbyUserName(username);
-            MstRoleEntity mstRoleEntity=user.getMstRoleEntity();
-            GrantedAuthority authority = new SimpleGrantedAuthority((mstRoleEntity).getRoleName());
-            
-            if (user != null) {
-                return new org.springframework.security.core.userdetails.User(
-                        user.getUserName(),
-                        user.getPassword(),
-                        Arrays.asList(authority)
-                );
-            }
-            throw new RuntimeException("User not found");
-        };
-    }
-
+	/*
+	 * @Bean public UserDetailsService userDetailsService() {
+	 * 
+	 * userService.getUserIdbyUserName(username);
+	 * 
+	 * return username -> { OrgUserMst user =
+	 * userService.getUserIdbyUserName(username); MstRoleEntity
+	 * mstRoleEntity=user.getMstRoleEntity(); GrantedAuthority authority = new
+	 * SimpleGrantedAuthority((mstRoleEntity).getRoleName());
+	 * 
+	 * if (user != null) { return new
+	 * org.springframework.security.core.userdetails.User( user.getUserName(),
+	 * user.getPassword(), Arrays.asList(authority) ); } throw new
+	 * RuntimeException("User not found"); }; }
+	 */
     
     
     @Bean
@@ -116,7 +106,7 @@ public class SecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager() throws Exception {
     	DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-		authenticationProvider.setUserDetailsService(userDetailsService());
+		authenticationProvider.setUserDetailsService(userServiceImpl);
 		authenticationProvider.setPasswordEncoder(passwordEncoder);
 		ProviderManager providerManager = new ProviderManager(authenticationProvider);
 		providerManager.setEraseCredentialsAfterAuthentication(false);

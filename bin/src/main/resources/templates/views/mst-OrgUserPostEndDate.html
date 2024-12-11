@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:utext="#{msg.thymeleaf.pageheading.EmployeeServiceEndDate}"></title>
+</head>
+
+<body class="mst-bulkAllowance">
+    <div th:replace="header/menuHeader :: var-script-header"></div>
+    <div th:replace="header/menuHeader :: varmenuheader"></div>
+    <div class="container min-height-600">
+        <div class="breadcrumbMain">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#"><span th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><span th:utext="#{msg.thymeleaf.pageheading.EmployeeServiceEndDate}"></span></li>
+                </ol>
+            </nav>
+        </div>
+        <h3 Class="PageHeading">
+            <span th:utext="#{msg.thymeleaf.pageheading.ServiceEndWorkList}"></span>
+        </h3>
+        <div class="pageComtentNew">
+        	<div id="childLock">
+    <div id="tabmenu">
+        <ul id="maintab" class="shadetabs">
+            <li class="selected"><a href="#" rel="tcontent1" class="selected"><b><label style="color:black" class="captionTag" id="EmpEndDate.WorkList">Service End WorkList</label></b></a></li>
+        </ul>
+    </div>
+    <div id="tcontent1" style="background-color: rgb(232, 227, 227); border-style: inset; border-color: rgb(178, 71, 0); border-width: thin; display: block;">
+        <br>
+        <form method="POST" action="./hrms.htm?actionFlag=getEmpDataForEndDate" name="EmpInfo" enctype="text/form-data">
+            <table width="85%" align="center" style="display:show;" border="1">
+                <tbody>
+                    <tr>
+                        <td>
+                            <fieldset id="Search Employee" class="fieldGroupTag">
+                                <p id=""><span>Search Employee </span></p>
+                                <div id="" style="display: block; width: 100%;">
+                                    <table align="right" cellpadding="1" cellspacing="1">
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="javascript:clearEmployee('EmpInfoSearch')" id="null" class="anchortag">Clear</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table align="left" cellpadding="1" cellspacing="1">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Search With Name/SevaarthId</td>
+                                                <td><input type="text" name="Employee_srchNameText_EmpInfoSearch" id="txtSearchName" class="texttag" value="" autocomplete="off">
+                                                    <div id="ajaxAuto_txtSearchName" class="autocomplete" style="display: none;"></div>
+                                                </td>
+                                                <td width="50%" align="left" colspan="3">
+                                                    <input type="button" name="search_EmpInfoSearch" onclick="GoToNewPageEmpInfoSearch()" id="search_EmpInfoSearch" value="Search" size="3" maxlength="3" class="buttontag">
+                                                    <span id="roleIndicatorRegion" style="display: none"> <img src="./images/busy-indicator.gif"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fieldLabel" width="25%" style="display:none">Employee Id</td>
+                                                <td style="display:none"><input type="text" name="Employee_Name_EmpInfoSearch" id="Employee_Name_EmpInfoSearch" class="texttag disabledcontrol" value="" readonly=""></td>
+                                                <td class="fieldLabel" width="25%">Sevaarth Id</td>
+                                                <td><input type="text" name="Emp_Sevarth_Id_EmpInfoSearch" id="Emp_Sevarth_Id_EmpInfoSearch" class="texttag disabledcontrol" value="" readonly=""></td>
+                                                <td class="fieldLabel" width="25%">Office Name</td>
+                                                <td><input type="text" name="Police_ST_NM_EmpInfoSearch" id="Police_ST_NM_EmpInfoSearch" class="texttag disabledcontrol" value="" readonly=""></td>
+                                                <td class="fieldLabel" width="25%"><label class="captionTag" id="Dsgn_NM">Designation </label></td>
+                                                <td><input type="text" name="Dsgn_NM_EmpInfoSearch" id="Dsgn_NM_EmpInfoSearch" class="texttag disabledcontrol" value="" readonly=""></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fieldLabel" width="25%" style="display:none"><label class="captionTag" id="DISTRICT_NM">District </label></td>
+                                                <td style="display:none"><input type="text" name="DISTRICT_NM_EmpInfoSearch" id="DISTRICT_NM_EmpInfoSearch" class="texttag disabledcontrol" value="" readonly=""></td>
+                                                <td class="fieldLabel" width="25%"><label class="captionTag" id="GPF_NM">GPF No.</label></td>
+                                                <td><input type="text" name="GPF_NM_EmpInfoSearch" id="GPF_NM_EmpInfoSearch" class="texttag disabledcontrol" value="" readonly=""></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <input type="hidden" name="Employee_ID_EmpInfoSearch" value="" id="Employee_ID_EmpInfoSearch">
+                                    <input type="hidden" name="USER_ID_EmpInfoSearch" value="" id="USER_ID_EmpInfoSearch">
+                                    <input type="hidden" name="filteredEmpIDPostFix" value="EmpInfoSearch" id="filteredEmpIDPostFix">
+                                    <input type="hidden" name="Employee_ID_Array_EmpInfoSearch" value="EmpInfoSearch" id="Employee_ID_Array_EmpInfoSearch">
+                                    <input type="hidden" name="Sel_Employee_NAME_Array_EmpInfoSearch" value="EmpInfoSearch" id="Sel_Employee_NAME_Array_EmpInfoSearch">
+                                    <input type="hidden" name="Sel_Employee_DESIG_Array_EmpInfoSearch" value="EmpInfoSearch" id="Sel_Employee_DESIG_Array_EmpInfoSearch">
+                                    <input type="hidden" name="Sel_Employee_POST_Array_EmpInfoSearch" value="EmpInfoSearch" id="Sel_Employee_POST_Array_EmpInfoSearch">
+                                    <input type="hidden" name="srchCountVal_EmpInfoSearch" value="" id="srchCountVal_EmpInfoSearch">
+                                    <input type="hidden" name="Employee_Post_ID_EmpInfoSearch" value="" id="Employee_Post_ID_EmpInfoSearch">
+                                </div>
+                            </fieldset>
+                            <input type="hidden" name="hidSearchFromSRKA" id="hidSearchFromSRKA" value="searchBySRKA">
+                        </td>
+                    </tr>
+                    <tr style="display:none">
+                        <td align="center">
+                            <fieldset style="background: #eeeeee;">
+                                <!--<input type="submit"  onclick="return chkValue()"  id="details"  value="Populate Details"  size="3"  maxlength="3"  class="buttontag" >	
+				-->
+                                <input type="button" name="viewAll" onclick="submitForm()" id="viewAll" value="View All" size="3" maxlength="3" class="buttontag">
+                            </fieldset>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+        <span class="pagebanner">26 Records found, displaying 1 to 20 Records.</span><span class="pagelinks">[First/Prev] <strong>1</strong>, <a href="?elementId=9000224&amp;actionFlag=getEmpDataForEndDate&amp;d-16544-p=2" title="Go to page 2">2</a> [<a href="?elementId=9000224&amp;actionFlag=getEmpDataForEndDate&amp;d-16544-p=2">Next</a>/<a href="?elementId=9000224&amp;actionFlag=getEmpDataForEndDate&amp;d-16544-p=2">Last</a>]</span>
+        <table class="datatable" style="width:100%" id="row">
+            <thead>
+                <tr>
+                    <th class="datatableheader">Employee Name</th>
+                    <th class="datatableheader">DCPS/GPF</th>
+                    <th class="datatableheader">Employee Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+        <br>
+    </div>
+</div>
+        </div>
+    </div>
+    <div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+
+</html>

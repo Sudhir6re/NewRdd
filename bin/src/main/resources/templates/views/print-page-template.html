@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Report</title>
+</head>
+<body class="bank-master">
+	<div class="container-fluid">
+		<div id="print-content">
+			<div th:replace="header/menuHeader :: var-script-header"></div>
+
+
+
+
+		</div>
+		<div class="text-center">
+			<button id="print" onclick="printContent('print-content');"
+				class="btn">Print</button>
+			<input type="button" name="btnBackAgain" id="btnBackAgain"
+				onclick="history.back()" value="Back" class="buttontag">
+		</div>
+
+	</div>
+
+</body>
+</html>

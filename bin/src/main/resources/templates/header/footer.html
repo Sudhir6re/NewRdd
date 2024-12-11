@@ -1,0 +1,21 @@
+	<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+	<div class="container footer-main" th:fragment="varfooter">
+		<footer>
+			<div class="footer">
+				<span> © By <span th:text="#{msg.thymeleaf.pagelabel.MahaSevaarth}"></span> </span>
+				<div class="foot-log-main flex float-right">
+					<span>Developed &amp; Maintained by :</span> <img
+						th:src="@{/images/footer-logo.png}" alt="Maharashtra Government" />
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="clear"></div>
+		</footer>
+	</div>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pagelabel.createsubMenuScreen}"></title>
+</head>
+<body class="edit-sub-menu">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.UtilitiesBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pagelabel.createsubMenuScreen}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pagelabel.createsubMenuScreen}"></span>
+		</h3>
+		<fieldset class="container">
+			<!-- 	<b><legend th:utext="#{msg.thymeleaf.pagelabel.subMenuScreen}"
+					th:style="${'color: orange;'}"></legend></b> -->
+
+			<form class="form-horizontal" th:action="@{/master/saveEditSubMenu}"
+				th:object="${mstSubMenuEntity}" method="POST"
+				enctype="multipart/form-data">
+
+				<input type="hidden" name="language" id="language"
+					th:value="${language}" /> <input type="hidden" name="message"
+					id="message" th:value="${message}" /> <input type="hidden"
+					name="subMenuId" id="subMenuId" th:value="${subMenuId}" />
+
+				<div class="form-group">
+
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.roleName}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+						<select class="form-control" id="roleId" th:field="*{roleId}">
+							<option selected="selected" th:value="0"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+							<option th:each="varRole : ${lstRole}"
+								th:value="${varRole.roleId}"
+								th:text="${language=='mh' ? varRole.roleName : varRole.roleName}"></option>
+						</select>
+					</div>
+
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.menuName}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+						<select class="form-control" id="menuCode" th:field="*{menuCode}">
+							<option selected="selected" th:value="0"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+							<option th:each="varMenu : ${lstMenu}"
+								th:value="${varMenu.menuCode}"
+								th:text="${language=='mh' ? varMenu.menuNameMarathi : varMenu.menuNameEnglish}"></option>
+						</select>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.subMenuEnglish}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="sub_menu_name_english"
+							th:field="*{sub_menu_name_english}" />
+					</div>
+
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.subMenuMarathi}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="sub_menu_name_marathi"
+							th:field="*{sub_menu_name_marathi}" />
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.controllerName}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="controller_name"
+							th:field="*{controller_name}" />
+					</div>
+
+
+
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.linkName}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="link_name"
+							th:field="*{link_name}" />
+					</div>
+
+				</div>
+
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.status}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+						<select class="form-control" id="is_active"
+							th:field="*{is_active}">
+							<option selected="selected" th:value="0"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+							<option th:each="varCommon : ${lstCommonMst}"
+								th:value="${varCommon.commonValue}"
+								th:text="${language=='mh' ? varCommon.commonValMarathi : varCommon.commonValEnglish}"></option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr />
+					<div class="col-sm-offset-5 col-sm-1">
+						<input type="submit" id="btnSave" class="btn btn-primary"
+							th:value="#{msg.thymeleaf.pagelabel.btnUpdate}" />
+					</div>
+					<div class="col-sm-offset-0 col-sm-1">
+						<input type="button" class="btn btn-info"
+							th:value="#{msg.thymeleaf.pagelabel.btnCancel}" />
+					</div>
+				</div>
+
+				<input type="hidden" name="${_csrf.parameterName}"
+					value="${_csrf.token}" />
+
+			</form>
+		</fieldset>
+	</div>
+
+	<div th:replace="header/newHeader :: varnewfooter"></div>
+
+	<script th:src="@{/js/project/mst-sub-menu.js}"></script>
+
+</body>
+</html>

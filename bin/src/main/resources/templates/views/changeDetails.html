@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.changeDetails}"></title>
+<!--  <link rel="stylesheet" type="text/css"
+	href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css"
+	href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css"> -->
+<script th:src="@{/js/jquery.min.js}"></script>
+<link rel="stylesheet"
+	href="../static/css/dataTables.bootstrap4.min.css"
+	th:href="@{/css/dataTables.bootstrap4.min.css}" />
+<script>
+	$(document).ready(function() {
+
+		$('#changedetails').DataTable();
+		setTimeout(function() {
+			$('#tblDataTable5').DataTable();
+		}, 1200);
+
+	});
+</script>
+<style>
+span#empname {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+table#tblDataTable input {
+	/*max-width: 70px;*/
+	font-size: 15px;
+	color: #000;
+}
+
+th.emppname2.sorting {
+	width: 350px !important;
+}
+
+input#checkboxid {
+	max-width: 100% !important;
+	margin: auto;
+	cursor: pointer;
+}
+
+table#test * {
+	vertical-align: middle;
+}
+
+table#test td:nth-child(2), table#test td:nth-child(7) {
+	min-width: 230px;
+}
+
+table#test td:nth-child(5) {
+	min-width: 320px;
+}
+</style>
+
+
+</head>
+<body class="changeDetails">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+
+
+
+
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.changeDetails}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.changeDetails}"></span>
+		</h3>
+		<form class="form-horizontal container" th:action="@{/ddoast/saveEmpRelieve}"
+			th:object="${empChangeDetailsModel}" method="POST"
+			enctype="multipart/form-data">
+
+			<input type="hidden" name="language" id="language"
+				th:value="${language}" /> <input type="hidden" name="message"
+				id="message" th:value="${message}" /> <input type="hidden"
+				name="message" id="messages" th:value="${messages}" />
+			<div class="table-responsive2">
+
+				<table id="changedetails"
+					class="table empChangeDtls table-striped table-bordered">
+					<thead>
+						<tr>
+							<th th:utext="#{msg.thymeleaf.pagelabel.sevaarthId}"></th>
+							<th th:utext="#{msg.thymeleaf.pagelabel.employeeName}"></th>
+							<th th:utext="#{msg.thymeleaf.pagelabel.DOJ}"></th>
+							<th th:utext="#{msg.thymeleaf.pagelabel.retirementDate}"></th>
+							<th><span th:if="${roleId==3}"
+								th:utext="#{msg.thymeleaf.pagelabel.remarkrejected}"></span> <span
+								th:if="${roleId==2}"
+								th:utext="#{msg.thymeleaf.pagelabel.reasonForChngDtls}"></span></th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="varEmp : ${empLst}">
+							<td class="text-center"><span th:if="${roleId==3}"> <a
+									style="font-size: 12px;" id="sevaarthId"
+									th:text="${empLst[__${varEmpStat.index}__].sevaarthId}"
+									th:href="@{${'/ddoast/changeEmpDtls/'+empLst[__${varEmpStat.index}__].employeeId}}"></a></span>
+									<span th:if="${roleId==2}"> <a
+									style="font-size: 12px;" id="sevaarthId"
+									th:text="${empLst[__${varEmpStat.index}__].sevaarthId}"
+									th:href="@{${'/ddo/changeEmpDtlsLvl2/'+empLst[__${varEmpStat.index}__].employeeId}}"></a></span>
+							</td>
+							<td class=""><span style="font-size: 12px;" id="empName"
+								th:text="${empLst[__${varEmpStat.index}__].employeeFullNameEn}"></span>
+							</td>
+							<td class="text-center"><span style="font-size: 12px;"
+								id="gender"
+								th:text="${#calendars.format(empLst[__${varEmpStat.index}__].doj,'dd-MM-yyyy ')}"
+								class=""></span></td>
+							<td class="text-center"><span style="font-size: 12px;"
+								id="gender"
+								th:text="${#calendars.format(empLst[__${varEmpStat.index}__].superAnnDate,'yyyy-MM-dd ')}"
+								class=""></span></td>
+							<td class=""><span th:if="${roleId==3}"
+								style="font-size: 12px;" id="remark"
+								th:text="${empLst[__${varEmpStat.index}__].reasonForRejOrApprv}"
+								class=""></span> <span th:if="${roleId==2}"
+								style="font-size: 12px;" id="remark"
+								th:text="${empLst[__${varEmpStat.index}__].reasonForChangedtls}"
+								class=""></span></td>
+
+						</tr>
+
+
+					</tbody>
+				</table>
+			</div>
+
+
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+
+		</form>
+		<!-- 		</fieldset> -->
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+
+
+
+	<script type="text/javascript">
+		$('#checkboxid').click(function() {
+			console.log($(this).val());
+			if ($('#checkboxid').prop('checked')) {
+				$(".checkboxid").prop('checked', true);
+				$(".checkboxid").val(true);
+			} else {
+				$(".checkboxid").prop('checked', false);
+				$(".checkboxid").val(false);
+			}
+		});
+
+		//$(".checkbox").prop('checked', true);
+		//$('.checkbox').click(function() {
+		$(document).on('click', "[class^=checkbox]", function() {
+			//console.log($(this).val());
+			if ($(this).prop('checked')) {
+				$(this).prop('checked', true);
+				$(this).val(true);
+			} else {
+				$(this).prop('checked', false);
+				$(this).val(false);
+			}
+		});
+	</script>
+	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			//alert("qwe");
+			var varMessage = $("#message").val();
+			///alert("varMessage in if----"+varMessage);
+
+			if (varMessage != "" && varMessage != undefined) {
+				swal("Employee Change Detail Approved..!!");
+			}
+		});
+	</script>
+
+
+	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			//alert("qwe");
+			var varMessage = $("#messages").val();
+			//alert("varMessage"+varMessage);
+
+			if (varMessage != "" && varMessage != undefined) {
+				swal("Please select checkbox..");
+			}
+		});
+	</script>
+	<!-- <script type="text/javascript" charset="utf8"
+		src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" charset="utf8"
+		src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"></script> 
+
+	
+
+	<!-- <script th:src="@{/js/project/EmpRelieving.js}"></script> -->
+	<script th:src="@{/js/project/changeDetails.js}"></script>
+
+</body>
+</html>

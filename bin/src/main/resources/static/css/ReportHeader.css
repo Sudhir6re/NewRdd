@@ -1,0 +1,65 @@
+img.logo {
+	max-width: 90px;
+}
+
+p.logo-sub-text {
+	margin: 5px 0;
+}
+
+img.aadhaarlogo {
+	max-width: 90px;
+}
+
+.flex {
+	display: flex;
+}
+
+.col-md-6 {
+	width: 50%;
+}
+
+.row {
+	width: 100%
+}
+
+.text-right {
+	text-align: right;
+}
+
+header .deptname {
+	color: #ef7c01;
+	font-size: 26px;
+	font-weight: bold;
+	margin-bottom: 0;
+}
+
+.logo-title p {
+	font-family: "Helvetica Neue", Helvetica, Arial !important;
+}
+
+.logo-title {
+	margin: auto 10px;
+}
+
+.header {
+	padding: 0px 22px;
+}
+
+header, .min-height-600 {
+	border: none !important;
+}
+
+.header {
+	border: none !important;
+}
+img.reportHeadlogo {
+    max-width: 1170px;
+}
+
+.pad10 {
+	padding-left: 25px;
+	padding-right: 15px;
+}
+table#changeReportTable td {
+    padding: 0 3px;
+}

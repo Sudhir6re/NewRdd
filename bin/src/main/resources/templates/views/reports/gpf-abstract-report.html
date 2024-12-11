@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.gpfAbstarct}"></title>
+<link rel="stylesheet" th:href="@{/css/print.css}" />
+<link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body class="gpf-abstract-report">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.reportBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.gpfAbstarct}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<div class="formMainwithNoborTb container">
+			<div id="print-content">
+				<fieldset>
+					<div class="text-center">
+						<h3 Class="PageHeading">
+							<span th:utext="#{msg.thymeleaf.pageheading.gpfAbstarct}"></span>
+						</h3>
+					</div>
+					<br />
+					<table class="table bor-0">
+						<tbody>
+							<tr>
+								<td colspan="2" style="font-weight: bolder; text-align: center;">GPF
+									Abstract for the Subscriptions and Refund of the following
+									Government Servants<br>From Major Head 8009
+								</td>
+							</tr>
+							<tr>
+								<td style="font-weight: bold;">For the Month of <span th:text="${currmonyer}"></span></td>
+								<td style="font-weight: bold; text-align: right;">Treasury
+									: <span th:text="${treasury}"></span></td>
+							</tr>
+							<tr>
+								<td style="font-weight: bold;">AG Office : A. G. Mumbai</td>
+								<td style="font-weight: bold; text-align: right;"></td>
+							</tr>
+							<tr>
+								<td style="font-weight: bold;">Name of the Office :
+									<span th:text = "${officename}"></span></td>
+								<td style="font-weight: bold; text-align: right;"></td>
+							</tr>
+						</tbody>
+					</table>
+					<br />
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th rowspan="2" th:utext="#{msg.thymeleaf.pagelabel.srno}" /></th>
+								<th rowspan="2" th:utext="#{msg.thymeleaf.pagelabel.seriesName}" /></th>
+								<th rowspan="2" th:utext="#{msg.thymeleaf.pagelabel.noOfgovser}" /></th>
+								<th rowspan="2" th:utext="#{msg.thymeleaf.pagelabel.payDP}" /></th>
+								<th rowspan="2" th:utext="#{msg.thymeleaf.pagelabel.subs}" /></th>
+								<th rowspan="2" th:utext="#{msg.thymeleaf.pagelabel.payDA}" /></th>
+								<th rowspan="2" th:utext="#{msg.thymeleaf.pagelabel.gpfArr}" /></th>
+								<th rowspan="2" th:utext="#{msg.thymeleaf.pagelabel.refundamt}" /></th>
+								<th rowspan="2" th:utext="#{msg.thymeleaf.pagelabel.total}" /></th>
+
+							</tr>
+
+
+						</thead>
+						<tbody>
+
+							<tr th:each="varDtls : ${gpfRptDtls}">
+								<td class="text-center" th:text="${varDtlsStat.index+1}"></td>
+								<td class="text-center" th:text="${varDtls.pfSeries}"></td>
+								<td class="text-center" th:text="${varDtls.countGPFEmp}"></td>
+								<td class="text-center" th:text="${varDtls.dp}"></td>
+								<td class="text-center" th:text="${varDtls.subsAmt}"></td>
+								<td class="text-center" th:text="${varDtls.payDaArrMrg}"></td>
+								<td class="text-center" th:text="${varDtls.refundAmt}"></td>
+								<td class="text-center" th:text="${varDtls.refundAmt}"></td>
+							</tr>
+						</tbody>
+					</table>
+					<br />
+					<table class="table bor-0">
+						<tbody>
+							<tr>
+								<td colspan="2" style="font-weight: bolder; text-align: Center;">
+									CERTIFICATE</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder;">Certified that
+									I have personally verified the correctness of the details in
+									this schedule and they are found correct</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder;"><br></td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder;"><br></td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder;">Dated
+									: <span th:text="${date}"></span></td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder;"><br></td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder;"><br></td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder; text-align: Right;">
+									Incharge HM</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder; text-align: Right;">
+									MAHARASHTRA UNIVERSITY,THANE,NORTH MAHARASHTRA UNIVERSITY</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder;">For use of
+									Audit Office</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder; text-align: Center;">
+									Date of Encashment :</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder;"><br></td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder;">1.Certified
+									that the name, amounts of individuals deductions &amp; the
+									total shown in column (7) have been checked by reference to</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder;">the bill,
+									vide. paragraph 224 of the Audit Manual.</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder;">2.Certified
+									that the rates of pay as shown in column(3) have been verified
+									with the amounts actually drawn in the bill.</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder;"><br></td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder;"><br></td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder;">Dated
+									: <span th:text="${date}"></span></td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder; text-align: Center;">
+									Initials of the Auditor</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder;"><br></td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder;">Portion for
+									Treasury Office</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder;">Treasury
+									Voucher No. and Date</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder;">Challan no.
+									and Date</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder; text-align: Right;">
+									Treasury Officer / Pay and Accounts Officer</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder;"><br></td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder;"><br></td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder;">VERIFICATION
+									TIME : <span th:text = "${sysDate}"></span></td>
+							</tr>
+						</tbody>
+					</table>
+					<br />
+					<table class="table bor-0">
+						<tbody>
+							<tr>
+								<td valign="middle" style="font-weight: bold;"><br /> <b>Verification
+										Time:-</b><span th:text = "${sysDate}"></span><br /> <span>* Generated
+										By <span th:text="#{msg.thymeleaf.pagelabel.hteCustSevaarth}"></span>
+								</span></td>
+							</tr>
+						</tbody>
+					</table>
+				</fieldset>
+			</div>
+		</div>
+		<div class="text-center">
+			<button id="print" onclick="printContent('print-content');"
+				class="btn">Print</button>
+			<input type="button" name="btnBackAgain" id="btnBackAgain"
+				onclick="history.back()" value="Back" class="buttontag">
+		</div>
+
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

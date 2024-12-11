@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Welcome To MahaSevaarth Payroll Application Govt. of Maharashtra</title>
+<link rel="icon" href="images/logo-v16.png" type="image" sizes="16x16">
+<link
+	href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600;700&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Libre+Baskerville:wght@400;700&family=Lobster&family=Play:wght@400;700&family=Righteous&family=Sansita+Swashed:wght@400;500;700&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet" href="./css/payrollStyles.css" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" >
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"></link>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script
+	src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
+<script
+	src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script src="js/dept.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.css"  />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.css"  />
+
+
+<link rel="stylesheet" href="./css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" href="./css/dept.css" th:href="@{/css/dept.css}" />
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+<style>
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+</style>
+</head>
+<body class="HomePage index public">
+
+	<!-- <div th:replace="header/VJNTHeader :: varmenuheaderVJNT"></div> -->
+	<div id="navbar" th:fragment="varmenuheaderVJNT">
+		<header>
+			<div class="hide" id="txt"></div>
+			<div class="header container" align="left">
+				<div class="row flex">
+					<div class="col-md-6 main-logo flex">
+						<img src="images/logo-v16.png" alt="Maharashtra Government"
+							class="logo" />
+						<div class=" logo-title">
+							<p class="deptname"> <span th:text="#{msg.thymeleaf.pagelabel.MahaSevaarth}"></span></p>
+							<p class="logo-sub-text"></p>
+						</div>
+					</div>
+					<div class="col-md-6 text-right secondary-logo">
+						<div class="secondary-logos">
+							<img src="images/logo.png" alt="Maharashtra Government"
+								class="aadhaarlogo mahait-logo" /> <img
+								src="images/maha-logo.png" alt="Maharashtra Government"
+								class="aadhaarlogo maha-logo" />
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="container">
+				<nav class="navbar navbar-default" role="navigation">
+					<div class="">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle"
+								data-toggle="collapse"
+								data-target="#bs-example-navbar-collapse-1">
+								<span class="sr-only">Toggle navigation</span> <span
+									class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="collapse navbar-collapse"
+							id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav ps-navBar navbarLeft navbar-left">
+								<li class="Menu-item-li first-li"><a href="#"> <span
+										class="glyphicon glyphicon-home"></span> Home
+								</a></li>
+								<!-- <li class="Menu-item-li"><a href="#vjnt_tabs"> <span
+									class="glyphicon glyphicon-list-alt"></span> Departments
+							</a></li> -->
+							</ul>
+							<!-- 		<div class="dept-name-main col-md-4 text-center">
+						<span>VJNTSevaarth</span> |
+						<span>VJNT Department</span>
+					</div> -->
+							<ul class="nav navbar-nav navbar-right">
+								<!-- <li class="Menu-item-li"><a href="./user/login"><span
+										class="glyphicon glyphicon-log-in"></span>Login</a></li> -->
+							</ul>
+						</div>
+						<!-- /.navbar-collapse -->
+					</div>
+					<!-- /.container-fluid -->
+				</nav>
+			</div>
+		</header>
+	</div>
+
+	<div class=" container min-height-600">
+		<section id="banner">
+			<div class="Banner-main" th:fragment="varslider">
+				<div class="container">
+					<div id="myCarousel" class="carousel slide" data-ride="carousel">
+						<!-- Indicators -->
+						<ol class="carousel-indicators">
+							<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+							<li data-target="#myCarousel" data-slide-to="1"></li>
+							<li data-target="#myCarousel" data-slide-to="2"></li>
+						</ol>
+
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner">
+							<div class="item active">
+								<img src="images/banner-img-4.png" alt="banner-image"
+									style="width: 100%;" />
+							</div>
+
+							<div class="item">
+								<img src="images/banner-img-2.png" alt="banner-image"
+									style="width: 100%;" />
+							</div>
+
+							<div class="item">
+								<img src="images/banner-img-3 (3).png" alt="banner-image"
+									style="width: 100%;" />
+							</div>
+						</div>
+
+						<!-- Left and right controls -->
+						<!-- <a class="left carousel-control" href="#myCarousel"
+						data-slide="prev"> <span
+						class="glyphicon glyphicon-chevron-left"></span> <span
+						class="sr-only">Previous</span>
+					</a> <a class="right carousel-control" href="#myCarousel"
+						data-slide="next"> <span
+						class="glyphicon glyphicon-chevron-right"></span> <span
+						class="sr-only">Next</span>
+					</a> -->
+					</div>
+				</div>
+			</div>
+		</section>
+		<section id="tabs" class="section-gap">
+		<h1 class="sec-title">
+						<span>Departments Of Government of Maharashtra</span>
+					</h1>
+			<div class=" ">
+				<div class="tabs-bg">
+					<div class="row tab-row1">
+						<div class="col-md-3 ">
+							<div class="faq-mm wow bounceInUp" style="visibility: visible; animation-name: bounceInUp; background: transparent;">
+								<button class="accordion quti4 toggle" value="0"
+									style="color: rgb(0, 0, 0);">Vimukta Jati and Nomadic Tribes Department<br/>(VJNTSevaarth Payroll Application)</button>
+								<div class="panel ans panel4 inner">
+									<ul>
+										<li>Go to <a target="_blank" href="/MahaSevaarth/user/login">Website: </a>
+										</li>
+										<li class="officials">Nodal Officials</li>
+										<li><i class="fa fa-user" aria-hidden="true"></i><span>Mr. Bhagwan
+												Gavit</span></li>
+										<a href="mailto:sameer.sutar@nic.in" class="mail-link">
+											<li><i class="fa fa-envelope" aria-hidden="true"></i><span>bhaurao.gavit@gov.in</span></li>
+										</a>
+									</ul>
+									<ul>
+										<li>MahaIT Development Center</li>
+										<a href="mailto:VJNTSevaarth@gmail.com" class="mail-link">
+											<li><i class="fa fa-envelope" aria-hidden="true"></i><span>VJNTSevaarth@gmail.com</span></li>
+										</a>
+										<li><i class="fa fa-phone" aria-hidden="true"></i><span>Support
+												No. 022-66364340</span></li>
+									</ul>
+								</div>
+							</div>
+
+						</div>
+						<div class="col-md-3">
+							<div class="faq-mm wow bounceInUp"
+								style="visibility: visible; animation-name: bounceInUp; background: transparent;">
+								<button class="accordion quti2 toggle" value="0"
+									style="color: rgb(0, 0, 0);">Agriculture Department<br/>(SauSevaarth Payroll Application)</button>
+								<div class="panel ans panel2 inner">
+									<ul>
+										<li>Go to <a target="_blank" href="/MahaSevaarth/user/login">Website: </a>
+										</li>
+										<li class="officials">Nodal Officials</li>
+										<li><i class="fa fa-user" aria-hidden="true"></i><span>Mr.
+												Umesh chandiwade</span></li>
+										<a href="mailto:sausevarth@gmail.com" class="mail-link">
+											<li><i class="fa fa-envelope" aria-hidden="true"></i><span>umesh.chandiwade@nic.in</span></li>
+										</a>
+									</ul>
+									<ul>
+										<li>MahaIT Development Center</li>
+										<a href="mailto:sausevarth@gmail.com" class="mail-link">
+											<li><i class="fa fa-envelope" aria-hidden="true"></i><span>sausevarth@gmail.com</span></li>
+										</a>
+										<li><i class="fa fa-phone" aria-hidden="true"></i><span>Support
+												No. 022-66364340</span></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="faq-mm wow bounceInUp"
+								style="visibility: visible; animation-name: bounceInUp; background: transparent;">
+								<button class="accordion quti3 toggle" value="0"
+									style="color: rgb(0, 0, 0);">Animal Husbandary and
+									Fisheries Department</br>(MafSevaarth Payroll Application)</button>
+								<div class="panel ans panel3 inner">
+									<ul>
+										<li>Go to <a target="_blank" href="/MahaSevaarth/user/login">Website: </a>
+										</li>
+										<li class="officials">Nodal Officials</li>
+										<li><i class="fa fa-user" aria-hidden="true"></i><span>Mr.
+												V.V Rane</span></li>
+										<a href="mailto:comptrollermafsu@yahoo.co.in"
+											class="mail-link">
+											<li><i class="fa fa-envelope" aria-hidden="true"></i><span>comptrollermafsu@yahoo.co.in</span></li>
+										</a>
+									</ul>
+									<ul>
+										<li>MahaIT Development Center</li>
+										<a href="mailto:mafSuaarth@gmail.com" class="mail-link">
+											<li><i class="fa fa-envelope" aria-hidden="true"></i><span>mafSuaarth@gmail.com</span></li>
+										</a>
+										<li><i class="fa fa-phone" aria-hidden="true"></i><span>Support
+												No. 022-66364340</span></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="faq-mm wow bounceInUp"
+								style="visibility: visible; animation-name: bounceInUp; background: transparent;">
+								<button class="accordion quti4 toggle" value="0"
+									style="color: rgb(0, 0, 0);">Higher and Technical
+									Education Department<br/>(HTESevaarth Payroll Application)</button>
+								<div class="panel ans panel4 inner">
+									<ul>
+										<li>Go to <a target="_blank" href="/MahaSevaarth/user/login">Website: </a>
+										</li>
+										<li class="officials">Nodal Officials</li>
+										<li><i class="fa fa-user" aria-hidden="true"></i><span>Mr.
+												Amol Ugalmugal</span></li>
+										<a href="mailto:do.asthahte-mh@gov.in" class="mail-link">
+											<li><i class="fa fa-envelope" aria-hidden="true"></i><span>do.asthahte-mh@gov.in
+											</span></li>
+										</a>
+									</ul>
+									<ul>
+										<li>MahaIT Development Center</li>
+										<a href="mailto:htesevaarth2@gmail.com" class="mail-link">
+											<li><i class="fa fa-envelope" aria-hidden="true"></i><span>htesevaarth2@gmail.com</span></li>
+										</a>
+										<li><i class="fa fa-phone" aria-hidden="true"></i><span>Support
+												No. 022-66364340</span></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row tab-row1">
+						<div class="col-md-3">
+							<div class="faq-mm wow bounceInUp"
+								style="visibility: visible; animation-name: bounceInUp; background: transparent;">
+								<button class="accordion quti4 toggle" value="0"
+									style="color: rgb(0, 0, 0);">Medical Department<br/>(Ayurvedaarth Payroll Application)</button>
+								<div class="panel ans panel4 inner">
+									<ul>
+										<li>Go to <a target="_blank" href="/MahaSevaarth/user/login">Website: </a>
+										</li>
+										<li class="officials">Nodal Officials</li>
+										<li><i class="fa fa-user" aria-hidden="true"></i><span>Mrs.
+												Shraddha Sude</span></li>
+										<a href="mailto:shraddhasude123@gmail.com" class="mail-link">
+											<li><i class="fa fa-envelope" aria-hidden="true"></i><span>shraddhasude123@gmail.com</span></li>
+										</a>
+									</ul>
+									<ul>
+										<li>MahaIT Development Center</li>
+										<a href="mailto:ayurvedaarth@gmail.com" class="mail-link">
+											<li><i class="fa fa-envelope" aria-hidden="true"></i><span>ayurvedaarth@gmail.com</span></li>
+										</a>
+										<li><i class="fa fa-phone" aria-hidden="true"></i><span>Support
+												No. 022-66364340</span></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="faq-mm wow bounceInUp"
+								style="visibility: visible; animation-name: bounceInUp; background: transparent;">
+								<button class="accordion quti4 toggle" value="0"
+									style="color: rgb(0, 0, 0);">Social Justice Department<br/>(SamajSevaarth Payroll Application)</button>
+								<div class="panel ans panel4 inner">
+									<ul>
+										<li>Go to <a target="_blank" href="/MahaSevaarth/user/login">Website: </a>
+										</li>
+										<li class="officials">Nodal Officials</li>
+										<li><i class="fa fa-user" aria-hidden="true"></i><span>Mr.
+												Sanjay Patil </span></li>
+										<a href="mailto:sanjay.patil62@nic.in" class="mail-link">
+											<li><i class="fa fa-envelope" aria-hidden="true"></i><span>sanjay.patil62@nic.in</span></li>
+										</a>
+									</ul>
+									<ul>
+										<li>MahaIT Development Center</li>
+										<a href="mailto:SamajSevaarth@gmail.com" class="mail-link">
+											<li><i class="fa fa-envelope" aria-hidden="true"></i><span>SamajSevaarth@gmail.com</span></li>
+										</a>
+										<li><i class="fa fa-phone" aria-hidden="true"></i><span>Support
+												No. 022-66364340</span></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="faq-mm wow bounceInUp"
+								style="visibility: visible; animation-name: bounceInUp; background: transparent;">
+								<button class="accordion quti4 toggle" value="0"
+									style="color: rgb(0, 0, 0);">Tribal Development
+									Department<br/>(AshramShalaarth Payroll Application)</button>
+								<div class="panel ans panel4 inner">
+									<ul>
+										<li>Go to <a target="_blank" href="/MahaSevaarth/user/login">Website: </a>
+										</li>
+										<li class="officials">Nodal Officials</li>
+										<li><i class="fa fa-user" aria-hidden="true"></i><span>Mr.
+												Kiran Ahire</span></li>
+										<a href="mailto:comptrollermafsu@yahoo.co.in"
+											class="mail-link">
+											<li><i class="fa fa-envelope" aria-hidden="true"></i><span>comptrollermafsu@yahoo.co.in</span></li>
+										</a>
+									</ul>
+									<ul>
+										<li>MahaIT Development Center</li>
+										<a href="mailto:ashramshalaarth@gmail.com" class="mail-link">
+											<li><i class="fa fa-envelope" aria-hidden="true"></i><span>ashramshalaarth@gmail.com</span></li>
+										</a>
+										<li><i class="fa fa-phone" aria-hidden="true"></i><span>Support
+												No. 022-66364340</span></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="faq-mm wow bounceInUp"
+								style="visibility: visible; animation-name: bounceInUp; background: transparent;">
+								<button class="accordion quti1 toggle " value="0"
+									style="color: #000;">Rural Development Department<br/>(PanchayatRajSevaarth Payroll Application)</button>
+								<div class="panel ans panel1 inner" style="display: none;">
+									<ul>
+										<li>Go to <a target="_blank" href="/MahaSevaarth/user/login">Website: </a>
+										</li>
+										<li class="officials">Nodal Officials</li>
+										<li><i class="fa fa-user" aria-hidden="true"></i><span>Mr.
+												Subhasha More</span></li>
+										<a href="mailto:doadmin11.rdd@maharashtra.gov.in"
+											class="mail-link">
+											<li><i class="fa fa-envelope" aria-hidden="true"></i><span>doadmin11.rdd@maharashtra.gov.in</span></li>
+										</a>
+									</ul>
+									<ul>
+										<li>MahaIT Development Center</li>
+										<a href="mailto:PanchayatRajSevaarth@gmail.com"
+											class="mail-link">
+											<li><i class="fa fa-envelope" aria-hidden="true"></i><span>PanchayatRajSevaarth@gmail.com</span></li>
+										</a>
+										<li><i class="fa fa-phone" aria-hidden="true"></i><span>Support
+												No. 022-66364340</span></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section id="logo-list" class="section-gap">
+	<h2 class="sec-title">Related Links</h2>
+	<div class="  logo-list-main ">
+		<div id="logo-slider" class="text-center">
+		<div class="item wow active bounceInUp">
+				<a href="http://samajsevaarth.maharashtra.gov.in/VJNT/"
+					>
+					<div class="logo-img-main">
+						<img src="images/Rural.png" alt="Logo" />
+					</div>
+					<p class="logo-title">VJNT Department</p>
+				</a>
+			</div>
+			<div class="item  wow bounceInUp">
+				<a href="http://panchayatrajsevarth.maharashtra.gov.in/login.jsp"
+					target="_blank">
+					<div class="logo-img-main">
+						<img src="images/Rural.png" alt="Logo" />
+					</div>
+					<p class="logo-title">Rural Development Department</p>
+				</a>
+			</div>
+			<div class="item wow bounceInDown">
+				<a target="_blank"
+					href="https://sausevarth.maharashtra.gov.in/login.jsp">
+					<div class="logo-img-main">
+						<img class="small-img" alt="Logo" src="images/krushi.png" /> 
+						<!-- <img class="" alt="Logo" src="/images/Rural.png" /> -->
+					</div>
+					<p class="logo-title">Agriculture Department</p>
+				</a>
+			</div>
+			<div class="item wow bounceInUp">
+				<a href="https://mafsuarth.maharashtra.gov.in/login.jsp"
+					target="_blank">
+					<div class="logo-img-main">
+						<!-- <img src="/images/Rural.png" alt="Logo" /> -->
+						<img src="images/Maf.png" alt="Logo" />
+					</div>
+					<p class="logo-title">Animal Husbandary and Fisheries
+						Department</p>
+				</a>
+			</div>
+			<div class="item wow bounceInDown ">
+				<a target="_blank"
+					href="https://htesevaarth.maharashtra.gov.in/login.jsp">
+					<div class="logo-img-main">
+						 <img class="small-img sm-hi" alt="Logo"
+							src="images/higher-education.jpg" />
+						<!-- <img src="/images/Rural.png" alt="Logo" /> -->
+					</div>
+					<p class="logo-title">Higher and Technical Education Department</p>
+				</a>
+			</div>
+			<div class="item wow bounceInUp">
+				<a target="_blank"
+					href="https://ayurvedarth.maharashtra.gov.in/login.jsp">
+					<div class="logo-img-main">
+						 <img class="small-img" alt="Logo" src="images/aarogya.png" /> 
+						<!-- <img src="/images/Rural.png" alt="Logo" /> -->
+					</div>
+					<p class="logo-title">Medical Department</p>
+				</a>
+			</div>
+			<div class="item wow bounceInDown">
+				<a target="_blank"
+					href="https://ashramshalarth.maharashtra.gov.in/login.jsp">
+					<div class="logo-img-main">
+						 <img class="small-img" alt="Logo" src="images/aadivasi.jpg" />
+					<!-- 	<img src="/images/Rural.png" alt="Logo" /> -->
+					</div>
+					<p class="logo-title">Tribal Development Department</p>
+				</a>
+			</div>
+			<div class="item wow bounceInUp ">
+				<a target="_blank"
+					href="https://samajsevaarth.maharashtra.gov.in/login.jsp">
+					<div class="logo-img-main">
+						<img class="small-img" alt="Logo" src="images/Rural.png" />
+					</div>
+					<p class="logo-title">Social Justice Department</p>
+				</a>
+			</div>
+			
+		</div>
+	</div>
+</section>
+	</div>
+	<div class="top0">
+		<div class="container footer-main" th:fragment="varfooter">
+			<footer>
+				<div class="footer">
+					<span>&copy;  </span>
+					<div class="foot-log-main flex float-right">
+						<span>Developed &amp; Maintained by :</span> <img
+							src="images/footer-logo.png" alt="Maharashtra Government" />
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+			</footer>
+		</div>
+	</div>
+	
+</body>
+<script>
+function openLoginWindow(wname) {
+    var urlToOpen = "/DCPS/user/login"; // URL of the login page
+    var mwname = 'IFMS';
+
+    // If wname is provided, use it; otherwise, create a unique name
+    if (wname) {
+        mwname = wname;
+    } else {
+        mwname += new Date().getMilliseconds();
+    }
+
+    // Define window properties
+    var prop = 'width=' + screen.availWidth + ',height=' + screen.availHeight +
+               ',top=0,left=0,resizable=no,menubar=no,scrollbars=yes,toolbar=no,' +
+               'location=no,status=no';
+
+    // Open the new window
+    var child = window.open(urlToOpen, mwname, prop);
+    if (child) {
+        child.moveTo(0, 0);
+        child.resizeTo(screen.availWidth, screen.availHeight);
+        child.focus();
+    } else {
+        alert("Please allow popups for this website.");
+    }
+}
+
+
+</script>
+</html>

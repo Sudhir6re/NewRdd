@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.bankMaster}"></title>
+<style type="text/css">
+.error {
+	color: red !important;
+	font-size: 12px !important;
+}
+
+select.error, textarea.error, input.error {
+	border: 1px solid red !important;
+}
+</style>
+</head>
+<body class="mst-bank">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+	<div class="breadcrumbMain">
+				<nav aria-label="breadcrumb">
+				  <ol class="breadcrumb">
+				<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+				    <li class="breadcrumb-item"><a href="#"><span  th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+				    <li class="breadcrumb-item active" aria-current="page"><span   th:utext="#{msg.thymeleaf.pageheading.bankMaster}"></span></li>
+				  </ol>
+				</nav>
+			</div>
+			<h3 Class="PageHeading"><span  th:utext="#{msg.thymeleaf.pageheading.bankMaster}"></span></h3>
+		<!-- <div align="center" class="success">
+			<span th:utext="${message}"></span>
+		</div> -->
+		<!-- <div th:if="${savedSuccessfully.value} eq 'SAVED'">
+			<p>Saved Successfully !</p>
+		</div> -->
+		<fieldset class="container">
+		<!-- <legend th:utext="#{msg.thymeleaf.pageheading.addBankDetails}" th:style="${'color: orange;'}"></legend> -->
+		
+<!-- 		<h1 th:utext="#{common.label.title}"></h1> -->
+		
+		<form class="form-horizontal" th:action="@{/mdc/saveBank}"
+			th:object="${mstBankEntity}" method="POST" name="mstBank" enctype="multipart/form-data">
+			
+			<input type="hidden" name="language" id="language" th:value="${language}"/>
+			
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="title" ><span th:utext="#{msg.thymeleaf.pagelabel.bankname}"></span>&nbsp;&nbsp;<b><font color="red" size="4px;">*</font></b></label>
+				<div class="col-sm-3">
+			<input type="text" class="form-control checkFirstChar"  name="bankName1" onblur="validateBankName1(this);"  th:field="*{bankName}" id ="bankName1" ></input> 
+				</div>
+				<label class="control-label col-sm-2" for="title" ><span th:utext="#{msg.thymeleaf.datatablelabel.bankShortName}"></span>&nbsp;&nbsp;<b><font color="red" size="4px;">*</font></b></label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control checkFirstChar"  name="branchName" th:field="*{bankShortName}" id ="bankShortName" ></input> 
+				
+					
+				</div>
+			</div>
+<!-- 			<div class="form-group">
+				<label class="control-label col-sm-2" for="title" ><span th:utext="#{msg.thymeleaf.datatablelabel.bankCode}"></span>&nbsp;&nbsp;<b><font color="red" size="4px;">*</font></b></label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control"  id="bankCode1" th:field="*{bankCode}" name="bankCode"  readonly="readonly"></input>
+				</div>
+			</div> -->
+			
+			<div class="form-group text-center">
+				<hr/>
+					<input type="submit" id="btnSave" class="btn btn-primary" th:value="#{msg.thymeleaf.pagelabel.btnSave}"/>
+					<!-- <input type="button" id ="btnCancel" class="btn btn-info" th:value="#{msg.thymeleaf.pagelabel.btnCancel}"/> -->
+					<input type="reset" id="btnReset" class="btn btn-primary" th:value="#{msg.thymeleaf.pagelabel.btnReset}"/>
+					<a th:href="@{/user/home}" class="btn"><span th:text="#{msg.thymeleaf.pagelabel.btnCancel}"></span></a>
+			</div>
+			
+			<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+			
+		</form>
+		</fieldset>
+		
+		
+		<table id="tblDataTable" class="table table-striped table-bordered"
+					style="width: 100%">
+					<thead>
+						<tr>
+					<!-- 		<th th:utext="#{msg.thymeleaf.datatablelabel.BankId}"></th>
+							<th th:utext="#{msg.thymeleaf.datatablelabel.bankCode}"></th> -->
+							<th th:utext="#{msg.thymeleaf.pagelabel.sNo}"></th>
+							<th
+								th:utext="#{msg.thymeleaf.datatablelabel.bankName}"></th>
+							<!-- <th
+								th:utext="#{msg.thymeleaf.datatablelabel.bankShortName}"></th> -->
+							<th th:utext="#{msg.thymeleaf.datatablelabel.status}"></th>
+							<th th:utext="#{msg.thymeleaf.datatablelabel.action}"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="varBank : ${lstAllBankList}">
+							<!-- <td th:text="${varBank.bankId}"></td>
+							<td th:text="${varBank.bankCode}"></td> -->
+							<td th:text="${varBankStat.index+1}"></td>
+							<td th:text="${varBank.bankName}"></td>
+							<!-- <td th:text="${varBank.bankShortName}"></td> -->
+							<td class="text-center"><span th:if="${varBank.isActive} == '1'"> <span
+									class="label label-success"
+									th:utext="#{msg.thymeleaf.status.active}"></span>
+							</span> <span th:if="${varBank.isActive} =='0'"> <span
+									class="label label-danger"
+									th:utext="#{msg.thymeleaf.status.inactive}"></span>
+							</span></td>
+							<td>
+								<div class="form-group text-center flex">
+										<a data-toggle="tooltipEdit" title="Edit"
+											th:href="@{'/mdc/editBank/'+ ${varBank.bankId}}"><span
+											class="glyphicon glyphicon-edit"></span></a>
+											<!--th:href="@{'/master/editBank/' + ${varBank.bankId}}"><span  -->
+										
+										<!-- <a data-toggle="tooltipDelete" title="Delete" th:data="${varBank.bankId}" th:data-val="${varBank.isActive}" 
+									class="delete"> <span class="glyphicon glyphicon-trash "></span></a>  -->
+											
+										<!-- <a data-toggle="tooltipDelete" title="Delete"  
+								th:href="@{'/master/deleteDept/'+${varBank.departmentId}}"	class="delete"> <span	class="glyphicon glyphicon-trash "></span></a> -->
+								</div>
+							</td>
+						</tr>
+					</tbody>
+					
+				</table>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script th:src="@{/js/project/datatable-common.js}"></script> 
+	
+			<script th:src="@{/js/jquery.validate.min.js}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.min.js"></script>
+
+ 	<script th:src="@{/js/validated.js}"></script>
+	 	<script th:src="@{/js/project/mst-bank.js}"></script> 
+</body>
+</html>

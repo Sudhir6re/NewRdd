@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pagelabel.approveemployeedetails}"></title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi">
+	
+</script>
+
+<script type="text/javascript">
+	//Edit method started
+	/* function editempconfig(empid) {
+		var employeeid = empid;
+		// 	alert("employeeid="+employeeid);
+		$('#employeeId').val(employeeid);
+		// 	var queryString = $('#myEForm').serialize();
+		// 	alert("queryString="+queryString);
+		document.getElementById("myAForm").submit();
+	} */
+
+	//Edit method ended
+</script>
+</head>
+<body class="approve-employee-details">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pagelabel.approveemployeedetails}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<fieldset class="">
+
+
+			<form class="form-horizontal container" name="myAForm" id="myAForm"
+				th:action="@{/ddo/approveEmployeeConfiguration}"
+				th:object="${mstEmployeeModel}" method="POST"
+				enctype="multipart/form-data">
+				<fieldset>
+					<legend th:utext="#{msg.thymeleaf.pagelabel.employeedetails}"
+						th:style="${'color: orange;'}"></legend>
+				</fieldset>
+				<input type="hidden" name="employeeId" id="employeeId"
+					th:field="*{employeeId}" class="form-control" /> <input
+					type="hidden" name="language" id="language" th:value="${language}" />
+				<input type="hidden" name="message" id="message"
+					th:value="${message}" />
+
+
+				<table id="tblDataTable" class="table table-striped table-bordered"
+					style="width: 100%">
+					<thead>
+						<tr style="text-align: center;">
+							<th th:utext="#{msg.thymeleaf.pagelabel.empid}"
+								style="text-align: center;" />
+
+							<th th:utext="#{msg.thymeleaf.pagelabel.employeeName}"
+								style="text-align: center;" />
+
+							<th th:utext="#{msg.thymeleaf.datatablelabel.ddocode}"
+								style="text-align: center;" />
+
+							<th th:utext="#{msg.thymeleaf.pagelabel.designationName}"
+								style="text-align: center;" />
+
+							<th th:utext="#{msg.thymeleaf.pagelabel.sevaarthId}"
+								style="text-align: center;" />
+
+							<th th:utext="#{msg.thymeleaf.datatablelabel.action}"
+								style="text-align: center;"></th>
+
+							<!-- <th th:utext="#{msg.thymeleaf.datatablelabel.subdepartmentName}"
+								style="text-align: center;"></th> -->
+						</tr>
+					</thead>
+
+					<tbody>
+
+
+
+						<tr th:each="varempdtls : ${employeedetails}">
+							<td th:text="${varempdtlsStat.index+1}"></td>
+							<td th:text="${varempdtls.employeeFullName}"></td>
+							<td th:text="${varempdtls.ddoCode}"></td>
+							<td th:text="${varempdtls.designationName}"></td>
+							<td class="text-center" th:text="${varempdtls.sevaarthId}"></td>
+
+							<td>
+								<div class="form-group text-center">
+									<a data-toggle="tooltip" title="Edit"
+										th:onclick="|editempconfig(${varempdtls.employeeId})|"> <span
+										class="glyphicon glyphicon-edit"></span>
+									</a>
+									
+								</div>
+							</td>
+
+						</tr>
+					</tbody>
+
+				</table>
+
+				<input type="hidden" name="${_csrf.parameterName}"
+					value="${_csrf.token}" />
+
+			</form>
+		</fieldset>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+
+	<script th:src="@{/js/project/approve-employee-details.js}"></script>
+	<script th:src="@{/js/project/datatable-common.js}"></script>
+	<script th:src="@{/js/project/mst-sub-menu.js}"></script>
+
+</body>
+</html>

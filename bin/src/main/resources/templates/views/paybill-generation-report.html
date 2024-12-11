@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.paybillGenerationReport}"></title>
+</head>
+<body class="paybill-generation-report">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.dcpsBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.paybillGenerationReport}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.paybillGenerationReport}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<form method="POST" th:object="${paybillGenerationReportModel}"
+				th:action="@{/mdc/treasuryDDOWiseReport}"
+				enctype="multipart/form-data">
+				<table class="table bor-0">
+					<tbody>
+						<tr>
+							<td width="15%">Region :</td>
+							<td width="35%"><select id="cmbRegion" name="cmbRegion"
+								th:field="*{region}" tabindex="10" style="width: 50%">
+									<option value="0">------Select Region------</option>
+									<option value="1">Konkan</option>
+									<option value="2">Pune</option>
+									<option value="3">Aurangabad</option>
+									<option value="4">Nagpur</option>
+									<option value="5">Nasik</option>
+									<option value="6">Amravati</option>
+									<option value="7">Mumbai</option>
+							</select></td>
+							<td width="15%"></td>
+							<td width="35%"></td>
+						</tr>
+						<tr>
+							<td width="15%">Year :</td>
+							<td width="35%"><select id="cmbYear" name="cmbYear"
+								th:field="*{year}" tabindex="10" style="width: 50%">
+									<option value="0">------Select Year------</option>
+									<option th:each="varGetAllYear : ${lstGetAllYear}"
+										th:value="${varGetAllYear.yearId}"
+										th:text="${language=='mh' ? varGetAllYear.yearMarathi : varGetAllYear.yearEnglish}"></option>
+
+
+							</select><label class="mandatoryindicator">*</label></td>
+							<td width="15%">Month :</td>
+							<td width="35%"><select id="cmbMonth" name="cmbMonth"
+								th:field="*{month}" tabindex="10" style="width: 50%">
+									<option value="0">------Select Month------</option>
+
+									<option th:each="varGetAllMonths : ${lstGetAllMonths}"
+										th:value="${varGetAllMonths.monthId}"
+										th:text="${language=='mh' ? varGetAllMonths.monthMarathi : varGetAllMonths.monthEnglish}"></option>
+
+
+							</select><label class="mandatoryindicator">*</label></td>
+						</tr>
+					</tbody>
+				</table>
+				<br />
+				<div class="text-center">
+					<!-- <a th:href="@{/mdc/treasuryDDOWiseReport}"
+						id="btnGenerateReport" class="btn">Generate Report</a> -->
+					<input type="submit" name="btnGenerateReport"
+						id="btnGenerateReport" value="Generate Report" class="btn">
+					<input type="button" name="btnReset" id="btnReset" value="Reset"
+						class="btn"> <input type="button" name="backButton"
+						id="backButton" value="Close" size="3" maxlength="3"
+						class="buttontag" onclick="history.back()">
+
+
+				</div>
+			</form>
+		</div>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{menu.mapping.allreport}"></title>
+<style type="text/css">
+.tbHead {
+	background-color: #F7E7D7;
+	color: rgb(202, 97, 12);
+	font-size: small;
+	font-style: normal;
+	font-weight: bold
+}
+</style>
+</head>
+<body class="all-reports">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.reportBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{menu.mapping.allreport}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{menu.mapping.allreport}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<form method="POST" action=" " name="printAllReports">
+				<table class="table table-bordered">
+					<tbody>
+						<tr>
+							<td align="center" class="tbHead">MONTH</td>
+							<td align="center" class="tbHead">YEAR</td>
+							<td align="center" class="tbHead">BILL DESCRIPTION</td>
+						</tr>
+						<tr>
+							<td align="center"><select name="selMonth" size="1"
+								id="selMonth" class="selecttag mandatorycontrol">
+									<option value="">-------Selected--------</option>
+									<option value="1">January</option>
+									<option value="2">February
+							</select>&nbsp;&nbsp;<label class="mandatoryindicator">*</label></td>
+							<td align="center"><select name="selYear" size="1"
+								id="selYear" class="selecttag mandatorycontrol">
+									<option value="">-------Selected--------</option>
+
+									<option value="2022">2022</option>
+									<option value="2023">2023</option>
+									<option value="2024" selected="selected">2024</option>
+							</select>&nbsp;&nbsp;<label class="mandatoryindicator">*</label></td>
+							<td align="center"><select name="billNo" size="1"
+								onchange="ShowTokenDetails()" id="billNo"
+								class="selecttag mandatorycontrol">
+									<option value="" selected="selected">-------Selected--------
+									</option>
+									<option value="9910000330">Regular Vocational
+										Osmanabad</option>
+									<option value="9910000331">lasalgaon college</option>
+									<option value="9910000357">S A C S C Naigaon</option>
+
+							</select>&nbsp;&nbsp;<label class="mandatoryindicator">*</label></td>
+						</tr>
+					</tbody>
+				</table>
+				<br>
+				<div class="text-center">
+					<input type="button" name="btn" onclick="ShowReports()"
+						id="tokenview" value="Show Reports" class="btn">
+				</div>
+				<br> <br>
+				<div class="all-reports-hidden">
+					<table class="table table-bordered width-50-auto">
+						<thead>
+							<tr>
+								<th class="tbHead">Report Name</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<div>
+										<input type="checkbox" id="mainData" name="mainData"
+											onclick="expandCollapseFormain('mainDiv','mainData')">
+										<font size="3">Main Reports</font>
+									</div>
+									<div id="mainDiv">
+										&nbsp;&nbsp;&nbsp; <a th:href="@{/ddoast/outerReport}"
+											target="_blank"> <font size="3">Outer</font>
+										</a> <br>&nbsp;&nbsp;&nbsp; <a
+											th:href="@{/ddoast/innerReport}" target="_blank"> <font
+											size="3">Inner</font>
+										</a> <br>&nbsp;&nbsp;&nbsp; <a href="" target="_blank"> <font
+											size="3">Broken Period</font>
+										</a> <br>&nbsp;&nbsp;&nbsp; <a
+											th:href="@{/ddoast/pageWiseAbstractReport}" target="_blank">
+											<font size="3">PageWise</font>
+										</a> <br>&nbsp;&nbsp;&nbsp; <a
+											th:href="@{/ddoast/groupWiseAbstractReport}" target="_blank">
+											<font size="3">GroupWise</font>
+										</a> <br>&nbsp;&nbsp;&nbsp; <a
+											th:href="@{/ddoast/bankStatementReport}" target="_blank">
+											<font size="3">Bank Statement</font>
+										</a> <br>&nbsp;&nbsp;&nbsp; <a
+											th:href="@{/ddoast/aquittanceRollReport}" target="_blank">
+											<font size="3">Aquittance Roll</font>
+										</a> <br>
+									</div> <br> <br>
+									<div>
+										<input type="checkbox" id="otherData" name="otherData">
+										<font size="3">GIS Reports</font>
+									</div>
+									<div id="gis" align="left">
+										&nbsp;&nbsp;&nbsp; <a th:href="@{/ddoast/gisReport}"
+											target="_blank"> <font size="3">GIS</font>
+										</a>
+									</div> <br>
+									<div>
+										<input type="checkbox" id="otherData" name="otherData">
+										<font size="3">Other Reports</font>
+									</div>
+									<div id="otherDiv" align="left">
+										&nbsp;&nbsp;&nbsp; <a th:href="@{/ddoast/incomeTaxReport}"
+											target="_blank"> <font size="3">Income Tax</font>
+										</a> <br>&nbsp;&nbsp;&nbsp; <a
+											th:href="@{/ddoast/accidentPolicyReport}" target="_blank">
+											<font size="3">Accident Policy</font>
+										</a> <br>&nbsp;&nbsp;&nbsp; <a
+											th:href="@{/ddoast/revenueStampReport}" target="_blank">
+											<font size="3">Revenue Stamp</font>
+										</a> <br>
+									</div> <br>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<br>
+				<div class="text-center">
+					<input type="button" name="btnBackAgain" id="btnBackAgain"
+						onclick="history.back()" value="Back" class="buttontag">
+				</div>
+				<br>
+			</form>
+		</div>
+
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script>
+		$(".all-reports-hidden").hide();
+		$("#subdiv").hide();
+		function ShowReports() {
+			$(".all-reports-hidden").fadeIn(200);
+		}
+	</script>
+</body>
+</html>

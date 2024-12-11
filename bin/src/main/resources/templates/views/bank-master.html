@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.bankmaster}"></title>
+
+</head>
+<body class="bank-master">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.dcpsBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.bankmaster}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.bankmaster}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<div id="content">
+
+				<form method="POST" name="DDOOfficeView">
+
+					<a th:href="@{/mdc/addBank}" class="btn">Add new Entry</a> 
+					<br />
+					<table class="datatable table table-bordered" id="datatableNew">
+						<thead>
+							<tr>
+								<th >Bank Id</th>
+								<th >Bank Name</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr >
+								<td class="tablecelltext"
+									style="text-align: center; font-size: 12px;">7834</td>
+								<td class="tablecelltext"
+									style="text-align: center; font-size: 12px;"><a th:href="@{/mdc/addBank}">ABHYUDAYA
+										CO-OP BANK LTD </a></td>
+							</tr>
+							<tr >
+								<td class="tablecelltext"
+									style="text-align: center; font-size: 12px;">500109</td>
+								<td class="tablecelltext"
+									style="text-align: center; font-size: 12px;"><a th:href="@{/mdc/addBank}">ABU
+										DHABI COMMERCIAL BANK </a></td>
+							</tr>
+
+						</tbody>
+					</table>
+				</form>
+				<br />
+				<div class="text-center">
+					<input type="button" name="btnCancel" onclick="history.back()"
+						id="btnCancel" value="Cancel" size="3" maxlength="3"
+						class="buttontag">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

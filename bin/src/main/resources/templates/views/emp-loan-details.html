@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Employee Loan Details</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi">
+	
+</script>
+<style>
+.PageSubHeading {
+	font-size: 17px;
+	color: orange;
+	font-weight: 600;
+	padding-left: 15px;
+	border-bottom: 1px solid;
+	margin-bottom: 20px;
+}
+
+.loanTableMain table {
+	min-width: 2000px !important;
+}
+
+.buttonsdiv {
+	margin-top: 30px;
+}
+</style>
+</head>
+<body class="addEmployeeLoanDetails">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span>Employee
+							Loan Details</span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span>Employee Loan Details</span>
+		</h3>
+		<div align="center" class="alert alert-success"
+			th:if="${message!=null}">
+			<strong><span th:utext="${message}"></span></strong>
+		</div>
+		<fieldset class="container">
+			<h3 Class="PageSubHeading">
+				<span>Search Employee</span>
+			</h3>
+			<form class="form-horizontal" id="form1"
+				th:action="@{/ddoast/addLoan}" name="form1"
+				th:object="${empLoanModel}" method="POST"
+				enctype="multipart/form-data">
+
+				<input type="hidden" name="ddocode" id="ddocode"
+					th:value="${ddocode}" class="form-control" /> <input type="hidden"
+					name="employeeid" id="employeeid" th:field="*{employeeid}"
+					class="form-control" /> <input type="hidden" name="message"
+					id="message" th:value="${message}" />
+				<div class="form-group">
+
+					<label class="control-label col-sm-3" for="title"><span>Search
+							with Name/Sevaarth ID Name</span>&nbsp;&nbsp;</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control " id="sevaarth"></input>
+						<ul id="searchDiv">
+
+						</ul>
+					</div>
+					<div class="col-sm-3">
+						<input type="reset" id="btnReset" class="btn btn-primary"
+							th:value="#{msg.thymeleaf.pagelabel.btnReset}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="title"><span>Sevaarth
+							ID</span></label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" th:field="*{sevaarthId}"
+							id="sevaarthId" readonly="readonly"></input>
+					</div>
+					<label class="control-label col-sm-3" for="title"><span>Office Name</span> </label>
+					<div class="col-sm-3">
+						<input type="text"  readonly class="form-control" id="orgInstName"
+							th:field="*{orgInstName}"></input>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="title"><span>GPF
+							Number</span></label>
+					<div class="col-sm-3">
+						<input type="text" id="gpfNo" th:field="*{gpfNo}" readonly class="form-control"></input>
+					</div>
+					<label class="control-label col-sm-3" for="title"><span>Designation</span>
+					</label>
+					<div class="col-sm-3">
+						<input type="text" id="designName" th:field="*{designName}"
+							readonly class="form-control"></input>
+					</div>
+				</div>
+				<hr />
+				<p class="text text-danger">
+					Note: Only those loans and advances which are mapped with
+					Organization/institution Name will come in <b>Loan Name</b> combo
+					given below
+				</p>
+				
+				<div class="table-responsive loanTableMain">
+					<table class="table table-bordered table-strapped">
+						<thead>
+							<tr>
+								<th>Employee Name</th>
+								<th>Loan Name</th>
+								<th>Loan Principal Amount (`)</th>
+								<th>Loan Interest Amount (`)</th>
+								<th>Loan EMI Amount</th>
+							</tr>
+						</thead>
+						<tbody class="tbodyloaddetailtbl">
+
+							<tr th:each="varLstEmp : ${lstEmp}">
+								<td ><a class="collapse-item"
+											th:href="@{'/ddoast/findSavedEmpLoanDtls/'+${varLstEmp.sevaarthId}}"><span th:text="${varLstEmp.employeeName}"></span></a></td>
+								<td th:text="${varLstEmp.loanAdvName}"></td>
+								<td th:text="${varLstEmp.loanprinamt}"></td>
+								<td th:text="${varLstEmp.loaninterestamt}"></td>
+								<td th:text="${varLstEmp.loanemiamt}">
+								<input type="hidden" id="sevaarthId" th:value ="${varLstEmp.sevaarthId}"></td>
+								
+							</tr>
+
+
+
+						</tbody>
+					</table>
+				</div>
+				<div align="center">
+				<input type="submit" name="AddNewEntry" id="AddNewEntry" value="Add new Entry"
+					size="3" maxlength="3" class="btn"> 
+			</div>
+			</form>
+
+		</fieldset>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+
+	<script type="text/javascript">
+		jQuery(document)
+				.ready(
+						function($) {
+							//alert("qwe");
+							var varMessage = $("#message").val();
+							///alert("varMessage"+varMessage);
+
+							if (varMessage != "" && varMessage != undefined) {
+								swal("Record updated Successfully..");
+							}
+
+							$("#btnSave")
+									.click(
+											function(e) {
+												if ($("#loanStatus").val == "0") {
+													e.preventDefault();
+													if ($("#PriAmount").val() == $(
+															"#preRecovAmount")
+															.val()) {
+														$("#form1").submit();
+													} else {
+														swal("Loan can't be Inactive as the total amount is not paid....!!")
+													}
+												}
+											});
+
+						});
+	</script>
+	<script th:src="@{/js/project/emp_loan_details.js}"></script>
+	<script th:src="@{/js/project/datatable-common.js}"></script>
+	<script th:src="@{/js/emp-loan-details.js}"></script>
+	<script th:src="@{/js/validated.js}"></script>
+</body>
+</html>

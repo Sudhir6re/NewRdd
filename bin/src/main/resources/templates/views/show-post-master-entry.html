@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.postmaster}"></title>
+
+</head>
+<body class="show-post-master-entry">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.dcpsBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.postmaster}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.postmaster}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<form method="POST" name="DDOOfficeView">
+				<table class="table bor-0 width-60 tbBold">
+					<tbody>
+						<tr>
+							<td width="50%" align="left">Field Department</td>
+							<td width="30%"><select name="cmbFieldDepartment"
+								id="cmbFieldDepartment" onchange="getCadresForTheFieldDept();">
+									<option value="-1">-- Select --</option>
+									<option value="10546">ADDITIONAL COLLECTOR B.S.D.
+										REHABILITATION BRANCH,</option>
+									<option value="10606" selected="selected">ADDITIONAL
+										GOVERNMENT PLEADER, HIGH COURT, NAGPUR</option>
+									<option value="10615">ADMINISTRATOR GENERAL AND
+										OFFICIAL TRUSTEE, MUMBAI</option>
+									<option value="10547">ADMINISTRATOR, ULHASNAGAR
+										TOWNSHIP</option>
+									<option value="10573">ADVISOR TO GOVERNMENT OF
+										MAHARASHTRA,STATE FIRE TR</option>
+							</select> <label class="mandatoryindicator">*</label></td>
+						</tr>
+						<tr>
+							<td width="20%" align="left">Group</td>
+							<td width="30%"><select name="cmbGroup" id="cmbGroup">
+									<option value="-1">-- Select --</option>
+									<option value="700057">A</option>
+									<option value="700058">B</option>
+									<option value="700059">BnGz</option>
+									<option value="700060">C</option>
+									<option value="700061">D</option>
+							</select> <label class="mandatoryindicator">*</label></td>
+						</tr>
+						<tr>
+							<td width="20%" align="left">Post Code</td>
+							<td width="30%"><input type="text" name="txtCadreCode"
+								id="txtCadreCode" style="text-align: left" value="906">
+								<label class="mandatoryindicator">*</label></td>
+						</tr>
+						<tr>
+							<td width="20%" align="left">Post Description</td>
+							<td width="30%"><input type="text" name="txtCadreDesc"
+								id="txtCadreDesc" maxlength="100" style="text-align: left"
+								size="40"> <label class="mandatoryindicator">*</label></td>
+						</tr>
+						<tr>
+							<td width="20%" align="left">Whether Ministerial</td>
+							<td width="80%"><input type="radio" id="radioMinisterial"
+								name="radioMinisterial" value="Y"> Yes <input
+								type="radio" id="radioMinisterial" name="radioMinisterial"
+								value="N" checked="checked"> No <label
+								class="mandatoryindicator">*</label></td>
+						</tr>
+						<tr>
+							<td width="20%" align="left">Super Annuation Age</td>
+							<td width="30%"><input type="text" name="txtSuperAnnuAge"
+								id="txtSuperAnnuAge" maxlength="2" style="text-align: left">
+								<label class="mandatoryindicator">*</label></td>
+						</tr>
+						<tr>
+							<td width="20%" align="left">Post Controlled By Own
+								Department</td>
+							<td width="80%"><input type="radio"
+								id="radioCadreControlDept" name="radioCadreControlDept"
+								value="Y" checked="checked" onclick="hideRadio(this);">
+								Yes <input type="radio" id="radioCadreControlDept"
+								name="radioCadreControlDept" value="N"
+								onclick="hideRadio(this);"> No <label
+								class="mandatoryindicator">*</label></td>
+						</tr>
+						<tr id="T1" >
+							<td width="20%" align="left">If No, Controlled By Field
+								Department</td>
+							<td width="30%"><select name="cmbCntrlFieldDept"
+								id="cmbCntrlFieldDept" style="width: 40%">
+									<option value="-1">-- Select --</option>
+									<option value="10546">ADDITIONAL COLLECTOR B.S.D.
+										REHABILITATION BRANCH,</option>
+									<option value="10606">ADDITIONAL GOVERNMENT PLEADER,
+										HIGH COURT, NAGPUR</option>
+									<option value="10615">ADMINISTRATOR GENERAL AND
+										OFFICIAL TRUSTEE, MUMBAI</option>
+									<option value="10547">ADMINISTRATOR, ULHASNAGAR
+										TOWNSHIP</option>
+									<option value="10573">ADVISOR TO GOVERNMENT OF
+										MAHARASHTRA,STATE FIRE TR</option>
+							</select> <label class="mandatoryindicator">*</label></td>
+							<td width="50%"></td>
+						</tr>
+					</tbody>
+				</table>
+				<br />
+				<div class="text-center">
+					<input type="button" name="btnSaveData" id="btnSaveData"
+						value="Save" size="3" maxlength="3" class="buttontag"> <input
+						type="button" name="btnCancel" onclick="history.back()"
+						id="btnCancel" value="Cancel" size="3" maxlength="3"
+						class="buttontag">
+				</div>
+				<br />
+				<fieldset class="posttable">
+					<legend>Post Added</legend>
+					<br>
+					<table class="datatable table table-bordered" id="datatableNew">
+						<thead>
+							<tr>
+								<th>Post Code</th>
+								<th>Post Description</th>
+								<th>Field Department</th>
+								<th>Group Code</th>
+								<th>Ministerial</th>
+								<th>Super Annuation Age</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>901</td>
+								<td>Group-A(Exact Cadre not known)</td>
+								<td>ADDITIONAL GOVERNMENT PLEADER, HIGH COURT, NAGPUR</td>
+								<td>A</td>
+								<td>Yes</td>
+								<td>58</td>
+							</tr>
+							<tr>
+								<td>902</td>
+								<td>Group-B-Gaz(Exact Cadre not known)</td>
+								<td>ADDITIONAL GOVERNMENT PLEADER, HIGH COURT, NAGPUR</td>
+								<td>B</td>
+								<td>Yes</td>
+								<td>58</td>
+							</tr>
+							<tr>
+								<td>903</td>
+								<td>Group-B-Non-Gaz(Exact Cadre Not Known)</td>
+								<td>ADDITIONAL GOVERNMENT PLEADER, HIGH COURT, NAGPUR</td>
+								<td>BnGz</td>
+								<td>Yes</td>
+								<td>58</td>
+							</tr>
+							<tr>
+								<td>904</td>
+								<td>Group-C(Exact Cadre not known)</td>
+								<td>ADDITIONAL GOVERNMENT PLEADER, HIGH COURT, NAGPUR</td>
+								<td>C</td>
+								<td>Yes</td>
+								<td>58</td>
+							</tr>
+							<tr>
+								<td>905</td>
+								<td>Group-D(Exact Cadre not known)</td>
+								<td>ADDITIONAL GOVERNMENT PLEADER, HIGH COURT, NAGPUR</td>
+								<td>D</td>
+								<td>Yes</td>
+								<td>58</td>
+							</tr>
+						</tbody>
+					</table>
+					<br>
+				</fieldset>
+
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script>
+	$(".posttable").hide();
+	function getCadresForTheFieldDept() {
+		$(".posttable").fadeIn(100);
+	}
+	</script>
+</body>
+</html>

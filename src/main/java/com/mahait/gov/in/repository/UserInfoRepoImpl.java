@@ -17,7 +17,6 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 
 @Repository
-@Transactional
 public class UserInfoRepoImpl implements UserInfoRepo {
 
 	@PersistenceContext

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:fragment="var-script-headerReport">
+<title>Welcome</title>
+<style>
+img#favicon22 {
+	position: absolute;
+	top: 25%;
+	left: 40%;
+	max-width: 100%;
+	width: 350px;
+	opacity: 0.1;
+}
+.showprintt {
+	display: none;
+}
+@media print {
+	img#favicon22 {
+		left: 33% !important;
+	}
+	.showprintt {
+		display: block;
+	}
+}
+
+</style>
+</head>
+<body class="reportHeader">
+	<div id="navbar" th:fragment="varmenuheaderReport">
+		<header class="menuHeader">
+			<!-- <div class="header container" >
+			<div class="row flex">
+				<div class="col-md-9 main-logo flex">
+					<img th:src="@{/images/logo-v16.png}" id="favicon"
+						alt="Maharashtra Government" class="logo" />
+					<div class=" logo-title">
+						<p class="deptname">
+							<span th:utext="#{msg.thymeleaf.pagelabel.MahaSevaarth}"></span>
+						</p>
+						<p class="logo-sub-text">
+							<span th:utext="#{msg.thymeleaf.pagelabel.Officialwebsite}"></span>
+						</p>
+					</div>
+				</div>
+				<div class="col-md-3 text-right secondary-logo">
+					<img th:src="@{/images/logo.png}" alt="Maharashtra Government"
+						class="aadhaarlogo" />
+				</div>
+			</div>
+		</div> -->
+			<!-- <div class="watermark">
+				<img th:src="@{/images/logo-v16.png}" id="favicon22"
+					alt="Maharashtra Government" class="logo" />
+			</div> -->
+			<div class=" logo-title text-center" style="text-align: center;">
+				<p class="deptname"
+					style="font-size: 24px; font-weight: 600; color: #030359; margin-bottom: -5px;">
+					<span th:text="#{msg.thymeleaf.pagelabel.MahaSevaarth}"></span>
+				</p>
+				<!-- <p class="logo-sub-text">
+					<span>Official website of Government of Maharashtra</span>
+				</p> -->
+			</div>
+			<hr />
+		</header>
+	</div>
+	<!-- <div class="container footer-main" th:fragment="varmenufooterReport">
+		<footer>
+			<div class="footer">
+				<span th:utext="#{msg.thymeleaf.pagelabel.footerText}"> </span>
+				<div class="foot-log-main flex float-right">
+					<span th:utext="#{msg.thymeleaf.pagelabel.developByText}"></span> <img
+						th:src="@{/images/footer-logo-w.png}" alt="center" />
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="clear"></div>
+		</footer>
+	</div> -->
+</body>
+</html>

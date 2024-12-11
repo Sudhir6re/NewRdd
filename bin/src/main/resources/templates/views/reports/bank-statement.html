@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.bankStatement}"></title>
+</head>
+<body class="bank-statement">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.reportBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.bankStatement}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<div class="formMainwithNoborTb container">
+			<div class="text-center">
+				<h3 Class="PageHeading">
+					<span th:utext="#{msg.thymeleaf.pageheading.bankStatement}"></span>
+				</h3>
+			</div>
+			<br />
+			<form method="POST" action="" name="ReportForm"
+				enctype="multipart/form-data">
+				<table class="table bor-0 tbBold">
+					<tbody>
+						<tr>
+							<td class="captionTag" width="20%">Department <font
+								color="RED">*</font>
+							</td>
+							<td width="30%"><select name="Department" id="Department">
+									<option value="-1">-- Select --</option>
+									<option value="4000839">MAHARASHTRA
+										UNIVERSITY,THANE,NORTH MAHARASHTRA UNIVERSITY</option>
+							</select></td>
+
+							<td width="20%"><b>Month</b> <font color="RED">*</font></td>
+							<td width="30%"><select name="monthId" th:field="*{monthId}"
+								id="monthId" class="form-control removeErrorFromDropdown">
+									<option selected="selected" th:value="0"
+										th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+									<option th:each="varGetAllMonths : ${lstMonths}"
+										th:value="${varGetAllMonths.monthId}"
+										th:text="${language=='mh' ? varGetAllMonths.monthMarathi : varGetAllMonths.monthEnglish}"></option>
+							</select></td>
+						</tr>
+						<tr>
+							<td><b>Year</b> <font color="RED">*</font></td>
+							<td><select name="yearId" th:field="*{yearId}" id="yearId"
+								class="form-control removeErrorFromDropdown">
+									<option selected="selected" th:value="0"
+										th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+									<option th:each="varGetAllYear : ${lstYears}"
+										th:value="${varGetAllYear.yearId}"
+										th:text="${language=='mh' ? varGetAllYear.yearMarathi : varGetAllYear.yearEnglish}"></option>
+							</select></td>
+							<td class="captionTag">Designation</td>
+							<td><select name="Designation" id="Designation">
+									<option value="-1">-- Select --</option>
+									<option value="100680">Accounts Clerk</option>
+									<option value="99100001139">Assistant Accountant</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td width="20%"><b>Bill Group </b><font color="RED">*</font>
+							</td>
+							<td width="30%"><select name="billGroup"
+								th:field="*{billGroup}" id="billGroup"
+								class="form-control removeErrorFromDropdown">
+									<option selected="selected" th:value="0"
+										th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+									<option th:each="varGetAllBillGrp : ${lstBillDesc}"
+										th:value="${varGetAllBillGrp.dcpsDdoBillGroupId}"
+										th:text="${language=='mh' ? varGetAllBillGrp.description : varGetAllBillGrp.description}"></option>
+							</select></td>
+							<td class="captionTag">Grade</td>
+							<td><select name="Grade" id="Grade">
+									<option value="-1">-- Select --</option>
+									<option value="100001">A</option>
+									<option value="100064">B</option>
+									<option value="100065">BnGz</option>
+									<option value="100066">C</option>
+									<option value="100067">D</option>
+									<option value="100115">No Grade</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td class="captionTag">No of Records</td>
+							<td><input type="text" name="No of Records" class="texttag"></td>
+						</tr>
+						<tr bgcolor="#f3f3f3">
+							<td colspan="2" style="border-top: solid 1px #333333;"><i><b>Note:
+								</b>Parameter marked with a '<font face="Verdana" color="red">*</font>'
+									are mandatory</i> <br></td>
+							<td colspan="2" class="TableBorderTN"
+								style="padding: 5px; text-align: right">
+								<!-- <input
+								type="button" name="GenerateReport" id="rptBtn_GenerateReport"
+								value="Generate Report" class="btn"> --> <a
+								th:href="@{/ddoast/bankStatementReport}" class="btn"
+								id="rptBtn_GenerateReport">Generate Report</a> <input
+								type="reset" name="ResetParams" id="rptBtn_ResetBtn"
+								value="Reset" class="btn"> <input type="button"
+								name="btnBackAgain" id="btnBackAgain" onclick="history.back()"
+								value="Back" class="buttontag">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<br>
+
+			</form>
+		</div>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

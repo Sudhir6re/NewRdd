@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pagelabel.sancleave}"></title>
+</head>
+<body class="DeptCompMpg">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+
+	<div class="container min-height-600 ">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pagelabel.sancleave}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pagelabel.sancleave}"></span>
+		</h3>
+		<div class="newpagecontent container">
+			<form method="post" action="" name="DCPSForwardedFormsList" enctype="multipart/form-data" id="DCPSForwardedFormsList">
+    <fieldset class="tabstyle">
+        <legend> <b>Filter Institute</b> </legend>
+        <table align="center">
+            <tbody>
+                <tr>
+                    <td>Taluka</td>
+                    <td><select name="cmbTaluka" id="cmbTaluka" style="width: 85%,display: inline;">
+                            <option title="Select" value="-1">Select</option>
+                            <option value="163" title="Mahoor">
+                                Mahoor</option>
+                            <option value="164" title="Kinwat">
+                                Kinwat</option>
+                            <option value="165" title="Himayatnagar">
+                                Himayatnagar</option>
+                            <option value="166" title="Hadgaon">
+                                Hadgaon</option>
+                            <option value="167" title="Ardhapur">
+                                Ardhapur</option>
+                            <option value="168" title="Nanded">
+                                Nanded</option>
+                            <option value="169" title="Mudkhed">
+                                Mudkhed</option>
+                            <option value="180" title="Not Applicable">
+                                Not Applicable</option>
+                        </select></td>
+                    <td colspan="4" align="center"><input id="btnFilter" class="buttontag" type="button" size="5" maxlength="5" value="Filter" onclick="filterInstitute();" name="btnFilter" style="width: 120px;"></td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+    <table width="100%" align="center" class="bor-0 table">
+        <tbody>
+            <tr>
+                <td colspan="4">
+                    <font style="color: green;"><i>Note 1: Please select the type of vacation before entering Leave details.</i></font>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <font style="color: green;"><i>Note 2: You can enter Summer/Rainy vactaion leave details of current year only.</i></font>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <font style="color: green;"><i>Note 3: Please check the School and put the common from date and to date in below field. Same from date and to date will be copied in all the selected school.</i></font>
+                </td>
+            </tr>
+            <tr align="center">
+                <td align="right" colspan="">From Date</td>
+                <td align="left"><input type="text" name="txtFromDate" id="txtFromDate" maxlength="10" onkeypress="digitFormat(this);dateFormat(this);" onblur="validateThedate(this,1);" value="">
+                    <img src="images/CalendarImages/ico-calendar.gif" width="20" onclick="window_open(&quot;txtFromDate&quot;,375,570)" style="cursor: pointer;"><label class="mandatoryindicator"> *</label></td>
+                <td align="right">To Date</td>
+                <td align="left"><input type="text" name="txtTodate" id="txtTodate" maxlength="10" onkeypress="digitFormat(this);dateFormat(this);" onblur="validateThedate(this,2); compareDate(document.getElementById('txtFromDate'),this,'To date can not be less than from date.','>')"><img src="images/CalendarImages/ico-calendar.gif" width="20" onclick="window_open(&quot;txtTodate&quot;,375,570)" style="cursor: pointer;"><label class="mandatoryindicator"> *</label></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td align="center" colspan="4"><input id="btnMap" class="buttontag" type="button" size="5" maxlength="5" value="Bulk Mapping" onclick="massMapping();" name="btnMap" style="width: 180px;"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="right"><b>Type Of Leave:</b></td>
+                <td colspan="2" align="left">
+                    <select name="cmbLeaveType" id="cmbLeaveType" onchange="displayOfficeList();">
+                        <option value="-1">----Select----</option>
+                        <option value="Summer">Summer</option>
+                        <option value="Rainy">Rainy</option>
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div align="center">
+        <div class="" id="vacationDiv" style="display: none">
+            <fieldset class="tabstyle">
+                <legend> <b>DDO Leave Details for Current Year</b> </legend> <br>
+                <div class="scrollablediv">
+                    No Records found to display</div>
+            </fieldset>
+            <div align="center"><input type="button" name="btnUpdate" onclick="updateDetails();" id="btnUpdate" value="Update Details" style="width: 15%" size="3" maxlength="3" class="buttontag"></div>
+        </div>
+    
+    </div>
+   
+</form>
+
+		</div>
+		
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Employee District wise Validation Report</title>
+<link rel="stylesheet" th:href="@{/css/print.css}" />
+<link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body class="emp-dist-wise-val-report">
+	<div class="container-fluid">
+		<div th:replace="header/menuHeader :: var-script-header"></div>
+		<fieldset>
+			<div id="print-content">
+				<form id="rptForm_ID" name="schoolDistrictValidationView"
+					method="POST" action="">
+					<h3 Class="PageHeading text-center">
+						<span>Employee Configuration Report</span>
+					</h3>
+					<table id="vo" class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>No. of Employees whose data is
+								Entered</th>
+								<th>No of employees whose data is
+								Saved as draft</th>
+								<th>Forwarded to DDO</th>
+								<th>No of employees whose data is
+								approved by DDO</th>
+								<th>Balance number of employees
+								whose data is to be approved</th>
+								
+							</tr>
+						</thead>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+			<br /> <br />
+			<div class="text-center">
+				<button id="print" onclick="printContent('print-content');"
+					class="btn">Print</button>
+				<input type="button" name="btnBackAgain" id="btnBackAgain"
+					onclick="history.back()" value="Back" class="buttontag">
+
+			</div>
+		</fieldset>
+	</div>
+
+</body>
+</html>

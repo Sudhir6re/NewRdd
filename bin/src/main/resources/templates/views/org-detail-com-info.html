@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.OrganisationInfo}"></title>
+</head>
+<style>
+input[type="button" i]:disabled {
+	pointer-events: none;
+	opacity: 0.6;
+}
+</style>
+<body class="org-detail-com-info">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.OrganisationInfo}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.OrganisationInfo}"></span>
+		</h3>
+		<div class="pageComtentNew container">
+			<form method="post" th:action="@{/ddoast/updateddoOfficeDetails}"
+				th:object="${organisationDtlsModel}" name="DDOInfo"
+				enctype="multipart/form-data" id="DDOInfo">
+				<ul class="nav nav-tabs">
+					<li class="active orginf"><a data-toggle="tab" href="#home">Organisation
+							Info</a></li>
+					<li class="orgdtl"><a data-toggle="tab" href="#menu1" >Organisation
+							Details</a></li>
+				</ul>
+				<div class="tab-content">
+					<div id="home" class="tab-pane fade in active">
+						<br />
+						<div
+							th:replace="views/hte-organization-institution-info :: orgInfo"></div>
+					</div>
+					<div id="menu1" class="tab-pane fade">
+						<br />
+						<div th:replace="views/organization-details:: orgDetails"></div>
+					</div>
+
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/hte-organization-institution-info.js}"></script>
+	<script th:src="@{/js/validated.js}"></script>
+	
+	<script>
+		$(document).ready(function() {
+
+			/* var currentTab = 0;
+
+			$("#btnNext").click(function() {
+				var tabs = $('#tabs').tabs();
+				var c = $('#tabs').tabs("length");
+				currentTab = currentTab == (c - 1) ? currentTab : (currentTab + 1);
+
+				tabs.tabs('select', currentTab);
+
+				if (currentTab == (c - 1)) {
+					 $("#btnNext").hide(); 
+				} else {
+					$("#btnNext").show();
+				}
+				$(window).scrollTop(0);
+			}); */
+			
+
+
+			
+			
+			
+		 	$(".nxt").click(function() {
+				$(".orgdtl a").click();
+			});
+			$(".bk").click(function() {
+				$(".orginf a").click();
+			}); 
+		});
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pagelabel.departmentintitutionInfo}"></title>
+</head>
+<body class="orgnization-institution-info organization-institution-info">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pagelabel.departmentintitutionInfo}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pagelabel.departmentintitutionInfo}"></span>
+		</h3>
+		<div align="center" class="success">
+			<span th:utext="${message}"></span>
+		</div>
+
+		<form class="form-horizontal" th:object="${orgInstInfoModel}"
+			th:action="@{/level1/saveOrgInstInfo}" id="orgInstInfoForm2"
+			method="POST">
+
+
+			<input type="hidden" name="language" id="language"
+				th:value="${language}" /> <input type="hidden" name="ddoCode"
+				id="ddoCode" th:value="${ddoCode}" /> <input type="hidden"
+				name="designationCode" id="desigCode" th:value="${designationCode}" />
+				<input type="hidden" name="parentFieldDepartmentId" id="parentFieldDepartmentId"
+				th:value="${corno}" /> 
+		 	
+			<fieldset class="container">
+				<legend th:utext="#{msg.thymeleaf.pagelabel.department}"
+					th:style="${'color: orange;'}"></legend>
+
+
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="title"
+						th:utext="#{msg.thymeleaf.pagelabel.administrativedept}"></label>
+					<div class="col-sm-3"> 
+						<select class="form-control" 
+							th:field="*{parentAdminDepartmentId}"
+							id="parentAdminDepartmentId">
+							<option th:each="varFieldDept : ${lstDeptDataTable}"
+								th:value="${varFieldDept.departmentId}"
+								th:text="${language=='mh' ? varFieldDept.departmentNameMr : varFieldDept.departmentNameEn}"></option>
+						</select>
+					</div>
+					<label class="control-label col-sm-2" for="title"
+						th:utext="#{msg.thymeleaf.pagelabel.fieldhoddept}"></label>
+					<!-- th:utext="#{ }" -->
+					<div class="col-sm-3">
+					 <select class="form-control"  
+							id="parentFieldDepartmentId"
+							th:field="*{parentFieldDepartmentId}">
+							<option th:value="0" th:selected="selected"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+
+							<option th:each="varFieldOfficeMst : ${lstSubDepartment}"
+								th:value="${varFieldOfficeMst.subDepartmentId}"
+								th:selected="selected"
+								th:text="${varFieldOfficeMst.subDepartmentNameEn}">
+							</option>
+						</select> 
+					</div>
+
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="title"
+						th:utext="#{msg.thymeleaf.pagelabel.instituteType}"></label>
+					<div class="col-sm-3"> 
+						<select class="form-control" 
+							th:field="*{parentAdminDepartmentId}"
+							id="parentAdminDepartmentId">
+							<option th:each="varFieldDept : ${lstDeptDataTable}"
+								th:value="${varFieldDept.departmentId}"
+								th:text="${language=='mh' ? varFieldDept.departmentNameMr : varFieldDept.departmentNameEn}"></option>
+						</select>
+					</div>
+				</div>
+			</fieldset>
+			<fieldset class="container">
+				<legend th:utext="#{msg.thymeleaf.pagelabel.signingauthority}"
+					th:style="${'color: orange;'}"></legend>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="title"
+						th:utext="#{msg.thymeleaf.pagelabel.name}"></label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control"
+							th:field="*{name}" ></input>
+						<!-- th:each="instdata : ${instdata}" th:value="${instdata.subDepartmentNameEn}" -->
+					</div>
+					<label class="control-label col-sm-2" for="title"
+						th:utext="#{msg.thymeleaf.pagelabel.designation}"></label>
+					<div class="col-sm-3">
+						<select class="form-control"
+											id="designationId" th:field="*{designationId}">
+												<option th:value="0"
+													th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+												<option th:each="varPay : ${lstDesignation}"
+													th:value="${varPay.designationCode}"
+													th:text="${language=='mh' ? varPay.designation : varPay.designation}"></option>
+										</select>
+					</div>
+					<div class="col-sm-3">
+						<input type="hidden" class="form-control" id="desigCode"
+							th:field=*{designationCode} ></input>
+							
+							
+							<input type="hidden" class="form-control" id="ddoId"
+							th:field=*{ddoId} ></input>
+							
+						<!--th:each="instdata : ${instdata}" th:value="${instdata.designationName}"  -->
+					</div>
+					<!-- <select class="form-control" th:field="*{designation}" id="designation">  -->
+					<!-- <option selected="selected"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}" 
+								th:each="designation:${designation}"
+ 							th:value="${designation.designation}"   th:text="${designation.designation}"  ></option> -->
+					<!--  <option value="1">SBI</option>
+							<option value="2">BOB</option>
+							<option value="3">BOM</option>  -->
+					<!-- 	</select>  -->
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="title"
+						th:utext="#{msg.thymeleaf.pagelabel.withEffDate}"></label>
+					<div class="col-sm-3">
+						<div class="input-group date">
+							<input type="date" class="form-control fromdate"
+								placeholder="dd/mm/yyyy" th:field="*{withEffectFrmDate}"
+								id="withEffectFrmDate" /> 
+						</div>
+					</div>
+							<label class="control-label col-sm-2" for="title"
+						th:utext="#{msg.thymeleaf.pagelabel.tanno}"></label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control tan" th:field=*{tanNo} maxlength="10"
+							id="tanNo" ></input>
+						<!--th:each="instdata : ${instdata}" th:value="${instdata.tanNo}"  -->
+					</div>
+				</div>
+				<!-- <div class="form-group" th:classappend="${#fields.hasErrors('ddoName')} ? has-error : ''">
+				<label class="control-label col-sm-2" for="title">DDO Name</label>
+				<i class="fa fa-times-circle-o" th:if="${#fields.hasErrors('ddoName')}"></i>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" th:field="*{ddoName}"/> 
+					<span th:if="${#fields.hasErrors('ddoName')}" class="help-block" th:errors="*{ddoName}"></span>
+				</div>
+			</div> -->
+				<div class="form-group">
+			
+					<label class="control-label col-sm-2" for="title"
+						th:utext="#{msg.thymeleaf.pagelabel.itowardcircle}"></label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="itoWardCircle"
+							th:field=*{itoWardCircle} ></input>
+						<!--th:each="instdata : ${instdata}" th:value="${instdata.itoWardCircle}"  -->
+					</div>
+				</div>
+			</fieldset>
+			<fieldset class="container">
+				<legend th:utext="#{msg.thymeleaf.pagelabel.bankdtl}"
+					th:style="${'color: orange;'}"></legend>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="title"
+						th:utext="#{msg.thymeleaf.pagelabel.bankname}"></label>
+					<div class="col-sm-3">
+						<select class="form-control"
+											th:field="*{bankId}" id="bankId">
+												<option selected="selected" th:value="0"
+													th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+												<option th:each="varAllBankList : ${lstAllBankList}"
+													th:value="${varAllBankList.bankCode}"
+													th:text="${language=='mh' ? varAllBankList.bankName : varAllBankList.bankName}"></option>
+										</select>
+					</div>
+					<label class="control-label col-sm-2" for="title"
+						th:utext="#{msg.thymeleaf.pagelabel.branchname}"></label>
+					<div class="col-sm-3">
+						<select class="form-control"
+											id="bankBranchCode" th:field="*{bankBranchCode}">
+												<option th:value="0"
+													th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+												<option
+													th:each="varAllBankbranchList : ${lstAllBankBranchList}"
+													th:value="${varAllBankbranchList[0]}"
+													th:text="${language=='mh' ? varAllBankbranchList[1] : varAllBankbranchList[1]}"></option>
+										</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="title"
+						th:utext="#{msg.thymeleaf.pagelabel.ifsccode}"></label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="ifscCode"
+							th:field="*{ifscCode}" ></input>
+					</div>
+					<label class="control-label col-sm-2" for="title"
+						th:utext="#{msg.thymeleaf.pagelabel.bankacno}"></label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" th:field="*{accountno}" minlength="9" maxlength="18"
+							id="bankAccNo" ></input>
+						<!-- th:each="instdata : ${instdata}" th:value="${instdata.accountno}" -->
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="title"
+						th:utext="#{msg.thymeleaf.pagelabel.remarks}"></label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="remarks"
+							th:field="*{remarks}" ></input>
+					</div>
+				</div>
+			</fieldset>
+			<div class="form-group text-center">
+				<hr />
+				  <input type="submit" id="btnSave" class="btn btn-primary"
+					th:value="#{msg.thymeleaf.pagelabel.btnSave}" />
+					 <a th:href="@{/level1/editInstituteData}">
+					 <input type="button"  
+					id="btnEdit" class="btn btn-warning"
+					th:value="#{msg.thymeleaf.pagelabel.btnEdit}" /></a>
+											
+					<input
+					type="reset" id="btnReset" class="btn btn-primary"
+					th:value="#{msg.thymeleaf.pagelabel.btnReset}" />
+					
+					<a
+					th:href="@{/user/home}" class="btn"><span
+					th:text="#{msg.thymeleaf.pagelabel.btnCancel}"></span></a>
+				</div>
+				
+		</form>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/organization-institution-info.js}"></script>
+	<script th:src="@{/js/validated.js}"></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.componentmappingmaster}"></title>
+
+<style>
+table#tblNonGovDuesDeduct td:last-child, table#tblNonGovDuesDeduct td:nth-child(8),
+	table#tblNonGovDuesDeduct th:nth-child(8), table#tblNonGovDuesDeduct th:nth-child(7),
+	table#tblNonGovDuesDeduct td:nth-child(7) {
+	display: none !important;
+}
+
+table#tblNonGovDuesDeduct td:first-child input, table#tblNonGovDuesDeduct td:nth-child(2) input
+	{
+	pointer-events: none;
+}
+
+table#tblNonGovDuesDeduct th:nth-child(2) {
+	min-width: 150px
+}
+
+.netAmount, input.existingAmount {
+	max-width: 120px;
+}
+</style>
+</head>
+<body class="NonGovernmentDuesAndDeduction">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+
+
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.componentmappingmaster}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.componentmappingmaster}"></span>
+		</h3>
+
+		<form class="form-horizontal" id="ruleMasterForm"
+			th:action="@{/mdc/updatePrivileges}"
+			th:object="${ComponetMappingMstEntity}" method="POST"
+			enctype="multipart/form-data">
+
+			<input type="hidden" name="language" id="language"
+				th:value="${language}" /> <input type="hidden" name="message"
+				id="message" th:value="${message}" />
+
+
+				<label class="control-label col-sm-2" for="title"><span
+					th:utext="#{msg.thymeleaf.pagelabel.typeOfComponent}"></span>&nbsp;&nbsp;<b><font
+						color="red" size="4px;">*</font></b></label>
+				<div class="col-sm-3">
+					<!-- 					 <select class="form-control" id="componentId"  th:field = "*{isType}">  -->
+					<select class="form-control" th:field="*{departmentAllowdeducCode}"
+						id="departmentAllowdeducCode">
+						<option selected="selected" th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option
+							th:each="lstdeptEligibilityForAllowAndDeduct : ${lstdeptEligibilityForAllowAndDeduct}"
+							th:data2="${lstdeptEligibilityForAllowAndDeduct.departmentAllowdeducName}"
+							th:data="${lstdeptEligibilityForAllowAndDeduct.departmentAllowdeducId}"
+							th:data1="${lstdeptEligibilityForAllowAndDeduct.isType}"
+							th:value="${lstdeptEligibilityForAllowAndDeduct.departmentAllowdeducCode}"
+							th:text="${language=='mh' ? lstdeptEligibilityForAllowAndDeduct.departmentAllowdeducName : lstdeptEligibilityForAllowAndDeduct.departmentAllowdeducName}"></option>
+
+					</select>
+				</div>
+			</div>
+			<h1>Select Components</h1>
+    <form th:action="@{/mdc/getAll}"
+			th:object="${ComponetMstEntity}" method="POST"
+			enctype="multipart/form-data">
+        <div>
+            <label>Components:</label>
+            <div th:each="component : ${components}">
+                <input type="checkbox" name="components" th:value="${component.id}" th:text="${component.componentName}"/>
+            </div>
+        </div>
+			<div class="form-group text-center">
+				<hr />
+				<input type="submit" id="btnSave" class="btn btn-primary"
+					th:value="#{msg.thymeleaf.pagelabel.btnSave}" /> <input
+					type="reset" id="btnReset" class="btn btn-primary"
+					th:value="#{msg.thymeleaf.pagelabel.btnReset}" /> <a
+					th:href="@{/user/home}" class="btn"> <span
+					th:text="#{msg.thymeleaf.pagelabel.btnCancel}"></span></a> <input
+					type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			</div>
+		</form>
+
+		<div class="form-group text-center">
+			<hr />
+			<input type="submit" id="btnSave" class="btn btn-primary"
+				th:value="#{msg.thymeleaf.pagelabel.btnSave}" /> <input
+				type="reset" id="btnReset" class="btn btn-primary"
+				th:value="#{msg.thymeleaf.pagelabel.btnReset}" /> <a
+				th:href="@{/user/home}" class="btn"><span
+				th:text="#{msg.thymeleaf.pagelabel.btnCancel}"></span></a>
+		</div>
+
+		<input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" />
+
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+
+	<script th:src="@{/js/hte/allow-deduc-rule-master.js}"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.entryDcpsLegacy}"></title>
+<style>
+#dcpslegacyTb td {
+	min-width: 200px;
+}
+
+#dcpslegacyTb input {
+	float: left;
+}
+
+#dcpslegacyTb .mandatoryindicator {
+	float: right;
+}
+.scrollablediv {
+    box-shadow: 0px 0px 5px #ccc;
+    padding: 15px 15px;
+}
+</style>
+</head>
+<body class="entry-dcps-legacy">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.entryDcpsLegacy}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.entryDcpsLegacy}"></span>
+		</h3>
+
+		<div class="entry-dcps-legacy-main container">
+			<form method="post" action="" name="DCPSForwardedFormsList"
+				enctype="multipart/form-data" id="DCPSForwardedFormsList">
+				<fieldset style="width: 100%" class="tabstyle">
+					<legend id="headingMsg">
+						<b>Search employee</b>
+					</legend>
+					<table class="bor-0">
+						<tbody>
+							<tr align="center">
+								<td width="25%" align="left">Sevarth Id</td>
+								<td width="50%" align="left"><input type="text"
+									id="txtSevaarthId" class="form-control" name="txtSevaarthId"></td>
+							</tr>
+							<tr>
+								<td colspan="2" align="center"><label style="color: red">OR</label></td>
+							</tr>
+							<tr align="center">
+								<td width="25%" align="left">Employee Name</td>
+								<td width="50%" align="left"><input type="text"
+									id="txtEmployeeName" size="30" name="txtEmployeeName"
+									class="form-control"></td>
+							</tr>
+							<tr>
+								<td colspan="2" align="center"><label style="color: red">OR</label></td>
+							</tr>
+							<tr align="center">
+								<td width="25%" align="left">DCPS ID</td>
+								<td width="50%" align="left"><input type="text"
+									id="txtDcpsId" size="30" name="txtDcpsId" class="form-control">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<br>
+					<div class="text-center">
+						<input type="button" name="btnSearch" onclick="getEmp();"
+							id="btnSearch" value="Search" class="btn btn-sm">
+					</div>
+				</fieldset>
+				<br> <br>
+				<div id="displayData">
+					<fieldset style="width: 100%" class="tabstyle">
+						<legend id="headingMsg">
+							<b>Details</b>
+						</legend>
+						<div class="scrollablediv">
+							<table class="table table-bordered table-striped"
+								id="dcpslegacyTb">
+								<thead>
+									<tr>
+										<th>Employee Name</th>
+										<th>DCPS ID</th>
+										<th>Sevarth ID</th>
+										<th>Pran No</th>
+										<th>Date of Joining</th>
+										<th>Super Ann Date</th>
+										<th>Service End Date</th>
+										<th>Period</th>
+										<th>Contribution Start Date</th>
+										<th>Contribution End Date</th>
+										<th>Employee Contribution</th>
+										<th>Employer Contribution</th>
+										<th>Interest on Employee Contribution</th>
+										<th>Interest on Employer Contribution</th>
+										<th>Total</th>
+										<th>Remark</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td style="text-align: center; width: 12%"><label
+											id="txtEmployeeName1">PRAVIN RAMDAS GHURDE</label></td>
+										<td style="text-align: center; width: 15%"><label
+											id="txtDcpsId1">066101002205PRGM8601A</label></td>
+										<td style="text-align: center; width: 8%"><label
+											id="txtSevaa">06DHEPRGM8601</label></td>
+										<td style="text-align: center; width: 8%"><label
+											id="pranNo">110148855901</label></td>
+										<td style="text-align: center; width: 8%"><input
+											type="text" id="doj" value="10/01/2020" readonly="readonly"
+											size="9" class="form-control"></td>
+										<td style="text-align: center; width: 8%"><input
+											type="text" id="serend" value="30/06/2046"
+											readonly="readonly" size="9" class="form-control"></td>
+										<td style="text-align: center; width: 8%"><input
+											type="text" id="servend" value="30/06/2046"
+											readonly="readonly" size="9" class="form-control"></td>
+										<td style="text-align: center; width: 8%"><select
+											name="period" id="period" class="form-control">
+												<option value="">-------Selected--------</option>
+												<option value="10001198258">2011-2012 to March 2021</option>
+												<option value="10001198259">2021-2022</option>
+												<option value="10001198260">2022-2023</option>
+												<option value="10001198261">2023-2024</option>
+										</select></td>
+										<td style="text-align: center; width: 8%"><input
+											type="date" name="contriStartDt" id="contriStartDt" value=""
+											class="form-control"></td>
+										<td style="text-align: center; width: 8%"><input
+											type="date" name="contriEndDt" id="contriEndDt" value=""
+											class="form-control"></td>
+										<td style="text-align: left; width: 20%"><input
+											type="text" id="empContri" name="empContri"
+											class="form-control"><label
+											class="mandatoryindicator">*</label></td>
+										<td style="text-align: left; width: 20%"><input
+											type="text" id="employerContri" name="employerContri"
+											class="form-control"><label
+											class="mandatoryindicator">*</label></td>
+										<td style="text-align: left; width: 20%"><input
+											type="text" id="empInterest" name="empInterest"
+											class="form-control"><label
+											class="mandatoryindicator">*</label></td>
+										<td style="text-align: left; width: 20%"><input
+											type="text" id="employerInterest" name="employerInterest"
+											class="form-control"><label
+											class="mandatoryindicator">*</label></td>
+										<td style="text-align: left"><input type="text"
+											id="total" name="total" disabled="disabled"
+											class="form-control"><label
+											class="mandatoryindicator">*</label></td>
+										<td style="text-align: left"><input type="text"
+											id="remark" name="remark" class="form-control"><label
+											class="mandatoryindicator">*</label></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<br />
+						<div class="text-center">
+							<input type="button" name="btnSave" id="btnSave" value="Save"
+								class="btn"> <input type="reset" name="btnreset"
+								id="btnreset" value="Reset" class="btn">
+						</div>
+					</fieldset>
+				</div>
+				<br />
+				<fieldset>
+					<b> <font color="red">Note : Kindly update the PRAN No.
+							of employee before entering legacy data.</font>
+					</b>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/hte/entry-dcps-legacy.js}"></script>
+	<script th:src="@{/js/jquery.validate.min.js}"></script>
+	
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.veriform1}"></title>
+<style type="text/css">
+</style>
+</head>
+<body class="verification-of-form1">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.veriform1}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.veriform1}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<form method="post" action="" name="" enctype="multipart/form-data"
+				id="">
+					<fieldset class="tabstyle">
+						<legend>
+							<b>Filter By DDO</b>
+						</legend>
+						<table class="table bor-0 width-60">
+							<tbody>
+								<tr>
+									<td>DDO Code</td>
+									<td><select name="cmbAsstDDO" id="cmbAsstDDO">
+											<option title="Select" value="-1">Select</option>
+											<option title="Rajarshi Shahu College, Latur(06340100003)"
+												value="06340100003">Rajarshi Shahu College,
+												Latur(06340100003)</option>
+											<option
+												title="Mahatma Basweshwar College, Latur(06340100004)"
+												value="06340100004">Mahatma Basweshwar College,
+												Latur(06340100004)</option>
+											<option title="Dayanand Law College, Latur(06340100005)"
+												value="06340100005">Dayanand Law College,
+												Latur(06340100005)</option>
+											<option title="Dayanand Commerce College, Latur(06340100006)"
+												value="06340100006">Dayanand Commerce College,
+												Latur(06340100006)</option>
+											<option title="Dayanand Science College, Latur(06340100007)"
+												value="06340100007">Dayanand Science College,
+												Latur(06340100007)</option>
+											<option title="Dayanand Arts College, Latur(06340100008)"
+												value="06340100008">Dayanand Arts College,
+												Latur(06340100008)</option>
+									</select></td>
+									<td><input id="btnFilter" class="btn" type="button"
+										align="center" value="Filter" name="btnFilter"></td>
+								</tr>
+							</tbody>
+						</table>
+					</fieldset>
+					<fieldset class="tabstyle">
+						<legend>
+							<b>All Employee Details</b>
+						</legend>
+						<table class="table table-bordered table-striped"
+							id="datatableNew">
+							<thead>
+								<tr>
+									<th class="datatableheader sortable">Employee Name</th>
+									<th class="datatableheader sortable">Date Of Birth</th>
+									<th class="datatableheader sortable">Gender:</th>
+									<th class="datatableheader sortable">Designation:</th>
+									<th class="datatableheader sortable">DDO Code</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="odd">
+									<td class="oddcentre" style="text-align: left"><a href="#">PRADIP
+											SHIVAJI ANANTWAR</a></td>
+									<td class="oddcentre" style="text-align: left">02/09/1987
+									</td>
+									<td class="oddcentre" style="text-align: left">M</td>
+									<td class="oddcentre" style="text-align: left">Assistant
+										Professor</td>
+									<td class="oddcentre" style="text-align: left">
+										06340100056</td>
+								</tr>
+								<tr class="even">
+									<td class="oddcentre" style="text-align: left"><a href="#">RAVINDER
+											SURESH KONDA</a></td>
+									<td class="oddcentre" style="text-align: left">06/05/1989
+									</td>
+									<td class="oddcentre" style="text-align: left">M</td>
+									<td class="oddcentre" style="text-align: left">Assistant
+										Professor</td>
+									<td class="oddcentre" style="text-align: left">
+										06340100056</td>
+								</tr>
+								<tr class="odd">
+									<td class="oddcentre" style="text-align: left"><a href="#">GOVIND
+											RAMKISHAN BAHIRE</a></td>
+									<td class="oddcentre" style="text-align: left">05/03/1993
+									</td>
+									<td class="oddcentre" style="text-align: left">M</td>
+									<td class="oddcentre" style="text-align: left">Assistant
+										Professor</td>
+									<td class="oddcentre" style="text-align: left">
+										06340100056</td>
+								</tr>
+								<tr class="even">
+									<td class="oddcentre" style="text-align: left"><a href="#">UMESH
+											RAMRAO SUKALWAD</a></td>
+									<td class="oddcentre" style="text-align: left">19/03/1993
+									</td>
+									<td class="oddcentre" style="text-align: left">M</td>
+									<td class="oddcentre" style="text-align: left">Assistant
+										Professor</td>
+									<td class="oddcentre" style="text-align: left">
+										06340100056</td>
+								</tr>
+								<tr class="odd">
+									<td class="oddcentre" style="text-align: left"><a href="#">SADANAND
+											RAJARAM WADJE</a></td>
+									<td class="oddcentre" style="text-align: left">20/06/1988
+									</td>
+									<td class="oddcentre" style="text-align: left">M</td>
+									<td class="oddcentre" style="text-align: left">Assistant
+										Professor</td>
+									<td class="oddcentre" style="text-align: left">
+										06340100056</td>
+								</tr>
+							</tbody>
+						</table>
+						<br />
+						<div class="text-center">
+							<input type="button" name="btnCancel" onclick="history.back()"
+								id="btnCancel" value="Cancel" size="3" maxlength="3"
+								class="buttontag">
+						</div>
+					</fieldset>
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

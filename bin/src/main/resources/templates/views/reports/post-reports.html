@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.postReports}"></title>
+</head>
+<body class="post-reports">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.reportBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.postReports}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<div class="formMainwithNoborTb container">
+			<div class="text-center">
+				<h3 Class="PageHeading">
+					<span th:utext="#{msg.thymeleaf.pageheading.postReports}"></span>
+				</h3>
+			</div>
+			<br />
+			<form method="POST" action="" name="ReportForm"
+				enctype="multipart/form-data">
+				<table class="table bor-0">
+					<tbody>
+						<tr>
+							<td width="25%" align="center"><label class="captionTag"
+								id="admin.SelectTypePost">Select Type Of Post</label> &nbsp;</td>
+							<td width="25%"><select name="postTypeCmbBox"
+								id="postTypeCmbBox" class="selecttag mandatorycontrol">
+									<option value="-1">-- Select --</option>
+									<option value="1">Permanent</option>
+									<option value="2">Statutory</option>
+									<option value="3">Temporary</option>
+							</select>&nbsp;&nbsp;<label class="mandatoryindicator">*</label></td>
+							<td id="tempSubPost" width="25%" align="center"><label
+								class="captionTag" id="admin.SelectSubTypePost">Select
+									Sub Type of Post</label> &nbsp;</td>
+							<td width="25%" id="tempSubPost1"><select
+								name="postSubTypeCmbBoxTemp" id="postSubTypeCmbBoxTemp"
+								class="selecttag mandatorycontrol">
+									<option value="-1">-- Select --</option>
+									<option value="10001198157">Adhoc</option>
+									<option value="10001198175">Clock Hour Basis</option>
+									<option value="10001198153">Contract</option>
+									<option value="10001198154">Honorary</option>
+									<option value="10001198155">Statutory</option>
+							</select>&nbsp;&nbsp;<label class="mandatoryindicator">*</label></td>
+							<td id="permSubPost" width="25%" align="center"><label
+								class="captionTag" id="admin.SelectSubTypePost">Select
+									Sub Type of Post</label> &nbsp;</td>
+							<td id="permSubPost1" width="25%"><select
+								name="postSubTypeCmbBoxPerm" id="postSubTypeCmbBoxPerm"
+								class="selecttag mandatorycontrol">
+									<option value="-1">-- Select --</option>
+									<option value="10001198159">Protected</option>
+									<option value="10001198174">Regular</option>
+									<option value="10001198156">Surplus</option>
+							</select>&nbsp;&nbsp;<label class="mandatoryindicator">*</label></td>
+						</tr>
+						<tr>
+							<td colspan="4" align="center"><br />
+							<input name="Search" value="Search" type="button" id="Search"
+								class="btn"> <input type="button" name="btnBackAgain"
+								id="btnBackAgain" onclick="history.back()" value="Back"
+								class="buttontag"></td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+
+	<script>
+		$("#tempSubPost").hide();
+		$("#permSubPost").hide();
+		$("#tempSubPost1").hide();
+		$("#permSubPost1").hide();
+		$('#postTypeCmbBox').on('change', function() {
+			var commId = $("#postTypeCmbBox").val();
+			if (commId == 1) {
+				// alert("permenet");
+				$("#tempSubPost").hide();
+				$("#permSubPost").fadeIn(200);
+				$("#tempSubPost1").hide();
+				$("#permSubPost1").fadeIn(200);
+
+			} else if (commId == 3) {
+				//alert("temporary");
+				$("#tempSubPost").fadeIn(200);
+				$("#permSubPost").hide();
+				$("#tempSubPost1").fadeIn(200);
+				$("#permSubPost1").hide();
+			} else if (commId == -1) {
+				// alert("selected");
+				$("#tempSubPost").hide();
+				$("#permSubPost").hide();
+				$("#tempSubPost1").hide();
+				$("#permSubPost1").hide();
+			}
+
+		});
+	</script>
+</body>
+</html>

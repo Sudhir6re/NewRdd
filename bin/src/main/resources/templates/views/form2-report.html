@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.form2Regularr}"></title>
+<style type="text/css">
+</style>
+</head>
+<body class="form2-regular">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.reportBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.form2Regularr}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.form2Regularr}"></span>
+		</h3>
+		<form class="form-horizontal" name="myForm" id="myForm"
+			th:action="@{/ddoast/form2RegularReport}"
+			th:object="${regularReportModel}" method="POST"
+			enctype="multipart/form-data">
+			<div class="formMainwithNoborTb container">
+				<table class="table bor-0">
+					<tbody>
+						<tr>
+							<td width="20%"><b>Bill Group </b><font color="RED">*</font>
+							</td>
+							<td width="30%"><select name="billGroup"
+								th:field="*{billGroup}" id="billGroup"
+								class="form-control removeErrorFromDropdown">
+									<option selected="selected" th:value="0"
+										th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+									<option th:each="varGetAllBillGrp : ${lstBillDesc}"
+										th:value="${varGetAllBillGrp.dcpsDdoBillGroupId}"
+										th:text="${language=='mh' ? varGetAllBillGrp.description : varGetAllBillGrp.description}"></option>
+							</select></td>
+							<td width="20%"><b>Month</b> <font color="RED">*</font></td>
+							<td width="30%"><select name="monthId" th:field="*{monthId}"
+								id="monthId" class="form-control removeErrorFromDropdown">
+									<option selected="selected" th:value="0"
+										th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+									<option th:each="varGetAllMonths : ${lstMonths}"
+										th:value="${varGetAllMonths.monthId}"
+										th:text="${language=='mh' ? varGetAllMonths.monthMarathi : varGetAllMonths.monthEnglish}"></option>
+							</select></td>
+						</tr>
+						<tr>
+							<td><b>Year</b> <font color="RED">*</font></td>
+							<td><select name="yearId" th:field="*{yearId}" id="yearId"
+								class="form-control removeErrorFromDropdown">
+									<option selected="selected" th:value="0"
+										th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+									<option th:each="varGetAllYear : ${lstYears}"
+										th:value="${varGetAllYear.yearId}"
+										th:text="${language=='mh' ? varGetAllYear.yearMarathi : varGetAllYear.yearEnglish}"></option>
+							</select></td>
+						</tr>
+						<tr>
+							<td><b>Report Name</b> <font color="RED">*</font></td>
+							<td><select name="yearId" th:field="*{allowdedCode}"
+								id="allowdedCode" class="form-control removeErrorFromDropdown">
+									<option selected="selected" th:value="0"
+										th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+									<option value="59">Form-2 (Regular)</option>
+									<option value="700047">Form-2 (Delayed)</option>
+									<option value="700048">Form-2 (DA Arrear)</option>
+									<option value="700049">Form-2 (Pay Arrear)</option>
+									<option value="218">Form-2 (7 PC DCPS Recovery)</option>
+
+							</select></td>
+						</tr>
+						<tr>
+							<td colspan="2" style="text-align: right"><input
+								type="submit" name="GenerateReport" id="GenerateReport"
+								th:value="#{msg.thymeleaf.pagelabel.GenerateReport}" class="btn">
+								<input type="reset" id="btnReset" class="btn btn-primary"
+								th:value="#{msg.thymeleaf.pagelabel.btnReset}" /> <a
+								th:href="@{/user/home}" class="btn"><span
+									th:text="#{msg.thymeleaf.pagelabel.btnCancel}"></span></a></td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</form>
+
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<script th:src="@{/js/project/form2RegularReport.js}"></script>
+</body>
+</html>

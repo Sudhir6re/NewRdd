@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.dcpsPrintSchedule}"></title>
+<link rel="stylesheet" th:href="@{/css/print.css}" />
+<link rel="stylesheet" th:href="@{/css/styles.css}" />
+<style>
+@media print {
+	div#print-content * {
+		font-size: 10px;
+		padding: 0px;
+	}
+	@page {
+		size: landscape;
+	}
+	table {
+		width: 100%;
+		table-layout: fixed;
+	}
+	th, td {
+		word-wrap: break-word;
+	}
+}
+</style>
+</head>
+<body class="dcps-print-schedule">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.dcpsPrintSchedule}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.dcpsPrintSchedule}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<form method="post" action="" name="FrmResetPassword"
+				enctype="multipart/form-data">
+				<fieldset class="tabstyle">
+					<legend>Select Financial Year</legend>
+					<table class="table bor-0 width-70">
+						<tbody>
+							<tr>
+								<td width="30%">Financial Year</td>
+								<td><select class="form-control"
+									id="cmbFinancialYear" >
+										<option selected="selected" th:value="0"
+											th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+										<option th:each="varGetAllYear : ${lstGetAllYear}"
+											th:value="${varGetAllYear.yearId}"
+											th:text="${language=='mh' ? varGetAllYear.financialYear : varGetAllYear.financialYear}"></option> 
+								</select><label class="mandatoryindicator">*</label></td>
+								<td><input type="button" name="btnSubmit" id="btnSubmit"
+									value="Go" class="buttontag" onclick="getEmpInfo()"></td>
+							</tr>
+						</tbody>
+					</table>
+				</fieldset>
+				<br /> <br />
+				<fieldset class="empdetails">
+					<div id="print-content">
+						<div th:replace="header/menuHeader :: var-script-header"></div>
+						<legend>Yearly Process of 6th PC Arrear Amount Deposition
+							To DCPS Print Schedule</legend>
+						<div align="center">No Records found to display</div>
+					</div>
+					<br />
+					<div class="text-center">
+						<input type="button" name="btnExporttoExcel" id="btnExporttoExcel"
+							value="Export to Excel" size="3" maxlength="3" class="btn">
+						<input type="button" name="btnprintReport" id="btnprintReport"
+							onclick="printContent('print-content');" value="Print Report"
+							size="3" maxlength="3" class="btn"> <input type="button"
+							name="btnBackAgain" id="btnBackAgain" onclick="history.back()"
+							value="Back" class="buttontag">
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script>
+		$(".empdetails").hide();
+		function getEmpInfo() {
+			$(".empdetails").fadeIn(100);
+		}
+	</script>
+</body>
+</html>

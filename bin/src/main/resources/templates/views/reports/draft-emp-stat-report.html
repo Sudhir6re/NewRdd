@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.draftEmpStatReport}"></title>
+<style type="text/css">
+</style>
+</head>
+<body class="draft-emp-stat-report">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.reportBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.draftEmpStatReport}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.draftEmpStatReport}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<fieldset>
+				<legend>Forward Employee Statistics</legend>
+				<div class="scrollablediv">
+					<table class="table table-bodered table-striped">
+						<thead>
+							<tr class="datatableheader">
+								<th >UID No.</th>
+								<th>EID No.</th>
+								<th>Employee Name</th>
+								<th>Date Of Birth</th>
+								<th>Gender</th>
+								<th>Date Of Joining</th>
+								<th>Physically Challenged</th>
+								<th>PAN No.</th>
+								<th>Cadre</th>
+								<th>Super Annuation Date</th>
+								<th>Pay Commission</th>
+								<th>Pay Scale Description</th>
+								<th>Pay in Pay Band</th>
+								<th>Grade Pay</th>
+								<th>Basic Pay</th>
+								<th>Current Post</th>
+								<th>Post Sanction Date</th>
+								<th>Post End Date</th>
+								<th>Current Institute</th>
+								<th>Date Of Initial Appointment in Parent Institute</th>
+								<th>Name Of Post/Designation at First Appointment</th>
+								<th>Individual Approval Order No.</th>
+								<th>Individual Approval Order Date</th>
+								<th>Employee Type</th>
+								<th>Bank Name</th>
+								<th>Branch Name</th>
+								<th>Account No</th>
+								<th>IFS Code</th>
+								<th>Pay Commision</th>
+								<th>PF A/C No</th>
+								<th>GIS Menbership Date</th>
+								<th>Nominee Name</th>
+								<th>Nominee Date Of Birth</th>
+								<th>Nominee Relationship</th>
+								<th>Percentage Share</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">ASASAS</td>
+								<td style="text-align: center">01/01/1978</td>
+								<td style="text-align: center">M</td>
+								<td style="text-align: center">01/01/2000</td>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">Class I</td>
+								<td style="text-align: center">31/12/2037</td>
+								<td style="text-align: center">6th Pay Commission</td>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">6th Pay Commission</td>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">-</td>
+								<td style="text-align: center">-</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<br />
+				<div class="text-center">
+					<button id="excel" class="btn">Export to Excel</button>
+					<input type="button" name="btnBackAgain" id="btnBackAgain"
+						onclick="history.back()" value="Back" class="buttontag">
+				</div>
+			</fieldset>
+		</div>
+
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

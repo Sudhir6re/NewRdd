@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>  
+<title th:utext="#{msg.thymeleaf.pageheading.paybill}"></title>
+<style>
+.disableTillyear, .monthhide, .billgphide,.paybillTypehide {
+	visibility: hidden;
+}
+
+h2#swal2-title {
+	word-break: break-word;
+}
+.swal2-popup{
+ width: 64em !important;
+    }
+</style>
+</head>
+<body class="paybill-Generate">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600 paybill_generate">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.TransactionBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.paybill}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.paybill}"></span>
+		</h3>
+
+			<form class="form-horizontal" id="savePaybill"
+				th:action="@{/ddoast/savePaybillHeadMpg}"
+				th:object="${paybillHeadMpgModel}" method="POST"
+				enctype="multipart/form-data">
+
+				<input type="hidden" name="language" id="language"
+					th:value="${language}" /> <input type="hidden" name="message"
+					id="message" th:value="${message}" /> <input type="hidden"
+					name="returnId" id="returnId" th:value="${returnId}" />
+
+				<input type="hidden" name="isCityCategory" id="isCityCategory"
+					th:value="${isCityCategory}" />
+
+
+				<div class="form-group">
+					<label class="control-label col-sm-2 " for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.paybillYear}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-2">
+						<select class="form-control" id="paybillYear"
+							th:field="*{paybillYear}">
+							<option selected="selected" th:value="0"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+							<option th:each="varGetAllYear : ${lstGetAllYear}"
+								th:value="${varGetAllYear.yearId}"
+								th:text="${language=='mh' ? varGetAllYear.yearMarathi : varGetAllYear.yearEnglish}"></option>
+
+						</select>
+					</div>
+					<div class="disableTillyear1">
+						<label class="control-label col-sm-2 monthhide" for="title"><span
+							th:utext="#{msg.thymeleaf.pagelabel.paybillMonth}"></span>&nbsp;&nbsp;<b><font
+								color="red" size="4px;">*</font></b></label>
+						<div class="col-sm-2 monthhide">
+							<select class="form-control" th:field="*{paybillMonth}"
+								id="paybillMonth">
+								<option selected="selected" th:value="0"
+									th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+								<option th:each="varGetAllMonths : ${lstGetAllMonths}"
+									th:value="${varGetAllMonths.monthId}"
+									th:text="${language=='mh' ? varGetAllMonths.monthMarathi : varGetAllMonths.monthEnglish}"></option>
+							</select>
+						</div>
+						
+						
+						<label class="control-label col-sm-2 paybillTypehide"  for="title"><span
+							th:utext="#{msg.thymeleaf.pagelabel.paybillType}"></span>&nbsp;&nbsp;<b><font
+								color="red" size="4px;">*</font></b></label>
+						<div class="col-sm-2 paybillTypehide">
+							<select class="form-control" id="paybillType"
+								th:field="*{billTypeId}">
+								<option th:value="0"
+									th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+								<option th:each="varCommon : ${lstBillTypes}"
+									th:value="${varCommon.commonValue}"
+									th:text="${language=='mh' ? varCommon.commonValEnglish : varCommon.commonValEnglish}"></option>
+							</select>
+						</div>
+
+						
+					</div>
+				</div>
+				<div class="disableTillyear">
+					<div class="form-group">
+					
+					<label class="control-label col-sm-2 " for="title"><span
+							th:utext="#{msg.thymeleaf.pagelabel.billGroup}"></span>&nbsp;&nbsp;<b><font
+								color="red" size="4px;">*</font></b></label>
+						<div class="col-sm-2 ">
+							<select class="form-control" id="schemeBillGroupId"
+								th:field="*{schemeBillgroupId}">
+								<option selected="selected" th:value="0" th:data="0"
+									th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+								<option th:each="varSchemeBillGroup : ${lstSchemeBillGroup}"
+									th:value="${varSchemeBillGroup.dcpsDdoBillGroupId}"
+									th:text="${language=='mh' ? varSchemeBillGroup.description : varSchemeBillGroup.description}"></option>
+							</select>
+						</div>
+						
+						<label class="control-label col-sm-2" for="title"
+							th:utext="#{msg.thymeleaf.pagelabel.noOfEmployee}"></label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="noOfEmployee"
+								readonly="readonly" th:field="*{noOfEmployee}"></input>
+						</div>
+						<!-- <label class="control-label col-sm-2" for="title"><span
+							th:utext="#{msg.thymeleaf.pagelabel.schemeName}"></span>&nbsp;&nbsp;<b><font
+								color="red" size="4px;">*</font></b></label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" th:field="*{schemeName}"
+								readonly="readonly"></input>
+						</div>
+						<label class="control-label col-sm-2" for="title"><span
+							th:utext="#{msg.thymeleaf.pagelabel.majorHead}"></span>&nbsp;&nbsp;<b><font
+								color="red" size="4px;">*</font></b></label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" th:field="*{majorHead}"
+								readonly="readonly"></input>
+						</div> -->
+					</div>
+					<!-- <div class="form-group">
+						<label class="control-label col-sm-2" for="title"><span
+							th:utext="#{msg.thymeleaf.pagelabel.minorHead}"></span>&nbsp;&nbsp;<b><font
+								color="red" size="4px;">*</font></b></label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" th:field="*{minorHead}"
+								readonly="readonly"></input>
+						</div>
+						<label class="control-label col-sm-2" for="title"><span
+							th:utext="#{msg.thymeleaf.pagelabel.subMajorHead}"></span>&nbsp;&nbsp;<b><font
+								color="red" size="4px;">*</font></b></label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control"
+								th:field="*{subMajorHead}" readonly="readonly"></input>
+						</div>
+						<label class="control-label col-sm-2" for="title"><span
+							th:utext="#{msg.thymeleaf.pagelabel.subMinorHead}"></span>&nbsp;&nbsp;<b><font
+								color="red" size="4px;">*</font></b></label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control"
+								th:field="*{subMinorHead}" readonly="readonly"></input>
+						</div>
+					</div> -->
+
+
+					<!-- <div class="form-group">
+						<label class="control-label col-sm-2" for="title"
+							th:utext="#{msg.thymeleaf.pagelabel.noOfEmployee}"></label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="noOfEmployee"
+								readonly="readonly" th:field="*{noOfEmployee}"></input>
+						</div>
+
+					</div> -->
+
+					<div class="form-group text-center">
+						<hr />
+						<input type="button" id="btnSave" class="btn btn-primary"
+							th:value="#{msg.thymeleaf.pagelabel.btnGenerate}" /> <input
+							type="reset" id="btnReset" class="btn btn-primary"
+							th:value="#{msg.thymeleaf.pagelabel.btnReset}" /> <a
+							th:href="@{/user/home}" class="btn"><span
+							th:text="#{msg.thymeleaf.pagelabel.btnCancel}"></span></a>
+
+					</div>
+				</div>
+				<input type="hidden" name="${_csrf.parameterName}"
+					value="${_csrf.token}" /> <input type="hidden" name="ddoCode"
+					id="ddoCode" th:field="*{ddoCode}" />
+
+			</form>
+		</fieldset>
+	</div>
+
+
+	<div class="container">
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<p id="modalContent">This sevaarth id 123,456 has not mapped
+							with allowance deduction</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/paybill-generate.js}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title
+	th:utext="#{msg.thymeleaf.pageheading.hraallowanceMaster }"></title>
+<style>
+.error {
+	color: red !important;
+	font-size: 12px !important;
+}
+
+select.error, textarea.error, input.error {
+	border: 1px solid red !important;
+}
+</style>
+</head>
+<body class="allowance-deduction-mst">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.hraallowanceMaster}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span
+				th:utext="#{msg.thymeleaf.pageheading.hraallowanceMaster}"></span>
+		</h3>
+		<!-- <div align="center" class="success">
+			<span th:utext="${message}"></span>
+		</div> -->
+		<!-- <div th:if="${savedSuccessfully.value} eq 'SAVED'">
+			<p>Saved Successfully !</p>
+		</div> -->
+		<fieldset class="container">
+			<!-- <legend th:utext="#{msg.thymeleaf.pageheading.addBankDetails}" th:style="${'color: orange;'}"></legend> -->
+
+			<!-- 		<h1 th:utext="#{common.label.title}"></h1> -->
+
+			<form class="form-horizontal"
+				th:action="@{/master/EditHRAAllowanceMasterSave}"
+				th:object="${hraAllowanceMstEntity}" method="POST"
+				name="allowMst" enctype="multipart/form-data">
+
+				<input type="hidden" name="message" id="message"
+					th:value="${message}" /> <input type="hidden" name="language"
+					id="language" th:value="${language}" /> <input type="hidden"
+					name="context" id="context" th:value="${context}" />
+
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.paycommission}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+						<select class="form-control" id="payCommision"
+							th:field="*{payCommissionCode}">
+							<option th:value="0"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+							<option th:each="varPay : ${lstddcPayCommission}"
+								th:value="${varPay.id}"
+								th:text="${language=='mh' ? varPay.commission_name_mh: varPay.commission_name_en}"></option>
+						</select>
+					</div>
+					
+			
+
+
+				</div>
+				
+				<div class="form-group">
+							<label class="control-label col-sm-2" for="title"> <span
+						th:utext="#{msg.thymeleaf.label.startDate}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+						<input type="date" class="form-control" id="startDate"
+							th:field="*{startDate}"></input>
+					</div>
+ 
+					<label class="control-label col-sm-2" for="title"> <span
+						th:utext="#{msg.thymeleaf.label.endDate}"></span>&nbsp;&nbsp;<b></b></label>
+					<div class="col-sm-3">
+						<input type="date" class="form-control" id="endDate"
+							th:field="*{endDate}"></input>
+					</div>
+					
+			
+
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.label.cityClassX}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="cityClassx"
+							th:field="*{cityClassX}"></input>
+						
+					</div> 
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.label.cityClassY}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="cityClassY"
+							th:field="*{cityClassY}"></input>
+					</div>
+
+			</div>
+
+				
+				<div class="form-group">
+
+					
+					
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.label.cityClassZ}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="cityClassZ"
+							th:field="*{cityClassZ}"></input>
+							
+							<input type="hidden" id="allowanceHRAId" th:field="*{allowanceHRAId}"/>
+					</div>	
+				
+				</div>
+			
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.status}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+							<select class="form-control" th:field="*{isActive}">
+							<option th:value="0" th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+							<option th:value="1"  th:selected="${isActive == 1}"  th:utext="#{msg.thymeleaf.pagelabel.dropdown.active}"></option>
+							<option th:value="0" th:selected="${isActive == 0}"  th:utext="#{msg.thymeleaf.pagelabel.dropdown.inactive}"></option>
+						</select>
+					</div>
+				</div>
+				
+				<div class="form-group text-center">
+					<hr />
+					<input type="submit" id="btnSave" class="btn btn-primary"
+						th:value="#{msg.thymeleaf.pagelabel.btnUpdate}" />
+					<!-- <input type="button" class="btn btn-info" id="btnCancel" th:value="#{msg.thymeleaf.pagelabel.btnCancel}"/> -->
+			
+					<a th:href = "@{/master/HRAAllowance}" >
+  					<input type="button"  class="btn btn-info"   th:href = "@{/master/HRAAllowance}" 
+  					 th:value="#{msg.thymeleaf.pagelabel.btnCancel}"  /> </a>
+				
+				</div>
+			</form>
+		</fieldset>
+
+
+		<!-- <table id="tblDataTable" class="table table-striped table-bordered"
+			style="width: 100%">
+			<thead>
+				<tr>
+					<th th:utext="#{msg.thymeleaf.pagelabel.srno}"></th>
+					<th th:utext="#{msg.thymeleaf.pagelabel.paycommission}"></th>
+					<th th:utext="#{msg.thymeleaf.label.startDate}"></th>
+					<th th:utext="#{msg.thymeleaf.label.endDate}"></th>
+					<th th:utext="#{msg.thymeleaf.label.cityClassX}"></th>
+					<th th:utext="#{msg.thymeleaf.label.cityClassY}"></th>
+					<th th:utext="#{msg.thymeleaf.label.cityClassZ}"></th>
+					<th th:utext="#{msg.thymeleaf.pagelabel.status}"></th>
+					<th th:utext="#{msg.thymeleaf.datatablelabel.action}"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="varlstAlloDeduMst: ${lstAllowanceDeductionMst}">
+					<td th:text="${varlstAlloDeduMstStat.index+1}"></td>
+					<td th:text="${varlstAlloDeduMst.payCommissionName}"></td>
+					<td class="text-center" th:text="${varlstAlloDeduMst.startDate}"></td>
+					<td th:text="${varlstAlloDeduMst.endDate}"></td>
+
+					<td th:text="${varlstAlloDeduMst.endDate} "></td>
+
+					<td class="text-right" th:text="${varlstAlloDeduMst.cityClassX}"></td>
+					<td class="text-right" th:text="${varlstAlloDeduMst.cityClassY}"></td>
+					<td class="text-right" th:text="${varlstAlloDeduMst.cityClassZ}"></td>
+					<td class="text-center"><span th:if="${varlstAlloDeduMst.isActive} == '1'">
+							<span class="label label-success"
+							th:utext="#{msg.thymeleaf.status.active}"></span>
+					</span> <span th:if="${varlstAlloDeduMst.isActive} =='0'"> <span
+							class="label label-danger"
+							th:utext="#{msg.thymeleaf.status.inactive}"></span>
+					</span></td>
+					<td>
+						<div class="form-group text-center flex">
+								<a data-toggle="tooltipEdit" title="Edit"
+									th:href="@{'/admin/editAllowanceDeductionWiseMaster/' + ${varlstAlloDeduMst.allowanceHRAId}}"><span
+									class="glyphicon glyphicon-edit"></span></a>
+								<a data-toggle="tooltipDelete" title="Delete"
+									th:data="${varlstAlloDeduMst.allowanceHRAId}"
+									th:data-val="${varlstAlloDeduMst.isActive}" class="delete">
+									<span class="glyphicon glyphicon-trash "></span>
+								</a>
+							</div>
+					</td>
+				</tr>
+			</tbody>
+
+		</table> -->
+	</div>
+
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script th:src="@{/js/jquery.validate.min.js}"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.min.js"></script>
+	<script th:src="@{/js/allowance-deduction-wise-mst.js}"></script>
+	<script th:src="@{/js/project/datatable-common.js}"></script>
+
+</body>
+</html>

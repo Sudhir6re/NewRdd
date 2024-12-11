@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Print form 1 Acknowledgement Report</title>
+<link rel="stylesheet" th:href="@{/css/print.css}" />
+<link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body class="print-form1-ack-report">
+	<div class="container-fluid">
+		<div th:replace="header/menuHeader :: var-script-header"></div>
+		<div id="print-content">
+			<fieldset>
+				<form id="rptForm_ID" name="rptForm_Name" method="POST" action="">
+					<table class="table bor-0">
+						<tbody>
+							<tr>
+								<td>
+									<h4 Class="text-center">FORM-1</h4>
+								</td>
+							</tr>
+							<tr>
+								<td valign="top">
+									<table class="table table-striped">
+										<tbody>
+											<tr>
+												<td width="100%"></td>
+											</tr>
+
+											<tr>
+												<td valign="middle" style="text-align: center;">
+													<h3 Class="PageHeading text-center">DCPS
+														Acknowledgement</h3>
+												</td>
+											</tr>
+											<tr>
+												<td valign="middle">&nbsp;</td>
+											</tr>
+
+											<tr>
+												<td valign="middle">&nbsp;</td>
+											</tr>
+											<tr>
+												<td valign="middle" style="text-align: left;">The
+													application submitted by Shri./Smt&nbsp;&nbsp;&nbsp;&nbsp;<b>TEMP
+														TEMP TEMP</b>
+												</td>
+											</tr>
+											<tr>
+												<td valign="middle">has been accepted and the following
+													Pension Account Number is alloted to him/her</td>
+											</tr>
+											<tr>
+												<td valign="middle">&nbsp;</td>
+											</tr>
+											<tr>
+												<td valign="middle" style="text-align: left;">Pension
+													Account Number :-</td>
+											</tr>
+											<tr>
+												<td valign="middle">&nbsp;</td>
+											</tr>
+
+											<tr>
+												<td valign="middle" style="text-align: center"><b>
+														<font size="5px"> 202222222222TTTM9001F</font>
+												</b></td>
+											</tr>
+											<tr>
+												<td valign="middle">&nbsp;</td>
+											</tr>
+											<tr>
+												<td valign="middle" style="text-align: left;">Sevaarth
+													Id :-</td>
+											</tr>
+											<tr>
+												<td valign="middle" style="text-align: center;"><b>
+														<font size="5px"> 20DHETTTM9002</font>
+												</b></td>
+											</tr>
+
+											<tr>
+												<td valign="middle">&nbsp;</td>
+											</tr>
+											<tr>
+												<td valign="middle">&nbsp;</td>
+											</tr>
+											<tr>
+												<td valign="middle" style="text-align: right;">Signature
+													of the Authorised Officer</td>
+											</tr>
+											<tr>
+												<td valign="middle" style="text-align: right;">(with
+													full name)</td>
+											</tr>
+											<tr>
+												<td valign="middle">(N.B. :- One copy should be
+													retained by S.R.K.A. The second copy should be pasted to
+													the service book of</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</fieldset>
+
+		</div>
+		<div class="text-center">
+			<button id="print" onclick="printContent('print-content');"
+				class="btn">Print</button>
+			<input type="button" name="btnBackAgain" id="btnBackAgain"
+				onclick="history.back()" value="Back" class="buttontag">
+		</div>
+
+	</div>
+
+</body>
+</html>

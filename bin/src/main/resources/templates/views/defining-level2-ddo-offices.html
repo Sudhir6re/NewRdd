@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.defininglevel2ddooffices}"></title>
+<style type="text/css">
+</style>
+</head>
+<body class="defining-level2-ddo-offices">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.defininglevel2ddooffices}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span
+				th:utext="#{msg.thymeleaf.pageheading.defininglevel2ddooffices}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<div id="content" style="background: :#f0ebe8;">
+
+				<form method="post" action="" name="frmDReportingDDO"
+					enctype="multipart/form-data">
+
+
+					<div id="tcontent1">
+						<br> <input type="hidden" value="lvl2" name="lvl2" id="lvl2">
+						<table class="table bor-0 width-60">
+							<tbody>
+								<tr>
+									<td width="15%"><b><label class="captionTag"
+											id="ZPDDOOOFFICE_TREASURY">Treasury Name</label></b></td>
+									<td width="35%"><select name="tCode" id="tCode"
+										class="selecttag">
+											<option value="-1">---------------------------------
+												Select -----------------------------------</option>
+											<option value="5401">AHMEDNAGAR ,DISTRICT TREASURY
+												OFFICE</option>
+											<option value="6201">AKOLA ,DISTRICT TREASURY OFFICE</option>
+											<option value="6101">AMRAVATI ,DISTRICT TREASURY
+												OFFICE</option>
+											<option value="3101">AURANGABAD ,DISTRICT TREASURY
+												OFFICE</option>
+											<option value="3301">BEED ,DISTRICT TREASURY OFFICE</option>
+											<option value="4701">BHANDARA ,DISTRICT TREASURY
+												OFFICE</option>
+											<option value="6301">BULDANA ,DISTRICT TREASURY
+												OFFICE</option>
+											<option value="4801">CHANDRAPUR ,DISTRICT TREASURY
+												OFFICE</option>
+											<option value="2222">DEMO LVL2</option>
+											<option value="5201">DHULE ,DISTRICT TREASURY OFFICE</option>
+											<option value="4901">GADCHIROLI ,DISTRICT TREASURY
+												OFFICE</option>
+											<option value="4401">GONDIA ,DISTRICT TREASURY
+												OFFICE</option>
+											<option value="3801">HINGOLI ,DISTRICT TREASURY
+												OFFICE</option>
+											<option value="5301">JALGAON ,DISTRICT TREASURY
+												OFFICE</option>
+											<option value="3601">JALNA ,DISTRICT TREASURY OFFICE</option>
+											<option value="2601">KOLHAPUR ,DISTRICT TREASURY
+												OFFICE</option>
+											<option value="3701">LATUR ,DISTRICT TREASURY OFFICE</option>
+											<option value="4601">NAGPUR ,DISTRICT TREASURY
+												OFFICE</option>
+											<option value="3401">NANDED ,DISTRICT TREASURY
+												OFFICE</option>
+											<option value="5501">NANDURBAR ,DISTRICT TREASURY
+												OFFICE</option>
+											<option value="5101">NASHIK ,DISTRICT TREASURY
+												OFFICE</option>
+											<option value="3501">OSMANABAD ,DISTRICT TREASURY
+												OFFICE</option>
+											<option value="1601">PALGHAR ,DISTRICT TREASURY
+												OFFICE</option>
+											<option value="7101">PAO MUMBAI</option>
+											<option value="3201">PARBHANI ,DISTRICT TREASURY
+												OFFICE</option>
+											<option value="2201">PUNE ,DISTRICT TREASURY OFFICE</option>
+											<option value="1301">RAIGAD-ALIBAG ,DISTRICT
+												TREASURY OFFICE</option>
+											<option value="1401">RATNAGIRI ,DISTRICT TREASURY
+												OFFICE</option>
+											<option value="2401">SANGLI ,DISTRICT TREASURY
+												OFFICE</option>
+											<option value="2301">SATARA TREASURY ,DISTRICT
+												TREASURY OFFICE</option>
+											<option value="1501">SINDHUDURG ,DISTRICT TREASURY
+												OFFICE</option>
+											<option value="2501">SOLAPUR ,DISTRICT TREASURY
+												OFFICE</option>
+											<option value="1201">THANE ,DISTRICT TREASURY OFFICE</option>
+											<option value="4501">WARDHA ,DISTRICT TREASURY
+												OFFICE</option>
+											<option value="6501">WASHIM ,DISTRICT TREASURY
+												OFFICE</option>
+											<option value="6401">YAVATMAL ,DISTRICT TREASURY
+												OFFICE</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td width="15%"><b><label class="captionTag"
+											id="ZPDDOOOFFICE_SUB_TREASURY">Sub Treasury Name</label></b></td>
+									<td width="35%"><select name="subTCode"
+										style="width: 550px" id="subTCode" class="selecttag">
+											<option value="-1">---------------------------------
+												Select -----------------------------------</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td width="15%"><label class="captionTag"
+										id="ZPDDOOFFICE_ZPADMINOFFICE">Admin Office</label></td>
+									<td width="35%"><select name="cmbAdminOffice"
+										id="cmbAdminOffice" style="width: 550px">
+											<option value="-1">---------------------------------
+												Select -----------------------------------</option>
+											<option value="07">Private Aided Technical Education
+											</option>
+											<option value="19">Private Aided Vocational
+												Education</option>
+											<option value="06">Private Aided Higher Education</option>
+											<option value="20">Private Aided Arts</option>
+											<option value="31">University</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td width="15%"><label class="captionTag"
+										id="ZPDDOOFFICE_ZPDISTRICTOFFICE">District Office</label></td>
+									<td width="35%"><select name="cmbDistOffice"
+										style="width: 550px" id="cmbDistOffice" class="selecttag">
+											<option value="-1">---------------------------------
+												Select -----------------------------------</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td width="400px"><label class="captionTag">Admin
+											Department</label></td>
+									<td width="35%"><select name="cmbAdminDept"
+										id="cmbAdminDept" style="width: 550px">
+											<option value="-1">---------------------------------
+												Select -----------------------------------</option>
+											<option value="10023">HIGHER AND TECHNICAL EDUCATION
+												DEPARTMENT.</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td width="15%"><label class="captionTag">Field
+											Department</label></td>
+									<td width="35%"><select name="cmbFieldDept"
+										id="cmbFieldDept" style="width: 800px">
+											<option value="-1">---------------------------------
+												Select -----------------------------------</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td width="15%"><label class="captionTag" id="ZP.lvl2DDO">Level2
+											DDO</label></td>
+									<td width="35%"><select name="cmbDdoCode"
+										style="width: 800px" id="cmbDdoCode" class="selecttag">
+											<option value="-1">---------------------------------
+												Select -----------------------------------</option>
+									</select></td>
+								</tr>
+
+								<tr>
+								</tr>
+
+							</tbody>
+						</table>
+						<br />
+						<div class="text-center">
+							<input type="button" name="btnSave" onclick="generateDDOCode();"
+								id="btnSave" value="Save" size="3" maxlength="3"
+								class="buttontag"> <input type="button" name="btnCancel"
+								onclick="history.back()" id="btnCancel" value="Cancel" size="3"
+								maxlength="3" class="buttontag">
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.addscale}"></title>
+<style type="text/css">
+</style>
+</head>
+<body class="add-scale">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.addscale}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.addscale}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<div id="content">
+
+				<form method="POST" name="frmScaleMaster">
+
+					<div id="tcontent1">
+						<br> <br>
+						<table class="table bor-0">
+							<tbody>
+								<tr>
+									<td><label class="captionTag" id="SM.PayCommission">Pay
+											Commission</label> &nbsp;</td>
+									<td><select name="payCommissionCmbBx"
+										id="payCommissionCmbBx" class="selecttag mandatorycontrol">
+											<option value="300388">-- Select --</option>
+											<option value="2500342">Consolidated Pay</option>
+											<option value="2500340">Fifth Pay Commission</option>
+											<option value="2500345">Fourth ( IV )</option>
+											<option value="2500343">Non Govt. Scales</option>
+											<option value="2500344">Padmanabhan Comm.</option>
+											<option value="2500347">Seventh Pay Commission</option>
+											<option value="2500346">Shetty Commission</option>
+											<option value="2500341">Sixth Pay Commission</option>
+									</select>&nbsp;&nbsp;<label class="mandatoryindicator">*</label></td>
+									<td><label class="captionTag" id="SM.PayScaleType">Pay
+											Scale Type</label> &nbsp;</td>
+									<td><select name="payScaleTypeCmbBx" id="payScaleType"
+										class="selecttag">
+											<option value="300388">-- Select --</option>
+											<option value="10001198132">Judiciary</option>
+											<option value="10001198133">UGC</option>
+											<option value="10001198134">Other Organization</option>
+									</select></td>
+								</tr>
+
+								<tr>
+									<td><b><label class="captionTag" id="OT.empScale">Pay
+												Scale</label></b></td>
+									<td><input type="text" name="payscale" id="payscale"
+										style="text-align: right" class="numbertag " value=""
+										maxlength="10" size="10/"></td>
+								</tr>
+								<tr>
+									<td><b><label class="captionTag" id="SM.scaleStrAmt">Start
+												Amount(Rs.)</label></b></td>
+									<td><input type="text" name="scaleStartAmt"
+										id="scaleStartAmt" style="text-align: right"
+										class="numbertag mandatorycontrol" value="" maxlength="10"
+										size="10/">&nbsp;&nbsp;<label
+										class="mandatoryindicator">*</label></td>
+									<td><b><label class="captionTag" id="SM.scaleIncAmt">Increment
+												Amount(Rs.)</label></b></td>
+									<td><input type="text" name="scaleIncrAmt"
+										id="scaleIncrAmt" style="text-align: right" class="numbertag"
+										value="" maxlength="10" size="10/"></td>
+									<td><b><label class="captionTag" id="SM.scaleEndAmt">End
+												Amount(Rs.)</label></b></td>
+									<td><input type="text" name="scaleEndAmt" id="scaleEndAmt"
+										style="text-align: right" class="numbertag mandatorycontrol"
+										value="" maxlength="10" size="10/">&nbsp;&nbsp;<label
+										class="mandatoryindicator">*</label></td>
+								</tr>
+								<tr id="gpRow" style="display: none;">
+									<td colspan="1"><b><label class="captionTag"
+											id="eis.GradePay">Grade Pay</label></b></td>
+									<td colspan="3"><input type="text" name="gradePay"
+										id="gradePay" class="texttag mandatorycontrol" value=""
+										maxlength="10" size="10/">&nbsp;&nbsp;<label
+										class="mandatoryindicator">*</label></td>
+								</tr>
+								<tr id="HighIncr">
+									<!-- Added by Mrugesh for Bigger Scale Value -->
+									<td><b><label class="captionTag"
+											id="SM.scaleHigherIncAmt">Higher Increment
+												Amount(Rs.)</label></b></td>
+									<td><input type="text" name="scaleHigherIncrementAmt"
+										id="scaleHigherIncrAmt" style="text-align: right"
+										class="numbertag" value="" maxlength="10" size="10/"></td>
+									<td><b><label class="captionTag"
+											id="SM.scaleHigherEndAmt">Higher End Amount(Rs.)</label></b></td>
+									<td><input type="text" name="scaleHigherEndAmt"
+										id="scaleHigherEndAmt" style="text-align: right"
+										class="numbertag" value="" maxlength="10" size="10/"></td>
+									<td></td>
+								</tr>
+								<tr id="secondHighIncr">
+									<td><b><label class="captionTag"
+											id="SM.scaleSecondHigherIncAmt">Second Increment
+												Amount(Rs.)</label></b></td>
+									<td><input type="text"
+										name="scaleSecondHigherIncrementAmt"
+										id="scaleSecondHigherIncrAmt" style="text-align: right"
+										class="numbertag" value="" maxlength="10" size="10/"></td>
+									<td><b><label class="captionTag"
+											id="SM.scaleSecondHigherEndAmt">Second End
+												Amount(Rs.)</label></b></td>
+									<td><input type="text" name="scaleSecondHigherEndAmt"
+										id="scaleSecondHigherEndAmt" style="text-align: right"
+										class="numbertag" value="" maxlength="10" size="10/"></td>
+									<td></td>
+								</tr>
+								<tr id="thirdHighIncr">
+									<td><b><label class="captionTag"
+											id="SM.scaleThirdHigherIncAmt">Third Increment
+												Amount(Rs.)</label></b></td>
+									<td><input type="text" name="scaleThirdHigherIncrementAmt"
+										id="scaleThirdHigherIncrAmt" style="text-align: right"
+										class="numbertag" value="" maxlength="10" size="10/"></td>
+									<td><b><label class="captionTag"
+											id="SM.scaleThirdHigherEndAmt">Third End Amount(Rs.)</label></b></td>
+									<td><input type="text" name="scalethirdHigherEndAmt"
+										id="scaleThirdHigherEndAmt" style="text-align: right"
+										class="numbertag" value="" maxlength="10" size="10/"></td>
+									<td></td>
+								</tr>
+								<tr>
+								</tr>
+								<tr>
+									<td><b><label class="captionTag" id="SM.scaleEFFD">Effective
+												From Date</label></b></td>
+									<td><input type="text" name="scaleEFD" id="scaleEFD"
+										class="texttag" value="" maxlength="10" size="10/">&nbsp;&nbsp;<label
+										class="mandatoryindicator">*</label></td>
+								</tr>
+								<tr>
+									<td><b><label class="captionTag" id="SM.scaleEFTD">Effective
+												To Date</label></b></td>
+									<td><input type="text" name="scaleETD" id="scaleETD"
+										class="texttag" value="" maxlength="10" size="10/"></td>
+								</tr>
+								<tr>
+									<td><b><label class="captionTag" id="SM.IncrementDate">Increment
+												Date</label></b></td>
+									<td><input type="text" name="scaleIncDat" id="scaleIncDat"
+										class="texttag" value="01/07/2024" maxlength="10" size="10/"></td>
+								</tr>
+							</tbody>
+						</table>
+						<br> <br>
+					</div>
+					<br> <br>
+					<div>
+						<input type="hidden" name="givenurl" value="getScaleData"
+							id="givenurl">
+
+						<div class="text-center">
+							<input type="button" name="formSubmitButton"
+								id="formSubmitButtonTemp" value="Save" size="3" maxlength="3"
+								class="buttontag"> <input type="hidden" name="csrfToken"
+								value=""> <input type="button" name="Close"
+								onclick="history.back()" id="Close" value="Close" size="3"
+								maxlength="3" class="buttontag"> <input type="reset"
+								name="Reset"  id="Reset" value="Reset"
+								size="3" maxlength="3" class="buttontag">
+
+						</div>
+					</div>
+
+				</form>
+			</div>
+
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

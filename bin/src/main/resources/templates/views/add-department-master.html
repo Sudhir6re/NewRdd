@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.addDept}"></title>
+<style type="text/css">
+</style>
+</head>
+<body class="add-department-master">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.addDept}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.addDept}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<div id="content">
+
+				<form method="post" action="" name="addDept" th:object="${mstDepartmentEntity}"
+					enctype="multipart/form-data">
+					<div id="tcontent1">
+						<table class="table bor-0 width-50">
+							<tbody>
+								<tr>
+									<td width="25%"><b><label>Admin Office Name</label></b></td>
+									<td width="25%"><select name="seladminDept"
+										id="seladminDept">
+										<option value="-1">-- Select --</option>
+											<option th:each="varAdminOfcList : ${adminOfc}"
+												th:value="${varAdminOfcList.officeCode}"
+												th:text="${language=='mh' ? varAdminOfcList.officeName : varAdminOfcList.officeName}"></option>
+									</select></td>
+								</tr>
+								<tr>
+									<td width="25%"><b><label>Department Name Name</label></b></td>
+									<td width="25%"><select name="seladminDept"
+										id="seladminDept"><option>--</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td width="25%"><b><label>Department Code</label></b></td>
+									<td width="25%"><input type="text" name="deptcode"
+										id="deptcode" value=""></td>
+								</tr>
+								<tr>
+									<td width="25%"><b><label>Admin Qualification</label></b></td>
+									<td width="25%"><input type="text" name="adminqulfn"
+										id="adminqulfn" value=""></td>
+								</tr>
+							</tbody>
+						</table>
+						<br> <br>
+						<div class='text-center'>
+							<input type="button" name="btnSave" id="btnSave" value="Save"
+								size="3" maxlength="3" class="buttontag"> <input
+								type="button" name="btnClose" id="btnClose" value="Close" onclick="history.back()"
+								size="3" maxlength="3" class="buttontag">
+						</div>
+						<br>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.basicDtls}"></title>
+<link rel="stylesheet" th:href="@{/css/dataTables.bootstrap4.min.css}" />
+<style>
+table#tblDataTable input {
+	/*max-width: 70px;*/
+	font-size: 15px;
+	color: #000;
+}
+
+th.emppname2.sorting {
+	width: 350px !important;
+}
+
+input#checkboxid {
+	max-width: 100% !important;
+	margin: auto;
+	cursor: pointer;
+}
+
+table#tblDataTable * {
+	vertical-align: middle;
+}
+</style>
+
+</head>
+<body class="changebasicdtls">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+
+
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.basicDtls}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.basicDtls}"></span>
+		</h3>
+		<form class="form-horizontal"
+			th:action="@{/ddoast/saveChangeBasicdtls}"
+			th:object="${changeBasicDtlsModel}" method="POST" name="changeBasicDtls"
+			enctype="multipart/form-data">
+
+			<input type="hidden" name="language" id="language"
+				th:value="${language}" /> <input type="hidden" name="message"
+				id="message" th:value="${message}" /> <input type="hidden"
+				name="message" id="messages" th:value="${messages}" />
+			<div class="table-responsive1">
+				<table id="tblDataTable" class="table table-striped table-bordered">
+					<thead>
+
+						<tr>
+							<th th:utext="#{msg.thymeleaf.pagelabel.checkbox}"></th>
+							<th th:utext="#{msg.thymeleaf.pagelabel.employeeName}"></th>
+							<th th:utext="#{msg.thymeleaf.pagelabel.htesevaarthId}"></th>
+							<th th:utext="#{msg.thymeleaf.pagelabel.basicSalary}"></th>
+							<th><span th:utext="#{msg.thymeleaf.pagelabel.percentage}"></span>&nbsp;&nbsp;<b><font color="red" size="4px;">*</font></b></th>
+							<th><span th:utext="#{msg.thymeleaf.pagelabel.withEffDate}"></span>
+								&nbsp;&nbsp;<b><font color="red" size="4px;">*</font></b></th>
+							<th th:utext="#{msg.thymeleaf.pagelabel.revisedBasic}"></th>
+
+
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr
+							th:each="att, itemStat : ${changeBasicDtlsModel.changeBasicDtlsModelsList}">
+							<td><input type="checkbox" name="checkboxid" id="checkboxid"
+								class="checkbox"
+								th:value="${changeBasicDtlsModel.changeBasicDtlsModelsList[__${itemStat.index}__].checkboxid}"
+								th:field="${changeBasicDtlsModel.changeBasicDtlsModelsList[__${itemStat.index}__].checkboxid}" />
+								<input type="hidden" name="checkboxid2" th:id="${'checkboxid2'+itemStat.index}" 
+								class="checkboxorg"
+								th:value="${changeBasicDtlsModel.changeBasicDtlsModelsList[__${itemStat.index}__].checkboxid}"
+								th:field="${changeBasicDtlsModel.changeBasicDtlsModelsList[__${itemStat.index}__].checkboxid}" />
+							</td>
+							<td class="" align="left" style="text-align: left;"><span
+								style="font-size: 12px;"
+								th:text="${changeBasicDtlsModel.changeBasicDtlsModelsList[__${itemStat.index}__].empName}"
+								th:field="${changeBasicDtlsModel.changeBasicDtlsModelsList[__${itemStat.index}__].empName}"></span></td>
+							<td class="" align="left" style="text-align: left;"><span
+								style="font-size: 12px;"
+								th:text="${changeBasicDtlsModel.changeBasicDtlsModelsList[__${itemStat.index}__].sevaarthId}"
+								th:field="${changeBasicDtlsModel.changeBasicDtlsModelsList[__${itemStat.index}__].sevaarthId}"></span></td>
+							<td
+								th:text="${changeBasicDtlsModel.changeBasicDtlsModelsList[__${itemStat.index}__].basicSal}"
+								th:field="${changeBasicDtlsModel.changeBasicDtlsModelsList[__${itemStat.index}__].basicSal}"
+								class="basicSal"></td>
+							<td><input type="text" th:id="${'percentage'+itemStat.index}"
+								th:value="${changeBasicDtlsModel.changeBasicDtlsModelsList[__${itemStat.index}__].percentage}"
+								th:field="${changeBasicDtlsModel.changeBasicDtlsModelsList[__${itemStat.index}__].percentage}"
+								class="percentage form-control"></td>
+							<td><input type="date" id="date" class="form-control" th:id="${'withEffDate'+itemStat.index}"
+								th:value="${changeBasicDtlsModel.changeBasicDtlsModelsList[__${itemStat.index}__].withEffDate}"
+								th:field="${changeBasicDtlsModel.changeBasicDtlsModelsList[__${itemStat.index}__].withEffDate}"></td>
+							<td><input type="text" readonly="readonly"
+								th:value="${changeBasicDtlsModel.changeBasicDtlsModelsList[__${itemStat.index}__].revisedSal}"
+								th:field="${changeBasicDtlsModel.changeBasicDtlsModelsList[__${itemStat.index}__].revisedSal}"
+								class="revisedSal form-control"> <input type="hidden"
+								th:value="${changeBasicDtlsModel.changeBasicDtlsModelsList[__${itemStat.index}__].empId}"
+								th:field="${changeBasicDtlsModel.changeBasicDtlsModelsList[__${itemStat.index}__].empId}">
+							</td>
+
+
+
+
+							<!-- <td><input type="text"   ></td>
+							<td><input type="text"   ></td>
+							<td></td> -->
+
+
+
+						</tr>
+
+					</tbody>
+
+				</table>
+			</div>
+
+			<div class="form-group">
+				<hr />
+				<div class="text-center">
+					<input type="submit" id="btnSave" class="btn btn-primary"
+						value="Update Details" /> <input type="reset" id="btnReset"
+						class="btn btn-primary"
+						th:value="#{msg.thymeleaf.pagelabel.btnReset}" /> <a
+						th:href="@{/user/home}" class="btn"><span
+						th:text="#{msg.thymeleaf.pagelabel.btnCancel}"></span></a>
+				</div>
+			</div>
+
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+
+		</form>
+		<!-- 		</fieldset> -->
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/js/dataTables.bootstrap4.min.js}"></script>
+	<script>
+		$(document).ready(function() {
+			$('#tblDataTable').DataTable();
+		});
+	</script>
+
+	<script type="text/javascript">
+		$('#checkboxid').click(function() {
+			console.log($(this).val());
+			if ($('#checkboxid').prop('checked')) {
+				$(".checkboxid").prop('checked', true);
+				$(".checkboxid").val(true);
+			} else {
+				$(".checkboxid").prop('checked', false);
+				$(".checkboxid").val(false);
+			}
+		});
+
+		//$(".checkbox").prop('checked', true);
+		//$('.checkbox').click(function() {
+		$(document).on('click', "[class^=checkbox]", function() {
+			//console.log($(this).val());
+			if ($(this).prop('checked')) {
+				$(this).prop('checked', true);
+				$(this).val(true);
+			} else {
+				$(this).prop('checked', false);
+				$(this).val(false);
+			}
+		});
+	</script>
+	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			//alert("qwe");
+			var varMessage = $("#message").val();
+			///alert("varMessage"+varMessage);
+
+			if (varMessage != "" && varMessage != undefined) {
+				swal("Record updated Successfully..");
+			}
+		});
+	</script>
+
+
+	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			//alert("qwe");
+			var varMessage = $("#messages").val();
+			//alert("varMessage"+varMessage);
+
+			if (varMessage != "" && varMessage != undefined) {
+				swal("Please select checkbox..");
+			}
+
+		});
+	</script>
+	<script th:src="@{/js/dataTables.bootstrap4.min.js}"></script>
+	<script th:src="@{/js/project/changeBasicdtls.js}"></script>
+
+</body>
+</html>

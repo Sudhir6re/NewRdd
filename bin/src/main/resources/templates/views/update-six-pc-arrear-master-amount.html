@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.updateSixPCArrAmt}"></title>
+<link rel="stylesheet" th:href="@{/css/print.css}" />
+<link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body class="update-six-pc-arrear-master-amount">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.dcpsBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.updateSixPCArrAmt}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.updateSixPCArrAmt}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<form method="post" action="" name="FrmResetPassword"
+				enctype="multipart/form-data">
+				<fieldset class="form-group">
+					
+						<b> 6th PC Arrear Amount Deposition To DCPS Contribution Entry
+							Form </b>
+			
+					<table class="table bor-0 width-70">
+						<tbody>
+							<tr>
+								<td width="30%"><b>Designation</b></td>
+								<td><select name="cmbDesignation" id="cmbDesignation"
+									class="form-control">
+										<option>Clerk</option>
+										<option>Engineer</option>
+								</select></td>
+								<td><input type="button" name="btnSubmit" id="btnSubmit"
+									value="Serach" class="buttontag" onclick="getEmpInfo()"></td>
+							</tr>
+						</tbody>
+					</table>
+				</fieldset>
+				<br /> <br />
+				<fieldset class="empdetails">
+					<div th:replace="header/menuHeader :: var-script-header"></div>
+					<legend>Employee Statistics</legend>
+					<div class="scrollablediv">
+						<table id="vo" class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>Sr.No</th>
+									<th>Employee Pension ID</th>
+									<th>Employee Name</th>
+									<th>From Date</th>
+									<th>To Date</th>
+									<th>Total Amount to be deposited</th>
+									<th>SixthPC Arrears Status</th>
+									<th>Remarks(If Any)</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+
+									<td align="center">01</td>
+									<td align="center">SSA0079</td>
+									<td>Pratik Shinde</td>
+									<td align="center">30-04-2024</td>
+									<td align="center">01-01-2025</td>
+									<td align="right">350000</td>
+									<td align="center">Pending</td>
+									<td>-</td>
+
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<br />
+					<div class="text-center">
+						<input type="button" name="btnApprove" id="btnApprove"
+							value="Approve" class="btn"> <input type="button"
+							name="btnReject" id="btnReject" value="Reject" class="btn">
+						<input type="button" name="btnBackAgain" id="btnBackAgain"
+							onclick="history.back()" value="Back" class="buttontag">
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script>
+		$(".empdetails").hide();
+		function getEmpInfo() {
+			$(".empdetails").fadeIn(100);
+		}
+	</script>
+</body>
+</html>

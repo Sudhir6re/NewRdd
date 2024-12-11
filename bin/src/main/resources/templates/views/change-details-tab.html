@@ -1,0 +1,947 @@
+<!DOCtype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+</head>
+
+<body class="change-details-tab">
+	<div class="SevaarthId" th:fragment="SevaarthId">
+		<table class="table table-bordered ">
+			<tr>
+				<td width="25%">
+					<div class="sevaarthIdBlock">
+						<label><span
+							th:utext="#{msg.thymeleaf.pagelabel.sevaarthId}"></span>&nbsp;&nbsp;<b>
+								<font color="red" size="4px;">*</font>
+						</b></label>
+					</div>
+				</td>
+				<td width="25%">
+					<div class="sevaarthIdBlock">
+						<input type="text" size="40%" id="sevaarthId" name="sevaarthId"
+							maxlength="15" style="text-transform: uppercase"
+							th:field="*{sevaarthId}" readonly="readonly" class="form-control" />
+					</div>
+				</td>
+				<td colspan="2"></td>
+			</tr>
+		</table>
+	</div>
+	<div class="EmployeeDatils" th:fragment="EmployeeDetails">
+		<table class="table table-bordered ">
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.UIDNO}"></span> <sub><span
+							th:utext="#{msg.thymeleaf.pagelabel.either}"></span></sub> &nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="25%"><input type="text" size="4" name="uid1"
+					onblur="validateUIDUniqe();" th:field="*{uidNo1}" id="uid1"
+					maxlength="4" class="input-style number" /> <input type="text"
+					size="4" maxlength="4" name="uid2" id="uid2" th:field="*{uidNo2}"
+					onblur="validateUIDUniqe();" class="input-style number" /> <input
+					type="text" id="uid3" onblur="validateUIDUniqe();" size="4"
+					name="uid3" th:field="*{uidNo3}" maxlength="4"
+					class="input-style number" /> <label id="uid1-error" class="error"
+					for="uid1" style="display: none;"> </label></br> <label id="uid2-error"
+					class="error" for="uid2" style="display: none;"> </label></br> <label
+					id="uid3-error" class="error" for="uid3" style="display: none;">
+				</label></br></td>
+				<!-- onblur="uidvalidenumber(this);isuidEmpty();" -->
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.EIDNO}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><input type="text" size="40%" model="eidNo"
+					th:field="*{eidNo}" id="eidNo" class="form-control number" /></td>
+			</tr>
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.salutation}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="25%"><select class="form-control" id="salutation"
+					name="salutation" th:field="*{salutation}">
+						<option th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option th:each="varCommon : ${lstCommonMstSalutation}"
+							th:value="${varCommon.lookupId}"
+							th:text="${language=='mh' ? varCommon.lookupName : varCommon.lookupName}"></option>
+				</select></td>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.fName}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><input type="text" size="40%" maxlength="25"
+					id="fName" name="fName" th:field="*{employeeFNameEn}"
+					onblur="getFisrtName();"
+					onkeypress="return onlyAlphabets(event,this);"
+					style="text-transform: uppercase" class="form-control" /></td>
+			</tr>
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.mName}"></span>&nbsp;&nbsp; <!-- <b><font
+													color="red" size="4px;">*</font></b> --></label></td>
+				<td width="25%"><input type="text" size="40%" maxlength="25"
+					style="text-transform: uppercase"
+					onkeypress="return onlyAlphabets(event,this);" id="mName"
+					th:field="*{employeeMNameEn}" class="form-control" /></td>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.lName}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><input type="text" size="40%" maxlength="25"
+					style="text-transform: uppercase"
+					onkeypress="return onlyAlphabets(event,this)|| charCode == 45;"
+					id="lName" th:field="*{employeeLNameEn}" class="form-control" /></td>
+			</tr>
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.fullname}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="25%"><input type="text" size="40%"
+					readonly="readonly" id="fullName" style="text-transform: uppercase"
+					th:field="*{employeeFullNameEn}" class="form-control" /></td>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.fullnamedevnagri}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><input type="text" size="40%"
+					readonly="readonly" id="fullNameInDevnagri"
+					style="text-transform: uppercase" th:field="*{employeeFullNameMr}"
+					class="form-control" /></td>
+			</tr>
+			<tr>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.departmentidorbuckleno}"></span></label></td>
+				<td width="30%"><input type="text" size="40%"
+					th:field="*{buckleNo}" class="form-control" /></td>
+			</tr>
+			<tr>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.gender}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><input type="radio" size="2" id="gender"
+					name="gender" ng-model="gender" th:field="*{gender}" th:value="M" />
+					<label><span th:utext="#{msg.thymeleaf.pagelabel.male}"></span></label>
+					<input type="radio" value="Female" id="gender" name="gender"
+					ng-model="gender" th:field="*{gender}" th:value="F" /> <label><span
+						th:utext="#{msg.thymeleaf.pagelabel.female}"></span></label> <input
+					type="radio" value="Transgender" id="gender" name="gender"
+					ng-model="gender" th:field="*{gender}" th:value="T" /> <label><span
+						th:utext="#{msg.thymeleaf.pagelabel.transgender}"></span></label></td>
+
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.religion}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<!--  <td width="30%"><input type="radio" size="2" id="gender" name="gender" ng-model="gender" th:field="*{gender}" 
+										 th:value="M"/> <label><span th:utext="#{msg.thymeleaf.pagelabel.male}"></span></label>  
+										  <input type="radio" value="Female"  id="gender" name="gender" ng-model="gender" th:field="*{gender}" th:value="F"/>
+										    <label><span th:utext="#{msg.thymeleaf.pagelabel.female}"></span></label> 
+										    <input type="radio" value="Transgender"  id="gender" name="gender" ng-model="gender" th:field="*{gender}" th:value="T"/> <label><span th:utext="#{msg.thymeleaf.pagelabel.transgender}" ></span></label></td>  -->
+				<td width="30%"><select class="form-control"
+					th:field="*{religionCode}">
+						<option th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option th:each="varCommon : ${mstReligionLst}"
+							th:value="${varCommon.religionId}"
+							th:text="${language=='mh' ?  varCommon.religionNameMarathi:varCommon.religionNameEnglish}"></option>
+				</select></td>
+			</tr>
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.married}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="25%"><input type="radio" size="2" id="married"
+					onchange="checkGender();" name="married" ng-model="married"
+					th:field="*{maritalStatus}" th:value="Y" /> <label><span
+						th:utext="#{msg.thymeleaf.pagelabel.whetherMinisterialYes}"></span></label>
+					<input type="radio" value="Female" id="married"
+					onchange="checkGender();" name="married" checked="checked"
+					ng-model="married" th:field="*{maritalStatus}" th:value="N" /> <label><span
+						th:utext="#{msg.thymeleaf.pagelabel.whetherMinisterialNo}"></span></label></br>
+					<label id="maritalStatus-error" class="error" for="maritalStatus">
+				</label></td>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.fatherhusbandname}"></span>&nbsp;&nbsp;
+						<!-- <b><font
+													color="red" size="4px;">*</font></b> --> </label></td>
+				<td width="30%"><input type="text" size="40%"
+					readonly="readonly" id="fatherName" ng-model="fatherOrHusbandName"
+					th:field="*{employeeMNameMr}" class="form-control" /></td>
+			</tr>
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.DOB}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="25%"><input type="date" size="40%" ng-model="dob"
+					onBlur="getAge();" ng-change="getDob();" id="dob" th:field="*{dob}"
+					class="input-style" /></td>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.servicejoindate}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><input type="date"
+					ng-model="serviceJoiningDate" onBlur="getDOJ();"
+					th:attr="max=${date}" id="serviceJod" th:field="*{doj}"
+					class="input-style" /></td>
+			</tr>
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.currentaddress}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b> </label></td>
+				<td width="25%"><textarea id="addressBuilding"
+						onblur="Validatealphanumaric(this);"
+						style="text-transform: uppercase" th:field="*{address1}"
+						class="form-control"></textarea></td>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.permanentaddresssameornot}"></span>&nbsp;&nbsp;</label></td>
+				<td width="30%"><input type="checkbox" id="sameOrNot"
+					name="sameOrNot" /></td>
+			</tr>
+			<tr class="permanentaddresssameornotmain">
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.permanentaddress}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><textarea onblur="Validatealphanumaric(this);"
+						id="addressStreet" style="text-transform: uppercase;"
+						th:field="*{address2}" class="form-control"></textarea></td>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.pincode}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><input type="text" size="40%" maxlength="6"
+					name="pinCode" id="pinCode" onblur="pincodevalide(this)"
+					th:field="*{pinCode}" class="form-control number" /></td>
+			</tr>
+
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.state}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b> </label></td>
+				<td width="25%"><select class="form-control" id="stateCode"
+					name="stateCode" th:field="*{stateCode}">
+						<option th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option th:each="varCommon : ${lstAllState}"
+							th:value="${varCommon.stateCode}"
+							th:text="${varCommon.stateNameEn}"></option>
+				</select></td>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.district}"></span>
+						&nbsp;&nbsp;<b> <font color="red" size="4px;">*</font>
+					</b> </label></td>
+				<td width="25%"><select class="form-control" id="districtCode"
+					name="districtCode" th:field="*{districtCode}">
+						<option th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option th:each="varCommon : ${lstAllDistrict}"
+							th:value="${varCommon.districtId}"
+							th:text="${varCommon.districtName}"></option>
+				</select></td>
+			</tr>
+
+			<tr>
+
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.physicallyhandicap}"></span>
+						&nbsp;&nbsp;<b> <font color="red" size="4px;">*</font>
+					</b> </label></td>
+				<td width="25%"><input type="radio" size="2"
+					id="physicallyHandicapped" th:field="*{physicallyHandicapped}"
+					th:value="Y" /> <label> <span
+						th:utext="#{msg.thymeleaf.pagelabel.whetherMinisterialYes}"></span>
+				</label> <input type="radio" id="physicallyHandicapped"
+					name="physicallyHandicapped" th:field="*{physicallyHandicapped}"
+					th:value="N" /> <label><span
+						th:utext="#{msg.thymeleaf.pagelabel.whetherMinisterialNo}"></span></label>
+					</br> <label id="physicallyHandicapped-error" class="error"
+					for="physicallyHandicapped"> </label></td>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.mobileno}"></span>
+						&nbsp;&nbsp;<b> <font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><input type="text" size="40%" id="mobileNo1"
+					minlength="10" maxlength="10" th:field="*{mobileNo1}"
+					class="form-control number mobilevalidation" /></td>
+			</tr>
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.email}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b> </label></td>
+				<td width="25%"><input type="email" size="40%" id="email"
+					name="email" th:field="*{emailId}" onblur="ValidateEmail(this);"
+					class="form-control email" /></td>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.panno}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><input type="text" size="40%" id="panNo"
+					onblur="validatePanUniqe();" name="panNo" maxlength="10"
+					placeholder="ABCDE1234F" style="text-transform: uppercase"
+					th:field="*{panNo}" class="form-control " /></td>
+			</tr>
+			<tr>
+				<td width="15%"><label>Qualification&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><select class="form-control" id="qid"
+					th:field="*{qualification}">
+						<option th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option th:each="varPay : ${lstQualification}"
+							th:value="${varPay.qId}"
+							th:text="${language=='mh' ? varPay.qualification : varPay.qualification}"></option>
+				</select></td>
+			</tr>
+			<tr>
+				<td width="25%"><label><span>Secondary Qualification</span>
+						&nbsp;&nbsp;<b> <font color="red" size="4px;">*</font>
+					</b>
+				</label></td>
+				<td width="25%"><select class="form-control"
+					id="secqualification" name="secqualification"
+					th:field="*{secqualification}">
+						<option th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option th:each="varPay : ${lstQualification}"
+							th:value="${varPay.qualification}"
+							th:text="${language=='mh' ? varPay.qualification : varPay.qualification}"></option>
+				</select></td>
+			</tr>
+			<tr>
+				<td width="15%"><label>More Qualification<b> <font
+							color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><input type="text" size="40%"
+					id="morequalification" name="morequalification"
+					style="text-transform: uppercase" th:field="*{morequalification}"
+					class="form-control " /></td>
+			</tr>
+		</table>
+	</div>
+	<div class="depart-mentdetails" th:fragment="DepartmentDetails">
+		<table class="table table-bordered">
+			<tr>
+				<td width="15%" colspan="1"><label>Parent field
+						department / HOD </label>&nbsp;&nbsp;<b> <font color="red" size="4px;">*</font>
+				</b></td>
+				<td width="30%"><select class="form-control"
+					id="parentFieldDepartmentId" readonly="readonly"
+					th:field="*{parentFieldDepartmentId}">
+						<!-- 												<option selected="selected" th:value="0" -->
+						<!-- 													th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option> -->
+						<option th:each="varFieldOfficeMst : ${lstAdminOfficeMst}"
+							th:value="${varFieldOfficeMst.subDepartmentId}"
+							th:text="${language=='mh' ? varFieldOfficeMst.subDeptName : varFieldOfficeMst.subDeptName}"></option>
+				</select></td>
+			</tr>
+			<tr>
+				<td width="25%"><label>Cadre&nbsp;&nbsp;<b> <font
+							color="red" size="4px;">*</font>
+					</b>
+				</label></td>
+				<!-- <td width="25%"><select disabled="disabled" class="form-control" id="sel1">
+												<option th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+										</select> </td> -->
+				<td width="25%"><select class="form-control"
+					ng-change="getCadre();" id="cadre" ng-model="cadreValue"
+					th:field="*{cadreId}">
+						<option selected="selected" th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option th:each="varCadreGrp : ${lstCadreMst}"
+							th:value="${varCadreGrp.cadreId}"
+							th:text="${language=='mh' ? varCadreGrp.cadreId : varCadreGrp.cadreDescription}"></option>
+				</select></td>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.group}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><select readonly="readonly"
+					class="form-control" id="empClass" th:field="*{empClass}">
+						<option th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option th:each="varGISGroup : ${lstGISGroup}"
+							th:value="${varGISGroup.id}"
+							th:text="${language=='mh' ? varGISGroup.group_name_mh : varGISGroup.group_name_en}"></option>
+				</select></td>
+			</tr>
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.superannutationage}"></span>
+						&nbsp;&nbsp;<b> <font color="red" size="4px;">*</font>
+					</b> </label></td>
+				<td width="25%"><input type="text" size="40%" readonly
+					id="superannuationage" th:field="*{superannuationage}"
+					class="form-control" /></td>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.superannuationretiringage}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><input type="date" size="40%" id="superAnnDate"
+					readonly ng-model="superAnnDate" th:field="*{superAnnDate}"
+					class="input-style" /></td>
+			</tr>
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.paycommission}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b> </label></td>
+				<td width="25%"><select class="form-control" id="payCommision"
+					th:field="*{payCommissionCode}">
+						<option th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option th:each="varPay : ${lstddcPayCommission}"
+							th:value="${varPay.id}"
+							th:text="${language=='mh' ? varPay.commission_name_mh : varPay.commission_name_en}"></option>
+				</select></td>
+				<td width="15%"><label>Appointment&nbsp;&nbsp;<b> <font
+							color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><select class="form-control" id="appointmentId"
+					th:field="*{appointmentId}">
+						<option th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option th:each="varPay : ${lstAppointment}"
+							th:value="${varPay.appointmentId}"
+							th:text="${language=='mh' ? varPay.appointmentId : varPay.appointmentName}"></option>
+				</select></td>
+			</tr>
+			<tr>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.designation}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><select class="form-control" id="designationId"
+					th:field="*{designationId}">
+						<option th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option th:each="varPay : ${lstDesignation}"
+							th:value="${varPay.desginationId}"
+							th:text="${language=='mh' ? varPay.desginationId : varPay.desgination}"></option>
+				</select></td>
+			</tr>
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.payscalelevel}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b> </label></td>
+				<td width="25%"><select class="form-control" id="payscalelevel"
+					name="payscalelevelId" th:field="*{payscalelevelId}">
+						<option th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option th:each="varPay : ${lstpayscalelevel}"
+							th:value="${varPay[4]}" th:text="${varPay[3]}"></option>
+				</select></td>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.svnthpaybasic}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><select class="form-control" id="svnthpaybasic"
+					th:field="*{svnthpaybasic}">
+						<option th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option th:each="varPay : ${lstsvnbasicpay}"
+							th:value="${varPay[0]}" th:text="${varPay[1]}"></option>
+				</select> <input type="hidden" id="sevenPcBasic" th:field="*{sevenPcBasic}" /></td>
+			</tr>
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.payscale}"></span>
+						&nbsp;&nbsp;<b> <font color="red" size="4px;">*</font>
+					</b> </label></td>
+				<td width="25%"><select class="form-control" id="payScaleSeven"
+					th:field="*{payScaleCode}">
+						<option th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option th:each="varPay : ${lstsixpayscalelevel}"
+							th:value="${varPay[4]}" th:text="${varPay[3]}"></option>
+				</select></td>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.payInPayBand}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><input type="text" size="40%" id="payInPayBand"
+					th:field="*{payInPayBand}" class="form-control number" /></td>
+			</tr>
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.gradePay}"></span>
+						&nbsp;&nbsp;<b> <font color="red" size="4px;">*</font>
+					</b> </label></td>
+				<td width="25%"><input type="text" size="40%"
+					readonly="readonly" id="gradePay" th:field="*{gradePay}"
+					class="form-control amount" /></td>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.basicpay}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><input type="text" size="40%" id="basicPay"
+					th:field="*{basicPay}" class="form-control number" readonly /></td>
+			</tr>
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.hraBasic}"></span>
+						&nbsp;&nbsp;</label></td>
+				<td width="25%"><input type="text" size="40%"
+					ng-model="hraBasic" id="hraBasic" name="hraBasic"
+					class="form-control" th:field="*{hraBasic}" /></td>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabelcurrentpost}"></span>
+						&nbsp;&nbsp;<b> <font color="red" size="4px;">*</font>
+					</b> </label></td>
+				<td width="25%"><select class="form-control" id="postdetailid"
+					th:field="*{postdetailid}">
+						<option th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option th:each="varPay : ${lstCurrentPost}"
+							th:value="${varPay[0]}" th:text="${varPay[1]}"></option>
+				</select></td>
+			</tr>
+			<tr>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.currentdept}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><select class="form-control"
+					id="adminDepartmentId" th:field="*{adminDepartmentId}">
+						<option th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option th:each="varPay : ${lstCurntDepartment}"
+							th:value="${varPay.departmentId}" th:text="${varPay.deptName}"></option>
+				</select></td>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.nameofpostdesg}"></span>&nbsp;&nbsp;
+				</label></td>
+				<td width="25%"><input type="text" size="40%"
+					id="nameOfPostDesg" th:field="*{departmentNameEn}"
+					class="form-control" /></td>
+			</tr>
+			<tr>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.dtinitialappointmentparentinst}"></span>&nbsp;&nbsp;</label></td>
+				<td width="30%"><input type="date" size="40%"
+					id="dtInitialAppointmentParentInst"
+					th:field="*{dtInitialAppointmentParentInst}" class="form-control" /></td>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.institutionAdd}"></span>
+						&nbsp;&nbsp;</label></td>
+				<td width="25%"><input type="text" size="40%" id="instituteAdd"
+					ng-model="instituteAdd" th:field="*{instituteAdd}"
+					class="form-control" /></td>
+			</tr>
+			<tr>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.mobile}"></span>&nbsp;&nbsp;</label></td>
+				<td width="30%"><input type="text" size="40%" id="mobileNo2"
+					ng-model="mobile" th:field="*{mobileNo2}" maxlength="10"
+					class="form-control number mobilevalidation" /></td>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.InstEmailId}"></span>
+						&nbsp;&nbsp;</label></td>
+				<td width="25%"><input type="email" size="40%" id="instEmailId"
+					ng-model="instEmailId" th:field="*{instemail}" class="form-control" /></td>
+			</tr>
+
+			<tr>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.cityClass}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><input Type="text" size="40%" id="cityClass"
+					ng-model="cityClass" th:field="*{cityClass}" class="form-control" /></td>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.dtofJoinCurrentPost}"></span>
+						&nbsp;&nbsp;</label></td>
+				<td width="25%"><input Type="date" size="40%"
+					ng-model="dtJoinCurrentPost" id="dtJoinCurrentPost"
+					th:field="*{dtJoinCurrentPost}" readonly="readonly"
+					class="form-control" /></td>
+			</tr>
+			<tr>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.Remark}"></span>&nbsp;&nbsp;</label></td>
+				<td width="30%"><input type="text" size="40%" ng-model="remark"
+					id="remark" th:field="*{remark}" class="form-control" /></td>
+				<td width="15%"><label>Type of Teaching<b> <font
+							color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><input type="radio" size="2" id="Teaching"
+					name="Teaching" ng-model="Teaching" th:field="*{Teaching}"
+					th:value="Teaching" /> <label>Teaching</label> <input type="radio"
+					id="Teaching" name="Teaching" ng-model="Teaching"
+					th:field="*{Teaching}" th:value="NonTeaching" /> <label>Non
+						Teaching</label></td>
+			</tr>
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.indiApproOrdNo}"></span>
+						&nbsp;&nbsp;</label></td>
+				<td width="25%"><input type="text" size="40%"
+					ng-model="indiApproveOrderNo" id="indiApproveOrderNo"
+					name="indiApproveOrderNo" class="form-control alphanumeric" /></td>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.indiApproDt}"></span>&nbsp;&nbsp;</label></td>
+				<td width="30%"><input type="date" size="40%"
+					ng-model="indiApproDt" id="indiApproDt"
+					th:field="*{approvalByDdoDate}" name="indiApproDt"
+					class="form-control" /></td>
+			</tr>
+		</table>
+	</div>
+	<div class="bank-dcps-gpf-details" th:fragment="BankDetails">
+		<table class="table table-bordered">
+			<h5>
+				<b><span th:utext="#{msg.thymeleaf.pagelabel.bankdetails}"></span></b>
+			</h5>
+			<hr />
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.bankname}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="25%"><select class="form-control"
+					th:field="*{bankId}" id="bankId">
+						<option selected="selected" th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option th:each="varAllBankList : ${lstAllBankList}"
+							th:value="${varAllBankList.bankCode}"
+							th:text="${language=='mh' ? varAllBankList.bankName : varAllBankList.bankName}"></option>
+				</select></td>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.branchname}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><select class="form-control" id="bankBranchId"
+					th:field="*{bankBranchId}">
+						<option th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option th:each="varAllBankbranchList : ${lstAllBankBranchList}"
+							th:value="${varAllBankbranchList[0]}"
+							th:text="${language=='mh' ? varAllBankbranchList[1] : varAllBankbranchList[1]}"></option>
+				</select></td>
+			</tr>
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.bankaccountno}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="25%"><input type="text" size="40%" minlength="9"
+					maxlength="18" id="bankAccountNo"
+					onblur="bankaccountvalidenumber(this);validateBankAccNumUniqe();"
+					th:field="*{bankAcntNo}" class="form-control" /></td>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.ifsccode}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><input type="text" size="40%"
+					readonly="readonly" ng-model="ifscCode" id="ifscCode"
+					th:field="*{ifscCode}" class="form-control" /></td>
+			</tr>
+		</table>
+		<table class="table table-bordered">
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.dcps}"></span> &nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><input type="radio" id="dcps"
+					onchange="checkDcpcGpf();" name="dcps" checked="checked"
+					th:field="*{dcpsgpfflag}" th:value="Y" /> <label>Yes</label> <input
+					type="radio" id="dcps" name="dcps" onchange="checkDcpcGpf();"
+					ng-model="dcps" th:value="N" th:field="*{dcpsgpfflag}" /> <label>No</label>
+					</br> <label id="dcpsgpfflag-error" class="error" for="dcpsgpfflag"></label>
+				</td>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.dcpsaccountmaintainedby}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><select class="form-control"
+					id="dcpsaccountmaintainby" th:field="*{dcpsaccountmaintainby}">
+						<option th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option th:each="varCommon : ${lstDcpsAccnMaintainby}"
+							th:value="${varCommon.lookupId}"
+							th:text="${language=='mh' ? varCommon.lookupName : varCommon.lookupName}"></option>
+				</select></td>
+			</tr>
+			<tr>
+				<!-- <td width="25%"><label><span
+												th:utext="#{msg.thymeleaf.pagelabel.empstaemptype}"></span>
+												&nbsp;&nbsp;<b><font color="red" size="4px;">*</font></b></label></td>
+										<td width="30%"><input type="text" class="form-control"
+											th:field="*{empType}" /></td> -->
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.empstapranno}"></span>&nbsp;&nbsp;
+						<!-- 	<b><font color="red" size="4px;">*</font></b> --> </label></td>
+				<td width="30%"><input type="text" class="form-control number"
+					maxlength="12" th:field="*{pranNo}" /></td>
+			</tr>
+		</table>
+		<table class="table table-bordered">
+			<h5>
+				<b><span th:utext="#{msg.thymeleaf.pagelabel.pfdetails}"></span></b>
+			</h5>
+			<hr />
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.accountmaintainedby}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="25%"><select class="form-control"
+					id="accountmaintainby" th:field="*{accountmaintainby}">
+						<option th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option th:each="varCommon : ${lstAccountMaintainby}"
+							th:value="${varCommon.lookupId}"
+							th:text="${language=='mh' ? varCommon.lookupName : varCommon.lookupName}"></option>
+				</select></td>
+				<td width="15%" class="pfSeriesDive"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.pfseries}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%" class="pfSeriesDive"><select
+					class="form-control" id="pfseries" onchange="getPfseriesPfacc();"
+					th:field="*{pfseries}">
+						<option th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<!-- 													th:each="varCommon : ${lstpfSeries}" -->
+						<!-- 													th:value="${varCommon.lookupId}" -->
+						<!-- 													th:text="${language=='mh' ? varCommon.lookupName : varCommon.lookupName}"></option> -->
+						<option th:each="varAllpfseries : ${lstpfSeries}"
+							th:value="${varAllpfseries[0]}"
+							th:text="${language=='mh' ? varAllpfseries[1] : varAllpfseries[1]}"></option>
+				</select></td>
+			</tr>
+			<tr class="accMaintainedByOtherDiv" style="display: none;">
+				<td width="10%"><label><span
+						th:utext="#{msg.thymeleaf.pageheading.otherName}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td><input type="text" id="accMaintainedByOther"
+					class="form-control" th:field="*{accMaintainedByOther}" /></td>
+			</tr>
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.pfaccountno}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="25%"><input type="text" size="40%" id="pfacno"
+					maxlength="22" th:field="*{pfacno}" onblur="getPfseriesPfacc();"
+					class="form-control alphanumeric" /></td>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.pfseriesdecsription}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="30%"><input type="text" size="40%"
+					class="form-control" id="pfdescription" readonly="readonly"
+					th:field="*{pfdescription}" /></td>
+			</tr>
+		</table>
+	</div>
+	<div class="gisdetails" th:fragment="GISDetails">
+		<table class="table table-bordered">
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.gisapplicable}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="25%"><select class="form-control" id="gisapplicable"
+					th:field="*{gisapplicable}">
+						<option th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option th:each="varCommon : ${lstGISApplicable}"
+							th:value="${varCommon.lookupId}"
+							th:text="${language=='mh' ? varCommon.lookupName : varCommon.lookupName}"></option>
+				</select></td>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.gisgroup}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="25%"><select class="form-control" id="gisgroup"
+					onchange="checkGisGroup();" th:field="*{gisgroup}">
+						<option th:value="0"
+							th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+						<option th:each="varGISGroup : ${lstGISGroup}"
+							th:value="${varGISGroup.id}"
+							th:text="${language=='mh' ? varGISGroup.group_name_mh : varGISGroup.group_name_en}"></option>
+				</select></td>
+			</tr>
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabl.membershipDate}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="25%"><input type="date" id="membership_date"
+					th:field="*{membership_date}" onBlur="checkMembershipDate();"
+					class="input-style" /></td>
+			</tr>
+			<tr class="gisOtherDiv" style="display: none;">
+				<td width="10%"><label><span
+						th:utext="#{msg.thymeleaf.pageheading.otherName}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td><input type="text" id="gisRemark" class="form-control"
+					th:field="*{gisRemark}" /></td>
+			</tr>
+		</table>
+	</div>
+	<div class="dcps-nominee-details" th:fragment="NomineeDetails">
+		<table class="table table-bordered">
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabl.nomineename}"></span>&nbsp;&nbsp;<b></b></label></td>
+				<td width="25%"><input type="text" size="40%" id="nomineename"
+					th:field="*{nomineename}" style="text-transform: uppercase"
+					class="form-control checkFirstChar" /></td>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabl.address}"></span>&nbsp;&nbsp;<b></b></label></td>
+				<td width="30%"><input type="text" size="40%"
+					style="text-transform: uppercase" ng-model="nomineeaddress"
+					id="nomineeaddress" th:field="*{nomineeaddress}"
+					class="form-control" /></td>
+			</tr>
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabl.dob}"></span>&nbsp;&nbsp;<b></b></label></td>
+				<td width="25%"><input type="date" size="40%" id="rdob"
+					th:field="*{rdob}" ng-model="rdob" class="form-control" /></td>
+				<td width="15%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabl.reletionship}"></span>&nbsp;&nbsp;<b></b></label></td>
+				<td width="30%"><select class="form-control" id="relation"
+					th:field="*{relation}">
+						<option th:value="0">Please Select</option>
+						<option th:each="varRelation : ${lstRelation}"
+							th:value="${varRelation[0]}"
+							th:text="${language=='mh' ? varRelation[1] : varRelation[1]}"></option>
+				</select></td>
+			</tr>
+			<tr>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabl.percentageshare}"></span>&nbsp;&nbsp;<b></b></label></td>
+				<td colspan="3"><input type="text" size="40%"
+					id="percent_share" maxlength="3" onblur="ValidateNomineeShare();"
+					th:field="*{percent_share}" ng-model="percent_share"
+					onkeypress="return isNumberKey(event)" class="form-control"
+					style="width: 35%;" /></td>
+			</tr>
+		</table>
+		<div class="text-center">
+			<input type="button" class="btn btn-info" value="Add" id="add"></input>
+			<br/>
+		</div>
+		<table id="displayTableForNomineeDtls"
+			class="table table-striped table-bordered" style="width: 100%">
+			<tr>
+				<!-- 										<td align="center"><b>Sr.No</b></td> -->
+				<td align="center"><b>Nominee Name</b></td>
+				<td align="center"><b>Date Of Birth</b></td>
+				<td align="center"><b>%Share</b></td>
+				<td align="center"><b>Relationship</b></td>
+				<td align="center"><b>Delete Nominee</b></td>
+			</tr>
+			<!-- 									<span th:if= "${searchResults.results != ''> -->
+			<!-- 									</span> -->
+			<tr th:each="nmnDtls,iterationStatus: ${lstNmnDtls}">
+				<!--     <td class="tds" align="center"> -->
+				<!-- 						<input type="text" style="border: none;" size="5"  name="txtNomineeSerialNoValue" id="txtNomineeSerialNoValue"  th:class='${iterationStatus.count}' th:value='${iterationStatus.count}' readonly="readonly"/> -->
+				<!-- 						</td> -->
+				<td class="tds" align="center"><input type="text"
+					style="border: none;" size="20" name="txtNameValue"
+					id="txtNameValue" th:class='${iterationStatus.count}'
+					th:value="${nmnDtls.nomineename}" readonly="readonly" /> <input
+					type='hidden' id="txtNomAddr1" name="txtNomAddr1"
+					th:value="${nmnDtls.nomineeaddress}"
+					th:class='${iterationStatus.count}' /></td>
+				<td class="tds" align="center"><input type="text"
+					style="border: none;" size="20" name="txtDateOfBirthValue"
+					th:class='${iterationStatus.count}' id="txtDateOfBirthValue"
+					readonly="readonly" th:value="${nmnDtls.dob}" /></td>
+				<td class="tds" align="center"><input type="text"
+					style="border: none;" size="5" name="txtPercentShareValue"
+					id="txtPercentShareValue" th:class='${iterationStatus.count}'
+					th:value="${nmnDtls.percent_share}" readonly="readonly" /></td>
+				<td class="tds" align="center"><input type="text" size="10"
+					style="border: none;" name="txtRelationshipValue"
+					id="txtRelationshipValue" th:class='${iterationStatus.count}'
+					th:value="${nmnDtls.relation}" readonly="readonly" /></td>
+				<td class="tds" align="center"><a data-toggle='tooltip'
+					class='glyphicon glyphicon-trash' onclick="deleteRow();"></a></td>
+			</tr>
+		</table>
+	</div>
+	<div class="photosign" th:fragment="PhotoSignature">
+		<table class="table table-bordered">
+			<tr>
+				<td width="10%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabl.filedesc}"></span> &nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b> </label></td>
+				<td width="25%"><input type="text" size="40%"
+					placeholder="Photo" readonly="readonly" ng-model="fileDesc"
+					id="photodesc" name="photodesc" class="form-control"
+					accept="image/png, image/jpeg" /></td>
+				<td width="10%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabl.attachfile}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="25%">
+					<!-- 										<input type="file" ng-model="attachFile" id="photo" /> -->
+					<input type="file" ng-model="attachFile" id="files"
+					onchange="getimage(this);" name="files"
+					accept="image/png, image/jpeg" />
+				</td>
+				<!-- 										<td width="10%"><label class="btn btn-info"><span -->
+				<!-- 												th:utext="#{msg.thymeleaf.pagelabl.uploadphoto}" -->
+				<!-- 												ng-click="uploadPhoto();"></span></label></td> -->
+				<td width="10%">
+					<!-- 										<img id="photoView" src="#" onerror="" width="100" height="100" /> -->
+					<img id="imagePath"
+					th:src="@{${'/ddoast/viewFilephoto/' + empChangeDetailsModel.employeeId}}"
+					width="100" height="100" />
+				</td>
+			</tr>
+			<tr>
+				<td width="10%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabl.signDesc}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="25%"><input type="text" size="40%"
+					placeholder="Signature" readonly="readonly" id="signaturedesc"
+					name="signaturedesc" ng-model="signature" class="form-control" /></td>
+				<td width="10%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabl.attachfile}"></span>&nbsp;&nbsp;<b>
+							<font color="red" size="4px;">*</font>
+					</b></label></td>
+				<td width="25%">
+					<!-- 										<input type="file" ng-model="attachFile1" id="signature" th:field="*{photoAttachmentId}"  /> -->
+					<input type="file" ng-model="attachFile1" id="files"
+					onchange="getimagesign(this);" name="files" />
+				</td>
+				<!-- 										<td width="10%"><label class="btn btn-info"><span -->
+				<!-- 												th:utext="#{msg.thymeleaf.pagelabl.uploadphoto}" -->
+				<!-- 												ng-click="uploadPhoto1();"></span></label></td> -->
+				<td width="10%">
+					<!-- 										<img id="blah" src="#" width="100" height="100" onerror="" /> -->
+					<img id="imagePathSign"
+					th:src="@{${'/ddoast/viewFileSign/' + empChangeDetailsModel.employeeId}}"
+					width="100" height="100" />
+				</td>
+			</tr>
+		</table>
+	</div>
+
+
+</body>
+
+</html>

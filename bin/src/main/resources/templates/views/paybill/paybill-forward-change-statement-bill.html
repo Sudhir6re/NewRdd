@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title th:utext="#{menu.mapping.payBillforwardChangeStatement}"></title>
+</head>
+<body class="paybill-forward-change-statement-bill">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb"S>
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.TransactionBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{menu.mapping.payBillforwardChangeStatement}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{menu.mapping.payBillforwardChangeStatement}"></span>
+		</h3>
+		<fieldset class="container">
+			<!-- <legend th:utext="#{menu.mapping.payBillforwardChangeStatement}"
+				th:style="${'color: orange;'}"></legend> -->
+			<input type="hidden" value="text" id="radioid" />
+			<form class="form-horizontal"  id="viewPaybillFrm"   
+				th:object="${payBillViewApprDelBillModel}" method="POST"
+				enctype="multipart/form-data">
+				<!-- th:action="@{/master/saveBillGrpMain}" -->
+
+				<input type="hidden" name="language" id="language"
+					th:value="${language}" /> <input type="hidden" name="message"
+					id="message" th:value="${message}" /> <input type="hidden"
+					name="roleId" id="roleId" th:value="${roleId}" /> <input
+					type="hidden" name="ddoCode" id="ddoCode" th:value="${ddoCode}" />
+				<input type="hidden" name="userId" id="userId" th:value="${userId}" />
+
+
+
+
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.selectmonth}"></span></label>
+					<div class="col-sm-2">
+						<select class="form-control" th:field="*{monthName}"
+							id="monthName" name="monthName">
+							<option selected="selected" th:value="0"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+							<option th:each="varMonth : ${lstMonths}"
+								th:value="${varMonth.monthId}"
+								th:text="${language=='mh' ? varMonth.monthMarathi : varMonth.monthEnglish}"></option>
+						</select>
+					</div>
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.selectyear}"></span></label>
+					<div class="col-sm-2">
+
+
+						<select class="form-control" th:field="*{yearName}" id="yearName"
+							name="yearName">
+							<option selected="selected" th:value="0"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+							<option th:each="varYear : ${lstYears}"
+								th:value="${varYear.yearId}"
+								th:text="${language=='mh' ? varYear.yearMarathi : varYear.yearEnglish}"></option>
+						</select>
+
+
+
+					</div>
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.billNumber}"></span></label>
+					<div class="col-sm-2">
+						<select class="form-control" th:field="*{billNumber}"
+							id="billNumber">
+							<option selected="selected" th:value="0" th:data="0"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+							<option th:each="varSchemeBillGroup : ${lstBillGroupLvl2}"
+								th:value="${varSchemeBillGroup.billGrpId}"
+								th:data="${varSchemeBillGroup.billGrpId}"
+								th:text="${language=='mh' ? varSchemeBillGroup.billDesc : varSchemeBillGroup.billDesc}"></option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="text-center">
+						<input type="submit" id="btnSearch" class="btn btn-primary"
+							th:value="#{msg.thymeleaf.pagelabel.btnSearch}" /> <input
+							type="reset" id="btnReset" class="btn btn-primary"
+							th:value="#{msg.thymeleaf.pagelabel.btnReset}" /> <a
+							th:href="@{/user/home}" class="btn"><span
+							th:text="#{msg.thymeleaf.pagelabel.btnCancel}"></span></a>
+					</div>
+				</div>
+
+				<hr />
+
+				<table id="tblShowPayBill" 
+					class="table table-striped table-bordered" style="width: 100%">
+					<thead>
+						<tr>
+							<th th:utext="#{msg.thymeleaf.pagelabel.checkbox}" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.chngStatmBillDetails}" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.payBillDetails}" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.billDesc}" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.schemeCode}" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.schemeName}" />
+							<!-- <th th:utext="#{msg.thymeleaf.pagelabel.subSchemeCode}" /> -->
+							<th th:utext="#{msg.thymeleaf.pagelabel.noOfEmployee}" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.grossAmount}" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.netAmount}" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.authNumber}" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.status}"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="varBillGrp : ${lstGenerateBillDetails}">
+							<td><input type="radio" name="paybillId"
+								id="paybillGenerationTrnId" class="generatedChkId"
+								th:value="${varBillGrp.paybillGenerationTrnId}"
+								th:data="${varBillGrp.isActive}" /></td>
+
+							<span
+								th:if="${varBillGrp.isActive} == 1 or ${varBillGrp.isActive}==2">
+								<td><a class="paybillGenerationTrnId"
+									th:text=${varBillGrp.paybillGenerationTrnId}></a></td>
+							</span>
+							<span th:if="${varBillGrp.isActive} != 1"><td
+								th:text="${varBillGrp.paybillGenerationTrnId}"></td></span>
+
+
+							<td th:text="${varBillGrp.billDescription}"></td>
+							<td th:text="${varBillGrp.schemeCode}"></td>
+							<td th:text="${varBillGrp.schemeName}"></td>
+							<td th:text="${varBillGrp.noOfEmployee}"></td>
+							<td th:text="${varBillGrp.billGrossAmt}"></td>
+							<td th:text="${varBillGrp.billNetAmt}"></td>
+
+							<td>---</td>
+
+							<td><span th:if="${varBillGrp.isActive} == 1"> <span
+									class="label label-success text-center"
+									th:utext="#{msg.thymeleaf.changeStatementGenerated}"></span>
+							</span> <span th:if="${varBillGrp.isActive} ==2"> <span
+									class="label label-success text-center"
+									th:utext="#{msg.thymeleaf.changeStatementForwarded}"></span>
+							</span> <span th:if="${varBillGrp.isActive} == 3"> <span
+									class="label label-success text-center"
+									th:utext="#{msg.thymeleaf.changeStatementApproved}"></span>
+							</span> <span th:if="${varBillGrp.isActive} ==4"> <span
+									class="label label-success text-center"
+									th:utext="#{msg.thymeleaf.changeStatementRejected}"></span>
+							</span> <span th:if="${varBillGrp.isActive} == 5"> <span
+									class="label label-success text-center"
+									th:utext="#{msg.thymeleaf.generatePaybill}"></span>
+							</span> <span th:if="${varBillGrp.isActive} ==6"> <span
+									class="label label-success text-center"
+									th:utext="#{msg.thymeleaf.generatePaybillForwarded}"></span>
+							</span> <span th:if="${varBillGrp.isActive} ==7"> <span
+									class="label label-success text-center"
+									th:utext="#{msg.thymeleaf.billRejected}"></span>
+							</span> <span th:if="${varBillGrp.isActive} ==8"> <span
+									class="label label-success text-center"
+									th:utext="#{msg.thymeleaf.billDeleted}"></span>
+							</span></td>
+
+
+							<!-- <td><textarea class="form-control" rows="2" cols="2" id="txtAreaRemarks"></textarea></td> -->
+							<!-- <td>
+								<div class="form-group">
+									<div class="col-sm-offset-1 col-sm-1">
+										<a data-toggle="tooltip" title="Edit"
+											th:href="@{'/master/editCadre/' + ${varBillGrp.cadreId}}"><span
+											class="glyphicon glyphicon-edit"></span></a>
+									</div>
+									<div class="col-sm-offset-1 col-sm-1">
+										<a data-toggle="tooltip" title="Delete"
+											th:onclick="${'ConfirmDeleteRecord('+varBillGrp.cadreId+','+varBillGrp.isActive+');'}">
+											<span class="glyphicon glyphicon-trash"></span>
+										</a>
+									</div>
+								</div>
+							</td> -->
+						</tr>
+					</tbody>
+				</table>
+				
+				
+				<div class="text-center">
+					<input type="button" value="Approve Change Statement"
+						class="btn btn-primary" id="btnApprChangState" /> &nbsp;&nbsp; <input
+						type="button" value="Reject Change Statement"
+						class="btn btn-primary" id="btnRejectChangState" /> &nbsp;&nbsp;
+				</div>
+
+			</form>
+		</fieldset>
+	</div>
+	<script>
+		$(document).ready(
+				function() {
+					$('#tblShowPayBill').DataTable();
+
+					$('#tblShowPayBill tr').each(
+							function(row, tr) {
+								$(tr).find('td:eq(5)').text();
+								$(tr).find('td:eq(6)').text();
+								$(tr).find('td:eq(5)').text(
+										toPlainString($(tr).find('td:eq(5)')
+												.text()));
+								$(tr).find('td:eq(6)').text(
+										toPlainString($(tr).find('td:eq(6)')
+												.text()));
+							});
+
+					function toPlainString(num) {
+						return ('' + +num).replace(
+								/(-?)(\d*)\.?(\d*)e([+-]\d+)/, function(a, b,
+										c, d, e) {
+									return e < 0 ? b + '0.'
+											+ Array(1 - e - c.length).join(0)
+											+ c + d : b + c + d
+											+ Array(e - d.length + 1).join(0);
+								});
+					}
+
+				});
+	</script>
+
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/datatable-common.js}"></script>
+	<script th:src="@{/js/project/paybill-view-approve-delete-bill.js}"></script>
+
+</body>
+</html>

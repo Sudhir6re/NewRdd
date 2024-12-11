@@ -1,0 +1,440 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<!--   <link rel="stylesheet" href="../css/innerreports.css"></link> -->
+<!--   <link rel="stylesheet" href="../css/ReportHeader.css"></link> -->
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<style type="text/css">
+body{font-family:Verdana}.TableBorderN{border-style:solid;border-color:grey;border-width:1px}.TableBorderBN{border-bottom-style:solid;border-bottom-color:grey;border-bottom-width:1px}.TableBorderRN{border-right-style:solid;border-right-color:grey;border-right-width:1px}.TableBorderLN{border-left-style:solid;border-left-color:grey;border-left-width:1px}.TableBorderTN{border-top-style:solid;border-top-color:#375472;border-top-width:1px}.TableBorderLTN{border-top-style:solid;border-top-color:grey;border-top-width:1px;border-left-style:solid;border-left-color:grey;border-left-width:1px}.TableBorderTRN{border-top-style:solid;border-top-color:grey;border-top-width:1px;border-right-style:solid;border-right-color:grey;border-right-width:1px}.TableBorderRBN{border-bottom-style:solid;border-bottom-color:grey;border-bottom-width:1px;border-right-style:solid;border-right-color:grey;border-right-width:1px}.TableBorderBLN{border-left-style:solid;border-left-color:grey;border-left-width:1px;border-bottom-style:solid;border-bottom-color:grey;border-bottom-width:1px}.TableBorderLRN{border-left-style:solid;border-left-color:grey;border-left-width:1px;border-right-style:solid;border-right-color:grey;border-right-width:1px}.TableBorderRLN{border-left-style:solid;border-left-color:grey;border-left-width:1px;border-right-style:solid;border-right-color:grey;border-right-width:1px}.TableBorderBTN{border-top-style:solid;border-top-color:grey;border-top-width:1px;border-bottom-style:solid;border-bottom-color:grey;border-bottom-width:1px}.TableBorderTBN{border-top-style:solid;border-top-color:grey;border-top-width:1px;border-bottom-style:solid;border-bottom-color:grey;border-bottom-width:1px}.TableBorderLTRN{border-top-style:solid;border-top-color:grey;border-top-width:1px;border-left-style:solid;border-left-color:grey;border-left-width:1px;border-right-style:solid;border-right-color:grey;border-right-width:1px}.TableBorderTRBN{border-top-style:solid;border-top-color:grey;border-top-width:1px;border-bottom-style:solid;border-bottom-color:grey;border-bottom-width:1px;border-right-style:solid;border-right-color:grey;border-right-width:1px}.TableBorderRBLN{border-bottom-style:solid;border-bottom-color:grey;border-bottom-width:1px;border-left-style:solid;border-left-color:grey;border-left-width:1px;border-right-style:solid;border-right-color:grey;border-right-width:1px}.TableBorderBLTN{border-top-style:solid;border-top-color:grey;border-top-width:1px;border-bottom-style:solid;border-bottom-color:grey;border-bottom-width:1px;border-left-style:solid;border-left-color:grey;border-left-width:1px}.TableBorderLTRBN{border-color:#4c4c4c;border-style:solid;border-width:1px}.TableBorderTRBLN{border-color:grey;border-style:solid;border-width:1px}.TableBorderRBLTN{border-color:grey;border-style:solid;border-width:1px}.TableBorderBLTRN{border-color:grey;border-style:solid;border-width:1px}.TableBorderH{border-color:#ccc #aebac6 #ccc #ccc;border-style:solid;border-width:1px}.TableBorder{border-color:#f7f7f7 #fff #f7f7f7 #f7f7f7;border-style:solid;border-width:1px}.TableBorder2{border-color:#f7f7f7;border-style:solid;border-width:1px}.TableBorder3{border-right-color:#f5fcf4}.TableExtraColBG1{border-color:#f7f7f7;border-style:solid;border-width:1px}.TableExtraColBG2{border-color:#f7f7f7;border-style:solid;border-width:1px}.TableBorder4{border-right-color:#aebac6}a.Unreadfile:link{text-decoration:underline;color:#000;font-weight:700;size:10}a.Unreadfile:active{text-decoration:underline;color:#000;font-weight:700;size:10}a.Unreadfile:visited{text-decoration:underline;color:#000;font-weight:700;size:10}a.Unreadfile:hover{text-decoration:underline;color:#000;font-weight:700;size:10}a.file:link{text-decoration:underline;color:#000;font-weight:400;font-size:10px}a.file:active{text-decoration:underline;color:#000;font-weight:400;font-size:10px}a.file:visited{text-decoration:underline;color:#000;font-weight:400;font-size:10px}a.file:hover{text-decoration:underline;color:navy;font-weight:400;font-size:10px}a.pagination:link{text-decoration:none;color:navy;font-weight:400;font-size:10px}a.pagination:active{text-decoration:none;color:navy;font-weight:400;font-size:10px}a.pagination:visited{text-decoration:none;color:navy;font-weight:400;font-size:10px}a.pagination:hover{text-decoration:none;color:#903;font-weight:400;font-size:10px}// .TitleBG{background:#fff;text-decoration:none;font-size:8pt;font-weight:700;color:#000}.FileInfoBG{background:#f3f3f3}.TablerowBG1{background:#fff}.TablerowBG2{background:#f7f7f7}.TableRowFieldBBN{border-bottom-style:solid;border-bottom-color:#a0a0a0;border-bottom-width:1px}.TableRowFieldTBN{border-top-style:solid;border-top-color:#a0a0a0;border-top-width:1px}.TableRowFieldLBN{border-left-style:solid;border-left-color:#a0a0a0;border-left-width:1px}.TableRowFieldRBN{border-right-style:solid;border-right-color:#a0a0a0;border-right-width:1px}.TableHeaderBG{background:#dedede;border-style:solid;border-color:#909090}.TableHeaderFieldBBN{border-bottom-style:solid;border-bottom-color:#4c4c4c;border-bottom-width:1px}.TableHeaderFieldTBN{border-top-style:solid;border-top-color:#4c4c4c;border-top-width:1px}.TableHeaderFieldLBN{border-left-style:solid;border-left-color:#4c4c4c;border-left-width:1px}.TableHeaderFieldRBN{border-right-style:solid;border-right-color:#4c4c4c;border-right-width:1px}.HLabel{font-size:10px;font-weight:700;color:#000}// .Label{text-decoration:none;font-size:10px;font-weight:700;color:#263765}.Label{text-decoration:none;font-size:11px;font-weight:400;color:#000}.Label2{text-decoration:none;font-weight:400;color:#000}.Label3{text-decoration:none;font-size:11px;font-weight:400;color:#000}.Label1{text-decoration:none;font-size:6pt;color:Navy}.titles{font-size:14px;font-weight:700;color:#375472}.HeaderLabel{text-decoration:none;font-size:9pt;font-weight:700;color:maroon}.EditableField{text-decoration:none;font-size:8pt;font-weight:700;color:#000}.EditableField1{text-decoration:none;font-size:8pt;font-weight:400;color:#000}.ComputedField{text-decoration:none;font-size:8pt;font-weight:700;color:Gray}.FileInfoBG{background:#f3f3f3}.UserText{text-decoration:none;font-size:7pt;font-weight:700;color:Red}.EditableFieldBBN{text-decoration:none;font-size:8pt;font-weight:700;color:#000;border-bottom-style:solid;border-bottom-color:navy;border-bottom-width:1px}.EditableFieldTBN{text-decoration:none;font-size:8pt;font-weight:700;color:#000;border-top-style:solid;border-top-color:navy;border-top-width:1px}.EditableFieldLBN{text-decoration:none;font-size:8pt;font-weight:700;color:#000;border-left-style:solid;border-left-color:navy;border-left-width:1px}.EditableFieldRBN{text-decoration:none;font-size:8pt;font-weight:700;color:#000;border-right-style:solid;border-right-color:navy;border-right-width:1px}.ComputedFieldBBN{text-decoration:none;font-size:8pt;font-weight:700;color:Gray;border-bottom-style:solid;border-bottom-color:navy;border-bottom-width:1px}.ComputedFieldTBN{text-decoration:none;font-size:8pt;font-weight:700;color:Gray;border-top-style:solid;border-top-color:navy;border-top-width:1px}.ComputedFieldLBN{text-decoration:none;font-size:8pt;font-weight:700;color:Gray;border-left-style:solid;border-left-color:navy;border-left-width:1px}.ComputedFieldRBN{text-decoration:none;font-size:8pt;font-weight:700;color:Gray;border-right-style:solid;border-right-color:navy;border-right-width:1px}.EditableFieldBBG{text-decoration:none;font-size:8pt;font-weight:700;color:#000;border-bottom-style:solid;border-bottom-color:Gray;border-bottom-width:1px}.EditableFieldTBG{text-decoration:none;font-size:8pt;font-weight:700;color:#000;border-top-style:solid;border-top-color:Gray;border-top-width:1px}.EditableFieldLBG{text-decoration:none;font-size:8pt;font-weight:700;color:#000;border-left-style:solid;border-left-color:Gray;border-left-width:1px}.EditableFieldRBG{text-decoration:none;font-size:8pt;font-weight:700;color:#000;border-right-style:solid;border-right-color:Gray;border-right-width:1px}.ComputedFieldBBG{text-decoration:none;font-size:8pt;font-weight:700;color:Gray;border-bottom-style:solid;border-bottom-color:Gray;border-bottom-width:1px}.ComputedFieldTBG{text-decoration:none;font-size:8pt;font-weight:700;color:Gray;border-top-style:solid;border-top-color:Gray;border-top-width:1px}.ComputedFieldLBG{text-decoration:none;font-size:8pt;font-weight:700;color:Gray;border-left-style:solid;border-left-color:Gray;border-left-width:1px}.ComputedFieldRBG{text-decoration:none;font-size:8pt;font-weight:700;color:Gray;border-right-style:solid;border-right-color:Gray;border-right-width:1px}.LabelFieldM{text-align:left;font-size:8pt;color:#600;font-weight:700;border-width:0;background:#f3f3f3}.LabelFieldB{text-align:left;font-size:8pt;color:#000;font-weight:400;border-width:0;background:#f3f3f3}.LabelFieldW{text-align:center;font-size:8pt;color:#fff;font-weight:700;border-width:0;background:#fff}.LabelFieldSM{text-align:center;font-size:8pt;color:#600;font-weight:700;border-width:0;background:#999}.ListBoxGUIA{text-decoration:none;font-size:8pt;font-weight:700;color:navy;width:175px}.ListBoxGUI2{text-decoration:none;font-size:8pt;font-weight:700;color:#000;width:128px}.ListBoxGUI1{text-decoration:none;font-size:8pt;font-weight:700;color:#000;text-decoration:none;font-size:8pt;font-weight:700;color:#000;width:129px}.ListBoxGUI3{text-decoration:none;font-size:8pt;font-weight:400;color:#000;width:300px}.TableBorderNavy{border-style:solid;border-color:navy;border-width:1px}.TableBorderWhite{border-style:solid;border-color:#fff;border-width:1px}.TableBorderGray{border-style:solid;border-color:Gray;border-width:1px}.TDPlain{text-decoration:none;font-size:8pt}.ActionButton{font-size:10px;width:60px}.ActionButton1{font-size:10px;width:80px}.FileActionButton{font-size:10px;width:200px}.FieldBlack{text-decoration:none;font-size:8pt;font-weight:400;color:#000;width:135px}.FieldGrey{text-decoration:none;font-size:8pt;font-weight:700;color:Gray}.FieldBlack1{text-decoration:none;font-size:8pt;font-weight:400;color:#000;width:175px}.FieldBlackSrch{text-decoration:none;font-size:8pt;font-weight:400;color:#000;width:300px}.FldHierarchy{font-size:12px;font-weight:700;color:#375472}.LABLESAFE{background:#7fff7f;text-decoration:none;font-size:8pt;font-weight:700;color:Navy}.LABLEUNSAFE{background:red;text-decoration:none;font-size:8pt;font-weight:700;color:Navy}.LABLEC{font-color:navy}#content{background:#999}#currentApplication{display:none}</style>
+<style>
+.innerTr td:first-child table#innertable td, .innerTr td:last-child table#innertable td
+	{
+	text-align: left;
+	width: 2%
+}
+
+.innerTr td:first-child, .innerTr td:last-child {
+	text-align: left;
+	width: 2%
+}
+
+.innerTr td:nth-child(2) table#innertable td {
+	text-align: right;
+	width: 11%
+}
+
+.innerTr td:nth-child(2) {
+	text-align: right;
+	width: 11%
+}
+
+.innerTr td:nth-child(10) table#innertable td, .innerTr td:nth-child(3) table#innertable td,
+	.innerTr td:nth-child(4) table#innertable td, .innerTr td:nth-child(5) table#innertable td,
+	.innerTr td:nth-child(6) table#innertable td, .innerTr td:nth-child(7) table#innertable td,
+	.innerTr td:nth-child(8) table#innertable td, .innerTr td:nth-child(9) table#innertable td
+	{
+	text-align: right;
+	width: 11%
+}
+
+.innerTr td:nth-child(10), .innerTr td:nth-child(3), .innerTr td:nth-child(4),
+	.innerTr td:nth-child(5), .innerTr td:nth-child(6), .innerTr td:nth-child(7),
+	.innerTr td:nth-child(8), .innerTr td:nth-child(9) {
+	text-align: right;
+	width: 11%
+}
+
+.pagination {
+	display: inline-block
+}
+
+.pagination a {
+	color: #000;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none
+}
+
+img.logo {
+	max-width: 90px
+}
+
+p.logo-sub-text {
+	margin: 5px 0
+}
+
+img.aadhaarlogo {
+	max-width: 90px
+}
+
+.flex {
+	display: flex
+}
+
+.col-md-6 {
+	width: 50%
+}
+
+.row {
+	width: 100%;
+	display: inline-flex
+}
+
+.text-right {
+	text-align: right
+}
+
+.text-center {
+	text-align: center
+}
+
+header .deptname {
+	color: #ef7c01;
+	font-size: 26px;
+	font-weight: 700;
+	margin-bottom: 0
+}
+
+.logo-title p {
+	font-family: "Helvetica Neue", Helvetica, Arial !important
+}
+
+.logo-title {
+	margin: auto 10px
+}
+
+.header {
+	padding: 0 22px
+}
+
+.min-height-600, header {
+	border: none !important
+}
+
+.left {
+	float: left
+}
+
+.right {
+	float: right
+}
+
+.width50 {
+	width: 50%
+}
+
+.text-left {
+	text-align: left
+}
+
+.row {
+	display: inline-flex
+}
+
+.btn {
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #fff;
+	border: none !important;
+	outline: 0 !important;
+	box-shadow: none !important
+}
+
+#print-content {
+	padding: 10px 30px
+}
+
+body, table {
+	font-family: "Helvetica Neue", Helvetica, Arial !important;
+	font-size: 14px
+}
+
+.RpHead {
+	text-align: center;
+	font-size: 20px !important;
+	margin-bottom: 40px;
+	font-weight: 600;
+	font-family: 'Libre Baskerville', serif
+}
+
+.Tablealign td:nth-child(2) *, .Tablealign td:nth-child(3) *,
+	.Tablealign td:nth-child(4) *, .Tablealign td:nth-child(5) *,
+	.Tablealign td:nth-child(6) *, .Tablealign td:nth-child(7) *,
+	.Tablealign td:nth-child(8) *, .Tablealign td:nth-child(9) *,
+	.Tablealign td:nth-child(10) * {
+	text-align: right !important;
+	padding-right: 5px
+}
+
+.Tablealign td:nth-child(2) {
+	vertical-align: top;
+}
+
+.pagination a {
+	color: #000;
+	float: left;
+	text-decoration: none;
+	padding: 3px 5px !important;
+	border: 1px solid #ccc;
+	font-size: 12px;
+}
+
+div#print-content {
+	height: 85vh;
+	overflow: auto !important;
+}
+
+.btn, .swal-button {
+	background: linear-gradient(45deg, #26b9bf, #157478) !important;
+	border: none !important;
+	outline: 0 !important;
+	box-shadow: none !important;
+}
+
+@media print {
+	h1 {
+		page-break-before: always
+	}
+	div#print-content {
+		height: 100% !important;
+	}
+	div#print-content {
+		height: 100vh;
+		overflow: auto !important;
+	}
+	.btn, .pagination {
+		display: none !important;
+	}
+	.btniHideOnAllreport {
+		display: none !important;
+	}
+}
+</style>
+
+</head>
+<body class="brokenPeriodreportDesign">
+	<div class="text-center" id="print-content">
+	<div th:replace="header/reportHeader :: var-script-headerReport"></div>
+	<div th:replace="header/reportHeader :: varmenuheaderReport"></div>
+		<h3 class="RpHead" style="font-size: 20px;">
+			<span th:utext="#{msg.thymeleaf.pagelabel.brokenPeriod}"></span>
+		</h3>
+		<table style="width: 100%" class="padded-table">
+			<!-- <tr>
+				<td style="padding: 5px;"><center>
+						<font class="titles"><span th:utext="#{msg.thymeleaf.pagelabel.PAYBILL}"></span></font>
+					</center></td>
+			</tr> -->
+			<tr th:if="${innerrptPage.totalPages > 0}" class="pagination"
+				th:each="pageNumber : ${pageNumbers}">
+				<td><a
+					th:href="@{|/paybill/brokenPeriodReport/${billNumber}/${innerrptPage.size}/${pageNumber}|}"><span th:utext="${pageNumber}"></span></a>
+				</td>
+			</tr>
+
+			<span th:each="innerrptPagerow,iterationStatus : ${innerrptPage}">
+				<center>
+					<tr>
+						<td>
+							<table id="dataTable0" class="TableBorderLTRBN padded-table"
+								style="border-collapse: collapse;">
+
+								<tr class="TablerowBG1 TablerowBG2">
+									<td colspan="11"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="border-right: none;"><span
+										th:text="${innerrptPagerow.description}"></span></td>
+								</tr>
+
+								<tr class="TablerowBG1 Tablealign">
+									<span
+										th:each="orderdatarow,iterationStatus : ${innerrptPagerow.orderdataList}">
+										<td class="TableRowFieldBBN TableRowFieldRBN Label2">
+											<table id="innertable"
+												style="width: 100%; height: 100%; font-weight: 200;">
+												<tr th:each="row,iterationStatus : ${orderdatarow}">
+													<td class="Label2" th:text="${row}"></td>
+												</tr>
+											</table>
+									</td>
+									</span>
+								</tr>
+								<tr class="TablerowBG1T TablerowBG2">
+									<td align="left" colspan="11"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: bolder;"><span
+										th:utext="#{msg.thymeleaf.pagelabel.Allowances}"></span></td>
+								</tr>
+
+								<tr class="TablerowBG1 innerTr">
+									<span
+										th:each="allowanceRow,iterationStatus : ${innerrptPagerow.allowance}">
+										<td align="center"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: 200;">
+											<table id="innertable" border="0" cellspacing="0"
+												cellpadding="2" width="100%" height="100%"
+												style="font-weight: 200;">
+												<span th:each="row,iterationStatus : ${allowanceRow}">
+													<tr>
+														<td class="Label2"><span th:text="${row}"></span></td>
+													</tr>
+												</span>
+											</table>
+									</td>
+									</span>
+								</tr>
+
+								<tr class="TablerowBG2 innerTr">
+									<span
+										th:each="algrossamtRow,iterationStatus : ${innerrptPagerow.algrossamt}">
+										<td class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: 500;"><span
+											th:text="${algrossamtRow}"></span></td>
+									</span>
+								</tr>
+
+								<tr class="TablerowBG1 innerTr">
+									<span
+										th:each="algrosssaleRow,iterationStatus : ${innerrptPagerow.algrosssale}">
+										<td class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: 500;"><span
+											th:text="${algrosssaleRow}"></span></td>
+									</span>
+								</tr>
+								<tr class="TablerowBG1 TablerowBG2">
+									<td align="left" colspan="11"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: bolder;"><span
+										th:utext="#{msg.thymeleaf.pagelabel.DEDUCTIONSbrokenperiod}"></span>
+									</td>
+								</tr>
+
+								<tr class="innerTr">
+									<span
+										th:each="dedctionagRow,iterationStatus : ${innerrptPagerow.lstdedectionag}">
+										<td colspan="1"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: 200;">
+											<table id="innertable"
+												style="font-weight: 200; height: 100%; width: 100%;">
+												<span th:each="row,iterationStatus : ${dedctionagRow}">
+													<tr>
+														<td class="Label2"><span th:text="${row}"></span></td>
+													</tr>
+												</span>
+											</table>
+									</td>
+									</span>
+								</tr>
+								<tr class=" innerTr">
+									<span
+										th:each="deductionamtRow,iterationStatus : ${innerrptPagerow.deductionamt}">
+										<td colspan="1"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: 500;"><span
+											th:text="${deductionamtRow}"></span></td>
+									</span>
+								</tr>
+								<tr class="innerTr">
+
+
+									<td colspan="1"
+										th:each="alnetamtRow,iterationStatus : ${innerrptPagerow.alnetamt}"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: 500;"><span th:text="${alnetamtRow}"></span>
+									</td>
+
+								</tr>
+
+							</table>
+						</td>
+					</tr>
+				</center>
+			</span>
+			<tr>
+				<td align="left"></td>
+			</tr>
+
+			<tr>
+				<td align="left" style="padding: 5px;"></td>
+			</tr>
+
+		</table>
+		<div class="row">
+			<div class="pad10 clear" style="float: left">
+				<b><label for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.aqureport}"></span></label> <span
+					th:text="${currmonyer}"></span></b>
+			</div>
+		</div>
+		<div class="row">
+			<div class="pad10 clear width50 text-left" style="float: left">
+				<b><label for="title"><span th:text="${ddoname}">
+					</span> <span th:utext="#{msg.thymeleaf.pagelabel.ofcname}"> </span></label> <span
+					th:text="${officeDetails}"></span></b>
+			</div>
+		</div>
+		<br />
+		<div class="row clear">
+			<div class="col-md-6 text-left">
+				<span th:utext="#{msg.pagelabel.varificationdatetime}"></span> <span
+					th:text="${createddate}"></span>
+			</div>
+			<div class="col-md-6 text-right">
+				<span th:utext="#{msg.pagelabel.printingdatetime}"></span> <span
+					th:text="${systemdate}"></span>
+			</div>
+		</div>
+		<div class="clear">
+			<div class="text-center">
+				<div class="text-center">
+					<span th:utext="#{msg.thymeleaf.pagelabel.footerreport}"></span>
+				</div>
+			</div>
+			<p><b>Note:</b> <span th:utext="#{msg.thymeleaf.pagelabel.PrintNotefooter}"></span></p>
+		</div>
+
+	</div>
+
+
+	
+			<div style="text-align: center;" class="btniHideOnAllreport"><input type="hidden"
+				hidden="billNumber" value="billNumber"></input> <input
+				type="hidden" hidden="size" value="size"></input> <input
+				type="hidden" hidden="page" value="page"></input> 
+				<button id="print" onclick="printContent('print-content');"
+					class="btn orange">Print</button> <!-- <a
+				th:href="${'/MahaSevaarth/innerreport/getinnerreportPDF/'+billNumber+'/'+size+'/'+page}">
+					<input id="pdfbutton" type="button" value="PDF" class="orange btn"></input>
+			</a> -->
+			</div>
+		
+
+	<script>
+		function printContent(el) {
+			var restorepage = $('body').html();
+			var printcontent = $('#' + el).clone();
+			$('body').empty().html(printcontent);
+			window.print();
+			$('body').html(restorepage);
+		}
+	</script>
+</body>
+</html>

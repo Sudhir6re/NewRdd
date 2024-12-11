@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pagelabel.empdetails}"></title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi">
+	
+</script>
+
+</head>
+<body class="dcps-employee-details">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pagelabel.empdetails}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<form class="form-horizontal container" name="myDForm" id="myDForm"
+			th:action="@{/ddo/approveDCPSEmployeeConfiguration}"
+			th:object="${mstEmployeeModel}" method="POST"
+			enctype="multipart/form-data">
+			<fieldset class="">
+				<legend th:utext="#{msg.thymeleaf.pagelabel.empdetails}"
+					th:style="${'color: orange;'}"></legend>
+			</fieldset>
+			<input type="hidden" name="employeeId" id="employeeId"
+				th:field="*{employeeId}" class="form-control" /> <input
+				type="hidden" name="language" id="language" th:value="${language}" />
+			<input type="hidden" name="message" id="message"
+				th:value="${message}" />
+
+
+
+
+			<table id="tblDataTable" class="table table-striped table-bordered"
+				style="width: 100%">
+				<thead>
+				
+					
+					<tr style="text-align: center;">
+					
+					     <th >
+					      <input
+						type="checkbox" id="selectAll" style="margin-top: 10px;" />
+					     
+					     </th>
+					
+						<th th:utext="#{msg.thymeleaf.pagelabel.empid}"
+							style="text-align: center;" />
+
+						<th th:utext="#{msg.thymeleaf.pagelabel.employeeName}"
+							style="text-align: center;" />
+
+							<th th:utext="#{msg.thymeleaf.pagelabel.DOB}"
+								style="text-align: center;" />
+								
+						<th th:utext="#{msg.thymeleaf.pagelabel.status}"
+							style="text-align: center;" />
+
+						<th th:utext="#{msg.thymeleaf.pagelabel.Remark}"
+							style="text-align: center;" />
+
+					</tr>
+				</thead>
+
+				<tbody>
+						<tr th:each="varempdtls : ${employeeDraftCaseLst}">
+						
+						<td>
+						    <input type="checkbox" name="employeeids" id="employeeIds"
+								th:data="'chk'+${varempdtls.isActive}" class="checkbox employeeIds"
+								th:value="${varempdtls.employeeId}"  />
+								</td>
+						
+							<td th:text="${varempdtlsStat.index+1}"></td>
+							<td >
+							<a    th:id="'emp'+${varempdtls.employeeId}"  th:href="@{'/ddoast/viewDraftCaseByEmployeeId/'+${varempdtls.employeeId}}" th:text="${varempdtls.employeeFullName}"> </a>
+							</td>
+							
+							<td th:text="${#dates.format(varempdtls.dob, 'dd-MM-yyyy')} ?: '------'"></td>
+						
+						
+							<td >
+						
+						    
+						    <span th:switch="${varempdtls.isActive}">
+									    <span th:case='-1' th:class="'label label-danger text-center'"
+									          th:text="#{|msg.employeeConfiguration.isActive${varempdtls.isActive}|}"></span>
+									  
+									    <span  th:case = "*" th:class="'label label-warning text-center'"
+									         th:text="#{|msg.employeeConfiguration.isActive${varempdtls.isActive}|}"  ></span>
+							</span>
+									
+							
+							</td>
+							
+						    <td th:text="${varempdtls.remark}"></td>
+					</tr>
+				</tbody>
+
+			</table>
+			
+			<div class="form-group text-center">
+					<input type="button" id="viewDraftCase" class="btn btn-primary"
+						th:value="#{msg.thymeleaf.pagelabel.viewDraftCase}" /> 
+						
+						&nbsp;&nbsp;
+						
+						<input type="button" id="deleteDraftCase" class="btn btn-primary"
+						th:value="#{msg.thymeleaf.pagelabel.deleteDraft}"  /> 
+		   </div>
+		
+
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+
+		</form>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/datatable-common.js}"></script>
+	<script th:src="@{/js/project/employee-draft-case-list.js}"></script>
+
+</body>
+</html>

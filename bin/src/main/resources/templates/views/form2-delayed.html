@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.form2delayCont}"></title>
+<style type="text/css">
+</style>
+</head>
+<body class="form2-delayed">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.reportBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.form2delayCont}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.form2delayCont}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<table class="table bor-0">
+				<tbody>
+					<tr>
+						<td width="20%"><b>Bill Group </b><font color="RED">*</font>
+						</td>
+						<td width="30%"><select class="selecttag" size="1" name="billGroupId"
+							id="billGroupId">
+								<option value="-1">-- Select --</option>
+								<option value="99201790770">Bill Group For Scheme
+									IA-GRANTS TO UNIVERSITIS FOR GENERAL EDUCATION</option>
+								<option value="992017907106">Bill Group For Scheme
+									IA.1-GRANT TO NON-GOVT. ARTS , SCIENCE, COMMERCE ,LAW AND B.ED
+									COLLEGES</option>
+						</select></td>
+						<td width="20%"><b>Month</b> <font color="RED">*</font>
+						</td>
+						<td width="30%"><select class="selecttag" size="1" name="monthId"
+							id="monthId">
+								<option value="10">October</option>
+								<option value="11">November</option>
+								<option value="12">December</option>
+						</select></td>
+					</tr>
+					<tr>
+						<td><b>Year</b> <font color="RED">*</font>
+						</td>
+						<td><select class="selecttag" size="1" name="yearId"
+							id="yearId">
+								<option value="33">2020-2021</option>
+								<option value="34">2021-2022</option>
+								<option value="35">2022-2023</option>
+								<option value="36">2023-2024</option>
+								<option value="37">2024-2025</option>
+						</select></td>
+					</tr>
+					<tr>
+						<td colspan="2" style="border-top: solid 1px #333333;"><i><b>Note:
+							</b>Parameter marked with a '<font face="Verdana" color="red">*</font>'
+								are mandatory</i> <br></td>
+						<td colspan="2" style="text-align: right"><a
+							id="rptBtn_GenerateReport" class="btn"
+							th:href="@{/ddoast/form2DelayedReport}"> Generate Report</a> <input
+							type="reset" name="ResetParams" id="rptBtn_ResetBtn"
+							value="Reset" class="btn"> <input type="button"
+							name="btnClose1" onclick="history.back()" id="btnClose1"
+							value="Close" class="btn"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

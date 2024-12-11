@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.intrestConfig}"></title>
+
+</head>
+<body class="interest-configuration">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.gpfBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.intrestConfig}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<!-- <h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.intrestConfig}"></span>
+		</h3> -->
+
+		<div class="formMainwithNoborTb container">
+			<form method="post" action="" name="GPFInterestConfiguration"
+				enctype="multipart/form-data">
+
+				<fieldset class="tabstyle">
+					<legend>Interest Configuration</legend>
+					<br>
+					<table class="table bor-0">
+						<tbody>
+							<tr>
+								<td width="20%">Group</td>
+								<td ><select name="cmbGroup" id="cmbGroup"
+									style="width: 160px">
+										<option value="-1">-- Select --</option>
+										<option value="700057">A</option>
+										<option value="700058">B</option>
+										<option value="700059">BnGz</option>
+										<option value="700060">C</option>
+										<option value="700061">D</option>
+								</select><label class="mandatoryindicator">*</label></td>
+							</tr>
+							<tr>
+								<td width="20%">Effective From Month</td>
+								<td width="25%"><input type="date" name="txtEffeFromDate"
+									id="txtEffeFromDate" value=""> <label
+									class="mandatoryindicator">*</label></td>
+								<td width="15%">Applicable To Date</td>
+								<td width="25%"><input type="date"
+									name="txtApplicableToDate" id="txtApplicableToDate" value="">
+									<label class="mandatoryindicator">*</label></td>
+							</tr>
+							<tr>
+								<td width="20%">Interest Rate</td>
+								<td width="25%" ><input type="text"
+									name="txtInterestRate" id="txtInterestRate"><label
+									class="mandatoryindicator">*</label></td>
+							</tr>
+						</tbody>
+					</table>
+					<br>
+					<div class="text-center">
+						<input type="button" name="btnSubmit" id="btnSubmit" value="Save"
+							size="3" maxlength="3" class="buttontag"> <input
+							type="button" name="btnBack" onclick="history.back()"
+							id="btnBack" value="Back" size="3" maxlength="3"
+							class="buttontag">
+					</div>
+				</fieldset>
+
+
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

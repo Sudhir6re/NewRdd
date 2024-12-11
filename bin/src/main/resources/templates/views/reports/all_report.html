@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title th:utext="#{menu.mapping.allreport}"></title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+	
+</script>
+<style>
+ input.multiSelect,input#inloansReports,input#MainReports,input#consolreportip,input#otherreportip {
+    display: none;
+}
+</style>
+</head>
+
+<body class="all_report">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.ReportBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{menu.mapping.allreport}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{menu.mapping.allreport}"></span>
+		</h3>
+		<fieldset class="container">
+			<!-- 	<legend th:utext="#{menu.mapping.allreport}"
+				th:style="${'color: orange;'}"></legend> -->
+			<form class="form-horizontal"
+				th:object="${payBillViewApprDelBillModel}" method="POST"
+				enctype="multipart/form-data">
+				<!-- th:action="@{/master/saveBillGrpMain}" -->
+				<input type="hidden" name="language" id="language"
+					th:value="${language}" /> <input type="hidden" name="message"
+					id="message" th:value="${message}" /> <input type="hidden"
+					name="radioval" id="radioval" />
+					
+						 <input type="hidden" name="context" id="context" th:value="${context}" />
+					
+					
+					
+				<div class="form-group" style="padding-right: 65px;" >
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.selectmonth}"></span></label>
+					<div class="col-sm-2">
+						<select class="form-control removeErrorFromDropdown" th:field="*{monthName}"
+							id="monthName">
+							<option selected="selected" th:value="0"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+							<option th:each="varMonth : ${lstMonths}"
+								th:value="${varMonth.monthId}"
+								th:text="${language=='mh' ? varMonth.monthMarathi : varMonth.monthEnglish}"></option>
+						</select>
+					</div>
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.selectyear}"></span></label>
+					<div class="col-sm-2">
+						<select class="form-control removeErrorFromDropdown" th:field="*{yearName}" id="yearName">
+							<option selected="selected" th:value="0"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+							<option th:each="varYear : ${lstYears}"
+								th:value="${varYear.yearId}"
+								th:text="${language=='mh' ? varYear.yearEnglish : varYear.yearEnglish}"></option>
+						</select>
+					</div>
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.billDesc}"></span></label>
+					<div class="col-sm-2">
+						<select name="billGroup"
+								th:field="*{billNumber}" id="billGroup"
+								class="form-control removeErrorFromDropdown">
+									<option selected="selected" th:value="0"
+										th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+									<option th:each="varGetAllBillGrp : ${lstBillDesc}"
+										th:value="${varGetAllBillGrp.dcpsDdoBillGroupId}"
+										th:text="${language=='mh' ? varGetAllBillGrp.description : varGetAllBillGrp.description}"></option>
+							</select>
+					</div>
+				</div>
+				<br />
+				<div class="form-group" id="btnDiv">
+					<div class="text-center">
+						<input type="hidden" hidden="billno" id="billno" />
+					
+						 <input
+							type="button" value="Show Reports" id="btnshowreport"
+							class="btn btn-primary" />
+							
+							
+							
+							 <input type="reset" id="btnReset"
+							class="btn btn-primary"
+							th:value="#{msg.thymeleaf.pagelabel.btnReset}" /> <a
+							th:href="@{/user/home}" class="btn"><span
+							th:text="#{msg.thymeleaf.pagelabel.btnCancel}"></span></a>
+
+					</div>
+				</div>
+				<br />
+				<div id="con">
+					<hr />
+					<div class="row Reportmenumain">
+						<div class="col-md-4 Reportmenumaincol Reportmenumaincol1">
+							<div class="text-center reporthedsmaindv">
+								<input type="checkbox" name="MainReports" id="MainReports"
+									checked> <span
+									th:utext="#{msg.thymeleaf.pagelabel.MainReport}"></span>
+							</div>
+							<div class="MainReports" id="main">
+								<input type="checkbox" name="checkbox" class="multiSelect"
+									value="outer" /> <a id="btnouterreport" class="btn outerbtn"><span
+									th:utext="#{msg.thymeleaf.pagelabel.Outer}"></span> </a><br> <input
+									type="checkbox" name="checkbox" class="multiSelect"
+									value="inner" /> <a id="btninnerreport" class="btn inenrbtn"><span
+									th:utext="#{msg.thymeleaf.pagelabel.Inner}"></span> </a><br> <input
+									type="checkbox" name="checkbox" class="multiSelect"
+									value="abstract" /> <a id="btngroupAbstractreport"
+									class="btn grpabstbtn"><span
+									th:utext="#{msg.thymeleaf.pagelabel.GroupAbstract}"></span> </a><br>
+								<input type="checkbox" name="checkbox" class="multiSelect"
+									value="bank" /> <a id="btnbankstatementreport"
+									class="btn bnkstatementbtn"> <span
+									th:utext="#{msg.thymeleaf.pagelabel.BankStatement}"></span></a><br>
+								<input type="checkbox" name="checkbox" class="multiSelect"
+									value="quito" /> <a id="btnaquittancerollreport"
+									class="btn aquittRollbtn"> <span
+									th:utext="#{msg.thymeleaf.pagelabel.AquittanceRoll}"></span></a><br>
+							<!-- 	<input type="checkbox" name="checkbox" class="multiSelect"
+									value="sevenpc" /> <a id="btnsvnpcbasicreport"
+									class="btn pcBasicbtn"> <span
+									th:utext="#{msg.thymeleaf.pagelabel.SeventhPCBasic}"></span></a><br> -->
+								<!-- <input type="checkbox" name="checkbox" class="multiSelect"
+									value="revenueStamp" /> <a id="btnrevenueStampreport"
+									class="btn pcrevenueStamp"> <span
+									th:utext="#{msg.thymeleaf.pagelabel.revenuestamp}"></span></a><br> -->
+								<input type="checkbox" name="checkbox" class="multiSelect"
+									value="brokenPeriod" /> <a id="btnbrokenPeriodreport"
+									class="btn pcBrokenbtn"> <span
+									th:utext="#{msg.thymeleaf.pagelabel.BrokenPeriod}"></span></a><br>
+								<input type="checkbox" name="checkbox" class="multiSelect"
+									value="pageWiseAbstract" />  <a id="btnpageWiseAbstractreport"
+									class="btn pcPageWiseAbstract"> <span
+									th:utext="#{msg.thymeleaf.pagelabel.pageWiseAbstract}"></span></a><br>
+								<!-- <a id="btnconsolidatedreport" class="btn consolidatedbtn">Consolidated</a><br> -->
+								<!--<a id="btnpageWiseAbstractreport" class="btn pgabstactbtn">Page Wise Abstract</a> -->
+							</div>
+						</div>
+					<!-- 	<div class="col-md-4 Reportmenumaincol Reportmenumaincol2">
+							<div class="text-center reporthedsmaindv">
+								<input type="checkbox" name="inloansReports" id="inloansReports"
+									checked> <span
+									th:utext="#{msg.thymeleaf.pagelabel.InterestLoansandAdvances}"></span>
+							</div>
+							<div class="inloansReports" id="inloans"
+								style="padding-left: 10px">
+								<input type="checkbox" name="checkbox" class="multiSelect"
+									value="advance" /> <a id="btnadvanceInterestreport"
+									class="btn FAbtn"><span
+									th:utext="#{msg.thymeleaf.pagelabel.FA}"></span></a><br>
+							</div>
+						</div> -->
+						<!-- <div class="col-md-3 Reportmenumaincol Reportmenumaincol3">
+							<div class="text-center reporthedsmaindv">
+								<input type="checkbox" name="intloansReports"
+									id="consolreportip" checked> <span
+									th:utext="#{msg.thymeleaf.pagelabel.FormBConsolidated}"></span>
+							</div>
+							<div class="inloansReports" id="consolreport"
+								style="padding-left: 10px">
+								<input type="checkbox" name="checkbox" class="multiSelect"
+									value="friadvance" /> <a id="btnadvanceFormBreport"
+									class="btn FAbtn"><span
+									th:utext="#{msg.thymeleaf.pagelabel.FA}"></span></a><br>
+							</div>
+						</div> -->
+						<div class="col-md-4 Reportmenumaincol Reportmenumaincol4">
+							<div class="text-center reporthedsmaindv">
+								<input type="checkbox" name="intloansReports" id="otherreportip"
+									checked> <span
+									th:utext="#{msg.thymeleaf.pagelabel.OtherReports}"></span>
+							</div>
+							<div class="inloansReports" id="otherreport"
+								style="padding-left: 10px">
+							<!-- 	<input type="checkbox" name="checkbox" class="multiSelect"
+									value="incometax" /> <a id="btnincomeTaxreport"
+									class="btn taxbtn"> <span
+									th:utext="#{msg.thymeleaf.pagelabel.IncomeTax}"></span></a> -->
+									<input type="checkbox" name="checkbox" class="multiSelect"
+									value="revenueStamp" /> <a id="btnrevenueStampreport"
+									class="btn pcrevenueStamp"> <span
+									th:utext="#{msg.thymeleaf.pagelabel.revenuestamp}"></span></a><br>
+									
+									<!-- <br>
+								<input type="checkbox" name="checkbox" class="multiSelect"
+									value="accidins" /> <a id="btnaccidentalInsuranceSchemeReport"
+									class="btn accpoltn"> <span
+									th:utext="#{msg.thymeleaf.pagelabel.AccidentPolicy}"></span></a><br> -->
+							</div>
+						</div>
+					</div>
+					<div style="padding-left: 50px"></div>
+					<br>
+					<div class="form-group">
+						<div class="text-center">
+							<input class="btn btn-primary" type="button" value="Close"
+								onclick="window.location = '../user/home';"> <!-- <input
+								class="btn btn-primary" type="button" value="All Report"
+								id="allReport"> -->
+								<a th:href="@{/user/home}"> <input type="button" id="btnCancel"
+				class="btn btn-primary"
+				th:value="#{msg.thymeleaf.pagelabel.btnCancel}" /></a>
+						</div>
+
+					</div>
+				</div>
+				<!-- <div class="form-group">
+					<div class="col-sm-offset-5 col-sm-1">
+						<input type="button" value="Outer Report" id="btnouterreport"
+							class="btn btn-primary" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-5 col-sm-1">
+						<input type="button" value="Inner Report" id="btninnerreport"
+							class="btn btn-primary" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-5 col-sm-1">
+						<input type="button" value="Group Abstract Report"
+							id="btngroupAbstractreport" class="btn btn-primary" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-5 col-sm-1">
+						<input type="button" value="Bank Statement Report"
+							id="btnbankstatementreport" class="btn btn-primary" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-5 col-sm-1">
+						<input type="button" value="Aquittance Roll Report"
+							id="btnaquittancerollreport" class="btn btn-primary" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-5 col-sm-1">
+						<input type="button" value="Revenue Stamp Report"
+							id="btnrevenueStampreport" class="btn btn-primary" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-5 col-sm-1">
+						<input type="button" value="Advance Interest FA Report"
+							id="btnadvanceInterestreport" class="btn btn-primary" />
+					</div>
+				</div> -->
+				<div id="mainDiv" style="display: none" align="left">
+					<table id="tblShowPayBill"
+						class="table table-striped table-bordered" style="width: 100%">
+						<thead>
+							<tr>
+								<th th:utext="#{menu.mapping.allreport}" />
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<!-- 						    <input type="radio" name="paybillId" class="generatedChkId" th:value="${varBillGrp.paybillGenerationTrnId}"  th:data="${varBillGrp.isActive}"  /> -->
+									<!-- 						   <a class="btn" th:href="@{C:\Users\jjman\OneDrive\Desktop\design\OuterReportDesign.html}" target="_blank">Outer Report</a> -->
+									<!-- 						<button --> <!--     th:data-url="@{C:\Users\jjman\OneDrive\Desktop\design\OuterReportDesign.html}" -->
+									<!--     onclick="window.open(this.getAttribute('data-url'))">Outer Report</button> -->
+									<!-- 						   <input type="button" value="Outer Report" class="btn btn-primary"  id="btnouterreport" /> -->
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</form>
+		</fieldset>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/datatable-common.js}"></script>
+	<script th:src="@{/js/project/outerreport.js}"></script>
+	<script>
+		$(document).ready(function() {
+			$("body").on('change', '#MainReports', function() {
+				var isChecked = $("#MainReports").is(':checked');
+				if (isChecked == true) {
+					$("#main").show();
+				} else {
+					$("#main").hide();
+				}
+			});
+		});
+	</script>
+	<script>
+		$(document).ready(function() {
+
+			$("body").on('change', '#inloansReports', function() {
+				var isChecked = $("#inloansReports").is(':checked');
+				if (isChecked == true) {
+					$("#inloans").show();
+				} else {
+					$("#inloans").hide();
+				}
+			});
+		});
+	</script>
+	<script>
+		$(document).ready(function() {
+
+			$("body").on('change', '#consolreportip', function() {
+				var isChecked = $("#consolreportip").is(':checked');
+				if (isChecked == true) {
+					$("#consolreport").show();
+				} else {
+					$("#consolreport").hide();
+				}
+			});
+
+			$("body").on('change', '#otherreportip', function() {
+				var isChecked = $("#otherreportip").is(':checked');
+				if (isChecked == true) {
+					$("#otherreport").show();
+				} else {
+					$("#otherreport").hide();
+				}
+			});
+
+		});
+	</script>
+</body>
+<script th:src="@{/js/project/form2RegularReport.js}"></script>
+</html>

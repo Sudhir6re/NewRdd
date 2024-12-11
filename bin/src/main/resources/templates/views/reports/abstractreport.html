@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<link
+	href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+<link
+	href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css" />
+<title th:utext="#{msg.thymeleaf.pagelabel.absnamere}"></title>
+<style>
+table.dataTable {
+	clear: both;
+	margin-top: 6px !important;
+	margin-bottom: 6px !important;
+	max-width: none !important;
+	border-collapse: separate !important;
+	border-spacing: 0;
+	width: 100%;
+}
+
+.table-bordered {
+	border: 1px solid #ddd;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table, th, td {
+	border: 1px solid black;
+}
+
+.table-bordered>thead>tr>th, .table-bordered>tbody>tr>th,
+	.table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td,
+	.table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td {
+	border: 1px solid #ddd;
+}
+
+.text-left {
+	text-align: left;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.table-responsive {
+	padding-right: 10px;
+}
+
+@media print {
+	table#abstractReportTable * {
+		font-size: 10px;
+	}
+	button#print {
+    display: none !important;
+}
+}
+</style>
+</head>
+<body class="abstractreport">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<!-- <div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					  <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li>
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.TransactionBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{menu.mapping.viewDeleteConsolidatedPayBill}"></span></li>
+				</ol>
+			</nav>
+		</div> -->
+
+
+		<div id="dvContainer" class="container">
+ <input type="hidden" name="context" id="context" th:value="${context}" />
+					
+			<div id="print-content">
+				<br />
+				<h3 Class="PageHeading text-center">
+					<span th:utext="#{msg.thymeleaf.pagelabel.absnamere}"></span>
+					
+				</h3>
+				<div class="container ">
+					<div class=" table-responsive">
+						<table id="abstractReportTable" class="table">
+							<thead>
+								<tr>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.srno}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.insname}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.billname}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.totsalary}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.fa}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.expayrec}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.gpf}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.dcpsreg}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.dcpsdep}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.dcpsPay}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.dcpsda}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.npsEmprDedu}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.it}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.pt}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.compadv}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.otherded}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.pli}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.gis}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.accplolicy}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.revenuestamp}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.totalded}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.netpatble}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.ngrrd}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.ngrlic}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.ngrmisc}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.ngrbankloan}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.ngrsocloan}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.ngrtotded}"></span></label></b></td>
+									<td class="text-center"><b><label for="title"><span
+												th:utext="#{msg.thymeleaf.pagelabel.salarypayable}"></span></label></b></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="varAbs : ${listA}">
+									<td align="center" th:text="${varAbsStat.index+1}"></td>
+									<td align="left" th:text="${varAbs.instName}"></td>
+									<td align="right" th:text="${varAbs.BillName}"></td>
+									<td align="right" th:text="${varAbs.GrossSalary}"></td>
+									<td align="right" th:text="${varAbs.fa}"></td>
+									<td align="right" th:text="${varAbs.recovery}"></td>
+									<td align="right" th:text="${varAbs.GPF}"></td>
+									<td align="right" th:text="${varAbs.dcpsreg}"  ></td>
+									<td align="right" th:text="${varAbs.dcpsdel}"></td>
+									<td align="right" th:text="${varAbs.dcpsPay}"></td>
+									<td align="right" th:text="${varAbs.dcpsda}"></td>
+									<td align="right" th:text="${varAbs.npsEmprDeduc}"></td>
+									<td align="right" th:text="${varAbs.it}"></td>
+									<td align="right" th:text="${varAbs.pt}"></td>
+									<td align="right" th:text="${varAbs.compadv}"></td>
+									<td align="right" th:text="${varAbs.otherded}"></td>
+									<td align="right" th:text="${varAbs.pli}"></td>
+									<td align="right" th:text="${varAbs.gis}"></td>
+									<td align="right" th:text="${varAbs.accPolicy}"></td>
+									<td align="right" th:text="${varAbs.RevenueStamp}"></td>
+									<td align="right" th:text="${varAbs.totdedction}"></td>
+									<td align="right" th:text="${varAbs.netpay}"></td>
+									<td align="right" th:text="${varAbs.recurringDeposit}"></td>
+									<td align="right" th:text="${varAbs.ngrlic}"></td>
+									<td align="right" th:text="${varAbs.ngrmisc}"></td>
+									<td align="right" th:text="${varAbs.ngrbankloan}"></td>
+									<td align="right" th:text="${varAbs.ngrsocloan}"></td>
+									<td align="right" th:text="${varAbs.ngrtotded}"></td>
+									<td align="right"    th:text="${#numbers.formatDecimal(varAbs.TotalSalary, 0, 2)}"  ></td>
+								</tr>
+								<tr>
+								<td align="center"></td>
+									<td align="left" ></td>
+									<td align="right">Total</td>
+									<td align="right" th:text="${#aggregates.sum(listA.![GrossSalary])}" ></td>
+									<td align="right" th:text="${#aggregates.sum(listA.![fa])}" ></td>
+									<td align="right" th:text="${#aggregates.sum(listA.![recovery])}" ></td>
+									<td align="right" th:text="${#aggregates.sum(listA.![GPF])}" ></td>
+									<td align="right" th:text="${#aggregates.sum(listA.![dcpsreg])}" ></td>
+									<td align="right" th:text="${#aggregates.sum(listA.![dcpsdel])}" ></td>
+									<td align="right" th:text="${#aggregates.sum(listA.![dcpsPay])}" ></td>
+									<td align="right" th:text="${#aggregates.sum(listA.![dcpsda])}" ></td>
+									<td align="right" th:text="${#aggregates.sum(listA.![npsEmprDeduc])}" ></td>
+									<td align="right" th:text="${#aggregates.sum(listA.![it])}" ></td>
+									<td align="right" th:text="${#aggregates.sum(listA.![pt])}" ></td>
+									<td align="right" th:text="${#aggregates.sum(listA.![compadv])}" ></td>
+									<td align="right" th:text="${#aggregates.sum(listA.![otherded])}" ></td>
+									<td align="right" th:text="${#aggregates.sum(listA.![pli])}" ></td>
+									<td align="right" th:text="${#aggregates.sum(listA.![gis])}"></td>
+									<td align="right" th:text="${#aggregates.sum(listA.![accPolicy])}" ></td>
+									<td align="right" th:text="${#aggregates.sum(listA.![RevenueStamp])}" ></td>
+									<td align="right" th:text="${#aggregates.sum(listA.![totdedction])}"></td>
+									<td align="right" th:text="${#aggregates.sum(listA.![netpay])}" ></td>
+									<td align="right" th:text="${#aggregates.sum(listA.![recurringDeposit])}" ></td>
+									<td align="right" th:text="${#aggregates.sum(listA.![GrossSalary])}" ></td>
+									<td align="right" th:text="${#aggregates.sum(listA.![ngrlic])}" ></td>
+									<td align="right" th:text="${#aggregates.sum(listA.![ngrbankloan])}" ></td>
+									<td align="right" th:text="${#aggregates.sum(listA.![ngrsocloan])}" ></td>
+									<td align="right" th:text="${#aggregates.sum(listA.![ngrtotded])}" ></td>
+									<td align="right" th:text="${#aggregates.sum(listA.![TotalSalary])}" ></td>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+					<div class="row">
+						<div class="text-left col-md-6">
+							<span th:utext="#{msg.pagelabel.varificationdatetime}"></span> <span
+								th:text="${createddate}"> </span>
+						</div>
+						<div class="text-right col-md-6">
+							<span th:utext="#{msg.pagelabel.printingdatetime}"></span> <span
+								th:text="${systemdate}"> </span>
+
+						</div>
+					</div>
+					<div class="clear">
+						<div class="text-center">
+							<span th:utext="#{msg.thymeleaf.pagelabel.footerreport}"></span>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<!-- <table >
+			<tr align="center">
+			
+				<td><input type="hidden" hidden="paybillGenerationTrnId" value="paybillGenerationTrnId"/>
+				<button id="print" onclick="printContent('print-content');" class="btn orange">Print</button>
+				<a th:href="${'viewabstractReportExecl/'+paybillGenerationTrnId}">
+					<input id="pdfbutton" type="button" value="Export To Excel" class="btn" /></a>
+				</td>
+			</tr>
+		</table> -->
+			<br />
+			<div class="text-center">
+				<button id="print" onclick="printContent('print-content');"
+					class="btn">Print</button>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+
+	<script>
+		$("#loaderMainNew").hide();
+	</script>
+	<script>
+		function printContent(el) {
+			var restorepage = $('body').html();
+			var printcontent = $('#' + el).clone();
+			$('body').empty().html(printcontent);
+			setTimeout(function() {
+				window.print();
+				$('body').html(restorepage);
+			}, 250);
+
+		}
+		
+		/* $(document).ready(function() {
+		 $('#abstractReportTable tr').each(function(row, tr){
+			   $(tr).find('td:eq(7)').text(toPlainString($(tr).find('td:eq(7)').text()));
+			   $(tr).find('td:eq(31)').text(toPlainString($(tr).find('td:eq(31)').text()));
+			/*  
+			 if(!isNaN($(tr).find('td:eq(4)').text())){
+				 $(tr).find('td:eq(4)').text(Number(cellValue).toPrecision());
+				 } */
+		
+		    });    
+		 
+		 
+		 
+		 function decimalToInteger(){
+			 $('.testimonial').each(function(i, obj) {
+				 var num=$(this).text();
+				  var numWithoutDecimal=(''+ +num).replace(/(-?)(\d*)\.?(\d*)e([+-]\d+)/,
+					        function(a,b,c,d,e) {
+					          return e < 0
+					            ? b + '0.' + Array(1-e-c.length).join(0) + c + d
+					            : b + c + d + Array(e-d.length+1).join(0);
+					        });
+				  
+				     $(this).text(numWithoutDecimal);
+				});
+		 }
+		
+		 
+		 
+		 
+		 
+		    function toPlainString(num) {
+		      return (''+ +num).replace(/(-?)(\d*)\.?(\d*)e([+-]\d+)/,
+		        function(a,b,c,d,e) {
+		          return e < 0
+		            ? b + '0.' + Array(1-e-c.length).join(0) + c + d
+		            : b + c + d + Array(e-d.length+1).join(0);
+		        });
+		    } 
+		 }); 
+	</script>
+</body>
+
+</html>

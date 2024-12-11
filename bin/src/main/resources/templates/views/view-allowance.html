@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.viewallowance}"></title>
+</head>
+<body class="view-allowance">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.dcpsBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.viewallowance}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.viewallowance}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<div id="content">
+				<form method="POST" name="" action="">
+					<table class="datatable table table-bordered" id="row">
+						<thead>
+							<tr>
+								<th c>Short Name</th>
+								<th c>Full Name</th>
+								<th c>Allowance Desc</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td style="text-align: center;">7PC DA</td>
+								<td style="text-align: center;">7PC DA</td>
+								<td style="text-align: center;">7PC DA</td>
+							</tr>
+							<tr>
+								<td style="text-align: center;">7PC TA</td>
+								<td style="text-align: center;">7PC TA</td>
+								<td style="text-align: center;">7PC TA</td>
+							</tr>
+							<tr>
+								<td style="text-align: center;">7th PC DCPS Arrear</td>
+								<td style="text-align: center;">7th PC DCPS Arrear</td>
+								<td style="text-align: center;">7th PC DCPS Arrear</td>
+							</tr>
+							<tr>
+								<td style="text-align: center;">7th PC GPF Arrears</td>
+								<td style="text-align: center;">7th PC GPF Arrears</td>
+								<td style="text-align: center;">7th PC GPF Arrears</td>
+							</tr>
+							<tr>
+								<td style="text-align: center;">7th PC T.A. Arrear</td>
+								<td style="text-align: center;">7th PC T.A. Arrear</td>
+								<td style="text-align: center;">7th PC T.A. Arrear</td>
+							</tr>
+							<tr>
+								<td style="text-align: center;">ATS-Incentive(30)</td>
+								<td style="text-align: center;">ATS_Incentive(30)</td>
+								<td style="text-align: center;">ATS30</td>
+							</tr>
+							<tr>
+								<td style="text-align: center;">ATS-Incentive(50)</td>
+								<td style="text-align: center;">ATS-Incentive(50)</td>
+								<td style="text-align: center;">ATS50</td>
+							</tr>
+							<tr>
+								<td style="text-align: center;">Additional DA</td>
+								<td style="text-align: center;">Additional DA</td>
+								<td style="text-align: center;">Addl DA</td>
+							</tr>
+							<tr>
+								<td style="text-align: center;">Additional HRA in Lieu of
+									Rent Free Quarter</td>
+								<td style="text-align: center;">Additional HRA in Lieu of
+									Rent Free Quarter</td>
+								<td style="text-align: center;">Additional HRA in Lieu of
+									Rent Free Quarter</td>
+							</tr>
+							<tr>
+								<td style="text-align: center;">Additional Pay</td>
+								<td style="text-align: center;">Additional Pay</td>
+								<td style="text-align: center;">Additional Pay</td>
+							</tr>
+							<tr>
+								<td style="text-align: center;">Arm Allowance</td>
+								<td style="text-align: center;">Arm Allowance</td>
+								<td style="text-align: center;">Arm Allowance</td>
+							</tr>
+							<tr>
+								<td style="text-align: center;">Armourer Allowance</td>
+								<td style="text-align: center;">Armourer Allowance</td>
+								<td style="text-align: center;">Armourer Allowance</td>
+							</tr>
+							<tr>
+								<td style="text-align: center;">BMI Allowance</td>
+								<td style="text-align: center;">BMI Allowance</td>
+								<td style="text-align: center;">BMI Allowance</td>
+							</tr>
+							<tr>
+								<td style="text-align: center;">Basic Arrear</td>
+								<td style="text-align: center;">Basic Arrear</td>
+								<td style="text-align: center;">Basic Arrear</td>
+							</tr>
+							<tr>
+								<td style="text-align: center;">CHPL/CPL Allowance For
+									Pilot</td>
+								<td style="text-align: center;">CHPL/CPL Allowance For
+									Pilot</td>
+								<td style="text-align: center;">CHPL/CPL Allowance For
+									Pilot</td>
+							</tr>
+							<tr>
+								<td style="text-align: center;">CID Allowance</td>
+								<td style="text-align: center;">CID Allowance</td>
+								<td style="text-align: center;">CID Allowance</td>
+							</tr>
+							<tr>
+								<td style="text-align: center;">Cash Allowance</td>
+								<td style="text-align: center;">Cash Allowance</td>
+								<td style="text-align: center;">Cash Allowance</td>
+							</tr>
+							<tr>
+								<td style="text-align: center;">Central DA</td>
+								<td style="text-align: center;">Central DA</td>
+								<td style="text-align: center;">CentralDA</td>
+							</tr>
+							<tr>
+								<td style="text-align: center;">Central TA</td>
+								<td style="text-align: center;">Central TA</td>
+								<td style="text-align: center;">TACentral</td>
+							</tr>
+							<tr>
+								<td style="text-align: center;">City Local Allowance
+									(C.L.A)</td>
+								<td style="text-align: center;">Compensatory Local
+									Allowance</td>
+								<td style="text-align: center;">CLA</td>
+							</tr>
+						</tbody>
+					</table>
+					<br />
+					<div class="text-center">
+						<input type="button" name="Close" id="Close" value="Close"
+							size="3" maxlength="3" class="buttontag" onclick="history.back()">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

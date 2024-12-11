@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.mahait.gov.in</groupId>
 	<artifactId>RDD-1</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+<!--	<version>0.0.1-SNAPSHOT</version>-->
 	<packaging>war</packaging>
 	<name>RDD-1</name>
 	<description>Demo project for Spring Boot</description>
@@ -56,15 +56,13 @@
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-tomcat</artifactId>
 				</exclusion>
+
+				<!--<exclusion>
+					<artifactId>logback-classic</artifactId>
+					<groupId>ch.qos.logback</groupId>
+				</exclusion>-->
 			</exclusions>
 		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
 
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
@@ -188,6 +186,23 @@
 			<artifactId>jakarta.servlet-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		
+		
+		
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+			<version>1.7.36</version> <!-- Match your SLF4J version -->
+		</dependency>
+
+
 
 
 	</dependencies>
@@ -207,6 +222,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+			<finalName>RDD</finalName> 
 	</build>
 
 </project>

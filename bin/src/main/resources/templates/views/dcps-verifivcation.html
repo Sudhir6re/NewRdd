@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.dcpsVerification}"></title>
+</head>
+<body class="dcps-verifivcation">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.dcpsVerification}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.dcpsVerification}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<form method="post" action="" name="dcpsVerification"
+				enctype="multipart/form-data" id="">
+				<fieldset>
+					<legend>
+						<b>Select Year</b>
+					</legend>
+					<table class="table bor-0">
+						<tbody>
+							<tr align="center">
+								<td align="left" width="15%"><b>Financial Year</b></td>
+								<td align="left" width="40%"><select class="form-control"
+									id="cmbFinancialYear" >
+										<option selected="selected" th:value="0"
+											th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+										<option th:each="varGetAllYear : ${lstGetAllYear}"
+											th:value="${varGetAllYear.yearId}"
+											th:text="${language=='mh' ? varGetAllYear.financialYear : varGetAllYear.financialYear}"></option> 
+								</select>&nbsp;<label class="mandatoryindicator">*</label></td>
+								<td align="left"><input type="button" name="btnGo"
+									id="btnGo" value="GO" class="btn" onclick="getEmpInfo()">
+									<input type="button" name="btnBackWithGo" id="btnBackWithGo"
+									value="Back" onclick="history.back()" class="btn"></td>
+							</tr>
+						</tbody>
+					</table>
+					<br> <br>
+				</fieldset>
+				<fieldset class="empdetails">
+					<legend id="headerMsg"> Yearly Process of 6th PC
+						Installment Amount Deposition to DCPS Verification </legend>
+					<table class="table table-bordered table-striped">
+						<tbody>
+							<tr>
+								<td>
+									<div>No Records found to display</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<br />
+					<div class="text-center">
+						<input type="button" name="btnBackAgain" id="btnBackAgain"
+							onclick="history.back()" value="Back" class="buttontag">
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script>
+		$(".empdetails").hide();
+		function getEmpInfo() {
+			$(".empdetails").fadeIn(100);
+		}
+	</script>
+	<script th:src="@{/js/project/dcps-verifivcation.js}"></script>
+</body>
+</html>

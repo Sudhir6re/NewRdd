@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.formXII}"></title>
+<link rel="stylesheet" th:href="@{/css/print.css}" />
+<link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body class="form-XII-report">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.reportBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.formXII}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<div class="formMainwithNoborTb container">
+			<div id="print-content">
+				<fieldset>
+				<form method="POST" action="" name="ReportForm"  th:object="${regularReportModel}"
+				enctype="multipart/form-data">
+					<div class="text-center">
+						<h3 Class="PageHeading">
+							<span th:utext="#{msg.thymeleaf.pageheading.formXII}"></span>
+						</h3>
+					</div>
+					<br />
+					<table class="table bor-0">
+						<tbody>
+							<tr>
+								<td colspan="2">FORM XII</td>
+							</tr>
+							<tr>
+								<td>Certificate Attached with the Paybill in respect of
+									class IV Govt. Servants for the Month of June 2020</td>
+							</tr>
+							<tr>
+								<td>Paid in <span th:text="${nextmonyer}"></span> for the office of M. H.
+									Saboo Siddik Polytechnic, Mumbai</td>
+							</tr>
+							<tr>
+								<td>Certified that the sum of (`) <span th:text="${totalAmount}"></span> has been
+									deducted from the salary for the month of <span th:text="${currmonyer}"></span></td>
+							</tr>
+						</tbody>
+					</table>
+					<br />
+					<table class="table">
+						<tbody>
+							<tr>
+								<td>
+									<p>1. Subscription...................... :<span th:text="${totalSubscription}"></span></p>
+									<p>2. Refund of Withdrawal........:<span th:text="${totalRefund}"></span></p>
+									<p>3. DA Arrears.........................:<span th:text="${totalDaArr}"></span></p>
+									<p>Total (`).................................:<span th:text="${totalAmount}"></span></p>
+									<p>Total Deduction In Words (`) : <span th:text="${word}"></span></p>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<HR />
+					<table class="table bor-0">
+						<tbody>
+
+							<tr>
+								<td colspan="2" align="center"><b>CERTIFICATE</b></td>
+							</tr>
+							<tr>
+								<td colspan="2">Certified that the Total Recoveries shown
+									above agrees with the amount actually</td>
+							</tr>
+							<tr>
+								<td colspan="2">recovered and shown in the body of the
+									bill.</td>
+							</tr>
+							<tr>
+								<td colspan="2">Certified that the recoveries have been
+									duly posted in Register of Advance (Form A ).</td>
+							</tr>
+							<tr>
+								<td colspan="2">Dated :<span th:text="${date}"></span></td>
+							</tr>
+							<tr>
+								<td colspan="2"><br></td>
+							</tr>
+							<tr>
+								<td colspan="2"><br></td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder; text-align: Right;">
+									Incharge HM</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder; text-align: Right;">
+									MAHARASHTRA UNIVERSITY,THANE,NORTH MAHARASHTRA UNIVERSITY</td>
+							</tr>
+							<tr>
+								<td colspan="2"><br></td>
+							</tr>
+							<tr>
+								<td colspan="2"><br></td>
+							</tr>
+							<tr>
+								<td colspan="2">Portion for Treasury Office</td>
+							</tr>
+							<tr>
+								<td colspan="2">Treasury Voucher No. and Date</td>
+							</tr>
+							<tr>
+								<td colspan="2">Challan no. and Date</td>
+							</tr>
+							<tr>
+								<td colspan="2"><br></td>
+							</tr>
+							<tr>
+								<td colspan="2"><br></td>
+							</tr>
+							<tr>
+								<td colspan="2" style="font-weight: bolder; text-align: Right;">
+									Treasury Officer / Pay &amp; Accounts Officer</td>
+							</tr>
+							<tr>
+								<td colspan="2"><br></td>
+							</tr>
+							<tr>
+								<td colspan="2"><br></td>
+							</tr>
+							<tr>
+								<td colspan="2">VERIFICATION TIME :<span th:text="${sysDate}"></span>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" align="center">*******End of Report*******</td>
+							</tr>
+						</tbody>
+					</table>
+					<br />
+					<table class="table bor-0">
+						<tbody>
+							<tr>
+								<td valign="middle" style="font-weight: bold;"><br /> <b>Verification
+										Time:-</b>19-07-2024 11:55:29.372<br /> <span>* Generated
+										By <span th:text="#{msg.thymeleaf.pagelabel.hteCustSevaarth}"></span>
+								</span></td>
+							</tr>
+						</tbody>
+					</table>
+					</form>
+				</fieldset>
+			</div>
+		</div>
+		<div class="text-center">
+			<button id="print" onclick="printContent('print-content');"
+				class="btn">Print</button>
+			<input type="button" name="btnBackAgain" id="btnBackAgain"
+				onclick="history.back()" value="Back" class="buttontag">
+		</div>
+
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

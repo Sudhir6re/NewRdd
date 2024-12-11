@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.employeeStatastic}"></title>
+<link rel="stylesheet" th:href="@{/css/print.css}" />
+<link rel="stylesheet" th:href="@{/css/styles.css}" />
+<style>
+@media print {
+	div#print-content * {
+		font-size: 10px;
+		padding: 0px;
+	}
+	@page {
+		size: landscape;
+	}
+	table {
+		width: 100%;
+		table-layout: fixed;
+	}
+	th, td {
+		word-wrap: break-word;
+	}
+}
+</style>
+</head>
+<body class="employee-statastic">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.dcpsBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.employeeStatastic}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.employeeStatastic}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<form method="post" action="" name="FrmResetPassword"
+				enctype="multipart/form-data">
+				<fieldset class="tabstyle">
+					<legend>Search DDO</legend>
+					<table class="table bor-0 width-70">
+						<tbody>
+							<tr>
+								<td width="30%">DDO CODE</td>
+								<td><input type="text" maxlength="10" id="txtDdocode"
+									name="txtDdocode" value="" autocomplete="off"></td>
+								<td><input type="button" name="btnSubmit" id="btnSubmit"
+									value="Submit" class="buttontag" onclick="getEmpInfo()"></td>
+							</tr>
+						</tbody>
+					</table>
+				</fieldset>
+				<br /> <br />
+				<fieldset class="empdetails">
+					<div id="print-content">
+						<div th:replace="header/menuHeader :: var-script-header"></div>
+						<legend>Employee Statistics</legend>
+						<div class="scrollablediv">
+							<table id="vo" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th>Employee Name</th>
+										<th>Sevaarth Id</th>
+										<th>Date of Birth</th>
+										<th>Employee Type</th>
+										<th>Cadre</th>
+										<th>Post Name</th>
+										<th>Post Type</th>
+										<th>Post Start Date</th>
+										<th>Post End Date</th>
+										<th>Date of Joining</th>
+										<th>Date of Service Expiry</th>
+										<th>Scale Description</th>
+										<th>Basic Salary</th>
+										<th>7PC Basic Salary</th>
+										<th>7PC Level</th>
+										<th>PF Series</th>
+										<th>GPF/DCPS Account No.</th>
+										<th>GIS Group</th>
+										<th>GIS Value</th>
+										<th>Physically Handicapped</th>
+										<th>Bank name</th>
+										<th>Bank Branch Name</th>
+										<th>Account No</th>
+										<th>Pran No</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>WATSON</td>
+										<td>20DHEWATM9601</td>
+										<td>23/07/1996</td>
+										<td></td>
+										<td>C</td>
+										<td>Assistant Accountant77200010947</td>
+										<td>Permanent</td>
+										<td>13/05/2015</td>
+										<td></td>
+										<td>21/12/2022</td>
+										<td>31/07/2056</td>
+										<td>5200-20200-Grade Pay(1800)</td>
+										<td>10300</td>
+										<td>0</td>
+										<td>NA</td>
+										<td>DCPS</td>
+										<td>202222222222WATM9601P</td>
+										<td>C</td>
+										<td>Regular Vocational Osmanabad</td>
+										<td>-</td>
+										<td>BANK OF MAHARASHTRA</td>
+										<td>AKOT,AKOLA,AKOLA</td>
+										<td>1236547896541236</td>
+										<td>464467896546</td>
+									</tr>
+									<tr>
+										<td>SURAJ KISHOR THAKUR</td>
+										<td>20DHESKTM7301</td>
+										<td>05/08/1973</td>
+										<td>Non teaching</td>
+										<td>A</td>
+										<td>Principal77200011271</td>
+										<td>Permanent</td>
+										<td>05/08/2015</td>
+										<td></td>
+										<td>02/08/2000</td>
+										<td>31/08/2033</td>
+										<td>37400-67000-Academic Grade Pay(9000)</td>
+										<td>74000</td>
+										<td>133500</td>
+										<td>S_27</td>
+										<td>GA/MAH</td>
+										<td>456545</td>
+										<td>A</td>
+										<td>Regular Vocational Osmanabad</td>
+										<td>-</td>
+										<td>STATE BANK OF INDIA</td>
+										<td>MULUND (EAST),GREATER BOMBAY,MUMBAI</td>
+										<td>00000000030715488606</td>
+										<td>NA</td>
+									</tr>
+									<tr>
+										<td>TEMP TEMP TEMP</td>
+										<td>20DHETTTM9002</td>
+										<td>01/01/1990</td>
+										<td>Teaching</td>
+										<td>A</td>
+										<td>Assistant Registrar77200010642</td>
+										<td>Permanent</td>
+										<td>01/01/2012</td>
+										<td></td>
+										<td>01/01/2014</td>
+										<td>31/12/2047</td>
+										<td>9300-34800-Grade Pay (4500)</td>
+										<td>26500</td>
+										<td>20400</td>
+										<td>NTVTS3</td>
+										<td>DCPS</td>
+										<td>202222222222TTTM9001F</td>
+										<td>A</td>
+										<td>S A C S C Naigaon</td>
+										<td>-</td>
+										<td>BANK OF INDIA</td>
+										<td>AKOT,AKOLA,AKOT</td>
+										<td>656565656454545</td>
+										<td>457861257645</td>
+									</tr>
+									<tr>
+										<td>ASHISH WASAKE</td>
+										<td>20DHEAWAM8701</td>
+										<td>24/10/1987</td>
+										<td>Teaching</td>
+										<td>A</td>
+										<td>Assistant Professor77200060134</td>
+										<td>Permanent</td>
+										<td>20/08/2015</td>
+										<td></td>
+										<td>11/01/2018</td>
+										<td>31/10/2047</td>
+										<td>15600-39100-Grade Pay(5400)</td>
+										<td>40400</td>
+										<td>51500</td>
+										<td>NTVTS15</td>
+										<td>DCPS</td>
+										<td>202222222222AWAM8701M</td>
+										<td>A</td>
+										<td>S A C S C Naigaon</td>
+										<td>-</td>
+										<td>STATE BANK OF INDIA</td>
+										<td>ABDUL HAT,KOLHAPUR,SHIROL</td>
+										<td>31963318144</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>NAVEEN PRIYA</td>
+										<td>20DHENPRM9001</td>
+										<td>02/10/1990</td>
+										<td></td>
+										<td>A</td>
+										<td>Assistant Professor77200060143</td>
+										<td>Permanent</td>
+										<td>20/08/2015</td>
+										<td></td>
+										<td>01/02/2013</td>
+										<td>31/10/2052</td>
+										<td>5200-20200-Grade Pay (3500)</td>
+										<td>22500</td>
+										<td>0</td>
+										<td>NA</td>
+										<td>DCPS</td>
+										<td>202222222222NPRM9001H</td>
+										<td>A</td>
+										<td>RAJA SHIVCHHATRAPATI ARTS AND COMMERCE COLLEGE,
+											MAHAGAON</td>
+										<td>-</td>
+										<td>STATE BANK OF INDIA</td>
+										<td>ADGAON</td>
+										<td>30003781351</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>NDCPS NDCPS CDCPS</td>
+										<td>20DHENNCM8401</td>
+										<td>01/01/1984</td>
+										<td>Non teaching</td>
+										<td>C</td>
+										<td>accountant77200010623</td>
+										<td>Permanent</td>
+										<td>01/01/2012</td>
+										<td></td>
+										<td>01/01/2006</td>
+										<td>31/12/2041</td>
+										<td>5200-20200-Grade Pay(2400)</td>
+										<td>18000</td>
+										<td>15000</td>
+										<td>NA</td>
+										<td>DCPS</td>
+										<td>202222222222NNCM8401Z</td>
+										<td>C</td>
+										<td>12223</td>
+										<td>-</td>
+										<td>BANK OF INDIA</td>
+										<td>ALAPALLI,GADCHIROLI,GADCHIROLI</td>
+										<td>4555454</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>SASWEEWE</td>
+										<td>20DHESASM7901</td>
+										<td>01/01/1979</td>
+										<td></td>
+										<td>C</td>
+										<td>Head Clerk77200060164</td>
+										<td>Permanent</td>
+										<td>14/08/2015</td>
+										<td></td>
+										<td>01/01/2005</td>
+										<td>31/12/2036</td>
+										<td>15600-39100-Academic Grade Pay(6000)</td>
+										<td>21600</td>
+										<td>57700</td>
+										<td>NTVTAS10</td>
+										<td>ABCD</td>
+										<td>556</td>
+										<td>C</td>
+										<td>12223</td>
+										<td>-</td>
+										<td>BANK OF INDIA</td>
+										<td>ACHHAD,THANE,THANE</td>
+										<td>56565656565</td>
+										<td>NA</td>
+									</tr>
+									<tr>
+										<td>GHANA DESAI</td>
+										<td>20DHEGDEM8901</td>
+										<td>01/01/1989</td>
+										<td>Non teaching</td>
+										<td>C</td>
+										<td>Head Clerk77200060150</td>
+										<td>Permanent</td>
+										<td>14/08/2015</td>
+										<td></td>
+										<td>01/01/2021</td>
+										<td>31/12/2053</td>
+										<td></td>
+										<td>35550</td>
+										<td>65100</td>
+										<td>NTVTS15</td>
+										<td>AJ/MAH</td>
+										<td>5662465</td>
+										<td>C</td>
+										<td>Bill Group For Scheme District Thane</td>
+										<td>-</td>
+										<td>ABHYUDAYA CO-OP BANK LTD</td>
+										<td>AIROLI,GREATER MUMBAI,MUMBAI</td>
+										<td>6465246541</td>
+										<td>NA</td>
+									</tr>
+									<tr>
+										<td>EPISON</td>
+										<td>20DHEEPIM8901</td>
+										<td>01/01/1989</td>
+										<td>Non teaching</td>
+										<td>C</td>
+										<td>Head Clerk77200060151</td>
+										<td>Permanent</td>
+										<td>14/08/2015</td>
+										<td></td>
+										<td>01/01/2022</td>
+										<td>31/12/2048</td>
+										<td>5200-20200-Grade Pay(2800)</td>
+										<td>19800</td>
+										<td>35400</td>
+										<td>VS9</td>
+										<td>EDMH</td>
+										<td>123232</td>
+										<td>C</td>
+										<td>Bill Group For Scheme District Thane</td>
+										<td>-</td>
+										<td>BANK OF INDIA</td>
+										<td>ADGAON NAKA,NASIK,NASIK</td>
+										<td>6788898</td>
+										<td>NA</td>
+									</tr>
+									<tr>
+										<td>SNEHA SANJAY MOON</td>
+										<td>20DHESSMF9601</td>
+										<td>02/02/1996</td>
+										<td>Non teaching</td>
+										<td>C</td>
+										<td>accountant77200010622</td>
+										<td>Permanent</td>
+										<td>01/01/2012</td>
+										<td></td>
+										<td>17/05/2019</td>
+										<td>28/02/2054</td>
+										<td>5200-20200-Grade Pay(2000)</td>
+										<td>7300</td>
+										<td>0</td>
+										<td>NA</td>
+										<td>DCPS</td>
+										<td>202222222222SSMF9601X</td>
+										<td>C</td>
+										<td>Bill Group For Scheme District Nasik</td>
+										<td>-</td>
+										<td>ALLAHABAD BANK</td>
+										<td>AKOLA,AKOLA,AKOLA</td>
+										<td>754864565642545</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>KULDEEP JAYANT JOSHI</td>
+										<td>20DHEKJJM8501</td>
+										<td>05/01/1985</td>
+										<td></td>
+										<td>D</td>
+										<td>Attendant77200010648</td>
+										<td>Permanent</td>
+										<td>01/01/2012</td>
+										<td></td>
+										<td>13/08/2009</td>
+										<td>31/01/2043</td>
+										<td>4440-7440-Grade Pay (1600)</td>
+										<td>7500</td>
+										<td>48500</td>
+										<td>NTVTS15</td>
+										<td>DCPS</td>
+										<td>202222222222KJJM8501C</td>
+										<td>D</td>
+										<td>Bill Group For Scheme District Nasik</td>
+										<td>-</td>
+										<td>ANDHRA BANK</td>
+										<td>KOLHAPUR,KOLHAPUR,KOLHAPUR</td>
+										<td>12358965874256328547</td>
+										<td>516512618548</td>
+									</tr>
+									<tr>
+										<td>ASHISH SHANKAR WASAKEE</td>
+										<td>20DHEASWM9501</td>
+										<td>14/12/1995</td>
+										<td>Teaching</td>
+										<td>A</td>
+										<td>Assistant Professor77200060137</td>
+										<td>Permanent</td>
+										<td>20/08/2015</td>
+										<td></td>
+										<td>15/12/2010</td>
+										<td>31/12/2055</td>
+										<td>4440-7440-Grade Pay (2000)</td>
+										<td>8800</td>
+										<td>53700</td>
+										<td>S_18</td>
+										<td>DCPS</td>
+										<td>202222222222ASWM9501X</td>
+										<td>A</td>
+										<td>Bill Group For Scheme District Nasik</td>
+										<td>-</td>
+										<td>BANK OF BARODA</td>
+										<td>AMBIJALGAON, MAHARASHTRA,AHMADNAGAR,AMBI JALGAON</td>
+										<td>1234567899874561</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>NEWTON</td>
+										<td>20DHENEWM8901</td>
+										<td>01/01/1989</td>
+										<td>Non teaching</td>
+										<td>C</td>
+										<td>Head Clerk77200060158</td>
+										<td>Permanent</td>
+										<td>14/08/2015</td>
+										<td></td>
+										<td>01/01/2022</td>
+										<td>31/12/2046</td>
+										<td>37400-67000-Grade Pay(10000)</td>
+										<td>60000</td>
+										<td>56900</td>
+										<td>NTS16</td>
+										<td>DCPS</td>
+										<td>202222222222NEWM8901P</td>
+										<td>C</td>
+										<td>Bill Group For Scheme District Nasik</td>
+										<td>-</td>
+										<td>BANK OF INDIA</td>
+										<td>ALAPALLI,GADCHIROLI,GADCHIROLI</td>
+										<td>68462</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>GPF</td>
+										<td>20DHEGPFM7801</td>
+										<td>01/02/1989</td>
+										<td>Teaching</td>
+										<td>C</td>
+										<td>Head Clerk77200060168</td>
+										<td>Permanent</td>
+										<td>14/08/2015</td>
+										<td></td>
+										<td>10/10/2000</td>
+										<td>31/01/2047</td>
+										<td>9300-34800-Grade Pay(4600)</td>
+										<td>25600</td>
+										<td>0</td>
+										<td>NA</td>
+										<td>Not Applicable</td>
+										<td>123133</td>
+										<td>C</td>
+										<td>Bill Group For Scheme District Nasik</td>
+										<td>-</td>
+										<td>BANK OF INDIA</td>
+										<td>AHERI,GADCHIROLI,GADCHIROLI</td>
+										<td>545454545</td>
+										<td>NA</td>
+									</tr>
+									<tr>
+										<td>STATUTORY EMPLOYEE</td>
+										<td>20DHESEMM8901</td>
+										<td>01/01/1989</td>
+										<td>Non teaching</td>
+										<td>C</td>
+										<td>assistant77200010630</td>
+										<td>Statutory</td>
+										<td>01/01/2013</td>
+										<td></td>
+										<td>01/01/2009</td>
+										<td>31/12/2048</td>
+										<td>37400-67000-Academic Grade Pay(9000)</td>
+										<td>46400</td>
+										<td>131400</td>
+										<td>AS13</td>
+										<td>DCPS</td>
+										<td>202222222222SEMM8901I</td>
+										<td>C</td>
+										<td></td>
+										<td>-</td>
+										<td>BANK OF INDIA</td>
+										<td>AKLUJ,SOLAPUR,SOLAPUR</td>
+										<td>78787878</td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<br />
+					<div class="text-center">
+						<input type="button" name="btnExporttoExcel" id="btnExporttoExcel"
+							value="Export to Excel" size="3" maxlength="3" class="btn">
+						<input type="button" name="btnprintReport" id="btnprintReport"
+							onclick="printContent('print-content');" value="Print Report"
+							size="3" maxlength="3" class="btn"> <input type="button"
+							name="btnBackAgain" id="btnBackAgain" onclick="history.back()"
+							value="Back" class="buttontag">
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script>
+		$(".empdetails").hide();
+		function getEmpInfo() {
+			$(".empdetails").fadeIn(100);
+		}
+	</script>
+</body>
+</html>

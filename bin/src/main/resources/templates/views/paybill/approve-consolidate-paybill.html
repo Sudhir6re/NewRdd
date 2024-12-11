@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{menu.mapping.approveconsolidatePayBill}"></title>
+</head>
+<body class="approve-consolidate-paybill">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.TransactionBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{menu.mapping.approveconsolidatePayBill}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{menu.mapping.approveconsolidatePayBill}"></span>
+		</h3>
+		<fieldset class="container">
+			<!-- <legend th:utext="#{menu.mapping.consolidatePayBill}"
+				th:style="${'color: orange;'}"></legend> -->
+
+			<form class="form-horizontal container" th:object="${consolidatePayBillModel}"
+				method="POST" enctype="multipart/form-data"
+				th:action="@{/ddo/approveConsolidateBill}">
+
+				<input type="hidden" name="language" id="language"
+					th:value="${language}" /> <input type="hidden" name="message"
+					id="message" th:value="${message}" /> <input type="hidden"
+					name="userId" id="userId" th:value="${userId}" />
+
+				
+				<div class="">
+					<div class="">
+						<table class="table table-bordered"> 
+							<thead>
+						<tr>
+							<th th:utext="#{msg.thymeleaf.pagelabel.checkbox}" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.consolitedBillIdLabel}" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.schemeCode}" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.subSchemeCode}" />
+							<th th:utext="#{msg.pagelabel.grossAmount}" />
+							<th th:utext="#{msg.thymeleaf.vewdts.netamt}" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.status}" />
+						</tr>
+					</thead>
+							<tbody>
+							<tr th:each="att, itemStat : ${consolidatePayBillModel.lstCons}">
+							<td class="text-center"><input type="radio" name="consolidateId"
+								class="generatedChkId"	th:value="${att.consolidateId}"></td>
+								<td th:text="${att.consolidateId}"></td>
+								<td th:text="${att.schemeCode}"></td>
+									<td th:text="${att.subSchemeName}"></td>
+									<td th:text="${att.billGrossAmt}"></td>
+									<td th:text="${att.billNetAmt}"></td>
+									<td>Pending</td>
+							</tr>
+								<!-- <tr th:each="att, itemStat : ${consolidatePayBillModel.lstCons}">
+							<td><input type="checkbox" name="checkboxid" id="checkboxid"
+								class="checkbox"
+								th:value="${consolidatePayBillModel.lstCons[__${itemStat.index}__].checkboxid}"
+								th:field="${consolidatePayBillModel.lstCons[__${itemStat.index}__].checkboxid}" />
+								<input type="hidden" name="checkboxid2" th:id="${'checkboxid2'+itemStat.index}" 
+								class="checkboxorg checkbox"
+								th:value="${consolidatePayBillModel.lstCons[__${itemStat.index}__].checkboxid}"
+								th:field="${consolidatePayBillModel.lstCons[__${itemStat.index}__].checkboxid}" />
+								<input type="hidden" th:id="ddoCode" th:value="${att.ddoCode}" th:field="${consolidatePayBillModel.lstCons[__${itemStat.index}__].ddoCode}">
+							</td>
+									<td th:text="${att.ddoCode}"></td>
+									<td th:text="${att.officeName}"></td>
+								</tr> -->
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="form-group text-center">
+					<input type="submit" id="btnSearch" class="btn btn-primary"
+						th:value="#{msg.thymeleaf.pagelabel.approve}" /> 
+				</div>
+				<hr />
+			</form>
+		</fieldset>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/datatable-common.js}"></script>
+	<script th:src="@{/js/project/consolidate-paybill.js}"></script>
+
+</body>
+</html>

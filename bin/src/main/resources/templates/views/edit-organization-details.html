@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.orgdetails}"></title>
+</head>
+<body class="organization-details">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.payrollBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.orgdetails}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.orgdetails}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+		<form method="post" th:action="@{/ddoast/updateddoOfficeDetails}"
+					th:object="${organisationDtlsModel}" name="DDOInfo"
+					enctype="multipart/form-data" id="DDOInfo">
+			<table class="table bor-0">
+				<tbody>
+					<tr>
+						<td>
+							<fieldset class="tabstyle">
+								<legend>Organization/Institution Details</legend>
+								<table width="100%" align="center" cellpadding="4"
+									cellspacing="4">
+									<tbody>
+										<tr>
+											<td align="left">Name of the Organization/Institution</td>
+											<td align="left"><input type="text" size="100%"
+												name="txtNameOfOffice" id="txtNameOfOffice"
+												th:field="*{officeName}">
+												<label class="mandatoryindicator">*</label></td>
+										</tr>
+									</tbody>
+								</table>
+							</fieldset>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<fieldset class="tabstyle">
+								<legend> Address Details </legend>
+								<table class="table bor-0">
+									<tbody>
+										<tr>
+											<td width="15%" align="left">State</td>
+											<td width="35%" align="left"><select name="cmbState" th:field="*{stateId}"
+												id="cmbState">
+													<option value="-1">-- Select --</option>
+													<option value="15">Maharashtra</option>
+											</select></td>
+											<td width="15%" align="left">District</td>
+											<td width="35%" align="left"><select name="cmbDist" th:field="*{districtId}"
+												id="cmbDist">
+													<option th:value="0"
+												th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+											<option th:each="varPay : ${lstDistrict}"
+												th:value="${varPay.districtId} "
+												th:text="${language=='mh' ? varPay.districtName : varPay.districtName}"></option>
+													</select></td>
+										</tr>
+										<tr>
+											<td width="15%" align="left">Taluka</td>
+											<td width="35%" align="left"><select name="cmbTaluka" th:field="*{talukaId}"
+												id="cmbTaluka">
+													
+											</select></td>
+										</tr>
+										<tr>
+											<td align="left" width="15%">City</td>
+											<td align="left" width="35%"><select name="cmbcity" th:field="*{city}"
+												id="cmbcity">
+													
+											</select> <label class="mandatoryindicator">*</label></td>
+											<td width="15%" align="left">Village</td>
+											<td width="35%"><input type="text" size="48" th:field="*{village}"
+												name="txtVillage" id="txtVillage" maxlength="50"
+												></td>
+										</tr>
+										<tr>
+											<td width="15%" align="left">Address</td>
+											<td width="35%"><textarea name="txtAddress1" th:field="*{Address}"
+													id="txtAddress1" rows="5" cols="42"></textarea>
+												<label class="mandatoryindicator">*</label></td>
+											<td width="15%" align="left">PIN</td> 
+											<td width="35%"><input type="text" size="48" th:field="*{pin}"
+												name="txtPin" id="txtPin" maxlength="6" >
+												<label class="mandatoryindicator">*</label></td>
+										</tr>
+										<tr>
+											<td width="15%" align="left">Organization/Institution
+												City Class</td>
+											<td align="left" width="35%"><input type="text"
+												name="cmbOfficeCityClass" size="50" id="cmbOfficeCityClass" th:field="*{cityClass}"
+												> <label
+												class="mandatoryindicator">*</label></td>
+										</tr>
+										<tr>
+											<td width="15%" align="left">Institution Number</td>
+											<td width="35%"><input type="text" size="48"
+												name="txtdiceCode" id="txtdiceCode" maxlength="11" th:field="*{instiNo}"
+												></td>
+											<td width="15%" align="left">Percentage Of Grant
+												Applicable</td>
+											<td width="35%" align="left"><select name="txtGrant" th:field="*{PercGrant}"
+												id="txtGrant">
+													<option value="-1">-- Select --</option>
+													<option value="90">90%</option>
+													<option value="100" selected="selected">100%</option>
+											</select></td>
+										</tr>
+									</tbody>
+								</table>
+							</fieldset>
+						</td>
+					</tr>
+					<tr>
+						<td width="100%" valign="top">
+							<fieldset class="tabstyle">
+								<legend> Contact Details </legend>
+								<table class="table bor-0">
+									<tbody>
+										<tr>
+											<td width="15%" align="left">Tel No(1)</td>
+											<td width="35%"><input type="text" size="48" th:field="*{tel1}"
+												name="txtTelNo1" id="txtTelNo1" maxlength="11"
+												></td>
+											<td width="15%" align="left">Tel No(2) Mobile</td> 
+											<td width="35%"><input type="text" size="48" th:field="*{tel2}"
+												name="txtTelNo2" id="txtTelNo2" maxlength="10"
+												><label class="mandatoryindicator">*</label>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="4"
+												style="font-size: smaller; font-style: italic">(Use
+												only numbers. Do not provide space between STD Code and
+												Phone number.eg. 02227485961 and not 022 27485961)</td>
+										</tr>
+										<tr>
+											<td width="15%" align="left">Fax</td>
+											<td width="35%"><input type="text" size="48" th:field="*{fax}"
+												name="txtMobileNo" id="txtMobileNo" maxlength="15"
+												value="2462229572"></td>
+											<td width="15%" align="left">Email</td>
+											<td width="35%"><input type="text" size="48" th:field="*{email}"
+												name="txtEmail" id="txtEmail" maxlength="254"
+												value="srtmunregistrar@gmail.com"></td>
+										</tr>
+									</tbody>
+								</table>
+							</fieldset>
+						</td>
+					</tr>
+					<tr>
+						<td valign="top" align="center">
+							<table class="table bor-0">
+								<tbody>
+									<tr>
+										<td align="center"><input type="submit" name="btnUpdate"
+									id="btnUpdate" value="Update" size="3" maxlength="3"
+									class="buttontag"> 
+											<input type="button" name="btnClose" id="btnClose"
+											value="Back" class="btn" >
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			</form>
+		</div>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/edit-organization-details.js}"></script>
+
+</body>
+</html>

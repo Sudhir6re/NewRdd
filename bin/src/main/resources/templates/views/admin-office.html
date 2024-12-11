@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.adminoffice}"></title>
+<style type="text/css">
+</style>
+</head>
+<body class="admin-office">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.adminoffice}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.adminoffice}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<div id="content">
+				
+				
+				<form method="post" 
+					name="ZpAdminOffice" enctype="multipart/form-data">
+					<div id="tcontent1">
+						<table class="table bor-0">
+							<tbody>
+								<tr>
+									<td width="25%"><label class="captionTag"
+										id="ZPADMINOFFICE_ADMIN_OFFICE_NAME">Admin Office Name</label></td>
+									<td width="25%"><select name="cmbAdminOfficeName"
+										id="cmbAdminOfficeName"
+										onchange="adminCodecopytoOfficeCode(this);">
+											<option value="-1">Select</option>
+											<option value="01" disabled="disabled">State
+												Government</option>
+											<option value="02">Zilla Parishad</option>
+											<option value="03">Private Aided School, Primary</option>
+											<option value="04">Private Aided School, Secondary</option>
+											<option value="05">Private Aided School, Higher
+												Secondary</option>
+											<option value="06">Private Aided Higher Education</option>
+											<option value="07" selected="selected" disabled="disabled">
+												Private Aided Technical Education</option>
+											<option value="08">Private Aided Medical Education</option>
+											<option value="09">Private Aided Agricultural
+												Education</option>
+											<option value="10">Agricultural University</option>
+											<option value="11">Non Agricultural University</option>
+											<option value="12">Municipal Corporation Primary
+												School</option>
+											<option value="13">Municipal Council Primary School
+											</option>
+											<option value="14">Private Aided Institution under
+												Tribal Development Department</option>
+											<option value="15">Private Aided Institution under
+												Social Justice Department</option>
+											<option value="16">Private Aided Institution under
+												A. D. F. Department</option>
+											<option value="17">Private Aided Institution under
+												Water Resources Department</option>
+											<option value="18">Private Aided Institution under
+												Women and Child Development Department</option>
+											<option value="19">Private Aided Vocational
+												Education</option>
+											<option value="20">Private Aided Arts</option>
+											<option value="21">D.Ed. Colleges</option>
+											<option value="22">Cantonment Boards</option>
+											<option value="23">Night School</option>
+											<option value="24">Practising School</option>
+											<option value="25">Sainik School</option>
+											<option value="26">Municipal Corporation Secondary
+												School</option>
+											<option value="27">Municipal Council Secondary
+												School</option>
+											<option value="29">Scoutes and Guides Offices</option>
+											<option value="31">University</option>
+									</select> </td>
+								</tr>
+								<tr>
+									<td><label class="captionTag"
+										id="ZPADMINOFFICE_DCPS_Scheme_Code">Scheme Code</label></td>
+									<td><input type="text" name="txtDcpsShemeCode"
+										id="txtDcpsShemeCode" onblur="chkEnteredSchemeLength();"
+										onkeyup="popUpSchemeName();" class="texttag mandatorycontrol"
+										value="12345" maxlength="10/">&nbsp;&nbsp;<label
+										class="mandatoryindicator">*</label></td>
+									<td>
+										<div id="schemeNameLabel">
+											<label class="captionTag" id="CMN.SCHEMENAME">Scheme
+												Name</label>
+										</div>
+									</td>
+									<td >
+										<div id="schemeName">
+											<select name="cmbSchemeName" onchange="setSchemeCode();"
+												id="cmbSchemeName" class="selecttag">
+												<option value="-1">-- Select --</option>
+											</select> <label class="mandatoryindicator">*</label>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td><label class="captionTag"
+										id="ZPADMINOFFICE_DCPS_GR_NO">Gr No</label></td>
+									<td><select name="GrNo" id="GrNo" onchange="getGRDate();">
+											<option value="-1">Select</option>
+									</select> <input type="hidden" value="" name="cmbGrNo" id="cmbGrNo">
+									</td>
+									
+								</tr>
+								<tr>
+									<td><label class="captionTag"
+										id="ZPADMINOFFICE_DCPS_GR_DATE">Gr Date</label></td>
+									<td><input type="text" name="txtDcpsGRDate" id="txtDcpsGRDate"
+										onblur="validateDate(this);chkDate(this);"
+										class="texttag disabledcontrol"
+										onkeypress="digitFormat(this);dateFormat(this);" value=""
+										 maxlength="10/" placeholder="DD/MM/YYYY">
+										<label class="mandatoryindicator">*</label></td>
+									
+								<tr>
+									<td><label class="captionTag"
+										id="ZPADMINOFFICE_DCPS_OFF_NAME">Deputy SRKA</label></td>
+									<td><select name="txtDcpsOffName" id="txtDcpsOffName">
+											<option value="Chief Accounts and Finance Officer Z.P.">Chief
+												Accounts and Finance Officer Z.P.</option>
+											<option value="Deputy Director, Education">Deputy
+												Director, Education</option>
+											<option value="Comptroller,MAFS University,Nagpur">Comptroller,MAFS
+												University,Nagpur</option>
+											<option value="Assistant Tribal Commissioner">Assistant
+												Tribal Commissioner</option>
+											<option value="Regional Joint Director">Regional
+												Joint Director</option>
+											<option value="Regional Deputy Commissioner,Social Welfare">Regional
+												Deputy Commissioner,Social Welfare</option>
+											<option value="Regional Deputy Commissioner,Social Welfare">Regional
+												Deputy Commissioner,Social Welfare</option>
+											<option
+												value="Comptroller,Mahatma Phule Agriculture University,Rahuri">Comptroller,Mahatma
+												Phule Agriculture University,Rahuri</option>
+											<option
+												value="Comptroller,Dr. Babasaheb Sawant kokan Agriculture University,Dapoli">Comptroller,Dr.
+												Babasaheb Sawant kokan Agriculture University,Dapoli</option>
+											<option
+												value="Comptroller,Dr.Punjabrao Deshmukh Agriculture University,Akola">Comptroller,Dr.Punjabrao
+												Deshmukh Agriculture University,Akola</option>
+											<option
+												value="Comptroller,Marathwada Agriculture University,Parbhani">Comptroller,
+												Marathwada Agriculture University,Parbhani</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td><label class="captionTag" id="ZPADMINOFFICE_CODE">Office
+											Code</label></td>
+									<td><input type="text" name="txtCode" id="txtCode"
+										class="texttag disabledcontrol mandatorycontrol" value="07"
+										 maxlength="10/">&nbsp;&nbsp;<label
+										class="mandatoryindicator">*</label></td>
+								</tr>
+								<tr>
+
+									<td colspan="4"><input type="hidden" name="hdnOfcId"
+										value="991000085" id="hdnOfcId"></td>
+								</tr>
+
+							</tbody>
+						</table>
+						<div class="text-center">
+							<input type="button" name="btnSave"
+								onclick="fnZpAdminOfficeSave();" id="btnSave" value="Save"
+								size="3" maxlength="3" class="buttontag"> <input
+								type="button" name="btnCancel" onclick="history.back()" 
+								id="btnCancel" value="Cancel" size="3" maxlength="3"
+								class="buttontag">
+						</div>
+						
+					</div>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/mst-bank.js}"></script>
+</body>
+</html>

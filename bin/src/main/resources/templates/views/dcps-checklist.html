@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.dcpsChecklist}"></title>
+</head>
+<body class="dcps-checklist">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.dcpsChecklist}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.dcpsChecklist}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<form method="POST" action="" name="" enctype="multipart/form-data">
+				<table class="table bor-0">
+					<tbody>
+						<tr>
+							<td colspan="10"><legend>Yearly Process of 6th Pay
+									Arrear Amount Deposition to DCPS Account</legend></td>
+						</tr>
+						<tr>
+							<td class="captionTag" width="15%">Financial Year <font color="RED">*</font>
+							</td>
+							<td width="30%"><select class="selecttag" size="1"
+								name="yearid" id="yearid">
+									<option value="-1">Select</option>
+									<option value="22">2009-2010</option>
+									<option value="23">2010-2011</option>
+									<option value="24">2011-2012</option>
+									<option value="25">2012-2013</option>
+									<option value="26">2013-2014</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td colspan="5"><i><b>Note: </b>Parameter marked with a
+									'<font face="Verdana" color="red">*</font>' are mandatory</i> <br>
+							</td>
+							<td colspan="5" class="TableBorderTN"
+								style="padding: 5px; text-align: right"><a
+								th:href="@{/ddoast/dcpsChecklistReport}"
+								id="rptBtn_GenerateReport" class="btn">Generate Report</a> <input
+								type="button" name="ResetParams" id="rptBtn_ResetBtn"
+								value="Reset" class="btn"></td>
+						</tr>
+					</tbody>
+				</table>
+				<br>
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

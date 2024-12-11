@@ -1,0 +1,231 @@
+<STYLE type="text/css">
+<!--
+body{
+	font-family:Verdana;
+}
+	
+.TableBorderN {border-style : solid ; border-color :grey; border-width: 1px;}
+
+.TableBorderBN {border-bottom-style : solid ; border-bottom-color :grey; border-bottom-width: 1px;}
+
+.TableBorderRN {border-right-style : solid ; border-right-color :grey; border-right-width: 1px;}
+
+.TableBorderLN {border-left-style : solid ; border-left-color :grey; border-left-width: 1px;}
+
+.TableBorderTN {border-top-style : solid ; border-top-color :#375472; border-top-width: 1px;}
+
+.TableBorderLTN {border-top-style : solid ; border-top-color :grey; border-top-width: 1px;border-left-style : solid ; border-left-color :grey; border-left-width: 1px;}
+
+.TableBorderTRN {border-top-style : solid ; border-top-color :grey; border-top-width: 1px;border-right-style : solid ; border-right-color :grey; border-right-width: 1px;}
+
+.TableBorderRBN {border-bottom-style : solid ; border-bottom-color :grey; border-bottom-width: 1px;border-right-style : solid ; border-right-color :grey; border-right-width: 1px;}
+
+.TableBorderBLN {border-left-style : solid ; border-left-color :grey; border-left-width: 1px;border-bottom-style : solid ; border-bottom-color :grey; border-bottom-width: 1px;}
+
+.TableBorderLRN {border-left-style : solid ; border-left-color :grey; border-left-width: 1px;border-right-style : solid ; border-right-color :grey; border-right-width: 1px;}
+
+.TableBorderRLN {border-left-style : solid ; border-left-color :grey; border-left-width: 1px;border-right-style : solid ; border-right-color :grey; border-right-width: 1px;}
+
+.TableBorderBTN {border-top-style : solid ; border-top-color :grey; border-top-width: 1px;border-bottom-style : solid ; border-bottom-color :grey; border-bottom-width: 1px;}
+
+.TableBorderTBN {border-top-style : solid ; border-top-color :grey; border-top-width: 1px;border-bottom-style : solid ; border-bottom-color :grey; border-bottom-width: 1px;}
+
+.TableBorderLTRN {border-top-style : solid ; border-top-color :grey; border-top-width: 1px;border-left-style : solid ; border-left-color :grey; border-left-width: 1px;border-right-style : solid ; border-right-color :grey; border-right-width: 1px;}
+
+.TableBorderTRBN {border-top-style : solid ; border-top-color :grey; border-top-width: 1px;border-bottom-style : solid ; border-bottom-color :grey; border-bottom-width: 1px;border-right-style : solid ; border-right-color :grey; border-right-width: 1px;}
+
+.TableBorderRBLN {border-bottom-style : solid ; border-bottom-color :grey; border-bottom-width: 1px;border-left-style : solid ; border-left-color :grey; border-left-width: 1px;border-right-style : solid ; border-right-color :grey; border-right-width: 1px;}
+
+.TableBorderBLTN {border-top-style : solid ; border-top-color :grey; border-top-width: 1px;border-bottom-style : solid ; border-bottom-color :grey; border-bottom-width: 1px;border-left-style : solid ; border-left-color :grey; border-left-width: 1px;}
+
+.TableBorderLTRBN {border-top-style : solid ; border-top-color :#4C4C4C; border-top-width: 1px;border-bottom-style : solid ; border-bottom-color :#4C4C4C; border-bottom-width: 1px;border-left-style : solid ; border-left-color :#4C4C4C; border-left-width: 1px;border-right-style : solid ; border-right-color :#4C4C4C; border-right-width: 1px;}
+
+.TableBorderTRBLN {border-top-style : solid ; border-top-color :grey; border-top-width: 1px;border-bottom-style : solid ; border-bottom-color :grey; border-bottom-width: 1px;border-left-style : solid ; border-left-color :grey; border-left-width: 1px;border-right-style : solid ; border-right-color :grey; border-right-width: 1px;}
+
+.TableBorderRBLTN {border-top-style : solid ; border-top-color :grey; border-top-width: 1px;border-bottom-style : solid ; border-bottom-color :grey; border-bottom-width: 1px;border-left-style : solid ; border-left-color :grey; border-left-width: 1px;border-right-style : solid ; border-right-color :grey; border-right-width: 1px;}
+
+.TableBorderBLTRN {border-top-style : solid ; border-top-color :grey; border-top-width: 1px;border-bottom-style : solid ; border-bottom-color :grey; border-bottom-width: 1px;border-left-style : solid ; border-left-color :grey; border-left-width: 1px;border-right-style : solid ; border-right-color :grey; border-right-width: 1px;}
+
+.TableBorderH {border-top-style : solid ; border-top-color :#CCCCCC; border-top-width: 1px;border-bottom-style : solid ; border-bottom-color :#CCCCCC; border-bottom-width: 1px;border-left-style : solid ; border-left-color :#CCCCCC; border-left-width: 1px;border-right-style : solid ; border-right-color :#AEBAC6; border-right-width: 1px;}
+
+.TableBorder {border-top-style : solid ; border-top-color :#F7F7F7; border-top-width: 1px;border-bottom-style : solid ; border-bottom-color :#F7F7F7; border-bottom-width: 1px;border-left-style : solid ; border-left-color :#F7F7F7; border-left-width: 1px;border-right-style : solid ; border-right-color :white; border-right-width: 1px;}
+
+.TableBorder2{border-top-style : solid ; border-top-color :#F7F7F7; border-top-width: 1px;border-bottom-style : solid ; border-bottom-color :#F7F7F7; border-bottom-width: 1px;border-left-style : solid ; border-left-color :#F7F7F7; border-left-width: 1px;border-right-style : solid ; border-right-color :#F7F7F7; border-right-width: 1px;}
+
+.TableBorder3{border-right-color:#F5FCF4}
+
+.TableExtraColBG1{border-top-style : solid ; border-top-color :#F7F7F7; border-top-width: 1px;border-bottom-style : solid ; border-bottom-color :#F7F7F7; border-bottom-width: 1px;border-left-style : solid ; border-left-color :#F7F7F7; border-left-width: 1px;border-right-style : solid ; border-right-color :#F7F7F7; border-right-width: 1px;}
+
+.TableExtraColBG2{border-top-style : solid ; border-top-color :#F7F7F7; border-top-width: 1px;border-bottom-style : solid ; border-bottom-color :#F7F7F7; border-bottom-width: 1px;border-left-style : solid ; border-left-color :#F7F7F7; border-left-width: 1px;border-right-style : solid ; border-right-color :#F7F7F7; border-right-width: 1px;}
+
+.TableBorder4{border-right-color:#AEBAC6} 
+
+-->
+</STYLE>
+
+/**
+* 
+*/
+<style type="text/css">{  }
+/**
+*	Style sheet for hyper text reference
+*/
+a.Unreadfile:link{text-decoration:underline;color:black;font-weight:bold;size:10}
+a.Unreadfile:active{text-decoration:underline;color:black;font-weight:bold;size:10}
+a.Unreadfile:visited{text-decoration:underline;color:black;font-weight:bold;size:10}
+a.Unreadfile:hover{text-decoration:underline;color:black;font-weight:bold;size:10}
+
+a.file:link { text-decoration:underline; color:black;font-weight:normal; font-size:10 }
+a.file:active {  text-decoration:underline; color:black;font-weight:normal; font-size:10} 
+a.file:visited { text-decoration:underline; color:black; font-weight:normal;font-size:10 }
+a.file:hover {  text-decoration:underline; color:navy;font-weight:normal; font-size:10 }
+
+a.pagination:link { text-decoration: none; color:navy;font-weight:normal; font-size:10 }
+a.pagination:active { text-decoration: none;color:navy;font-weight:normal; font-size: 10} 
+a.pagination:visited { text-decoration: none; color:navy; font-weight:normal;font-size:10 }
+a.pagination:hover { text-decoration: none; color:#990033;font-weight:normal; font-size:10 }
+/**
+* Background color for the title which appears as heading in a page
+* 
+*/
+//.TitleBG {background:#FFFFFF;text-decoration: none;font-size:8pt;font-weight:bold;color:Black;}
+.FileInfoBG {background: #F3F3F3}
+.TablerowBG1 {background: #FFFFFF}
+.TablerowBG2 {background: #F7F7F7}
+
+.TableRowFieldBBN { border-bottom-style : solid ; border-bottom-color :#A0A0A0; border-bottom-width: 1px;}
+.TableRowFieldTBN { border-top-style : solid ; border-top-color :#A0A0A0; border-top-width: 1px;}
+.TableRowFieldLBN { border-left-style : solid ; border-left-color :#A0A0A0; border-left-width: 1px;}
+.TableRowFieldRBN { border-right-style : solid ; border-right-color :#A0A0A0; border-right-width: 1px;}
+
+.TableHeaderBG { background :#DEDEDE; border-style:solid; border-color:#909090 }
+.TableHeaderFieldBBN { border-bottom-style : solid ; border-bottom-color :#4C4C4C; border-bottom-width: 1px;}
+.TableHeaderFieldTBN { border-top-style : solid ; border-top-color :#4C4C4C; border-top-width: 1px;}
+.TableHeaderFieldLBN { border-left-style : solid ; border-left-color :#4C4C4C; border-left-width: 1px;}
+.TableHeaderFieldRBN { border-right-style : solid ; border-right-color :#4C4C4C; border-right-width: 1px;}
+
+.HLabel { font-size:10;font-weight:bold;color:black}
+//.Label { text-decoration: none;font-size:10;font-weight:bold;color:#263765}
+.Label { text-decoration: none;font-size:11;font-weight:normal;color:Black}
+.Label2 { text-decoration: none;font-size:10;font-weight:normal;color:Black}
+.Label3 { text-decoration: none;font-size:11;font-weight:normal;color:Black}
+.Label1 { text-decoration: none;font-size:6pt;color:Navy}
+/*.titles{text-align: center;font-size:8pt;color:black;font-weight: bold;}
+.titles{  text-align: center;font-size:8pt;color:#660000;font-weight: bold;}*/
+.titles{font-size: 14px;
+	font-weight: bold;
+	color: #375472;}
+.HeaderLabel { text-decoration: none;font-size:9pt;font-weight:bold;color:#800000}
+.EditableField { text-decoration: none;font-size:8pt;font-weight:bold;color:Black;}
+.EditableField1 { text-decoration: none;font-size:8pt;font-weight:normal;color:Black;}
+.ComputedField { text-decoration: none;font-size:8pt;font-weight:bold;color:Gray}
+.FileInfoBG{background: #F3F3F3}
+/**
+*	Use * for user text fields,means field should be filled in.
+*/
+.UserText { text-decoration: none;font-size:7pt;font-weight:bold;color:Red}
+
+/**
+*	This style sheet for editable text field with 'Navy' color.
+*	BBN - Bottom Bottom Navy
+*	TBN - Top Bottom Navy
+*	LBN	- Left Bottom Navy
+*	RBN - Right Bottom Navy
+*/
+.EditableFieldBBN { text-decoration: none;font-size:8pt;font-weight:bold;color:Black;border-bottom-style : solid ; border-bottom-color :navy; border-bottom-width: 1px;}
+.EditableFieldTBN { text-decoration: none;font-size:8pt;font-weight:bold;color:Black;border-top-style : solid ; border-top-color :navy; border-top-width: 1px;}
+.EditableFieldLBN { text-decoration: none;font-size:8pt;font-weight:bold;color:Black;border-left-style : solid ; border-left-color :navy; border-left-width: 1px;}
+.EditableFieldRBN { text-decoration: none;font-size:8pt;font-weight:bold;color:Black;border-right-style : solid ; border-right-color :navy; border-right-width: 1px;}
+/**
+*	This style sheet for Computed text field with 'Navy' color.
+*	BBN - Bottom Bottom Navy
+*	TBN - Top Bottom Navy
+*	LBN	- Left Bottom Navy
+*	RBN - Right Bottom Navy
+*/
+.ComputedFieldBBN { text-decoration: none;font-size:8pt;font-weight:bold;color:Gray;border-bottom-style : solid ; border-bottom-color :navy; border-bottom-width: 1px;}
+.ComputedFieldTBN { text-decoration: none;font-size:8pt;font-weight:bold;color:Gray;border-top-style : solid ; border-top-color :navy; border-top-width: 1px;}
+.ComputedFieldLBN { text-decoration: none;font-size:8pt;font-weight:bold;color:Gray;border-left-style : solid ; border-left-color :navy; border-left-width: 1px;}
+.ComputedFieldRBN { text-decoration: none;font-size:8pt;font-weight:bold;color:Gray;border-right-style : solid ; border-right-color :navy; border-right-width: 1px;}
+/**
+*	This style sheet for editable text fields with 'Gray' color.
+*	BBN - Bottom Bottom Gray
+*	TBN - Top Bottom Gray
+*	LBN	- Left Bottom Gray
+*	RBN - Right Bottom Gray
+*/
+.EditableFieldBBG { text-decoration: none;font-size:8pt;font-weight:bold;color:Black;border-bottom-style : solid ; border-bottom-color :Gray; border-bottom-width: 1px;}
+.EditableFieldTBG { text-decoration: none;font-size:8pt;font-weight:bold;color:Black;border-top-style : solid ; border-top-color :Gray; border-top-width: 1px;}
+.EditableFieldLBG { text-decoration: none;font-size:8pt;font-weight:bold;color:Black;border-left-style : solid ; border-left-color :Gray; border-left-width: 1px;}
+.EditableFieldRBG { text-decoration: none;font-size:8pt;font-weight:bold;color:Black;border-right-style : solid ; border-right-color :Gray; border-right-width: 1px;}
+/**
+*	This style sheet for computed text field with 'Gray' color.
+*	BBN - Bottom Bottom Gray
+*	TBN - Top Bottom Gray
+*	LBN - Left Bottom Gray
+*	RBN - Right Bottom Gray
+*/
+.ComputedFieldBBG { text-decoration: none;font-size:8pt;font-weight:bold;color:Gray;border-bottom-style : solid ; border-bottom-color :Gray; border-bottom-width: 1px;}
+.ComputedFieldTBG { text-decoration: none;font-size:8pt;font-weight:bold;color:Gray;border-top-style : solid ; border-top-color :Gray; border-top-width: 1px;}
+.ComputedFieldLBG { text-decoration: none;font-size:8pt;font-weight:bold;color:Gray;border-left-style : solid ; border-left-color :Gray; border-left-width: 1px;}
+.ComputedFieldRBG { text-decoration: none;font-size:8pt;font-weight:bold;color:Gray;border-right-style : solid ; border-right-color :Gray; border-right-width: 1px;}
+/**	This style sheet for  Text Field with a Look Of a Label 
+	with Font color 
+	M-Maroon
+	B-Black
+	W-White
+  SM-Selected
+*/
+.LabelFieldM{text-align: left;font-size:8pt;color:#660000;font-weight: bold;border-width:0px;background: #F3F3F3}
+.LabelFieldB{text-align: left;font-size:8pt;color:black;font-weight:normal;border-width:0px;background: #F3F3F3}
+.LabelFieldW{text-align: center;font-size:8pt;color:white;font-weight:bold;border-width:0px;background: #FFFFFF}
+.LabelFieldSM{text-align: center;font-size:8pt;color:#660000;font-weight: bold;border-width:0px;background: #999999}
+
+/**
+*	For Drop Down list box
+*/
+.ListBoxGUI { text-decoration: none;font-size:8pt;font-weight:normal;color:Black}
+/**
+*	For Home Page list box
+*/
+.ListBoxGUIA { text-decoration: none;font-size:8pt;font-weight:bold;color:navy;width:175;}
+.ListBoxGUI2 { text-decoration: none;font-size:8pt;font-weight:bold;color:Black;width:128; }
+.ListBoxGUI1 { text-decoration: none;font-size:8pt;font-weight:bold;color:Black;}
+.ListBoxGUI1 { text-decoration: none;font-size:8pt;font-weight:bold;color:Black;width:129; }
+.ListBoxGUI3 { text-decoration: none;font-size:8pt;font-weight:normal;color:Black;width:300; }
+
+/**
+*	This style sheet for table borders
+*/
+.TableBorderNavy {border-style : solid ; border-color :navy; border-width: 1px;}
+.TableBorderWhite {border-style : solid ; border-color :White; border-width: 1px;}
+.TableBorderGray {border-style : solid ; border-color :Gray; border-width: 1px;}
+/**
+*	This style sheet for Body content
+*/
+/**
+*	Style sheet for table definition
+*/
+.TDPlain { text-decoration: none;font-size:8pt}
+.ActionButton{ font-size:10;width:60}
+.ActionButton1{ font-size:10;width:80}
+.FileActionButton{ font-size:10;width:200}
+.FieldBlack { text-decoration: none;font-size:8pt;font-weight:normal;color:Black;width:135}
+.FieldGrey { text-decoration: none;font-size:8pt;font-weight:bold;color:Gray}
+.FieldBlack1 { text-decoration: none;font-size:8pt;font-weight:normal;color:Black;width:175}
+.FieldBlackSrch { text-decoration: none;font-size:8pt;font-weight:normal;color:Black;width:300}
+.FldHierarchy{
+	font-size: 12px;
+	font-weight: bold;
+	color: #375472;}
+
+.LABLESAFE{background:'#7FFF7F' ; text-decoration: none;font-size:8pt;font-weight:bold;color:Navy;}
+.LABLEUNSAFE{background:'#FF0000';text-decoration: none;font-size:8pt;font-weight:bold;color:Navy;}
+.LABLEC{font- color:'#000080'}
+#content {
+	background: #999999;
+}
+#currentApplication{
+	display:none;
+}
+</STYLE>

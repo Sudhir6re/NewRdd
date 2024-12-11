@@ -1,0 +1,2699 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.postmaster}"></title>
+
+</head>
+<body class="add-post-master-entry">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.dcpsBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.postmaster}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.postmaster}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<form method="post" action="hrms.htm?actionFlag=SubmitAdminPostData"
+				name="frmAdminCrtPost" enctype="multipart/form-data">
+
+
+
+				<fieldset class="tabstyle">
+					<legend>
+						<b>Filter Institute</b>
+					</legend>
+					<table align="center">
+						<tbody>
+							<tr>
+								<td>Taluka</td>
+
+								<td><select name="cmbTaluka" id="cmbTaluka"
+									style="width: 85%, display: inline;">
+										<option title="Select" value="-1">Select</option>
+
+								</select></td>
+
+								<td>DDO Code/Office Name</td>
+								<td><input type="text" id="ddoCodeforFilter"
+									name="ddoCodeforFilter" maxlength="200" size="30"></td>
+
+
+							</tr>
+							<tr>
+								<td colspan="4" align="center"><input id="btnFilter"
+									class="buttontag" type="button" size="5" maxlength="5"
+									value="Filter" onclick="filterInstituteForPostEntry();"
+									name="btnFilter" style="width: 120px;"></td>
+							</tr>
+						</tbody>
+					</table>
+				</fieldset>
+
+
+
+				<div id="tcontent1"
+					style="background-color: rgb(232, 227, 227); border-style: inset; border-color: rgb(178, 71, 0); border-width: thin; display: block;">
+
+					<table class="tabtable" border="0"
+						onkeypress="return submit_frmAdminCrtPostNew(event)">
+
+						<tbody>
+							<tr bgcolor="#BD6C03">
+								<td class="fieldLabel" colspan="4"><font color="#ffffff">
+										<strong>Post Details</strong>
+								</font></td>
+							</tr>
+
+
+
+							<tr>
+								<td style="width: 200px;">Institute Name&nbsp;</td>
+
+								<td><select name="ddoCode" style="width: 500px;"
+									onchange="crtPostForSubDDO()" id="ddoCode"
+									class="selecttag mandatorycontrol"><option
+											value="06710100024">06710100024</option></select>&nbsp;&nbsp;<label
+									class="mandatoryindicator">*</label></td>
+							</tr>
+
+							<tr>
+								<td>Sub Field Department</td>
+								<td width="50%"><select name="cmbSubFieldDept"
+									id="cmbSubFieldDept" style="width: 100%">
+										<option value="-1">------------------------------
+											Select ------------------------------</option>
+
+										<option value="12">Other</option>
+
+										<option value="1">General Higher Education</option>
+
+										<option value="2">Teachers Training</option>
+
+										<option value="3">Univertsity</option>
+
+										<option value="4">Polytechnic</option>
+
+										<option value="5">Pharmacy</option>
+
+										<option value="6">Engineering</option>
+
+										<option value="7">Architecture</option>
+
+										<option value="8">HSC Vocational</option>
+
+										<option value="9">Bifocal</option>
+
+										<option value="10">Technical School</option>
+
+										<option value="11">Arts Education</option>
+
+								</select><label class="mandatoryindicator">*</label></td>
+							</tr>
+
+							<tr>
+								<td><label class="captionTag" id="admin.SelectTypePost">Select
+										Type Of Post</label> &nbsp;</td>
+
+								<td><select name="postTypeCmbBox" style="width: 250px;"
+									onchange="fieldDisplay();onchagevalue();" id="postTypeCmbBox"
+									class="selecttag mandatorycontrol"><option value="-1">------------
+											Select ------------</option>
+										<option value="10001198129">Permanent</option>
+										<option value="10001198155">Statutory</option>
+										<option value="10001198130">Temporary</option></select>&nbsp;&nbsp;<label
+									class="mandatoryindicator">*</label></td>
+
+
+
+							</tr>
+							<tr>
+
+							</tr>
+
+							<tr id="selectpurpose" style="display: none">
+								<td><label class="captionTag" id="admin.Selectpurpose">Select(New
+										Entry/Renewal)</label> &nbsp;</td>
+								<td><select name="purposeCmbBox"
+									onchange="fieldDisplay(); onchagevalue();" id="purposeCmbBox"
+									class="selecttag mandatorycontrol">
+
+										<!-- 	<option value="-1" > -- Select --  -->
+										<option value="3">Entry Of Post
+											<!-- 	<option value="4" > Renewal Of Post -->
+										</option>
+								</select>&nbsp;&nbsp;<label class="mandatoryindicator">*</label></td>
+							</tr>
+
+
+							<tr id="tempCombo" style="display: none;">
+								<td>
+									<!-- Nature of temporary Post  --> <label class="captionTag"
+									id="admin.SelectTypeTempoPost">select Type of Temporary
+										Post</label> &nbsp;
+								</td>
+								<td><select name="tempPostTypeCmbBox"
+									onchange="fieldDisplay();" id="tempPostTypeCmbBox"
+									class="selecttag mandatorycontrol">
+
+										<option value="-1">-- Select Nature Of Temporary Post
+											--</option>
+										<option value="-1">Temporary</option>
+										<option value="-1">Contract</option>
+										<option value="-1">Seasonable</option>
+										<option value="-1">C.R.T.</option>
+										<option value="-1">C.R.P</option>
+										<option value="-1">Honorary</option>
+										<option value="-1">Part Time</option>
+										<option value="-1">Supar Numerarie</option>
+								</select>&nbsp;&nbsp;<label class="mandatoryindicator">*</label></td>
+							</tr>
+
+
+
+							<tr>
+
+								<td class="fieldLabel"><b><label class="captionTag"
+										id="admin.designation">Designation</label></b></td>
+								<td class="fieldLabel"><select name="designationCmb"
+									style="width: 250px;" id="designationCmb"
+									class="selecttag mandatorycontrol">
+
+										<option value="-1">------------ Select ------------</option>
+										<option value="99100001411">A.C.Technician</option>
+
+										<option value="99100001412">Abhirakshak (Maratha
+											Itihas)</option>
+
+										<option value="100553">accountant</option>
+
+										<option value="99100001550">Accounts Assistant</option>
+
+										<option value="100680">Accounts Clerk</option>
+
+										<option value="100682">Accounts Officer</option>
+
+										<option value="99100001390">Animal Care Taker</option>
+
+										<option value="99100001578">Animal House Attendant</option>
+
+										<option value="99100001382">Archaelogical Draughtsman</option>
+
+										<option value="100823">Architect</option>
+
+										<option value="99100001217">Artist Cum Modeler</option>
+
+										<option value="100839">Artist Cum Photographer</option>
+
+										<option value="100555">assistant</option>
+
+										<option value="99100001139">Assistant Accountant</option>
+
+										<option value="99100001551">Assistant Archivist</option>
+
+										<option value="99100001375">Assistant Auditor</option>
+
+										<option value="100892">Assistant Binder</option>
+
+										<option value="100866">Assistant Cashier</option>
+
+										<option value="100922">Assistant Curator</option>
+
+										<option value="100926">Assistant Director</option>
+
+										<option value="99100001415">Assistant
+											Director(Sports)</option>
+
+										<option value="99100001359">Assistant
+											Director,Lifelong Learning and Extension</option>
+
+										<option value="99100001416">Assistant Engineer
+											(Civil)</option>
+
+										<option value="99100001417">Assistant
+											Engineer(Electric)</option>
+
+										<option value="99100001233">Assistant Finance</option>
+
+										<option value="99100001539">Assistant Finance Officer</option>
+
+										<option value="99100001404">Assistant Keeper of
+											Museum</option>
+
+										<option value="100560">assistant Librarian</option>
+
+										<option value="101034">Assistant Plumber</option>
+
+										<option value="99100001130">Assistant Professor</option>
+
+										<option value="99100001418">Assistant Professor/Sub
+											Editor/Research Associate</option>
+
+										<option value="101045">Assistant Programmer</option>
+
+										<option value="99100001419">Assistant Record Keeper</option>
+
+										<option value="101056">Assistant Registrar</option>
+
+										<option value="99100001397">Assistant Registrar
+											(Audit)</option>
+
+										<option value="99100001234">Assistant Section Officer</option>
+
+										<option value="99100001420">Assistant Section Officer
+											(Accounts)</option>
+
+										<option value="99100001298">Assistant Security
+											Officer</option>
+
+										<option value="101074">Assistant Store Keeper</option>
+
+										<option value="101079">Assistant Superintendent</option>
+
+										<option value="99100001421">Assistant Superintendent
+											(Accounts)</option>
+
+										<option value="99100001384">Assistant Telephone
+											Operator</option>
+
+										<option value="101111">Associate Professor</option>
+
+										<option value="101314">Attendant</option>
+
+										<option value="99100001235">Attendant Cum Cook</option>
+
+										<option value="99100001581">Berar</option>
+
+										<option value="101385">Binder</option>
+
+										<option value="99100001424">Building Supervisor</option>
+
+										<option value="105434">caretaker</option>
+
+										<option value="101522">Carpenter</option>
+
+										<option value="99100001425">Carpenter Assistant</option>
+
+										<option value="100566">cashier</option>
+
+										<option value="99100001396">Chair Recainer</option>
+
+										<option value="99100001426">Chemical Analyst</option>
+
+										<option value="101569">Chemical Assistant</option>
+
+										<option value="101575">Chief Accountant</option>
+
+										<option value="99100001555">Civil Draftsman</option>
+
+										<option value="99100001146">Class Four</option>
+
+										<option value="99100001236">Clerk Cum Mistry</option>
+
+										<option value="101700">Clerk Cum Typist</option>
+
+										<option value="99100001428">Co-Ordinator (Sub Centre)</option>
+
+										<option value="101733">Coach</option>
+
+										<option value="99100001306">College Librarian</option>
+
+										<option value="101770">Compounder</option>
+
+										<option value="101771">Compounder-cum-dresser</option>
+
+										<option value="99100001508">Computer Center Head</option>
+
+										<option value="101781">Computer Operator</option>
+
+										<option value="99100001558">Conservationist</option>
+
+										<option value="99100001427">Construction Assistant</option>
+
+										<option value="101799">Controller Of Examination</option>
+
+										<option value="101808">Cook</option>
+
+										<option value="99100001564">Cultural Co-ordinator and
+											Counsellor</option>
+
+										<option value="99100001379">Culturist</option>
+
+										<option value="101888">Curator</option>
+
+										<option value="99100001429">Curator (Archaeology)</option>
+
+										<option value="99100001237">Cyclostyling Operator</option>
+
+										<option value="99100001391">D.G. Set Operator</option>
+
+										<option value="101905">Daftari</option>
+
+										<option value="101921">Dark Room Assistant</option>
+
+										<option value="101927">Data Entry Operator</option>
+
+										<option value="101928">Data Operator</option>
+
+										<option value="99100001570">Database Administator</option>
+
+										<option value="101934">Dean</option>
+
+										<option value="99100001648">Dean Faculty of Commerce
+											and Management</option>
+
+										<option value="99100001632">Dean Faculty of
+											Humanities</option>
+
+										<option value="99100001647">Dean Faculty of
+											Interdisciplinary Studies</option>
+
+										<option value="99100001631">Dean Faculty of Science
+											and Technology</option>
+
+										<option value="99100001563">Deputry Director</option>
+
+										<option value="102040">Deputy Engineer</option>
+
+										<option value="102042">Deputy Engineer (civil)</option>
+
+										<option value="99100001430">Deputy Engineer (ECT)</option>
+
+										<option value="99100001643">Deputy Engineer
+											Electrical</option>
+
+										<option value="99100001238">Deputy Finance</option>
+
+										<option value="99100001537">Deputy Finance and
+											Accounts Officer</option>
+
+										<option value="99100001599">Deputy Finance Officer</option>
+
+										<option value="102048">Deputy Librarian</option>
+
+										<option value="99100001293">Deputy Museum Keeper</option>
+
+										<option value="102055">Deputy Registrar</option>
+
+										<option value="99100001431">Deputy Registrar (Law</option>
+
+										<option value="99100001432">Deputy Registrar
+											(Law/RTI)</option>
+
+										<option value="99100001433">Deputy Registrar (Public
+											Relation)</option>
+
+										<option value="99100001434">Deputy Registrar (VC
+											Office)</option>
+
+										<option value="99100001509">Desktop Publishing (DTP)
+											Operator</option>
+
+										<option value="99100001373">Digital Engineer</option>
+
+										<option value="102083">Director</option>
+
+										<option value="99100001652">Director Examination and
+											Evaluation Board</option>
+
+										<option value="99100001649">Director Knowledge
+											Resource Centre</option>
+
+										<option value="99100001653">Director Lifelong
+											Learning and Extension</option>
+
+										<option value="99100001281">Director of Student
+											Welfare</option>
+
+										<option value="99100001284">Director of Adult
+											Education</option>
+
+										<option value="99100001282">Director of B.C.U.D</option>
+
+										<option value="99100001629">Director of Innovation,
+											Incubation and Linkages</option>
+
+										<option value="99100001358">Director of Lifelong
+											Learning and Extension</option>
+
+										<option value="99100001356">Director of Physical
+											Education</option>
+
+										<option value="99100001283">Director of Sports</option>
+
+										<option value="99100001630">Director of Sports and
+											Physical Education</option>
+
+										<option value="99100001435">Director, Sub-Center</option>
+
+										<option value="99100001367">Director,Board of Extra
+											Mural Studies</option>
+
+										<option value="99100001313">Dispatch Assistant</option>
+
+										<option value="105618">documentalist</option>
+
+										<option value="99100001320">Documentation Assistant</option>
+
+										<option value="102191">Documentation Officer</option>
+
+										<option value="102192">Draftsman</option>
+
+										<option value="99100001573">Draftsman Cum Estimator</option>
+
+										<option value="99100001574">Draftsman Cum
+											Photographer</option>
+
+										<option value="102202">Draughtsman</option>
+
+										<option value="99100001560">Drawing Assistant</option>
+
+										<option value="102209">Dresser</option>
+
+										<option value="100574">driver</option>
+
+										<option value="102232">Driver Cum Mechanic</option>
+
+										<option value="99100001181">Dye House Assistant</option>
+
+										<option value="102365">Editor</option>
+
+										<option value="105650">editorial Assistant</option>
+
+										<option value="99100001436">Electric Inspector</option>
+
+										<option value="99100001299">Electric Overseer</option>
+
+										<option value="102378">Electric Technician</option>
+
+										<option value="99100001600">Electrical Mechanical
+											Research Associate</option>
+
+										<option value="102382">Electrical Supervisor</option>
+
+										<option value="102384">Electrician</option>
+
+										<option value="99100001496">Electrician Grade-II</option>
+
+										<option value="99100001645">Electronics Technician</option>
+
+										<option value="99100001583">Engineering Coolie</option>
+
+										<option value="105673">estate Manager</option>
+
+										<option value="102423">Estate Officer</option>
+
+										<option value="99100001383">Excavation Artist</option>
+
+										<option value="99100001542">Executive Assistant to
+											Pro. Vice Chancellor</option>
+
+										<option value="99100001341">Executive Assistant to
+											Vice-Chancellor</option>
+
+										<option value="102432">Executive Engineer</option>
+
+										<option value="99100001335">Executive Officer</option>
+
+										<option value="99100001309">Extension Programme
+											Co-Ordinator</option>
+
+										<option value="102453">Farras</option>
+
+										<option value="102467">Field Collector</option>
+
+										<option value="102469">Fieldman</option>
+
+										<option value="99100001336">Finance</option>
+
+										<option value="99100001357">Finance and Accounts
+											Officer</option>
+
+										<option value="100579">foreman</option>
+
+										<option value="99100001437">Foreman cum Field
+											Assistant</option>
+
+										<option value="102550">Gangman</option>
+
+										<option value="99100001438">Garden Assistant</option>
+
+										<option value="102553">Garden Coolie</option>
+
+										<option value="99100001439">Garden Superintendant</option>
+
+										<option value="102560">Gardner</option>
+
+										<option value="99100001440">Gardner-Cum-Watchman</option>
+
+										<option value="99100001387">Gas</option>
+
+										<option value="99100001441">Gas and AC Welder</option>
+
+										<option value="99100001497">Gas and Arc Welder</option>
+
+										<option value="99100001545">General Editor</option>
+
+										<option value="99100001239">General Technician</option>
+
+										<option value="102585">Glass Blower</option>
+
+										<option value="102586">Godown Keeper</option>
+
+										<option value="99100001442">Ground Peon</option>
+
+										<option value="99100001322">Grounds men Marker</option>
+
+										<option value="99100001408">Groundsman</option>
+
+										<option value="102622">Halalkhor</option>
+
+										<option value="100583">hamal</option>
+
+										<option value="102640">Havaldar</option>
+
+										<option value="102658">Head Clerk</option>
+
+										<option value="99100001443">Head Clerk cum Accountant</option>
+
+										<option value="102668">Head Cook</option>
+
+										<option value="100585">head Mali</option>
+
+										<option value="99100001243">Head Storekeeper</option>
+
+										<option value="99100001323">Head Watchman</option>
+
+										<option value="99100001244">Health Attendant</option>
+
+										<option value="99100001503">Health Centre Nurse</option>
+
+										<option value="102733">Helper</option>
+
+										<option value="99100001406">Helper to Carpenter</option>
+
+										<option value="99100001407">Helper to Cyclo Assistant</option>
+
+										<option value="99100001562">Helper to Mason</option>
+
+										<option value="99100001580">Helper to Plumber</option>
+
+										<option value="99100001577">Helper to Wireman</option>
+
+										<option value="99100001541">Herbarium Keeper</option>
+
+										<option value="102740">Higher Grade Stenographer</option>
+
+										<option value="99100001380">Horticulturist</option>
+
+										<option value="102797">Hostel Superintendent</option>
+
+										<option value="99100001504">Hostel Superintendent
+											Assistant</option>
+
+										<option value="99100001374">House Manager</option>
+
+										<option value="102825">Information Officer</option>
+
+										<option value="99100001398">Information Scientist</option>
+
+										<option value="99100001247">Information Scientist
+											(Bio Informatics)</option>
+
+										<option value="99100001444">Information Scientist
+											(Library)</option>
+
+										<option value="99100001595">Inspector(Daroga)</option>
+
+										<option value="99100001371">Instructor (Dramatics)</option>
+
+										<option value="105811">instrument Repairer</option>
+
+										<option value="99100001399">Instrumentaion Engineer</option>
+
+										<option value="99100001310">Instrumentation Officer</option>
+
+										<option value="102868">Internal Auditor</option>
+
+										<option value="102883">Jamadar</option>
+
+										<option value="99100001505">Jamadar to VC</option>
+
+										<option value="99100001548">Joint General Editor</option>
+
+										<option value="99100001494">Jr. Scientific Officer
+											(Electronic)</option>
+
+										<option value="100586">junior Accountant</option>
+
+										<option value="99100001250">Junior Accounts Clerk</option>
+
+										<option value="99100001325">Junior Accounts
+											Clerk/Typist</option>
+
+										<option value="99100001184">Junior Analyst</option>
+
+										<option value="99100001445">Junior Assistant
+											(Accounts)</option>
+
+										<option value="99100001378">Junior Assistant
+											(Franking)</option>
+
+										<option value="99100001446">Junior Assistant
+											(General)</option>
+
+										<option value="99100001377">Junior Assistant-cum-Data
+											Entry Operator</option>
+
+										<option value="100551">Junior Clerk</option>
+
+										<option value="103015">Junior Clerk Cum Typist</option>
+
+										<option value="99100001327">Junior Clerk/Typist</option>
+
+										<option value="103025">Junior Electrician</option>
+
+										<option value="103026">Junior Engineer</option>
+
+										<option value="99100001447">Junior Engineer (Civil)</option>
+
+										<option value="99100001448">Junior Engineer (Elect)</option>
+
+										<option value="99100001449">Junior Information
+											Scientist Grade I</option>
+
+										<option value="99100001540">Junior Information
+											Scientist Grade II</option>
+
+										<option value="99100001575">Junior Lab Assistant</option>
+
+										<option value="99100001587">Junior Laboratory
+											Attendent</option>
+
+										<option value="99100001144">Junior Library Assistant</option>
+
+										<option value="99100001145">Junior Micro Analyst</option>
+
+										<option value="99100001450">Junior Office Assistant</option>
+
+										<option value="99100001347">Junior Office
+											Superitendent</option>
+
+										<option value="103046">Junior Scientific Officer</option>
+
+										<option value="99100001337">Junior Steno Typist</option>
+
+										<option value="103053">Junior Stenographer</option>
+
+										<option value="103058">Junior Technical Assistant</option>
+
+										<option value="103060">Junior Technician</option>
+
+										<option value="99100001451">Junior Telephone Operator</option>
+
+										<option value="99100001253">Junior Typist</option>
+
+										<option value="99100001297">Keeper of Museum(Curator)</option>
+
+										<option value="103076">Khansama</option>
+
+										<option value="99100001452">Khansama cum Guest House
+											Attendant</option>
+
+										<option value="99100001646">Lab technician Health</option>
+
+										<option value="103099">Laboratory Assistant</option>
+
+										<option value="103103">Laboratory Attendant</option>
+
+										<option value="99100001453">Laboratory Attendant
+											(Phonetic)</option>
+
+										<option value="99100001254">Laboratory Helper</option>
+
+										<option value="99100001559">Laboratory Mechanic
+											(Physics)</option>
+
+										<option value="99100001362">Laboratory Technical
+											Assistant</option>
+
+										<option value="103112">Laboratory Technician</option>
+
+										<option value="99100001454">Labour-Cum-Attendant</option>
+
+										<option value="99100001255">Labourer cum Hamal</option>
+
+										<option value="99100001256">Ladies Worker</option>
+
+										<option value="103142">Language Laboratory Assistant</option>
+
+										<option value="99100001349">Language Laboratory
+											Technician</option>
+
+										<option value="103158">Law Officer</option>
+
+										<option value="99100001565">Lecturer Scientist</option>
+
+										<option value="103265">Librarian</option>
+
+										<option value="103276">Library Assistant</option>
+
+										<option value="103277">Library Attendant</option>
+
+										<option value="103279">Library Clerk</option>
+
+										<option value="99100001328">Library Peon</option>
+
+										<option value="103283">Lift Man</option>
+
+										<option value="103291">Lineman</option>
+
+										<option value="99100001500">Lineman cum Peon</option>
+
+										<option value="99100001512">Lineman cum Wireman</option>
+
+										<option value="99100001241">Liquid Nitrogen Plan
+											Operator</option>
+
+										<option value="103316">Lower Grade Stenographer</option>
+
+										<option value="99100001455">Machine Attendant</option>
+
+										<option value="103339">Machine Operator</option>
+
+										<option value="103347">Maid Servant</option>
+
+										<option value="103368">Mali</option>
+
+										<option value="103370">Manager</option>
+
+										<option value="99100001363">Map Curator</option>
+
+										<option value="105980">marker</option>
+
+										<option value="103387">Mason</option>
+
+										<option value="99100001388">Mat Assistant</option>
+
+										<option value="103420">Mechanic</option>
+
+										<option value="99100001249">Mechanic Attendant</option>
+
+										<option value="99100001330">Mechanic cum Driver</option>
+
+										<option value="103440">Medical Officer</option>
+
+										<option value="103462">Medical Record Technician</option>
+
+										<option value="103475">Mehtar</option>
+
+										<option value="103494">Metron</option>
+
+										<option value="99100001187">Micro Analyst</option>
+
+										<option value="99100001586">Microbiological Assistant</option>
+
+										<option value="103522">Mistry</option>
+
+										<option value="103550">Mukadam</option>
+
+										<option value="99100001588">Multigrapher</option>
+
+										<option value="103568">Museum Assistant</option>
+
+										<option value="99100001251">Museum Cleaner</option>
+
+										<option value="103570">Museum Keeper</option>
+
+										<option value="99100001381">N.I.S.Coach</option>
+
+										<option value="100592">naik</option>
+
+										<option value="99100001370">Network Administrator</option>
+
+										<option value="99100001571">Network Engineer</option>
+
+										<option value="103625">Nurse</option>
+
+										<option value="99100001331">Nurse cum Secretary</option>
+
+										<option value="99100001456">Nursery School teacher</option>
+
+										<option value="103633">Nursing Orderly</option>
+
+										<option value="99100001252">Office Assistant</option>
+
+										<option value="103662">Office Superintendant</option>
+
+										<option value="103694">Operator</option>
+
+										<option value="99100001644">Operator USIC</option>
+
+										<option value="103716">Overseer</option>
+
+										<option value="99100001544">P A to Director</option>
+
+										<option value="99100001300">Paint House Assistant</option>
+
+										<option value="103799">Peon</option>
+
+										<option value="103814">Peon Cum Hamal</option>
+
+										<option value="99100001346">Peon Cum Laboratory
+											Attendant</option>
+
+										<option value="99100001345">Peon Cum Library
+											Attendant</option>
+
+										<option value="99100001395">Peon-cum-Watchman</option>
+
+										<option value="103830">Personal Assistant</option>
+
+										<option value="99100001342">Personal Assistant to
+											Vice- Chancellor</option>
+
+										<option value="103849">Pharmacist</option>
+
+										<option value="99100001457">Photo Printer</option>
+
+										<option value="103862">Photographer</option>
+
+										<option value="103865">Photographer Cum Artist</option>
+
+										<option value="99100001458">Photographer cum Surveyor
+											cum Draftsman</option>
+
+										<option value="99100001307">Physical Director</option>
+
+										<option value="99100001572">Pilot Plant
+											Superintendent</option>
+
+										<option value="99100001568">Placement and Training
+											Officer</option>
+
+										<option value="99100001369">Placement Officer</option>
+
+										<option value="103890">Plant Collector</option>
+
+										<option value="103896">Plumber</option>
+
+										<option value="103940">Presiding Officer</option>
+
+										<option value="103949">Principal</option>
+
+										<option value="99100001593">Principal Scientific
+											Officer</option>
+
+										<option value="99100001650">Pro Vice Chancellor</option>
+
+										<option value="99100001258">Pro-Vice Chancellor</option>
+
+										<option value="99100001376">Professional Assistant</option>
+
+										<option value="99100001459">Professor/ General
+											Editor/Editor/ Joint General Editor</option>
+
+										<option value="99100001194">Proffessor</option>
+
+										<option value="99100001301">Programme Co-ordinator</option>
+
+										<option value="99100001400">Programme Organizer</option>
+
+										<option value="104022">Programmer</option>
+
+										<option value="99100001460">Programming Assistant</option>
+
+										<option value="104035">Project Officer</option>
+
+										<option value="99100001368">Project Officer,Lifelong
+											Learning and Extension</option>
+
+										<option value="104045">Proof Reader</option>
+
+										<option value="104073">Public Health Nurse</option>
+
+										<option value="104078">Public Relation Officer</option>
+
+										<option value="99100001511">Publication Officer</option>
+
+										<option value="100611">pump Operator</option>
+
+										<option value="104091">Punch Operator</option>
+
+										<option value="104094">Purchase Officer</option>
+
+										<option value="99100001333">Qualified Attendant</option>
+
+										<option value="99100001594">Qualified Library
+											Assistant</option>
+
+										<option value="99100001566">Reader Scientist</option>
+
+										<option value="104120">Receptionist</option>
+
+										<option value="104124">Record Keeper</option>
+
+										<option value="104125">Record Keeper Cum Clerk</option>
+
+										<option value="99100001259">Registrar (Kulsachiv)</option>
+
+										<option value="99100001275">Registrar (Prabandhak)</option>
+
+										<option value="104169">Research Assistant</option>
+
+										<option value="99100001461">Research Assistant /
+											Editorial Assistant</option>
+
+										<option value="99100001351">Research Associate</option>
+
+										<option value="99100001462">Research Equipment Keeper
+											cum Research Typist</option>
+
+										<option value="99100001361">Research Investigator</option>
+
+										<option value="99100001638">Research Technician</option>
+
+										<option value="104257">Sanitory Inspector</option>
+
+										<option value="104277">Scientific Assistant</option>
+
+										<option value="99100001463">Scientific Officer Grade
+											I</option>
+
+										<option value="99100001567">Scientist Cum Lecturer/
+											Research Associate</option>
+
+										<option value="99100001360">Secretary-cum-Technical
+											Co-ordinator</option>
+
+										<option value="99100001260">Section Cutter</option>
+
+										<option value="99100001265">Section Cutter cum
+											Grinder</option>
+
+										<option value="104302">Section Officer</option>
+
+										<option value="99100001464">Section Officer
+											(Accounts)</option>
+
+										<option value="99100001410">Section Officer (Central
+											Workshop)</option>
+
+										<option value="99100001465">Section Officer (D.T.P.)</option>
+
+										<option value="99100001401">Section Officer (Garden)</option>
+
+										<option value="99100001466">Section Officer (General)</option>
+
+										<option value="104315">Security Guard</option>
+
+										<option value="99100001268">Security Guard/ Watchman</option>
+
+										<option value="104316">Security Officer</option>
+
+										<option value="99100001270">Security Supervisor</option>
+
+										<option value="104319">Selection Grade Clerk</option>
+
+										<option value="99100001590">Semiskilled Attendant</option>
+
+										<option value="99100001182">Senior Analyst</option>
+
+										<option value="104343">Senior Assistant</option>
+
+										<option value="99100001467">Senior Assistant
+											(Accounts)</option>
+
+										<option value="99100001556">Senior Assistant (Garden)</option>
+
+										<option value="99100001468">Senior Assistant
+											(General)</option>
+
+										<option value="100620">senior Clerk</option>
+
+										<option value="106296">senior Electrician</option>
+
+										<option value="104385">Senior Laboratory Assistant</option>
+
+										<option value="99100001271">Senior Law Officer</option>
+
+										<option value="104388">Senior Library Assistant</option>
+
+										<option value="99100001543">Senior Scale Technician</option>
+
+										<option value="104407">Senior Scientific Officer</option>
+
+										<option value="104417">Senior Statistical Assistant</option>
+
+										<option value="99100001272">Senior Stenographer</option>
+
+										<option value="106320">senior Storekeeper</option>
+
+										<option value="104421">Senior Technical Assistant</option>
+
+										<option value="104422">Senior Technician</option>
+
+										<option value="99100001561">Senior Telephone Operator</option>
+
+										<option value="99100001469">Senior Typist clerk</option>
+
+										<option value="99100001470">Senior Wireman</option>
+
+										<option value="104437">Serviceman</option>
+
+										<option value="104463">Sister Tutor</option>
+
+										<option value="99100001208">Site Engineer</option>
+
+										<option value="104467">Skilled Worker</option>
+
+										<option value="99100001591">Soap Attendent</option>
+
+										<option value="99100001471">Sr. Clerk (Accounts)</option>
+
+										<option value="99100001472">Sr. Clerk (General Admin)</option>
+
+										<option value="99100001473">Sr. Programmer</option>
+
+										<option value="104571">Staff Nurse</option>
+
+										<option value="99100001501">Stage Helper</option>
+
+										<option value="99100001385">Stage Light Expert</option>
+
+										<option value="99100001393">Stage Light Helper</option>
+
+										<option value="99100001476">Statistical Analyst</option>
+
+										<option value="104591">Statistical Assistant</option>
+
+										<option value="104594">Statistical Clerk</option>
+
+										<option value="104596">Statistical Officer</option>
+
+										<option value="104598">Statistician</option>
+
+										<option value="104623">Steno Typist</option>
+
+										<option value="104634">Stenographer</option>
+
+										<option value="99100001403">Stenographer (Junior
+											Grade)</option>
+
+										<option value="99100001402">Stenographer (Senior
+											Grade)</option>
+
+										<option value="104675">Stenographer(lower Grade)</option>
+
+										<option value="104695">Store Assistant</option>
+
+										<option value="104699">Store Clerk</option>
+
+										<option value="104704">Store Keeper</option>
+
+										<option value="99100001365">Studio Technician</option>
+
+										<option value="104735">Sub Editor</option>
+
+										<option value="104774">Superintendent</option>
+
+										<option value="99100001554">Superintendent (Garden)</option>
+
+										<option value="99100001553">Superintendent (Record)</option>
+
+										<option value="99100001477">Superitendant (Accounts)</option>
+
+										<option value="99100001478">Superitendant
+											(Excavation)</option>
+
+										<option value="104820">Supervisor</option>
+
+										<option value="99100001479">Supervisor (Construction)</option>
+
+										<option value="104863">Surveyor</option>
+
+										<option value="100627">sweeper</option>
+
+										<option value="99100001261">Sweeper Cum Coolie</option>
+
+										<option value="99100001266">Sweeper Cum Palm House
+											Caretaker</option>
+
+										<option value="104888">System Analyst</option>
+
+										<option value="99100001480">System Expert</option>
+
+										<option value="99100001552">System Programmer</option>
+
+										<option value="99100001481">Tabla Player</option>
+
+										<option value="99100001482">Tabulation Assistant</option>
+
+										<option value="100630">technical Assistant</option>
+
+										<option value="99100001483">Technical Assistant
+											(Computer Programmer)</option>
+
+										<option value="99100001484">Technical Assistant
+											(Linguistic Laboratory)</option>
+
+										<option value="99100001485">Technical Assistant
+											(Maintanance)</option>
+
+										<option value="99100001486">Technical Assistant
+											(Photography)</option>
+
+										<option value="99100001597">Technical Assistant (RVK)</option>
+
+										<option value="99100001273">Technical Assistant
+											Librarian</option>
+
+										<option value="99100001386">Technical
+											Assistant-cum-Welder</option>
+
+										<option value="104952">Technical Officer</option>
+
+										<option value="99100001487">Technical Staff</option>
+
+										<option value="104956">Technician</option>
+
+										<option value="99100001488">Technician (Electrical)</option>
+
+										<option value="99100001489">Technician (General)</option>
+
+										<option value="99100001596">Technician (RVK)</option>
+
+										<option value="99100001616">Technician A</option>
+
+										<option value="99100001617">Technician B</option>
+
+										<option value="99100001618">Technician C</option>
+
+										<option value="99100001274">Technician Cum Draftsman</option>
+
+										<option value="99100001557">Technician cum Laboratory
+											Assistant</option>
+
+										<option value="99100001276">Technician Mycology</option>
+
+										<option value="104964">Telephone Attendant</option>
+
+										<option value="104969">Telephone Operator</option>
+
+										<option value="104983">Time Keeper</option>
+
+										<option value="104992">Tractor Driver</option>
+
+										<option value="99100001507">Trained Attendent</option>
+
+										<option value="99100001277">Trained Nurse</option>
+
+										<option value="99100001278">Trainee Programmer</option>
+
+										<option value="105019">Turner</option>
+
+										<option value="99100001601">Tutor Musician</option>
+
+										<option value="99100001389">Tutor-cum-Technical
+											Assistant</option>
+
+										<option value="99100001490">Typist/ Clerk (senior)</option>
+
+										<option value="99100001491">U.P.S. Technician</option>
+
+										<option value="99100001409">University Dy. Engineer</option>
+
+										<option value="99100001104">University Engineer</option>
+
+										<option value="99100001305">University Librarian</option>
+
+										<option value="99100001279">Vice-Chancellor</option>
+
+										<option value="99100001492">Vidyut Aveshak</option>
+
+										<option value="105086">Ward Boy</option>
+
+										<option value="99100001493">Warden for Ladies Hostel</option>
+
+										<option value="105094">Watchman</option>
+
+										<option value="105110">Welder</option>
+
+										<option value="105124">Wireman</option>
+
+										<option value="99100001576">Wireman cum Pump Operator</option>
+
+										<option value="105143">Workshop Attendant</option>
+
+										<option value="105145">Workshop Foreman</option>
+
+										<option value="99100001229">Workshop Mechanic</option>
+
+										<option value="105151">Workshop Superintendent</option>
+
+										<option value="105173">X-ray Technician</option>
+
+										<option value="105176">Xerox Machine Operator</option>
+
+										<option value="99100001498">Xerox Machine Operator
+											(Cyclo Assistant)</option>
+
+										<option value="105175">Xerox Operator</option>
+
+								</select>&nbsp;&nbsp;<label class="mandatoryindicator">*</label></td>
+								<!-- added by vaibhav tyagi: start -->
+
+							</tr>
+							<tr>
+								<td class="fieldLabel">Subject</td>
+								<td class="fieldLabel"><select name="subjectCmb"
+									style="width: 250px;" id="subjectCmb"
+									class="selecttag mandatorycontrol">
+
+										<option value="-1">------------ Select ------------</option>
+										<option value="Mathematics(PT)">Mathematics(PT)</option>
+
+										<option value="Politics(PT)">Politics(PT)</option>
+
+										<option value="Home Economics">Home Economics</option>
+
+										<option value="Home Economics">Home Economics</option>
+
+										<option value="Home Science Extension Education">Home
+											Science Extension Education</option>
+
+										<option value="Food Nutrition">Food Nutrition</option>
+
+										<option value="Child Development">Child Development</option>
+
+										<option value="Home Management">Home Management</option>
+
+										<option value="Material Science">Material Science</option>
+
+										<option value="Social Work">Social Work</option>
+
+										<option value="Dramatics">Dramatics</option>
+
+										<option value="Public Administration">Public
+											Administration</option>
+
+										<option value="Environmental Science">Environmental
+											Science</option>
+
+										<option value="Computer Science &amp; Information Technology">Computer
+											Science &amp; Information Technology</option>
+
+										<option value="Chemical Technology">Chemical
+											Technology</option>
+
+										<option value="Tourism Administration">Tourism
+											Administration</option>
+
+										<option value="Bio Technology">Bio Technology</option>
+
+										<option value="Pali &amp; Buddhism">Pali &amp;
+											Buddhism</option>
+
+										<option value="Journalism &amp; Mass Communication">Journalism
+											&amp; Mass Communication</option>
+
+										<option value="Management Science">Management Science</option>
+
+										<option value="Water &amp; Land Management">Water
+											&amp; Land Management</option>
+
+										<option value="Chinese">Chinese</option>
+
+										<option value="NIS Coach">NIS Coach</option>
+
+										<option value="Sahkar">Sahkar</option>
+
+										<option value="Applied Mechanics">Applied Mechanics</option>
+
+										<option value="Sugar">Sugar</option>
+
+										<option value="Instrument">Instrument</option>
+
+										<option value="Cooperation">Cooperation</option>
+
+										<option value="Community Development and Extension">Community
+											Development and Extension</option>
+
+										<option value="Ecology and Applied Biology">Ecology
+											and Applied Biology</option>
+
+										<option value="Dramatics">Dramatics</option>
+
+										<option value="Public Administration">Public
+											Administration</option>
+
+										<option value="Environmental Science">Environmental
+											Science</option>
+
+										<option value="Computer Science and Information Technology">Computer
+											Science and Information Technology</option>
+
+										<option value="Chemical Technology">Chemical
+											Technology</option>
+
+										<option value="Tourism Administration">Tourism
+											Administration</option>
+
+										<option value="Bio-Technology">Bio-Technology</option>
+
+										<option value="Pali and Buddhism">Pali and Buddhism</option>
+
+										<option value="Journalism and Mass Communication">Journalism
+											and Mass Communication</option>
+
+										<option value="Management Science">Management Science</option>
+
+										<option value="Water and Land Management">Water and
+											Land Management</option>
+
+										<option value="Chinese">Chinese</option>
+
+										<option value="NIS Coach">NIS Coach</option>
+
+										<option value="Horticulture">Horticulture</option>
+
+										<option value="Industrial chemistry">Industrial
+											chemistry</option>
+
+										<option value="Fishery science">Fishery science</option>
+
+										<option value="Dairy science">Dairy science</option>
+
+										<option value="Military science">Military science</option>
+
+										<option value="Fitter">Fitter</option>
+
+										<option value="Welder">Welder</option>
+
+										<option value="Carpentor">Carpentor</option>
+
+										<option value="Plumber">Plumber</option>
+
+										<option value="Structural">Structural</option>
+
+										<option value="Computer Technology">Computer
+											Technology</option>
+
+										<option value="Applied Mechanics">Applied Mechanics</option>
+
+										<option value="Dye Stuff Technolgy">Dye Stuff
+											Technolgy</option>
+
+										<option value="Fibers and Textile Processing Technology">Fibers
+											and Textile Processing Technology</option>
+
+										<option value="Food Engineering And Technology">Food
+											Engineering And Technology</option>
+
+										<option value="Oils, Oleochemicals and Surfactant Technolgy">Oils,
+											Oleochemicals and Surfactant Technolgy</option>
+
+										<option value="Pharmaceutical Science and Technology">Pharmaceutical
+											Science and Technology</option>
+
+										<option value="General Engineering">General
+											Engineering</option>
+
+										<option value="Industrial Electronics">Industrial
+											Electronics</option>
+
+										<option value="Plastic Engineering">Plastic
+											Engineering</option>
+
+										<option value="Urdu">Urdu</option>
+
+										<option value="Urdu / Persian">Urdu / Persian</option>
+
+										<option value="Islamic Culture">Islamic Culture</option>
+
+										<option value="Physics and Electronics">Physics and
+											Electronics</option>
+
+										<option value="Defence Studies">Defence Studies</option>
+
+										<option value="Home Economics">Home Economics</option>
+
+										<option value="Mathematics and Statistics">Mathematics
+											and Statistics</option>
+
+										<option value="Applied Physiology">Applied Physiology</option>
+
+										<option value="Sahkar">Sahkar</option>
+
+										<option value="Instrumentation">Instrumentation</option>
+
+										<option value="Electronics and Telecommunication">Electronics
+											and Telecommunication</option>
+
+										<option value="NA">NA</option>
+
+										<option value="Ardhmagdhi">Ardhmagdhi</option>
+
+										<option value="Anthropology">Anthropology</option>
+
+										<option value="Accounts ">Accounts</option>
+
+										<option value="General">General</option>
+
+										<option value="Not Applicable">Not Applicable</option>
+
+										<option value="A.I.Culture">A.I.Culture</option>
+
+										<option value="Accountancy">Accountancy</option>
+
+										<option value="Accountancy(Arts CCG)">Accountancy(Arts
+											CCG)</option>
+
+										<option value="Accountancy(PT)">Accountancy(PT)</option>
+
+										<option value="Accountancy(Part Time)">Accountancy(Part
+											Time)</option>
+
+										<option value="Accountancy &amp; Auditing">Accountancy
+											&amp; Auditing</option>
+
+										<option value="African Studies">African Studies</option>
+
+										<option value="Analytical Chemistry">Analytical
+											Chemistry</option>
+
+										<option value="Animal Science &amp; Dairy">Animal
+											Science &amp; Dairy</option>
+
+										<option value="Applied Linguistic">Applied Linguistic</option>
+
+										<option value="Applied Psychology">Applied Psychology</option>
+
+										<option value="Applied Art">Applied Art</option>
+
+										<option value="Arabic">Arabic</option>
+
+										<option value="Arts">Arts</option>
+
+										<option value="Arts Pune">Arts Pune</option>
+
+										<option value="Arts &amp; Commerce Mumbai">Arts &amp;
+											Commerce Mumbai</option>
+
+										<option value="Arts &amp; Painting(Pune)">Arts &amp;
+											Painting(Pune)</option>
+
+										<option value="Arts &amp; Painting">Arts &amp;
+											Painting</option>
+
+										<option value="Arts &amp; Painting(Arts CCG)">Arts
+											&amp; Painting(Arts CCG)</option>
+
+										<option value="Art Teachers Diploma">Art Teachers
+											Diploma</option>
+
+										<option value="Auditing">Auditing</option>
+
+										<option value="Auto Engineering Technician">Auto
+											Engineering Technician</option>
+
+										<option value="Bakery &amp; Confectionary">Bakery
+											&amp; Confectionary</option>
+
+										<option value="Banking">Banking</option>
+
+										<option value="Biology">Biology</option>
+
+										<option value="Biochemistry">Biochemistry</option>
+
+										<option value="Botany">Botany</option>
+
+										<option value="Building Maintenance">Building
+											Maintenance</option>
+
+										<option value="Business Communication">Business
+											Communication</option>
+
+										<option value="Business Eco.">Business Eco.</option>
+
+										<option value="Business Law">Business Law</option>
+
+										<option value="Business Law(PT)">Business Law(PT)</option>
+
+										<option value="Business Law Part Time">Business Law
+											Part Time</option>
+
+										<option value="Chemical Plant Operation">Chemical
+											Plant Operation</option>
+
+										<option value="Chemistry">Chemistry</option>
+
+										<option value="Ceramic and Pottery">Ceramic and
+											Pottery</option>
+
+										<option value="Child Care">Child Care</option>
+
+										<option value="Civics &amp; Politics">Civics &amp;
+											Politics</option>
+
+										<option value="CMC">CMC</option>
+
+										<option value="Computer Science">Computer Science</option>
+
+										<option value="Comm. (Arts Pune) PT">Comm. (Arts
+											Pune) PT</option>
+
+										<option value="Commerce">Commerce</option>
+
+										<option value="Commerce (Arts CCG)">Commerce (Arts
+											CCG)</option>
+
+										<option value="Commerce (Arts Pune)">Commerce (Arts
+											Pune)</option>
+
+										<option value="Commerce (Pune)">Commerce (Pune)</option>
+
+										<option value="Commerce Part Time">Commerce Part Time</option>
+
+										<option value="Commu. Media for Child">Commu. Media
+											for Child</option>
+
+										<option value="Communication Ext.">Communication Ext.</option>
+
+										<option value="Community Resource Management">Community
+											Resource Management</option>
+
+										<option value="Community Resource Mgt">Community
+											Resource Mgt</option>
+
+										<option value="Community Resource Mgt (PT)">Community
+											Resource Mgt (PT)</option>
+
+										<option value="Computer Science">Computer Science</option>
+
+										<option value="Computer Technie">Computer Technie</option>
+
+										<option value="Cont. &amp; Adult Edu (Bhavnagar)">Cont.
+											&amp; Adult Edu (Bhavnagar)</option>
+
+										<option value="Cont. &amp; Adult Edu (Pune)">Cont.
+											&amp; Adult Edu (Pune)</option>
+
+										<option value="Cont. &amp; Adult Edu.">Cont. &amp;
+											Adult Edu.</option>
+
+										<option value="Cookery">Cookery</option>
+
+										<option value="Cre &amp; P Sch. Mgt.">Cre &amp; P
+											Sch. Mgt.</option>
+
+										<option value="Crop-Science">Crop-Science</option>
+
+										<option value="Dairy Technology">Dairy Technology</option>
+
+										<option value="Dance">Dance</option>
+
+										<option value="Dir. Physical Edu.">Dir. Physical Edu.</option>
+
+										<option value="Drawing &amp; Painting">Drawing &amp;
+											Painting</option>
+
+										<option value="Economics">Economics</option>
+
+										<option value="Economics (Arts CCG)">Economics (Arts
+											CCG)</option>
+
+										<option value="Economics (Arts Pune)">Economics (Arts
+											Pune)</option>
+
+										<option value="Economics (PGSR CCG)">Economics (PGSR
+											CCG)</option>
+
+										<option value="Economics (PGSR Pune)">Economics (PGSR
+											Pune)</option>
+
+										<option value="Economics (Pune)">Economics (Pune)</option>
+
+										<option value="Education">Education</option>
+
+										<option value="Education (Pune)">Education (Pune)</option>
+
+										<option value="Education MGMT.">Education MGMT.</option>
+
+										<option value="Education Technology">Education
+											Technology</option>
+
+										<option value="Electrical Maintenance">Electrical
+											Maintenance</option>
+
+										<option value="Electronics">Electronics</option>
+
+										<option value="Electronics Technology">Electronics
+											Technology</option>
+
+										<option
+											value="V3 - Elements of Electrical and Electronics Technology">V3
+											- Elements of Electrical and Electronics Technology</option>
+
+										<option value="V2 - Elements of Mech. Eng.">V2 -
+											Elements of Mech. Eng.</option>
+
+										<option value="EMRDA">EMRDA</option>
+
+										<option value="Engi">Engi</option>
+
+										<option value="English">English</option>
+
+										<option value="English (Arts CCG)">English (Arts CCG)</option>
+
+										<option value="English (Arts Pune)">English (Arts
+											Pune)</option>
+
+										<option value="English (H.Sc Pune)">English (H.Sc
+											Pune)</option>
+
+										<option value="English (PGSR CCG)">English (PGSR CCG)</option>
+
+										<option value="English (Pune)">English (Pune)</option>
+
+										<option value="English Part Time">English Part Time</option>
+
+										<option value="Enviro. &amp; Travel &amp; Tourism">Enviro.
+											&amp; Travel &amp; Tourism</option>
+
+										<option value="Eurasian Studies">Eurasian Studies</option>
+
+										<option value="EVS">EVS</option>
+
+										<option value="EVS (PT)">EVS (PT)</option>
+
+										<option value="Extension Edu.">Extension Edu.</option>
+
+										<option value="Extension Edu.(H. Sc. Pune)">Extension
+											Edu.(H. Sc. Pune)</option>
+
+										<option value="Family Res. Mgmt">Family Res. Mgmt</option>
+
+										<option value="Family Res. Mgmt (H. Sc. Pune)">Family
+											Res. Mgmt (H. Sc. Pune)</option>
+
+										<option value="Family Res. Mgmt (H.Sc. Pune) PT">Family
+											Res. Mgmt (H.Sc. Pune) PT</option>
+
+										<option value="Family Res. Mgmt (PT)">Family Res.
+											Mgmt (PT)</option>
+
+										<option value="Family Res. Mgmt (Pune)">Family Res.
+											Mgmt (Pune)</option>
+
+										<option value="FC">FC</option>
+
+										<option value="FC Part Time">FC Part Time</option>
+
+										<option value="Fish Processing Technology">Fish
+											Processing Technology</option>
+
+										<option value="Food Sci &amp; Nutri. (H.Sc. Pune) PT">Food
+											Sci &amp; Nutri. (H.Sc. Pune) PT</option>
+
+										<option value="Food Sci. &amp; Nutri (H.Sc. Pune)">Food
+											Sci. &amp; Nutri (H.Sc. Pune)</option>
+
+										<option value="Food Sci. &amp; Nutrition (Pune)">Food
+											Sci. &amp; Nutrition (Pune)</option>
+
+										<option value="Food Science &amp; Nutrition">Food
+											Science &amp; Nutrition</option>
+
+										<option value="Food Science &amp; Nutrition (PT)">Food
+											Science &amp; Nutrition (PT)</option>
+
+										<option value="Foundation Course">Foundation Course</option>
+
+										<option value="French">French</option>
+
+										<option value="Fresh Water &amp; Fish Culture">Fresh
+											Water &amp; Fish Culture</option>
+
+										<option value="Foundation Course">Foundation Course</option>
+
+										<option value="FSN">FSN</option>
+
+										<option value="General Civil Engg.">General Civil
+											Engg.</option>
+
+										<option value="Geography">Geography</option>
+
+										<option value="Geography (Arts CCG)">Geography (Arts
+											CCG)</option>
+
+										<option value="Geography (Arts Pune)">Geography (Arts
+											Pune)</option>
+
+										<option value="Geography (Arts Pune) PT">Geography
+											(Arts Pune) PT</option>
+
+										<option value="Geography (PGSR Pune)">Geography (PGSR
+											Pune)</option>
+
+										<option value="Geography (PT)">Geography (PT)</option>
+
+										<option value="Geography (Pune)">Geography (Pune)</option>
+
+										<option value="Geology">Geology</option>
+
+										<option value="German">German</option>
+
+										<option value="Guidance &amp; Counseling">Guidance
+											&amp; Counseling</option>
+
+										<option value="Gujarati">Gujarati</option>
+
+										<option value="Gujarati (Arts CCG)">Gujarati (Arts
+											CCG)</option>
+
+										<option value="H. Sc. &amp; Extension Edu.">H. Sc.
+											&amp; Extension Edu.</option>
+
+										<option value="Hindi">Hindi</option>
+
+										<option value="Hindi (Arts CCG)">Hindi (Arts CCG)</option>
+
+										<option value="Hindi (Arts Pune)">Hindi (Arts Pune)</option>
+
+										<option value="Hindi (PGSR CCG)">Hindi (PGSR CCG)</option>
+
+										<option value="Hindi (PGSR Pune)">Hindi (PGSR Pune)</option>
+
+										<option value="Hindi (PGSR Pune) PT">Hindi (PGSR
+											Pune) PT</option>
+
+										<option value="Hindi (PT)">Hindi (PT)</option>
+
+										<option value="Hindi (Pune)">Hindi (Pune)</option>
+
+										<option value="History">History</option>
+
+										<option value="History FC (Arts CCG)">History FC
+											(Arts CCG)</option>
+
+										<option value="Home Science">Home Science</option>
+
+										<option value="Home Science (Pune)">Home Science
+											(Pune)</option>
+
+										<option value="History (PT)">History (PT)</option>
+
+										<option value="Horticulture">Horticulture</option>
+
+										<option value="Human Development">Human Development</option>
+
+										<option value="Human Development (H. Sc. Pune)">Human
+											Development (H. Sc. Pune)</option>
+
+										<option value="Human Development (PT)">Human
+											Development (PT)</option>
+
+										<option value="Human Development (Pune)">Human
+											Development (Pune)</option>
+
+										<option value="Inland Fisheries">Inland Fisheries</option>
+
+										<option value="Interior Decoration">Interior
+											Decoration</option>
+
+										<option value="Islamic Studies">Islamic Studies</option>
+
+										<option value="Insurance">Insurance</option>
+
+										<option value="V1 - Introduction to Basic Technology">V1
+											- Introduction to Basic Technology</option>
+
+										<option value="Kannada">Kannada</option>
+
+										<option value="Law">Law</option>
+
+										<option value="law (PT)">law (PT)</option>
+
+										<option value="Library">Library</option>
+
+										<option value="Library &amp; Info. Science">Library
+											&amp; Info. Science</option>
+
+										<option value="Library Science">Library Science</option>
+
+										<option value="Life Sciences">Life Sciences</option>
+
+										<option value="Linguistics">Linguistics</option>
+
+										<option value="Marathi">Marathi</option>
+
+										<option value="Marathi (Arts CCG)">Marathi (Arts CCG)</option>
+
+										<option value="Marathi (Arts Pune)">Marathi (Arts
+											Pune)</option>
+
+										<option value="Marathi (Mumbai)">Marathi (Mumbai)</option>
+
+										<option value="Marathi (PT)">Marathi (PT)</option>
+
+										<option value="Marathi Pune">Marathi Pune</option>
+
+										<option value="Maths">Maths</option>
+
+										<option value="Mathematics">Mathematics</option>
+
+										<option value="Microbiology">Microbiology</option>
+
+										<option value="Music">Music</option>
+
+										<option value="Music (Arts CCG)">Music (Arts CCG)</option>
+
+										<option value="Music (Arts Pune)">Music (Arts Pune)</option>
+
+										<option value="Music (Pune)">Music (Pune)</option>
+
+										<option value="Musician">Musician</option>
+
+										<option value="Mechanical Technology">Mechanical
+											Technology</option>
+
+										<option value="Mechanical Maintenance">Mechanical
+											Maintenance</option>
+
+										<option value="Medical Lab. Technician">Medical Lab.
+											Technician</option>
+
+										<option value="Mktg. &amp; Salesmanship">Mktg. &amp;
+											Salesmanship</option>
+
+										<option value="MLT Technician">MLT Technician</option>
+
+										<option value="M. R. E. D. A.">M. R. E. D. A.</option>
+
+										<option value="N.A.">N.A.</option>
+
+										<option value="Nursing">Nursing</option>
+
+										<option value="Nursing (Coll.)">Nursing (Coll.)</option>
+
+										<option value="Office Management">Office Management</option>
+
+										<option value="Ophthalmic Technician">Ophthalmic
+											Technician</option>
+
+										<option value="Pali">Pali</option>
+
+										<option value="Persian">Persian</option>
+
+										<option value="Philosophy">Philosophy</option>
+
+										<option value="Phy. Education">Phy. Education</option>
+
+										<option value="Physics">Physics</option>
+
+										<option value="Physiology (H. Sc. Pune)">Physiology
+											(H. Sc. Pune)</option>
+
+										<option value="Physiology (H.Sc.Pune) PT">Physiology
+											(H.Sc.Pune) PT</option>
+
+										<option value="Physics">Physics</option>
+
+										<option value="Psychology">Psychology</option>
+
+										<option value="Psychology (Arts CCG)">Psychology
+											(Arts CCG)</option>
+
+										<option value="Psychology (Arts Pune)">Psychology
+											(Arts Pune)</option>
+
+										<option value="Psychology (Pune)">Psychology (Pune)</option>
+
+										<option value="Political Science">Political Science</option>
+
+										<option value="Political Science (Arts CCG)">Political
+											Science (Arts CCG)</option>
+
+										<option value="Politics">Politics</option>
+
+										<option value="Post Harvest Technology">Post Harvest
+											Technology</option>
+
+										<option value="Poultry Production">Poultry Production</option>
+
+										<option value="Purchasing &amp; Store-Keeping">Purchasing
+											&amp; Store-Keeping</option>
+
+										<option value="Res. Cen. For Women Study">Res. Cen.
+											For Women Study</option>
+
+										<option
+											value="Rep. Ment. &amp; Rewinding of Electrical Motors">Rep.
+											Ment. &amp; Rewinding of Electrical Motors</option>
+
+										<option value="Rural Development">Rural Development</option>
+
+										<option value="Russian">Russian</option>
+
+										<option value="Rachna Sharir">Rachna Sharir</option>
+
+										<option value="Sanskrit">Sanskrit</option>
+
+										<option value="Sanskrit (Arts CCG)">Sanskrit (Arts
+											CCG)</option>
+
+										<option value="Sanskrut (PT)">Sanskrut (PT)</option>
+
+										<option value="Sculpture and Modeling">Sculpture and
+											Modeling</option>
+
+										<option value="Science">Science</option>
+
+										<option value="Science (H. Sc. Pune)">Science (H. Sc.
+											Pune)</option>
+
+										<option value="Scoter &amp; Motorcycle Servicing">Scoter
+											&amp; Motorcycle Servicing</option>
+
+										<option value="Seed Production Technology">Seed
+											Production Technology</option>
+
+										<option value="Sindhi">Sindhi</option>
+
+										<option value="Small Indl. &amp; Self Emp.">Small
+											Indl. &amp; Self Emp.</option>
+
+										<option value="Sociology">Sociology</option>
+
+										<option value="Social Science">Social Science</option>
+
+										<option value="Sociology (Arts CCG)">Sociology (Arts
+											CCG)</option>
+
+										<option value="Sociology (PT)">Sociology (PT)</option>
+
+										<option value="Spl. Education">Spl. Education</option>
+
+										<option value="Statistics">Statistics</option>
+
+										<option value="Statistics (PT)">Statistics (PT)</option>
+
+										<option value="Statutory">Statutory</option>
+
+										<option value="Textile Design">Textile Design</option>
+
+										<option value="Textile &amp; Clothing">Textile &amp;
+											Clothing</option>
+
+										<option value="Textile &amp; Clothing (H. Sc.)">Textile
+											&amp; Clothing (H. Sc.)</option>
+
+										<option value="Textile &amp; Clothing (PT)">Textile
+											&amp; Clothing (PT)</option>
+
+										<option value="Textile &amp; Clothing (Pune)">Textile
+											&amp; Clothing (Pune)</option>
+
+										<option value="Tourism &amp; Travel Techniques">Tourism
+											&amp; Travel Techniques</option>
+
+										<option value="Travel &amp; Tourism">Travel &amp;
+											Tourism</option>
+
+										<option value="Urdu">Urdu</option>
+
+										<option value="Visual Art (Arts Pune)">Visual Art
+											(Arts Pune)</option>
+
+										<option value="Water Shed Management">Water Shed
+											Management</option>
+
+										<option value="Womens Studies">Womens Studies</option>
+
+										<option value="X-Ray Technician">X-Ray Technician</option>
+
+										<option value="Zoology">Zoology</option>
+
+										<option value="Civil">Civil</option>
+
+										<option value="Mechanical">Mechanical</option>
+
+										<option value="Electrical">Electrical</option>
+
+										<option value="Computer">Computer</option>
+
+										<option value="Production/Workshop">Production/Workshop</option>
+
+										<option value="Structure">Structure</option>
+
+										<option value="Textile">Textile</option>
+
+										<option value="Information Technology">Information
+											Technology</option>
+
+										<option value="System Management/Administrator">System
+											Management/Administrator</option>
+
+										<option value="Humanities">Humanities</option>
+
+										<option value="Production">Production</option>
+
+										<option value="Training and Placement Officer">Training
+											and Placement Officer</option>
+
+										<option value="Applied Physics">Applied Physics</option>
+
+										<option value="Textile Chemistry">Textile Chemistry</option>
+
+										<option value="Robotics">Robotics</option>
+
+										<option value="Pharmacy">Pharmacy</option>
+
+										<option value="DMLT">DMLT</option>
+
+										<option value="Commercial &amp; Secretarial">Commercial
+											&amp; Secretarial</option>
+
+										<option value="Food Technology">Food Technology</option>
+
+										<option value="Interior Design">Interior Design</option>
+
+										<option value="Social Communication">Social
+											Communication</option>
+
+										<option value="Dress Designing">Dress Designing</option>
+
+										<option value="Digital Electronics">Digital
+											Electronics</option>
+
+										<option value="Chemical Engineering">Chemical
+											Engineering</option>
+
+										<option value="Computer Application">Computer
+											Application</option>
+
+										<option value="Estate">Estate</option>
+
+										<option value="Grade-I Bio-Informatics">Grade-I
+											Bio-Informatics</option>
+
+										<option value="Grade II Bio-Informatics">Grade II
+											Bio-Informatics</option>
+
+										<option value="Electrical/Estate, Civil">Electrical/Estate,
+											Civil</option>
+
+										<option value="Accounts Officer">Accounts Officer</option>
+
+										<option value="Law and Grievance">Law and Grievance</option>
+
+										<option value="Chemistry/Estate">Chemistry/Estate</option>
+
+										<option value="Refectory ">Refectory</option>
+
+										<option value="Health Center">Health Center</option>
+
+										<option value="Bio-Informatics">Bio-Informatics</option>
+
+										<option value="Physics Dept Computer Laboratory">Physics
+											Dept Computer Laboratory</option>
+
+										<option value="D.T.P.">D.T.P.</option>
+
+										<option value="Assistant">Assistant</option>
+
+										<option value="Electronics/ Bio-Informatics">Electronics/
+											Bio-Informatics</option>
+
+										<option value="Maintenance">Maintenance</option>
+
+										<option value="Photography">Photography</option>
+
+										<option value="Pollution">Pollution</option>
+
+										<option value="Computational Science">Computational
+											Science</option>
+
+										<option value="Business Management">Business
+											Management</option>
+
+										<option value="M. Law">M. Law</option>
+
+										<option value="Dr. Ambedkar Thoughts">Dr. Ambedkar
+											Thoughts</option>
+
+										<option value="Physical Sciences">Physical Sciences</option>
+
+										<option value="Chemical Sciences">Chemical Sciences</option>
+
+										<option value="Management Studies">Management Studies</option>
+
+										<option value="Langugage Studies">Langugage Studies</option>
+
+										<option value="Mathematical Sciences">Mathematical
+											Sciences</option>
+
+										<option value="Food Science">Food Science</option>
+
+										<option value="Tabla Player">Tabla Player</option>
+
+										<option value="Vedic Studies">Vedic Studies</option>
+
+										<option value="Sanskrit and Sanskrit Literature">Sanskrit
+											and Sanskrit Literature</option>
+
+										<option value="Indian Religion, Philosophy and Culture">Indian
+											Religion, Philosophy and Culture</option>
+
+										<option value="Ancient indian Sciences and Fine Arts">Ancient
+											indian Sciences and Fine Arts</option>
+
+										<option
+											value="Sanskrit Education, Ancient and Modern Subjects">Sanskrit
+											Education, Ancient and Modern Subjects</option>
+
+										<option value="Polymer and Surface Engineering">Polymer
+											and Surface Engineering</option>
+
+										<option value="Opthalmic Technology">Opthalmic
+											Technology</option>
+
+										<option value="Plastic And Polymer">Plastic And
+											Polymer</option>
+
+										<option value="Petrochemical">Petrochemical</option>
+
+										<option value="Administrative Services">Administrative
+											Services</option>
+
+										<option value="Apparel Manufacturing Design">Apparel
+											Manufacturing Design</option>
+
+										<option value="Comparative Languages">Comparative
+											Languages</option>
+
+										<option value="Applied Electronics">Applied
+											Electronics</option>
+
+										<option value="Bachelor of Interior Design(Architecture)">Bachelor
+											of Interior Design(Architecture)</option>
+
+										<option value="Cosmetic Technology">Cosmetic
+											Technology</option>
+
+										<option value="Hotel Management and Catering Technology">Hotel
+											Management and Catering Technology</option>
+
+										<option value="Archeology">Archeology</option>
+
+										<option value="Household Biology">Household Biology</option>
+
+										<option value="Logic">Logic</option>
+
+										<option value="Logic (Part Time)">Logic (Part Time)</option>
+
+										<option value="Ancient Indian History">Ancient Indian
+											History</option>
+
+										<option value="Computer Application and System Management">Computer
+											Application and System Management</option>
+
+										<option value="Costing">Costing</option>
+
+										<option value="Yoga">Yoga</option>
+
+										<option
+											value="Adult &amp; Continuing Education &amp; Extension Services">Adult
+											&amp; Continuing Education &amp; Extension Services</option>
+
+										<option value="Adult and Continuing Education">Adult
+											and Continuing Education</option>
+
+										<option value="Advanced Study in Sanskrit ">Advanced
+											Study in Sanskrit</option>
+
+										<option value="Ambedkar Thought">Ambedkar Thought</option>
+
+										<option
+											value="Ancient Indian History, Culture &amp; Archaeology">Ancient
+											Indian History, Culture &amp; Archaeology</option>
+
+										<option value="Applied Organic Chemistry">Applied
+											Organic Chemistry</option>
+
+										<option value="Ayurveda">Ayurveda</option>
+
+										<option value="Chemical Technology (Cellulose)">Chemical
+											Technology (Cellulose)</option>
+
+										<option
+											value="Chemical Technology (Cellulose/ Pulp and Paper)">Chemical
+											Technology (Cellulose/ Pulp and Paper)</option>
+
+										<option value="Chemical Technology (Food)">Chemical
+											Technology (Food)</option>
+
+										<option value="Chemical Technology (Oil)">Chemical
+											Technology (Oil)</option>
+
+										<option value="Chemical Technology (Oil/Paint)">Chemical
+											Technology (Oil/Paint)</option>
+
+										<option value="Chemical Technology (Petro)">Chemical
+											Technology (Petro)</option>
+
+										<option value="Chemical Technology (Plastic &amp; Polymer)">Chemical
+											Technology (Plastic &amp; Polymer)</option>
+
+										<option value="Chemical Technology (Surface Coating)">Chemical
+											Technology (Surface Coating)</option>
+
+										<option value="Commerce &amp; Management">Commerce
+											&amp; Management</option>
+
+										<option value="Communication &amp; Journalism">Communication
+											&amp; Journalism</option>
+
+										<option value="Communication Studies">Communication
+											Studies</option>
+
+										<option value="Fine Arts">Fine Arts</option>
+
+										<option value="Foreign Language">Foreign Language</option>
+
+										<option value="Gandhian Thought">Gandhian Thought</option>
+
+										<option value="Health Science">Health Science</option>
+
+										<option value="Inorganic Chemistry">Inorganic
+											Chemistry</option>
+
+										<option value="Instrumentation Science">Instrumentation
+											Science</option>
+
+										<option
+											value="Inter Disciplinery School (Humanities &amp; Social Science)">Inter
+											Disciplinery School (Humanities &amp; Social Science)</option>
+
+										<option value="Inter Disciplinery School of Sciences">Inter
+											Disciplinery School of Sciences</option>
+
+										<option value="Mass Communication">Mass Communication</option>
+
+										<option value="Nano Science &amp; Bio Technology">Nano
+											Science &amp; Bio Technology</option>
+
+										<option value="National Service Scheme">National
+											Service Scheme</option>
+
+										<option value="Organic Chemistry">Organic Chemistry</option>
+
+										<option value="P.G.T.D. Education">P.G.T.D. Education</option>
+
+										<option value="P.G.T.D. Law">P.G.T.D. Law</option>
+
+										<option value="Pali &amp; Prakrit">Pali &amp; Prakrit</option>
+
+										<option value="Performing Art">Performing Art</option>
+
+										<option value="Physical Chemistry">Physical Chemistry</option>
+
+										<option value="Sanskrit &amp; Lexicography">Sanskrit
+											&amp; Lexicography</option>
+
+										<option value="Sanskrit &amp; Prakrit">Sanskrit &amp;
+											Prakrit</option>
+
+										<option value="Space Science">Space Science</option>
+
+										<option value="Sports">Sports</option>
+
+										<option value="Student Welfare">Student Welfare</option>
+
+										<option value="Youth Development">Youth Development</option>
+
+								</select>&nbsp;&nbsp;<label class="mandatoryindicator">*</label></td>
+
+
+
+								<!-- added by vaibhav tyagi: end -->
+							</tr>
+							<tr id="order" style="display: block;">
+								<td class="fieldLabel"><b><label class="captionTag"
+										id="admin.GrNO">GR No</label></b></td>
+								<td class="fieldLabel"><select name="orderCmb"
+									style="width: 250px" onchange="DisplayOrderDate();"
+									id="orderCmb" class="selecttag mandatorycontrol">
+
+										<option value="-1">------------ Select ------------</option>
+										<option value="99100007554">NGC-1996/VIDHI ANUDAAN</option>
+
+
+										<option value="99100001759">vep-1/mcl02 /sanction
+											post/2011-12</option>
+
+
+								</select>&nbsp;&nbsp;<label class="mandatoryindicator">*</label></td>
+							</tr>
+							<!--
+			by khushal
+				-->
+							<tr>
+								<td class="fieldLabel"><b><label class="captionTag"
+										id="admin.GrDate">GR Date</label></b></td>
+
+
+								<td class="fieldLabel"><input type="text" size="10"
+									name="OrderDate" id="OrderDate" maxlength="10"
+									onkeypress="digitFormat(this);dateFormat(this);"
+									onblur="validateDate(this);" value="" readonly="readonly">
+									&nbsp; <img src="images/CalendarImages/ico-calendar.gif"
+									onclick="window_open(&quot;OrderDate&quot;,375,570)"
+									style="cursor: pointer;"></td>
+							</tr>
+							<tr id="original" style="display: none;">
+
+								<td class="fieldLabel" style="display: none"><b><label
+										class="captionTag" id="admin.OriginalOrderName">Old
+											Order Name</label></b></td>
+
+								<td class="fieldLabel" style="display: none"><select
+									name="OriginalorderCmb" style="width: 230px"
+									onchange="DisplayOriginalOrderDate();" id="OriginalorderCmb"
+									class="selecttag mandatorycontrol">
+
+										<option value="-1">------------ Select ------------</option>
+										<option value="99100007554">NGC-1996/VIDHI ANUDAAN</option>
+
+										<option value="99100001759">vep-1/mcl02 /sanction
+											post/2011-12</option>
+
+								</select>&nbsp;&nbsp;<label class="mandatoryindicator">*</label></td>
+
+								<td class="fieldLabel" style="display: none"><b><label
+										class="captionTag" id="admin.OriginalOrderDate">Old
+											Order Date</label></b></td>
+								<td style="display: none"><input type="text" size="10"
+									name="OriginalOrderDate" id="OriginalOrderDate" maxlength="10"
+									onkeypress="digitFormat(this);dateFormat(this);"
+									onblur="validateDate(this);" value=""> &nbsp; <img
+									src="images/CalendarImages/ico-calendar.gif"
+									onclick="window_open(&quot;OriginalOrderDate&quot;,375,570)"
+									style="cursor: pointer;"></td>
+							</tr>
+							<tr id="renewal" style="display: none;">
+								<td class="fieldLabel" style="display: none"><b><label
+										class="captionTag" id="admin.RenewalOrderName">Renewal
+											Order Name</label></b></td>
+
+								<td class="fieldLabel" style="display: none"><select
+									name="RenewalorderCmb" style="width: 230px"
+									id="RenewalorderCmb" class="selecttag mandatorycontrol">
+
+										<option value="-1">------------ Select ------------</option>
+										<option value="99100007554">NGC-1996/VIDHI ANUDAAN</option>
+
+										<option value="99100001759">vep-1/mcl02 /sanction
+											post/2011-12</option>
+
+								</select>&nbsp;&nbsp;<label class="mandatoryindicator">*</label></td>
+
+								<td class="fieldLabel" style="display: none"><b><label
+										class="captionTag" id="
+">------------ Select
+											------------</label></b></td>
+								<td class="fieldLabel" style="display: none"><input
+									type="text" name="RenewalOrderDate" id="RenewalOrderDate"
+									class="texttag" onkeypress="return checkDateNumber(event)"
+									value="" maxlength="10" size="10/"><img
+									style="cursor: pointer;" id="img_RenewalOrderDate"
+									src="themes/ifmsblue/images/taglib/ico-calendar.gif" width="20"
+									onclick="window_open(event,'RenewalOrderDate',375,570,'',&quot;&quot;)">&nbsp;&nbsp;<label
+									class="mandatoryindicator">*</label></td>
+
+
+							</tr>
+
+							<tr>
+
+								<td class="fieldLabel"><b><label class="captionTag"
+										id="admin.Office">Office</label></b></td>
+								<td class="fieldLabel"><select name="officeCmb"
+									style="width: 250px;" id="officeCmb"
+									class="selecttag mandatorycontrol">
+
+										<option value="-1">------------ Select ------------</option>
+										<option value="9910000846">Siddharth College Of
+											Law,Mumbai</option>
+
+								</select>&nbsp;&nbsp;<label class="mandatoryindicator">*</label></td>
+								<td class="fieldLabel"></td>
+								<td class="fieldLabel"></td>
+							</tr>
+
+							<tr>
+
+								<td class="fieldLabel"><b><label class="captionTag"
+										id="admin.SancFromDt">Sanctioned From Date</label></b></td>
+								<td class="fieldLabel"><input type="text" size="10"
+									name="startDate" id="startDate" maxlength="10"
+									onkeypress="digitFormat(this);dateFormat(this);"
+									onblur="validateDate(this);compareDatesLocally(OrderDate,this,'Sanctioned From Date field should not be less than GR Date.','>');"
+									value=""> &nbsp; <img
+									src="images/CalendarImages/ico-calendar.gif"
+									onclick="window_open(&quot;startDate&quot;,375,570)"
+									style="cursor: pointer;">&nbsp;<label
+									class="mandatoryindicator">*</label></td>
+
+							</tr>
+
+							<tr>
+								<td class="fieldLabel" id="endDate1" style="display: none;"><b><label
+										class="captionTag" id="admin.SancToDt">Sanctioned To
+											Date</label></b></td>
+								<!--<td class="fieldLabel" id="endDate2">
+			
+			<input type="text" size="10" name="endDate" id="endDate" maxlength="10" onkeypress="digitFormat(this);dateFormat(this);"
+															onBlur="validateDate(this);" value="" /> &nbsp;
+															<img src='images/CalendarImages/ico-calendar.gif' 
+															onClick='window_open("endDate",375,570)'
+															style="cursor: pointer;"/></td>
+				
+			
+			-->
+
+
+								<td class="fieldLabel" id="tempEndDate1" style="display: none;"><b><label
+										class="captionTag" id="admin.SancToDt">Sanctioned To
+											Date</label></b></td>
+								<td class="fieldLabel" id="endDate2" style="display: none;">
+									<input type="text" size="10" name="endDate" id="endDate"
+									maxlength="10" onkeypress="digitFormat(this);dateFormat(this);"
+									onblur="validateDate(this);compareDatesLocally(startDate,this,'Sanctioned To Date field should not be less than Sanctioned From Date.','>');"
+									value=""> &nbsp; <img
+									src="images/CalendarImages/ico-calendar.gif"
+									onclick="window_open(&quot;endDate&quot;,375,570)"
+									style="cursor: pointer;"> <label
+									class="mandatoryindicator">*</label>
+								</td>
+
+								<td class="fieldLabel" id="tempEndDate2" style="display: none;">
+									<input type="text" name="tempEndDate" id="tempEndDate"
+									onblur="chktempDate();dateFormat(this);" class="texttag"
+									onkeypress="return checkDateNumber(event)" value=""
+									maxlength="10" size="10/"><img style="cursor: pointer;"
+									id="img_tempEndDate"
+									src="themes/ifmsblue/images/taglib/ico-calendar.gif" width="20"
+									onclick="window_open(event,'tempEndDate',375,570,'',&quot;&quot;)">&nbsp;&nbsp;<label
+									class="mandatoryindicator">*</label> <label
+									class="mandatoryindicator">*</label>
+								</td>
+
+							</tr>
+
+
+
+							<tr>
+
+								<td class="fieldLabel"><b><label class="captionTag"
+										id="admin.postNumber">Number of Post</label></b></td>
+								<td class="fieldLabel"><input type="text" name="postNumber"
+									id="postNumber" style="width: 18%"
+									onkeyup="return checkOnlyNumber(postNumber,false)"
+									class="numbertag mandatorycontrol"
+									onkeypress="return checkforNumbersOnly(false,postNumber,event)"
+									value="1">&nbsp;&nbsp;<label class="mandatoryindicator">*</label></td>
+							</tr>
+
+							<tr>
+								<td class="fieldLabel"><b><label class="captionTag"
+										id="eis.Remarks">Remarks</label></b></td>
+								<td class="fieldLabel"><textarea name="Remarks"
+										onblur="OnlyAplha(this)" id="Remarks" class="textareatag"
+										cols="30" rows="3"></textarea></td>
+							</tr>
+
+
+						</tbody>
+					</table>
+
+
+
+					<input type="hidden" name="flag" value="add" id="flag"> <input
+						type="hidden" name="postId" value="" id="postId">
+
+				</div>
+				<input type="hidden" name="givenurl" value="showAdminPostDtl"
+					id="givenurl"> <br>
+				<table class="tabNavigationBar" width="80" align="center">
+					<tbody>
+						<tr>
+							<td width="37%" align="center"></td>
+							<td width="2%"><input type="button" name="formSubmitButton"
+								onclick="submitButton_formSubmitButton();" id="formSubmitButton"
+								value="Save" size="3" maxlength="3" class="buttontag"></td>
+							<td width="2%"><input type="button" name="backButton"
+								onclick="history.back()" id="backButton" value="Close" size="3"
+								maxlength="3" class="buttontag"></td>
+							<td width="2%"><input type="button" name="resetButton"
+								onclick="resetForm()" id="resetButton" value="Reset" size="3"
+								maxlength="3" class="buttontag"></td>
+							<td width="37%" align="center"></td>
+
+						</tr>
+					</tbody>
+				</table>
+
+
+				<script language="JavaScript">
+setAlertMessageForCssCheck('Contains Invalid Character');
+</script>
+				<script language="JavaScript">
+function validateForm_frmAdminCrtPost()
+{
+if(!validate('RDropMenu','Please select the $CPTN','ddoCode',"Reporting DDOs"))
+{ 
+return false;
+}
+ 
+if(!validate('RDropMenu','Please select the $CPTN','designationCmb',"Designation"))
+{ 
+return false;
+}
+ 
+if(!validate('RDropMenu','Please select the $CPTN','subjectCmb',"Subject"))
+{ 
+return false;
+}
+ 
+if(!validate('RDropMenu','Please select the $CPTN','orderCmb',"GR No"))
+{ 
+return false;
+}
+ 
+if(!validate('RDropMenu','Please select the $CPTN','RenewalorderCmb',"Order Name"))
+{ 
+return false;
+}
+ 
+if(!validate('RDate','Please enter valid $CPTN','RenewalOrderDate',"null"))
+{ 
+return false;
+}
+ 
+if(!validate('RDate','Please enter valid $CPTN','RenewalOrderDate',"null"))
+{ 
+return false;
+}
+ 
+if(!validate('RDropMenu','Please select the $CPTN','officeCmb',"Office"))
+{ 
+return false;
+}
+ 
+if(!validate('RDate','Please enter valid $CPTN','tempEndDate',"null"))
+{ 
+return false;
+}
+ 
+if(!validate('RDate','Please enter valid $CPTN','tempEndDate',"null"))
+{ 
+return false;
+}
+ 
+if(!submit_frmAdminCrtPostNew())
+{ 
+return false;
+}
+ 
+return true;
+}
+</script>
+				<input type="hidden" name="formField_ddoCode"
+					value="validate(&quot;RDropMenu&quot;,&quot;Please select the $CPTN&quot;,&quot;ddoCode&quot;,&quot;Reporting DDOs&quot;)">
+				<input type="hidden" name="formField_designationCmb"
+					value="validate(&quot;RDropMenu&quot;,&quot;Please select the $CPTN&quot;,&quot;designationCmb&quot;,&quot;Designation&quot;)">
+				<input type="hidden" name="formField_subjectCmb"
+					value="validate(&quot;RDropMenu&quot;,&quot;Please select the $CPTN&quot;,&quot;subjectCmb&quot;,&quot;Subject&quot;)">
+				<input type="hidden" name="formField_orderCmb"
+					value="validate(&quot;RDropMenu&quot;,&quot;Please select the $CPTN&quot;,&quot;orderCmb&quot;,&quot;GR No&quot;)">
+				<input type="hidden" name="formField_RenewalorderCmb"
+					value="validate(&quot;RDropMenu&quot;,&quot;Please select the $CPTN&quot;,&quot;RenewalorderCmb&quot;,&quot;Order Name&quot;)">
+				<input type="hidden" name="formField_RenewalOrderDate"
+					value="validate(&quot;RDate&quot;,&quot;Please enter valid $CPTN&quot;,&quot;RenewalOrderDate&quot;,&quot;null&quot;)">
+				<input type="hidden" name="formField_RenewalOrderDate"
+					value="validate(&quot;RDate&quot;,&quot;Please enter valid $CPTN&quot;,&quot;RenewalOrderDate&quot;,&quot;null&quot;)">
+				<input type="hidden" name="formField_officeCmb"
+					value="validate(&quot;RDropMenu&quot;,&quot;Please select the $CPTN&quot;,&quot;officeCmb&quot;,&quot;Office&quot;)">
+				<input type="hidden" name="formField_tempEndDate"
+					value="validate(&quot;RDate&quot;,&quot;Please enter valid $CPTN&quot;,&quot;tempEndDate&quot;,&quot;null&quot;)">
+				<input type="hidden" name="formField_tempEndDate"
+					value="validate(&quot;RDate&quot;,&quot;Please enter valid $CPTN&quot;,&quot;tempEndDate&quot;,&quot;null&quot;)">
+				<input type="hidden" name="formField_submit_frmAdminCrtPostNew"
+					value="submit_frmAdminCrtPostNew()">
+
+
+				<script type="text/javascript">
+	initializetabcontent("maintab");	
+	
+</script>
+				<script language="JavaScript">
+setForm('frmAdminCrtPost');
+sortSingle(document.getElementById('ddoCode'))
+sortSingle(document.getElementById('postTypeCmbBox'))
+sortSingle(document.getElementById('postSubTypeCmbBoxPerm'))
+sortSingle(document.getElementById('purposeCmbBox'))
+sortSingle(document.getElementById('tempPostTypeCmbBox'))
+sortSingle(document.getElementById('designationCmb'))
+sortSingle(document.getElementById('subjectCmb'))
+sortSingle(document.getElementById('orderCmb'))
+sortSingle(document.getElementById('OriginalorderCmb'))
+sortSingle(document.getElementById('RenewalorderCmb'))
+sortSingle(document.getElementById('officeCmb'))
+</script>
+			</form>
+		</div>
+	
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script>
+	$(".posttable").hide();
+	function getCadresForTheFieldDept() {
+		$(".posttable").fadeIn(100);
+	}
+	</script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title
+	th:utext="#{msg.thymeleaf.pageheading.nonComputationalDuesDeductions}"></title>
+<style type="text/css">
+</style>
+</head>
+<body class="non-computational-dues-deductions">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.payrollBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.nonComputationalDuesDeductions}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span
+				th:utext="#{msg.thymeleaf.pageheading.nonComputationalDuesDeductions}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+
+
+			<form method="post" name="" enctype="multipart/form-data">
+				<fieldset id="Search Employee" class="fieldGroupTag">
+					<p id="">
+						<legend>Search Employee </legend>
+					</p>
+					<div id="">
+						<table class="table bor-0">
+							<tbody>
+								<tr>
+									<td><b>Search With Name/SevaarthId</b></td>
+									<td><input type="text"
+										name="Employee_srchNameText_EmployeeSearch" id="txtSearchName"
+										class="texttag" value="" autocomplete="off"></td>
+									<td align="left" colspan="2"><input type="button"
+										name="search_EmployeeSearch" id="search_EmployeeSearch"
+										value="Search" size="3" maxlength="3" class="btn"></td>
+								</tr>
+								<tr>
+									<td class="fieldLabel" width="25%"><b>Employee Id</b></td>
+									<td><input type="text" name="Employee_Name_EmployeeSearch"
+										id="Employee_Name_EmployeeSearch"
+										class="texttag disabledcontrol"></td>
+									<td class="fieldLabel" width="25%"><b>Sevaarth Id</b></td>
+									<td><input type="text"
+										name="Emp_Sevarth_Id_EmployeeSearch"
+										id="Emp_Sevarth_Id_EmployeeSearch"
+										class="texttag disabledcontrol"></td>
+
+								</tr>
+								<tr>
+									<td class="fieldLabel" width="25%"><b>Office Name</b></td>
+									<td><input type="text" name="Police_ST_NM_EmployeeSearch"
+										id="Police_ST_NM_EmployeeSearch"
+										class="texttag disabledcontrol"></td>
+									<td class="fieldLabel" width="25%"><label
+										class="captionTag" id="Dsgn_NM"><b>Designation </b></label></td>
+									<td><input type="text" name="Dsgn_NM_EmployeeSearch"
+										id="Dsgn_NM_EmployeeSearch" class="texttag disabledcontrol"></td>
+								</tr>
+								<tr>
+									<td class="fieldLabel" width="25%"><label
+										class="captionTag" id="DISTRICT_NM">District </label></td>
+									<td><input type="text" name="DISTRICT_NM_EmployeeSearch"
+										id="DISTRICT_NM_EmployeeSearch"
+										class="texttag disabledcontrol"></td>
+									<td class="fieldLabel" width="25%"><label
+										class="captionTag" id="GPF_NM">GPF No.</label></td>
+									<td><input type="text" name="GPF_NM_EmployeeSearch"
+										id="GPF_NM_EmployeeSearch" class="texttag disabledcontrol"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</fieldset>
+				<div>
+					<table class="table bor-0">
+						<tbody>
+							<tr>
+								<td colspan="4">
+									<p style="color: red;">Note:Please Select Type Of Component
+										and Pay Item First.</p>
+								</td>
+							</tr>
+							<tr>
+								<td class="Label" width="30%" align="justify"><b><label
+										class="captionTag" id="bulk.componentType">Type Of
+											Component</label></b></td>
+								<td width="20%" align="justify"><select name="cmpType"
+									id="cmpType" class="selecttag mandatorycontrol">
+										<option value="">------Select-------</option>
+										<option value="2500134">Allowances</option>
+										<option value="2500135">Deductions</option>
+								</select>&nbsp;&nbsp;<label class="mandatoryindicator">*</label></td>
+								<td class="Label" width="30%" align="center"><b><label
+										class="captionTag" id="bulk.payItem">Select Pay-Item</label></b></td>
+								<td class="Label" width="20%" align="justify"><select
+									name="payItemCombo" id="payItemCombo"
+									class="selecttag mandatorycontrol">
+										<option value="">-------Select------</option>
+								</select>&nbsp;&nbsp;<label class="mandatoryindicator">*</label></td>
+							</tr>
+							<tr>
+								<td class="Label" width="30%" align="justify"><b>Bill Group</b></td>
+								<td class="Label" colspan="" width="20%" align="justify"><select
+									name="billcombo" id="billcombo">
+										<option value="-1">----------------------Select----------------------
+										</option>
+										<option></option>
+										<option value="99201790770"
+											title="Bill Group For Scheme IA-GRANTS TO UNIVERSITIS FOR GENERAL EDUCATION">Bill
+											Group For Scheme IA-GRANTS TO UNIVERSITIS FOR GENERAL
+											EDUCATION</option>
+										<option value="992017907106"
+											title="Bill Group For Scheme IA.1-GRANT TO NON-GOVT.  ARTS  , SCIENCE, COMMERCE ,LAW AND B.ED COLLEGES">Bill
+											Group For Scheme IA.1-GRANT TO NON-GOVT. ARTS , SCIENCE,
+											COMMERCE ,LAW AND B.ED COLLEGES</option>
+								</select></td>
+								<td width="30%" align="justify"></td>
+								<td width="20%" align="justify"></td>
+							</tr>
+							<tr>
+								<td class="Label" width="30%" align="justify"><b><label
+										class="captionTag" id="bulk.empByDesignation">Select
+											Employee By Designation</label></b></td>
+								<td class="Label" width="20%" align="justify"><select
+									name="dsgnCombo" id="dsgnCombo" class="selecttag">
+										<option value="">-----------Select-----------</option>
+										<option value="1">-All Designation</option>
+										<option value="DEFAULT">DEFAULT DESIGNATION</option>
+								</select></td>
+								<td width="30%" align="justify"></td>
+								<td width="20%" align="justify"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<table class="table bor-0">
+					<tbody>
+						<tr>
+							<td width="46%"><b><label class="captionTag"
+									id="bulk.selectChkBox">Please Enter Amount (in case
+										applicable to many employees):</label></b> <font size="3"
+								face="Rupee Foradian"> (<font size="3"
+									face="Rupee Foradian">`</font>)
+							</font></td>
+							<td><input type="text" name="amount" id="amount"
+								class="numbertag mandatorycontrol" value="" maxlength="10/">&nbsp;&nbsp;<label
+								class="mandatoryindicator">*</label></td>
+							<td><b> <font color="black"> </font>
+							</b></td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+			<form method="POST" action="" name="newBulkForm"
+				enctype="multipart/form-data">
+				<table class="table table-bordered table-striped">
+					<tbody>
+						<tr>
+							<th><b>Employee Name<b></b></b></th>
+							<th align="center"><b>Existing Amount <font size="3"
+									face="Rupee Foradian"> (<font size="3"
+										face="Rupee Foradian">`</font>)
+								</font></b></th>
+							<th align="center"><b>New Amount <font size="3"
+									face="Rupee Foradian"> (<font size="3"
+										face="Rupee Foradian">`</font>)
+								</font></b></th>
+							<th align="center"><b>Difference <font size="3"
+									face="Rupee Foradian"> (<font size="3"
+										face="Rupee Foradian">`</font>)
+								</font></b></th>
+							<th align="center"><b> <font color="black"> <input
+										type="checkbox" name="selcheckBoxAllowSelectAll" value="1"
+										id="selcheckBoxAllowSelectAll" class="checkboxtag">
+								</font>
+							</b></th>
+						</tr>
+						<tr>
+							<td><input type="hidden" name="hiddenEmpFlag"
+								id="hiddenEmpFlag"> <input type="hidden" name="eCode"
+								id="eCode"> Total<font size="3" face="Rupee Foradian">
+									(<font size="3" face="Rupee Foradian">`</font>)
+							</font></td>
+							<td><input type="text" id="existAmountTotal"
+								style="text-align: right;" name="existAmountTotal" value="0"
+								disabled="disabled"></td>
+							<td><input type="text" id="newAmountTotal"
+								style="text-align: right;" name="newAmountTotal" value="0"
+								disabled="disabled"></td>
+							<td><input type="text" id="differenceTotal"
+								style="text-align: right;" name="differenceTotal" value="0"
+								disabled="disabled"></td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+		<div align="center">
+			<input type="button" name="Save" onclick="submitForm()" id="Save"
+				value="Save" style="text-align: center;" size="3" maxlength="3"
+				class="btn"> <input type="button" name="btnClose1"
+				onclick="history.back()" id="btnClose1" value="Close"
+				style="text-align: center;" size="3" maxlength="3" class="btn">
+		</div>
+		<br/>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

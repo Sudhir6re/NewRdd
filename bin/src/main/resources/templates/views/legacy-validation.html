@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.verifyDcpsLegacy}"></title>
+<style>
+#dcpsVerifyTb td {
+	min-width: 200px;
+}
+
+#dcpslegacyTb input {
+	float: left;
+}
+
+#dcpslegacyTb .mandatoryindicator {
+	float: right;
+}
+
+.scrollablediv {
+	box-shadow: 0px 0px 5px #ccc;
+	padding: 15px 15px;
+}
+</style>
+</head>
+<body class="legacy-validation">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.verifyDcpsLegacy}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.verifyDcpsLegacy}"></span>
+		</h3>
+
+		<div class="legacy-val-main container">
+			<form method="post" action="" name="frmDCPSMatchedEntries"
+				enctype="multipart/form-data">
+
+				<br>
+				<fieldset class="tabstyle">
+					<legend>
+						<b>Search NSDL Files</b>
+					</legend>
+					<table class="table bor-0 width-70">
+						<tbody>
+							<tr>
+								<td>Legacy Year</td>
+								<td><select name="cmbYear" id="cmbYear">
+										<option value="-1">-- Select --</option>
+										<option value="2015">2015</option>
+										<option value="2016">2016</option>
+										<option value="2017">2017</option>
+										<option value="2018">2018</option>
+										<option value="2019">2019</option>
+										<option value="2020">2020</option>
+										<option value="2021">2021</option>
+										<option value="2022">2022</option>
+										<option value="2023">2023</option>
+										<option value="2024" selected="selected">2024</option>
+								</select> <label class="mandatoryindicator">*</label></td>
+								<td>Legacy Month</td>
+								<td><select name="cmbMonth" id="cmbMonth">
+										<option value="-1">-- Select --</option>
+										<option value="1">January</option>
+										<option value="2">February</option>
+										<option value="3">March</option>
+										<option value="4">April</option>
+										<option value="5">May</option>
+										<option value="6">June</option>
+										<option value="7">July</option>
+										<option value="8">August</option>
+										<option value="9">September</option>
+										<option value="10" selected="selected">October</option>
+										<option value="11">November</option>
+										<option value="12">December</option>
+								</select> <label class="mandatoryindicator">*</label></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="text-center">
+						<input type="button" name="Search" onclick="getListOfEmp();"
+							id="submit" value="Search" size="3" maxlength="3" class="btn">
+					</div>
+				</fieldset>
+				<br> <br>
+				<div id="displayData">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th align="center" width="5%">Select</th>
+								<th align="center" width="12%">File Id</th>
+								<th align="center" width="12%">Amount of Employee
+									Contribution</th>
+								<th align="center" width="12%">Amount of Employer
+									Contribution</th>
+								<th align="center" width="12%">Transaction ID</th>
+								<th align="center" width="20%">File Validation Result</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td align="center"><input type="checkbox" name="select1"></td>
+								<td align="center">12345</td>
+								<td align="center">1500</td>
+								<td align="center">1500</td>
+								<td align="center">TXN001</td>
+								<td align="center">Success</td>
+							</tr>
+
+						</tbody>
+					</table>
+
+					<br> <br>
+					<div class="text-center">
+						<input type="button" name="save" id="save" class="btn btn-sm"
+							value="View and Save File"> <input type="button"
+							name="validate" id="validate" class="btn btn-sm" value="Validate File">
+						<input type="button" name="sendfile" id="sendfile" class="btn btn-sm"
+							value="Send Contribution File"> <input type="button"
+							name="getFile" id="getFile" class="btn btn-sm"
+							value="Get Contribution File Status"> <input
+							type="button" name="updateVoucher" id="updateVoucher" class="btn btn-sm"
+							value="Update Voucher/BDS Number"> <input type="button"
+							name="delete" id="delete" class="btn btn-sm" value="Delete">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/hte/verify-dcps-legacy.js}"></script>
+	<script th:src="@{/js/jquery.validate.min.js}"></script>
+
+</body>
+</html>

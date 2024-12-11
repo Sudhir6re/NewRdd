@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pagelabel.lvl2ApprForm}"></title>
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"></link>
+</head>
+<body class="NewRegApprovedForms">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+
+	<div class="container min-height-600 ">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pagelabel.lvl2ApprForm}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pagelabel.lvl2ApprForm}"></span>
+		</h3>
+		<!-- <h4><b><center>Organization Institution Information</center></b></h4> -->
+		<form class="form-horizontal" method="POST" id="orgInstDetailForm" th:object="${newRegDDOModel}">
+		
+		<input type="hidden" name="language" id="language"
+					th:value="${language}"  /> 
+			<!-- <input type="hidden" name="isSaved" id="isSaved" th:value="${isSaved}"></input> -->
+			<fieldset class="container">
+				<legend th:style="${'color: black'}"
+					th:utext="#{msg.thymeleaf.pagelabel.filterByddo}"></legend>
+				<div class="form-group">
+					<label class="control-label col-sm-2 " for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.ddocode}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-2">
+						<select class="form-control" id="ddoCode"><!-- th:field="*{paybillYear}"-->
+							<option selected="selected" th:value="0"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+							<option th:each="varDDOOff : ${lstDDOOffice}"
+								th:value="${varDDOOff.ddoCode}"
+								th:text="${language=='mh' ? varDDOOff.officeName : varDDOOff.officeName}"></option>
+
+						</select>
+					</div>
+				</div>
+			</fieldset>
+			<fieldset class="container">
+				<legend th:style="${'color: black'}"
+					th:utext="#{msg.thymeleaf.pagelabel.empdetails}"></legend>
+				<div class="form-group">
+					<table id="changedetails"
+					class="table empChangeDtls table-striped table-bordered">
+					<thead>
+						<tr>
+							<th th:utext="#{msg.thymeleaf.pagelabel.employeeName}"></th>
+							<th th:utext="#{msg.thymeleaf.pagelabel.DOB}"></th>
+							<th th:utext="#{msg.thymeleaf.pagelabel.gender}"></th>
+							<th th:utext="#{msg.thymeleaf.pagelabel.designation}"></th>
+							<th th:utext="#{msg.thymeleaf.pagelabel.aquddo}"></th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="varEmp : ${empLst}">
+							<td class="text-center">
+									<span> <a style="font-size: 12px;" id="empName"
+									th:text="${empLst[__${varEmpStat.index}__].empName}"
+									th:href="@{${'/ddo/popUpEmpDtls/'+empLst[__${varEmpStat.index}__].employeeId}}"></a></span>
+							</td>
+							<td class=""><span style="font-size: 12px;" id="dob"
+								th:text="${empLst[__${varEmpStat.index}__].dob}"></span>
+							</td>
+							<td class=""><span style="font-size: 12px;"
+								id="gender"
+								th:text="${empLst[__${varEmpStat.index}__].gender}"
+								class=""></span></td>
+							<td class="text-center"><span style="font-size: 12px;"
+								id="desg"
+								th:text="${empLst[__${varEmpStat.index}__].desgName}"
+								class=""></span></td>
+							<td class="text-center"><span style="font-size: 12px;"
+								id="ddo"
+								th:text="${empLst[__${varEmpStat.index}__].ddoCode}"
+								class=""></span></td>
+						</tr>
+
+
+					</tbody>
+				</table>
+				</div>
+				
+			</fieldset>
+		<!-- 	<div class="form-group text-center">
+				<hr />
+					<input type="button" id="btnSave" class="btn btn-primary" 
+						value="Save and Forward to Reporting DDO" />
+						<input type="reset" id="btnReset" class="btn btn-primary" th:value="#{msg.thymeleaf.pagelabel.btnReset}"/>
+				 <a th:href = "@{/level1/editofficeDetails}" >
+					<input type="button" id="btnEdit" class="btn btn-warning" 
+						th:value="#{msg.thymeleaf.pagelabel.btnEdit}" /></a>
+					<input type="button" class="btn btn-info"
+						th:value="#{msg.thymeleaf.pagelabel.btnCancel}" />
+			</div> -->
+		</form>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/organization-institution-details.js}"></script> 
+	<script th:src="@{/js/validated.js}"></script> 
+	 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script> 
+	<script type="text/javascript">
+       $(document).ready(function(){
+    	   jQuery.browser = {};
+    	   (function () {
+    	       jQuery.browser.msie = false;
+    	       jQuery.browser.version = 0;
+    	       if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+    	           jQuery.browser.msie = true;
+    	           jQuery.browser.version = RegExp.$1;
+    	       }
+    	   })();
+    	   $("#date").datepicker({ dateFormat: "yy-mm-dd" }).val();
+    	 });
+  </script>
+
+</body>
+</html>

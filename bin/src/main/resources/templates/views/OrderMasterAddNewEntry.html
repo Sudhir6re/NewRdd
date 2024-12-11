@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pagelabel.orderMst}"></title>
+</head>
+<body class="OrderMasterAddNewEntry">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+
+	<div class="container min-height-600 ">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pagelabel.orderMst}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pagelabel.orderMst}"></span>
+		</h3>
+		<div class="newpagecontent container">
+			<form method="POST" action="javascript:validateForm()" name="frmOrderMaster" enctype="multipart/form-data">
+    <fieldset class="tabstyle">
+    <form class="form-horizontal" method="POST" name="updateEmpType"
+				th:action="@{}" th:object="${newRegDDOModel}"
+				enctype="multipart/form-data">
+        <legend> <b>Filter Institute</b> </legend>
+        <table align="center">
+            <tbody>
+                <tr>
+                    <td>Taluka</td>
+                    <td>
+                    <select class="form-control" th:field="*{talukaName}"
+							id="talukaName">
+							<option selected="selected" th:value="0"
+								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+							<option th:each="varTaluka : ${talukaLst}"
+								th:value="${varTaluka.talukaId}"
+								th:data="${varTaluka.talukaId}"
+								th:text="${language=='mh' ? varTaluka.talukaName : varTaluka.talukaName}"></option>
+						</select>
+                    
+                    
+                    <!-- <select name="cmbTaluka" id="cmbTaluka" style="width: 85%,display: inline;">
+                            <option title="Select" value="-1">Select</option>
+                            <option value="163" title="Mahoor">
+                                Mahoor</option>
+                            <option value="164" title="Kinwat">
+                                Kinwat</option>
+                            <option value="165" title="Himayatnagar">
+                                Himayatnagar</option>
+                            <option value="166" title="Hadgaon">
+                                Hadgaon</option>
+                            <option value="167" title="Ardhapur">
+                                Ardhapur</option>
+                            <option value="168" title="Nanded">
+                                Nanded</option>
+                            <option value="169" title="Mudkhed">
+                                Mudkhed</option>
+                            <option value="170" title="Bhokar">
+                                Bhokar</option>
+                            <option value="171" title="Umri">
+                                Umri</option>
+                            <option value="180" title="Not Applicable">
+                                Not Applicable</option>
+                        </select> --></td>
+                    <td> DDO Code/Office Name</td>
+                    <td>
+                        <input type="text" id="ddoCode" name="ddoCode" maxlength="200" size="30" th:field="*{ddoCode}">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" align="center"><input id="btnFilter" class="buttontag" type="button" size="5" maxlength="5" value="Filter" onclick="filterInstitute();" name="btnFilter" style="width: 120px;"></td>
+                </tr>
+            </tbody>
+        </table>
+        </form>
+    </fieldset>
+    <div id="tabmenu">
+        <ul id="maintab" class="shadetabs">
+            <li class="selected"><a href="#" rel="tcontent1" class="selected"><b>Add Order</b></a></li>
+            <!-- <li class="selected"><a href="#" rel="tcontent2">INSERT FORM2</a></li> -->
+        </ul>
+    </div>
+    <div id="tcontent1" style="background-color: rgb(232, 227, 227); border-style: inset; border-color: rgb(178, 71, 0); border-width: thin; display: block;">
+        <br> <br>
+        <br>
+        <table align="center" cellsapcing="2" cellpadding="2">
+            <!-- Start Added By Urvin Shah for Fetching the Department List -->
+            <tbody>
+                <tr>
+                    <td class="Label">
+                        <b>Institution/Organization</b></td>
+                    <td>
+                        <select name="cmbDept" size="1" id="cmbDept" onchange="checkAvailability()">
+                            <option value="-1">-------------------Select---------------------</option>
+                            <option value="4000743" title="Rajarshi Shahu College, Latur(06340100003)">Rajarshi Shahu College, Latur(06340100003)</option>
+                            <option value="4000744" title="Mahatma Basweshwar College, Latur(06340100004)">Mahatma Basweshwar College, Latur(06340100004)</option>
+                            <option value="4000745" title="Dayanand Law College, Latur(06340100005)">Dayanand Law College, Latur(06340100005)</option>
+                            <option value="4000746" title="Dayanand Commerce College, Latur(06340100006)">Dayanand Commerce College, Latur(06340100006)</option>
+                            <option value="4000747" title="Dayanand Science College, Latur(06340100007)">Dayanand Science College, Latur(06340100007)</option>
+                            <option value="4000748" title="Dayanand Arts College, Latur(06340100008)">Dayanand Arts College, Latur(06340100008)</option>
+                            <option value="4000749" title="Smt Sushiladevi Deshmukh Mahila College, Latur(06340100009)">Smt Sushiladevi Deshmukh Mahila College, Latur(06340100009)</option>
+                            <option value="4000750" title="Smt Sushiladevi Deshmukh Senior College, Latur(06340100010)">Smt Sushiladevi Deshmukh Senior College, Latur(06340100010)</option>
+                            <option value="4000751" title="Shivaji College, Udgir(06340100011)">Shivaji College, Udgir(06340100011)</option>
+                            <option value="4000752" title="Maharashtra Udyagari College, Udgir(06340100012)">Maharashtra Udyagari College, Udgir(06340100012)</option>
+                            <option value="4000753" title="Shri Havagi Swami College, Udgir(06340100013)">Shri Havagi Swami College, Udgir(06340100013)</option>
+                            <option value="4000754" title="Maharashtra College, Nilanga(06340100014)">Maharashtra College, Nilanga(06340100014)</option>
+                           
+                        </select>
+                       </td>
+                </tr>
+                <!-- Ended By Urvin Shah -->
+                <tr>
+                    <td><b>Sanction Order No<b></b></b></td>
+                    <td><input type="text" name="orderName" id="orderName" onblur="checkAvailability()" class="texttag mandatorycontrol" onkeypress="if(event.keyCode == 13) event.returnValue = false;" value="" maxlength="50" size="30/">&nbsp;&nbsp;<label class="mandatoryindicator">*</label></td>
+                </tr>
+                <tr>
+                    <td><b>Order Date<b></b></b></td>
+                    <td><input type="text" name="txtStartDate" id="txtStartDate" onblur="return checkDate('txtStartDate','Please enter valid $CPTN','ST.DATE','0','02/07/2024','Please enter $CPTN less than 02/07/2024'),checkAvailability()" class="texttag" onkeypress="return checkDateNumber(event)" value="" maxlength="10" size="10/"><img style="cursor: pointer;" id="img_txtStartDate" src="themes/ifmsblue/images/taglib/ico-calendar.gif" width="20" onclick="window_open(event,'txtStartDate',375,570,'',&quot;txtStartDate,Please~enter~valid~$CPTN,ST.DATE,0,02/07/2024,Please~enter~$CPTN~less~than~02/07/2024&quot;)">&nbsp;&nbsp;<label class="mandatoryindicator">*</label> </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="hidden" name="txtEndDate" id="txtEndDate">
+                        <b>Order Type<b></b></b></td>
+                    <td>
+                        <select name="cmbgrtype" size="100px" id="cmbgrtype" class="selecttag">
+                            <option value="6">
+                                STATE GR</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table align="center" border="1">
+            <tbody>
+                <tr>
+                    <td colspan="10"><b>Order Upload:-</b>
+                        <script type="text/javascript">
+                        var contextPath = '/dcps
+                        ';
+                        var navDisplay = navDisplay;
+                        if (navDisplay == undefined)
+                            navDisplay = true;
+                        </script>
+                        <script type="text/javascript" src="/dcps/script/common/cmbBoxFillUp.js">
+                        </script>
+                        <script type="text/javascript" src="/dcps/script/common/attachment.js">
+                        </script>
+                        <style type="text/css">
+                        .removeLink {
+                            text-decoration: underline;
+                            cursor: pointer;
+                            color: #0000FF;
+                        }
+                        </style>
+                        <script type="text/javascript" language="JavaScript">
+                        addButtonFunctionorderId = true;
+                        removeJSFunctionorderId = true;
+                        </script>
+                        <script type="text/javascript" language="JavaScript">
+                        updaterorderId = null;
+                        counterorderId = 0;
+                        addRowCounter = 0;
+                        requestObjectorderId = null;
+                        formNameGlobalVarorderId = null;
+                        formActionorderId = null;
+                        formTargetorderId = null;
+                        formMethodorderId = null;
+                        removeURL = null;
+                        attachmentEditorderId = true;
+                        dbRowCountorderId = 0;
+
+                        rowCountForEidtorderId = 0;
+
+                        //////////Flag for Changed Row Number to use or Incremented Row Number to use
+                        rowNumberChangedorderId = false;
+
+                        function insRowEditorderId() {
+                            if (attachmentEditorderId) {
+
+                            }
+
+                        }
+
+                        function removeRoworderId(removeURL, src) {
+                            try {
+                                if (confirm('Whether you would like to delete the attachment?')) {
+
+
+                                    if (removeJSFunctionorderId) {
+                                        counterorderId--;
+                                        //var roworderId = src.parentElement.parentElement;
+                                        var roworderId = src.parentNode.parentNode;
+
+
+                                        //var rownum = roworderId.rowIndex;
+                                        //rownum--;
+                                        ajaxfunctionRemoveURLorderId(removeURL);
+
+                                        rowCountForEidtorderId = rowCountForEidtorderId - 1;
+
+                                        document.getElementById("myTableorderId").deleteRow(roworderId.rowIndex);
+                                    }
+                                }
+                            } catch (qq) {
+                                alert('Some problem occured while removing Row -->' + qq);
+                            }
+                        }
+
+                        function ajaxfunctionRemoveURLorderId(removeUrl) {
+
+
+                            try {
+
+                                xmlHttporderId = new XMLHttpRequest();
+                            } catch (eorderId) { // Internet Explorer    
+                                try {
+
+                                    xmlHttporderId = new ActiveXObject("Msxml2.XMLHTTP");
+
+                                } catch (eorderId) {
+                                    try {
+                                        //alert("here2");
+                                        xmlHttporderId = new ActiveXObject("Microsoft.XMLHTTP");
+                                    } catch (eorderId) {
+                                        alert("Your browser does not support AJAX!...orderId");
+                                        return false;
+                                    }
+                                }
+                            }
+
+                            var urlorderId = removeUrl;
+
+
+                            xmlHttporderId.onreadystatechange = function() {
+
+                                if (xmlHttporderId.readyState == 4) {
+                                    if (xmlHttporderId.status == 200) {}
+
+                                }
+                            }
+
+                            xmlHttporderId.open("POST", encodeURI(urlorderId), false);
+                            xmlHttporderId.setRequestHeader("Content-Type", "text/html; charset=iso-8859-1");
+
+                            xmlHttporderId.send(encodeURIComponent(null));
+
+
+                        } // end of method ajaxfunction	
+                        function removeRowFromTableorderId(rowNum, formName) {
+                            //	alert ('removeRowFromTable called ');
+                            // 	202414
+                            var obj = document.getElementById('descorderId');
+                            if (obj.type == 'text') {
+                                obj.value = '';
+                            } else {
+                                obj.selectedIndex = 0;
+                            }
+                            var tbl = document.getElementById('myTableorderId');
+                            var lastRow = tbl.rows.length;
+                            while (lastRow > 1) {
+                                tbl.deleteRow(lastRow - 1);
+                                lastRow = lastRow - 1;
+                            }
+
+                            if (rowNum >= 0) {
+                                rowNum = rowNum + 1;
+                                if (formName != null) {
+                                    document.getElementById('orderId_rowNumber').value = rowNum;
+
+                                    if (formName == 'EditAttachmentIsTrue') {
+                                        rowNumberChangedorderId = true;
+                                    } else {
+                                        rowNumberChangedorderId = false;
+                                    }
+                                }
+                            }
+
+                            dbRowCountorderId = 0;
+                        }
+
+                        function returnLatestRowNumberorderId(formName) {
+                            // If Row Number is chagned then use local variable of attacment for rowNumber
+                            // Otherwise start with 1 if Incremanted Row Number is not exist.
+
+                            var rowNumber = 0;
+                            if (rowNumberChangedorderId) {
+                                rowNumber = document.forms[formName].orderId_rowNumber.value;
+                            } else {
+                                if (document.getElementById("Incremented_rowNumber") == null) {
+                                    rowNumber = 1;
+                                } else {
+                                    rowNumber = document.getElementById("Incremented_rowNumber").value;
+                                }
+                            }
+                            return rowNumber;
+                        }
+
+                        function insRowForAddorderId(fileName, fileDescription, delRowNum, editFlag, viewURL) {
+                            counterorderId++;
+                            addRowCounter = document.getElementById('myTableorderId').rows.length;
+                            var xorderId = document.getElementById('myTableorderId').insertRow(addRowCounter)
+
+                            var col1orderId = xorderId.insertCell(0)
+                            var col2orderId = xorderId.insertCell(1)
+                            var col3orderId = xorderId.insertCell(2)
+
+                            if (!editFlag) {
+                                document.forms[0].cntorderId.value = counterorderId;
+                            }
+                            if (fileDescription != "") {
+                                col1orderId.innerHTML = fileDescription;
+                            } else {
+                                var result = fileName.lastIndexOf(".");
+                                var fileNameDesc = fileName.substring(0, result);
+                                col1orderId.innerHTML = fileNameDesc;
+                            }
+
+                            col2orderId.innerHTML = fileName;
+
+                            if (!editFlag) {
+                                delRowNum = document.forms[0].orderId_rowNumber.value;
+                                //alert('delRowNum'+delRowNum);
+
+                                col3orderId.innerHTML = '<a class="removeLink" onClick="delRoworderId(this,' + delRowNum + ')" target="target_uploadorderId">Remove</a> / <a href="#" onClick="viewRoworderId(this,' + delRowNum + ')">View</a>';
+                            } else {
+                                col3orderId.innerHTML = "<A href='#' onclick=\"openDocumentOnClick('" + viewURL + "')\">View</A>";
+                                dbRowCountorderId = dbRowCountorderId + 1;
+                            }
+                        }
+                        </script>
+                        <script type="text/javascript" language="JavaScript">
+                        function ajaxfunctionorderId(rownum, removeUrl) {
+                            try {
+                                // Firefox, Opera 8.0+, Safari    
+
+                                xmlHttporderId = new XMLHttpRequest();
+                            } catch (eorderId) { // Internet Explorer    
+                                try {
+
+                                    xmlHttporderId = new ActiveXObject("Msxml2.XMLHTTP");
+
+                                } catch (eorderId) {
+                                    try {
+                                        xmlHttporderId = new ActiveXObject("Microsoft.XMLHTTP");
+                                    } catch (eorderId) {
+                                        alert("Your browser does not support AJAX!...orderId");
+                                        return false;
+                                    }
+                                }
+                            }
+
+                            var urlorderId = removeUrl + rownum;
+
+
+                            xmlHttporderId.onreadystatechange = function() {
+
+                                if (xmlHttporderId.readyState == 4) {
+                                    if (xmlHttporderId.status == 200) {
+
+
+                                    }
+
+                                }
+                            }
+                            xmlHttporderId.open("POST", encodeURI(urlorderId), false);
+                            xmlHttporderId.setRequestHeader("Content-Type", "text/html; charset=iso-8859-1");
+
+                            xmlHttporderId.send(encodeURIComponent(null));
+
+                        } // end of method ajaxfunction		
+
+                        function handleResponseorderId() {
+                            if ((requestObjectorderId.readyState == 4) && (requestObjectorderId.status == 200)) {
+                                alert(requestObjectorderId.responseText);
+                            }
+                        } // end of function handleResponseorderId
+
+
+                        function startStatusCheckorderId(formName) {
+
+
+
+                            if (addButtonFunctionorderId) {
+
+                                formActionorderId = window.document.forms[formName].action;
+                                formTargetorderId = window.document.forms[formName].target;
+                                formMethodorderId = window.document.forms[formName].method;
+
+
+                                formNameGlobalVarorderId = formName;
+
+                                $('submitButtonorderId').disabled = true;
+
+                                try {
+
+
+                                    var fileNameValue = document.forms[formName].importFileorderId.value;
+                                    if (isFieldValueNull(fileNameValue) || fileNameValue == '') {
+                                        alert('File Name is Required');
+                                        document.forms[formName].importFileorderId.focus();
+                                        throw 'exception';
+                                    }
+                                    var result = fileNameValue.lastIndexOf(".");
+                                    var fileExtention = fileNameValue.substring(result + 1, fileNameValue.length);
+
+
+                                    if (fileExtention.toLowerCase() == 'exe' || fileExtention.toLowerCase() == 'com' || fileExtention.toLowerCase() == 'bat' || fileExtention.toLowerCase() == 'sys' || fileExtention.toLowerCase() == 'pif' || fileExtention.toLowerCase() == 'sys' || fileExtention.toLowerCase() == 'sh') {
+                                        alert('Invalid Attachment (.EXE, .COM, .BAT, .SYS, .PIF, .DLL, .SH are not allowed)');
+                                        document.forms[formName].importFileorderId.focus();
+                                        throw 'exception';
+                                    }
+
+
+                                    updaterorderId = new Ajax.PeriodicalUpdater(
+                                        'statusorderId',
+                                        'Upload', { asynchronous: true, frequency: 1, method: 'get', parameters: 'c=status', onFailure: reportErrororderId });
+
+                                    window.document.forms[formName].target = "target_uploadorderId";
+
+                                    // form enctype is not supported here  ... it should be written within within the form tag
+                                    // window.document.forms[formName].enctype="multipart/form-data";
+
+                                    // the form method must be get here otherwise the form wont be submitted
+                                    window.document.forms[formName].method = "post";
+
+
+                                    var rowNumber = returnLatestRowNumberorderId(formName);
+                                    //alert("rowNumber in JSP"+rowNumber);			
+
+                                    // START : CODE FOR GETTING VAUES OF FILE DESCRIPTION 
+                                    // ADDED BY : 202414  
+                                    //	alert ("OBJECT ");
+                                    var fileDescription = null;
+                                    var obj = document.forms[formName].descorderId;
+                                    //	alert (obj);
+                                    //	alert (obj.type) ;
+                                    if (obj.type == 'text') {
+                                        fileDescription = obj.value;
+                                    } else {
+                                        var selIndex = obj.selectedIndex;
+                                        //	alert ("SELECTED INDEX :"+selIndex);
+                                        if (selIndex == 0) {
+                                            //	alert ('Please select file description ');
+                                            alert('Please select file description.');
+                                            obj.focus();
+                                            throw 'File description combo is not selected ';
+                                        }
+                                        fileDescription = obj.options[selIndex].text;
+                                    }
+                                    //	alert ("file description :"+fileDescription);
+                                    // END : CODE FOR GETTING VAUES OF FILE DESCRIPTION 
+
+                                    // 			var fileDescription = document.forms[formName].descorderId.value;
+
+                                    //window.document.forms[formName].action="Upload?attachmentNameHidden=orderId&fileDescription="+fileDescription+"&rowNumber="+rowNumber;
+                                    window.document.forms[formName].action = "Upload?attachmentNameHidden=orderId&fileDescription=" + fileDescription + "&rowNumber=" + rowNumber + "&xmlAllowed=null";
+                                    window.document.forms[formName].submit();
+
+                                    window.document.forms[formName].action = formActionorderId;
+                                    window.document.forms[formName].target = formTargetorderId;
+                                    window.document.forms[formName].method = formMethodorderId;
+
+                                } catch (eorderId) {
+                                    $('submitButtonorderId').disabled = false;
+                                }
+
+
+
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+
+                        function reportErrororderId(request) {
+                            $('submitButtonorderId').disabled = false;
+
+                            $('statusorderId').innerHTML = '<div class="error"><b>Error communicating with server. Please try again.</b></div>';
+                        }
+
+                        function killUpdateorderId(message) {
+                            $('submitButtonorderId').disabled = false;
+
+                            updaterorderId.stop();
+                            if (message != '') {
+                                $('statusorderId').innerHTML = '<div class="error"><b>' + message + '</b></div>';
+                                remove('importFileorderId');
+                                var obj = document.forms[formNameGlobalVarorderId].descorderId;
+                                // START : CODE FOR RESET FILE DESCRIPTION OBJECT
+                                // ADDED BY  : 202414
+                                if (obj.type == 'text') {
+                                    document.forms[formNameGlobalVarorderId].descorderId.value = '';
+                                } else {
+                                    //	resetBioCmbBox (obj,'') ;
+                                    obj.selectedIndex = 0;
+                                }
+                                // END : CODE FOR RESET FILE DESCRIPTION OBJECT
+                            } else {
+                                new Ajax.Updater('statusorderId',
+                                    'Upload', { asynchronous: true, method: 'get', parameters: 'c=status', onFailure: reportErrororderId, onComplete: showResponseorderId });
+
+                            }
+                        } // end of function killUpdate
+
+                        function showResponseorderId() {
+                            var fileElementLocal = document.getElementById('importFileorderId').value;
+                            if (fileElementLocal != '') {
+                                insRoworderId();
+                            }
+
+                        }
+
+                        function insRoworderId() {
+                            try {
+                                counterorderId++;
+                                addRowCounter = document.getElementById('myTableorderId').rows.length;
+                                var xorderId = document.getElementById('myTableorderId').insertRow(parseInt(addRowCounter));
+                            } catch (e) {
+                                alert("Some problem occured while inserting Row " + e.message);
+                            }
+
+                            var col1orderId = xorderId.insertCell(0);
+                            var col2orderId = xorderId.insertCell(1);
+                            var col3orderId = xorderId.insertCell(2);
+
+                            document.forms[formNameGlobalVarorderId].cntorderId.value = counterorderId;
+
+                            var fileName = document.forms[formNameGlobalVarorderId].importFileorderId.value;
+                            fileName = fileName.replace(/\\\\/g, '/');
+                            var result = fileName.lastIndexOf("/");
+                            fileName = fileName.substring(result + 1, fileName.length);
+
+                            if (document.forms[formNameGlobalVarorderId].descorderId.value != "") {
+                                // 202414 
+                                var obj = document.forms[formNameGlobalVarorderId].descorderId;
+                                if (obj.type == 'text') {
+                                    fileDescription = obj.value;
+                                } else {
+                                    var selIndex = obj.selectedIndex;
+                                    // HERE NOT NEEDED TO CHECK DEFAULT SELECTION 
+                                    // alert ("SELECTED INDEX :"+selIndex);
+                                    fileDescription = obj.options[selIndex].text;
+                                }
+                                //alert ("file description :"+fileDescription);
+
+                                col1orderId.innerHTML = fileDescription;
+                                //	    	col1orderId.innerHTML=document.forms[formNameGlobalVarorderId].descorderId.value;
+                            } else {
+                                result = fileName.lastIndexOf(".");
+                                var fileNameDesc = fileName.substring(0, result);
+                                //col1orderId.innerHTML = "<B>N.A</B>";
+                                col1orderId.innerHTML = fileNameDesc;
+                            }
+
+                            col2orderId.innerHTML = fileName;
+                            document.getElementById("hidFileName").value = document.getElementById("hidFileName").value + "~" + fileName;
+
+
+                            var rowNumber = returnLatestRowNumberorderId(formNameGlobalVarorderId);
+                            //alert('DEL ROW NUM:'+rowNumber);	    
+                            col3orderId.innerHTML = '<a class="removeLink" onClick="delRoworderId(this,' + rowNumber + ')" target="target_uploadorderId">Remove</a> / <a href="#" onClick="viewRoworderId(this,' + rowNumber + ')">View</a>';
+
+
+                            var obj = document.forms[formNameGlobalVarorderId].descorderId
+                            if (obj.type == 'text') {
+                                document.forms[formNameGlobalVarorderId].descorderId.value = '';
+                            } else {
+                                //alert('resetBioCmbBox  called');
+                                obj.selectedIndex = 0;
+                                // resetBioCmbBox (obj ,'')
+                            }
+
+
+                            remove('importFileorderId');
+                        } // end of function insRow
+                        function resetBioCmbBox(obj, bioDeviceType) {
+                            //	alert ("bioDeviceType :"+bioDeviceType)	 ;
+                            obj.selectedIndex = 0;
+                        }
+
+                        function delRoworderId(src, rowNumber) {
+                            if (confirm('Whether you would like to delete the attachment?')) {
+                                document.getElementById("hidFileName").value = "";
+
+
+                                if (removeJSFunctionorderId) {
+                                    try {
+                                        counterorderId--;
+
+                                        var roworderId = src.parentNode.parentNode;
+                                        var rownum = roworderId.rowIndex;
+                                        if (rownum > 0) {
+                                            rownum--;
+                                        }
+
+
+
+                                        // Row Count added for Attachment Multiple Add/Edit functionality 2007-10-11
+                                        var rowCount = dbRowCountorderId;
+
+                                        ajaxfunctionorderId(rownum, 'Upload?attachmentNameHidden=orderId&rowNumber=' + rowNumber + '&rowCount=' + rowCount + '&removeElement=removeElementFromArrayList&elementNumber=');
+
+
+                                        document.getElementById("myTableorderId").deleteRow(roworderId.rowIndex);
+                                    } catch (qq) {
+                                        alert('Some problem occured while deleting Row -->' + qq);
+                                    }
+                                }
+                            }
+
+                        } // end of function delRow
+
+                        function viewRoworderId(src, rowNumber) {
+                            formActionorderId = window.document.forms[formNameGlobalVarorderId].action;
+
+                            var actionFlagorderId = '';
+                            var totalForms = document.forms.length;
+                            var theForm = document.forms["saveRequestFORM"];
+                            var actionFlagFoundinSaveRequestForm = false;
+                            var otherForm = false;
+                            for (var j = 0; j < totalForms; j++) {
+                                theForm = document.forms[j];
+                                for (var i = 0; i < theForm.elements.length; i++) {
+                                    if (theForm.elements[i].type == "hidden") {
+                                        if (theForm.elements[i].name == "actionFlag") {
+                                            if (theForm.name == "saveRequestFORM")
+                                                actionFlagFoundinSaveRequestForm = true;
+                                            else
+                                                otherForm = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+
+                            //if((document.getElementsByName('actionFlag').length > 1 ))
+                            if (otherForm) {
+                                actionFlagorderId = document.forms[formNameGlobalVarorderId].actionFlag.value;
+                                document.forms[formNameGlobalVarorderId].actionFlag.value = 'viewAttachmentFromClientPath';
+                            }
+                            try {
+                                if (rowNumber == undefined) {
+                                    rowNumber = '';
+                                }
+                                // var roworderId = src.parentElement.parentElement;
+                                var roworderId = src.parentNode.parentNode;
+
+
+                                var rowIndex = roworderId.rowIndex;
+
+                                // Row Count added for Attachment Multiple Add/Edit functionality 2007-10-11
+                                var rowCount = dbRowCountorderId;
+
+                                var urlValue = "ifms.htm?actionFlag=viewAttachmentFromClientPath&attachmentUniqeName=orderId&rowNumber=" + rowNumber + "&rowCount=" + rowCount + "&rowIndex=";
+                                urlValue = urlValue + rowIndex;
+
+                                document.forms[formNameGlobalVarorderId].action = urlValue;
+
+                                document.forms[formNameGlobalVarorderId].submit();
+                            } catch (qq) {
+                                alert('Some problem occured during view -->' + qq);
+                            }
+
+                            document.forms[formNameGlobalVarorderId].action = formActionorderId;
+                            // if(document.getElementsByName('actionFlag').length > 0 )
+                            if (otherForm) {
+                                document.forms[formNameGlobalVarorderId].actionFlag.value = actionFlagorderId;
+                            }
+                        }
+                        </script>
+                        <iframe id="target_uploadorderId" name="target_uploadorderId" src="" style="display: none" onload="insRowEditorderId();"></iframe>
+                        <fieldset id="Attachment" class="fieldGroupTag">
+                            <p id=""><span>Attachment </span></p>
+                            <div id="" style="display: block; width: 100%;">
+                                <table id="formTable1orderId" border="0" align="left" width="100%" cellspacing="1" cellpadding="1">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <label class="captionTag" id="FILE_DESCRIPTION">File Description</label>&nbsp;
+                                                <!--   
+	// START : BIOMETRIC RELATED CODE  COMBO BOX 
+	// ADDED BY : 202414
+ -->
+                                                <input type="text" name="descorderId" id="descorderId" class="texttag" value="" maxlength="40" size="30/">
+                                                <!--   
+	// END  : BIOMETRIC RELATED CODE  COMBO BOX 
+ -->
+                                                <input type="hidden" name="cntorderId" value="0">&nbsp;
+                                            </td>
+                                            <td id="formTable1FILETDorderId">
+                                                <label class="captionTag" id="ATTACH_FILE">Attach File</label>&nbsp;
+                                                <input type="file" name="importFileorderId" maxlength="40" onkeypress="return checkValue();" class="filetag" id="importFileorderId">
+                                            </td>
+                                            <input type="hidden" name="attachmentName" value="orderId" id="attachmentName">
+                                            <input type="hidden" name="hidFileName" value="" id="hidFileName">
+                                            <input type="hidden" name="attachmentType" value="Document" id="attachmentType">
+                                            <input type="hidden" name="orderId_rowNumber" value="1" id="orderId_rowNumber">
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" align="center">
+                                                <input type="button" name="submitButtonorderId" onclick="startStatusCheckorderId('frmOrderMaster')" id="submitButtonorderId" value="Add Attachment" size="3" maxlength="3" class="bigbutton">
+                                                <!-- <input type="button" name="scanbuttonorderId" 
+ onclick="openScanAppletAttachmentName('orderId','','true')"  id="scanbuttonorderId"  value="Scan And Add" size="3" maxlength="3"  class=buttontag  > -->
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">
+                                                <div id="statusorderId" style="width: 100%;">
+                                                </div>
+                                                <br>
+                                                <table id="myTableorderId" class="datatable">
+                                                    <tbody>
+                                                        <tr>
+                                                            <!-- 	<td><center>Sr No</center></td>     -->
+                                                            <td class="datatableheader">
+                                                                <center><label class="captionTag" id="DESCRIPTION">Description</label></center>
+                                                            </td>
+                                                            <td class="datatableheader">
+                                                                <center><label class="captionTag" id="FILE_NAME">File Name</label></center>
+                                                            </td>
+                                                            <td class="datatableheader">
+                                                                <center><label class="captionTag" id="ACTIONS">Actions</label></center>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br>
+                            </div>
+                            
+                        </fieldset>
+                        <script type="text/javascript">
+                        window.FILL_COMBO_BOX_TAB_WISE = false;
+
+                        function openDocumentOnClick(vRL) {
+                            window.open(vRL);
+                        }
+                        enableAjaxSubmit(false);
+                        insRowEditorderId();
+                        </script>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table id="btnAdd" style="" align="center">
+            <tbody>
+                <tr>
+                    <td class="fieldLabel" align="center" colspan="4"><input type="button" name="add" onclick="addOrderData()" id="add" value="Add" size="3" maxlength="3" class="buttontag"></td>
+                </tr>
+            </tbody>
+        </table>
+        <table id="orderDataTable" border="1" bgcolor="ffffff" bordercolor="aaaaaa" align="center">
+            <tbody>
+                <tr>
+                    <td align="center"><b>Department</b></td>
+                    <td align="center"><b>Section Order No</b></td>
+                    <td align="center"><b>Order Date</b></td>
+                    <td align="center"><b>Order End Date</b></td>
+                    <td align="center"><b>GR Type</b></td>
+                    <td align="center"><b>Delete</b></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <div>
+        <input type="hidden" name="givenurl" value="getOrderData" id="givenurl">
+        <script type="text/javascript">
+        var contextPath = '/dcps
+        ';
+        var navDisplay = navDisplay;
+        if (navDisplay == undefined)
+            navDisplay = true;
+        </script>
+        <table class="tabNavigationBar">
+            <tbody>
+                <tr align="center">
+                    <td class="tabnavtdcenter" id="tabnavtdcenter"><input type="button" name="formSubmitButton" onclick="submitButton_formSubmitButton()" id="formSubmitButtonTemp" value="Save" size="3" maxlength="3" class="buttontag">
+                        <input type="button" name="Close" onclick="onBackfn();" id="Close" value="Close" size="3" maxlength="3" class="buttontag">
+                        <input type="button" name="Reset" onclick="resetForm()" id="Reset" value="Reset" size="3" maxlength="3" class="buttontag"> <!-- <input type="reset" value="Reset"/>-->
+                        <script language="javaScript">
+                        
+                        function onclosefn() {
+                            document.forms[0].action = "./hrms.htm?actionFlag=getHomePage";
+                            document.forms[0].submit();
+                        }
+
+                        function onBackfn() {
+                            if (document.forms[0].givenurl != null) {
+                                var url = "./hrms.htm?actionFlag=" + document.forms[0].givenurl.value;
+                                document.forms[0].action = url;
+                            } else {
+                                document.forms[0].action = "./hrms.htm?actionFlag=getHomePage";
+                            }
+                            document.forms[0].submit();
+                        }
+
+                        function resetForm() {
+                            if (confirm("All entered values will be cleared, please confirm!") == true) {
+                                document.forms[0].reset();
+
+                                window.location.reload();
+                            }
+
+                        }
+                        </script> <!-- Message in gujarati is still remains....Jaspal.. -->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+        
+    
+   
+</form>
+
+		</div>
+		
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

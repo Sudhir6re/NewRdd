@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pagelabel.apprddohist}"></title>
+</head>
+<body class="ApproveDDOHistory">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+
+	<div class="container min-height-600 ">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pagelabel.apprddohist}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pagelabel.apprddohist}"></span>
+		</h3>
+		<div class="newpagecontent container">
+			<form method="post" action="" name="approveDDOHistory" enctype="multipart/form-data" id="approveDDOHistory">
+    <br><br>
+    <fieldset class="tabstyle">
+    <form class="form-horizontal" method="POST" name="updateEmpType"
+				th:action="@{/level1/saveCRTEmp}" th:object="${approveDDOHstModel}"
+				enctype="multipart/form-data">
+        <legend>Approve/Reject DDO History.</legend>
+        <br>
+        <span class="pagebanner">10 Records found, displaying all Records.</span><span class="pagelinks"><strong>1</strong></span>
+        <table class="datatable table table-bordered" id="vo">
+            <thead>
+            
+            <tr>
+							<th th:text="#{msg.thymeleaf.pagelabel.ddoname}"></th>
+							<th th:text="#{msg.thymeleaf.pagelabel.ddoCode}"></th>
+							<th th:text="#{msg.pagelabel.fromDate}"></th>
+							<th th:text="#{msg.pagelabel.toDate}"></th>
+							<th th:text="#{msg.thymeleaf.pagelabel.status}"></th>
+							<th th:text="#{msg.thymeleaf.pagelabel.apprej}"></th>
+						</tr>
+            
+            
+               <!--  <tr>
+                    <th class="datatableheader sortable">
+                        <a href="?elementId=90002640&amp;actionFlag=ApproveDDOHistory&amp;d-5487-s=0&amp;d-5487-o=2">DDO Name</a></th>
+                    <th class="datatableheader">DDO Code</th>
+                    <th class="datatableheader sortable">
+                        <a href="?elementId=90002640&amp;actionFlag=ApproveDDOHistory&amp;d-5487-s=2&amp;d-5487-o=2">From date</a></th>
+                    <th class="datatableheader sortable">
+                        <a href="?elementId=90002640&amp;actionFlag=ApproveDDOHistory&amp;d-5487-s=3&amp;d-5487-o=2">To Date</a></th>
+                    <th class="datatableheader sortable">
+                        <a href="?elementId=90002640&amp;actionFlag=ApproveDDOHistory&amp;d-5487-s=4&amp;d-5487-o=2">Status</a></th>
+                    <th class="datatableheader sortable">
+                        <a href="?elementId=90002640&amp;actionFlag=ApproveDDOHistory&amp;d-5487-s=5&amp;d-5487-o=2">Approve/Reject</a></th>
+                </tr> -->
+            </thead>
+            <tbody>
+						<tr th:each="VarDDO : ${lstDDOofficeforApprv}">
+						<td><a th:href="@{'/moderator/ApproveDDOOficeStatus/'+${VarDDO.ddoregid}}"><span
+												th:text="${VarDDO.orginstname}"></span></a></td>
+						<!-- 	<td style="text-align: left"><a th:href="@{/master/ApproveDDOOficeStatus}" th:text="${VarDDO.orginstname}"></a></td> -->
+							<td style="text-align: left" th:text="${VarDDO.orginstname}"></td>
+							<td style="text-align: left" th:text="${VarDDO.address}"></td>
+							<td style="text-align: left">
+								<div id="">Approved</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+          <!--   <tbody>
+                <tr class="odd">
+                    <td class="oddcentre" style="text-align:left">
+                        Shri R.B.DESHMUKH
+                    </td>
+                    <td class="oddcentre" style="text-align:left">
+                        06340100126
+                    </td>
+                    <td class="oddcentre" style="text-align:left">
+                        01/08/2022
+                    </td>
+                    <td class="oddcentre" style="text-align:left">
+                        31/07/2024
+                    </td>
+                    <td class="oddcentre" style="text-align:left">
+                        Saved
+                    </td>
+                    <td class="oddcentre" style="text-align:left">
+                        <a href="#" onclick="approve('991000073','06340100126','Shri R.B.DESHMUKH','991005002')">Approve</a>&nbsp;/&nbsp;<a href="#" onclick="reject('991000073','06340100126','Shri R.B.DESHMUKH')">Reject</a>
+                    </td>
+                </tr>
+               
+            </tbody>
+        </table> -->
+        <br>
+        </form>
+    </fieldset>
+</form>
+
+		</div>
+		
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.setPassDdo}"></title>
+
+</head>
+<body class="set-pass-ddo">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.dcpsBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.setPassDdo}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.setPassDdo}"></span>
+		</h3>
+
+		<div class="formMainwithNoborTb container">
+			<form method="post" action="" name="FrmResetPassword"
+				enctype="multipart/form-data">
+				<fieldset class="tabstyle">
+					<legend>Employee Details</legend>
+					<table class="table bor-0 tbBold width-50">
+						<tbody>
+							<tr>
+								<td width="40%">User Name</td>
+								<td><input type="text" id="txtUserName" name="txtUserName">
+									<label class="mandatoryindicator">*</label></td>
+							</tr>
+							<tr>
+								<td width="15%">Name</td>
+								<td width="35%"><input type="text" id="txtEmpName"
+									name="txtEmpName" readonly="readonly"></td>
+							</tr>
+						</tbody>
+					</table>
+					<br />
+					<div class="text-center">
+						<input type="button" name="btnUpdate" id="btnUpdate"
+							value="Update" size="3" maxlength="3" class="buttontag">
+						<input type="button" name="btnBack" onclick="history.back()"
+							id="btnBack" value="Back" size="3" maxlength="3"
+							class="buttontag">
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script>
+		$(".empdetails").hide();
+		function getEmpInfo() {
+			$(".empdetails").fadeIn(100);
+		}
+	</script>
+</body>
+</html>

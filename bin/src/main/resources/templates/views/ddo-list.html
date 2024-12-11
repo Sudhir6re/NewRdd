@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Active In Active Post</title>
+<style type="text/css">
+.error {
+	color: red !important;
+	font-size: 12px !important;
+}
+
+select.error, textarea.error, input.error {
+	border: 1px solid red !important;
+}
+</style>
+</head>
+<body class="mst-menu">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.UtilitiesBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pagelabel.menuScreen}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span>Active In Active Post</span>
+		</h3>
+		<div class="container">
+			<fieldset>
+				<!-- <b><legend th:utext="#{msg.thymeleaf.pagelabel.menuScreen}"
+					th:style="${'color: orange;'}"></legend></b> -->
+				<table class="table table-bordered" id="postDetails" >
+					<thead>
+						<tr>
+							<th class="datatableheader sortable">Sr. No.</th>
+							<th class="datatableheader sortable">DDO Code</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="userPostCustomVO,rowStat : ${getddolst}">
+							<td th:text="${rowStat.index+1}">1</td>
+							<td th:text="${userPostCustomVO.ddoCode}"></td>
+							<td>
+
+								<div class="form-group text-center">
+									<a data-toggle="tooltip" title="Edit" id="updatePostStatus" th:href="@{'/mdc/showPostList/'+ ${userPostCustomVO.ddoCode}}">
+										<!-- th:data-postId="${userPostCustomVO.postId}"
+									 th:data-activateFlag="${userPostCustomVO.activateFlag}" --> <span
+										class="glyphicon glyphicon-edit"></span>
+									</a>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<input type="hidden" name="${_csrf.parameterName}"
+					value="${_csrf.token}" />
+			</fieldset>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+
+	<script th:src="@{/js/project/datatable-common.js}"></script>
+	<script th:src="@{/js/jquery.validate.min.js}"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.min.js"></script>
+	<script th:src="@{/js/project/mst-menu.js}"></script>
+	<script>
+		$("#postDetails").DataTable();
+	</script>
+
+</body>
+</html>
