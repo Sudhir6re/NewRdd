@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,6 +31,8 @@ import com.mahait.gov.in.repository.OrgPostMstRepository;
 import com.mahait.gov.in.repository.UserInfoRepo;
 import com.mahait.gov.in.repository.ZpAdminNameMstRepository;
 import com.mahait.gov.in.repository.ZpRltDdoMapRepository;
+
+import jakarta.transaction.Transactional;
 
 @Transactional
 @Service

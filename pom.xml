@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.mahait.gov.in</groupId>
 	<artifactId>RDD-1</artifactId>
-<!--	<version>0.0.1-SNAPSHOT</version>-->
+	<!--	<version>0.0.1-SNAPSHOT</version>-->
 	<packaging>war</packaging>
 	<name>RDD-1</name>
 	<description>Demo project for Spring Boot</description>
@@ -57,10 +57,10 @@
 					<artifactId>spring-boot-starter-tomcat</artifactId>
 				</exclusion>
 
-				<!--<exclusion>
+				<exclusion>
 					<artifactId>logback-classic</artifactId>
 					<groupId>ch.qos.logback</groupId>
-				</exclusion>-->
+				</exclusion>
 			</exclusions>
 		</dependency>
 
@@ -186,9 +186,8 @@
 			<artifactId>jakarta.servlet-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
-		
-		
+
+
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
@@ -203,6 +202,27 @@
 		</dependency>
 
 
+		<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+			<version>4.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+			<version>4.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.xml.ws</groupId>
+			<artifactId>jaxws-rt</artifactId>
+			<version>4.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.xml.ws</groupId>
+			<artifactId>jakarta.xml.ws-api</artifactId>
+			<version>4.0.0</version>
+		</dependency>
 
 
 	</dependencies>
@@ -222,7 +242,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
-			<finalName>RDD</finalName> 
+		<finalName>RDD</finalName>
 	</build>
 
 </project>

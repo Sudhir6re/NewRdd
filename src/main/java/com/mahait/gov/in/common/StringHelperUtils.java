@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
@@ -267,7 +268,38 @@ public class StringHelperUtils {
 			return false;
 		}
 	}
+
 	
+	public static Float isNullFloat(Object object) {
+        try {
+            if (object == null) {
+               return  0.0f; 
+            } else {
+                 return (Float)object;
+            }
+        } catch (NullPointerException n) {
+            return  0.0f; 
+        }
+    
+	}
+	
+	public static Timestamp isNullTimestamp(Object object) {
+        try {
+            if (object == null) {
+                return new Timestamp(new Date().getTime()); 
+            } else if (object instanceof Timestamp) {
+                return (Timestamp) object;
+            } else if (object instanceof java.util.Date) {
+                return new Timestamp(((java.util.Date) object).getTime());
+            } else if (object instanceof String) {
+                return Timestamp.valueOf(object.toString());
+            } else {
+            	return new Timestamp(new Date().getTime()); 
+            }
+        } catch (Exception e) {
+            return new Timestamp(new Date().getTime()); 
+        }
+    }
 	
 	
 }

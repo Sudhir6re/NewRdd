@@ -1,18 +1,17 @@
 package com.mahait.gov.in.service;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mahait.gov.in.entity.MstDesignationEntity;
 import com.mahait.gov.in.entity.OrgUserMst;
 import com.mahait.gov.in.entity.ZpAdminOfficeMst;
 import com.mahait.gov.in.mapper.ZpAdminOfficeMstMapper;
 import com.mahait.gov.in.model.ZpAdminOfficeMstModel;
 import com.mahait.gov.in.repository.ZpAdminNameMstRepository;
 import com.mahait.gov.in.repository.ZpAdminOfficeMstRepository;
+
+import jakarta.transaction.Transactional;
 
 @Transactional
 @Service
