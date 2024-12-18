@@ -34,11 +34,10 @@ public class CreateAdminOfficeRepoImpl implements CreateAdminOfficeRepo {
 		List list = null;
 
 		Session hibSession = entityManager.unwrap(Session.class);
-
 		StringBuffer strQuery = new StringBuffer();
 		strQuery.append(
 				"SELECT zp.ZP_DDO_CODE,zp.REPT_DDO_CODE,zp.FINAL_DDO_CODE,zp.SPECIAL_DDO_CODE,zp.ZPLEVEL,zp.STATUS,zp.ZP_MAP_ID,zp.created_date FROM  RLT_ZP_DDO_MAP zp ");
-		strQuery.append(" inner join mst_dcps_ddo_office office on zp.zp_ddo_code=office.ddo_code ");
+		strQuery.append(" inner join org_ddo_mst office on zp.zp_ddo_code=office.ddo_code ");
 		strQuery.append(" where zp.status is not null "); // zp.LANG_ID =1 and
 		if ((districtName != null) && (districtName != "") && (Long.parseLong(districtName) != -1)) {
 			strQuery.append(" and office.district='" + districtName + "'");
@@ -52,7 +51,6 @@ public class CreateAdminOfficeRepoImpl implements CreateAdminOfficeRepo {
 		}
 		strQuery.append(" order by ZP_MAP_ID desc");
 
-		// logger.info("Details Query :"+strQuery.toString());
 		Query query = hibSession.createNativeQuery(strQuery.toString());
 		list = query.getResultList();
 		return list;
