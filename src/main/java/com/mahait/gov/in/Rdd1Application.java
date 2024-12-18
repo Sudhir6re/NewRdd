@@ -16,7 +16,6 @@ import org.springframework.cache.annotation.EnableCaching;
 public class Rdd1Application {
 
 	public static void main(String[] args) {
-		System.setProperty("server.servlet.context-path", "/dcps");
 		SpringApplication.run(Rdd1Application.class, args);
 	}
 

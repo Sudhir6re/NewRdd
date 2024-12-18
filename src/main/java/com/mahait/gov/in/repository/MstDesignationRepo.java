@@ -9,7 +9,7 @@ import com.mahait.gov.in.entity.MstPayCommissionEntity;
 
 public interface MstDesignationRepo {
 
-	public int saveDesignationMst(MstDesignationEntity mstDesignationEntity);
+	public Long saveDesignationMst(MstDesignationEntity mstDesignationEntity);
 //	public List<Object[]> getCadreDesc(Integer fieldDepartmrntID);
 	public List<MstPayCommissionEntity> findAllPayCommission();
 	public List<Object[]> getDesignationMstData();

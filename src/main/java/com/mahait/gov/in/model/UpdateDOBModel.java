@@ -16,12 +16,22 @@ public class UpdateDOBModel {
 	private Long employeeId;
 	private String employeeFullNameEn;
 	private boolean checkboxid;
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dob;
+	
+	
+	private String dateString;
+	
+	
 	private String designation; 
 	private Integer designationCode;
 	private Integer designationId;
 
+	
+	
+	
+	
 	
 	public List<UpdateDOBModel> emplist=new ArrayList<>();
 

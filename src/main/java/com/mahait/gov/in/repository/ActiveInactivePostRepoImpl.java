@@ -44,8 +44,9 @@ public class ActiveInactivePostRepoImpl implements ActiveInactivePostRepo {
 		sb.append(" left join mst_dcps_bill_group  i on i.BILL_GROUP_ID=e.bill_no   ");
 		sb.append("inner join rlt_zp_ddo_map j on j.zp_ddo_code=f.ddo_code where j.rept_ddo_code='"+ddoCode+"'");
 		sb.append(" order by a.CREATED_DATE desc  ");
-		
+
 		System.out.println(sb.toString());
+
 		Query query = hibSession.createNativeQuery(sb.toString());
 		postNameList = query.getResultList();
 		return postNameList;
@@ -73,12 +74,8 @@ public class ActiveInactivePostRepoImpl implements ActiveInactivePostRepo {
 		String hql = "select distinct rept_ddo_code,rept_ddo_post_id from rlt_zp_ddo_map ";
 					//	+ " AND (d.sevaarth_id NOT IN (SELECT sevaarth_id    FROM employee_increment  WHERE effective_from_date <= '2023-07-01' AND sevaarth_id != ''  AND sevaarth_id != '0') OR d.sevaarth_id IS NULL) and a.emp_service_end_date >= current_date";
 		Query query = currentSession.createNativeQuery(hql);
+		//System.out.println("findAllEmpForDue------" + hql);
 		return query.getResultList();
 	}
 
 }
-
-
-
-
-

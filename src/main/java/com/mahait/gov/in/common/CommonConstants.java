@@ -1,5 +1,7 @@
 package com.mahait.gov.in.common;
 
+import com.mahait.gov.in.entity.OrgUserMst;
+
 public class CommonConstants {
 
 	public interface Message{
@@ -217,6 +219,42 @@ public class CommonConstants {
 	public interface PostType {
 		int Permanent = 1;
 		int Temporary = 2;
+	}
+	
+	public static String getUserWiseUrl(OrgUserMst messages) {
+		String url = "";
+
+		switch (messages.getMstRoleEntity().getRoleId()) {
+		case 1:
+			url = "/mdc/";
+			break;
+		case 2:
+			url = "/ddo/";
+			break;
+		case 3:
+			url = "/ddoast/";
+			break;
+		case 4:
+			url = "/user/";
+			break;
+		case 5:
+			url = "/super/";
+			break;
+		case 6:
+			url = "/mdp/";
+			break;
+		case 7:
+			url = "/level3/";
+			break;
+		case 8:
+			url = "/level4/";
+			break;
+		case 9:
+			url = "/developer/";
+			break;
+		}
+		
+		return url;
 	}
 	
 }

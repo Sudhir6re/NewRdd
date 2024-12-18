@@ -6,8 +6,8 @@ import java.util.Date;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.core.env.Environment;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -61,6 +61,8 @@ public class TopicController extends BaseController {
 		return modelAndView;
 	}
 
+	
+	@CacheEvict(value = {"menus", "submenus"}, allEntries = true)
 	@RequestMapping("/logOut")
 	public RedirectView logOut(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");

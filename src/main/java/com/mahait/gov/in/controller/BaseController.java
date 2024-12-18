@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mahait.gov.in.common.CommonConstants;
 import com.mahait.gov.in.entity.OrgUserMst;
 import com.mahait.gov.in.model.TopicModel;
 import com.mahait.gov.in.service.CommonHomeMethodsService;
@@ -40,6 +41,7 @@ public abstract class BaseController {
 		modelAndView.addObject("session", request.getSession());
 		modelAndView.addObject("servletContext", request.getServletContext());
 		modelAndView.addObject("remoteUser", request.getRemoteUser());
+		modelAndView.addObject("userUrl", CommonConstants.getUserWiseUrl(messages));
 		if(messages!=null) {
 		modelAndView.addObject("userName",messages.getUserName());
 		}
@@ -64,10 +66,10 @@ public abstract class BaseController {
 		model.addAttribute("session", request.getSession());
 		model.addAttribute("servletContext", request.getServletContext());
 		model.addAttribute("remoteUser", request.getRemoteUser());
+		model.addAttribute("userUrl", CommonConstants.getUserWiseUrl(messages));
 		if(messages!=null) {
 			model.addAttribute("userName",messages.getUserName());
 		}
-		
 	}
 
 	private String getAppRootPath() {

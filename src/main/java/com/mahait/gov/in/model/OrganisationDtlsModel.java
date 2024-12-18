@@ -4,11 +4,12 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.Column;
 import lombok.Data;
 
 @Data
 public class OrganisationDtlsModel {
-	
+
 	private String ddoCode;
 	private String officeName;
 	private String stateId;
@@ -26,10 +27,10 @@ public class OrganisationDtlsModel {
 	private String email;
 	private Long fax;
 	private String cityId;
-	
+
 	private Long instituteType;
 	private String ddoOffice;
-	
+
 	private String bankId;
 	private String parentAdminDepartmentId;
 	private String ParentFieldDepartmentId;
@@ -41,7 +42,7 @@ public class OrganisationDtlsModel {
 	private String tanNo;
 
 	private String itaWardNo;
-	
+
 	private String bankName;
 
 	private String branchName;
@@ -50,5 +51,11 @@ public class OrganisationDtlsModel {
 
 	private String ifscCode;
 	private String Remarks;
+
+	private String bankPassbook;
+
+	private String bankCheaque;
+
+	private String DeptLetter;
 
 }

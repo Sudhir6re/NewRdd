@@ -4,17 +4,15 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.Column;
 import lombok.Data;
 
 @Data
 public class OrgDdoMstModel {
 
-	
 	private String ddoCode;
-	
+
 	private Long ddoId;
-
-
 
 	private String ddoName;
 
@@ -97,29 +95,30 @@ public class OrgDdoMstModel {
 	private String accountNo;
 
 	private String ifscCode;
-	
+
 	private Long ddoType;
 
-	
 	private Long instituteType;
-	
+
 	private Long DDO_TYPE;
 
-	
 	private Long ADMIN_DEPT_TYPE;
-	
-	
-	
+
 	// Constructors
-	
+
 	private Long statusFlag;
 
-	
 	private String bankId;
 	private String parentAdminDepartmentId;
 	private String ParentFieldDepartmentId;
 	private String ItoWardCircle;
 	private String designationId;
 	private String bankCode;
+
+	private String bankPassbook;
+
+	private String bankCheaque;
+
+	private String DeptLetter;
 
 }

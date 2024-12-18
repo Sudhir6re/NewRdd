@@ -69,10 +69,10 @@ public class MstDesignationRepoImpl implements MstDesignationRepo {
 	}
 	
 	@Override
-	public int saveDesignationMst(MstDesignationEntity mstDesignationEntity) {
+	public Long saveDesignationMst(MstDesignationEntity mstDesignationEntity) {
 		Session currentSession = entityManager.unwrap(Session.class);
 		Serializable saveId = (Serializable) currentSession.save(mstDesignationEntity);
-		return (Integer) saveId;
+		return (Long) saveId;
 	}
 	
 	@Override
@@ -101,16 +101,10 @@ public class MstDesignationRepoImpl implements MstDesignationRepo {
 	@Override
 	public List<Long> validateDesignationName(String desgname) {
 		Session currentSession =  entityManager.unwrap(Session.class);
-
 		String hql = "select count(*) as count from designation_mst where designation_name ='"+ desgname+"'";
-		
 		Query query = currentSession.createNativeQuery(hql).addScalar("count", Long.class);
-		
 		List<Long> lstresult = query.getResultList();
 		return lstresult;
 	}
-
-
-
 	
 }
