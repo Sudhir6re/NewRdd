@@ -72,6 +72,7 @@ public interface CSRFFormService {
 
 	public String getDdoRegNumber(String userName);
 
+	
 	public int gettrano(String userName);
 
 	public void updatemstEmployeeEntity(@Valid MstEmployeeEntity mstEmployeeEntity);
