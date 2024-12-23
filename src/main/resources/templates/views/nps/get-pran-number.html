@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.getPranNumber}"></title>
+</head>
+<body class="get-pran-number">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.NPSDB}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.getPranNumber}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.npsAllEmpDetail}"></span>
+		</h3>
+		<!-- <div align="center" class="alert alert-success">
+			<strong><span th:utext="${message}"></span></strong>
+		</div> -->
+		<fieldset class="container">
+			<!-- <legend th:utext="#{msg.thymeleaf.pageheading.departmentmaster}"
+				th:style="${'color: orange;'}"></legend> -->
+
+			<form class="form-horizontal" th:object="${trnNpsRegFileEntity}"
+				method="POST" enctype="multipart/form-data" id="pranGenForm"     th:action="@{/level1/sendFile}" >
+
+				<input type="hidden" name="language" id="language"
+					th:value="${language}" />
+					
+				<input type="hidden" name="batchFixId" id="batchFixId"
+					th:field="*{batchFixId}" />
+					
+				<input type="hidden" name="id" id="id"
+					th:field="*{id}" />
+					
+				
+
+
+
+
+				<table id="tblDataTable" class="table table-striped table-bordered"
+					style="width: 100%">
+					<thead>
+						<tr>
+							<th th:utext="#{msg.thymeleaf.pagelabel.select}"></th>
+							<th th:utext="#{msg.thymeleaf.pageheading.batchid}"></th>
+							<th th:utext="#{msg.thymeleaf.pageheading.nsdlrefno}"></th>
+							<th th:utext="#{msg.thymeleaf.pageheading.totalempinbatch}"></th>
+							<th th:utext="#{msg.thymeleaf.pageheading.prangenerated}"></th>
+							<th th:utext="#{msg.thymeleaf.pageheading.uploadeddate}"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="varEmp : ${lstTrnNpsRegFileEntity}">
+							<td><input type="radio" name="batchId"  class="batchClass" th:value="${varEmp.id}" th:data="${varEmp.batchFixId}"></td>
+							<td > <a th:href="@{${'/master/getNpsEmpDetailsById/'+varEmp.batchFixId}}"  th:text="${varEmp.batchFixId}" ></a></td>
+							<td th:text="${varEmp.nsdlRefNo}"></td>
+							<td th:text="${varEmp.totalEmpInBatch}"></td>
+							<td th:text="${varEmp.isPranGenerated}"></td>
+							<td th:text="${#dates.format(varEmp.createdDate, 'dd/MM/yyyy')}"></td>
+						</tr>
+					</tbody>
+
+				</table>
+
+
+				<div class="text-center">
+					<input type="submit" name="sendFile" 
+						id="sendFile" value="Send File to NSDL"
+						class="buttontag btn">
+					 <input type="submit" name="pranGen" onclick="getPran();"
+						id="pranGen" value="Get PRAN"  class="buttontag btn"  >
+				</div>
+			</form>
+
+		</fieldset>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script th:src="@{/js/project/datatable-common.js}"></script>
+	<script th:src="@{/js/project/mst-department.js}"></script>
+	<script>
+	$(document).on('click','.batchClass', function(event){
+		 $("#batchFixId").val($(this).attr("data"));
+		 $("#id").val($(this).val());
+	  });
+	
+	
+	function getPran(){
+		$("#pranGenForm").attr("action","../level1/getPranNumbers");
+	}
+	
+	
+	</script>
+
+
+</body>
+</html>

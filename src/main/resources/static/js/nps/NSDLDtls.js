@@ -193,7 +193,7 @@ $("#btnSearch").click(function(e) {
 	}else if(year==16 && (monthId==1 || monthId==2 || monthId==3)){
 		swal('NSDL file can not be generated for selected Month and Year.');
 	}else{
-		var dataTable= $("#tblDataTable").dataTable().fnClearTable();
+		var dataTable= $("#tblDataTable").dataTable();
 		  $("#loaderMainNew").show();
 		$.ajax({
 			type : "GET",
@@ -215,15 +215,15 @@ $("#btnSearch").click(function(e) {
 			success : function(data) {
 				 console.log(data);
 				 $("#loaderMainNew").hide();
+				 dataTable.fnClearTable();
 				var len = data.length;
 					var srNo, ddoCode,grossAmt, netAmt, empAmt,ddoRegNo, emprAmt,totalAmt;
 					$("#loaderMainNew").hide();
 					j=1;
 					
 					if(len>0){
-						 dataTable.fnClearTable();
 						for (var i = 0; i < data.length; i++) {
-							 dataTable.fnAddData([j,data[i].ddocode,data[i].empCountWithPran,data[i].empCountWithNoPran,data[i].totalEmpContri,data[i].ddoCode,data[i].totalEmprContri,data[i].totalAmount]);
+							 dataTable.fnAddData([j,data[i].ddocode,data[i].empCountWithPran,data[i].empCountWithNoPran,data[i].totalEmpContri,data[i].totalEmprContri,data[i].totalAmount]);
 							 j++;
 						}
 					}

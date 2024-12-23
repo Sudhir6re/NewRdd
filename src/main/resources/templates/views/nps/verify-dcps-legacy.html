@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.verifyDcpsLegacy}"></title>
+<style>
+#dcpsVerifyTb td {
+	min-width: 200px;
+}
+
+#dcpslegacyTb input {
+	float: left;
+}
+
+#dcpslegacyTb .mandatoryindicator {
+	float: right;
+}
+
+.scrollablediv {
+	box-shadow: 0px 0px 5px #ccc;
+	padding: 15px 15px;
+}
+</style>
+</head>
+<body class="verify-dcps-legacy">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.verifyDcpsLegacy}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.verifyDcpsLegacy}"></span>
+		</h3>
+
+		<div class="verify-dcps-legacy-main container">
+			<form method="post" th:object="${dcpsLegacyModel}"
+				th:action="@{/ddo/verifyDcpsLegacy}" enctype="multipart/form-data"
+				id="DCPSForwardedFormsList">
+
+				<input type="hidden" id="action" class="form-control" name="action"
+					th:field="*{action}">
+
+                   <input type="hidden" id="noDataFoundMsg" class="form-control"
+									name="noDataFoundMsg" th:value="${noDataFoundMsg}">
+
+				<div align="center">
+
+					<table class="table width-50-auto table-bordered" id="searchTable">
+						<tbody>
+							<tr>
+								<td
+									style="background-color: #F7E7D7; color: rgb(202, 97, 12); font-size: small; font-style: normal; font-weight: bold">
+									Validate Period:</td>
+								<td><select id="period" th:field="*{period}">
+										<option value="0">-- Select --</option>
+										<option
+											th:each="lLstLegValidatePeriod : ${lLstLegValidatePeriod}"
+											th:value="${lLstLegValidatePeriod.lookupId}"
+											th:text="${lLstLegValidatePeriod.lookupDesc}"></option>
+								</select></td>
+							</tr>
+							<tr>
+								<td colspan="4" align="center"><input type="button"
+									onclick="getListOfEmp();" class="buttontag"
+									value="View Records" /></td>
+							</tr>
+						</tbody>
+					</table>
+
+					<fieldset style="width: 100%" class="tabstyle" id="displayData"  th:if="${not #lists.isEmpty(dcpsLegacyModel.lstDcpsLegacyModel)}">
+						<legend id="headingMsg">
+							<b>Employee Details</b>
+						</legend>
+						<div class="scrollablediv"
+							>
+							<table class="table table-bordered table-striped"
+								id="dcpsVerifyTb">
+								<thead>
+									<tr>
+										<th th:text="#{msg.thymeleaf.legacypage.employeeName}">Employee
+											Name</th>
+										<th th:text="#{msg.thymeleaf.legacypage.dcpsId}">DCPS ID</th>
+										<th th:text="#{msg.thymeleaf.legacypage.pranNo}">Pran No</th>
+										<th th:text="#{msg.thymeleaf.legacypage.period}">Period</th>
+										<th th:text="#{msg.thymeleaf.legacypage.employeeContribution}">Employee
+											Contribution</th>
+										<th th:text="#{msg.thymeleaf.legacypage.employerContribution}">Employer
+											Contribution</th>
+										<th th:text="#{msg.thymeleaf.legacypage.empInterest}">Interest
+											on Employee Contribution</th>
+										<th th:text="#{msg.thymeleaf.legacypage.employerInterest}">Interest
+											on Employer Contribution</th>
+										<th th:text="#{msg.thymeleaf.legacypage.total}">Total</th>
+										<th th:text="#{msg.thymeleaf.legacypage.remark}">Remark</th>
+										<th th:text="#{msg.thymeleaf.pagelabel.approvelink}">Approve</th>
+										<th th:text="#{msg.thymeleaf.pagelabel.rejectlink}">Reject</th>
+
+									</tr>
+								</thead>
+								<tbody>
+									<tr
+										th:each="att, itemStat : ${dcpsLegacyModel.lstDcpsLegacyModel}">
+
+										<td style="text-align: center; width: 12%"><label
+											th:text="${att.employeeFullName}"></label></td>
+										<td style="text-align: center; width: 15%"><input
+											type="text" th:id="${'dcpsNo' + itemStat.index}"
+											readonly="readonly"
+											th:field="${dcpsLegacyModel.lstDcpsLegacyModel[__${itemStat.index}__].dcpsNo}" />
+										</td>
+										<td style="text-align: center; width: 8%"><label
+											th:id="${'pranNo' + itemStat.index}"
+											th:field="${dcpsLegacyModel.lstDcpsLegacyModel[__${itemStat.index}__].pranNo}">110148855901</label>
+
+											<input type="hidden" class="sevaarthId"
+											th:id="${'sevaarthId' + itemStat.index}" readonly="readonly"
+											th:field="${dcpsLegacyModel.lstDcpsLegacyModel[__${itemStat.index}__].sevaarthId}" />
+
+										</td>
+
+										<td style="text-align: center; width: 8%"><select
+											th:field="${dcpsLegacyModel.lstDcpsLegacyModel[__${itemStat.index}__].period}"
+											name="period" th:id="${'period' + itemStat.index}"
+											class="form-control  removeErrorFromDropdown period"
+											readonly="readonly">
+												<option value="0">-------Selected--------</option>
+												<option
+													th:each="lLstLegValidatePeriod : ${lLstLegValidatePeriod}"
+													th:value="${lLstLegValidatePeriod.lookupId}"
+													th:text="${lLstLegValidatePeriod.lookupDesc}"></option>
+
+										</select></td>
+
+
+										<td style="text-align: left; width: 20%"><input
+											step="0.01"
+											th:field="${dcpsLegacyModel.lstDcpsLegacyModel[__${itemStat.index}__].empContri}"
+											type="text" name="empContri" readonly="readonly"
+											th:id="${'empContri' + itemStat.index}"
+											class="form-control float  removeErrorFromInput"><label
+											class="mandatoryindicator">*</label></td>
+										<td style="text-align: left; width: 20%"><input
+											step="0.01" readonly="readonly"
+											th:field="${dcpsLegacyModel.lstDcpsLegacyModel[__${itemStat.index}__].employerContri}"
+											type="text" name="employerContri"
+											th:id="${'employerContri' + itemStat.index}"
+											class="form-control float removeErrorFromInput"><label
+											class="mandatoryindicator">*</label></td>
+										<td style="text-align: left; width: 20%"><input
+											step="0.01" readonly="readonly"
+											th:field="${dcpsLegacyModel.lstDcpsLegacyModel[__${itemStat.index}__].empInterest}"
+											type="text" name="empInterest"
+											th:id="${'empInterest' + itemStat.index}"
+											class="form-control float removeErrorFromInput"><label
+											class="mandatoryindicator">*</label></td>
+										<td style="text-align: left; width: 20%"><input
+											step="0.01" readonly="readonly"
+											th:field="${dcpsLegacyModel.lstDcpsLegacyModel[__${itemStat.index}__].employerInterest}"
+											type="text" name="employerInterest"
+											th:id="${'employerInterest' + itemStat.index}"
+											class="form-control  float removeErrorFromInput"><label
+											class="mandatoryindicator">*</label></td>
+										<td style="text-align: left"><input type="text"
+											th:field="${dcpsLegacyModel.lstDcpsLegacyModel[__${itemStat.index}__].total}"
+											th:id="${'total' + itemStat.index}" name="total"
+											readonly="readonly"
+											class="form-control float removeErrorFromInput"><label
+											class="mandatoryindicator">*</label></td>
+										<td style="text-align: left"><input type="text"
+											readonly="readonly"
+											th:field="${dcpsLegacyModel.lstDcpsLegacyModel[__${itemStat.index}__].remark}"
+											th:id="${'remark' + itemStat.index}" name="remark"
+											class="form-control removeErrorFromInput remark"> <label
+											class="mandatoryindicator">*</label> <input type="hidden"
+											th:field="${dcpsLegacyModel.lstDcpsLegacyModel[__${itemStat.index}__].ddoCode}" />
+
+										</td>
+
+
+										<td style="text-align: center; width: 8%"><input
+											type="button" id="verify" th:data-period="${att.period}"
+											th:data-dcpsNo="${att.dcpsNo}"
+											th:data-sevaarthId="${att.sevaarthId}" value="Approve"
+											class="btn bnt-sm verify"></td>
+										<td style="text-align: center; width: 8%"><input
+											type="button" id="reject" th:data-period="${att.period}"
+											th:data-dcpsNo="${att.dcpsNo}"
+											th:data-sevaarthId="${att.sevaarthId}" value="Reject"
+											class="btn bnt-sm reject"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</fieldset>
+
+					<input type="hidden" id="hdnCounter" name="hdnCounter" value="2">
+					<div align="center"></div>
+
+				</div>
+
+			</form>
+
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/nps/verify-dcps-legacy.js}"></script>
+	<script th:src="@{/js/jquery.validate.min.js}"></script>
+
+</body>
+</html>

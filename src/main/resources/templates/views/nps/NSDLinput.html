@@ -35,49 +35,56 @@ select.error, textarea.error, input.error {
 		</h3>
 		<fieldset class="container">
 
-			<form method="post" action="" name="frmDCPSMatchedEntries"  th:action="@{'/master/genNsdlTxtFile'}"
-				enctype="multipart/form-data" class="form-horizontal" th:object="${nsdlDetailsModel}">
+			<form method="post" action="" name="frmDCPSMatchedEntries"
+				th:action="@{'/master/genNsdlTxtFile'}"
+				enctype="multipart/form-data" class="form-horizontal"
+				th:object="${nsdlDetailsModel}">
 				<fieldset class="tabstyle">
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="title"><span>Pay
 								year</span>&nbsp;&nbsp;<b><font color="red" size="4px;">*</font></b></label>
 						<div class="col-sm-2">
-							<select  name="yearId"	id="yearId" class="form-control removeErrorFromDropdown"   th:field="*{year}">
-							<option selected="selected" th:value="0"
-								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
-							<option th:each="varGetAllYear : ${lstGetAllYear}"
-								th:value="${varGetAllYear.yearId}"
-								th:text="${language=='mh' ? varGetAllYear.yearMarathi : varGetAllYear.yearEnglish}"></option>
-						</select>
+							<select name="yearId" id="yearId"
+								class="form-control removeErrorFromDropdown" th:field="*{year}">
+								<option selected="selected" th:value="0"
+									th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+								<option th:each="varGetAllYear : ${lstGetAllYear}"
+									th:value="${varGetAllYear.yearId}"
+									th:text="${language=='mh' ? varGetAllYear.yearMarathi : varGetAllYear.yearEnglish}"></option>
+							</select>
 						</div>
 
 						<label class="control-label col-sm-2" for="title"><span>Pay
 								Month</span>&nbsp;&nbsp;<b><font color="red" size="4px;">*</font></b></label>
 						<div class="col-sm-2">
-							<select  name="monthId" id="monthId" class="form-control removeErrorFromDropdown" th:field="*{month}">
-						<option selected="selected" th:value="0"
-								th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+							<select name="monthId" id="monthId"
+								class="form-control removeErrorFromDropdown" th:field="*{month}">
+								<option selected="selected" th:value="0"
+									th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
 								<option th:each="varGetAllMonths : ${lstGetAllMonths}"
 									th:value="${varGetAllMonths.monthId}"
 									th:text="${language=='mh' ? varGetAllMonths.monthMarathi : varGetAllMonths.monthEnglish}"></option>
-						</select>
+							</select>
 						</div>
 						<label class="control-label col-sm-2" for="title"><span>Treasury</span>&nbsp;&nbsp;</label>
 						<div class="col-sm-2">
-							<select name="cmbTr" id="cmbTr" class="form-control removeErrorFromDropdown"  th:field="*{treasuryId}">
+							<select name="cmbTr" id="cmbTr"
+								class="form-control removeErrorFromDropdown"
+								th:field="*{treasuryId}">
 								<option value="0" selected="selected">--Select--</option>
-								
+
 								<option th:each="cmnLocationMst : ${lstTreasury}"
-											selected="selected" th:value="${cmnLocationMst.locId}"
-											th:text="${cmnLocationMst.locName}"></option>
+									selected="selected" th:value="${cmnLocationMst.locId}"
+									th:text="${cmnLocationMst.locName}"></option>
 							</select>
 						</div>
 
 					</div>
 					<br />
 					<div class=" text-center">
-						<input type="button" name="btnSearch" 
-							id="btnSearch" value="Search" size="3" maxlength="3" class="btn" /><!--onclick="getNsdlEntries();"  -->
+						<input type="button" name="btnSearch" id="btnSearch"
+							value="Search" size="3" maxlength="3" class="btn" />
+						<!--onclick="getNsdlEntries();"  -->
 					</div>
 				</fieldset>
 				<br> <br>
@@ -85,9 +92,9 @@ select.error, textarea.error, input.error {
 					<thead>
 						<tr>
 							<th class="datatableheader">Sr No</th>
-							<th class="datatableheader">DDO CODE</th>
-							<th class="datatableheader">Gross Amount</th>
-							<th class="datatableheader">Net Amount</th>
+							<th class="datatableheader">DDO Code</th>
+							<th class="datatableheader">Emp count with pran</th>
+							<th class="datatableheader">Emp count without pran</th>
 							<th class="datatableheader">Total Employee Contribution</th>
 							<th class="datatableheader">Total Employer Contribution</th>
 							<th class="datatableheader">TOTAL AMOUNT</th>
@@ -118,8 +125,9 @@ select.error, textarea.error, input.error {
 				</table>
 				<br> <br>
 				<div class="text-center">
-					<input type="submit" name="save" class="btn"  id="save"
-						value="Generate NSDL File"> &nbsp;&nbsp;<!-- <input
+					<input type="submit" name="save" class="btn" id="save"
+						value="Generate NSDL File"> &nbsp;&nbsp;
+					<!-- <input
 						type="button" name="validate" class="btn" id="validate"
 						value="Validate File">&nbsp;&nbsp;<input type="button"
 						name="delete" class="btn" id="delete" value="Delete">&nbsp;&nbsp; -->
