@@ -60,14 +60,8 @@
 							<table class="table bor-0">
 								<tbody>
 									<tr>
-										<td align="center" width="15%">Admin Type</td>
-										<td width="18%"><select id="cmbAdminType"
-											style="width: 85%, display: inline;">
-												<option title="Select All" value="-1">Select</option>
-												<option th:each="zpAdminNameMst : ${lstZpAdminNameMst}"
-													th:value="${zpAdminNameMst.adminCode}"
-													th:text="${zpAdminNameMst.adminName}"></option>
-										</select></td>
+										<!-- <td align="center" width="15%">Admin Type</td> -->
+										
 										<td align="center" width="15%">Distrct</td>
 										<td width="18%"><select name="cmbDistrict"
 											id="cmbDistrict" style="width: 85%, display: inline;">
@@ -113,10 +107,10 @@
 										<th class="datatableheader"
 											style="text-align: center; font-size: 12px;">Level2 DDO
 											Code</th>
-										<!-- 	<th class="datatableheader"
+										 	<th class="datatableheader"
 										style="text-align: center; font-size: 12px;">Level3 DDO
 										Code</th>
-									<th class="datatableheader"
+									<!--<th class="datatableheader"
 										style="text-align: center; font-size: 12px;">Level4 DDO
 										Code</th> -->
 										<th class="datatableheader"
@@ -159,8 +153,8 @@
 												th:data-ddocode="${zpRltDdoMapRlt[1]}"
 												th:data-srno="${rowStat.index}"> 3401002205 </a>
 										</span></td>
-										<!-- 	   <td><span th:text="${zpRltDdoMapRlt[2]}"></span> </td>
-							   <td><span th:text="${zpRltDdoMapRlt[3]}"></span> </td> -->
+										 	   <td><span th:text="${zpRltDdoMapRlt[2]}"></span> </td>
+							  <!-- <td><span th:text="${zpRltDdoMapRlt[3]}"></span> </td> -->
 										<td><span th:text="${zpRltDdoMapRlt[4]}"></span></td>
 										<!--    <td><span th:text="${zpRltDdoMapRlt[5]}"></span> -->
 

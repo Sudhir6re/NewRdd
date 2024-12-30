@@ -91,7 +91,10 @@ public class CustomSimpleUrlAuthenticationSuccessHandler implements Authenticati
 		roleTargetUrlMap.put("ROLE_DDO", "/ddo/home");
 		roleTargetUrlMap.put("ROLE_SBI_CMP", "/cmp/home");
 		roleTargetUrlMap.put("ROLE_MDC", "/mdc/home");
-		roleTargetUrlMap.put("ROLE_SUPER", "/super/home"); // developer
+		roleTargetUrlMap.put("ROLE_SUPER", "/super/home"); 
+		roleTargetUrlMap.put("ROLE_MDP", "/mdp/home");
+		roleTargetUrlMap.put("ROLE_FINAL_DDO_CODE", "/level3/home"); 
+		roleTargetUrlMap.put("ROLE_SPECIAL_DDO_CODE", "/level4/home");
 
 		final Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 		for (final GrantedAuthority grantedAuthority : authorities) {

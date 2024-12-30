@@ -23,6 +23,8 @@ import com.mahait.gov.in.customfilter.CustomLogoutSuccessHandler;
 import com.mahait.gov.in.customfilter.CustomSimpleUrlAuthenticationSuccessHandler;
 import com.mahait.gov.in.customfilter.UsernameDecryptFilter;
 import com.mahait.gov.in.service.UserService;
+
+import jakarta.servlet.http.HttpServletResponse;
 @Configuration
 public class SecurityConfig {
 
@@ -34,29 +36,14 @@ public class SecurityConfig {
 	PasswordEncoder passwordEncoder;
 
   
-	/*
-	 * @Bean public UserDetailsService userDetailsService() {
-	 * 
-	 * userService.getUserIdbyUserName(username);
-	 * 
-	 * return username -> { OrgUserMst user =
-	 * userService.getUserIdbyUserName(username); MstRoleEntity
-	 * mstRoleEntity=user.getMstRoleEntity(); GrantedAuthority authority = new
-	 * SimpleGrantedAuthority((mstRoleEntity).getRoleName());
-	 * 
-	 * if (user != null) { return new
-	 * org.springframework.security.core.userdetails.User( user.getUserName(),
-	 * user.getPassword(), Arrays.asList(authority) ); } throw new
-	 * RuntimeException("User not found"); }; }
-	 */
-    
+	
     
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authorize -> authorize
-                    .requestMatchers("/i18n/*","/lib/**","/register",  "/user/login","/user/logOut", "/css/**", "/js/**","/images/**","/pdf/**").permitAll()
+                    .requestMatchers("/i18n/*","/lib/**","/register",  "/","/user/login","/user/logOut", "/css/**", "/js/**","/images/**","/pdf/**").permitAll()
                     .requestMatchers("/mdc/**").hasRole("MDC")
                     .requestMatchers("/user/**").hasRole("USER")
                     .requestMatchers("/ddoast/**").hasRole("DDO_AST")
@@ -83,9 +70,17 @@ public class SecurityConfig {
                     .invalidateHttpSession(true) 
                     .deleteCookies("JSESSIONID")
             )
+				/*
+				 * .exceptionHandling(exceptions -> exceptions
+				 * .accessDeniedPage("/user/login?unauthorize") )
+				 */
+            
             .exceptionHandling(exceptions -> exceptions
-                    .accessDeniedPage("/user/login?unauthorize") 
-             )
+            	    .accessDeniedHandler((req, res, e) -> {
+            	    	//res.sendRedirect("/user/login?unauthorize").
+            	        res.sendError(HttpServletResponse.SC_FORBIDDEN, "Access Denied: " + e.getMessage());
+            	    })
+            	)
              .sessionManagement(session -> session
             	        .invalidSessionUrl("/user/login?expired")
             )

@@ -157,6 +157,140 @@ public class LoginController extends BaseController{
 
 	}
 	
+	@RequestMapping("/level3/home")
+	public ModelAndView level3Home(HttpServletRequest request, Model model, HttpServletResponse response,
+			Locale locale, HttpSession session) {
+		ModelAndView modelAndView = new ModelAndView();
+		/* modelAndView.addObject("usertopics", topicService.getAllTopics()); */
+		modelAndView.addObject("language", locale.getLanguage());
+
+		/* Setting User Session in an application */
+		/*
+		 * logger.info(">>>>>ApppCode : " +request.getSession().getAttribute("appCode")
+		 * );
+		 */
+		request.getSession().setAttribute("MY_SESSION_MESSAGES",
+				userService.getUserIdbyUserName(request.getRemoteUser()));
+
+		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");
+		
+		List<Object[]> retriveUserdetails = commonHomeMethodsService.retriveUserdetails(messages.getUserId());
+		if (retriveUserdetails.size() > 0) {
+			for (Object[] obj : retriveUserdetails) {
+				session.setAttribute("ddoCode", obj[0]);
+				session.setAttribute("locationId", obj[1]);
+				session.setAttribute("loggedInPost", obj[2]);
+				
+				messages.setLocId(Long.valueOf(obj[1].toString()));
+				messages.setPostId(Long.valueOf(obj[2].toString()));
+				
+				request.getSession().setAttribute("MY_SESSION_MESSAGES",messages);
+			}
+		}
+		
+		addMenuAndSubMenu(modelAndView,messages);
+		
+		//userSessionObject.setSession(messages.getUserId(),session);
+		if (messages.getUpdatedDate() == null) {
+			modelAndView.setViewName("redirect:/ddo/changePassword");
+		} else {
+			modelAndView.setViewName("topics");
+		}
+
+		return modelAndView;
+
+	}
+	
+	@RequestMapping("/level4/home")
+	public ModelAndView level4Home(HttpServletRequest request, Model model, HttpServletResponse response,
+			Locale locale, HttpSession session) {
+		ModelAndView modelAndView = new ModelAndView();
+		/* modelAndView.addObject("usertopics", topicService.getAllTopics()); */
+		modelAndView.addObject("language", locale.getLanguage());
+
+		/* Setting User Session in an application */
+		/*
+		 * logger.info(">>>>>ApppCode : " +request.getSession().getAttribute("appCode")
+		 * );
+		 */
+		request.getSession().setAttribute("MY_SESSION_MESSAGES",
+				userService.getUserIdbyUserName(request.getRemoteUser()));
+
+		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");
+		
+		List<Object[]> retriveUserdetails = commonHomeMethodsService.retriveUserdetails(messages.getUserId());
+		if (retriveUserdetails.size() > 0) {
+			for (Object[] obj : retriveUserdetails) {
+				session.setAttribute("ddoCode", obj[0]);
+				session.setAttribute("locationId", obj[1]);
+				session.setAttribute("loggedInPost", obj[2]);
+				
+				messages.setLocId(Long.valueOf(obj[1].toString()));
+				messages.setPostId(Long.valueOf(obj[2].toString()));
+				
+				request.getSession().setAttribute("MY_SESSION_MESSAGES",messages);
+			}
+		}
+		
+		addMenuAndSubMenu(modelAndView,messages);
+		
+		//userSessionObject.setSession(messages.getUserId(),session);
+		if (messages.getUpdatedDate() == null) {
+			modelAndView.setViewName("redirect:/ddo/changePassword");
+		} else {
+			modelAndView.setViewName("topics");
+		}
+
+		return modelAndView;
+
+	}
+	
+	@RequestMapping("/mdp/home")
+	public ModelAndView mdpHome(HttpServletRequest request, Model model, HttpServletResponse response,
+			Locale locale, HttpSession session) {
+		ModelAndView modelAndView = new ModelAndView();
+		/* modelAndView.addObject("usertopics", topicService.getAllTopics()); */
+		modelAndView.addObject("language", locale.getLanguage());
+
+		/* Setting User Session in an application */
+		/*
+		 * logger.info(">>>>>ApppCode : " +request.getSession().getAttribute("appCode")
+		 * );
+		 */
+		request.getSession().setAttribute("MY_SESSION_MESSAGES",
+				userService.getUserIdbyUserName(request.getRemoteUser()));
+
+		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");
+		
+		List<Object[]> retriveUserdetails = commonHomeMethodsService.retriveUserdetails(messages.getUserId());
+		if (retriveUserdetails.size() > 0) {
+			for (Object[] obj : retriveUserdetails) {
+				session.setAttribute("ddoCode", obj[0]);
+				session.setAttribute("locationId", obj[1]);
+				session.setAttribute("loggedInPost", obj[2]);
+				
+				messages.setLocId(Long.valueOf(obj[1].toString()));
+				messages.setPostId(Long.valueOf(obj[2].toString()));
+				
+				request.getSession().setAttribute("MY_SESSION_MESSAGES",messages);
+			}
+		}
+		
+		addMenuAndSubMenu(modelAndView,messages);
+		
+		//userSessionObject.setSession(messages.getUserId(),session);
+		if (messages.getUpdatedDate() == null) {
+			modelAndView.setViewName("redirect:/ddo/changePassword");
+		} else {
+			modelAndView.setViewName("topics");
+		}
+
+		return modelAndView;
+
+	}
+	
+	
+	
 
 	@RequestMapping("/user/home")
 	public ModelAndView userHomePage(HttpServletRequest request, Model model, HttpServletResponse response,

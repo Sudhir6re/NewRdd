@@ -70,7 +70,7 @@ $("#btnFilter").click(function(){
 	var context = $("#appRootPath").val();
 	var districtId = $("#cmbDistrict").val();
 	var talukaId = $("#cmbTaluka").val();
-	var cmbAdminType = $("#cmbAdminType").val();
+	var cmbAdminType =0;    //$("#cmbAdminType").val();
 	
 	$( "#loaderMainNew").show();
 	$.ajax({
