@@ -139,13 +139,13 @@ public class CreateAdminOfficeRepoImpl implements CreateAdminOfficeRepo {
 	@Override
 	public List<Object[]> retriveDisctOfcList(OrgUserMst messages, String ofcId) {
 		if (ofcId == null || ofcId.equals("")) {
-			String nativeQuery = "select DIST_MST_OFC_NAME, DIST_CODE from ZP_ADMIN_OFFICE_DISTRICT_MPG";
+			String nativeQuery = "select DIST_MST_OFC_NAME, DIST_ID,ADMIN_OFFICE_CODE from ZP_ADMIN_OFFICE_DISTRICT_MPG WHERE ADMIN_OFFICE_CODE='02' and LANG_ID=1";
 			Query query = (Query) entityManager.createNativeQuery(nativeQuery);
 			// query.setParameter("ofcId",ofcId);
 			List<Object[]> resultList = query.getResultList();
 			return resultList;
 		} else {
-			String nativeQuery = "select DIST_MST_OFC_NAME, DIST_CODE from ZP_ADMIN_OFFICE_DISTRICT_MPG where admin_OFFICE_CODE = :ofcId";
+			String nativeQuery = "select DIST_MST_OFC_NAME, DIST_ID,ADMIN_OFFICE_CODE from ZP_ADMIN_OFFICE_DISTRICT_MPG where admin_OFFICE_CODE = :ofcId";
 			Query query = (Query) entityManager.createNativeQuery(nativeQuery);
 			query.setParameter("ofcId", ofcId);
 			List<Object[]> resultList = query.getResultList();
@@ -221,6 +221,28 @@ public class CreateAdminOfficeRepoImpl implements CreateAdminOfficeRepo {
 		} else {
 			return 0;
 		}
+	}
+
+	@Override
+	public List<Object[]> findDeptByDistOfcCode(String distOfcId) {
+		String nativeQuery = "select dept_name, dept_id from MST_ZP_DEPT where ADMIN_OFF_TYPE_CODE = :distOfcId";
+		Query query = (Query) entityManager.createNativeQuery(nativeQuery);
+		query.setParameter("distOfcId", distOfcId);
+		List<Object[]> resultList = query.getResultList();
+		return resultList;
+	}
+
+	@Override
+	public String findLevel3DdoCode(String distOfcId) {
+		String ddoCode = null;
+		Session currentSession = entityManager.unwrap(Session.class);
+		StringBuffer sb = new StringBuffer();
+		sb.append("select DDO_CODE from ZP_LVL3_MST where"
+				+ " DIST_ID=(select  cast(DIST_CODE as integer) from ZP_ADMIN_OFFICE_DISTRICT_MPG where DIST_ID=" + distOfcId + ")");
+		Query query = currentSession.createNativeQuery(sb.toString());
+		ddoCode = query.getSingleResult().toString();
+		logger.info("level3ddocode" + ddoCode);
+		return ddoCode;
 	}
 
 }

@@ -559,4 +559,14 @@ public class CreateAdminOfficeServiceImpl implements CreateAdminOfficeService {
 	private int ddoCodeAlreadyExists(String level1DdoCode) {
 		return createAdminOfficeRepo.ddoCodeAlreadyExists(level1DdoCode);
 	}
+
+	@Override
+	public List<Object[]> findDeptByDistOfcCode(String distOfcId) {
+		return createAdminOfficeRepo.findDeptByDistOfcCode(distOfcId);
+	}
+
+	@Override
+	public String findLevel3DdoCode(String distOfcId) {
+		return createAdminOfficeRepo.findLevel3DdoCode(distOfcId);
+	}
 }

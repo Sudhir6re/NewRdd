@@ -42,4 +42,8 @@ public interface CreateAdminOfficeService {
 
 	List<Object[]> employeeMappingList(String userName);
 
+	List<Object[]> findDeptByDistOfcCode(String distOfcId);
+
+	String findLevel3DdoCode(String distOfcId);
+
 }

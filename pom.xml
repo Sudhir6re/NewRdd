@@ -197,7 +197,7 @@
 		</dependency>
 
 
-		<dependency>
+		<!--<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<scope>provided</scope>
@@ -207,9 +207,9 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jul-to-slf4j</artifactId>
-			<version>1.7.36</version> <!-- Match your SLF4J version -->
+			<version>1.7.36</version>  Match your SLF4J version 
 		</dependency>
-
+-->
 
 		<dependency>
 			<groupId>jakarta.xml.bind</groupId>

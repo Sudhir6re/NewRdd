@@ -8,6 +8,18 @@ $(document).ready(function() {
 	   if ($('#cmbTaluka').length) {
 	        $('#cmbTaluka').select2();
 	    }
+		
+		if ($('#cmbDistOffice').length) {
+		        $('#cmbDistOffice').select2();
+		    }
+			
+			
+			if ($('#dept').length) {
+					        $('#dept').select2();
+					    }
+		
+		
+		
 	
 	var contextPath = $("#appRootPath").val();
 	var DDOCode =$("#ddoCode").val(); 
@@ -64,6 +76,73 @@ $("#cmbDistrict").change(function(){
 	     }
 	 });
 });
+	
+$("#cmbDistOffice").change(function(){
+	var context = $("#appRootPath").val();
+	var distOfcId = $("#cmbDistOffice").val();
+	
+	$( "#loaderMainNew").show();
+	$.ajax({
+	      type: "POST",
+	      url: context+"/mdc/findDeptByDistOfcCode/"+distOfcId,
+	      async: false,
+	      contentType:'application/json',
+	      error: function(data){
+	    	  console.log(data);
+	      },
+		  	beforeSend : function(){
+				$( "#loaderMainNew").show();
+				},
+			complete : function(data){
+				$( "#loaderMainNew").hide();
+			},	
+	      success: function(data){
+			console.log(data);
+	    		 var len = data.length;
+	    		 $('#dept').empty();
+	    		 $( "#loaderMainNew").hide();
+	    		 $('#dept').append($('<option  value="-1"></option>').text("Please Select")); 
+					if (len != 0) {
+							   $.each(data, function(index, row) {
+								   $('#dept').append('<option value="' + row[1] + '">' + row[0] + '</option>');
+				                });		
+				}
+					
+	     }
+	 });
+});
+
+
+
+
+function loadLevel3DdoCode(){
+	var context = $("#appRootPath").val();
+	var distOfcId = $("#cmbDistOffice").val();
+	
+	$( "#loaderMainNew").show();
+	$.ajax({
+	      type: "POST",
+	      url: context+"/mdc/findLevel3DdoCode/"+distOfcId,
+	      async: false,
+	      contentType:'application/json',
+	      error: function(data){
+	    	  console.log(data);
+	      },
+		  	beforeSend : function(){
+				$( "#loaderMainNew").show();
+				},
+			complete : function(data){
+				$( "#loaderMainNew").hide();
+			},	
+	      success: function(data){
+			console.log(data);
+			$('#txtFinalDDOCode').val(data);
+	     }
+	 });
+}
+
+
+
 
 
 $("#btnFilter").click(function(){
@@ -205,6 +284,9 @@ $("#txtRepDDOCode").blur(function(){
 			$( "#loaderMainNew").hide();
 		},	
         success: function(response) {
+			loadLevel3DdoCode();
+			
+			
         	$( "#loaderMainNew").hide();
         	if(response!=''){
         		 var dropdown = $('#cmbSubTreasury');
@@ -234,7 +316,10 @@ $("#txtRepDDOCode").blur(function(){
 
 $("#cmbSubTreasury").change(function(){
 	var cmbSubTreasury=$("#cmbSubTreasury").val();
-	var cmbAdminOffice=$("#cmbAdminOffice").val();
+	//var cmbAdminOffice=$("#cmbAdminOffice").val();
+	//var cmbDistOffice=$("#cmbDistOffice").val();
+	var cmbAdminOffice=$('#cmbDistOffice option:selected').attr('data');
+	
 	$( "#loaderMainNew").show();
 $.ajax({
 	type : "GET",
@@ -365,10 +450,10 @@ function hideDtls(field, srno) {
 
     $("form[name='ZpDDOOffice']").validate({
         rules: {
-            cmbAdminOffice: {
+          /*  cmbAdminOffice: {
                 required: true,
                min: 1
-            },
+            },*/
             cmbDistOffice: {
                 required: true,
                min: 1
@@ -426,10 +511,10 @@ function hideDtls(field, srno) {
             }
         },
         messages: {
-            cmbAdminOffice: {
+           /* cmbAdminOffice: {
                 required: "Please select Admin Office",
                 min: "Please select Admin Office"
-            },
+            },*/
             cmbDistOffice: {
                 required: "Please select District Office",
                 min: "Please select District Office"
@@ -544,3 +629,14 @@ function validateMobileNo() {
 		return false;
 	}
 }
+
+function checkforHirechy() {
+    if ($('#radioFinalLevel2').is(':checked')) {
+        $('#txtFinalDDOCode').val("").prop('readonly', true);
+    }
+    if ($('#radioFinalLevel3').is(':checked')) {
+        $('#txtFinalDDOCode').prop('readonly', false);
+    }
+}
+
+
