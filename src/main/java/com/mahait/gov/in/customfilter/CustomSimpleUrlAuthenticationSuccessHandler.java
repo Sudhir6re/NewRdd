@@ -10,7 +10,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
@@ -91,10 +90,7 @@ public class CustomSimpleUrlAuthenticationSuccessHandler implements Authenticati
 		roleTargetUrlMap.put("ROLE_DDO", "/ddo/home");
 		roleTargetUrlMap.put("ROLE_SBI_CMP", "/cmp/home");
 		roleTargetUrlMap.put("ROLE_MDC", "/mdc/home");
-		roleTargetUrlMap.put("ROLE_SUPER", "/super/home"); 
-		roleTargetUrlMap.put("ROLE_MDP", "/mdp/home");
-		roleTargetUrlMap.put("ROLE_FINAL_DDO_CODE", "/level3/home"); 
-		roleTargetUrlMap.put("ROLE_SPECIAL_DDO_CODE", "/level4/home");
+		roleTargetUrlMap.put("ROLE_SUPER", "/super/home"); // developer
 
 		final Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 		for (final GrantedAuthority grantedAuthority : authorities) {
