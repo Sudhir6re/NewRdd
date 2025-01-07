@@ -307,7 +307,7 @@ public class AddNewDDOConfigRepository {
 		lObjPostDtldRlt.setOrgDesignationMst(lObjOrgDesigmMst);
 		// lObjPostDtldRlt.setCmnLookupMst(newOrgPostMst.getCmnLookupMst());
 
-		// lObjPostDtldRlt.setCmnLookupMst(postId.getCmnLookupMst());
+	//    lObjPostDtldRlt.setCmnLookupMst(postId.getCmnLookupMst());
 		lObjPostDtldRlt.setCmnLanguageMst(lObjCmnLanguageMst);
 		lObjPostDtldRlt.setCreatedBy(lObjOrgUserMstCrtd);
 		lObjPostDtldRlt.setCreatedByPost(postIdCrtd);

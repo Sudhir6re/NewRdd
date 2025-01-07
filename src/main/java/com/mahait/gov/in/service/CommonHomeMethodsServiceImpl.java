@@ -535,4 +535,10 @@ public class CommonHomeMethodsServiceImpl implements CommonHomeMethodsService {
 		// TODO Auto-generated method stub
 		return commonHomeMethodsRepo.findbankBranch();
 	}
+
+	
+	@Override
+	public List<CmnLookupMst> getLookupValues(String lookupName, int english) {
+		return commonHomeMethodsRepo.getLookupValues(lookupName, english);
+	}
 }

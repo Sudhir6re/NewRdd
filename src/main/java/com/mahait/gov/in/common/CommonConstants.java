@@ -221,6 +221,18 @@ public class CommonConstants {
 		int Temporary = 2;
 	}
 	
+	public interface Languages {
+		int English = 1;
+		int Marathi = 2;
+	}
+	
+	
+	public interface Headers {
+		public static final String CONTENT_DISPOSITION = "Content-Disposition";
+	}
+
+	
+	
 	public static String getUserWiseUrl(OrgUserMst messages) {
 		String url = "";
 
@@ -255,6 +267,10 @@ public class CommonConstants {
 		}
 		
 		return url;
+	}
+	
+	public interface LookUpQuery{
+	    static final String GET_LOOK_UP_VALUES = "SELECT O1 FROM CmnLookupMst O1, CmnLookupMst O2 WHERE O1.parentLookupId = O2.lookupId AND O2.lookupName = :lookupName AND O1.cmnLanguageMst.langId = :langId  ORDER BY O1.orderNo desc,O1.lookupId";
 	}
 	
 }

@@ -129,8 +129,10 @@ public class CmnLocationMst {
     @Column(name = "OFFICE_CODE", length = 20)
     private String officeCode;
 
-    @OneToMany(mappedBy = "cmnLocationMst", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<CmnBranchMst> cmnBranchMsts;
+	/*
+	 * @OneToMany(mappedBy = "cmnLocationMst", cascade = CascadeType.ALL,
+	 * orphanRemoval = true) private Set<CmnBranchMst> cmnBranchMsts;
+	 */
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "LOC_CATEGORY_ID")

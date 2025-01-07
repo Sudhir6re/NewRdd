@@ -43,7 +43,7 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authorize -> authorize
-                    .requestMatchers("/i18n/*","/lib/**","/register",  "/","/user/login","/user/logOut", "/css/**", "/js/**","/images/**","/pdf/**").permitAll()
+                    .requestMatchers( "/","/i18n/*","/lib/**","/register", "/user/login","/user/logOut", "/css/**", "/js/**","/images/**","/pdf/**").permitAll()
                     .requestMatchers("/mdc/**").hasRole("MDC")
                     .requestMatchers("/user/**").hasRole("USER")
                     .requestMatchers("/ddoast/**").hasRole("DDO_AST")
@@ -70,17 +70,9 @@ public class SecurityConfig {
                     .invalidateHttpSession(true) 
                     .deleteCookies("JSESSIONID")
             )
-				/*
-				 * .exceptionHandling(exceptions -> exceptions
-				 * .accessDeniedPage("/user/login?unauthorize") )
-				 */
-            
-            .exceptionHandling(exceptions -> exceptions
-            	    .accessDeniedHandler((req, res, e) -> {
-            	    	//res.sendRedirect("/user/login?unauthorize").
-            	        res.sendError(HttpServletResponse.SC_FORBIDDEN, "Access Denied: " + e.getMessage());
-            	    })
-            	)
+				
+				 .exceptionHandling(exceptions -> exceptions
+				  .accessDeniedPage("/user/login?unauthorize") )
              .sessionManagement(session -> session
             	        .invalidSessionUrl("/user/login?expired")
             )

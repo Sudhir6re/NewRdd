@@ -35,7 +35,7 @@ public class EntryOfPostsRepoImpl implements EntryOfPostsRepo {
 		//String HQL_QUERY = "from MstDesignationEntity ";
 		
 		String HQL_QUERY = "select mst from MstDcpsDesignation dcpsDesig, MstDesignationEntity mst  "
-				+ "where mst.desginationId=dcpsDesig.orgDesignation and mst.isActive='1' and  dcpsDesig.fieldDeptId =  "
+				+ "where  mst.desginationId = dcpsDesig.orgDesignation.desginationId  and mst.isActive='1' and  dcpsDesig.fieldDeptId =  "
 				+ lLngFieldDept;
 		Query query = session.createQuery(HQL_QUERY);
 		List resultList = query.getResultList();

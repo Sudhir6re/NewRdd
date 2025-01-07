@@ -9,7 +9,9 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
+import com.mahait.gov.in.common.CommonConstants;
 import com.mahait.gov.in.entity.BillStatusMstEntity;
+import com.mahait.gov.in.entity.CmnLookupMst;
 import com.mahait.gov.in.entity.MstBankBranchEntity;
 import com.mahait.gov.in.entity.MstBankEntity;
 import com.mahait.gov.in.entity.MstCommonEntity;
@@ -415,6 +417,19 @@ public class CommonHomeMethodsRepoImpl implements CommonHomeMethodsRepo {
 		// TODO Auto-generated method stub
 		String HQL = "FROM MstBankBranchEntity as t";
 		return (List<MstBankBranchEntity>) manager.createQuery(HQL).getResultList();
+	}
+
+	@Override
+	public List<CmnLookupMst> getLookupValues(String lookupName, int english) {
+		Session currentSession = manager.unwrap(Session.class);
+		Query lQuery = currentSession.createQuery(CommonConstants.LookUpQuery.GET_LOOK_UP_VALUES);
+		lQuery.setParameter("lookupName", lookupName);
+		lQuery.setParameter("langId", english);
+		
+		//lQuery.setString("lookupName", lookupName);
+		//lQuery.setLong("langId", english);
+		lQuery.setCacheable(true).setCacheRegion("ecache_lookup");
+		return lQuery.list();
 	}
 
 }
