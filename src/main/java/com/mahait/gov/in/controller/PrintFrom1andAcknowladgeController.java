@@ -11,7 +11,7 @@ import com.mahait.gov.in.entity.OrgUserMst;
 
 import jakarta.servlet.http.HttpSession;
 
-@RequestMapping("/mdc")
+@RequestMapping("/level3")
 @Controller
 public class PrintFrom1andAcknowladgeController  extends BaseController{
 	@GetMapping("/printForm1nACK")

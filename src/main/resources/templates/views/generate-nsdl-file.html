@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.generateNsdlFile}"></title>
+<style type="text/css">
+</style>
+</head>
+<body class="generate-nsdl-file">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.NPSDB}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.generateNsdlFile}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.generateNsdlFile}"></span>
+		</h3>
+
+		<div class="generateNsdlFileMain container">
+			<form method="post" action="" name="frmDCPSMatchedEntries"
+				enctype="multipart/form-data">
+				<br>
+				<fieldset class="tabstyle">
+					<legend>
+						<b>Input Details For NPS</b>
+					</legend>
+					<table id="table1" class="NsdlNpsForm table bor-0 border0">
+						<tbody>
+							<tr>
+								<td width="10%" align="right">Pay Year <label
+									class="mandatoryindicator">*</label></td>
+								<td width="20%"><select name="cmbYear" id="cmbYear"
+									style="width: 50%;">
+										<option value="-1">----Select----</option>
+										<option value="2023">2023</option>
+										<option value="2024">2024</option>
+								</select></td>
+								<td width="10%" align="right">Pay Month <label
+									class="mandatoryindicator">*</label></td>
+								<td width="20%"><select name="cmbMonth" id="cmbMonth"
+									style="width: 50%;">
+										<option value="-1">----Select----</option>
+										<option value="1">January</option>
+										<option value="2">February</option>
+								</select></td>
+								<td width="10%" align="right">Treasury <label
+									class="mandatoryindicator">*</label></td>
+								<td width="20%"><select name="cmbTr" id="cmbTr"
+									style="width: 50%;">
+										<option value="-1" selected="selected">----Select----</option>
+										<option value="3333" selected="selected">DEMO
+											TREASURY</option>
+								</select></td>
+							</tr>
+						</tbody>
+					</table>
+				</fieldset>
+				<br> <br>
+
+				<div class="text-center">
+					<input type="button" name="submit" id="submit" value="Submit"
+						size="" maxlength="3" class="buttontag"> <input
+						type="button" name="btnCancel" onclick="history.back()"
+						id="btnCancel" value="Cancel" size="3" maxlength="3"
+						class="buttontag">
+				</div>
+
+			</form>
+		</div>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/mst-bank.js}"></script>
+</body>
+</html>

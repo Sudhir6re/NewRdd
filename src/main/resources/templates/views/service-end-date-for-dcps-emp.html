@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.ServiceEndDateForDcpsEmp}"></title>
+<style>
+</style>
+</head>
+<body class="service-end-date-for-dcps-emp">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.ServiceEndDateForDcpsEmp}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 class="PageHeading">
+			<span
+				th:utext="#{msg.thymeleaf.pageheading.ServiceEndDateForDcpsEmp}"></span>
+		</h3>
+		<div class="service-end-date-for-dcps-emp-main container">
+			<form method="POST" action="" name="EmpInfo" enctype="text/form-data">
+				<fieldset>
+					<legend>Search Employee </legend>
+					<div>
+						<table class="table bor-0">
+							<tbody>
+								<tr>
+									<td>Search With Name/PanchayatrajSevarthId</td>
+									<td><input type="text"
+										name="Employee_srchNameText_EmpInfoSearch" autocomplete="off"></td>
+									<td colspan="3"><input type="button"
+										name="search_EmpInfoSearch" class="btn" value="Search"></td>
+								</tr>
+								<tr>
+									<td>PanchayatrajSevarth Id</td>
+									<td><input type="text" name="Emp_Sevarth_Id_EmpInfoSearch"
+										readonly></td>
+									<td>Office Name</td>
+									<td><input type="text" name="Police_ST_NM_EmpInfoSearch"
+										readonly></td>
+								</tr>
+								<tr>
+									<td>Designation</td>
+									<td><input type="text" name="Dsgn_NM_EmpInfoSearch"
+										readonly></td>
+									<td>GPF No.</td>
+									<td><input type="text" name="GPF_NM_EmpInfoSearch"
+										readonly></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</fieldset>
+			</form>
+			<hr />
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>Employee Name</th>
+						<th>Employee Type</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Shri. AADADAD</td>
+						<td>Permanent</td>
+					</tr>
+					<tr>
+						<td>Shri. ASDASASAS</td>
+						<td>Permanent</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+
+</body>
+</html>

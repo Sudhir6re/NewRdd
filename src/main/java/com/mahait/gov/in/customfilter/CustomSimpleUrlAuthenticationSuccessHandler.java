@@ -38,21 +38,20 @@ public class CustomSimpleUrlAuthenticationSuccessHandler implements Authenticati
 			final Authentication authentication) throws IOException {
 		handle(request, response, authentication);
 		String ip = InetAddress.getLocalHost().getHostAddress();
-		//User user = (User) authentication.getPrincipal();
-		
+		// User user = (User) authentication.getPrincipal();
+
 		Object principal = authentication.getPrincipal();
-	    String username;
-	    
-	    if (principal instanceof org.springframework.security.core.userdetails.User) {
-	        org.springframework.security.core.userdetails.User user = 
-	            (org.springframework.security.core.userdetails.User) principal;
-	        username = user.getUsername();
-	    } else if (principal instanceof String) {
-	        username = (String) principal;
-	    } else {
-	        throw new IllegalStateException("Unexpected principal type: " + principal.getClass().getName());
-	    }
-		
+		String username;
+
+		if (principal instanceof org.springframework.security.core.userdetails.User) {
+			org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) principal;
+			username = user.getUsername();
+		} else if (principal instanceof String) {
+			username = (String) principal;
+		} else {
+			throw new IllegalStateException("Unexpected principal type: " + principal.getClass().getName());
+		}
+
 		UserLoginHistryEntity userLoginHistryEntity = new UserLoginHistryEntity();
 		userLoginHistryEntity.setUsername(username);
 		userLoginHistryEntity.setLoginIp(ip);
@@ -90,7 +89,10 @@ public class CustomSimpleUrlAuthenticationSuccessHandler implements Authenticati
 		roleTargetUrlMap.put("ROLE_DDO", "/ddo/home");
 		roleTargetUrlMap.put("ROLE_SBI_CMP", "/cmp/home");
 		roleTargetUrlMap.put("ROLE_MDC", "/mdc/home");
-		roleTargetUrlMap.put("ROLE_SUPER", "/super/home"); // developer
+		roleTargetUrlMap.put("ROLE_SUPER", "/super/home");
+		roleTargetUrlMap.put("ROLE_MDP", "/mdp/home");
+		roleTargetUrlMap.put("ROLE_FINAL_DDO_CODE", "/level3/home");
+		roleTargetUrlMap.put("ROLE_SPECIAL_DDO_CODE", "/level4/home");
 
 		final Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 		for (final GrantedAuthority grantedAuthority : authorities) {
