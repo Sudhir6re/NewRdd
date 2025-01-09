@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.mahait.gov.in.common.StringHelperUtils;
 import com.mahait.gov.in.entity.HrPayOrderMst;
 import com.mahait.gov.in.entity.MstDcpsBillGroup;
 import com.mahait.gov.in.entity.MstDesignationEntity;
@@ -72,7 +73,10 @@ public class EntryOfPostsController extends BaseController {
 		if (session.getAttribute("locationId") != null) {
 			langId = 1l;
 			locId = Long.parseLong((String) session.getAttribute("locationId"));
-			loggedInPostId = (BigInteger) session.getAttribute("loggedInPost");
+			//loggedInPostId = (BigInteger) session.getAttribute("loggedInPost");
+			
+			Long loggedInPost = (Long) session.getAttribute("loggedInPost");
+			 loggedInPostId = BigInteger.valueOf(loggedInPost);
 
 			List<OrgDdoMst> ddoCodeList = entryOfPostsService.getDDOCodeByLoggedInlocId(locId);
 
@@ -126,7 +130,7 @@ public class EntryOfPostsController extends BaseController {
 
 			langId = 1l;
 			locId = Long.parseLong((String) session.getAttribute("locationId"));
-			loggedInPostId = (BigInteger) session.getAttribute("loggedInPost");
+			loggedInPostId = StringHelperUtils.isNullBigInteger(session.getAttribute("loggedInPost"));
 
 			model.addAttribute("ddoCode", ddoCode);
 

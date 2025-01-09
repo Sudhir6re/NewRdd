@@ -51,18 +51,17 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<!--<exclusions>
+			<exclusions>
 				<exclusion>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-tomcat</artifactId>
-					  <scope>provided</scope>
 				</exclusion>
 
 				<exclusion>
 					<artifactId>logback-classic</artifactId>
 					<groupId>ch.qos.logback</groupId>
 				</exclusion>
-			</exclusions>-->
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -109,7 +108,6 @@
 		<dependency>
 			<groupId>jakarta.validation</groupId>
 			<artifactId>jakarta.validation-api</artifactId>
-			<version>3.1.0</version>
 		</dependency>
 
 
@@ -207,19 +205,17 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jul-to-slf4j</artifactId>
-			<version>1.7.36</version> <!-- Match your SLF4J version -->
+			<version>1.7.36</version> 
 		</dependency>
 
 
 		<dependency>
 			<groupId>jakarta.xml.bind</groupId>
 			<artifactId>jakarta.xml.bind-api</artifactId>
-			<version>4.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.glassfish.jaxb</groupId>
 			<artifactId>jaxb-runtime</artifactId>
-			<version>4.0.0</version>
 		</dependency>
 
 		<dependency>
@@ -230,7 +226,6 @@
 		<dependency>
 			<groupId>jakarta.xml.ws</groupId>
 			<artifactId>jakarta.xml.ws-api</artifactId>
-			<version>4.0.0</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->

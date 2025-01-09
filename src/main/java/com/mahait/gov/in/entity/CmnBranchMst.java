@@ -30,19 +30,38 @@ public class CmnBranchMst {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long branchId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "LANG_ID", nullable = false)
-    private CmnLanguageMst cmnLanguageMst;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "DB_ID", nullable = false)
-    private CmnDatabaseMst cmnDatabaseMst;
+	/*
+	 * @ManyToOne(fetch = FetchType.LAZY)
+	 * 
+	 * @JoinColumn(name = "LANG_ID", nullable = false) private CmnLanguageMst
+	 * cmnLanguageMst;
+	 * 
+	 * @ManyToOne(fetch = FetchType.LAZY)
+	 * 
+	 * @JoinColumn(name = "DB_ID", nullable = false) private CmnDatabaseMst
+	 * cmnDatabaseMst;
+	 * 
+	 */
     
     
+    @Column(name = "LANG_ID")
+    private Long langId;
     
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "loc_id", nullable = false)
-    private CmnLocationMst cmnLocationMst;
+    
+    @Column(name = "DB_ID")
+    private Long dbId;
+    
+    
+    @Column(name = "loc_id")
+    private Long locId;
+    
+    
+	/*
+	 * @ManyToOne(fetch = FetchType.EAGER)
+	 * 
+	 * @JoinColumn(name = "loc_id", nullable = false) private CmnLocationMst
+	 * cmnLocationMst;
+	 */
 
     @Column(name = "BRANCH_CODE", length = 20, nullable = false)
     private String branchCode;

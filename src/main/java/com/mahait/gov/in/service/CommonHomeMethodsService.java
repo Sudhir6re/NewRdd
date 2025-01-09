@@ -104,9 +104,7 @@ public interface CommonHomeMethodsService {
 
 	public List<MstBankBranchEntity> findbankBranch();
 
-	
-	
-	
-	
+	public List<CmnLookupMst> getLookupValues(String string, int english);
+
 
 }

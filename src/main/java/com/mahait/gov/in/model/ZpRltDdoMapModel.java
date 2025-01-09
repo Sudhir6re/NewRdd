@@ -12,6 +12,8 @@ import lombok.Data;
 public class ZpRltDdoMapModel implements Serializable {
     
     private Long zpMapId;
+    
+
 
     private Long zpDdoPostId;
 
@@ -49,6 +51,9 @@ public class ZpRltDdoMapModel implements Serializable {
  
     @NotEmpty(message = "User's email cannot be empty.")
     private String cmbAdminOffice;
+    
+    @NotEmpty(message = "User's department cannot be empty.")
+    private Long dept;
     
     @NotEmpty(message = "User's email cannot be empty.")
     private String cmbDistOffice;

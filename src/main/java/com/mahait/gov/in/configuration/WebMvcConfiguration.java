@@ -15,10 +15,10 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
         registry.addInterceptor(new SecurityHeadersInterceptor());
     }
     
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**") // Apply CORS to all endpoints
-                .allowedOrigins("*"); // Allow specific origins
-    }
+	/*
+	 * @Override public void addCorsMappings(CorsRegistry registry) {
+	 * registry.addMapping("/**") // Apply CORS to all endpoints
+	 * .allowedOrigins("*"); // Allow specific origins }
+	 */
    
 }
