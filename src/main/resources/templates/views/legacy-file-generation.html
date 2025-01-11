@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.legacyFilegeneration}"></title>
+<style>
+table#searchTable td {
+    padding: 5px 15px;
+}
+</style>
+</head>
+<body class="legacy-file-generation">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.NPSDB}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.legacyFilegeneration}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.legacyFilegeneration}"></span>
+		</h3>
+
+		<div class="entry-dcps-legacy-main container">
+			<form method="post" action="" name="DCPSForwardedFormsList"
+				enctype="multipart/form-data" id="DCPSForwardedFormsList">
+				<fieldset style="width: 100%" class="tabstyle">
+					<div class="text-center">
+						<table id="searchTable" class="marauto">
+							<tbody>
+								<tr>
+									<td
+										style="background-color: #F7E7D7; color: rgb(202, 97, 12); font-size: small; font-style: normal; font-weight: bold">
+										Validate Period:</td>
+
+									<td><select id="treasuryList">
+											<option value="-1">-- Select --</option>
+											<option value="10001198212">Before 31-03-2016</option>
+											<option value="10001198216">01-04-2016 to 28-02-2018</option>
+									</select> <label class="mandatoryindicator">*</label></td>
+								</tr>
+								<tr>
+									<td colspan="4" align="center"><input type="button"
+										class="buttontag" value="View Records"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</fieldset>
+
+
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/hte/entry-dcps-legacy.js}"></script>
+	<script th:src="@{/js/jquery.validate.min.js}"></script>
+
+</body>
+</html>

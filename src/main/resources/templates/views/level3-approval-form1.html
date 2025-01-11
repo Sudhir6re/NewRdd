@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.Level3ApprovalForm1}"></title>
+<style>
+</style>
+</head>
+<body class="level3-approval-form1">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.dcpsBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.Level3ApprovalForm1}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.Level3ApprovalForm1}"></span>
+		</h3>
+		<div class="level3-approval-form1-main container">
+			<fieldset>
+				<legend>
+					<b>Filter By DDO</b>
+				</legend>
+				<table class="table bor-0 width-60">
+					<tbody>
+						<tr>
+							<td>Reporting DDO Code</td>
+							<td><select name="cmbReptDDO">
+									<option value="-1">Select</option>
+									<option value="0437010002" selected="selected">Rajmohan
+										Sharma (0437010002)</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td>Assistant DDO Code</td>
+							<td><select name="cmbAsstDDO">
+									<option value="-1">Select</option>
+									<option value="02370100003">TEST OFFICE
+										RDD(new)-abc:,./(02370100003)</option>
+									<option value="02370100004">(02370100004)</option>
+									<option value="02370100005">(02370100005)</option>
+									<option value="02370100328">Demo DDO RDD
+										Office(02370100328)</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td colspan="2" align="center"><input type="button"
+								value="Filter" name="btnFilter" class="btn"></td>
+						</tr>
+					</tbody>
+				</table>
+			</fieldset>
+			<hr />
+			<fieldset>
+				<legend>
+					<b>All Employee Details</b>
+				</legend>
+				<table class="table table-hover table-bordered">
+					<thead>
+						<tr>
+							<th>Employee Name</th>
+							<th>Date Of Birth</th>
+							<th>Gender</th>
+							<th>Designation</th>
+							<th>DDO</th>
+							<th>Level 2</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>SUDHIR PRABHAKAR NIMJE</td>
+							<td>24/04/1995</td>
+							<td>M</td>
+							<td>Assistant Account Officer</td>
+							<td>02370100003</td>
+							<td>0437010002</td>
+						</tr>
+						<tr>
+							<td>ASHISH SHANKAR WASAKE</td>
+							<td>24/04/1995</td>
+							<td>M</td>
+							<td>Assistant Account Officer</td>
+							<td>02370100003</td>
+							<td>0437010002</td>
+						</tr>
+					</tbody>
+				</table>
+			</fieldset>
+		</div>
+
+	</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+
+</body>
+</html>

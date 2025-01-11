@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.updateBankAccNum}"></title>
+<style>
+.tdbg {
+	background-color: #F7E7D7;
+	color: rgb(202, 97, 12);
+	font-size: small;
+	font-style: normal;
+	font-weight: bold
+}
+</style>
+</head>
+<body class="update-bank-acc-num">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.NPSDB}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.updateBankAccNum}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.updateBankAccNum}"></span>
+		</h3>
+
+		<div class="entry-dcps-legacy-main container">
+			<form method="post" action="" name="DCPSForwardedFormsList"
+				enctype="multipart/form-data" id="DCPSForwardedFormsList">
+				<fieldset style="width: 100%" class="tabstyle">
+					<legend id="headingMsg">
+						<b>Update Bank Account Number</b>
+					</legend>
+					<font color="red" style="font-style: verdana"> <b>Kindly
+							enter bank account details which are used for NPS (National
+							Pension Scheme) only.</b>
+					</font>
+					<table class="table bor-0 width-50">
+						<tbody>
+							<tr>
+								<td>Bank Name:</td>
+								<td><select name="bankId" id="bankId">
+										<option value="-1">-- Select --</option>
+										<option value="4226" title="Maharashtra Gramin Bank">Maharashtra
+											Gramin Bank</option>
+								</select> <label class="mandatoryindicator">*</label></td>
+							</tr>
+							<tr>
+								<td>Branch Name:</td>
+								<td><select name="branchId" id="branchId"
+									style="width: 80%;">
+										<option value="-1">-- Select --</option>
+								</select> <label class="mandatoryindicator">*</label></td>
+							</tr>
+							<tr>
+								<td>IFSC Code:</td>
+								<td><input type="text" id="ifs" value=""
+									readonly="readonly"> <label class="mandatoryindicator">*</label>
+								</td>
+							</tr>
+							<tr>
+								<td>Account Number:</td>
+								<td><input type="text" id="acntNo" name="acntNo"
+									maxlength="20"> <label class="mandatoryindicator">*</label>
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td><input type="button" name="BTN.UpdateBasic"
+									id="btnUpdate" value="Update Details" size="" maxlength="3"
+									class="buttontag"></td>
+							</tr>
+						</tbody>
+					</table>
+				</fieldset>
+
+				<fieldset style="width: 100%" class="tabstyle">
+					<legend id="headingMsg">
+						<b>Bank Details</b>
+					</legend>
+
+					<table class="table table-bordered table-hover" id="view">
+						<thead>
+							<tr>
+								<th class="tdbg"><span>Bank Name</span></th>
+								<th class="tdbg"><span>Branch Name</span></th>
+								<th class="tdbg"><span>Account Number</span></th>
+								<th class="tdbg"><span>IFSC Code</span></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td style="text-align: center; width: 8%"><label id="bank">BANK
+										OF INDIA</label></td>
+								<td style="text-align: center; width: 8%"><label
+									id="branch">ACHARA, SINDHUDURG, SINDHUDURG</label></td>
+								<td style="text-align: center; width: 8%"><label
+									id="accountno">123456789</label></td>
+								<td style="text-align: center; width: 8%"><label id="ifsc">BKID0001472</label>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

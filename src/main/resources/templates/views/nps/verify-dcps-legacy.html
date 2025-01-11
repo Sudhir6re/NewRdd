@@ -46,10 +46,9 @@
 				id="DCPSForwardedFormsList">
 
 				<input type="hidden" id="action" class="form-control" name="action"
-					th:field="*{action}">
-
-                   <input type="hidden" id="noDataFoundMsg" class="form-control"
-									name="noDataFoundMsg" th:value="${noDataFoundMsg}">
+					th:field="*{action}"> <input type="hidden"
+					id="noDataFoundMsg" class="form-control" name="noDataFoundMsg"
+					th:value="${noDataFoundMsg}">
 
 				<div align="center">
 
@@ -75,12 +74,12 @@
 						</tbody>
 					</table>
 
-					<fieldset style="width: 100%" class="tabstyle" id="displayData"  th:if="${not #lists.isEmpty(dcpsLegacyModel.lstDcpsLegacyModel)}">
+					<fieldset style="width: 100%" class="tabstyle" id="displayData"
+						th:if="${not #lists.isEmpty(dcpsLegacyModel.lstDcpsLegacyModel)}">
 						<legend id="headingMsg">
 							<b>Employee Details</b>
 						</legend>
-						<div class="scrollablediv"
-							>
+						<div class="scrollablediv">
 							<table class="table table-bordered table-striped"
 								id="dcpsVerifyTb">
 								<thead>
@@ -200,10 +199,6 @@
 							</table>
 						</div>
 					</fieldset>
-
-					<input type="hidden" id="hdnCounter" name="hdnCounter" value="2">
-					<div align="center"></div>
-
 				</div>
 
 			</form>
