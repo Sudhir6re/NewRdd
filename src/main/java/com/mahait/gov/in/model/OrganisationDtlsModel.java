@@ -20,7 +20,7 @@ public class OrganisationDtlsModel {
 	private String Address;
 	private Long pin;
 	private String cityClass;
-	private Long instiNo;
+	private String instiNo;
 	private String PercGrant;
 	private Long tel1;
 	private Long tel2;

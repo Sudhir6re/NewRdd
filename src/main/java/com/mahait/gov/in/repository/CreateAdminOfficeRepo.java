@@ -15,7 +15,7 @@ public interface CreateAdminOfficeRepo {
 
 	List getCountofDDOCode(String createdDDOCode);
 
-	List getTreasuryName(Long tDDOCode);
+	List getTreasuryName(String dDOCode);
 
 	List getSubTreasury(Long valueOf);
 	

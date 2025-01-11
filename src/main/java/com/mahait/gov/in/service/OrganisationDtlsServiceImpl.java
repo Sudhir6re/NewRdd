@@ -44,7 +44,7 @@ public class OrganisationDtlsServiceImpl implements OrganisationDtlsService {
 			obj.setPin(lstprop.getDcpsDdoOfficePin());
 
 			obj.setCityClass(lstprop.getDcpsDdoOfficeCityClass());
-			obj.setInstiNo(lstprop.getDiceCode());
+			obj.setInstiNo(ddoCode);
 			obj.setPercGrant(lstprop.getDcpsDdoOfficeGrant());
 			obj.setTel1(lstprop.getDcpsDdoOfficeTelNo1());
 			obj.setTel2(lstprop.getDcpsDdoOfficeTelNo2());
@@ -99,7 +99,7 @@ public class OrganisationDtlsServiceImpl implements OrganisationDtlsService {
 		objForSave.setDcpsDdoOfficeAddress1(organisationDtlsModel.getAddress());
 		objForSave.setDcpsDdoOfficePin(organisationDtlsModel.getPin());
 		objForSave.setDcpsDdoOfficeCityClass(organisationDtlsModel.getCityClass());
-		objForSave.setDiceCode(organisationDtlsModel.getInstiNo());
+		objForSave.setDiceCode(Long.valueOf(organisationDtlsModel.getInstiNo().toString()));
 		objForSave.setDcpsDdoOfficeGrant(organisationDtlsModel.getPercGrant());
 		objForSave.setDcpsDdoOfficeTelNo1(organisationDtlsModel.getTel1());
 		objForSave.setDcpsDdoOfficeTelNo2(organisationDtlsModel.getTel2());
@@ -181,7 +181,7 @@ public class OrganisationDtlsServiceImpl implements OrganisationDtlsService {
 		lstprop.setDcpsDdoOfficeVillage(organisationDtlsModel.getVillage());
 		lstprop.setDcpsDdoOfficeAddress1(organisationDtlsModel.getAddress());
 		lstprop.setDcpsDdoOfficeCityClass(organisationDtlsModel.getCityClass());
-		lstprop.setDiceCode(organisationDtlsModel.getInstiNo());
+		lstprop.setDiceCode(Long.valueOf(organisationDtlsModel.getInstiNo()));
 		lstprop.setDcpsDdoOfficeGrant(organisationDtlsModel.getPercGrant());
 		lstprop.setDcpsDdoOfficeTelNo1(organisationDtlsModel.getTel1());
 		lstprop.setDcpsDdoOfficeTelNo2(organisationDtlsModel.getTel2());

@@ -18,18 +18,14 @@ $(document).ready(function() {
 					        $('#dept').select2();
 					    }
 		
-		
-		
 	
 	var contextPath = $("#appRootPath").val();
 	var DDOCode =$("#ddoCode").val(); 
-	var instituteId = $("#uniqeInstituteId").val();
-	if (DDOCode != ''  && $("#uniqeInstituteId").val()!=null  && $("#uniqeInstituteId").val()!=undefined ) {
+	//var instituteId = $("#uniqeInstituteId").val();
+	if (DDOCode != '' && DDOCode != undefined  &&  DDOCode != "undefined") {
 		swal('For DDO Code: '
 				+ DDOCode
-				+ ', system generated unique institute Id: '
-				+ instituteId
-				+ '. Please note the details for future use. Additionally, the default password is: ifms123.');
+				+ ' Please note the details for future use. Additionally, the default password is: ifms123.');
 	}
 	
 
@@ -37,7 +33,8 @@ $(document).ready(function() {
 	
 	var dataTable= $('#ddoMapTable').dataTable({
 	    "columnDefs": [
-	        { "targets": [4], "visible": false } 
+	        { "targets": [4], "visible": false } ,
+	         { "targets": [5], "visible": false } 
 	    ],
 	    "order": [[4, 'desc']] 
 	});
@@ -149,7 +146,7 @@ $("#btnFilter").click(function(){
 	var context = $("#appRootPath").val();
 	var districtId = $("#cmbDistrict").val();
 	var talukaId = $("#cmbTaluka").val();
-	var cmbAdminType =0;    //$("#cmbAdminType").val();
+	var cmbAdminType ="-1";    //$("#cmbAdminType").val();
 	
 	$( "#loaderMainNew").show();
 	$.ajax({
@@ -184,27 +181,41 @@ $("#btnFilter").click(function(){
 
 
 function populateTable(data) {
+	dataTable.fnClearTable();
+	
     $.each(data, function(index, row) {
-    	dataTable.fnClearTable();
-    	   var row1 = '<span id="' + row[0] + '"><a href="#"  data-ddocode="'+ row[0]+'"  class="ddoCode"    data-srno="'+index+'"  >' + row[0] + '</a></span>';
-           var row2 = '<span id="' + row[1] + '"><a href="#"  data-ddocode="'+ row[1]+'" class="ddoCode"    data-srno="'+index+'" >' + row[1] + '</a></span>';
-    	var row3=null;
-    	   if(row[5]==0){
-    		   row3= '<span class="btn btn-warning" >Pending</span>';
-    	   }else if(row[5]==1){
-    		   row3= '<span  class="btn btn-succes" >Approved</span>';
+    	
+    	var zpDdoCode=row[0];
+    	var reptdDoCode=row[1];
+    	var finalDdoCode=row[2];
+    	var spclDdoCode=row[3];
+    	var zpLevel=row[4];
+    	var status=row[5];
+    	var zpMapId=row[6];
+    	var createdDate=row[7];
+    	
+    	
+    	zpDdoCode='<span id="' + zpDdoCode + '"><a href="#"  data-ddocode="'+ zpDdoCode+'"  class="ddoCode"    data-srno="'+index+'"  >' + zpDdoCode + '</a></span>';
+    	reptdDoCode='<span id="' + reptdDoCode + '"><a href="#"  data-ddocode="'+ reptdDoCode+'"  class="ddoCode"    data-srno="'+index+'"  >' + reptdDoCode + '</a></span>';
+    	finalDdoCode='<span id="' + finalDdoCode + '"><a href="#"  data-ddocode="'+ finalDdoCode+'"  class="ddoCode"    data-srno="'+index+'"  >' + finalDdoCode + '</a></span>';
+    	spclDdoCode='<span id="' + spclDdoCode + '"><a href="#"  data-ddocode="'+ spclDdoCode+'"  class="ddoCode"    data-srno="'+index+'"  >' + spclDdoCode + '</a></span>';
+    	
+    	
+    	   if(status==0){
+    		   status= '<span class="btn btn-warning" >Pending</span>';
+    	   }else if(status==1){
+    		   status= '<span  class="btn btn-succes" >Approved</span>';
     	   }else{
-    		   row3= '<span  class="btn btn-danger >Rejected</span>';
+    		   status= '<span  class="btn btn-danger >Rejected</span>';
     	   }
     	   
-    	   var createdDate = new Date(row[7]); 
 		    var formattedDate = dateToDMY(createdDate);
-        dataTable.fnAddData(
-				[
-					row1,
-					row2,row[4],
-					createdDate,row[6],row3
+		    
+		    dataTable.fnAddData(
+				[     
+					zpDdoCode,reptdDoCode,finalDdoCode,zpLevel,formattedDate,zpMapId,status
 						]);
+		    
     });
 }
 

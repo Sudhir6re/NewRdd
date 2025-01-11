@@ -27,7 +27,7 @@
 
 		<div class="formMainwithNoborTb container">
 			<div id="content">
-				<div id="content" style="background: :#f0ebe8;">
+				<div id="content" >
 					<script type="text/javascript">
 						function preventBack() {
 							window.history.forward();
@@ -64,7 +64,7 @@
 										
 										<td align="center" width="15%">Distrct</td>
 										<td width="18%"><select name="cmbDistrict"
-											id="cmbDistrict" style="width: 85%, display: inline;">
+											id="cmbDistrict" style="width: 85%;display:inline;">
 												<option title="Select All" value="-1">Select</option>
 
 												<option th:each="cmnDistrctMst : ${lstCmnDistrctMst}"
@@ -74,7 +74,7 @@
 										</select></td>
 										<td align="center" width="15%">Taluka</td>
 										<td width="18%"><select name="cmbTaluka" id="cmbTaluka"
-											style="width: 85%, display: inline;">
+											style="width: 85%; display: inline;">
 												<option title="Select All" value="-1">Select</option>
 												<option th:each="cmnTalukaMst : ${lstCmnTalukaMst}"
 													th:value="${cmnTalukaMst.talukaId}"

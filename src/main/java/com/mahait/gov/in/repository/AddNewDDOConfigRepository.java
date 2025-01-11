@@ -420,7 +420,7 @@ public class AddNewDDOConfigRepository {
 	}
 
 	public void insertMstDcpsDdoOffice(String lStrDdoCode, String lStrDdoOffice, String lStrDistCode, Long lLngLocId,
-			Long lLngUserIdCrtd, Long lLngPostIdCrtd, OrgUserMst orgUserMst, String uniqeInstituteId) {
+			Long lLngUserIdCrtd, Long lLngPostIdCrtd, OrgUserMst orgUserMst) {
 		Session ghibSession = entityManager.unwrap(Session.class);
 		Long lLngMstOfficeDdoId = null;
 
@@ -440,7 +440,7 @@ public class AddNewDDOConfigRepository {
 			lObjDdoOffice.setUserId(lLngUserIdCrtd);
 			lObjDdoOffice.setCreatedDate(new Timestamp(new Date().getTime()));
 			lObjDdoOffice.setStatusFlag(0l);
-			lObjDdoOffice.setUniqueInstituteNo(uniqeInstituteId);
+			//lObjDdoOffice.setUniqueInstituteNo(uniqeInstituteId);
 
 			lObjDdoOffice.setDcpsDdoCode(lStrDdoCode);
 			ghibSession.save(lObjDdoOffice);
@@ -635,14 +635,14 @@ public class AddNewDDOConfigRepository {
 	
 
 
-public List retriveDepts(String OfcCode) 
+public List retriveDepts(Long long1) 
 	{
 		List temp=null;
 		//hibSession = getSession();
 		try
 		{		
 			Session ghibSession = entityManager.unwrap(Session.class);   
-			String branchQuery = "select aa.DEPT_ID,aa.DEPT_NAME,aa.DEPT_CODE FROM MST_ZP_DEPT aa where ADMIN_OFF_TYPE_CODE='"+OfcCode+"'";
+			String branchQuery = "select aa.DEPT_ID,aa.DEPT_NAME,aa.DEPT_CODE FROM MST_ZP_DEPT aa where ADMIN_OFF_TYPE_CODE='"+long1+"'";
 			Query sqlQuery= ghibSession.createNativeQuery(branchQuery);
 			temp= sqlQuery.getResultList();
 		}

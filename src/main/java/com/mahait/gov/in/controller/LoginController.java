@@ -291,9 +291,8 @@ public class LoginController extends BaseController{
 	
 	
 	
-
-	@RequestMapping("/user/home")
-	public ModelAndView userHomePage(HttpServletRequest request, Model model, HttpServletResponse response,
+	@RequestMapping("/employee/home")
+	public ModelAndView employeeHomePage(HttpServletRequest request, Model model, HttpServletResponse response,
 			Locale locale, HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("language", locale.getLanguage());
@@ -322,6 +321,41 @@ public class LoginController extends BaseController{
 
 			addMenuAndSubMenu(modelAndView, messages);
 
+			modelAndView.setViewName("homepageLevel");
+		}
+		return modelAndView;
+
+	}
+
+	
+	
+
+	@RequestMapping("/user/home")
+	public ModelAndView userHomePage(HttpServletRequest request, Model model, HttpServletResponse response,
+			Locale locale, HttpSession session) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("language", locale.getLanguage());
+		request.getSession().setAttribute("MY_SESSION_MESSAGES",
+				userService.getUserIdbyUserName(request.getRemoteUser()));
+		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");
+		session.setAttribute("levelRoleVal", messages.getMstRoleEntity().getRoleId());
+		modelAndView.addObject("sessionMessages", messages.getUserId());
+		// logger.info(""+messages.getFullName());
+		modelAndView.addObject("userName", messages.getUserName());
+		int levelRoleVal = messages.getMstRoleEntity().getRoleId();
+		addMenuAndSubMenu(modelAndView, messages);
+		if (levelRoleVal==1) {
+			return new ModelAndView("redirect:/mdc/home");
+		} else if (levelRoleVal==3) {
+			return new ModelAndView("redirect:/ddoast/home");
+		} else if (levelRoleVal==2) {
+			return new ModelAndView("redirect:/ddo/home");
+		}else if (levelRoleVal==4) {
+			modelAndView.setViewName("topics");
+			//return new ModelAndView("redirect:/user/home");
+		}else if (levelRoleVal==5) {
+			return new ModelAndView("redirect:/super/home");
+		} else {
 			modelAndView.setViewName("homepageLevel");
 		}
 		return modelAndView;

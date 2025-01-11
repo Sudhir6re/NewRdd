@@ -14,11 +14,7 @@ public class StringHelperUtils {
 
 	private static final BigInteger BigInteger = null;
 	public static String isNullDouble;
-	/*
-	 * @Author Ashok Parmar
-	 * Find and replace the strings
-	 * Used for email template
-	 */
+	
 	public static String replaceString(Map<String,String> variables,String templateText) {
 			templateText = variables.keySet().stream()
 					.reduce(templateText, 

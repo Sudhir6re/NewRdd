@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 import jakarta.validation.constraints.NotEmpty;
-
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 
@@ -52,7 +52,7 @@ public class ZpRltDdoMapModel implements Serializable {
     @NotEmpty(message = "User's email cannot be empty.")
     private String cmbAdminOffice;
     
-    @NotEmpty(message = "User's department cannot be empty.")
+    @NotNull(message = "User's department cannot be empty.")
     private Long dept;
     
     @NotEmpty(message = "User's email cannot be empty.")

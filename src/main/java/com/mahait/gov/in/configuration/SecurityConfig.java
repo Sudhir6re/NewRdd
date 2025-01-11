@@ -45,7 +45,8 @@ public class SecurityConfig {
             .authorizeHttpRequests(authorize -> authorize
                     .requestMatchers( "/","/i18n/*","/lib/**","/register", "/user/login","/user/logOut", "/css/**", "/js/**","/images/**","/pdf/**").permitAll()
                     .requestMatchers("/mdc/**").hasRole("MDC")
-                    .requestMatchers("/user/**").hasRole("USER")
+                    .requestMatchers("/user/**").permitAll()
+                    .requestMatchers("/employee/**").hasRole("USER")
                     .requestMatchers("/ddoast/**").hasRole("DDO_AST")
               	  .requestMatchers("/ddo/**").hasRole("DDO")
               	  .requestMatchers("/super/**").hasRole("SUPER")

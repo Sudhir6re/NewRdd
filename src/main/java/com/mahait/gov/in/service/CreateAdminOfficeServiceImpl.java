@@ -79,11 +79,6 @@ public class CreateAdminOfficeServiceImpl implements CreateAdminOfficeService {
 	
 	
 	
-	
-	
-	
-	
-	
 
 	@Override
 	public List<ZpRltDdoMapModel> findAllDdoMappedlist(OrgUserMst messages) {
@@ -204,7 +199,7 @@ public class CreateAdminOfficeServiceImpl implements CreateAdminOfficeService {
 		String lstrHOD_Code=tmp1[1].toString();
 		
 		
-		List DeptCode=objZpDDOOfficeMstDAOImpl.retriveDepts(strAdminOfc);
+		List DeptCode=objZpDDOOfficeMstDAOImpl.retriveDepts(zpRltDdoMapModel.getDept());
 		String lstrDeptType=null;
 		if(DeptCode!=null && DeptCode.size()>0)
 			lstrDeptType=DeptCode.get(0).toString();
@@ -212,216 +207,20 @@ public class CreateAdminOfficeServiceImpl implements CreateAdminOfficeService {
 		String lstrAdminDeptType=null;
 		objZpDDOOfficeMstDAOImpl.insertOrgDdoMst(lStrDdoCode, lStrDdoName, lStrDdoPersonalName, lLngPostId, gLngUserId, lStrLocCode, gLngPostId, lLngAdminDept.toString(),lstrDdoType,lstrDept_Code,lstrHOD_Code,lstrDeptType,messages,desginationId,lStrDesgnName,lStrDdoOfficeName);
 
-		String uniqeInstituteId=objZpDDOOfficeMstDAOImpl.generateUniqeInstituteId(lStrDdoCode,lLngDistrictCode.toString(), messages);
-		objZpDDOOfficeMstDAOImpl.insertMstDcpsDdoOffice(lStrDdoCode, lStrDdoOfficeName, lLngDistrictCode.toString(), Long.parseLong(lStrLocCode), gLngUserId, gLngPostId, messages,uniqeInstituteId);
+		//String uniqeInstituteId=objZpDDOOfficeMstDAOImpl.generateUniqeInstituteId(lStrDdoCode,lLngDistrictCode.toString(), messages);
+		objZpDDOOfficeMstDAOImpl.insertMstDcpsDdoOffice(lStrDdoCode, lStrDdoOfficeName, lLngDistrictCode.toString(), Long.parseLong(lStrLocCode), gLngUserId, gLngPostId, messages);
 
 		
 		objZpDDOOfficeMstDAOImpl.insertRltZpDdoMap(lLngUserId, gLngPostId, 0l, 0l, lStrDdoCode, strRepoDDOCode, lstrFinalDDOCode,lstrSpecialDDOCode, lstrLevel,gLngUserId, gLngPostId, messages);
 		
-		
 		try {
 			objZpDDOOfficeMstDAOImpl.insertRltDdoOrg(gLngUserId, gLngPostId, lStrDdoCode, lLngTreasuryCode.toString(), messages);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	
 		
-/*
-		Long ZP_DDO_POST_ID=lLngPostId;
-		List RepoDDO=objZpDDOOfficeMstDAOImpl.retirveRepoDDOPostId((strRepoDDOCode));
-		List FinalDDO=null;
-		Long FINAL_DDO_POST_ID=null;
-		List SpecDDO=null;
-		Long SPECIAL_DDO_POST_ID=null;
-		Long REPT_DDO_POST_ID=Long.valueOf(RepoDDO.get(0).toString());
-		if(lstrFinalDDOCode!=null && !lstrFinalDDOCode.equals("") )
-		{
-			FinalDDO=objZpDDOOfficeMstDAOImpl.retirveFinalDDOPostId(Long.valueOf(lstrFinalDDOCode));
-			FINAL_DDO_POST_ID=Long.valueOf(FinalDDO.get(0).toString());
-		}
-
-		if(lstrLevel.equalsIgnoreCase("radioFinalLevel2")){
-			lstrLevel="2";
-			Long lstrReporole=700019L; 
-			List checkRole=objZpDDOOfficeMstDAOImpl.checkRepopostrole(REPT_DDO_POST_ID,lstrReporole);
-			if(checkRole.size()==0){
-				objZpDDOOfficeMstDAOImpl.insertPostRoleRlt(REPT_DDO_POST_ID, gLngUserId, gLngPostId, messages,"ReportingDDO",newOrgPostMst);
-			}
-		}
-		*/
-		/*
-		lObjAddNewDdoConfig.insertRltDdoOrg(gLngUserId, gLngPostId, lStrDdoCode, lLngTreasuryCode.toString(), objectArgs);
-		lObjAddNewDdoConfig.insertWfOrgPost(lLngPostId.toString()); 
-		lObjAddNewDdoConfig.insertWfOrgLoc(lStrLocCode);
-		lObjAddNewDdoConfig.insertWfOrgUser(lLngUserId);
-		logger.info(".........10................Inserting insertRltDdoOrg............................");
-		logger.info(".........................Entries Done in above tables............................");
-
-*/
-
-/*
-
-		// Entries for DDO Assistant as user
-		logger.info(".........................Entries for Asst Start............................");
-		Long lLngUserIdAsst = lLngUserId + 1;
-		String lStrDDOAsstUserName = lStrDdoCode.trim() + "_AST";
-		lObjAddNewDdoConfig.insertUserMstAsst(lLngUserIdAsst, lStrDDOAsstUserName, gLngUserId, gLngPostId, objectArgs);
-
-		Long lLngPostIdAsst = lLngPostId + 1;
-		String lStrDdoPersonalNameAsst =  lStrDdoPersonalName + "_AST";
-
-		String lStrDesgnNameAsst = lStrDesgnName + "_AST";
-		logger.info(".........................Entries for Asst Start1............................");
-		lObjAddNewDdoConfig.insertEmpMst(lLngUserIdAsst, lStrDdoPersonalNameAsst, gLngUserId, gLngPostId, lStrGender, objectArgs);
-		logger.info(".........................Entries for Asst Start2............................");
-		lObjAddNewDdoConfig.insertOrgPostMst(lLngPostIdAsst, lStrLocCode, gLngUserId, gLngPostId, lLngDesignID.toString(), objectArgs);
-		logger.info(".........................Entries for Asst Start3............................");
-		lObjAddNewDdoConfig.insertPostDtlsRlt(lStrLocCode, lLngPostIdAsst, lStrDesgnNameAsst, lLngDesignID, gLngUserId, gLngPostId, objectArgs);
-		logger.info(".........................Entries for Asst Start4............................");
-		objZpDDOOfficeMstDAOImpl.insertPostRoleRlt(lLngPostIdAsst, gLngUserId, gLngPostId, objectArgs,"ASST");
-		logger.info(".........................Entries for Asst Start5............................");
-		lObjAddNewDdoConfig.insertUserPostRlt(lLngPostIdAsst, lLngUserIdAsst, gLngUserId, gLngPostId, objectArgs);
-		logger.info(".........................Entries for Asst Start6............................");
-		lObjAddNewDdoConfig.insertWfOrgPost(lLngPostIdAsst.toString());
-		logger.info(".........................Entries for Asst Start7............................");
-		lObjAddNewDdoConfig.insertWfOrgUser(lLngUserIdAsst);
-		logger.info(".........................Entries for Asst Start8............................");
-		RltDdoAsst lObjRltDdoAsst = new RltDdoAsst();
-		lObjRltDdoAsst.setAsstPostId(lLngPostIdAsst);
-		lObjRltDdoAsst.setDdoPostId(lLngPostId);
-		logger.info(".........................Entries for Asst Start9............................");
-		//Long lLongRltDDOAsstId = IFMSCommonServiceImpl.getNextSeqNum("rlt_dcps_ddo_asst",objectArgs);
-		Long lLongRltDDOAsstId = lObjAddNewDdoConfig.getNextSeqNoLocForRltDcpsDdoAsst();
-		lObjRltDdoAsst.setRltDdoAsstId(lLongRltDDOAsstId);
-		logger.info(".........................Entries for Asst Start10............................");
-		lObjAddNewDdoConfig.create(lObjRltDdoAsst);
-		logger.info(".........................Entries for Asst End............................");
-		// Entries for DDO Assistant as a user overs
-*/
-/*
-
-		Long ZP_DDO_POST_ID=lLngPostId;
-		List RepoDDO=objZpDDOOfficeMstDAOImpl.retirveRepoDDOPostId((strRepoDDOCode));
-		List FinalDDO=null;
-		Long FINAL_DDO_POST_ID=null;
-		List SpecDDO=null;
-		Long SPECIAL_DDO_POST_ID=null;
-		Long REPT_DDO_POST_ID=Long.valueOf(RepoDDO.get(0).toString());
-		if(lstrFinalDDOCode!=null && !lstrFinalDDOCode.equals("") )
-		{
-			FinalDDO=objZpDDOOfficeMstDAOImpl.retirveFinalDDOPostId(Long.valueOf(lstrFinalDDOCode));
-			FINAL_DDO_POST_ID=Long.valueOf(FinalDDO.get(0).toString());
-		}
-
-
-		if(lstrSpecialDDOCode!=null && !lstrSpecialDDOCode.equals("") )
-		{
-			logger.info("lstrSpecialDDOCode-----sunitha"+lstrSpecialDDOCode);
-			SpecDDO=objZpDDOOfficeMstDAOImpl.retirveFinalDDOPostId(Long.valueOf(lstrSpecialDDOCode));
-			logger.info("SpecDDO-----sunitha"+SpecDDO);
-			SPECIAL_DDO_POST_ID=Long.valueOf(SpecDDO.get(0).toString());
-		}
-
-		if(lstrLevel.equalsIgnoreCase("radioFinalLevel2")){
-			lstrLevel="2";
-			Long lstrReporole=700019L; 
-			List checkRole=objZpDDOOfficeMstDAOImpl.checkRepopostrole(REPT_DDO_POST_ID,lstrReporole);
-			if(checkRole.size()==0){
-				objZpDDOOfficeMstDAOImpl.insertPostRoleRlt(REPT_DDO_POST_ID, gLngUserId, gLngPostId, objectArgs,"ReportingDDO");
-			}
-		}
-		if(lstrLevel.equalsIgnoreCase("radioFinalLevel3")){
-			lstrLevel="3";
-			Long lstrReporole=700019L; 
-			List checkRepoRole=objZpDDOOfficeMstDAOImpl.checkRepopostrole(REPT_DDO_POST_ID,lstrReporole);
-			if(checkRepoRole.size()==0){
-				objZpDDOOfficeMstDAOImpl.insertPostRoleRlt(REPT_DDO_POST_ID, gLngUserId, gLngPostId, objectArgs,"ReportingDDO");
-			}
-			Long lstrFinalrole=700020L; 
-			List checkFinalRole=objZpDDOOfficeMstDAOImpl.checkRepopostrole(FINAL_DDO_POST_ID,lstrFinalrole);
-			if(checkFinalRole.size()==0){
-				objZpDDOOfficeMstDAOImpl.insertPostRoleRlt(FINAL_DDO_POST_ID, gLngUserId, gLngPostId, objectArgs,"FinalDDO");
-			}
-		}
-		if(lstrLevel.equalsIgnoreCase("radioFinalLevel4")){
-			lstrLevel="4";
-			Long lstrReporole=700019L; 
-			List checkRepoRole=objZpDDOOfficeMstDAOImpl.checkRepopostrole(REPT_DDO_POST_ID,lstrReporole);
-			if(checkRepoRole.size()==0){
-				objZpDDOOfficeMstDAOImpl.insertPostRoleRlt(REPT_DDO_POST_ID, gLngUserId, gLngPostId, objectArgs,"ReportingDDO");
-			}
-			Long lstrFinalrole=700020L; 
-			List checkFinalRole=objZpDDOOfficeMstDAOImpl.checkRepopostrole(FINAL_DDO_POST_ID,lstrFinalrole);
-			if(checkFinalRole.size()==0){
-				objZpDDOOfficeMstDAOImpl.insertPostRoleRlt(FINAL_DDO_POST_ID, gLngUserId, gLngPostId, objectArgs,"FinalDDO");
-			}
-			Long lstrSpecialrole=700021L; 
-			List checkSpecialRole=objZpDDOOfficeMstDAOImpl.checkRepopostrole(SPECIAL_DDO_POST_ID,lstrSpecialrole);
-			if(checkSpecialRole.size()==0){
-				objZpDDOOfficeMstDAOImpl.insertPostRoleRlt(SPECIAL_DDO_POST_ID, gLngUserId, gLngPostId, objectArgs,"SpecialDDO");
-			}
-		}
-		logger.info(">>>>>>>>>>>>>>>>REPT_DDO_POST_ID>>>>>>>>>>>>>>>>>>>>>"+REPT_DDO_POST_ID);
-		logger.info(">>>>>>>>>>>>>>>>FINAL_DDO_POST_ID>>>>>>>>>>>>>>>>>>>>>"+FINAL_DDO_POST_ID);
-		logger.info(">>>>>>>>>>>>>>>>SPECIAL_DDO_POST_ID>>>>>>>>>>>>>>>>>>>>>"+SPECIAL_DDO_POST_ID);
-		objZpDDOOfficeMstDAOImpl.insertRltZpDdoMap(ZP_DDO_POST_ID, REPT_DDO_POST_ID, FINAL_DDO_POST_ID, SPECIAL_DDO_POST_ID, lStrDdoCode, strRepoDDOCode, lstrFinalDDOCode,lstrSpecialDDOCode, lstrLevel,gLngUserId, gLngPostId, objectArgs);
-		logger.info("######################................sunitha................Inserted into insertRltZpDdoMap");
-
-
-
-
-
-		//  Workflow Tables TODO -- Need to Check By Vihan 
-		logger.info("...................inserting Worflow Tables...............");
-		objZpDDOOfficeMstDAOImpl.insertWorkFlow(lLngPostIdAsst,lLngPostId,REPT_DDO_POST_ID, FINAL_DDO_POST_ID,SPECIAL_DDO_POST_ID, gLngUserId, lStrLocCode, objectArgs,lstrLevel);
-		// insertWorkFlow(Long lLngPostIdAsst,Long lLongDDOPostId,Long lLongTOAsstPostId,Long lLongTOPostId,Long lLongSpecialPostId,Long lLongCreatedByUserId,String lStrLocCode,Map inputMap,String lstrLevel) throws Exception {
-		//lObjAddNewDdoConfig.insertWfHierarchyTableSeqMst(lStrLocCode, objectArgs);
-		//lObjAddNewDdoConfig.insertWfHierachyPostMpgChanges(REPT_DDO_POST_ID, lLngPostIdAsst, REPT_DDO_POST_ID, lStrLocCode, objectArgs);
-		logger.info("...................inserting Worflow Tables...............");
-		//  Workflow Tables 
-
-		logger.info("....................Inserting in CMN TABLE MST...................");
-		ReportingDDODaoImpl rpt=new ReportingDDODaoImpl(null,serviceLocator.getSessionFactory()); 
-		Long seqId= rpt.getNextSeqNum();
-		rpt.getSeqTable(lStrLocCode,objectArgs,seqId);
-		rpt.updateUserMstSeq();
-		logger.info("....................Inserting in CMN TABLE MST...................");
-
-
-		ZpDDOOfficeMstDAOImpl  zpDDOOfficeMstDAO = new ZpDDOOfficeMstDAOImpl(ZpAdminOfficeMst.class,serviceLocator.getSessionFactory());
-		//commented by vaibhav tyagi
-		//List<ZpRltDdoMap> zpDDOOfficelst = zpDDOOfficeMstDAO.getAllDDOOfficeDtlsData();
-		
-		//added by vaibhav tyagi:start
-		String districtSelected =null;
-		String talukaSelected=null;
-		String adminTypeSelected=null;
-		List<ZpRltDdoMap> zpDDOOfficelst = zpDDOOfficeMstDAO.getAllDDOOfficeDtlsData(districtSelected,talukaSelected,adminTypeSelected);
-		//added by vaibhav tyagi:end
-		logger.info("zpdistrictOfficelst::"+zpDDOOfficelst.size());
-		
-		List districtList= zpDDOOfficeMstDAO.getAllDistrict();
-		List adminTypeList= zpDDOOfficeMstDAO.getAllAdminType();
-		List taluka = zpDDOOfficeMstDAO.getAllTalukaByDistrict(strDistCode);
-		objectArgs.put("zpDDOOfficelst",zpDDOOfficelst);
-		
-		objectArgs.put("districtList",districtList);
-		objectArgs.put("adminTypeList",adminTypeList);
-		objectArgs.put("zpDDOOfficelst",zpDDOOfficelst);
-		objectArgs.put("talukaList",taluka);
-		
-		
-		objectArgs.put("lStrDdoCode",lStrDdoCode);
-		objectArgs.put("uniqeInstituteId",uniqeInstituteId);
-		districtList=null;
-		adminTypeList=null;
-		zpDDOOfficelst=null;
-		objRes.setResultCode(ErrorConstants.SUCCESS);
-		objRes.setResultValue(objectArgs);
-		objRes.setViewName("zpDDOOfficeView");
-		return objRes;*/
-		
-		return uniqeInstituteId;
+		return "";
 	}
 
 	@Override
@@ -493,12 +292,14 @@ public class CreateAdminOfficeServiceImpl implements CreateAdminOfficeService {
 		Map<String, Object> response = new HashMap<>();
 		
 		try {
-			Long TDDOCode = 0l;
-			if (!DDOCode.equalsIgnoreCase("")) {
-				TDDOCode = Long.valueOf(DDOCode);
-			}
+			/*
+			 * Long TDDOCode = 0l; if (!DDOCode.equalsIgnoreCase("")) { TDDOCode =
+			 * Long.valueOf(DDOCode); }
+			 */
+			
+			
 			List RepoDDO = orgDdoMstRepository.findByDdoCodeLike(DDOCode);
-			List TODetail = createAdminOfficeRepo.getTreasuryName(TDDOCode);
+			List TODetail = createAdminOfficeRepo.getTreasuryName(DDOCode);
 			
 			if(TODetail.size()>0 && TODetail!=null) {
 				Object[] o = (Object[]) TODetail.get(0);

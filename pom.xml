@@ -13,7 +13,7 @@
 	<artifactId>RDD-1</artifactId>
 	<!--	<version>0.0.1-SNAPSHOT</version>-->
 	<packaging>war</packaging>
-	<name>RDD-1</name>
+	<name>ROOT</name>
 	<description>Demo project for Spring Boot</description>
 	<url />
 	<licenses>
@@ -252,7 +252,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>RDD</finalName>
+		<finalName>ROOT</finalName>
 	</build>
 
 </project>

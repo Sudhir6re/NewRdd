@@ -108,44 +108,13 @@ public class CreateAdminOfficeController extends BaseController {
 	public String saveCreateAdminOffice(Model model, Locale locale, HttpSession session,
 			@ModelAttribute("zpRltDdoMapModel") @Valid ZpRltDdoMapModel zpRltDdoMapModel, BindingResult result,
 			RedirectAttributes redirectAttribute) {
-
-		/*
-		 * if (result.hasErrors()) { return "/views/create-office"; }
-		 */
 		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");
 		String uniqueId = createAdminOfficeService.saveCreateAdminOffice(zpRltDdoMapModel, messages);
-
-		/*
-		 * // List<ZpRltDdoMapModel> lstZpRltDdoMapModel = //
-		 * createAdminOfficeService.findAllDdoMappedlist(messages); List<ZpAdminNameMst>
-		 * lstZpAdminNameMst = createAdminOfficeService.fetchAllOfficeList(messages);
-		 * 
-		 * List<CmnTalukaMst> lstCmnTalukaMst =
-		 * createAdminOfficeService.findAllTalukaList(messages); List<CmnDistrictMst>
-		 * lstCmnDistrctMst = createAdminOfficeService.findAllDistrictList(messages);
-		 * 
-		 * List<Object[]> adminOfcLst =
-		 * createAdminOfficeService.retriveDisctOfcList(messages, "");
-		 * model.addAttribute("adminOfcLst", adminOfcLst);
-		 * 
-		 * // model.addAttribute("lstZpRltDdoMapModel", lstZpRltDdoMapModel);
-		 * 
-		 * String districtName = null; String talukaNametName = null; String adminType =
-		 * null;
-		 * 
-		 * List<Object[]> lstZpRltDdoMapRlt =
-		 * createAdminOfficeService.findZpRltDtls(messages, districtName,
-		 * talukaNametName, adminType); model.addAttribute("lstZpAdminNameMst",
-		 * lstZpAdminNameMst); model.addAttribute("lstZpRltDdoMapRlt",
-		 * lstZpRltDdoMapRlt); model.addAttribute("lstCmnTalukaMst", lstCmnTalukaMst);
-		 * model.addAttribute("lstCmnDistrctMst", lstCmnDistrctMst);
-		 */
 		model.addAttribute("uniqueId", uniqueId);
+		model.addAttribute("ddoCode", zpRltDdoMapModel.getTxtDDOCode());
 		redirectAttribute.addFlashAttribute("uniqueId", uniqueId);
 		redirectAttribute.addFlashAttribute("ddoCode", zpRltDdoMapModel.getTxtDDOCode());
-
 		return "redirect:/mdc/createAdminOffice";
-
 	}
 
 	@RequestMapping(value = "/getAllTalukaByDistrictId/{districtId}", consumes = {

@@ -65,7 +65,7 @@ public class OrganisationDtlsRepoImpl implements OrganisationDtlsRepo {
 		Session hibSession = entityManager.unwrap(Session.class);
 		List temp = null;
 		try {
-			String cityQuery = "SELECT city_id, city_name, city_class  FROM cmn_city_mst where district_id = '"
+			String cityQuery = "SELECT city_id, city_name  FROM cmn_city_mst where district_id = '"
 					+ String.valueOf(districtId)+"'";
 			Query sqlQuery = hibSession.createNativeQuery(cityQuery);
 			temp = sqlQuery.getResultList();
