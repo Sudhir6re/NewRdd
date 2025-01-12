@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.mahait.gov.in.common.CommonConstants;
+import com.mahait.gov.in.entity.CmnLookupMst;
 import com.mahait.gov.in.entity.InstituteType;
 import com.mahait.gov.in.entity.MstBankEntity;
 import com.mahait.gov.in.entity.OrgUserMst;
@@ -45,7 +47,7 @@ public class OrganisationDtlsController   extends BaseController {
 	CommonHomeMethodsService commonHomeMethodsService;
 
 	@RequestMapping("/ddoOfficeDetails")
-	public ModelAndView login(Locale locale, HttpSession session, Model model,
+	public ModelAndView ddoOfficeDetails(Locale locale, HttpSession session, Model model,
 			@ModelAttribute("organisationDtlsModel") @Valid OrganisationDtlsModel organisationDtlsModel,
 			BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -56,7 +58,20 @@ public class OrganisationDtlsController   extends BaseController {
 		List<TopicModel> subMenuList = new ArrayList<>();
 
 		organisationDtlsModel = organisationDtlsService.lstOfficeDetails(messages.getDdoCode());
-
+		
+		
+		String adminDeptName = organisationDtlsService.getDeptNameByLocCode(organisationDtlsModel.getDeptLocCode(),
+				locale.getLanguage());
+		String fieldDeptName = organisationDtlsService.getDeptNameByLocCode(organisationDtlsModel.getHodLocCode(),
+				locale.getLanguage());
+		
+		organisationDtlsModel.setAdminDeptName(adminDeptName);
+		organisationDtlsModel.setFieldDeptName(fieldDeptName);
+		
+		
+		//DCPSDDOOffice
+	    List<CmnLookupMst> lstOfficeClass = commonHomeMethodsService.getLookupValues("DCPS_OFFICE_CLASS",CommonConstants.Languages.English);
+	     model.addAttribute("lstOfficeClass", lstOfficeClass);
 		
 		/*
 		 * 

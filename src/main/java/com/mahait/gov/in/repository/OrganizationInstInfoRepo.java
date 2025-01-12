@@ -18,6 +18,8 @@ public interface OrganizationInstInfoRepo {
 	public int saveorgInstituteInfo(OrgDdoMst objForSave);
 
 	public void updateorgInstituteInfo(OrgDdoMst objForSave);
+
+	public String getDeptNameByLocCode(String deptLocCode, String language);
 	
 	
 

@@ -36,7 +36,7 @@ $(document).ready(function() {
 	        { "targets": [4], "visible": false } ,
 	         { "targets": [5], "visible": false } 
 	    ],
-	    "order": [[4, 'desc']] 
+	    "order": [[5, 'desc']] 
 	});
 	
 	
@@ -115,11 +115,12 @@ $("#cmbDistOffice").change(function(){
 function loadLevel3DdoCode(){
 	var context = $("#appRootPath").val();
 	var distOfcId = $("#cmbDistOffice").val();
+	var reptDdoCode = $("#txtRepDDOCode").val();
 	
 	$( "#loaderMainNew").show();
 	$.ajax({
 	      type: "POST",
-	      url: context+"/mdc/findLevel3DdoCode/"+distOfcId,
+	      url: context+"/mdc/findLevel3DdoCode/"+distOfcId+"/"+reptDdoCode,
 	      async: false,
 	      contentType:'application/json',
 	      error: function(data){

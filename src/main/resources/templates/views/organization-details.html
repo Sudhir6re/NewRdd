@@ -36,7 +36,7 @@
 										<tr>
 											<td align="left" width="30%">Name of the
 												Organization/Institution</td>
-											<td align="left"><input type="text" size="100%"
+											<td align="left"><input type="text" size="100%" class="removeErrorFromInput"
 												name="txtNameOfOffice" id="txtNameOfOffice"
 												th:attr="readonly=${organisationDtlsModel.officeName!=null}? 'true' : 'false'"
 												th:field="*{officeName}"> <label
@@ -57,15 +57,15 @@
 											<td width="15%" align="left">State</td>
 											<td width="35%" align="left"><select name="cmbState"
 												th:field="*{stateId}"
-												th:class="${organisationDtlsModel.stateId!=null}? 'readonly' : ''"
+												th:class="${organisationDtlsModel.stateId!=null}? 'readonly removeErrorFromDropdown' : 'removeErrorFromDropdown'"
 												id="cmbState">
-													<option value="-1">-- Select --</option>
+													<option value="0">-- Select --</option>
 													<option value="15">Maharashtra</option>
 											</select></td>
 											<td width="15%" align="left">District</td>
 											<td width="35%" align="left"><select name="cmbDist"
 												th:field="*{districtId}"
-												th:class="${organisationDtlsModel.districtId!=null}? 'readonly' : ''"
+												th:class="${organisationDtlsModel.districtId!=null}? 'readonly removeErrorFromDropdown' : 'removeErrorFromDropdown'"
 												id="cmbDist">
 													<option th:value="0"
 														th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
@@ -76,41 +76,34 @@
 										</tr>
 										<tr>
 											<td width="15%" align="left">Taluka</td>
-											<td width="35%" align="left"><select name="cmbTaluka"
+											<td width="35%" align="left">
+											
+											<select name="cmbTaluka"
 												th:field="*{talukaId}"
-												th:class="${organisationDtlsModel.talukaId!=null}? 'readonly' : ''"
+												th:class="${organisationDtlsModel.talukaId!=null}? 'readonly removeErrorFromDropdown' : 'removeErrorFromDropdown'"
 												id="cmbTaluka">
 													<option th:each="varPay : ${lsttaluka}"
 														th:value="${varPay[0]} "
 														th:text="${language=='mh' ? varPay[1] : varPay[1]}"></option>
 											</select></td>
-										</tr>
-										<tr>
-											<td align="left" width="15%">City</td>
-											<td align="left" width="35%"><select name="cmbcity"
-												th:field="*{city}"
-												th:class="${organisationDtlsModel.city!=null}? 'readonly' : ''"
-												id="cmbcity">
-													<option th:each="varPay : ${lstcity}"
-														th:value="${varPay[0]} "
-														th:text="${language=='mh' ? varPay[1] : varPay[1]}"></option>
-											</select> <label class="mandatoryindicator">*</label></td>
+										
+											
 											<td width="15%" align="left">Village</td>
 											<td width="35%"><input type="text" size="48"
-												th:field="*{village}"
+												th:field="*{village}" class="removeErrorFromInput"
 												th:attr="readonly=${organisationDtlsModel.village!=null}? 'true' : 'false'"
 												name="txtVillage" id="txtVillage" maxlength="50"></td>
 										</tr>
 										<tr>
 											<td width="15%" align="left">Address</td>
 											<td width="35%"><textarea name="txtAddress1"
-													th:field="*{Address}"
+													th:field="*{Address}" class="removeErrorFromInput"
 													th:attr="readonly=${organisationDtlsModel.Address!=null}? 'true' : 'false'"
 													id="txtAddress1" rows="5" cols="42"></textarea> <label
 												class="mandatoryindicator">*</label></td>
 											<td width="15%" align="left">PIN</td>
 											<td width="35%"><input type="text" size="48"
-												th:field="*{pin}" class="number"
+												th:field="*{pin}" class="number removeErrorFromInput"
 												th:attr="readonly=${organisationDtlsModel.pin!=null}? 'true' : 'false'"
 												name="txtPin" id="txtPin" maxlength="6"> <label
 												class="mandatoryindicator">*</label></td>
@@ -118,17 +111,23 @@
 										<tr>
 											<td width="15%" align="left">Organization/Institution
 												City Class</td>
-											<td align="left" width="35%"><input type="text"
-												name="cmbOfficeCityClass" size="50" id="cmbOfficeCityClass"
-												th:field="*{cityClass}"
-												th:attr="readonly=${organisationDtlsModel.cityClass!=null}? 'true' : 'false'">
-												<label class="mandatoryindicator">*</label></td>
+											<td align="left" width="35%">
+											
+											<select name="cmbOfficeCityClass" class="removeErrorFromDropdown"  id="cmbOfficeCityClass"
+												th:field="*{cityClass}"  th:attr="readonly=${organisationDtlsModel.cityClass!=null}? 'true' : 'false'">	
+													<option th:each="varPay : ${lstOfficeClass}"
+														th:value="${varPay.lookupDesc} "
+														th:text="${varPay.lookupDesc}">
+													</option>
+												</select> <label class="mandatoryindicator">*</label>
+											</td>
+												
 										</tr>
 										<tr>
 											<td width="15%" align="left">Institution Number</td>
 											<td width="35%"><input type="text" size="48"
 												name="txtdiceCode" id="txtdiceCode" maxlength="11"
-												th:field="*{instiNo}" class="number"
+												th:field="*{instiNo}" class="number removeErrorFromInput"
 												th:attr="readonly=${organisationDtlsModel.instiNo!=null}? 'true' : 'false'"></td>
 											<td width="15%" align="left">Percentage Of Grant
 												Applicable</td>
@@ -154,7 +153,7 @@
 									<tbody>
 										<tr>
 											<td width="15%" align="left">Tel No(1)</td>
-											<td width="35%"><input type="text" size="48"
+											<td width="35%"><input type="text" size="48"  
 												th:field="*{tel1}" name="txtTelNo1" id="txtTelNo1"
 												maxlength="11"
 												th:attr="readonly=${organisationDtlsModel.tel1!=null}? 'true' : 'false'"></td>

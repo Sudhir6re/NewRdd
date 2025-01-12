@@ -41,14 +41,14 @@ input[type="button" i]:disabled {
 							<tr>
 								<td width="15%" align="left">Administrative Department</td>
 								<td width="35%"><input type="text" id="txtAdminDept"
-									style="text-transform: uppercase;" size="48" maxlength="90"
-									readonly="readonly" name="txtAdminDept"
+									style="text-transform: uppercase;" size="48" maxlength="90" class="removeErrorFromInput"
+									readonly="readonly" name="txtAdminDept"  th:field="*{adminDeptName}"
 									value="HIGHER AND TECHNICAL EDUCATION  DEPARTMENT."></td>
 								<td align="left" width="15%">Field Department/HOD
 									Department</td>
 								<td width="35%"><input type="text" id="txtFieldDept"
 									style="text-transform: uppercase;" size="40%" maxlength="90"
-									readonly="readonly" name="txtFieldDept"
+									readonly="readonly" name="txtFieldDept"  class="removeErrorFromInput"   th:field="*{fieldDeptName}"
 									value="DIRECTORATE OF HIGHER EDUCATION"> <!-- change size from 50% to 40% by Pratik 02-08-23 --></td>
 							</tr>
 							<!-- <tr>
@@ -78,15 +78,15 @@ input[type="button" i]:disabled {
 							<tr>
 								<td width="15%" align="left">Name <font color="red"
 									size="4px;">*</font></td>
-								<td width="35%"><input type="text" id="txtDDOName"
+								<td width="35%"><input type="text" id="txtDDOName"  class="removeErrorFromInput"
 									th:field="*{ddoOffice}" style="text-transform: uppercase"
 									size="48" maxlength="99" name="txtDDOName"></td>
 								<td width="15%" align="left">Designation<font color="red"
 									size="4px;">*</font>
 								</td>
-								<td align="left" width="35%"><select class="form-control"
+								<td align="left" width="35%"><select 
 									id="cmbDesignation" th:field="*{designationId}"
-									th:class="${organisationDtlsModel.designationId!=null}? 'readonly' : ''">
+									th:class="${organisationDtlsModel.designationId!=null}? 'readonly removeErrorFromDropdown' : 'removeErrorFromDropdown'">
 
 										<option th:value="0"
 											th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
@@ -108,7 +108,7 @@ input[type="button" i]:disabled {
 								<td align="left" width="35%"><input type="date"
 									th:max="${#dates.format(new java.util.Date(), 'yyyy-MM-dd')}"
 									th:attr="readonly=${organisationDtlsModel.designationId!=null}? 'true' : 'false'"
-									class="form-control" placeholder="dd/mm/yyyy"
+									class="form-control removeErrorFromInput" placeholder="dd/mm/yyyy"
 									th:field="*{startDate}" id="txtWEFDate" /></td>
 								<td width="15%">&nbsp;</td>
 								<td width="35%">&nbsp;</td>
@@ -116,12 +116,12 @@ input[type="button" i]:disabled {
 							<tr>
 								<td width="15%" align="left">Tan No.</td>
 								<td align="left" width="35%"><input type="text"
-									class="form-control tan"
+									class="form-control tan removeErrorFromInput"
 									th:attr="readonly=${organisationDtlsModel.designationId!=null}? 'true' : 'false'"
 									id="txtTANNo" style="text-transform: uppercase" size="48"
 									maxlength="10" name="txtTANNo" th:field="*{tanNo}"></td>
 								<td width="15%" align="left">ITO/Ward/Circle</td>
-								<td align="left" width="35%"><input type="text"
+								<td align="left" width="35%"><input type="text" removeErrorFromInput
 									th:attr="readonly=${organisationDtlsModel.designationId!=null}? 'true' : 'false'"
 									id="txtITWardCircle" style="text-transform: uppercase"
 									th:field="*{itaWardNo}" size="48" maxlength="10"
@@ -143,9 +143,9 @@ input[type="button" i]:disabled {
 								</td>
 								<td width="35%" align="left"><select name="cmbBankName"
 									th:field="*{bankName}"
-									th:class="${organisationDtlsModel.designationId!=null}? 'readonly' : ''"
+									th:class="${organisationDtlsModel.designationId!=null}? 'readonly removeErrorFromDropdown' : 'removeErrorFromDropdown'"
 									id="cmbBankName" style="width: 360px" class="form-control">
-										<option value="-1">-- Select --</option>
+										<option value="0">-- Select --</option>
 										<option th:each="varAllBankList : ${bankName}"
 											th:value="${varAllBankList.bankCode}"
 											th:text="${language=='mh' ? varAllBankList.bankName : varAllBankList.bankName}"></option>
@@ -157,8 +157,8 @@ input[type="button" i]:disabled {
 								<td align="left" width="35%"><select name="cmbBranchName"
 									id="cmbBranchName" style="width: 360px"
 									th:field="*{branchName}"
-									th:class="${organisationDtlsModel.designationId!=null}? 'readonly' : ''">
-										<option value="-1">-- Select --</option>
+									th:class="${organisationDtlsModel.designationId!=null}? 'readonly removeErrorFromDropdown' : 'removeErrorFromDropdown'">
+										<option value="0">-- Select --</option>
 										<option
 											th:each="varAllBankbranchList : ${lstAllBankBranchList}"
 											th:value="${varAllBankbranchList[0]}"
@@ -170,7 +170,7 @@ input[type="button" i]:disabled {
 								<td align="left" width="35%"><input type="text" readonly
 									id="txtIFSCCode" style="text-transform: uppercase;"
 									th:field="*{ifscCode}" size="48" maxlength="20"
-									name="txtIFSCCode" class="form-control"></td>
+									name="txtIFSCCode" class="form-control removeErrorFromInput"></td>
 								<td width="15%" align="left">Bank Acc. No. <font
 									color="red" size="4px;">*</font>
 								</td>
@@ -178,7 +178,7 @@ input[type="button" i]:disabled {
 									th:attr="readonly=${organisationDtlsModel.designationId!=null}? 'true' : 'false'"
 									id="txtAccountNo" style="text-transform: uppercase"
 									th:field="*{accountNo}" size="48" maxlength="20"
-									name="txtAccountNo" class="form-control number"></td>
+									name="txtAccountNo" class="form-control number removeErrorFromInput"></td>
 							</tr>
 							<tr>
 								<td width="15%" align="left">Remarks</td>
@@ -186,7 +186,7 @@ input[type="button" i]:disabled {
 									th:attr="readonly=${organisationDtlsModel.designationId!=null}? 'true' : 'false'"
 									id="txtRemarks" style="text-transform: uppercase" size="48"
 									maxlength="100" th:field="*{remarks}" name="txtRemarks"
-									class="form-control"></td>
+									class="form-control removeErrorFromInput"></td>
 								<td>&nbsp;</td>
 								<td>&nbsp;</td>
 							</tr>
@@ -197,15 +197,15 @@ input[type="button" i]:disabled {
 				<fieldset class="tabstyle">
 					<legend> Verify Documents </legend>
 					<p>
-						<input type="checkbox" name="bankPass" id="bankPass" />&nbsp;&nbsp;&nbsp;<label>Bank
+						<input type="checkbox"  th:field="*{bankPassbook}" name="bankPass" id="bankPass" />&nbsp;&nbsp;&nbsp;<label>Bank
 							Passbook</label>
 					</p>
 					<p>
-						<input type="checkbox" name="bankCheque" id="bankCheque" />&nbsp;&nbsp;&nbsp;<label>Bank
+						<input type="checkbox"  th:field="*{bankCheaque}" name="bankCheque" id="bankCheque" />&nbsp;&nbsp;&nbsp;<label>Bank
 							Cheque</label>
 					</p>
 					<p>
-						<input type="checkbox" name="deptLetter" id="deptLetter" />&nbsp;&nbsp;&nbsp;<label>Department
+						<input type="checkbox"  th:field="*{deptLetter}" name="deptLetter" id="deptLetter" />&nbsp;&nbsp;&nbsp;<label>Department
 							Letter</label>
 					</p>
 				</fieldset>

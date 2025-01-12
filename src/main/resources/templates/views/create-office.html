@@ -36,9 +36,9 @@ table.table.bor-0 td:first-child, table.table.bor-0 td:nth-child(3) {
 					th:action="@{/mdc/saveCreateAdminOffice}"
 					enctype="multipart/form-data">
 
-						
-						 <input type="hidden" id="desginationId"
-						name="desginationId" th:field="*{desginationId}" />
+
+					<input type="hidden" id="desginationId" name="desginationId"
+						th:field="*{desginationId}" />
 
 
 					<div id="tcontent1">
@@ -66,8 +66,9 @@ table.table.bor-0 td:first-child, table.table.bor-0 td:nth-child(3) {
 										style="width: 85%; display: inline;">
 											<option title="Select All" value="-1">Select</option>
 
-											<option th:each="cmnDistrctMst : ${adminOfcLst}"  th:data="${cmnDistrctMst[2]}"
-												th:value="${cmnDistrctMst[1]}" th:text="${cmnDistrctMst[0]}"></option>
+											<option th:each="cmnDistrctMst : ${adminOfcLst}"
+												th:data="${cmnDistrctMst[2]}" th:value="${cmnDistrctMst[1]}"
+												th:text="${cmnDistrctMst[0]}"></option>
 
 									</select>
 
@@ -84,7 +85,7 @@ table.table.bor-0 td:first-child, table.table.bor-0 td:nth-child(3) {
 										style="width: 85%; display: inline;">
 											<option title="Select All" value="-1">Select</option>
 
-										
+
 
 									</select>
 
@@ -98,24 +99,17 @@ table.table.bor-0 td:first-child, table.table.bor-0 td:nth-child(3) {
 										id="ZPDDOOOFFICE_FINAL_LEVEL">Final Level</label>2&nbsp;&nbsp;<label
 										class="mandatoryindicator">*</label></td>
 									<td><input type="radio" th:field="*{radioFinalLevel}"
-										name="radioFinalLevel" value="2"
-										onclick="checkforHirechy();" id="radioFinalLevel2"
-										class="radiobuttontag">Level 2
-										
-										 <input type="radio"
-										th:field="*{radioFinalLevel}" name="radioFinalLevel"
-										value="3" onclick="checkforHirechy();"
+										name="radioFinalLevel" value="2" onclick="checkforHirechy();"
+										id="radioFinalLevel2" class="radiobuttontag">Level 2 <input
+										type="radio" th:field="*{radioFinalLevel}"
+										name="radioFinalLevel" value="3" onclick="checkforHirechy();"
 										id="radioFinalLevel3" class="radiobuttontag mandatorycontrol"
 										checked="true">Level 3&nbsp;&nbsp;<label
-										class="mandatoryindicator">*</label> 
-										
-										
-										<input type="radio"
-										th:field="*{radioFinalLevel}" name="radioFinalLevel"
-										value="4" onclick="checkforHirechy();"
-										id="radioFinalLevel4" class="radiobuttontag mandatorycontrol"
-										disabled="">Level 4&nbsp;&nbsp;<label
-										class="mandatoryindicator">*</label>
+										class="mandatoryindicator">*</label> <input type="radio"
+										th:field="*{radioFinalLevel}" name="radioFinalLevel" value="4"
+										onclick="checkforHirechy();" id="radioFinalLevel4"
+										class="radiobuttontag mandatorycontrol" disabled="">Level
+										4&nbsp;&nbsp;<label class="mandatoryindicator">*</label>
 
 										<p th:if="${#fields.hasErrors('radioFinalLevel')}"
 											th:class="error" th:errors="*{radioFinalLevel}" /> <!-- 	
@@ -258,16 +252,20 @@ table.table.bor-0 td:first-child, table.table.bor-0 td:nth-child(3) {
 
 									<p th:if="${#fields.hasErrors('txtOfficeName')}"
 										th:class="error" th:errors="*{txtOfficeName}" /></td>
+
+
+
+								<td><label class="captionTag" id="ZPDDOOOFFICE_DDO_CODE">DDO
+										Code</label></td>
+								<td><input type="text" name="txtDDOCode" id="txtDDOCode"
+									th:field="*{txtDDOCode}" class="texttag disabledcontrol"
+									value="" readonly maxlength="50/">
+
+									<p th:if="${#fields.hasErrors('txtDDOCode')}" th:class="error"
+										th:errors="*{txtDDOCode}" /></td>
 								</tr>
 								<tr>
-									<td><label class="captionTag" id="ZPDDOOOFFICE_DDO_CODE">DDO
-											Code</label></td>
-									<td><input type="text" name="txtDDOCode" id="txtDDOCode"
-										th:field="*{txtDDOCode}" class="texttag disabledcontrol"
-										value="" readonly maxlength="50/">
 
-										<p th:if="${#fields.hasErrors('txtDDOCode')}" th:class="error"
-											th:errors="*{txtDDOCode}" /></td>
 									<td><label class="captionTag" id="ZPDDOOOFFICE_MOBILE_NO">Mobile
 											No.</label>&nbsp;&nbsp;<label class="mandatoryindicator">*</label></td>
 									<td><input type="text" name="txtMobileNo" id="txtMobileNo"
@@ -276,8 +274,7 @@ table.table.bor-0 td:first-child, table.table.bor-0 td:nth-child(3) {
 
 										<p th:if="${#fields.hasErrors('txtMobileNo')}"
 											th:class="error" th:errors="*{txtMobileNo}" /></td>
-								</tr>
-								<tr>
+								
 									<td><label class="captionTag" id="ZPDDOOOFFICE_EMAIL_ID">Email
 											Id</label>&nbsp;&nbsp;<label class="mandatoryindicator">*</label></td>
 									<td><input type="text" name="txtEmailId" id="txtEmailId"

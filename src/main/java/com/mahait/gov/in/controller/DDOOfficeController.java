@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mahait.gov.in.common.CommonConstants;
 import com.mahait.gov.in.entity.CmnDistrictMst;
+import com.mahait.gov.in.entity.CmnLookupMst;
 import com.mahait.gov.in.entity.CmnStateMst;
 import com.mahait.gov.in.entity.CmnTalukaMst;
 import com.mahait.gov.in.entity.DdoOffice;
@@ -60,13 +61,18 @@ public class DDOOfficeController  extends BaseController{
 		
 		//List<CmnLookupMst> dcpsOfficeClassId=commonHomeMethodsService.findCommonMstByLookupname(CommonConstants.COMMONMSTTABLE.DCPS_OFFICE_CLASS);
 		//List<CmnLookupMst>ddoOffClass=ddoInfoService.findDDOOffClass(dcpsOfficeClassId.get(0).getLookupId());
-		model.addAttribute("ddoOffClass", commonHomeMethodsService.findCommonMstByLookupname(CommonConstants.COMMONMSTTABLE.DCPS_OFFICE_CLASS));
+	//	model.addAttribute("ddoOffClass", commonHomeMethodsService.findCommonMstByLookupname(CommonConstants.COMMONMSTTABLE.DCPS_OFFICE_CLASS));
 		List<DdoOffice> lLstSavedOffices = ddoInfoService.getAllOffices(ddoCode);
 		if(lLstSavedOffices!=null) {
 			if(lLstSavedOffices.get(0).getDcpsDdoOfficeDdoFlag()=="Yes") {
 				lStrDdoOffice = "No";
 			}
 		}
+		
+		  List<CmnLookupMst> lstOfficeClass = commonHomeMethodsService.getLookupValues(CommonConstants.COMMONMSTTABLE.DCPS_OFFICE_CLASS,CommonConstants.Languages.English);
+		  model.addAttribute("ddoOffClass", lstOfficeClass);
+		
+		
 		bankName = commonHomeMethodsService.findBankName();
 		lstBankBranch = commonHomeMethodsService.findbankBranch();
 		lstdesgination = commonHomeMethodsService.findDesignation(messages.getUserName());
@@ -115,8 +121,6 @@ public class DDOOfficeController  extends BaseController{
 	{
 		List<Object[]> lst =  ddoInfoService.getAlreadySavedDataforDDO(ddoCode);
 		return lst;
-		
-		
     }
 	
 	@GetMapping("/updateApproveRejectStatus/{ddoCode}/{flag}/{cityClass}")

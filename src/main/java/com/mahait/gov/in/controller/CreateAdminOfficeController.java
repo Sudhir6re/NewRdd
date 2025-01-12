@@ -202,10 +202,10 @@ public class CreateAdminOfficeController extends BaseController {
 		return ResponseEntity.ok(response1);
 	}
 	
-	@RequestMapping(value = "/findLevel3DdoCode/{distOfcId}", consumes = {
+	@RequestMapping(value = "/findLevel3DdoCode/{distOfcId}/{reptDdoCode}", consumes = {
 	"application/json" }, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> findLevel3DdoCode(@PathVariable String distOfcId) {
-		String  response1 = createAdminOfficeService.findLevel3DdoCode(distOfcId);
+	public ResponseEntity<String> findLevel3DdoCode(@PathVariable String distOfcId,@PathVariable String reptDdoCode) {
+		String  response1 = createAdminOfficeService.findLevel3DdoCode(distOfcId,reptDdoCode);
 		return ResponseEntity.ok(response1);
 	}
 	

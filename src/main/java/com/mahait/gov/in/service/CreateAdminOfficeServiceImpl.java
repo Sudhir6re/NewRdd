@@ -133,9 +133,8 @@ public class CreateAdminOfficeServiceImpl implements CreateAdminOfficeService {
 		Long lLngDesignID =desginationId; //Long.parseLong(StringUtility.getParameter("1", request).trim());// TODO -- It will Change in future
 		Long lLngAdminDept=0l;
 	
-		/*if(StringUtility.getParameter("cmbDept", request).trim()!=null){
-		lLngAdminDept = -1l;//Long.parseLong(((StringUtility.getParameter("cmbDept", request).trim()!=null || !StringUtility.getParameter("cmbDept", request).trim().equals(""))?StringUtility.getParameter("cmbDept", request).trim():-1) );// TODO -- It will Change in future
-		}*/
+		lLngAdminDept=zpRltDdoMapModel.getDept();
+		
 		String lLngDistrictCode=zpRltDdoMapModel.getCmbDistOffice();
 
 		String lStrGender=zpRltDdoMapModel.getRadioGender();
@@ -205,7 +204,8 @@ public class CreateAdminOfficeServiceImpl implements CreateAdminOfficeService {
 			lstrDeptType=DeptCode.get(0).toString();
 
 		String lstrAdminDeptType=null;
-		objZpDDOOfficeMstDAOImpl.insertOrgDdoMst(lStrDdoCode, lStrDdoName, lStrDdoPersonalName, lLngPostId, gLngUserId, lStrLocCode, gLngPostId, lLngAdminDept.toString(),lstrDdoType,lstrDept_Code,lstrHOD_Code,lstrDeptType,messages,desginationId,lStrDesgnName,lStrDdoOfficeName);
+		objZpDDOOfficeMstDAOImpl.insertOrgDdoMst(lStrDdoCode, lStrDdoName, lStrDdoPersonalName, lLngPostId, gLngUserId, lStrLocCode, gLngPostId,
+				lLngAdminDept.toString(),lstrDdoType,lstrDept_Code,lstrHOD_Code,lstrDeptType,messages,desginationId,lStrDesgnName,lStrDdoOfficeName);
 
 		//String uniqeInstituteId=objZpDDOOfficeMstDAOImpl.generateUniqeInstituteId(lStrDdoCode,lLngDistrictCode.toString(), messages);
 		objZpDDOOfficeMstDAOImpl.insertMstDcpsDdoOffice(lStrDdoCode, lStrDdoOfficeName, lLngDistrictCode.toString(), Long.parseLong(lStrLocCode), gLngUserId, gLngPostId, messages);
@@ -366,8 +366,10 @@ public class CreateAdminOfficeServiceImpl implements CreateAdminOfficeService {
 		return createAdminOfficeRepo.findDeptByDistOfcCode(distOfcId);
 	}
 
+	
+
 	@Override
-	public String findLevel3DdoCode(String distOfcId) {
-		return createAdminOfficeRepo.findLevel3DdoCode(distOfcId);
+	public String findLevel3DdoCode(String distOfcId, String reptDdoCode) {
+		return createAdminOfficeRepo.findLevel3DdoCode(distOfcId,reptDdoCode);
 	}
 }

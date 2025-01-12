@@ -233,14 +233,16 @@ public class CreateAdminOfficeRepoImpl implements CreateAdminOfficeRepo {
 		return resultList;
 	}
 
+	
 	@Override
-	public String findLevel3DdoCode(String distOfcId) {
+	public String findLevel3DdoCode(String distOfcId, String reptDdoCode) {
 		String ddoCode = null;
 		Session currentSession = entityManager.unwrap(Session.class);
 		StringBuffer sb = new StringBuffer();
-		sb.append("select DDO_CODE from ZP_LVL3_MST where"
-				+ " DIST_ID=(select  cast(DIST_CODE as integer) from ZP_ADMIN_OFFICE_DISTRICT_MPG where DIST_ID=" + distOfcId + ")");
-		Query query = currentSession.createNativeQuery(sb.toString());
+		//sb.append("select DDO_CODE from ZP_LVL3_MST where"
+			//	+ " DIST_ID=(select  cast(DIST_CODE as integer) from ZP_ADMIN_OFFICE_DISTRICT_MPG where DIST_ID=" + distOfcId + ")");
+		sb.append("select final_ddo_code from rlt_zp_ddo_map where rept_ddo_code='"+reptDdoCode+"' limit 1");
+		Query query = currentSession.createNativeQuery(sb.toString(),String.class);
 		ddoCode = query.getSingleResult().toString();
 		logger.info("level3ddocode" + ddoCode);
 		return ddoCode;

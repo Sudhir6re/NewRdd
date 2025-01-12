@@ -56,6 +56,18 @@ public class OrganisationDtlsModel {
 
 	private String bankCheaque;
 
-	private String DeptLetter;
+	private String deptLetter;
 
+    private String deptLocCode;
+    
+    private String hodLocCode;
+    
+    private String adminDeptName;
+    
+    private String fieldDeptName;
+    
+    
+    
+	
+	
 }

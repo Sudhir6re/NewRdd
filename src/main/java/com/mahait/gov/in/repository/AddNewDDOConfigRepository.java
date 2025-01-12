@@ -401,7 +401,7 @@ public class AddNewDDOConfigRepository {
 			lObjOrgDdoMst.setDdoPersonalName(lStrDdoPrsnlName);
 			lObjOrgDdoMst.setPostId(lLngPostId);
 			lObjOrgDdoMst.setLangId((short) 1);
-			lObjOrgDdoMst.setDeptLocCode(lstrDeptLocCode);
+			lObjOrgDdoMst.setDeptLocCode(lstrDept_Code);
 			lObjOrgDdoMst.setCreatedBy(lLngUserIdCrtd);
 			lObjOrgDdoMst.setCreatedByPost(lLngPostIdCrtd);
 			lObjOrgDdoMst.setCreatedDate(new Timestamp(new Date().getTime()));

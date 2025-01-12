@@ -153,7 +153,21 @@
 												th:data-ddocode="${zpRltDdoMapRlt[1]}"
 												th:data-srno="${rowStat.index}"> 3401002205 </a>
 										</span></td>
-										 	   <td><span th:text="${zpRltDdoMapRlt[2]}"></span> </td>
+										
+										
+										<td><span th:id="|${rowStat.index}${zpRltDdoMapRlt[2]}|">
+												<a href="#" class="ddoCode"
+												th:attr="data-target='${zpRltDdoMapRlt[2]}', data-index='${rowStat.index}'"
+												th:text="${zpRltDdoMapRlt[2]}"
+												th:data-ddocode="${zpRltDdoMapRlt[2]}"
+												th:data-srno="${rowStat.index}"> 3401002205 </a>
+										</span></td>
+										
+										
+										 	  <!--  <td><span th:text="${zpRltDdoMapRlt[2]}"></span> </td> -->
+										 	   
+										 	   
+										 	   
 							  <!-- <td><span th:text="${zpRltDdoMapRlt[3]}"></span> </td> -->
 										<td><span th:text="${zpRltDdoMapRlt[4]}"></span></td>
 										<!--    <td><span th:text="${zpRltDdoMapRlt[5]}"></span> -->

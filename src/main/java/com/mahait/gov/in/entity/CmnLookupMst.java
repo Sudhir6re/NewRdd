@@ -51,9 +51,9 @@ public class CmnLookupMst implements Serializable {
     @Column(name = "order_no", nullable = false)
     private Long orderNo;
 
-    /*@ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lang_id", nullable = false)
-    private CmnLanguageMst cmnLanguageMst;*/
+    private CmnLanguageMst cmnLanguageMst;
 
 
     @Column(name = "created_date", nullable = false)

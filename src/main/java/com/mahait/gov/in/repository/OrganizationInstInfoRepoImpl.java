@@ -1,6 +1,7 @@
 package com.mahait.gov.in.repository;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -69,5 +70,29 @@ public class OrganizationInstInfoRepoImpl implements OrganizationInstInfoRepo {
 	public void updateorgInstituteInfo(OrgDdoMst objForSave) {
 		Session currentSession = manager.unwrap(Session.class);
 		currentSession.update(objForSave);
+	}
+
+
+
+	@Override
+	public String getDeptNameByLocCode(String locCode, String language) {
+		String LocName = "";
+		
+		Long langId=1l;
+		if(language.equals("en")) {
+			langId=1l;
+		}
+		Session currentSession = manager.unwrap(Session.class);
+			Query sqlQuery = currentSession.createNativeQuery("select Loc_name from cmn_location_mst where location_code = '" + locCode + "' and LANG_ID=" + langId);
+			List resList = sqlQuery.list();
+			if (resList != null && resList.size() > 0) {
+				Iterator it = resList.iterator();
+				Object tuple = null;
+				while (it.hasNext()) {
+					tuple = (Object) it.next();
+					LocName = tuple.toString();
+				}
+			}
+		return LocName;
 	}
 }

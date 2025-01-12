@@ -35,7 +35,7 @@ public interface CreateAdminOfficeRepo {
 
 	List<Object[]> findDeptByDistOfcCode(String distOfcId);
 
-	String findLevel3DdoCode(String distOfcId);
+	String findLevel3DdoCode(String distOfcId, String reptDdoCode);
 
 
 }

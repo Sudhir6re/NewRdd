@@ -19,5 +19,7 @@ public interface OrganisationDtlsService {
 
 	int updateddoOfficeDetails(OrganisationDtlsModel organisationDtlsModel,OrgUserMst messages);
 
+	String getDeptNameByLocCode(String deptLocCode, String language);
+
 
 }

@@ -43,7 +43,7 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authorize -> authorize
-                    .requestMatchers( "/","/i18n/*","/lib/**","/register", "/user/login","/user/logOut", "/css/**", "/js/**","/images/**","/pdf/**").permitAll()
+                    .requestMatchers("/","/i18n/*","/lib/**","/register", "/user/login","/user/logOut", "/css/**", "/js/**","/images/**","/pdf/**").permitAll()
                     .requestMatchers("/mdc/**").hasRole("MDC")
                     .requestMatchers("/user/**").permitAll()
                     .requestMatchers("/employee/**").hasRole("USER")

@@ -67,6 +67,9 @@ public class OrganisationDtlsServiceImpl implements OrganisationDtlsService {
 			obj.setAccountNo(orgInfo.getAccountNo());
 			obj.setRemarks(orgInfo.getRemarks());
 			obj.setInstituteType(orgInfo.getInstituteTypeId());
+			
+			obj.setDeptLocCode(orgInfo.getDeptLocCode());
+			obj.setHodLocCode(orgInfo.getHodLocCode());
 			if (orgInfo.getBankPassbook() != null)
 				obj.setBankPassbook(orgInfo.getBankPassbook());
 			else
@@ -220,4 +223,10 @@ public class OrganisationDtlsServiceImpl implements OrganisationDtlsService {
 		return 10;
 	}
 
+	@Override
+	public String getDeptNameByLocCode(String deptLocCode, String language) {
+		return organizationInstInfoRepo.getDeptNameByLocCode(deptLocCode,language);
+	}
+
+	
 }

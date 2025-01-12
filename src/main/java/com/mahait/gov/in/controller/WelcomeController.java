@@ -6,9 +6,9 @@ import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.mahait.gov.in.service.CommonHomeMethodsService;
 import com.mahait.gov.in.service.UserLoginHistryService;
@@ -21,7 +21,7 @@ public class WelcomeController {
 	
 	
 
-@RestController
+@Controller
 //@EnableJdbcHttpSession
 @RequestMapping("/")
 public class TopicController extends BaseController {
@@ -42,12 +42,11 @@ public class TopicController extends BaseController {
 	UserLoginHistryService userLoginHistryService;
 
 	@RequestMapping("/")
-	public ModelAndView login(Locale locale, HttpServletRequest request) throws UnknownHostException {
+	public String login(Locale locale, HttpServletRequest request,Model model ) throws UnknownHostException {
 		int id = 1;
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("lstApplicationAdminTable", welcomeService.findApplicationOnebyId(id));
-		modelAndView.setViewName("custom-login");
-
+		//ModelAndView modelAndView = new ModelAndView();
+		model.addAttribute("lstApplicationAdminTable", welcomeService.findApplicationOnebyId(id));
+	//	model.addAttribute("custom-login");
 		// Port
 		String portNumber = environment.getProperty("server.port");
 		String hostAddress = InetAddress.getLocalHost().getHostAddress();
@@ -55,7 +54,7 @@ public class TopicController extends BaseController {
 		InetAddress.getLoopbackAddress().getHostAddress();
 		InetAddress.getLoopbackAddress().getHostName();
 
-		return modelAndView;
+		return "custom-login";
 	}
 
 }

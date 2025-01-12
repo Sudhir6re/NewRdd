@@ -310,20 +310,7 @@
 										readonly="readonly" name="txtFieldDept"
 										value="DIRECTORATE OF HIGHER EDUCATION"> <!-- change size from 50% to 40% by Pratik 02-08-23 --></td>
 								</tr>
-								<tr>
-									<td id="instituteType1" width="15%" align="left">Institute
-										Type</td>
-									<td width="35%"><select name="instituteType"
-										 id="instituteType"
-										style="width: 360px">
-											<option th:value="0"
-												th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
-											<option th:each="varPay : ${lstInstituteType}"
-												th:value="${varPay.instituteTypeId} "
-												th:text="${language=='mh' ? varPay.instituteTypeName : varPay.instituteTypeName}"></option>
-									</select></td>
-									<td colspan="2" width="50%">&nbsp;</td>
-								</tr>
+							
 							</tbody>
 						</table>
 					</fieldset>
@@ -441,6 +428,23 @@
 							</tbody>
 						</table>
 					</fieldset>
+					
+					<br>
+					<fieldset class="tabstyle">
+					<legend> Verify Documents </legend>
+					<p>
+						<input type="checkbox"  th:field="*{bankPassbook}" name="bankPass" id="bankPass" />&nbsp;&nbsp;&nbsp;<label>Bank
+							Passbook</label>
+					</p>
+					<p>
+						<input type="checkbox"  th:field="*{bankCheaque}" name="bankCheque" id="bankCheque" />&nbsp;&nbsp;&nbsp;<label>Bank
+							Cheque</label>
+					</p>
+					<p>
+						<input type="checkbox"  th:field="*{deptLetter}" name="deptLetter" id="deptLetter" />&nbsp;&nbsp;&nbsp;<label>Department
+							Letter</label>
+					</p>
+				</fieldset>
 			
 			
 			<!-- ******** -->
