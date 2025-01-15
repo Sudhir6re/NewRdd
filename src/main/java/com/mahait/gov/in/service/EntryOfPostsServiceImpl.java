@@ -618,9 +618,8 @@ public class EntryOfPostsServiceImpl implements EntryOfPostsService {
 	}
 
 	@Override
-	public List getPostNameForDisplay(String valueOf, String lPostName, String psrNo, String billNo, String dsgn,
-			String ddoCode1) {
-		List postNameList = entryOfPostsRepo.getPostNameForDisplay(valueOf, lPostName, psrNo, billNo, dsgn, ddoCode1);
+	public List getPostNameForDisplay(String ddoCode) {
+		List postNameList = entryOfPostsRepo.getPostNameForDisplay(ddoCode);
 
 		List post = new ArrayList();
 		String empFullName = "";
@@ -787,6 +786,16 @@ public class EntryOfPostsServiceImpl implements EntryOfPostsService {
 	@Override
 	public HrPayOrderMst findOrderMasterById(long oldGrOrderId) {
 		return entryOfPostsRepo.findOrderMasterById(oldGrOrderId);
+	}
+
+	@Override
+	public List<Object[]> findLevelDdoCodeByDistrict(String districtId, OrgUserMst messages) {
+		return entryOfPostsRepo.findLevelDdoCodeByDistrict(districtId,messages);
+	}
+
+	@Override
+	public List<MstDesignationEntity> findAllDesignation() {
+		return entryOfPostsRepo.findAllDesignation();
 	}
 
 }

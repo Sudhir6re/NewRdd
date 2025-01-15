@@ -13,6 +13,7 @@ import com.mahait.gov.in.entity.MstDesignationEntity;
 import com.mahait.gov.in.entity.OrgDdoMst;
 import com.mahait.gov.in.entity.OrgPostDetailsRlt;
 import com.mahait.gov.in.entity.OrgPostMst;
+import com.mahait.gov.in.entity.OrgUserMst;
 import com.mahait.gov.in.entity.SubjectPostMpg;
 
 public interface EntryOfPostsRepo {
@@ -80,8 +81,7 @@ public interface EntryOfPostsRepo {
 
 	List<HrPayOrderMst> findGrOrderDetails(Long grOrderId);
 
-	List getPostNameForDisplay(String valueOf, String lPostName, String psrNo, String billNo, String dsgn,
-			String ddoCode1);
+	List getPostNameForDisplay(String valueOf);
 
 	OrgPostMst findPostObj(Long postId);
 
@@ -96,5 +96,9 @@ public interface EntryOfPostsRepo {
 	List findLevel1DddoByDdoCode(String ddoCode);
 
 	HrPayOrderMst findOrderMasterById(long oldGrOrderId);
+
+	List<Object[]> findLevelDdoCodeByDistrict(String districtId, OrgUserMst messages);
+
+	List<MstDesignationEntity> findAllDesignation();
 
 }

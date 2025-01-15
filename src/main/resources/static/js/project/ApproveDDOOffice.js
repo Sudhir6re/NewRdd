@@ -152,6 +152,10 @@ $(".officeName").click(function() {
 						$(this).trigger('change');
 					}
 				});
+				
+				
+				
+				$('html, body').animate({scrollTop : $("#txtNameOfOffice").offset().top},2000);
 
 			}
 		});

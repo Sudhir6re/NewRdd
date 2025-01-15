@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mahait.gov.in.common.StringHelperUtils;
+import com.mahait.gov.in.entity.DdoOffice;
 import com.mahait.gov.in.entity.HrPayOrderMst;
 import com.mahait.gov.in.entity.MstDcpsBillGroup;
 import com.mahait.gov.in.entity.MstDesignationEntity;
@@ -32,11 +33,12 @@ import com.mahait.gov.in.repository.OrgDdoMstRepository;
 import com.mahait.gov.in.repository.OrgPostDetailsRltRepository;
 import com.mahait.gov.in.response.MessageResponse;
 import com.mahait.gov.in.service.EntryOfPostsService;
+import com.mahait.gov.in.service.LocationMasterService;
 import com.mahait.gov.in.service.MstSchemeService;
 
 import jakarta.servlet.http.HttpSession;
 
-@RequestMapping("/ddo")
+@RequestMapping(value={"/ddo","/mdp"})
 @Controller
 public class EntryOfPostsController extends BaseController {
 
@@ -51,9 +53,13 @@ public class EntryOfPostsController extends BaseController {
 
 	@Autowired
 	MstSchemeService mstSchemeService;
+	
+	
+	@Autowired
+	LocationMasterService locationMasterService;
 
 	@GetMapping("/entryOfPosts")
-	public String entryOfPosts(Model model, Locale locale, HttpSession session) {
+	public String entryOfPosts(Model model, Locale locale, HttpSession session,@ModelAttribute("postEntryModel") PostEntryModel postEntryModel) {
 
 		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");
 
@@ -69,46 +75,45 @@ public class EntryOfPostsController extends BaseController {
 			// model.addAttribute("messageResponse", messageResponse);
 			model.addAttribute("message", messageResponse.getResponse());
 		}
+		
+		model.addAttribute("lstDistrict", commonHomeMethodsService.lstGetAllDistrict());
+		model.addAttribute("postEntryModel",postEntryModel);
 
-		if (session.getAttribute("locationId") != null) {
-			langId = 1l;
-			locId = Long.parseLong((String) session.getAttribute("locationId"));
-			//loggedInPostId = (BigInteger) session.getAttribute("loggedInPost");
-			
-			Long loggedInPost = (Long) session.getAttribute("loggedInPost");
-			 loggedInPostId = BigInteger.valueOf(loggedInPost);
-
-			List<OrgDdoMst> ddoCodeList = entryOfPostsService.getDDOCodeByLoggedInlocId(locId);
-
-			model.addAttribute("filterDdoCodes", ddoCodeList);
-
-			Long lLngFieldDept = Long.parseLong(ddoCodeList.get(0).getHodLocCode());
-			List<MstDesignationEntity> desgList = entryOfPostsService.getActiveDesig(lLngFieldDept);
-
-			model.addAttribute("Designation", desgList);
-
-			List billList = entryOfPostsService.getAllBillsFromLocation(locId);
-			model.addAttribute("billList", billList);
-
-			if (ddoCodeList.size() > 0)
-				ddoCode = ddoCodeList.get(0).getDdoCode();
-
-			List filterDdoCode = entryOfPostsService.findLevel1DddoByDdoCode(ddoCode);
-
-			model.addAttribute("ddoCode", ddoCode);
-			model.addAttribute("filterDdoCode", filterDdoCode);
-
-			String lPostName = "";
-			String srNo = "";
-			String PsrNo = "";
-			String BillNo = "";
-			String Dsgn = "";
-			String ddoCode1 = "";
-			List getPostNameForDisplay = entryOfPostsService.getPostNameForDisplay(messages.getDdoCode(), lPostName,
-					PsrNo, BillNo, Dsgn, ddoCode1);
-
-			model.addAttribute("getPostNameForDisplay", getPostNameForDisplay);
-		}
+		/*
+		 * if (session.getAttribute("locationId") != null) { langId = 1l; locId =
+		 * Long.parseLong((String) session.getAttribute("locationId")); //loggedInPostId
+		 * = (BigInteger) session.getAttribute("loggedInPost");
+		 * 
+		 * Long loggedInPost = (Long) session.getAttribute("loggedInPost");
+		 * loggedInPostId = BigInteger.valueOf(loggedInPost);
+		 * 
+		 * List<OrgDdoMst> ddoCodeList =
+		 * entryOfPostsService.getDDOCodeByLoggedInlocId(locId);
+		 * 
+		 * model.addAttribute("filterDdoCodes", ddoCodeList);
+		 * 
+		 * Long lLngFieldDept = Long.parseLong(ddoCodeList.get(0).getHodLocCode());
+		 * List<MstDesignationEntity> desgList =
+		 * entryOfPostsService.getActiveDesig(lLngFieldDept);
+		 * 
+		 * model.addAttribute("Designation", desgList);
+		 * 
+		 * List billList = entryOfPostsService.getAllBillsFromLocation(locId);
+		 * model.addAttribute("billList", billList);
+		 * 
+		 * if (ddoCodeList.size() > 0) ddoCode = ddoCodeList.get(0).getDdoCode();
+		 * 
+		 * List filterDdoCode = entryOfPostsService.findLevel1DddoByDdoCode(ddoCode);
+		 * 
+		 * model.addAttribute("ddoCode", ddoCode); model.addAttribute("filterDdoCode",
+		 * filterDdoCode);
+		 * 
+		 * String lPostName = ""; String srNo = ""; String PsrNo = ""; String BillNo =
+		 * ""; String Dsgn = ""; String ddoCode1 = ""; List getPostNameForDisplay =
+		 * entryOfPostsService.getPostNameForDisplay(ddoCode);
+		 * 
+		 * model.addAttribute("getPostNameForDisplay", getPostNameForDisplay); }
+		 */
 
 		addMenuAndSubMenu(model, messages);
 		return "/views/entry-of-posts";
@@ -125,7 +130,12 @@ public class EntryOfPostsController extends BaseController {
 		OrgDdoMst ddoMst = null;
 		String ddoCode = null;
 		List locationList = null;
+		model.addAttribute("lstDistrict", commonHomeMethodsService.lstGetAllDistrict());
+		
+		List<MstDesignationEntity> desgList = entryOfPostsService.findAllDesignation();
 
+		model.addAttribute("Designation", desgList);
+		
 		if (session.getAttribute("locationId") != null) {
 
 			langId = 1l;
@@ -138,7 +148,7 @@ public class EntryOfPostsController extends BaseController {
 			String ddoSelected = "";
 			List DDOdtls = entryOfPostsService.getSubDDOsOffc(loggedInPostId, talukaId, ddoSelected);
 			List<OrgDdoMst> ddoCodeList = entryOfPostsService.getDDOCodeByLoggedInlocId(locId);
-
+			model.addAttribute("lstDistrict", commonHomeMethodsService.lstGetAllDistrict());
 			if (ddoCodeList.size() > 0)
 				ddoCode = ddoCodeList.get(0).getDdoCode();
 
@@ -155,7 +165,6 @@ public class EntryOfPostsController extends BaseController {
 			List billList = entryOfPostsService.getAllBillsFromLocation(locId);
 			List officeList = entryOfPostsService.getAllOfficesFromDDO(ddoCode);
 
-			List subOfficeList = entryOfPostsService.getSubOfficesFromDDONew(loggedInPostId.longValue());
 
 			// code to find the district
 			String districtID = entryOfPostsService.districtName(ddoCode);
@@ -167,13 +176,11 @@ public class EntryOfPostsController extends BaseController {
 
 			Long lLngFieldDept = Long.parseLong(ddoCodeList.get(0).getHodLocCode());
 
-			List<MstDesignationEntity> desgList = entryOfPostsService.getActiveDesig(lLngFieldDept);
-
-			model.addAttribute("Designation", desgList);
+		
 
 			List<Object[]> subList = entryOfPostsService.getSubjectList();
 			model.addAttribute("SubjectList", subList);
-			model.addAttribute("subOfficeList", subOfficeList);
+		//	model.addAttribute("subOfficeList", subOfficeList);
 			model.addAttribute("orderList", orderList);
 			model.addAttribute("billList", billList);
 			model.addAttribute("langId", Long.valueOf(langId));
@@ -268,7 +275,7 @@ public class EntryOfPostsController extends BaseController {
 			messageResponse.setStatusCode(200);
 			redirectAttribute.addFlashAttribute("messageResponse", messageResponse);
 			postEntryModel = new PostEntryModel();
-			return "redirect:/ddo/entryOfPosts";
+			return "redirect:/mdp/entryOfPosts";
 
 		} else {
 			return "redirect:/user/login";
@@ -320,14 +327,8 @@ public class EntryOfPostsController extends BaseController {
 
 	@RequestMapping(value = "/searchPostDetails", consumes = {
 			"application/json" }, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List> searchPostDetails(@RequestParam String lPostName, @RequestParam String BillNo,
-			@RequestParam String ddoCode1, @RequestParam String Dsgn, HttpSession session) {
-
-		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");
-		Long locId = Long.parseLong((String) session.getAttribute("locationId"));
-		String PsrNo = "";
-		List getPostNameForDisplay = entryOfPostsService.getPostNameForDisplay(messages.getDdoCode(), lPostName, PsrNo,
-				BillNo, Dsgn, ddoCode1);
+	public ResponseEntity<List> searchPostDetails(@RequestParam String ddoCode,HttpSession session) {
+		List getPostNameForDisplay = entryOfPostsService.getPostNameForDisplay(ddoCode);
 		return ResponseEntity.ok(getPostNameForDisplay);
 	}
 
@@ -349,5 +350,25 @@ public class EntryOfPostsController extends BaseController {
 		List<MstDcpsBillGroup> lstMstDcpsBillGroup = mstSchemeService.findAllMpgSchemeBillGroupByDDOCode(ddoCode, 0);
 		return ResponseEntity.ok(lstMstDcpsBillGroup);
 	}
+	
+	@RequestMapping(value = "/findLevelDdoCodeByDistrict/{districtId}", consumes = {
+	"application/json" }, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Object[]>> findLevelDdoCodeByDistrict(@PathVariable String districtId,
+			HttpSession session) {
+		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");
+		List<Object[]> lstLevel1Ddo = entryOfPostsService.findLevelDdoCodeByDistrict(districtId, messages);
+		return ResponseEntity.ok(lstLevel1Ddo);
+	}
+	@RequestMapping(value = "/getAllOfficesFromDDO/{ddoCode}", consumes = {
+	"application/json" }, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<DdoOffice>> getAllOfficesFromDDO(@PathVariable String ddoCode,HttpSession session) {
+		List<DdoOffice> lstLevel1Ddo = entryOfPostsService.getAllOfficesFromDDO(ddoCode);
+		return ResponseEntity.ok(lstLevel1Ddo);
+	}
+	
+	
+	
+	
+	
 
 }

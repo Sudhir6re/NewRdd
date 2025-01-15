@@ -26,26 +26,40 @@
 
 		<div class="formMainwithNoborTb container">
 
-		<!-- 	<div th:if="${messageResponse!=null}"
+			<!-- 	<div th:if="${messageResponse!=null}"
 				th:class="${messageResponse.style}">
 				<strong><span th:utext="${messageResponse.response}"></span></strong>
 			</div> -->
 
-			<form method="post" action="" name="frmAdminCrtPost"
+			<form method="post" action="" name="frmAdminCrtPost" th:object="${postEntryModel}"
 				enctype="multipart/form-data">
 				<fieldset>
 					<legend>View Post Details </legend>
 				</fieldset>
 				<div id="tcontent1">
-				
-				<input type="hidden" name="message" id="message" th:value="${message}" />
+
+					<input type="hidden" name="message" id="message"
+						th:value="${message}" />
 
 					<table class="table bor-0">
 
 						<tbody>
+
 							<tr>
+								<td width="20%" align="left">District</td>
+								<td width="20%" align="left"><select name="districtId"
+									class="form-control" th:field="*{districtId}" id="districtId">
+										<option th:value="0"
+											th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+										<option th:each="varPay : ${lstDistrict}"
+											th:value="${varPay.districtId} "
+											th:text="${language=='mh' ? varPay.districtName : varPay.districtName}"></option>
+								</select>
+								</td>
+								
 								<td width="20%" align="right"><b>DDO Code</b></td>
-								<td width="20%"><select name="cmbAsstDDO" id="cmbAsstDDO">
+								<td width="20%">
+								<select name="ddoCode" id="ddoCode">
 										<option title="Select" value="-1">Select</option>
 										<option th:each="filterDdoCode : ${filterDdoCode}"
 											th:value="${filterDdoCode[0]}"
@@ -53,31 +67,10 @@
 										</option>
 								</select></td>
 							</tr>
+
 							<tr>
-								<td width="20%" align="right"><b><label
-										class="captionTag" id="admin.designation">Designation</label></b></td>
-								<td width="20%"><select name="designationCmb"
-									id="designationCmb" class="selecttag">
-										<option value="-1">Select</option>
-										<option th:each="desi : ${Designation}"
-											th:value="${desi.desgination}" th:text="${desi.desgination}">
-										</option>
-								</select></td>
-								<td width="20%" align="right"><b><label
-										class="captionTag" id="BillNo">Bill Group</label></b></td>
-								<td width="20%"><select name="billCmb" id="billCmb">
-										<option value="-1">Select</option>
-										<option th:each="bill : ${billList}"
-											th:value="${bill.description}" th:title="${bill.description}"
-											th:text="${bill.description}"></option>
-								</select></td>
-								<td><input name="Search" class="btn" value="Search"
-									type="button" id="Search"></td>
-							</tr>
-							<tr>
-								<td colspan="5" align="center"><br />
-								<a th:href="@{/ddo/addPosts}" class="btn"> Add New Entry </a> <a
-									th:href="@{/ddo/updatePosts}" class="btn">Renewal Of Post</a></td>
+								<td colspan="5" align="center"><br /> <a
+									th:href="@{/mdp/addPosts}" class="btn"> Add New Entry </a> <!-- 	<a th:href="@{/ddo/updatePosts}" class="btn">Renewal Of Post</a></td> -->
 							</tr>
 						</tbody>
 					</table>

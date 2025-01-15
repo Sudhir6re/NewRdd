@@ -1,8 +1,11 @@
 	var context ="";
+	var ddo ="";
+	
+	
+	
 $(document).ready(function() {
 	context = $("#appRootPath").val();
-	
-	
+	ddo=getUserUrl();
 	
 	var message =$("#message").val(); 
 	if (message != ''  && $("#message").val()!=null  && $("#message").val()!=undefined ) {
@@ -10,13 +13,16 @@ $(document).ready(function() {
 	}
 	
 	
-	var dataTable= $("#postDetails").DataTable();
+	
 	
 	    if ($('#cmbAsstDDO').length) {
 	        $('#cmbAsstDDO').select2();
 	    }
 	    if ($('#ddoCode').length) {
 	        $('#ddoCode').select2();
+	    }
+	    if ($('#districtId').length) {
+	        $('#districtId').select2();
 	    }
 	    
 	    
@@ -48,11 +54,6 @@ $(document).ready(function() {
 	    
 	    
 	    
-	    
-	    
-	    
-	    
-	    
 	
 	function checkRenewalDataBeforeSubmit()
 	{
@@ -71,13 +72,15 @@ $(document).ready(function() {
 		}
 	}
 
+	
+	
 
 $("#orderCmb").change(function(){
 	var context = $("#appRootPath").val();
 	var grOrderId = $("#orderCmb").val();
 	$.ajax({
 	      type: "POST",
-	      url: context+"/ddo/findGrOrderByGrOrderId/"+grOrderId,
+	      url: context+ddo+"findGrOrderByGrOrderId/"+grOrderId,
 	      async: false,
 	      contentType:'application/json',
 	      error: function(data){
@@ -121,7 +124,7 @@ $("#cmbNewOrder").change(function(){
 	var grOrderId = $("#cmbNewOrder").val();
 	$.ajax({
 	      type: "POST",
-	      url: context+"/ddo/findGrOrderByGrOrderId/"+grOrderId,
+	      url: context+ddo+"findGrOrderByGrOrderId/"+grOrderId,
 	      async: false,
 	      contentType:'application/json',
 	      error: function(data){
@@ -153,7 +156,7 @@ $("#oldGrOrderId").change(function(){
 	var grOrderId = $("#oldGrOrderId").val();
 	$.ajax({
 	      type: "POST",
-	      url: context+"/ddo/findGrOrderByGrOrderId/"+grOrderId,
+	      url: context+ddo+"findGrOrderByGrOrderId/"+grOrderId,
 	      async: false,
 	      contentType:'application/json',
 	      error: function(data){
@@ -179,7 +182,7 @@ $("#oldGrOrderId").change(function(){
 
 
 
-
+/*
 $("#btnFilter").click(function(){
 	 var ddoCode1=$("#cmbAsstDDO").val();
 	 var Dsgn=$("#designationCmb").val();
@@ -191,7 +194,7 @@ $("#btnFilter").click(function(){
 		 // $("#loaderMainNew").show();
 			$.ajax({
 				type : "GET",
-			    url: context+"/ddo/searchPostDetails",
+			    url: context+ddo+"searchPostDetails",
 				async : true,
 				   data: { ddoCode1: ddoCode1 ,BillNo:BillNo,Dsgn:Dsgn,lPostName:""},
 				contentType : 'application/json',
@@ -226,8 +229,8 @@ $("#btnFilter").click(function(){
 			});
 	}
  });
-
-
+*/
+/*
 $("#Search").click(function(){
 	 var ddoCode1=$("#cmbAsstDDO").val();
 	 var Dsgn=$("#designationCmb").val();
@@ -243,7 +246,7 @@ $("#Search").click(function(){
 		 // $("#loaderMainNew").show();
 			$.ajax({
 				type : "GET",
-			    url: context+"/ddo/searchPostDetails",
+			    url: context+ddo+"searchPostDetails",
 				async : true,
 				   data: { ddoCode1: ddoCode1 ,BillNo:BillNo,Dsgn:Dsgn,lPostName:""},
 				contentType : 'application/json',
@@ -282,12 +285,12 @@ $("#Search").click(function(){
 							}
 							// Redraw the DataTable to display the updated data
 							dataTable.draw();
-							/*// dataTable.fnClearTable();
+							// dataTable.fnClearTable();
 							 dataTable.clear();
 							for (var i = 0; i < data.length; i++) {
 								dataTable.fnAddData([j,data[i].empFullName,data[i].postname,data[i].postType,data[i].dsgnname,data[i].billNo]);
 								 j++;
-							}*/
+							}
 						}
 						if(data.length==0){
 							tablePost.fnClearTable();
@@ -296,11 +299,11 @@ $("#Search").click(function(){
 				}
 			});
 	}
-});
+});*/
 
 
 
-
+/*
 $("#searchPostDetails").click(function(){
 	var tablePost= $("#tablePost").dataTable();
 	
@@ -310,7 +313,7 @@ $("#searchPostDetails").click(function(){
 		 // $("#loaderMainNew").show();
 			$.ajax({
 				type : "GET",
-			    url: context+"/ddo/searchPostDetails/"+orderId,
+			    url: context+ddo+"searchPostDetails/"+orderId,
 				async : true,
 				//   data: { oldGrOrderId: oldGrOrderId },
 				contentType : 'application/json',
@@ -331,6 +334,7 @@ $("#searchPostDetails").click(function(){
 						$("#loaderMainNew").hide();
 						j=1;
 						if(len>0){
+							var  dataTable= $("#postDetails").DataTable();
 							tablePost.fnClearTable();
 							for (var i = 0; i < data.length; i++) {
 								var input='<input type="checkbox" name="GroupCheck" id="GroupCheck1" value="'+data[i].orgPostMst.postId+'">';
@@ -347,7 +351,7 @@ $("#searchPostDetails").click(function(){
 			});
 	}
 });
-
+*/
 
 
 
@@ -474,7 +478,7 @@ $("#btnSave").click(function(e){
     });
     $('#postIdsToBeAttached').val(attachedValues.slice(0, -1));
 	
-	$("#renewPost").attr("action", context+"/ddo/renewPostEntry"); 
+	$("#renewPost").attr("action", context+ddo+"renewPostEntry"); 
 
 	if(attachedValues==''){
 		e.preventDefault();
@@ -488,22 +492,142 @@ $("#btnSave").click(function(e){
 
 
 
-$('#cmbAsstDDO').on('change', function() {
-	var ddoCode=$(this).val();
-	if(ddoCode=="-1"){
+function postDetails() {
+	var ddoCode=$('#ddoCode').val();
+	 
+	if(ddoCode!='' && ddoCode!="0"){
+			$.ajax({
+				type : "GET",
+			    url: context+ddo+"searchPostDetails",
+				async : true,
+				   data: { ddoCode: ddoCode},
+				contentType : 'application/json',
+				error : function(data) {
+					 console.log(data);
+					 $("#loaderMainNew").hide();
+				},
+				beforeSend : function(){
+					$( "#loaderMainNew").show();
+					},
+				complete : function(data){
+					$( "#loaderMainNew").hide();
+				},	
+				success : function(data) {
+					 console.log(data);
+					 $("#loaderMainNew").hide();
+					var len = data.length;
+						$("#loaderMainNew").hide();
+						j=1;
+						if(len>0){
+							var  dataTable= $("#postDetails").DataTable();
+						 dataTable.clear();
+							for (var i = 0; i < data.length; i++) {
+								  dataTable.row.add([j,data[i].empFullName,data[i].postname,data[i].postType,data[i].dsgnname,data[i].ddoCode,data[i].billNo]);
+								 j++;
+							}
+							dataTable.draw();  // Redraw the table
+						}
+						if(data.length==0){
+							tablePost.fnClearTable();
+							swal("No data found");
+						}
+				}
+			});
+	}
+}
+	
+
+
+function getAllOfficesFromDDO() {
+	var ddoCode=$('#ddoCode').val();
+	 
+	if(ddoCode!='' && ddoCode!="0"){
+			$.ajax({
+				type : "GET",
+			    url: context+ddo+"getAllOfficesFromDDO/"+ddoCode,
+				async : true,
+				//   data: { ddoCode: ddoCode},
+				contentType : 'application/json',
+				error : function(data) {
+					 console.log(data);
+					 $("#loaderMainNew").hide();
+				},
+				beforeSend : function(){
+					$( "#loaderMainNew").show();
+					},
+				complete : function(data){
+					$( "#loaderMainNew").hide();
+				},	
+				success : function(data) {
+					 console.log(data);
+					 $("#loaderMainNew").hide();
+					var len = data.length;
+						$("#loaderMainNew").hide();
+						j=1;
+						if(len>0){
+							for (var i = 0; i < data.length; i++) {
+								$('#officeCmb').append('<option value="' + data[i].dcpsDdoOfficeIdPk + '">' + data[i].dcpsDdoOfficeName + '</option>');
+							}
+						}
+				}
+			});
+	}
+}
+	
+
+
+function getAllGrOrder() {
+	var ddoCode=$('#ddoCode').val();
+	 
+	if(ddoCode!='' && ddoCode!="0"){
+			$.ajax({
+				type : "GET",
+			    url: context+ddo+"findGrOrderByGrOrderByDdoCode/"+ddoCode,
+				async : true,
+				 // data: { ddoCode: ddoCode},
+				contentType : 'application/json',
+				error : function(data) {
+					 console.log(data);
+					 $("#loaderMainNew").hide();
+				},
+				beforeSend : function(){
+					$( "#loaderMainNew").show();
+					},
+				complete : function(data){
+					$( "#loaderMainNew").hide();
+				},	
+				success : function(data) {
+					 console.log(data);
+					 $("#loaderMainNew").hide();
+					var len = data.length;
+						$("#loaderMainNew").hide();
+						j=1;
+						if(len>0){
+						 dataTable.clear();
+							for (var i = 0; i < data.length; i++) {
+								$('#officeCmb').append('<option value="' + data[i].orderId + '">' + data[i].orderName + '</option>');
+							}
+						}
+				}
+			});
+	}
+}
+
+
+
+
+	/*if(ddoCode=="-1"){
 		dataTable.columns().search('').draw();
 	}else{
 		dataTable.column(5).search(ddoCode).draw(); 
-	}
+	}*/
 	
-	
-	if ($('#billCmb').length) {
+/*	if ($('#billCmb').length) {
 		fetchBillGroup();
-	}
+	}*/
 	
-});
 
-
+/*
 $('#designationCmb').on('change', function() {
 	var designation=$(this).val();
 	if(designation=="-1"){
@@ -522,7 +646,7 @@ $('#BillNo').on('change', function() {
 		dataTable.column(6).search(BillNo).draw();
 	}
 });
-
+*/
 
 /*
 $('#billCmb').on('change', function() {
@@ -549,12 +673,68 @@ $('#SelectAll').on('change', function() {
 
 
 
+
+
+
 $(document).on('change', '#ddoCode', function() {
+	
+	if($('#postDetails').length){
+		postDetails();
+		}
+		
+		
+	if($('#officeCmb').length){
+		getAllOfficesFromDDO();
+		}
+		
+		
+		if($('#orderCmb').length){
+				getAllGrOrder();
+		}
+		
+		
+	
+	if($('#orderCmb').length){
+		var context = $("#appRootPath").val();
+			var ddoCode = $("#ddoCode").val();
+			$.ajax({
+			      type: "POST",
+			      url: context+ddo+"findGrOrderByGrOrderByDdoCode/"+ddoCode,
+			      async: false,
+			      contentType:'application/json',
+			      error: function(data){
+			    	  console.log(data);
+			      },
+				  	beforeSend : function(){
+						$( "#loaderMainNew").show();
+						},
+					complete : function(data){
+						$( "#loaderMainNew").hide();
+					},	
+			      success: function(data){
+			    		 var len = data.length;
+			    		 $('#orderCmb').empty();
+			    		 $( "#loaderMainNew").hide();
+			    		 $('#orderCmb').append($('<option  value="-1"></option>').text("Please Select")); 
+							if (len != 0) {
+									   for(var i=0;i<len;i++){
+										   $('#orderCmb').append('<option value="' + data[i].orderId + '">' + data[i].orderName + '</option>');
+						                }		
+						}
+							
+			     }
+			 });
+	}
+});
+
+
+
+$("#districtId").change(function(){
 	var context = $("#appRootPath").val();
-	var ddoCode = $("#ddoCode").val();
+	var districtId = $("#districtId").val();
 	$.ajax({
 	      type: "POST",
-	      url: context+"/ddo/findGrOrderByGrOrderByDdoCode/"+ddoCode,
+	      url: context+ddo+"findLevelDdoCodeByDistrict/"+districtId,
 	      async: false,
 	      contentType:'application/json',
 	      error: function(data){
@@ -573,21 +753,25 @@ $(document).on('change', '#ddoCode', function() {
 	    		 $('#orderCmb').append($('<option  value="-1"></option>').text("Please Select")); 
 					if (len != 0) {
 							   for(var i=0;i<len;i++){
-								   $('#orderCmb').append('<option value="' + data[i].orderId + '">' + data[i].orderName + '</option>');
+								$.each(data, function(index, row) {
+															   $('#ddoCode').append('<option value="' + row[0] + '">' + row[0]+"("+row[1] + ')</option>');
+											                });
 				                }		
 				}
 					
 	     }
 	 });
-});
+	});
 
 
+
+/*
 function fetchBillGroup(){
 	var context = $("#appRootPath").val();
 	var ddoCode = $("#cmbAsstDDO").val();
 	$.ajax({
 	      type: "POST",
-	      url: context+"/ddo/fetchBillGroupByDdoCode/"+ddoCode,
+	      url: context+ddo+"fetchBillGroupByDdoCode/"+ddoCode,
 	      async: false,
 	      contentType:'application/json',
 	      error: function(data){
@@ -612,7 +796,7 @@ function fetchBillGroup(){
 					
 	     }
 	 });
-}
+}*/
 
 });
 

@@ -54,8 +54,7 @@ public interface EntryOfPostsService {
 
 	List<HrPayOrderMst> findGrOrderDetails(Long grOrderId);
 
-	List getPostNameForDisplay(String valueOf, String lPostName, String psrNo, String billNo, String dsgn,
-			String ddoCode1);
+	List getPostNameForDisplay(String valueOf);
 
 	List searchPostListByGrOrderId(Long locId, Long orderId);
 
@@ -68,6 +67,10 @@ public interface EntryOfPostsService {
 	List findLevel1DddoByDdoCode(String ddoCode);
 
 	HrPayOrderMst findOrderMasterById(long oldGrOrderId);
+
+	List<Object[]> findLevelDdoCodeByDistrict(String districtId, OrgUserMst messages);
+
+	List<MstDesignationEntity> findAllDesignation();
 
 
 }

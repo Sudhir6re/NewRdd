@@ -54,7 +54,6 @@ public class OrganisationDtlsController   extends BaseController {
 
 		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");
 		// logger.info("For Testing Logger *****");
-		List<TopicModel> menuList = new ArrayList<>();
 		List<TopicModel> subMenuList = new ArrayList<>();
 
 		organisationDtlsModel = organisationDtlsService.lstOfficeDetails(messages.getDdoCode());
@@ -91,8 +90,6 @@ public class OrganisationDtlsController   extends BaseController {
 			model.addAttribute("lstAllBankBranchList",
 					commonHomeMethodsService.getBankBranch(organisationDtlsModel.getBankName()));
 		}
-		modelAndView.addObject("menuList", menuList);
-		modelAndView.addObject("subMenuList", subMenuList);
 		modelAndView.addObject("lstdesgination", lstdesgination);
 		modelAndView.addObject("lstDistrict", commonHomeMethodsService.lstGetAllDistrict());
 		// modelAndView.addObject("lstTaluka",

@@ -63,7 +63,9 @@
 													<option value="15">Maharashtra</option>
 											</select></td>
 											<td width="15%" align="left">District</td>
-											<td width="35%" align="left"><select name="cmbDist"
+											<td width="35%" align="left">
+											
+											<select name="cmbDist"
 												th:field="*{districtId}"
 												th:class="${organisationDtlsModel.districtId!=null}? 'readonly removeErrorFromDropdown' : 'removeErrorFromDropdown'"
 												id="cmbDist">

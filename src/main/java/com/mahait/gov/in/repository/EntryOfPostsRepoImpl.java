@@ -17,6 +17,7 @@ import com.mahait.gov.in.entity.MstDesignationEntity;
 import com.mahait.gov.in.entity.OrgDdoMst;
 import com.mahait.gov.in.entity.OrgPostDetailsRlt;
 import com.mahait.gov.in.entity.OrgPostMst;
+import com.mahait.gov.in.entity.OrgUserMst;
 import com.mahait.gov.in.entity.SubjectPostMpg;
 
 import jakarta.persistence.EntityManager;
@@ -344,8 +345,7 @@ public class EntryOfPostsRepoImpl implements EntryOfPostsRepo {
 	
 		
 	@Override
-	public List getPostNameForDisplay(String loginDddo, String lPostName, String PsrNo, String BillNo, String Dsgn,
-			String ddoSelected) {
+	public List getPostNameForDisplay(String ddoSelected) {
 		List postNameList = new ArrayList();
 		Session hibSession = getSession();
 		StringBuffer sb = new StringBuffer();
@@ -360,8 +360,12 @@ public class EntryOfPostsRepoImpl implements EntryOfPostsRepo {
 		sb.append(" inner join cmn_lookup_mst  h on h.lookup_id=b.post_type_lookup_id   ");
 		sb.append(" left join mst_dcps_bill_group  i on i.BILL_GROUP_ID=e.bill_no   ");
 		
-		sb.append("  where a.loc_id in (SELECT cast(location_code as bigint) FROM org_ddo_mst  a inner join rlt_zp_ddo_map b on a.ddo_code=b.zp_ddo_code" + 
-				"  where rept_ddo_code='"+loginDddo+"')");
+		/*
+		 * sb.
+		 * append("  where a.loc_id in (SELECT cast(location_code as bigint) FROM org_ddo_mst  a inner join rlt_zp_ddo_map b on a.ddo_code=b.zp_ddo_code"
+		 * + "  where rept_ddo_code='"+loginDddo+"')");
+		 */
+		
 		
 		if ((ddoSelected != null) && (ddoSelected != "")) {
 			sb.append(
@@ -369,13 +373,17 @@ public class EntryOfPostsRepoImpl implements EntryOfPostsRepo {
 							+ ddoSelected + "')");
 		} 
 		
-		if (BillNo != null && !BillNo.equals(""))
-			sb.append("  and i.BILL_GROUP_ID  = " + BillNo);
+		/*
+		 * if (BillNo != null && !BillNo.equals(""))
+		 * sb.append("  and i.BILL_GROUP_ID  = " + BillNo);
+		 */
 		
-	    if (Dsgn != null && !(Dsgn.trim()).equals(""))
-			sb.append("  and  upper(c.DESIGNATION_NAME) like  upper('%" + Dsgn + "%')  ");
-		else
-			sb.append("  and  upper(a.post_name) like  upper('%" + lPostName + "%') ");
+		/*
+		 * if (Dsgn != null && !(Dsgn.trim()).equals(""))
+		 * sb.append("  and  upper(c.DESIGNATION_NAME) like  upper('%" + Dsgn +
+		 * "%')  "); else sb.append("  and  upper(a.post_name) like  upper('%" +
+		 * lPostName + "%') ");
+		 */
 		
 		sb.append("   order by a.CREATED_DATE desc  ");
 
@@ -466,6 +474,29 @@ public class EntryOfPostsRepoImpl implements EntryOfPostsRepo {
 		Session hibSession = getSession();
 		HrPayOrderMst hrPayOrderMst=hibSession.find(HrPayOrderMst.class,oldGrOrderId);
 		return hrPayOrderMst;
+	}
+
+	@Override
+	public List<Object[]> findLevelDdoCodeByDistrict(String districtId, OrgUserMst messages) {
+		List orderMstList = null;
+		Session hibSession = getSession();
+		StringBuffer sb = new StringBuffer();
+    	sb.append("SELECT off.ddo_code,off.off_name FROM rlt_zp_ddo_map rlt ");
+    	sb.append(" inner join mst_dcps_ddo_office off on rlt.zp_ddo_code=off.ddo_code ");
+    	sb.append(" where upper(off.ddo_office) = 'YES' and off.DISTRICT='"+districtId+"'");
+		Query query = hibSession.createNativeQuery(sb.toString());
+		orderMstList = query.getResultList();
+		return orderMstList;
+	}
+
+	@Override
+	public List<MstDesignationEntity> findAllDesignation() {
+		Session session = getSession();
+		//String HQL_QUERY = "from MstDesignationEntity ";
+		String HQL_QUERY = "From MstDesignationEntity ";
+		Query query = session.createQuery(HQL_QUERY);
+		List resultList = query.getResultList();
+		return resultList;
 	}
 
 }

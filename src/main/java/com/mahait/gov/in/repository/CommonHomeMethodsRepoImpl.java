@@ -174,7 +174,7 @@ public class CommonHomeMethodsRepoImpl implements CommonHomeMethodsRepo {
 	@Override
 	public List<Object[]> lstGetAllDistrict() {
 		Session currentSession = manager.unwrap(Session.class);
-		String hql = "SELECT DISTRICT_ID,DISTRICT_NAME,DISTRICT_CODE FROM CMN_DISTRICT_MST where lang_id = 1";
+		String hql = "SELECT DISTRICT_ID,DISTRICT_NAME,DISTRICT_CODE FROM CMN_DISTRICT_MST where lang_id = 1  and state_id=15; ";
 
 		Query query = currentSession.createNativeQuery(hql);
 		return (List<Object[]>) query.list();

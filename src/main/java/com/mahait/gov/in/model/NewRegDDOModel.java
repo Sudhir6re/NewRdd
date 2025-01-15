@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import lombok.Data;
 
 @Data
@@ -54,6 +55,14 @@ public class NewRegDDOModel {
 	private String bankName;
 
 	private String branchName;
+	
+	
+    private String bankPassbook;
+    
+    private String  bankCheaque;
+    
+    private String deptLetter;
+	
 	
 	
 	public List<NewRegDDOModel> emplist=new ArrayList<>();

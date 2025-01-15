@@ -133,6 +133,12 @@ public class OrganisationDtlsServiceImpl implements OrganisationDtlsService {
 		orgInfo.setRemarks(organisationDtlsModel.getRemarks());
 		orgInfo.setInstituteTypeId(organisationDtlsModel.getInstituteType());
 		orgInfo.setDdoCode(organisationDtlsModel.getDdoCode());
+		
+		orgInfo.setBankPassbook(organisationDtlsModel.getBankPassbook());
+		orgInfo.setBankCheaque(organisationDtlsModel.getBankCheaque());
+		orgInfo.setDeptLetter(organisationDtlsModel.getDeptLetter());		
+	   
+		
 
 		// Long saveId=null;
 		organizationInstInfoRepo.updateorgInstituteInfo(orgInfo);

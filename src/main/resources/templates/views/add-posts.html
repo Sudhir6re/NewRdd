@@ -6,7 +6,7 @@
 <style type="text/css">
 table.table.bor-0 td:first-child, table.table.bor-0 td:nth-child(3) {
 	padding-left: 50px;
-} 
+}
 </style>
 </head>
 <body class="add-posts">
@@ -28,34 +28,34 @@ table.table.bor-0 td:first-child, table.table.bor-0 td:nth-child(3) {
 		</h3>
 
 		<div class="formMainwithNoborTb container">
-			<form method="post" th:action="@{/ddo/savePostEntry}"
+
+			<form method="post"
+				th:action="@{${levelRoleVal == 6 ? '/mdp/savePostEntry' : '/ddo/savePostEntryAlt'}}"
 				id="postEntryModel" name="postEntryModel"
 				th:object="${postEntryModel}" enctype="multipart/form-data">
-				<fieldset class="tabstyle hide">
+
+
+				<fieldset class="tabstyle">
 					<legend>
 						<b>Filter Institute</b>
 					</legend>
 					<table class="table bor-0 width-70">
 						<tbody>
 							<tr>
-								<td width="20%"><b>Taluka</b></td>
-								<td width="30%"><select th:field="*{cmbTaluka}"
-									id="cmbTaluka">
-										<option value="-1">Select</option>
-
-										<option th:each="taluka : ${talukaList}"
-											th:value="${taluka[0]}" th:text="${taluka[1]}"></option>
-
-
+								<td width="20%" align="left">District</td>
+								<td width="20%" align="left"><select name="districtId"
+									class="form-control" th:field="*{districtId}" id="districtId">
+										<option th:value="0"
+											th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
+										<option th:each="varPay : ${lstDistrict}"
+											th:value="${varPay.districtId} "
+											th:text="${language=='mh' ? varPay.districtName : varPay.districtName}"></option>
 								</select></td>
-								<td width="20%"><b>DDO Code/Office Name</b></td>
-								<td width="30%"><input type="text"
-									th:field="*{ddoCodeforFilter}" id="ddoCodeforFilter"></td>
 							</tr>
-							<tr>
-								<td colspan="4" ><input id="btnFilter"
-									class="buttontag" type="button" value="Filter" name="btnFilter"></td>
-							</tr>
+						<!-- 	<tr>
+								<td colspan="4"><input id="btnFilter" class="buttontag"
+									type="button" value="Filter" name="btnFilter"></td>
+							</tr> -->
 						</tbody>
 					</table>
 				</fieldset>
@@ -64,10 +64,10 @@ table.table.bor-0 td:first-child, table.table.bor-0 td:nth-child(3) {
 					<legend>Post Details</legend>
 				</fieldset>
 				<div id="tcontent1">
-					<table class="table bor-0">
+					<table class="table bor-0"  id="tableData">
 						<tbody>
 							<tr>
-								<td width="20%" ><b>Institute Name</b></td>
+								<td width="20%"><b>Leve 1 DDO Code</b></td>
 								<td width="25%"><select th:field="*{ddoCode}" id="ddoCode"
 									class="selecttag mandatorycontrol">
 										<option value="-1">Select</option>
@@ -76,120 +76,88 @@ table.table.bor-0 td:first-child, table.table.bor-0 td:nth-child(3) {
 										<!-- Populate options if necessary -->
 								</select> <label class="mandatoryindicator">*</label></td>
 
-								<td width="20%" ><b>Sub Field Department</b></td>
+
+								<td><label class="captionTag" id="SelectTypePost">Select
+										Type Of Post</label> &nbsp;</td>
+								<td><select th:field="*{postTypeCmbBox}"
+									id="postTypeCmbBox" class="selecttag mandatorycontrol">
+										<option value="-1">Select</option>
+										<option th:value="10001198130" th:text="Temporary"></option>
+										<option th:value="10001198129" th:text="Permanent"></option>
+										<option th:value="10001198155" th:text="Statutory"></option>
+								</select> <label class="mandatoryindicator">*</label></td>
+
+								<!-- 	<td width="20%" ><b>Sub Field Department</b></td>
 								<td width="25%"><select th:field="*{cmbSubFieldDept}"
 									id="cmbSubFieldDept">
 										<option value="-1">Select</option>
 										<option th:each="subOffice : ${subOfficeList}"
 											th:value="${subOffice[0]}" th:text="${subOffice[1]}"></option>
-								</select> <label class="mandatoryindicator">*</label></td>
+								</select> <label class="mandatoryindicator">*</label></td> -->
 							</tr>
 							<tr>
-								<td ><label class="captionTag"
-									id="SelectTypePost">Select Type Of Post</label> &nbsp;</td>
-								<td><select th:field="*{postTypeCmbBox}"
-									id="postTypeCmbBox" class="selecttag mandatorycontrol">
-										<option value="-1">Select </option>
-										<option th:value="10001198130" th:text="Temporary"></option>
-										<option th:value="10001198129" th:text="Permanent"></option>
-										<option th:value="10001198155" th:text="Statutory"></option>
-								</select> <label class="mandatoryindicator">*</label></td>
-								<td class="fieldLabel" ><b><label
-										class="captionTag" id="admin.designation">Designation</label></b></td>
+
+								<td class="fieldLabel"><b><label class="captionTag"
+										id="admin.designation">Designation</label></b></td>
 								<td class="fieldLabel"><select th:field="*{designationCmb}"
 									id="designationCmb" class="selecttag mandatorycontrol">
-										<option value="-1">Select </option>
+										<option value="-1">Select</option>
 										<option th:each="desi : ${Designation}"
 											th:value="${desi.desginationCode}"
 											th:text="${desi.desgination}">
 											<!-- Populate options if necessary -->
 								</select> <label class="mandatoryindicator">*</label></td>
 							</tr>
-							<tr id="selectpurpose" class="hide">
-								<td ><label class="captionTag"
-									id="admin.Selectpurpose">Select(New Entry/Renewal)</label>
-									&nbsp;</td>
-								<td><select th:field="*{purposeCmbBox}" id="purposeCmbBox"
-									class="selecttag mandatorycontrol">
-										<option value="3">Entry Of Post</option>
-										<!-- Populate options if necessary -->
-								</select> <label class="mandatoryindicator">*</label></td>
-							</tr>
-							<tr id="tempCombo" class="hide">
-								<td ><label class="captionTag"
-									id="admin.SelectTypeTempoPost">select Type of Temporary
-										Post</label> &nbsp;</td>
-								<td><select th:field="*{tempPostTypeCmbBox}"
-									id="tempPostTypeCmbBox" class="selecttag mandatorycontrol">
-										<option value="-1">-- Select Nature Of Temporary Post
-										</option>
-										<option value="-1">Temporary</option>
-										<option value="-1">Contract</option>
-										<option value="-1">Seasonable</option>
-										<option value="-1">C.R.T.</option>
-										<option value="-1">C.R.P</option>
-										<option value="-1">Honorary</option>
-										<option value="-1">Part Time</option>
-										<option value="-1">Supar Numerarie</option>
-								</select> <label class="mandatoryindicator">*</label></td>
-							</tr>
+
 							<tr>
-								<td class="fieldLabel" ><label
-									class="captionTag">Subject</label></td>
-								<td class="fieldLabel"><select th:field="*{subjectCmb}"
-									id="subjectCmb" class="selecttag mandatorycontrol">
-										<option value="-1">Select </option>
 
-										<option th:each="subject : ${SubjectList}"
-											th:value="${subject[1]}" th:text="${subject[1]}"></option>
 
-										<!-- Populate options if necessary -->
-								</select> <label class="mandatoryindicator">*</label></td>
-
-								<td class="fieldLabel" ><b><label
-										class="captionTag" id="admin.GrNO">GR No</label></b></td>
+								<td class="fieldLabel"><b><label class="captionTag"
+										id="admin.GrNO">GR No</label></b></td>
 								<td class="fieldLabel"><select th:field="*{orderCmb}"
 									id="orderCmb" style="width: 250px"
 									class="selecttag mandatorycontrol">
-										<option value="-1">Select </option>
+										<option value="-1">Select</option>
 										<option th:each="order : ${orderList}"
 											th:value="${order.orderId}" th:text="${order.orderName}"></option>
 								</select> <label class="mandatoryindicator">*</label></td>
-							</tr>
-							<tr>
-								<td class="fieldLabel" ><b><label
-										class="captionTag" id="admin.GrDate">GR Date</label></b></td>
+
+
+								<td class="fieldLabel"><b><label class="captionTag"
+										id="admin.GrDate">GR Date</label></b></td>
 								<td class="fieldLabel"><input type="date"
 									th:field="*{orderDate}" size="10" id="OrderDate">
 									&nbsp;</td>
+							</tr>
+							<tr>
 
-								<td class="fieldLabel" ><b><label
-										class="captionTag" id="admin.Office">Office</label></b></td>
+
+								<td class="fieldLabel"><b><label class="captionTag"
+										id="admin.Office">Office</label></b></td>
 								<td class="fieldLabel"><select th:field="*{officeCmb}"
 									id="officeCmb" class="selecttag mandatorycontrol">
-										<option value="-1">Select </option>
+										<option value="-1">Select</option>
 										<option th:each="office : ${officeList}"
 											th:value="${office.dcpsDdoOfficeIdPk}"
 											th:text="${office.dcpsDdoOfficeName}"></option>
 								</select> <label class="mandatoryindicator">*</label></td>
 							</tr>
 							<tr>
-								<td class="fieldLabel" ><b><label
-										class="captionTag" id="admin.SancFromDt">Sanctioned
-											From Date</label></b></td>
-								<td class="fieldLabel"><input type="date" th:max="${#dates.format(new java.util.Date(), 'yyyy-MM-dd')}" 
+								<td class="fieldLabel"><b><label class="captionTag"
+										id="admin.SancFromDt">Sanctioned From Date</label></b></td>
+								<td class="fieldLabel"><input type="date"
+									th:max="${#dates.format(new java.util.Date(), 'yyyy-MM-dd')}"
 									th:field="*{startDate}" size="10" id="startDate">
 									&nbsp;<label class="mandatoryindicator">*</label></td>
-								<td class="fieldLabel" ><b><label
-										class="captionTag" id="admin.postNumber">Number of
-											Post</label></b></td>
+								<td class="fieldLabel"><b><label class="captionTag"
+										id="admin.postNumber">Number of Post</label></b></td>
 								<td class="fieldLabel"><input type="text"
 									th:field="*{postNumber}" class="numbertag mandatorycontrol"
 									id="postNumber" value="1">&nbsp;&nbsp;<label
 									class="mandatoryindicator">*</label></td>
 							</tr>
 							<tr class="sanDateDiv" style="display: none;">
-								<td class="fieldLabel" id="endDate1" ><b><label
+								<td class="fieldLabel" id="endDate1"><b><label
 										class="captionTag" id="admin.SancToDt">Sanctioned To
 											Date</label></b></td>
 								<td class="fieldLabel"><input type="date"
@@ -197,8 +165,8 @@ table.table.bor-0 td:first-child, table.table.bor-0 td:nth-child(3) {
 									class="mandatoryindicator">*</label></td>
 							</tr>
 							<tr>
-								<td class="fieldLabel" ><b><label
-										class="captionTag" id="eis.Remarks">Remarks</label></b></td>
+								<td class="fieldLabel"><b><label class="captionTag"
+										id="eis.Remarks">Remarks</label></b></td>
 								<td class="fieldLabel"><textarea th:field="*{remarks}"
 										id="Remarks" class="textareatag" cols="30" rows="3"></textarea></td>
 							</tr>
