@@ -2,6 +2,7 @@ package com.mahait.gov.in.repository;
 
 import java.util.List;
 
+import com.mahait.gov.in.entity.MstRoleEntity;
 import com.mahait.gov.in.entity.MstSubMenuEntity;
 
 public interface MstSubMenuRepo {
@@ -15,5 +16,7 @@ public interface MstSubMenuRepo {
 	public void updateSubMenu(MstSubMenuEntity mstSubMenuEntity);
 
 	public MstSubMenuEntity findSubMenuBySubMenuKey(int subMenuKey);
+
+	public MstRoleEntity findRoleWiseUrl(Integer roleId);
 
 }

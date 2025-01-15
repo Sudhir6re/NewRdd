@@ -78,3 +78,52 @@ $("form[name='mstSubMenu']").validate({
       form.submit();
     }
   });
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  $("#roleName").change(function(){
+	var roleId = $("#roleName").val();
+	GetUrl(roleId);
+	});
+
+
+  $("#roleId").change(function(){
+  	var roleId = $("#roleId").val();
+	GetUrl(roleId)
+	});
+  	
+	function GetUrl(roleId){
+		var context = $("#appRootPath").val();
+		$( "#loaderMainNew").show();
+		  	$.ajax({
+		  	      type: "POST",
+		  	      url: context+"/master/findRoleWiseUrl/"+roleId,
+		  	      async: false,
+		  	      contentType:'application/json',
+		  	      error: function(data){
+		  	    	  console.log(data);
+		  	      },
+		  		  	beforeSend : function(){
+		  				$( "#loaderMainNew").show();
+		  				},
+		  			complete : function(data){
+		  				$( "#loaderMainNew").hide();
+		  			},	
+		  	      success: function(data){
+		  			console.log(data);
+		  		if(data){
+		  			$('#url').text(data.roleDescription);
+		  		}
+		  			
+		  	     }
+		  	 });
+	}
+	
+  	

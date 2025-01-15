@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
+import com.mahait.gov.in.entity.MstRoleEntity;
 import com.mahait.gov.in.entity.MstSubMenuEntity;
 
 import jakarta.persistence.EntityManager;
@@ -52,5 +53,10 @@ public class MstSubMenuRepoImpl implements MstSubMenuRepo {
 		Session currentSession = entityManager.unwrap(Session.class);
 		objSubMenuEntity = currentSession.get(MstSubMenuEntity.class, getSubMenuId);
 		return objSubMenuEntity;
+	}
+
+	@Override
+	public MstRoleEntity findRoleWiseUrl(Integer roleId) {
+		return entityManager.find(MstRoleEntity.class, roleId);
 	}
 }

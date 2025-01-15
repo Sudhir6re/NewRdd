@@ -47,15 +47,10 @@ public class AdminLoginController   extends BaseController{
 		request.getSession().setAttribute("MY_SESSION_MESSAGES",userService.getUserIdbyUserName(request.getRemoteUser()));
 		
 		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");
-		List<Object[]> retriveUserdetails = commonHomeMethodsService.retriveUserdetails(messages.getUserId());
-		if (retriveUserdetails.size() > 0) {
-			for (Object[] obj : retriveUserdetails) {
-				session.setAttribute("ddoCode", obj[0]);
-				session.setAttribute("locationId", obj[1]);
-				session.setAttribute("loggedInPost", obj[2]);
-			}
-		}
-		
+	
+		session.setAttribute("ddoCode", "MDP");
+		session.setAttribute("locationId", "380002");
+		session.setAttribute("loggedInPost", messages.getUserId());
 		
 		addMenuAndSubMenu(modelAndView,messages);
 	//	userSessionObject.setSession(messages.getUserId(),session);

@@ -136,60 +136,59 @@ public class EntryOfPostsController extends BaseController {
 
 		model.addAttribute("Designation", desgList);
 		
-		if (session.getAttribute("locationId") != null) {
-
-			langId = 1l;
-			locId = Long.parseLong((String) session.getAttribute("locationId"));
-			loggedInPostId = StringHelperUtils.isNullBigInteger(session.getAttribute("loggedInPost"));
-
-			model.addAttribute("ddoCode", ddoCode);
-
-			String talukaId = "";
-			String ddoSelected = "";
-			List DDOdtls = entryOfPostsService.getSubDDOsOffc(loggedInPostId, talukaId, ddoSelected);
-			List<OrgDdoMst> ddoCodeList = entryOfPostsService.getDDOCodeByLoggedInlocId(locId);
-			model.addAttribute("lstDistrict", commonHomeMethodsService.lstGetAllDistrict());
-			if (ddoCodeList.size() > 0)
-				ddoCode = ddoCodeList.get(0).getDdoCode();
-
-			// model.addAttribute("DDOlist", DDOdtls);
-
-			List filterDdoCode = entryOfPostsService.findLevel1DddoByDdoCode(ddoCode);
-			model.addAttribute("DDOlist", filterDdoCode);
-
-			List branchList_en = entryOfPostsService.getAllBranchList(1L);
-			model.addAttribute("Branch", branchList_en);
-
-			List<HrPayOrderMst> orderList = entryOfPostsService.getAllOrderData(locId, ddoCode);
-
-			List billList = entryOfPostsService.getAllBillsFromLocation(locId);
-			List officeList = entryOfPostsService.getAllOfficesFromDDO(ddoCode);
-
-
-			// code to find the district
-			String districtID = entryOfPostsService.districtName(ddoCode);
-			// code to find the taluka
-			List talukaList = entryOfPostsService.allTaluka(districtID);
-
-			// List<OrgDdoMst> ddoCodeList =
-			// entryOfPostsService.getDDOCodeByLoggedInlocId(locId);
-
-			Long lLngFieldDept = Long.parseLong(ddoCodeList.get(0).getHodLocCode());
-
-		
-
-			List<Object[]> subList = entryOfPostsService.getSubjectList();
-			model.addAttribute("SubjectList", subList);
-		//	model.addAttribute("subOfficeList", subOfficeList);
-			model.addAttribute("orderList", orderList);
-			model.addAttribute("billList", billList);
-			model.addAttribute("langId", Long.valueOf(langId));
-			model.addAttribute("officeList", officeList);
-			model.addAttribute("flag", "add");
-			model.addAttribute("talukaList", talukaList);
-			model.addAttribute("talukaId", talukaId);
-			// model.addAttribute("ddoSelected", ddoSelected);
-		}
+		/*
+		 * if (session.getAttribute("locationId") != null) {
+		 * 
+		 * langId = 1l; locId = Long.parseLong((String)
+		 * session.getAttribute("locationId")); loggedInPostId =
+		 * StringHelperUtils.isNullBigInteger(session.getAttribute("loggedInPost"));
+		 * 
+		 * model.addAttribute("ddoCode", ddoCode);
+		 * 
+		 * String talukaId = ""; String ddoSelected = ""; List DDOdtls =
+		 * entryOfPostsService.getSubDDOsOffc(loggedInPostId, talukaId, ddoSelected);
+		 * List<OrgDdoMst> ddoCodeList =
+		 * entryOfPostsService.getDDOCodeByLoggedInlocId(locId);
+		 * model.addAttribute("lstDistrict",
+		 * commonHomeMethodsService.lstGetAllDistrict()); if (ddoCodeList.size() > 0)
+		 * ddoCode = ddoCodeList.get(0).getDdoCode();
+		 * 
+		 * // model.addAttribute("DDOlist", DDOdtls);
+		 * 
+		 * List filterDdoCode = entryOfPostsService.findLevel1DddoByDdoCode(ddoCode);
+		 * model.addAttribute("DDOlist", filterDdoCode);
+		 * 
+		 * List branchList_en = entryOfPostsService.getAllBranchList(1L);
+		 * model.addAttribute("Branch", branchList_en);
+		 * 
+		 * List<HrPayOrderMst> orderList = entryOfPostsService.getAllOrderData(locId,
+		 * ddoCode);
+		 * 
+		 * List billList = entryOfPostsService.getAllBillsFromLocation(locId); List
+		 * officeList = entryOfPostsService.getAllOfficesFromDDO(ddoCode);
+		 * 
+		 * 
+		 * // code to find the district String districtID =
+		 * entryOfPostsService.districtName(ddoCode); // code to find the taluka List
+		 * talukaList = entryOfPostsService.allTaluka(districtID);
+		 * 
+		 * // List<OrgDdoMst> ddoCodeList = //
+		 * entryOfPostsService.getDDOCodeByLoggedInlocId(locId);
+		 * 
+		 * Long lLngFieldDept = Long.parseLong(ddoCodeList.get(0).getHodLocCode());
+		 * 
+		 * 
+		 * 
+		 * List<Object[]> subList = entryOfPostsService.getSubjectList();
+		 * model.addAttribute("SubjectList", subList); //
+		 * model.addAttribute("subOfficeList", subOfficeList);
+		 * model.addAttribute("orderList", orderList); model.addAttribute("billList",
+		 * billList); model.addAttribute("langId", Long.valueOf(langId));
+		 * model.addAttribute("officeList", officeList); model.addAttribute("flag",
+		 * "add"); model.addAttribute("talukaList", talukaList);
+		 * model.addAttribute("talukaId", talukaId); //
+		 * model.addAttribute("ddoSelected", ddoSelected); }
+		 */
 
 		addMenuAndSubMenu(model, messages);
 		model.addAttribute("postEntryModel", postEntryModel);
@@ -267,7 +266,7 @@ public class EntryOfPostsController extends BaseController {
 		BigInteger loggedInPostId = null;
 		if (session.getAttribute("locationId") != null) {
 			locId = Long.parseLong((String) session.getAttribute("locationId"));
-			loggedInPostId = (BigInteger) session.getAttribute("loggedInPost");
+			loggedInPostId = BigInteger.valueOf(Long.valueOf(session.getAttribute("loggedInPost").toString()));
 			entryOfPostsService.savePostEntryDtl(postEntryModel, locId, loggedInPostId, messages);
 			MessageResponse messageResponse = new MessageResponse();
 			messageResponse.setResponse("Post Created Successfully");

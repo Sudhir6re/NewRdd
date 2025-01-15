@@ -8,6 +8,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mahait.gov.in.entity.MstRoleEntity;
 import com.mahait.gov.in.entity.MstSubMenuEntity;
 import com.mahait.gov.in.entity.OrgUserMst;
 import com.mahait.gov.in.model.MstSubMenuModel;
@@ -86,5 +87,11 @@ public class MstSubMenuServiceImpl implements MstSubMenuService {
 			mstSubMenuRepo.updateSubMenu(objSubMenu);
 		}
 		return "UPDATED";
+	}
+
+	@Override
+	public MstRoleEntity findRoleWiseUrl(Integer roleId) {
+		// TODO Auto-generated method stub
+		return mstSubMenuRepo.findRoleWiseUrl(roleId);
 	}
 }

@@ -78,3 +78,47 @@ $("form[name='mstSubMenu']").validate({
       form.submit();
     }
   });
+  
+  
+  
+  
+  $("#roleId").change(function(){
+	      findRoleWiseUrl();
+  });
+  
+
+  function findRoleWiseUrl(){
+  	var context = $("#appRootPath").val();
+  	var roleId = $("#roleId").val();
+  	
+  	$( "#loaderMainNew").show();
+  	$.ajax({
+  	      type: "POST",
+  	      url: context+"/master/findRoleWiseUrl/"+roleId,
+  	      async: false,
+  	      contentType:'application/json',
+  	      error: function(data){
+  	    	  console.log(data);
+  	      },
+  		  	beforeSend : function(){
+  				$( "#loaderMainNew").show();
+  				},
+  			complete : function(data){
+  				$( "#loaderMainNew").hide();
+  			},	
+  	      success: function(data){
+  			console.log(data);
+			if(data){
+				$('#url').text(data.roleDescription);
+			}
+  			
+  	     }
+  	 });
+  }
+
+  
+  
+  
+  
+  
+  
