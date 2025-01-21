@@ -115,7 +115,7 @@ public class EntryOfPostsServiceImpl implements EntryOfPostsService {
 	}
 
 	@Override
-	public Long savePost(OrgPostMst orgPostMst) {
+	public OrgPostMst savePost(OrgPostMst orgPostMst) {
 		return entryOfPostsRepo.savePost(orgPostMst);
 	}
 
@@ -262,7 +262,7 @@ public class EntryOfPostsServiceImpl implements EntryOfPostsService {
 				// orgPostMaster.setPostTypeLookupId(lObjCmnLookupMst);
 				// orgPostMstDaoImpl.create(orgPostMaster);
 
-				postId = entryOfPostsRepo.savePost(orgPostMaster);
+				orgPostMaster = entryOfPostsRepo.savePost(orgPostMaster);
 
 				SubjectPostMpg subjectPostMpg = new SubjectPostMpg();
 
@@ -340,8 +340,9 @@ public class EntryOfPostsServiceImpl implements EntryOfPostsService {
 					orgPostMaster.setCreatedBy(messages);
 					orgPostMaster.setCreatedByPost(orgPostMst);
 					orgPostMaster.setLocationCode(String.valueOf(locId));
-
-					Long pId = entryOfPostsRepo.savePost(orgPostMaster);
+					
+					orgPostMaster=entryOfPostsRepo.savePost(orgPostMaster);
+					Long pId =orgPostMaster.getPostId();
 
 					subjectPostMpg1.setPostId(postId);
 					subjectPostMpg1.setSubjectName(subjectSel);
@@ -536,7 +537,15 @@ public class EntryOfPostsServiceImpl implements EntryOfPostsService {
 
 		OrgDdoMst orgDdoMst = organizationInstInfoRepo.findDDOInfo(postEntryModel.getDdoCode());
 
-		CmnLocationMst cmnLocationMst = cmnLocationMstRepository.findByLocId(Long.valueOf(orgDdoMst.getLocationCode()));
+		List<CmnLocationMst> lstCmnLocationMst=entryOfPostsRepo.findByLocId(Long.valueOf(orgDdoMst.getLocationCode()));
+		
+		CmnLocationMst cmnLocationMst = null;
+		if(lstCmnLocationMst.size()>0) {
+			 cmnLocationMst = lstCmnLocationMst.get(0);
+		}else {
+			cmnLocationMst=new CmnLocationMst();
+		}
+		
 
 		long nextPsr = entryOfPostsRepo.getNextPsrNo();
 
@@ -576,16 +585,19 @@ public class EntryOfPostsServiceImpl implements EntryOfPostsService {
 			newOrgPostMst.setOrderDate(postEntryModel.getOrderDate());
 			newOrgPostMst.setDdoCode(postEntryModel.getDdoCode());
 
-			Long postId = entryOfPostsRepo.savePost(newOrgPostMst);
+			
 
-			OrgPostMst pg1 = entryOfPostsRepo.findPostObj(postId);
+			OrgPostMst pg1 = entryOfPostsRepo.savePost(newOrgPostMst);
+			Long postId = pg1.getPostId();
 
-			SubjectPostMpg subjectPostMpg = new SubjectPostMpg();
-
-			subjectPostMpg.setPostId(postId);
-			subjectPostMpg.setSubjectName(postEntryModel.getSubjectCmb());
-
-			entryOfPostsRepo.submitSubject(subjectPostMpg);
+			/*
+			 * SubjectPostMpg subjectPostMpg = new SubjectPostMpg();
+			 * 
+			 * subjectPostMpg.setPostId(postId);
+			 * subjectPostMpg.setSubjectName(postEntryModel.getSubjectCmb());
+			 * 
+			 * entryOfPostsRepo.submitSubject(subjectPostMpg);
+			 */
 
 			HrPayPsrPostMpg postPsrMpg = new HrPayPsrPostMpg();
 			postPsrMpg.setPsrId(nextPsr);

@@ -36,7 +36,7 @@ public interface EntryOfPostsService {
 
 	List getSubDDOsOffc(long loggedInPostId, String talukaId, String ddoSelected);
 
-	Long savePost(OrgPostMst orgPostMst);
+	OrgPostMst savePost(OrgPostMst orgPostMst);
 
 	Long savePostDetails(OrgPostDetailsRlt orgPostDetailsRlt);
 

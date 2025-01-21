@@ -287,7 +287,7 @@ public class MstEmployeeServiceImpl implements MstEmployeeService {
 		int age = 0;
 		for (Object obj[] : lstObj) {
 			MstEmployeeModel mstEmployeeModel = new MstEmployeeModel();
-			ag = (Integer) obj[1];
+			ag =StringHelperUtils.isNullBigInteger(obj[1]).intValue();
 
 			age = ag.intValue();
 			SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
@@ -1005,8 +1005,8 @@ public class MstEmployeeServiceImpl implements MstEmployeeService {
 		objEntity.setDoj(mstEmployeeModel.getDoj());
 		objEntity.setAddress1(mstEmployeeModel.getAddress1().toUpperCase());
 		objEntity.setAddress2(mstEmployeeModel.getAddress2().toUpperCase());
-		objEntity.setQualification(mstEmployeeModel.getQualification().toString());
-		objEntity.setAppointment(mstEmployeeModel.getAppointmentId().toString());
+		//objEntity.setQualification(mstEmployeeModel.getQualification().toString());
+		//objEntity.setAppointment(mstEmployeeModel.getAppointmentId().toString());
 		// objEntity.setAddress3(mstEmployeeModel.getAddress3().toUpperCase());
 		// objEntity.setLocality(mstEmployeeModel.getLocality());
 		objEntity.setStateCode(mstEmployeeModel.getStateCode());
@@ -1018,8 +1018,8 @@ public class MstEmployeeServiceImpl implements MstEmployeeService {
 		objEntity.setEmailId(mstEmployeeModel.getEmailId());
 		objEntity.setPanNo(mstEmployeeModel.getPanNo().toUpperCase());
 		// objEntity.setQualification(mstEmployeeModel.getQualification());
-		objEntity.setSecqualification(mstEmployeeModel.getSecqualification());
-		objEntity.setMorequalification(mstEmployeeModel.getMorequalification());
+		//objEntity.setSecqualification(mstEmployeeModel.getSecqualification());
+		//objEntity.setMorequalification(mstEmployeeModel.getMorequalification());
 
 		// Employee Details End
 

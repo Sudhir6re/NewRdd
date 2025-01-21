@@ -7,6 +7,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
+import com.mahait.gov.in.entity.CmnLocationMst;
 import com.mahait.gov.in.entity.DdoOffice;
 import com.mahait.gov.in.entity.HrPayOfficepostMpg;
 import com.mahait.gov.in.entity.HrPayOrderHeadMpg;
@@ -158,9 +159,9 @@ public class EntryOfPostsRepoImpl implements EntryOfPostsRepo {
 	}
 
 	@Override
-	public Long savePost(OrgPostMst orgPostMst) {
+	public OrgPostMst savePost(OrgPostMst orgPostMst) {
 		Session session = getSession();
-		return (Long) session.save(orgPostMst);
+		return (OrgPostMst) session.merge(orgPostMst);
 	}
 
 	@Override
@@ -496,6 +497,15 @@ public class EntryOfPostsRepoImpl implements EntryOfPostsRepo {
 		String HQL_QUERY = "From MstDesignationEntity ";
 		Query query = session.createQuery(HQL_QUERY);
 		List resultList = query.getResultList();
+		return resultList;
+	}
+
+	@Override
+	public List<CmnLocationMst> findByLocId(Long valueOf) {
+		Session session = getSession();
+		String HQL_QUERY = "SELECT DISTINCT c FROM CmnLocationMst c WHERE  c.locId="+valueOf;
+		Query query = session.createQuery(HQL_QUERY);
+		List<CmnLocationMst> resultList = query.getResultList();
 		return resultList;
 	}
 

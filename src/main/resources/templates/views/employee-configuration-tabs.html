@@ -105,7 +105,7 @@
 						th:utext="#{msg.thymeleaf.pagelabel.fullnamedevnagri}"></span>&nbsp;&nbsp;<b><font
 							color="red" size="4px;">*</font></b></label></td>
 				<td width="25%"><input type="text" size="40%"
-					readonly="readonly" id="fullNameInDevnagri"
+					 id="fullNameInDevnagri"
 					style="text-transform: uppercase" th:field="*{employeeFullNameMr}"
 					class="form-control" /></td>
 			</tr>
@@ -266,7 +266,7 @@
 					placeholder="ABCDE1234F" style="text-transform: uppercase"
 					th:field="*{panNo}" class="form-control " /></td>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<td width="25%"><label>Qualification&nbsp;&nbsp;<b><font
 							color="red" size="4px;">*</font></b></label></td>
 				<td width="25%"><select class="form-control" id="qid"
@@ -297,7 +297,7 @@
 					id="morequalification" name="morequalification"
 					style="text-transform: uppercase" th:field="*{morequalification}"
 					class="form-control " /></td>
-			</tr>
+			</tr> -->
 		</table>
 	</div>
 
@@ -381,7 +381,7 @@
 							th:value="${varPay.id}"
 							th:text="${language=='mh' ? varPay.commission_name_mh : varPay.commission_name_en}"></option>
 				</select></td>
-				<td width="25%"><label>Appointment&nbsp;&nbsp;<b><font
+				<!-- <td width="25%"><label>Appointment&nbsp;&nbsp;<b><font
 							color="red" size="4px;">*</font></b></label></td>
 				<td width="25%"><select class="form-control" id="appointmentId"
 					th:field="*{appointmentId}">
@@ -390,7 +390,7 @@
 						<option th:each="varPay : ${lstAppointment}"
 							th:value="${varPay.appointmentId}"
 							th:text="${language=='mh' ? varPay.appointmentName : varPay.appointmentName}"></option>
-				</select></td>
+				</select></td> -->
 			</tr>
 			<tr>
 				<td width="25%"><label><span

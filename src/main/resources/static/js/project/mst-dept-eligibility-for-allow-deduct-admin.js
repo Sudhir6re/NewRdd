@@ -172,9 +172,9 @@ $(document).ready(function(){
     								    		// 15
     					//alert("data exists");
     								    		
-    								    		 $('input[name="test"][value="' + value[3] + '"]').prop("checked", true);
-    								    		 selecteditems.push(value[3]); 
-    								    		 $("#"+value[3]).attr("data-serialid",value[0]);
+    								    		 $('input[name="test"][value="' + value[1] + '"]').prop("checked", true);
+    								    		 selecteditems.push(value[1]); 
+    								    		 $("#"+value[1]).attr("data-serialid",value[1]);
     								    		 serialid.push(value[0]);
     							    		});
     						    		  }

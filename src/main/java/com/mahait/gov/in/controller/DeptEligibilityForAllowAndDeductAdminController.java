@@ -60,28 +60,12 @@ public class DeptEligibilityForAllowAndDeductAdminController  extends BaseContro
 		model.addAttribute("mstBankModel", deptEligibilityForAllowAndDeductModel);
 		
 		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");
-		
-		List<TopicModel> menuList = new ArrayList<>();
-		List<TopicModel> subMenuList = new ArrayList<>();
-		
-		/*menuList = commonHomeMethodsService.findMenuNameByRoleID(messages.getRole_id(),locale.getLanguage());
-		subMenuList = commonHomeMethodsService.findSubMenuByRoleID(messages.getRole_id(),locale.getLanguage());
-		
-		model.addAttribute("menuList", menuList);
-		model.addAttribute("subMenuList", subMenuList);
-		
-		if(message != null && message.equals("SUCCESS")) {
-			if(locale != null && locale.getLanguage().equalsIgnoreCase("en")) {
-				model = CommonUtils.initModel(CommonConstants.Message.ADDED_ENGLSH, STATUS.SUCCESS, model);
-			} else {
-				model = CommonUtils.initModel(CommonConstants.Message.ADDED_MARATHI, STATUS.SUCCESS, model);
-			}
-		}*/
 		model.addAttribute("lstDeptDataTable1", deptEligibilityForAllowAndDeductService.findDeptEligibilityForAllowAndDeductList());
 		System.out.println("listdata"+deptEligibilityForAllowAndDeductService.findDeptEligibilityForAllowAndDeductList());
 		
 		model.addAttribute("lstAllDepartment", createAdminOfficeService.lstAllDepartment());
 		model.addAttribute("language", locale.getLanguage());
+		model.addAttribute("message", message);
 		
 		addMenuAndSubMenu(model,messages);	
 		deptEligibilityForAllowAndDeductModel.setDepartmentAllowdeducCode(Integer.valueOf(commonHomeMethodsService.findCodeSeq("department_allowdeduc_code","department_allowdeduc_mst"))); 

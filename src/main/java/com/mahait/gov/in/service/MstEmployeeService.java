@@ -137,6 +137,7 @@ public interface MstEmployeeService {
 	List<Long> rejectEmployeeConfiguration(String empid);
 
 
+
 	// public List<MstBankBranchEntity> getIfscCodeByBranchId(int branchId);
 
 }

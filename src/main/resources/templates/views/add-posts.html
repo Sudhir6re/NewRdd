@@ -103,7 +103,7 @@ table.table.bor-0 td:first-child, table.table.bor-0 td:nth-child(3) {
 									id="designationCmb" class="selecttag mandatorycontrol">
 										<option value="-1">Select</option>
 										<option th:each="desi : ${Designation}"
-											th:value="${desi.desginationCode}"
+											th:value="${desi.desginationId}"
 											th:text="${desi.desgination}">
 											<!-- Populate options if necessary -->
 								</select> <label class="mandatoryindicator">*</label></td>

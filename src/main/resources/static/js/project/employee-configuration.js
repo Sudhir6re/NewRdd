@@ -3914,11 +3914,6 @@ $("#cadre")
 															temp,
 															function(index,
 																	value) {
-																//    
-																// $('#bankBranchId').append("<option
-																// value="+value[0]+">"
-																// + value[1] +
-																// "</option>");
 															
 																
 																$("#empClass").val(value[0]);

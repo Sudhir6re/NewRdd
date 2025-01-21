@@ -468,7 +468,7 @@ public class CommonHomeMethodsServiceImpl implements CommonHomeMethodsService {
 				lstObj.add(obj);
 			}
 		}
-		return lstObj;
+		return lstObj.stream().distinct().toList();
 	}
 
 	public List<MstYearEntity> lstGetAllYears() {

@@ -96,11 +96,10 @@ public class DeptEligibilityForAllowAndDeductRepoImpl implements DeptEligibility
 				return  1;
 	}
 
-	
 	@Override
 	public List<Object[]> findallowDeductLevel2(String ddoCode2) {
 		Session currentSession = entityManager.unwrap(Session.class);
-		String hql =  "select * from department_allowdeduc_mpg where ddo_code ='"+ddoCode2+"'";
+		String hql =  "select  department_allowdeduc_mpg_id,department_allowdeduc_code,ddo_code,with_effective_date from department_allowdeduc_mpg where ddo_code ='"+ddoCode2+"'";
 		Query query = currentSession.createNativeQuery(hql);
 		return query.list();
 	}

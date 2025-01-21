@@ -3,6 +3,7 @@ package com.mahait.gov.in.repository;
 import java.math.BigInteger;
 import java.util.List;
 
+import com.mahait.gov.in.entity.CmnLocationMst;
 import com.mahait.gov.in.entity.DdoOffice;
 import com.mahait.gov.in.entity.HrPayOfficepostMpg;
 import com.mahait.gov.in.entity.HrPayOrderHeadMpg;
@@ -42,7 +43,7 @@ public interface EntryOfPostsRepo {
 
 	Long savePostDetails(OrgPostDetailsRlt orgPostDetailsRlt);
 
-	Long savePost(OrgPostMst orgPostMst);
+	OrgPostMst savePost(OrgPostMst orgPostMst);
 
 	Long savePostDetails(HrPayOfficepostMpg hrPayOfficepostMpg);
 
@@ -100,5 +101,7 @@ public interface EntryOfPostsRepo {
 	List<Object[]> findLevelDdoCodeByDistrict(String districtId, OrgUserMst messages);
 
 	List<MstDesignationEntity> findAllDesignation();
+
+	List<CmnLocationMst> findByLocId(Long valueOf);
 
 }

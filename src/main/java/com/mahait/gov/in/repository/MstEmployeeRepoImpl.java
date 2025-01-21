@@ -176,10 +176,24 @@ public class MstEmployeeRepoImpl implements MstEmployeeRepo {
 
 	@Override
 	public List<MstCadreGroupEntity> getGISGroup() {
-		Session hibSession = entityManager.unwrap(Session.class);
-		List<MstCadreGroupEntity> result = null;
-		result = entityManager.createQuery("from MstCadreGroupEntity", MstCadreGroupEntity.class).getResultList();
-		return result;
+		Session currentSession = entityManager.unwrap(Session.class);
+		String hql = "select DISTINCT a.LOOKUP_ID,a.LOOKUP_NAME from CMN_LOOKUP_MST a inner join MST_DCPS_CADRE b on a.LOOKUP_ID=cast(b.GROUP_ID as bigint)";
+		Query query = currentSession.createNativeQuery(hql);
+		List<Object[]> lstObject=query.list();
+		List<MstCadreGroupEntity> lstMstCadreGroupEntity=new ArrayList<>();
+		for(Object[] object :lstObject) {
+			MstCadreGroupEntity mstCadreGroupEntity=new MstCadreGroupEntity();
+			mstCadreGroupEntity.setId(StringHelperUtils.isNullLong(object[0]));
+			mstCadreGroupEntity.setGroup_name_en(StringHelperUtils.isNullString(object[1]));
+			mstCadreGroupEntity.setGroup_name_mh(StringHelperUtils.isNullString(object[1]));
+			lstMstCadreGroupEntity.add(mstCadreGroupEntity);
+		}
+		return lstMstCadreGroupEntity;
+		/*
+		 * List<MstCadreGroupEntity> result = null; result =
+		 * entityManager.createQuery("from MstCadreGroupEntity",
+		 * MstCadreGroupEntity.class).getResultList(); return result;
+		 */
 	}
 
 	@Override
@@ -244,7 +258,7 @@ public class MstEmployeeRepoImpl implements MstEmployeeRepo {
 	@Override
 	public List<Object[]> getgroupname(String caderid) {
 		Session currentSession = entityManager.unwrap(Session.class);
-		String hql = "SELECT lookup.LOOKUP_ID,cad.SUPER_ANTUN_AGE FROM mst_dcps_cadre cad inner join CMN_LOOKUP_MST lookup on lookup.LOOKUP_ID = cad.GROUP_ID where cad.CADRE_ID = '"
+		String hql = "SELECT lookup.LOOKUP_ID,cad.SUPER_ANTUN_AGE,lookup.LOOKUP_NAME FROM mst_dcps_cadre cad inner join CMN_LOOKUP_MST lookup on lookup.LOOKUP_ID = cast(cad.GROUP_ID as bigint) where cad.CADRE_ID = '"
 				+ caderid + "'";
 
 		Query query = currentSession.createNativeQuery(hql);
@@ -258,25 +272,10 @@ public class MstEmployeeRepoImpl implements MstEmployeeRepo {
 	@Override
 	public List<Object[]> getCadreGroupMstDataNew(String cadreid) {
 		Session currentSession = entityManager.unwrap(Session.class);
-		String hql = "SELECT lookup.LOOKUP_NAME,cad.SUPER_ANTUN_AGE FROM mst_dcps_cadre cad inner join CMN_LOOKUP_MST lookup on lookup.LOOKUP_ID = cad.GROUP_ID where cad.CADRE_ID = '"
+		String hql = "SELECT lookup.LOOKUP_NAME,cad.SUPER_ANTUN_AGE FROM mst_dcps_cadre cad inner join CMN_LOOKUP_MST lookup on lookup.LOOKUP_ID = cast(cad.GROUP_ID as bigint) where cad.CADRE_ID = '"
 				+ cadreid + "'";
-		// String hql = "SELECT c.id, " +
-		// /*
-		// * "b.sub_department_name_en, "+ "b.sub_department_name_mr, "+
-		// */
-		// "c.group_name_en, " + "c.group_name_mh, " + "a.cadre_code, " + "a.cadre_name,
-		// " + "a.ministerial_flag, "
-		// + "a.superannuation_age, " + "a.is_active " + "FROM cadre_mst a, " +
-		// /* "sub_department_mst b, "+ */
-		// "cadre_group_mst c " +
-		// /* "WHERE a.org_category_id = b.sub_department_id "+ */
-		// "Where a.group_id = c.id and a.is_active='1' and a.cadre_id='" + cadreid+"'";
 		Query query = currentSession.createNativeQuery(hql);
 		return (List<Object[]>) query.list();
-		/*
-		 * String HQL = "FROM MstCadreEntity as t ORDER BY t.cadreId DESC"; return
-		 * (List<MstCadreEntity>) entityManager.createQuery(HQL).getResultList();
-		 */
 	}
 
 	@Override
@@ -511,8 +510,6 @@ public class MstEmployeeRepoImpl implements MstEmployeeRepo {
 
 	@Override
 	public BigInteger findbySevaarthCount(String sevaarth) {
-		// TODO Auto-generated method stub
-
 		Session currentSession = entityManager.unwrap(Session.class);
 		List list = new ArrayList();
 		BigInteger rtnStr = null;
@@ -521,9 +518,8 @@ public class MstEmployeeRepoImpl implements MstEmployeeRepo {
 		Query hsqlQuery = currentSession.createNativeQuery(query.toString());
 		list = hsqlQuery.list();
 		if (list != null && list.size() > 0)
-			rtnStr = (BigInteger) list.get(0);
+			rtnStr = BigInteger.valueOf(Long.valueOf(list.get(0).toString()));
 		return rtnStr;
-
 	}
 
 	@Override
@@ -936,7 +932,7 @@ public class MstEmployeeRepoImpl implements MstEmployeeRepo {
 	public List<MstNomineeDetailsEntity> getNominees(String empId) {
 		Session hibSession = entityManager.unwrap(Session.class);
 		List<MstNomineeDetailsEntity> result = null;
-		result = entityManager.createQuery("from MstNomineeDetailsEntity where employeeId =" + Integer.valueOf(empId),
+		result = entityManager.createQuery("from MstNomineeDetailsEntity where employeeId =" + Long.valueOf(empId),
 				MstNomineeDetailsEntity.class).getResultList();
 		return result;
 	}

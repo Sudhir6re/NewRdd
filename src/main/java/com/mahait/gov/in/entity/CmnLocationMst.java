@@ -35,11 +35,11 @@ public class CmnLocationMst {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long locId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lang_id", nullable = false)
     private CmnLanguageMst cmnLanguageMst;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_lookup_id", nullable = false)
     private CmnLookupMst cmnLookupMst;
 
@@ -134,7 +134,7 @@ public class CmnLocationMst {
 	 * orphanRemoval = true) private Set<CmnBranchMst> cmnBranchMsts;
 	 */
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "LOC_CATEGORY_ID")
     private CmnLookupMst cmnLookupMstLocCategory;
     
