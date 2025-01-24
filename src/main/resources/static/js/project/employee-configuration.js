@@ -3,6 +3,16 @@ var context ="";
 var ddo ="";
 
 jQuery(document).ready(function() {
+	
+	
+	       $("#subCorporationId").prop("disabled", true);
+			$("#isChangeParentDepartment1").prop("disabled", true);
+			$("#reasonForChngParentFieldDept").prop("disabled", true);
+				var pph = new PramukhPhoneticHandler();
+		pph.convertToIndicIME("fullNameInDevnagri", document
+				.getElementById('txtNameInDevanagari'), 'devanagari');
+
+	
 	context = $("#appRootPath").val();
 		ddo=getUserUrl();
 	
@@ -3519,8 +3529,6 @@ function approveEmpDtls() {
 		getSevaarthId();
 	}
 	
-	
-	
 	var sevaarthid= document.getElementById("sevaarthId").value;
 	
 	
@@ -3535,7 +3543,7 @@ function approveEmpDtls() {
 	if (uniqid != '') {
 		$.ajax({
 			type : "GET",
-			url : contextPath+"/ddo/approveEmpDtls/" + uniqid + "/" + sevaarthid + "/" + dcpsgpfflg,
+			url : contextPath+"/level3/approveEmpDtls/" + uniqid + "/" + sevaarthid + "/" + dcpsgpfflg,
 			async : true,
 			contentType : 'application/json',
 			error : function(data) {
@@ -3567,35 +3575,51 @@ function approveEmpDtls() {
 	}
 }
 
+
+
+$("#forwardDcpsEmpToLvl3").click(function(){
+	forwardDcpsEmpToLvl3();
+});
+
 function forwardDcpsEmpToLvl3(){
 	var empid = $("#employeeId").val();
 	
 	if (empid != '') {
-			$.ajax({
-				type : "GET",
-				url : "/forwardDcpsEmpToLvl3/" + empid,
-				async : true,
-				contentType : 'application/json',
-				error : function(data) {
-					 console.log(data);
-				},
-				beforeSend : function(){
-					$( "#loaderMainNew").show();
-					},
-				complete : function(data){
-					$( "#loaderMainNew").hide();
-				},	
-				success : function(data) {
-					swal({ 
-						 text: "Employee Forwarded to Level 3 Successfully",
-						 type: "success"}).then(okay => {
-						   if (okay) {
-							   document.getElementById("myForm").submit();
-						  }
-						});
-					return status;
-				}
-			});
+			swal({
+				  title: "Are you sure?",
+				  text: "Approve and Forward To Level 3",
+				  icon: "warning",
+				  buttons: true,
+				  dangerMode: true,
+				}).then((willDelete) => {
+				    if (willDelete) {
+						$.ajax({
+										type : "GET",
+										url : contextPath+ddo+"/forwardDcpsEmpToLvl3/" + empid,
+										async : true,
+										contentType : 'application/json',
+										error : function(data) {
+											 console.log(data);
+										},
+										beforeSend : function(){
+											$( "#loaderMainNew").show();
+											},
+										complete : function(data){
+											$( "#loaderMainNew").hide();
+										},	
+										success : function(data) {
+											swal({ 
+												 text: "Employee Forwarded to Level 3 Successfully",
+												 type: "success"}).then(okay => {
+												   if (okay) {
+													   document.getElementById("myForm").submit();
+												  }
+												});
+											return status;
+										}
+									});
+				     }
+			})
 		}
 }
 
@@ -3768,6 +3792,7 @@ function checkDcpcGpf() {
 		document.getElementById("relation").disabled = '';
 		document.getElementById("percent_share").disabled = '';
 		document.getElementById("pranNo").disabled = '';
+		$("#dcpsDiv").show();
 
 	} else {
 		document.getElementById('dcpsaccountmaintainby').disabled = 'true';
@@ -3783,6 +3808,8 @@ function checkDcpcGpf() {
 		document.getElementById("relation").disabled = 'true';
 		document.getElementById("percent_share").disabled = 'true';
 		document.getElementById("pranNo").disabled = 'true';
+		
+		$("#dcpsDiv").hide();
 
 	}
 

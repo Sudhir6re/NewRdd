@@ -119,9 +119,20 @@ input#uid1, input#uid2, input#uid3 {
 					type="hidden" name="strArrDob" id="strArrDob"
 					th:field="*{strArrDob}" class="form-control" /> <input
 					type="hidden" name="strArrPercentShare" id="strArrPercentShare"
-					th:field="*{strArrPercentShare}" class="form-control" /> <input
+					th:field="*{strArrPercentShare}" class="form-control" /> 
+					
+					
+					<input
 					type="hidden" name="strArrRelationship" id="strArrRelationship"
 					th:field="*{strArrRelationship}" class="form-control" />
+					
+					
+					<input
+					type="text" name="dcpsgpfflagValue" id="dcpsgpfflagValue"
+					th:value="*{mstEmployeeModel.dcpsgpfflag}" class="form-control" />
+					
+					
+					
 
 				<div id="tabContainer">
 					<ul class="nav nav-tabs">
@@ -208,63 +219,18 @@ input#uid1, input#uid2, input#uid3 {
 				<div class="form-group text-center">
 					<hr />
 
-					<!-- <input type="button" id="printpfA" th:onclick="'openPerformaA();'"
-							class="btn btn-primary"
-							th:value="#{msg.thymeleaf.pagelabel.printPerformaA}" /> -->
-					<!-- <a id="printpfA" th:href="@{/pdf/Proforma A.pdf}" target="_blank"
-						class="btn btn-primary"><span
-						th:text="#{msg.thymeleaf.pagelabel.printPerformaA}"></span></a>
+				
 
-												 <a th:href="@{/images/Proforma A.pdf}" target="_blank">Link
-													Testing</a>
-					<input type="button" class="btn btn-primary"
-							th:onclick="'openPerformaB();'"
-							th:value="#{msg.thymeleaf.pagelabel.printPerformaB}"
-							ng-click="printPerformaB();" />
-					<a class="btn btn-primary" th:href="@{/pdf/Proforma B.pdf}"
-						target="_blank"><span
-						th:text="#{msg.thymeleaf.pagelabel.printPerformaB}"></span></a> -->
-<!-- 					<input -->
-<!-- 						type="button" id="btnSave" class="btn btn-primary" -->
-<!-- 						th:value="#{msg.thymeleaf.pagelabel.saveAsDraft}" -->
-<!-- 						th:onclick="'saveAsDraft();'" />  -->
-
-
-					<!-- 							ng-click="saveAsDraft();" /> -->
 						<input type="submit" class="btn btn-primary" id="forward"
 						th:value="#{msg.thymeleaf.pagelabel.forwardToDDO}" />
 					
 					
-<!-- 						<input type="button" id="btnPrevious" name="btnPrevious" -->
-<!-- 							value="Previous" class="btn" />  -->
-<!-- 							<input type="button" -->
-<!-- 							id="btnNext" name="btnNext" value="Next" class="btn" /> -->
-					
-
-<!-- 					<span th:if="${mstEmployeeModel.employeeFNameEn != null}"> <input -->
-<!-- 						type="button" class="btn btn-primary rejectbtnn" -->
-<!-- 						th:value="#{msg.thymeleaf.pagelabel.back}" -->
-<!-- 						th:onclick="'backlvlEmpDtls();'" /> -->
-<!-- 					</span>  -->
-<!-- 					<input type="button" id="btnSave" class="btn btn-primary" -->
-<!-- 						th:value="#{msg.thymeleaf.pagelabel.saveAsDraft}" -->
-<!-- 						th:onclick="'saveAsDraft();'" /> <input type="reset" -->
-<!-- 						id="btnReset" class="btn btn-primary" -->
-<!-- 						th:value="#{msg.thymeleaf.pagelabel.btnReset}" /> <a -->
-<!-- 					</span> -->
-					
-					
-<!--                  <input type="button" id="btnSave" class="btn btn-primary" -->
 
 
 					<input type="button" id="btnPrevious" name="btnPrevious"
 						value="Previous" class="btn" /> <input type="button" id="btnNext"
 						name="btnNext" value="Next" class="btn" />
 
-					<!-- 	<input type="submit" class="btn btn-primary" id="forward"
-						th:value="#{msg.thymeleaf.pagelabel.forwardToDDO}" />
-						
-						 -->
 
 					<span th:if="${mstEmployeeModel.employeeFNameEn != null}"> <input
 						type="button" class="btn btn-primary rejectbtnn"
@@ -299,20 +265,6 @@ input#uid1, input#uid2, input#uid3 {
 	<script th:src="@{/js/project/census.js}"></script>
 	<script th:src="@{/js/validated.js}"></script>
 	<script th:src="@{/js/pramukhlib.js}"></script>
-	<script>
-		var pph = new PramukhPhoneticHandler();
-		pph.convertToIndicIME("fullNameInDevnagri", document
-				.getElementById('txtNameInDevanagari'), 'devanagari');
-	</script>
-
-	<script>
-		$(document).ready(function() {
-			$("#subCorporationId").prop("disabled", true);
-			$("#isChangeParentDepartment1").prop("disabled", true);
-			$("#reasonForChngParentFieldDept").prop("disabled", true);
-		});
-	</script>
-
 
 
 </body>

@@ -56,7 +56,6 @@
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-tomcat</artifactId>
 				</exclusion>
-
 				<exclusion>
 					<artifactId>logback-classic</artifactId>
 					<groupId>ch.qos.logback</groupId>

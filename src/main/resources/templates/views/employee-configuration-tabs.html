@@ -634,7 +634,7 @@
 				</select></td>
 			</tr>
 			
-			<tr  id="dcpsDiv">
+			<tr  id="dcpsDiv"  style="display:none;">
 				<td width="25%"><label><span
 						th:utext="#{msg.thymeleaf.pagelabel.dcpsauth}"></span>&nbsp;&nbsp;<b><font
 							color="red" size="4px;">*</font></b></label></td>
@@ -645,7 +645,7 @@
 						th:utext="#{msg.thymeleaf.pagelabel.dcpsaccno}"></span>&nbsp;&nbsp;<b><font
 							color="red" size="4px;">*</font></b></label></td>
 				<td width="25%"><input type="text" size="40%"
-					readonly="readonly"  id="dcpsAccNo"
+					  id="dcpsAccNo"
 					th:field="*{dcpsAccNo}" class="form-control" /></td>
 			</tr>
 			

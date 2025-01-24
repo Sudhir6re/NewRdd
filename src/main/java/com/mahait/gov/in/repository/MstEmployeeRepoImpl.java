@@ -860,6 +860,9 @@ public class MstEmployeeRepoImpl implements MstEmployeeRepo {
 				mstEmployeeModel.setGisRemark(mstEmployeeEntity.getGisRemark());
 				mstEmployeeModel.setDesignationId(mstEmployeeEntity.getDesignationCode());
 				// GIS Details End
+				
+				mstEmployeeModel.setDcpsAccMainAuthority(mstEmployeeEntity.getDcpsAccMainAuthority());				
+				mstEmployeeModel.setDcpsAccNo(mstEmployeeEntity.getDcpsAccNo());
 
 			}
 
@@ -961,20 +964,6 @@ public class MstEmployeeRepoImpl implements MstEmployeeRepo {
 
 	@Override
 	public String getCmnLocationMst(String ddoCode) {
-		// TODO Auto-generated method stub
-		// String strDeptNm = "";
-		// Session currentSession = entityManager.unwrap(Session.class);
-		// String hql = "SELECT loc.LOC_SHORT_NAME FROM CMN_LOCATION_MST loc "
-		// + "inner join ORG_DDO_MST ddo on cast(ddo.HOD_LOC_CODE as bigint) =
-		// loc.LOC_ID where ddo.DDO_CODE= '"+ddoCode+"'";
-		// Query query = currentSession.createNativeQuery(hql);
-		// List<Object[]> lstprop = query.list();
-		// if (!lstprop.isEmpty()) {
-		// for (Object[] objLst : lstprop) {
-		// strDeptNm = StringHelperUtils.isNullString(objLst[]);
-		// }
-		// }
-		// return strDeptNm;
 
 		Session currentSession = entityManager.unwrap(Session.class);
 		List list = new ArrayList();

@@ -629,8 +629,8 @@ input[type="Date"] {
 						<option th:each="varAllBankbranchList : ${lstAllBankBranchList}"
 							th:value="${varAllBankbranchList[0]}"
 							th:text="${language=='mh' ? varAllBankbranchList[1] : varAllBankbranchList[1]}"></option>
-
-				</select></td>
+				</select>
+				</td>
 			</tr>
 			<tr>
 				<td width="25%"><label><span
@@ -653,11 +653,12 @@ input[type="Date"] {
 				<td width="25%"><label><span
 						th:utext="#{msg.thymeleaf.pagelabel.dcps}"></span> &nbsp;&nbsp;<b><font
 							color="red" size="4px;">*</font></b></label></td>
-				<td width="30%"><input Type="radio" id="dcps"
+				<td width="30%">
+				<input Type="radio" id="dcpsY"
 					onchange="checkDcpcGpf();" disabled="disabled" name="dcps"
-					checked="checked" th:field="*{dcpsgpfflag}" th:value="Y" /> <label>Yes</label>
-					<input Type="radio" id="dcps" name="dcps"
-					onchange="checkDcpcGpf();" disabled="disabled" ng-model="dcps"
+					checked="checked" th:field="*{dcpsgpfflag}"   th:value="Y"     th:checked="${mstEmployeeModel.dcpsgpfflag == 'Y'?'checked':''}" /> <label>Yes</label>
+					<input Type="radio" id="dcpsN" name="dcps"
+					onchange="checkDcpcGpf();" disabled="disabled"  th:checked="${mstEmployeeModel.dcpsgpfflag == 'N'}"  
 					th:value="N" th:field="*{dcpsgpfflag}" /> <label>No</label></td>
 				<td width="15%"><label><span
 						th:utext="#{msg.thymeleaf.pagelabel.dcpsaccountmaintainedby}"></span>&nbsp;&nbsp;<b><font
@@ -672,7 +673,27 @@ input[type="Date"] {
 							th:text="${language=='mh' ? varCommon.lookupName : varCommon.lookupName}"></option>
 				</select></td>
 			</tr>
+			
+			
+			<tr  id="dcpsDiv" >
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.dcpsauth}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label></td>
+				<td width="25%"><input type="text" size="40%" minlength="9"
+					maxlength="18" id="dcpsAccMainAuthority"
+					th:field="*{dcpsAccMainAuthority}" class="form-control" /></td>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.dcpsaccno}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label></td>
+				<td width="25%"><input type="text" size="40%"
+					  id="dcpsAccNo"
+					th:field="*{dcpsAccNo}" class="form-control" /></td>
+			</tr>
 		</table>
+		
+		
+		
+		
 		<table class="table table-bordered">
 
 			<b><span th:utext="#{msg.thymeleaf.pagelabel.pfdetails}"></span></b>

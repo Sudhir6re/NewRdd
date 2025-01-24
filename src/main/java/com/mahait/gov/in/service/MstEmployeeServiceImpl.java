@@ -1166,6 +1166,9 @@ public class MstEmployeeServiceImpl implements MstEmployeeService {
 		objEntity.setBillGroupId(mstEmployeeModel.getBillgroupId());
 		objEntity.setEmpClass(mstEmployeeModel.getEmpClass());
 
+		objEntity.setDcpsAccMainAuthority(mstEmployeeModel.getDcpsAccMainAuthority());
+		objEntity.setDcpsAccNo(mstEmployeeModel.getDcpsAccNo());
+		
 		if (!mstEmployeeModel.getAction().equals("saveAsDraft")) {
 			objEntity.setIsActive(3l);
 		} else {
