@@ -568,7 +568,11 @@ public class MstEmployeeEntity {
 	private Integer pranActive;
 	
 	
+	@Column(name = "dcps_acc_main_authority")
+	private String dcpsAccMainAuthority;
 	
+	@Column(name = "dcps_acc_no")
+	private String dcpsAccNo;
 	
 	
 	

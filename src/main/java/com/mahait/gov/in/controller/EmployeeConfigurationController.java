@@ -3,6 +3,7 @@ package com.mahait.gov.in.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -652,6 +653,7 @@ public class EmployeeConfigurationController extends BaseController {
 		List<Object[]> lstsvnbasicpay = new ArrayList<Object[]>();
 		List<Object[]> lstpfSeries = new ArrayList<Object[]>();
 				
+		
 		if(mstEmployeeModel.getPayCommissionCode() != null) {
 			if (mstEmployeeModel.getPayCommissionCode() != null && !mstEmployeeModel.getPayCommissionCode().equals(2500347))
 				lstsixpayscalelevel = mstEmployeeService.findEmployeeConfigurationGetSixPayScale(2500341);
@@ -782,8 +784,7 @@ public class EmployeeConfigurationController extends BaseController {
 		// mstCadreService.getCadreMstData(locale.getLanguage()));
 		model.addAttribute("language", locale.getLanguage());
 		String strddo = messages.getDdoCode();
-		List<MstEmployeeModel> employeeConfigurationService = mstEmployeeService.getDcpsEmployeeDetails(strddo,
-				locale.getLanguage(), locId);
+		List<MstEmployeeModel> employeeConfigurationService = mstEmployeeService.getDcpsEmployeeDetails(strddo,locale.getLanguage(), locId,messages);
 		// MstEmployeeEntity mm=employeeConfigurationService.get(0);
 		// logger.info("employeeConfigurationService="+mm);
 		model.addAttribute("employeedetails", employeeConfigurationService);
@@ -1038,6 +1039,17 @@ public class EmployeeConfigurationController extends BaseController {
 
 		return "/views/approve-dcps-employee-configuration";
 	}
+	
+	
+
+	@RequestMapping("/forwardDcpsEmpToLvl3/{empid}")
+	public ResponseEntity<String> forwardDcpsEmpToLvl3(@PathVariable String empid,HttpSession session) {
+		OrgUserMst message = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");
+		String str=mstEmployeeService.approveDcpsEmpByDdo(empid,message);
+		return  ResponseEntity.ok(str);
+	}
+	
+	
 
 	@RequestMapping("/approveDcpsEmpDtls/{empid}/{dcpsnum}/{sevaarthid}/{dcpsgpfflg}")
 	public @ResponseBody List<String> approveDcpsEmployeeConfiguration(@PathVariable String empid,
@@ -1267,12 +1279,13 @@ public class EmployeeConfigurationController extends BaseController {
 			payscalelevel = mstEmployeeService.findEmployeeConfigurationGetpayscale(8);
 		}
 */
-		
+		if (mstEmployeeModel.getPayCommissionCode() != null) {
 		if(mstEmployeeModel.getPayCommissionCode().equals(2500347)    || mstEmployeeModel.getPayCommissionCode().equals(700016)) {
 			lstsixpayscalelevel = mstEmployeeService.findEmployeeConfigurationGetSixPayScale(2500341);
 		}
 		if(mstEmployeeModel.getPayCommissionCode().equals(2500347)  || mstEmployeeModel.getPayCommissionCode().equals(700005) ) {
 			payscalelevel = mstEmployeeService.findEmployeeConfigurationGetpayscale(mstEmployeeModel.getPayCommissionCode().intValue());
+		}
 		}
 		
 		
@@ -1408,6 +1421,13 @@ public class EmployeeConfigurationController extends BaseController {
 			Locale locale) {
 		List<Long> status = mstEmployeeService.rejectEmployeeConfiguration(empid);
 		return status;
+	}
+	
+	@RequestMapping("/getLookupValuesForParentAG/{agType}")
+	public ResponseEntity<List<CmnLookupMst>> getLookupValuesForParentAG(@PathVariable Long agType, Model model,
+			Locale locale) {
+		List<CmnLookupMst> lstCmnLookupMst = mstEmployeeService.getLookupValuesForParentAG(agType);
+		return ResponseEntity.ok(lstCmnLookupMst);
 	}
 	
 

@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.List;
 
 import com.mahait.gov.in.entity.AppoinmentEntity;
+import com.mahait.gov.in.entity.CmnLookupMst;
 import com.mahait.gov.in.entity.DdoOffice;
 import com.mahait.gov.in.entity.EmployeeAllowDeducComponentAmtEntity;
 import com.mahait.gov.in.entity.LoanEmployeeDtlsEntity;
@@ -124,7 +125,7 @@ public interface MstEmployeeRepo {
 
 	public List<QualificationEntity> getQualification(String language);
 
-	public List<MstEmployeeEntity> getDcpsEmployeeDetails(String strddo);
+	public List<MstEmployeeEntity> getDcpsEmployeeDetails(String strddo, OrgUserMst messages);
 
 	public List<Long> approveDcpsEmployeeConfiguration(String empid, String dcpsnumber, String sevaarthid,
 			String dcpsgpfflg);
@@ -145,6 +146,10 @@ public interface MstEmployeeRepo {
 	public Integer deleteEmployeesByIds(List<Long> employeeIds, OrgUserMst orgUserMst);
 
 	public List<Long> rejectEmployeeConfiguration(String empid);
+
+	public List<CmnLookupMst> getLookupValuesForParentAG(Long agType);
+
+	public String approveDcpsEmpByDdo(String empid, OrgUserMst message);
 
 
 

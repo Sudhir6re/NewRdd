@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mahait.gov.in.entity.AppoinmentEntity;
+import com.mahait.gov.in.entity.CmnLookupMst;
 import com.mahait.gov.in.entity.DdoOffice;
 import com.mahait.gov.in.entity.EmployeeAllowDeducComponentAmtEntity;
 import com.mahait.gov.in.entity.LoanEmployeeDtlsEntity;
@@ -113,7 +114,7 @@ public interface MstEmployeeService {
 
 	public List<QualificationEntity> getQualification(String language);
 
-	List<MstEmployeeModel> getDcpsEmployeeDetails(String strddo, String language, long locId);
+	List<MstEmployeeModel> getDcpsEmployeeDetails(String strddo, String language, long locId, OrgUserMst messages);
 
 	Character getLastDigit(String dcpsnum);
 
@@ -135,6 +136,10 @@ public interface MstEmployeeService {
 	Integer deleteEmployeesByIds(List<Long> employeeIds, OrgUserMst orgUserMst);
 
 	List<Long> rejectEmployeeConfiguration(String empid);
+
+	List<CmnLookupMst> getLookupValuesForParentAG(Long agType);
+
+	String approveDcpsEmpByDdo(String empid, OrgUserMst message);
 
 
 

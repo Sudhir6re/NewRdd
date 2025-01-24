@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import com.mahait.gov.in.common.StringHelperUtils;
 import com.mahait.gov.in.entity.AppoinmentEntity;
+import com.mahait.gov.in.entity.CmnLookupMst;
 import com.mahait.gov.in.entity.DdoOffice;
 import com.mahait.gov.in.entity.EmployeeAllowDeducComponentAmtEntity;
 import com.mahait.gov.in.entity.LoanEmployeeDtlsEntity;
@@ -1112,7 +1113,7 @@ public class MstEmployeeRepoImpl implements MstEmployeeRepo {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<MstEmployeeEntity> getDcpsEmployeeDetails(String strddo) {
+	public List<MstEmployeeEntity> getDcpsEmployeeDetails(String strddo,OrgUserMst orgUserMst) {
 
 		Session currentSession = entityManager.unwrap(Session.class);
 		List<Object[]> result = null;
@@ -1120,12 +1121,22 @@ public class MstEmployeeRepoImpl implements MstEmployeeRepo {
 		StringBuffer strQuery = new StringBuffer();
 
 		try {
-			strQuery.append(
-					"select employee_id,employee_full_name_en,sevaarth_id,designation_code,ddo_code from employee_mst  where is_active=3 and  dcps_gpf_flag = 'Y' and ddo_code in (");
+			strQuery.append(" select employee_id,employee_full_name_en,sevaarth_id,designation_code,ddo_code from employee_mst ");
+			
+			if(orgUserMst.getMstRoleEntity().getRoleId()==2) {
+				strQuery.append(" where is_active=3 ");
+			}else {
+				strQuery.append(" where is_active=4 ");
+			}
+			
+			strQuery.append(" and  dcps_gpf_flag = 'Y' and ddo_code in (");
 			strQuery.append(
 					"select ddo_code from org_ddo_mst where ddo_code in (select dmr.zp_ddo_code from rlt_zp_ddo_map dmr ");
 			strQuery.append("inner join org_ddo_mst drm  on drm.ddo_code = dmr.rept_ddo_code  where drm.ddo_code='"
 					+ strddo + "'))");
+			
+			
+			
 			Query query = currentSession.createNativeQuery(strQuery.toString());
 
 			result = query.list();
@@ -1153,18 +1164,11 @@ public class MstEmployeeRepoImpl implements MstEmployeeRepo {
 	public List<Long> approveDcpsEmployeeConfiguration(String empid, String Dcpsnumber, String sevaarthid,
 			String dcpsgpfflg) {
 		Session currentSession = entityManager.unwrap(Session.class);
-		// MstEmployeeEntity objEntity=new MstEmployeeEntity();
-		// objEntity.setEmployeeId(empid);
-		// currentSession.delete(objEntity);
+		
 		String hql = "update employee_mst set is_active=1,is_dcps_generate='Y', dcps_no = '" + Dcpsnumber
 				+ "',sevaarth_id='" + sevaarthid + "'  where employee_id = " + empid;
 		Query query = currentSession.createNativeQuery(hql);
 		Integer result = query.executeUpdate();
-
-		// String hql1 = "update dcps_details_mst set dcps_no='"+Dcpsnumber+"' where
-		// employee_id = "
-		// + empid;
-		// Query query1 = currentSession.createNativeQuery(hql1);
 
 		// Nominee Details
 		String hql1 = "update nominee_details_mst set  sevaarth_id='" + sevaarthid + "' where employee_id = " + empid;
@@ -1186,12 +1190,12 @@ public class MstEmployeeRepoImpl implements MstEmployeeRepo {
 
 		Query query3 = currentSession.createNativeQuery(hql3);
 		Integer result3 = query3.executeUpdate();
+		
+		
 		String hql4 = "update employee_mst_details set is_active=1, dcps_no = '"+Dcpsnumber+"',sevaarth_id='" + sevaarthid
 				+ "'  where employee_id = " + empid;
 		Query query4 = currentSession.createNativeQuery(hql4);
 		Integer result4 = query4.executeUpdate();
-		// logger.info("Query1 String=" + query1.getQueryString());
-		// Integer result1 = query1.executeUpdate();
 		List<Long> res = new ArrayList<Long>();
 		res.add((long) result);
 		return res;
@@ -1517,5 +1521,32 @@ public class MstEmployeeRepoImpl implements MstEmployeeRepo {
 		} else {
 			return Collections.emptyList();
 		}
+	}
+
+	@Override
+	public List<CmnLookupMst> getLookupValuesForParentAG(Long agType) {
+		Session currentSession = entityManager.unwrap(Session.class);
+		Long parentLookUpId=0l;
+		if(agType!=null) {
+			if (agType==700092) {
+				parentLookUpId = 700098l;
+			}
+
+			if (agType==700093) {
+				parentLookUpId = 700181l;
+			}
+		}
+		
+		String HQL = "FROM CmnLookupMst as  t  where  t.parentLookupId ="+parentLookUpId;
+		return  currentSession.createQuery(HQL).getResultList();
+	}
+
+	@Override
+	public String approveDcpsEmpByDdo(String empid, OrgUserMst message) {
+		Session currentSession = entityManager.unwrap(Session.class);
+		String hql = "update employee_mst set is_active =4,is_dcps_generate='N' where employee_id ="+empid;
+		Query query = currentSession.createNativeQuery(hql);
+		query.executeUpdate();
+		return "save";
 	}
 }
