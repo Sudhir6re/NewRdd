@@ -532,7 +532,7 @@
 					ng-model="dtJoinCurrentPost" id="dtJoinCurrentPost"
 					th:field="*{dtJoinCurrentPost}" class="form-control" /></td>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<td width="25%"><label><span
 						th:utext="#{msg.thymeleaf.pagelabel.Remark}"></span>&nbsp;&nbsp;</label></td>
 				<td width="25%"><input type="text" size="40%" ng-model="remark"
@@ -547,7 +547,7 @@
 						Teaching</label></td>
 
 
-			</tr>
+			</tr> -->
 			<tr>
 				<td width="25%"><label><span
 						th:utext="#{msg.thymeleaf.pagelabel.indiApproOrdNo}"></span>
@@ -633,6 +633,23 @@
 							th:text="${language=='mh' ? varCommon.lookupName : varCommon.lookupName}"></option>
 				</select></td>
 			</tr>
+			
+			<tr  id="dcpsDiv">
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.dcpsauth}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label></td>
+				<td width="25%"><input type="text" size="40%" minlength="9"
+					maxlength="18" id="dcpsAccMainAuthority"
+					th:field="*{dcpsAccMainAuthority}" class="form-control" /></td>
+				<td width="25%"><label><span
+						th:utext="#{msg.thymeleaf.pagelabel.dcpsaccno}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label></td>
+				<td width="25%"><input type="text" size="40%"
+					readonly="readonly"  id="dcpsAccNo"
+					th:field="*{dcpsAccNo}" class="form-control" /></td>
+			</tr>
+			
+			
 			<tr>
 				<td width="25%"><label><span
 						th:utext="#{msg.thymeleaf.pagelabel.empstapranno}"></span>&nbsp;&nbsp;

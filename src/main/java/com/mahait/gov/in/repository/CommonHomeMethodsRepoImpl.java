@@ -332,7 +332,7 @@ public class CommonHomeMethodsRepoImpl implements CommonHomeMethodsRepo {
 		if(commoncodeSalutations == "AccountMaintainedByForDCPSEmp")
 		{
 		String hql = "SELECT O1.LOOKUP_ID,O1.lookup_name,O1.lookup_desc FROM CMN_LOOKUP_MST O1, CMN_LOOKUP_MST O2 WHERE O1.PARENT_LOOKUP_ID = O2.LOOKUP_ID \r\n"
-				+ " AND O2.LOOKUP_NAME = '"+commoncodeSalutations+"' and O1.lookup_id in (700179,700343,10001198172,700344,10001198187) ORDER BY O1.ORDER_NO desc,O1.LOOKUP_ID";
+				+ " AND O2.LOOKUP_NAME = '"+commoncodeSalutations+"' and O1.lookup_id in (700175,7000181) ORDER BY O1.ORDER_NO desc,O1.LOOKUP_ID";
 		Query query = currentSession.createNativeQuery(hql);
 		return (List<Object[]>) query.list();
 		}else

@@ -209,6 +209,9 @@ public class MstEmployeeModel {
 	
 	private String reasonForChangedtls;
 	
+	private String dcpsAccMainAuthority;
+	private String dcpsAccNo;
+	
 	private List<MstNomineeDetailsModel> lstMstNomineeDetails;
 	
 	public List<MstEmployeeModel> mstEmployeeModelList=new ArrayList<>();

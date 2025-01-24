@@ -1,6 +1,10 @@
 var contextPath = $("#appRootPath").val();
+var context ="";
+var ddo ="";
+
 jQuery(document).ready(function() {
-	
+	context = $("#appRootPath").val();
+		ddo=getUserUrl();
 	
 	   if (enableTyping != undefined) {
            enableTyping(new Array('fName','mName','lName'),//Input fiel Name
@@ -1848,6 +1852,93 @@ $("#designationId")
 				});
 // end designation
 
+
+$("#accountmaintainby1").change(function() {
+	
+	    var accmainby = $("#accountmaintainby").val();
+	    var group = $('#txtGroup').val();
+	   var accMaintainText = $('#accountmaintainby option:selected').text();
+	   if ((accmainby !== '0' &&  accmainby !== '-1' ) && group !== '') {
+	       if (group === 'D' && accMaintainText !== 'Department') {
+	           alert('Group D accounts maintained by Department');
+	       } else if (['A', 'B', 'C'].includes(group) && ![700092, 700093, 700096].includes(Number(accmainby))) {
+	           alert('Group A, B, C accounts maintained by A.G.');
+	       }
+	   }
+	   
+	   if(accmainby === '700094'){
+		                    document.getElementById('pfdescription').value = 'Others';	
+		   					document.getElementById('pfseries').value = 'Others';	
+	   }
+	   
+      
+	   
+	   
+
+	                    document.getElementById('pfdescription').value = 'Others';	
+	   					document.getElementById('pfseries').value = 'Others';	
+	   
+	   
+	   if (accmainby === '700094') {
+	       $('#pfseries').val(-1).prop('disabled', true).hide();
+	       $('#txtPFSeries').val('').prop('disabled', false).show();
+	       $('#pfdescription').val('').prop('readonly', false).prop('disabled', false);
+	       $('#txtPfAccountNo').prop('readonly', false);
+	       $('#labelForGPFSeriesDesc').show();
+	       $('#labelForGPFAcNo').css('display', 'inline');
+	   } else if (selectedValue === '700095') {
+	       $('#cmbPFSeries').hide();
+	       $('#txtPFSeries').val('NA').prop('readonly', true).show();
+	       $('#txtPFSeriesDesc').val('NA').prop('readonly', true);
+	       $('#txtPfAccountNo').prop('readonly', true);
+	       $('#labelForGPFAcNo').hide();
+	       $('#labelForGPFSeriesDesc').hide();
+	   } else if (selectedValue === '700096') {
+	       $('#cmbPFSeries').hide();
+	       $('#txtPFSeries').val('Others').prop('readonly', true).show();
+	       $('#txtPFSeriesDesc').val('Others').prop('readonly', true);
+	       $('#txtPfAccountNo').prop('readonly', false);
+	       $('#labelForGPFAcNo').hide();
+	       $('#labelForGPFSeriesDesc').hide();
+	   } else if (['700092', '700093'].includes(selectedValue)) {
+	       $('#cmbPFSeries').prop('disabled', false).show();
+	       $('#txtPFSeries').hide();
+	       $('#txtPFSeriesDesc').val('').prop('readonly', true);
+	       $('#txtPfAccountNo').prop('readonly', false);
+	       $('#labelForGPFAcNo').css('display', 'inline');
+	       $('#labelForGPFSeriesDesc').hide();
+
+	       $.ajax({
+	           url: "ifms.htm",
+	           method: "POST",
+	           data: {
+	               actionFlag: "getLookupValuesForParentAG",
+	               typeOfAG: selectedValue
+	           },
+	           success: function (response) {
+	               populatePFSeriesDropdown(response);
+	           },
+	           error: function () {
+	               alert('Something went wrong...');
+	           }
+	       });
+	   } else {
+	       var defaultOption = $('<option>', { value: -1, text: '-- Select --' });
+	       $('#cmbPFSeries').empty().append(defaultOption).val(-1).prop('disabled', false).show();
+	       $('#txtPFSeries').hide();
+	       $('#txtPFSeriesDesc').val('').prop('readonly', true);
+	       $('#txtPfAccountNo').prop('readonly', false);
+	       $('#labelForGPFSeriesDesc').hide();
+	   }
+	
+	
+	
+	
+	
+	});
+
+
+
 // for fetching pf series associates with account maintain by
 $("#accountmaintainby")
 		.change(
@@ -1855,63 +1946,19 @@ $("#accountmaintainby")
 					var accmainby = $("#accountmaintainby").val();
 					if(accmainby== '700096')
 					{
-						$("#InputBox").hide();
-						//document.getElementById('pfseries').disabled = 'true';	
-						//document.getElementById('pfacno').disabled = 'true';	
 						document.getElementById('pfdescription').value = 'Others';	
 						document.getElementById('pfseries').value = 'Others';	
-						
-//						$('#pfseries').empty();
-//						$('#pfacno').empty();
-//						$('#pfdescription').empty();
-						
-						
-//						$('#pfseries').append("<option value='1'>A</option>");
-//						$('#pfseries').append("<option value='2'>B</option>");
-//						$('#pfseries').append("<option value='3'>C</option>");
-//						$('#pfseries').append("<option value='4'>D</option>");
-//						$('#pfseries').append("<option value='5'>E</option>");
-//						$('#pfseries').append("<option value='6'>F</option>");
-//						$('#pfseries').append("<option value='7'>G</option>");
-//						$('#pfseries').append("<option value='8'>H</option>");
-//						$('#pfseries').append("<option value='9'>I</option>");
-//						$('#pfseries').append("<option value='10'>J</option>");
-//						$('#pfseries').append("<option value='11'>K</option>");
-//						$('#pfseries').append("<option value='12'>L</option>");
-//						$('#pfseries').append("<option value='13'>M</option>");
-//						$('#pfseries').append("<option value='14'>N</option>");
-//						$('#pfseries').append("<option value='15'>O</option>");
-//						$('#pfseries').append("<option value='16'>P</option>");
-//						$('#pfseries').append("<option value='17'>Q</option>");
-//						$('#pfseries').append("<option value='18'>R</option>");
-//						$('#pfseries').append("<option value='19'>S</option>");
-//						$('#pfseries').append("<option value='20'>T</option>");
-//						$('#pfseries').append("<option value='21'>U</option>");
-//						$('#pfseries').append("<option value='22'>V</option>");
-//						$('#pfseries').append("<option value='23'>W</option>");
-//						$('#pfseries').append("<option value='24'>X</option>");
-//						$('#pfseries').append("<option value='25'>Y</option>");
-//						$('#pfseries').append("<option value='26'>Z</option>");
-//						
-						
 					}
-					
 					else if(accmainby== '700094')
 					{
-						$("#InputBox").hide();
-						//document.getElementById('pfseries').disabled = 'true';	
-						//document.getElementById('pfacno').disabled = 'true';	
-//						document.getElementById('pfdescription').disabled = 'true';	
 						document.getElementById('pfdescription').value = '';	
 						document.getElementById('pfseries').disabled = 'true';	
-						
 						$('#pfseries').empty();
 						$('#pfacno').empty();
 						$('#pfdescription').empty();
 					}
 					else
 						{
-						$("#InputBox").hide();
 					document.getElementById('pfseries').disabled = '';	
 					document.getElementById('pfacno').disabled = '';	
 				///	document.getElementById('pfdescription').disabled = '';	
@@ -3519,62 +3566,40 @@ function approveEmpDtls() {
 		});
 	}
 }
-function forwardLvlThreeEmpDtls() {
-	var dateString = document.getElementById("dob").value;
-	var ddocodeString = document.getElementById("ddoCode").value;
-	var location = document.getElementById("deptNm").value;
-	;
-	var birthDate = new Date(dateString);
-	var year = birthDate.getFullYear();
-	year = year.toString().substr(-2);
-	ddocodeString = ddocodeString.substring(0, 2);
-	// var fstNm = document.getElementById("fName").value;
-	var fstNm = $("#fName").val().toUpperCase();
-	var mNm = $("#mName").val().toUpperCase();
-	var lNm = $("#lName").val().toUpperCase();
-	// var mNm = document.getElementById("mName").value;
-	// var lNm = document.getElementById("lName").value;
-	var name = fstNm.charAt(0) + mNm.charAt(0) + lNm.charAt(0);
-	var index = document.myForm.gender.selectedIndex;
-	var genderValue = $("#gender").val();
-	genderValue = genderValue.substring(0, 1);
-	var empid = document.getElementById("employeeId").value;
-	var sevaarthid = ddocodeString + location + name + genderValue + year;
-	var dcpsgpfflg=document.getElementById("dcpsgpfflg").value;
-	if (empid != '') {
-		$.ajax({
-			type : "GET",
-			url : "forwardLvelThreeEmpDtls/" + empid + "/" + sevaarthid + "/" + dcpsgpfflg,
-			async : true,
-			contentType : 'application/json',
-			error : function(data) {
-				// console.log(data);
-			},
-			beforeSend : function(){
-				$( "#loaderMainNew").show();
-				},
-			complete : function(data){
-				$( "#loaderMainNew").hide();
-			},	
-			success : function(data) {
-				var sevaarthIdres = data;
-				// alert(checkFlag);
-				swal({ 
-					 text: "Employee Forwarded to Level 3 Successfully",
-					 type: "success"}).then(okay => {
-					   if (okay) {
-						   document.getElementById("myForm").submit();
-					  }
-					});
-//				swal('Approved Successfully Sevaarthid is genrated '
-//						+ sevaarthIdres);
-//				document.getElementById("myForm").submit();
-				return status;
 
-			}
-		});
-	}
+function forwardDcpsEmpToLvl3(){
+	var empid = $("#employeeId").val();
+	
+	if (empid != '') {
+			$.ajax({
+				type : "GET",
+				url : "/forwardDcpsEmpToLvl3/" + empid,
+				async : true,
+				contentType : 'application/json',
+				error : function(data) {
+					 console.log(data);
+				},
+				beforeSend : function(){
+					$( "#loaderMainNew").show();
+					},
+				complete : function(data){
+					$( "#loaderMainNew").hide();
+				},	
+				success : function(data) {
+					swal({ 
+						 text: "Employee Forwarded to Level 3 Successfully",
+						 type: "success"}).then(okay => {
+						   if (okay) {
+							   document.getElementById("myForm").submit();
+						  }
+						});
+					return status;
+				}
+			});
+		}
 }
+
+
 function rejectEmpDtls() {
 	var empid = document.getElementById("employeeId").value;
 	if (empid != '') {
@@ -5056,6 +5081,17 @@ function fetchPayScale(){
 
 }
 
+
+$("#dcpsaccountmaintainby").change(function(){
+	var dcpsAccMain=$("#dcpsaccountmaintainby").val();
+	if(dcpsAccMain=="700175"){
+		$("#dcpsDiv").hide();
+	}else{
+		$("#dcpsDiv").show();
+	}
+	
+	
+});
 
 
 

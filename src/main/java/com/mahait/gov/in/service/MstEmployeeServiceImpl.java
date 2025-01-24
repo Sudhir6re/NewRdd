@@ -1404,9 +1404,9 @@ public class MstEmployeeServiceImpl implements MstEmployeeService {
 	}
 
 	@Override
-	public List<MstEmployeeModel> getDcpsEmployeeDetails(String strddo, String language, long locId) {
+	public List<MstEmployeeModel> getDcpsEmployeeDetails(String strddo, String language, long locId,OrgUserMst messages) {
 		// TODO Auto-generated method stub
-		List<MstEmployeeEntity> listempentity = mstEmployeeRepo.getDcpsEmployeeDetails(strddo);
+		List<MstEmployeeEntity> listempentity = mstEmployeeRepo.getDcpsEmployeeDetails(strddo,messages);
 		List<MstEmployeeModel> result = new ArrayList<MstEmployeeModel>();
 		String DeptName = "";
 		List<DDOScreenModel> lstDepartment = findDDOScreenDataTable(language, locId);
@@ -1909,6 +1909,17 @@ public class MstEmployeeServiceImpl implements MstEmployeeService {
 	@Override
 	public List<Long> rejectEmployeeConfiguration(String empid) {
 		return mstEmployeeRepo.rejectEmployeeConfiguration(empid);
+	}
+
+
+	@Override
+	public List<CmnLookupMst> getLookupValuesForParentAG(Long agType) {
+		return mstEmployeeRepo.getLookupValuesForParentAG(agType);
+	}
+
+	@Override
+	public String approveDcpsEmpByDdo(String empid, OrgUserMst message) {
+		return mstEmployeeRepo.approveDcpsEmpByDdo(empid,message);
 	}
 
 	
