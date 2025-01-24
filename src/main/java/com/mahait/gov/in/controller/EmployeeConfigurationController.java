@@ -65,7 +65,7 @@ import jakarta.validation.Valid;
 
 @Controller
 // @RequestMapping("/ddoast")
-@RequestMapping(value = { "/ddoast", "/ddo" })
+@RequestMapping(value = { "/ddoast", "/ddo" ,"/level3"})
 @PropertySource(value = { "classpath:application.properties" })
 public class EmployeeConfigurationController extends BaseController {
 
