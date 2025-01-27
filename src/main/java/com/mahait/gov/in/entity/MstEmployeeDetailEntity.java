@@ -1,6 +1,5 @@
 package com.mahait.gov.in.entity;
 
-
 import java.util.Date;
 import java.util.List;
 
@@ -23,18 +22,16 @@ import lombok.Data;
 
 
 @Data
-@JsonIgnoreProperties(value = {"mstNomineeDetailsEntity","mstSubDepartmentEntity","mstGpfDetailsEntity"})
 @Entity
 @Table(name = "employee_mst_details", schema = "public")
+@JsonIgnoreProperties(value = { "mstNomineeDetailsEntity", "mstSubDepartmentEntity", "mstGpfDetailsEntity" })
 public class MstEmployeeDetailEntity {
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "mstEmployeeEntity", orphanRemoval = true)
-	private List<MstNomineeDetailsEntity> mstNomineeDetailsEntity;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mstEmployeeDetailEntity", orphanRemoval = true)
+    private List<MstNomineeDetailsEntity> mstNomineeDetailsEntity;
 
-
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "mstEmployeeEntity", orphanRemoval = true)
-	private MstGpfDetailsEntity mstGpfDetailsEntity;
-
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "mstEmployeeDetailEntity", orphanRemoval = true)
+    private MstGpfDetailsEntity mstGpfDetailsEntity;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,11 +40,9 @@ public class MstEmployeeDetailEntity {
 
 	@Column(name = "EMPLOYEE_ID")
 	private Long employeeId;
-	
+
 	@Column(name = "SEVAARTH_ID")
 	private String sevaarthId;
-
-
 
 	@Column(name = "GENDER")
 	private Character gender;
@@ -212,8 +207,6 @@ public class MstEmployeeDetailEntity {
 	@Column(name = "IsApplicableforBeams", length = 1)
 	private Character IsApplicableforBeams;
 
-
-
 	@Column(name = "REASON_FOR_CHANGEDTLS")
 	private String reasonForChangedtls;
 
@@ -249,7 +242,7 @@ public class MstEmployeeDetailEntity {
 
 	@Column(name = "pfseries")
 	private String pfseries;
-	
+
 	@Column(name = "dcps_no")
 	private String dcpsNo;
 
@@ -258,10 +251,10 @@ public class MstEmployeeDetailEntity {
 
 	@Column(name = "crtId")
 	private Long crtId;
-	
+
 	@Column(name = "headOfAccCode")
 	private String headOfAccCode;
-	
+
 	@Transient
 	private String employeeBirthPlace;
 
@@ -361,11 +354,9 @@ public class MstEmployeeDetailEntity {
 	@Column(name = "accMaintainedByOther")
 	private String accMaintainedByOther;
 
-	
 	@Transient
 	private String uidNo3;
 
-	
 	@Column(name = "PAY_IN_PAY_BAND")
 	private Long payInPayBand;
 
@@ -438,14 +429,12 @@ public class MstEmployeeDetailEntity {
 
 	@Column(name = "UPDATED_USER_ID")
 	private Long updatedUserId;
-	
+
 	@Column(name = "PAY_SCALE_LEVEL_ID")
 	private String payscalelevelId;
 
 	@Column(name = "locality")
 	private String locality;
-
-	
 
 	@Column(name = "seven_pc_basic")
 	private Double sevenPcBasic;
@@ -541,25 +530,22 @@ public class MstEmployeeDetailEntity {
 
 	@Column(name = "HOD_lOC_CODE")
 	private Long parentFieldDepartmentId;
-	
+
 	@Column(name = "QUALIFICATION")
 	private String qualification;
-	
+
 	@Column(name = "APPOINTMENT")
 	private String appointment;
-	
+
 	@Column(name = "EMP_TYPES")
 	private String teaching;
-	
+
 	@Column(name = "SEC_QUALIFICATION")
 	private String secqualification;
-	
-	
+
 	@Column(name = "MORE_QUALIFICATION")
 	private String morequalification;
-	
+
 	@Column(name = "FORM_STATUS")
 	private Long formstatus;
-	}
-
-
+}
