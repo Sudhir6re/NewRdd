@@ -211,6 +211,8 @@ public class MstEmployeeModel {
 	
 	private String dcpsAccMainAuthority;
 	private String dcpsAccNo;
+	private String reptDdoCode;
+	
 	
 	private List<MstNomineeDetailsModel> lstMstNomineeDetails;
 	

@@ -32,22 +32,18 @@
 					<tbody>
 						<tr>
 							<td>Reporting DDO Code</td>
-							<td><select name="cmbReptDDO">
-									<option value="-1">Select</option>
-									<option value="0437010002" selected="selected">Rajmohan
-										Sharma (0437010002)</option>
-							</select></td>
+							<td><select name="reptDdoCode" id="reptDdoCode">
+									<option value="0">Select</option>
+									<option th:each="varempdtls : ${employeedetails}" th:value="${varempdtls.reptDdoCode}" th:text="${varempdtls.reptDdoCode}">Select</option>
+								
+							</select>
+							</td>
 						</tr>
 						<tr>
 							<td>Assistant DDO Code</td>
-							<td><select name="cmbAsstDDO">
-									<option value="-1">Select</option>
-									<option value="02370100003">TEST OFFICE
-										RDD(new)-abc:,./(02370100003)</option>
-									<option value="02370100004">(02370100004)</option>
-									<option value="02370100005">(02370100005)</option>
-									<option value="02370100328">Demo DDO RDD
-										Office(02370100328)</option>
+							<td><select name="ddoCode" id="ddoCode">
+									<option value="0">Select</option>
+									
 							</select></td>
 						</tr>
 						<tr>
@@ -63,34 +59,65 @@
 					<b>All Employee Details</b>
 				</legend>
 				<table class="table table-hover table-bordered">
-					<thead>
-						<tr>
-							<th>Employee Name</th>
-							<th>Date Of Birth</th>
-							<th>Gender</th>
-							<th>Designation</th>
-							<th>DDO</th>
-							<th>Level 2</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>SUDHIR PRABHAKAR NIMJE</td>
-							<td>24/04/1995</td>
-							<td>M</td>
-							<td>Assistant Account Officer</td>
-							<td>02370100003</td>
-							<td>0437010002</td>
-						</tr>
-						<tr>
-							<td>ASHISH SHANKAR WASAKE</td>
-							<td>24/04/1995</td>
-							<td>M</td>
-							<td>Assistant Account Officer</td>
-							<td>02370100003</td>
-							<td>0437010002</td>
-						</tr>
-					</tbody>
+				
+				
+				<thead>
+					<tr style="text-align: center;">
+						<th th:utext="#{msg.thymeleaf.pagelabel.srno}"
+							style="text-align: center;"></th>
+
+						<th th:utext="#{msg.thymeleaf.pagelabel.employeeName}"
+							style="text-align: center;"></th>
+							
+						<th th:utext="#{msg.thymeleaf.pagelabel.sevaarthId}"
+							style="text-align: center;"></th>
+							
+						<th th:utext="#{msg.thymeleaf.pagelabel.empstadob}"
+							style="text-align: center;"></th>
+							
+							
+						<th th:utext="#{msg.thymeleaf.pagelabel.gender}"
+							style="text-align: center;"></th>
+							
+								<th th:utext="#{msg.thymeleaf.pagelabel.designationName}"
+							style="text-align: center;"></th>
+
+						<th th:utext="#{msg.thymeleaf.datatablelabel.ddocode}"
+							style="text-align: center;"></th>
+							
+							
+						<th th:utext="#{msg.thymeleaf.pagelabel.level2}"
+							style="text-align: center;"></th>
+
+
+						<th th:utext="#{msg.thymeleaf.datatablelabel.action}"
+							style="text-align: center;"></th>
+					</tr>
+				</thead>
+				<tbody>
+
+				<tbody>
+					<tr th:each="varempdtls : ${employeedetails}">
+						<td th:text="${varempdtlsStat.index+1}"></td>
+						<td th:text="${varempdtls.employeeFullName}"></td>
+						<td th:text="${varempdtls.sevaarthId}"></td>
+						<td th:text="${#dates.format(varempdtls.dob, 'dd-MM-yyyy')}"></td>
+
+					    <td th:text="${varempdtls.gender == 'Y' ? 'Male' : 'Female'}"></td>
+
+						<td th:text="${varempdtls.designationName}"></td>
+						<td th:text="${varempdtls.ddoCode}"></td>
+						<td th:text="${varempdtls.reptDdoCode}"></td>
+						<td>
+							<div class="form-group text-center">
+								<a data-toggle="tooltip" title="Edit"
+									th:onclick="|editempconfig(${varempdtls.employeeId})|"> <span
+									class="glyphicon glyphicon-edit"></span>
+								</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
 				</table>
 			</fieldset>
 		</div>

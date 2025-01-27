@@ -51,6 +51,7 @@ import com.mahait.gov.in.entity.OrgPostMst;
 import com.mahait.gov.in.entity.OrgUserMst;
 import com.mahait.gov.in.entity.OrgUserpostRlt;
 import com.mahait.gov.in.entity.QualificationEntity;
+import com.mahait.gov.in.entity.ZpRltDdoMap;
 import com.mahait.gov.in.model.DDOScreenModel;
 import com.mahait.gov.in.model.MstCadreModel;
 import com.mahait.gov.in.model.MstEmployeeModel;
@@ -1428,7 +1429,10 @@ public class MstEmployeeServiceImpl implements MstEmployeeService {
 							: "0".toString())
 					.toUpperCase());
 			mstEmployeeModel.setDdoCode(mstEmployeeEntity.getDdoCode());
+			mstEmployeeModel.setDob(mstEmployeeEntity.getDob());
+			mstEmployeeModel.setGender(mstEmployeeEntity.getGender());
 			mstEmployeeModel.setDepartmentNameEn(DeptName);
+			mstEmployeeModel.setReptDdoCode(mstEmployeeEntity.getReptDdoCode());
 
 			result.add(mstEmployeeModel);
 		}
@@ -1923,6 +1927,11 @@ public class MstEmployeeServiceImpl implements MstEmployeeService {
 	@Override
 	public String approveDcpsEmpByDdo(String empid, OrgUserMst message) {
 		return mstEmployeeRepo.approveDcpsEmpByDdo(empid,message);
+	}
+
+	@Override
+	public List<ZpRltDdoMap> findDdoByReptDdoCode(String reptDdoCode) {
+		return mstEmployeeRepo.findDdoByReptDdoCode(reptDdoCode);
 	}
 
 	

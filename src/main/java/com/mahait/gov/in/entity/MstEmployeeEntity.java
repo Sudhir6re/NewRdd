@@ -574,6 +574,10 @@ public class MstEmployeeEntity {
 	@Column(name = "dcps_acc_no")
 	private String dcpsAccNo;
 	
+	@Transient
+	private String reptDdoCode;
+	
+	
 	
 	
 	}

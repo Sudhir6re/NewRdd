@@ -66,26 +66,29 @@ public class TopicController extends BaseController {
 	@RequestMapping("/logOut")
 	public RedirectView logOut(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");
-		String ip = null;
-		try {
-			ip = InetAddress.getLocalHost().getHostAddress();
+		if(messages!=null) {
+			String ip = null;
+			try {
+				ip = InetAddress.getLocalHost().getHostAddress();
 
-			UserLoginHistryEntity userLoginHistry = new UserLoginHistryEntity();
-			userLoginHistry.setUsername(messages.getUserName());
-			userLoginHistry.setLoginIp(ip);
-			userLoginHistry.setCreatedDate(new Date());
-			userLoginHistry.setLoginDate(new Date());
-			userLoginHistry.setCreatedUserId(1);
-			userLoginHistry.setIsActive(3);
-			userLoginHistry.setStatus("Logout Successful");
-			userLoginHistryService.saveLoginDtls(userLoginHistry);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
+				UserLoginHistryEntity userLoginHistry = new UserLoginHistryEntity();
+				userLoginHistry.setUsername(messages.getUserName());
+				userLoginHistry.setLoginIp(ip);
+				userLoginHistry.setCreatedDate(new Date());
+				userLoginHistry.setLoginDate(new Date());
+				userLoginHistry.setCreatedUserId(1);
+				userLoginHistry.setIsActive(3);
+				userLoginHistry.setStatus("Logout Successful");
+				userLoginHistryService.saveLoginDtls(userLoginHistry);
+			} catch (UnknownHostException e) {
+				e.printStackTrace();
+			}
 
-		if (session != null) {
-			session.invalidate();
+			if (session != null) {
+				session.invalidate();
+			}
 		}
+		
 		RedirectView redirectView = new RedirectView("/user/login?logout");
 		redirectView.setContextRelative(true); // Ensures the context path is preserved
 		return redirectView;

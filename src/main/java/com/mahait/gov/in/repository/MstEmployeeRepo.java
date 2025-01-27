@@ -19,6 +19,7 @@ import com.mahait.gov.in.entity.MstRoleEntity;
 import com.mahait.gov.in.entity.OrgPostDetailsRlt;
 import com.mahait.gov.in.entity.OrgUserMst;
 import com.mahait.gov.in.entity.QualificationEntity;
+import com.mahait.gov.in.entity.ZpRltDdoMap;
 import com.mahait.gov.in.model.MstEmployeeModel;
 
 public interface MstEmployeeRepo {
@@ -150,6 +151,8 @@ public interface MstEmployeeRepo {
 	public List<CmnLookupMst> getLookupValuesForParentAG(Long agType);
 
 	public String approveDcpsEmpByDdo(String empid, OrgUserMst message);
+
+	public List<ZpRltDdoMap> findDdoByReptDdoCode(String reptDdoCode);
 
 
 

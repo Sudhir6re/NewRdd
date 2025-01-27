@@ -3,16 +3,6 @@ var context ="";
 var ddo ="";
 
 jQuery(document).ready(function() {
-	
-	
-	       $("#subCorporationId").prop("disabled", true);
-			$("#isChangeParentDepartment1").prop("disabled", true);
-			$("#reasonForChngParentFieldDept").prop("disabled", true);
-				var pph = new PramukhPhoneticHandler();
-		pph.convertToIndicIME("fullNameInDevnagri", document
-				.getElementById('txtNameInDevanagari'), 'devanagari');
-
-	
 	context = $("#appRootPath").val();
 		ddo=getUserUrl();
 	
@@ -3595,7 +3585,7 @@ function forwardDcpsEmpToLvl3(){
 				    if (willDelete) {
 						$.ajax({
 										type : "GET",
-										url : contextPath+ddo+"/forwardDcpsEmpToLvl3/" + empid,
+										url : contextPath+ddo+"forwardDcpsEmpToLvl3/" + empid,
 										async : true,
 										contentType : 'application/json',
 										error : function(data) {
@@ -5116,9 +5106,45 @@ $("#dcpsaccountmaintainby").change(function(){
 	}else{
 		$("#dcpsDiv").show();
 	}
-	
-	
 });
+
+$("#reptDdoCode").change(function(){
+	var reptDdoCode=$("#reptDdoCode").val();
+	if(reptDdoCode!=''){
+		$.ajax({
+					type : "GET",
+					url : context+ddo+"findDdoByReptDdoCode/" + reptDdoCode,
+					async : true,
+					contentType : 'application/json',
+					error : function(data) {
+						console.log(data);
+					},
+					beforeSend : function(){
+						$( "#loaderMainNew").show();
+						},
+					complete : function(data){
+						$( "#loaderMainNew").hide();
+					},	
+					success : function(data) {
+						 console.log(data);
+						var len = data.length;
+						if (len != 0) {
+							$("#ddoCode").empty();
+							$("#ddoCode").append("<option value='0' >Please Select</option>")
+							for(var i=0;i<len;i++){
+								$("#ddoCode").append("<option value='"+data[i].ddoCode+"' >"+data[i].ddoCode+"</option>")
+							}
+						} else {
+							swal("Record not found !!!");
+						}
+					}
+				});
+	}
+});
+
+
+
+
 
 
 

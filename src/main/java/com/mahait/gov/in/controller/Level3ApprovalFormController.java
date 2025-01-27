@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/level3")
 @Controller
-public class Level3ApprovalForm1Controller extends BaseController {
+public class Level3ApprovalFormController extends BaseController {
 	@GetMapping("/level3ApprovalForm1")
 	public String level3ApprovalForm1(Model model, Locale locale, HttpSession session) {
 		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");

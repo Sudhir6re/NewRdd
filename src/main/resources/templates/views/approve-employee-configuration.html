@@ -103,6 +103,9 @@ input#uid1, input#uid2, input#uid3 {
 					th:value="${mstEmployeeModel.pfseries}" disabled="disabled"
 					class="form-control" />
 
+<input type="text" th:value="${mstEmployeeModel.dcpsgpfflag}"> 
+
+
 				<div id="tabContainer" class="container">
 					<ul class="nav nav-tabs">
 						<!-- <li ><a data-toggle="tab" href="#home">Sevaarth Id Detail</a></li> -->
@@ -174,13 +177,16 @@ input#uid1, input#uid2, input#uid3 {
 
 						<input type="button" id="btnPrevious" name="btnPrevious"
 							value="Previous" class="btn" /> <input type="button"
-							id="btnNext" name="btnNext" value="Next" class="btn" /> <span
+							id="btnNext" name="btnNext" value="Next" class="btn" /> 
+							
+							<span
 							th:if="${mstEmployeeModel.dcpsgpfflag == 'Y'}"> <input
 							type="button" id="btnSave" class="btn btn-primary"
 							th:value="#{msg.thymeleaf.pagelabel.forwardtolevelthree}"
 							th:onclick="'forwardLvlThreeEmpDtls();'" />
 
-						</span> <span th:if="${mstEmployeeModel.dcpsgpfflag == 'N'}"> <input
+						</span> <span th:if="${mstEmployeeModel.dcpsgpfflag == 'N'}"> 
+						<input
 							type="button" id="btnSave" class="btn btn-primary"
 							th:value="#{msg.thymeleaf.pagelabel.approve}"
 							th:onclick="'approveEmpDtls();'" />

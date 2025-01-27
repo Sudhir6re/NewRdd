@@ -63,15 +63,22 @@ public class UserInfoRepoImpl implements UserInfoRepo {
 
 	@Override
 	public OrgUserMst getUserIdbyUserName(String userName) {
-		String sql = "Select e from " + OrgUserMst.class.getName() + " e " //
-				+ " Where e.userName = :userName  ";
+		
+		try {
+			String sql = "Select e from " + OrgUserMst.class.getName() + " e " //
+					+ " Where e.userName = :userName  ";
 
-			Query query = entityManager.createQuery(sql, OrgUserMst.class);
-			 /*Query query = entityManager.createQuery(sql); */
-			 query.setParameter("userName", userName);
-			 /*query.setParameter("appCode", appCode);*/
+				Query query = entityManager.createQuery(sql, OrgUserMst.class);
+				 /*Query query = entityManager.createQuery(sql); */
+				 query.setParameter("userName", userName);
+				 /*query.setParameter("appCode", appCode);*/
 
-			return (OrgUserMst) query.getSingleResult();
+				return (OrgUserMst) query.getSingleResult();
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
 		
 	}
 

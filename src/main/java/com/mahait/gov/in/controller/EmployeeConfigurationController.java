@@ -44,6 +44,7 @@ import com.mahait.gov.in.entity.MstPayCommissionEntity;
 import com.mahait.gov.in.entity.OrgDdoMst;
 import com.mahait.gov.in.entity.OrgUserMst;
 import com.mahait.gov.in.entity.ReligionMstEntity;
+import com.mahait.gov.in.entity.ZpRltDdoMap;
 import com.mahait.gov.in.fileupload.FileSecurityHandler;
 import com.mahait.gov.in.model.DDOScreenModel;
 import com.mahait.gov.in.model.MstDistrictModel;
@@ -789,6 +790,11 @@ public class EmployeeConfigurationController extends BaseController {
 		// logger.info("employeeConfigurationService="+mm);
 		model.addAttribute("employeedetails", employeeConfigurationService);
 		addMenuAndSubMenu(model, messages);
+		
+		if(messages.getMstRoleEntity().getRoleId()==7) {
+			return "/views/level3-approval-form1";
+		}
+		
 		return "/views/dcps-employee-details";
 	}
 
@@ -1429,6 +1435,18 @@ public class EmployeeConfigurationController extends BaseController {
 		List<CmnLookupMst> lstCmnLookupMst = mstEmployeeService.getLookupValuesForParentAG(agType);
 		return ResponseEntity.ok(lstCmnLookupMst);
 	}
+	
+	@RequestMapping("/findDdoByReptDdoCode/{reptDdoCode}")
+	public ResponseEntity<List<ZpRltDdoMap>> findDdoByReptDdoCode(@PathVariable String reptDdoCode, Model model,
+			Locale locale) {
+		List<ZpRltDdoMap> lstZpRltDdoMap = mstEmployeeService.findDdoByReptDdoCode(reptDdoCode);
+		return ResponseEntity.ok(lstZpRltDdoMap);
+	}
+	
+	
+	
+	//List<MstEmployeeModel> employeeConfigurationService = mstEmployeeService.getDcpsEmployeeDetails(strddo,locale.getLanguage(), locId,messages);
+	
 	
 
 }

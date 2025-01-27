@@ -24,7 +24,7 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(value = {"mstNomineeDetailsEntity","mstSubDepartmentEntity","mstGpfDetailsEntity"})
-//@Entity
+@Entity
 @Table(name = "employee_mst_details", schema = "public")
 public class MstEmployeeDetailEntity {
 

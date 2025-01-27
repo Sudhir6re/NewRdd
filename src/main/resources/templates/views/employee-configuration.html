@@ -129,7 +129,7 @@ input#uid1, input#uid2, input#uid3 {
 					
 					<input
 					type="text" name="dcpsgpfflagValue" id="dcpsgpfflagValue"
-					th:value="*{mstEmployeeModel.dcpsgpfflag}" class="form-control" />
+					th:value="${mstEmployeeModel.dcpsgpfflag}" class="form-control" />
 					
 					
 					
@@ -265,6 +265,18 @@ input#uid1, input#uid2, input#uid3 {
 	<script th:src="@{/js/project/census.js}"></script>
 	<script th:src="@{/js/validated.js}"></script>
 	<script th:src="@{/js/pramukhlib.js}"></script>
+	      
+	      
+	<script>
+	
+	 $("#subCorporationId").prop("disabled", true);
+			$("#isChangeParentDepartment1").prop("disabled", true);
+			$("#reasonForChngParentFieldDept").prop("disabled", true);
+				var pph = new PramukhPhoneticHandler();
+		pph.convertToIndicIME("fullNameInDevnagri", document
+				.getElementById('txtNameInDevanagari'), 'devanagari');
+	
+	</script>
 
 
 </body>
