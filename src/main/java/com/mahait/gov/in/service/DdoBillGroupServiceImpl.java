@@ -220,7 +220,7 @@ public String saveAttachDettachEmployee(MpgSchemeBillGroupModel mpgSchemeBillGro
 		if (lStrArrDcpsEmpIdstoBeDetached[lInt] != "" && !lStrArrDcpsEmpIdstoBeDetached[lInt].equals("")) {
 			lLongArrDcpsEmpIdstoBeDetached[lInt] = Long.valueOf(lStrArrDcpsEmpIdstoBeDetached[lInt]);
 			result = ddoBillGroupRepo.saveAttachDettachEmployeeBillGroup(mpgSchemeBillGroupModel.getSevaarthId(),
-					lLongArrDcpsEmpIdstoBeDetached[lInt].intValue(), mpgSchemeBillGroupModel.getSchemebillGroupId(),
+					lLongArrDcpsEmpIdstoBeDetached[lInt], mpgSchemeBillGroupModel.getSchemebillGroupId(),
 					"Detach");// updateBillNoInPayroll(lLongArrDcpsEmpIdstoBeDetached[lInt], null, "Detach");
 		}
 	}
@@ -235,7 +235,7 @@ public String saveAttachDettachEmployee(MpgSchemeBillGroupModel mpgSchemeBillGro
 			// lObjDdoBillGroupDAO.updateBillNoInPayroll(lLongArrDcpsEmpIdstoBeAttached[lInt],
 			// lLongbillGroupId, "Attach");
 			result = ddoBillGroupRepo.saveAttachDettachEmployeeBillGroup(mpgSchemeBillGroupModel.getSevaarthId(),
-					lLongArrDcpsEmpIdstoBeAttached[lInt].intValue(), mpgSchemeBillGroupModel.getSchemebillGroupId(),
+					lLongArrDcpsEmpIdstoBeAttached[lInt], mpgSchemeBillGroupModel.getSchemebillGroupId(),
 					"Attach");
 		}
 	}

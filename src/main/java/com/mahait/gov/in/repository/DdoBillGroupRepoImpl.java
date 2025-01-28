@@ -145,7 +145,7 @@ public class DdoBillGroupRepoImpl implements DdoBillGroupRepo {
 	}
 
 	@Override
-	public String saveAttachDettachEmployeeBillGroup(String sevaarthId, int empid, Long billGroupId, String status) {
+	public String saveAttachDettachEmployeeBillGroup(String sevaarthId, Long empid, Long billGroupId, String status) {
 		// TODO Auto-generated method stub
 		Session currentSession = entityManager.unwrap(Session.class);
 		StringBuffer hql = new StringBuffer();

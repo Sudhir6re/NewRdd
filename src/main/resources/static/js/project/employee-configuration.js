@@ -5108,6 +5108,8 @@ $("#dcpsaccountmaintainby").change(function(){
 	}
 });
 
+
+
 $("#reptDdoCode").change(function(){
 	var reptDdoCode=$("#reptDdoCode").val();
 	if(reptDdoCode!=''){
@@ -5132,7 +5134,7 @@ $("#reptDdoCode").change(function(){
 							$("#ddoCode").empty();
 							$("#ddoCode").append("<option value='0' >Please Select</option>")
 							for(var i=0;i<len;i++){
-								$("#ddoCode").append("<option value='"+data[i].ddoCode+"' >"+data[i].ddoCode+"</option>")
+								$("#ddoCode").append("<option value='"+data[i].zpDdoCode+"' >"+data[i].zpDdoCode+"</option>")
 							}
 						} else {
 							swal("Record not found !!!");
@@ -5146,7 +5148,11 @@ $("#reptDdoCode").change(function(){
 
 
 
-
+function editempconfig(empid) {
+		var employeeid = empid;
+		$('#employeeId').val(employeeid);
+		document.getElementById("myAForm").submit();
+	}
 
 
 

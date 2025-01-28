@@ -48,17 +48,25 @@
 						</tr>
 						<tr>
 							<td colspan="2" align="center"><input type="button"
-								value="Filter" name="btnFilter" class="btn"></td>
+								value="Filter" name="btnFilter"  id="btnFilter" class="btn"></td>
 						</tr>
 					</tbody>
 				</table>
 			</fieldset>
 			<hr />
+			
+				<form class="form-horizontal container" name="myAForm" id="myAForm"
+				th:action="@{/level3/approveEmployeeConfiguration}"
+				th:object="${mstEmployeeModel}" method="POST"
+				enctype="multipart/form-data">
+				
+					<input type="hidden" name="employeeId" id="employeeId"
+					th:field="*{employeeId}" class="form-control" />
 			<fieldset>
 				<legend>
 					<b>All Employee Details</b>
 				</legend>
-				<table class="table table-hover table-bordered">
+				<table class="table table-hover table-bordered" id="dcpsDetailsTable">
 				
 				
 				<thead>
@@ -120,12 +128,13 @@
 				</tbody>
 				</table>
 			</fieldset>
+				</form>
 		</div>
 
 	</div>
-	</div>
 
 	<div th:replace="header/menuHeader :: varmenufooter"></div>
+		<script th:src="@{/js/project/employee-configuration.js}"></script>
 
 </body>
 </html>

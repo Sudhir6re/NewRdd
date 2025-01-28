@@ -731,15 +731,7 @@ public class EmployeeConfigurationController extends BaseController {
 		//end new user creation
 		
 	
-		//add entry into gpf mst details table
-	
-		//	mstGpfDetailsEntity
-
-		if (empcount != 0) {
-		} else {
-			mstEmployeeService.createNewUser(sevaarthid, messages, mstEmployeeModel);
-		}
-		// end new user creation
+		
 
 		// add entry into gpf mst details table
 		int isSevaarthPresent = mstEmployeeService.checkSevaarthIdExistInGpfDetailMst(empid);

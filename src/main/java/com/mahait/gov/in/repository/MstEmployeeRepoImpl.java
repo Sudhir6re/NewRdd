@@ -1062,14 +1062,14 @@ public class MstEmployeeRepoImpl implements MstEmployeeRepo {
 		// TODO Auto-generated method stub
 		Session currentSession = entityManager.unwrap(Session.class);
 		List list = new ArrayList();
-		BigInteger bg = null;
+		Long bg = null;
 		int rtnStr = 0;
 		StringBuffer query = new StringBuffer();
 		query.append("select count(*) from org_user_mst where user_name ='" + sevaarthid + "' ");
 		Query hsqlQuery = currentSession.createNativeQuery(query.toString());
 		list = hsqlQuery.list();
 		if (list != null && list.size() > 0) {
-			bg = (BigInteger) list.get(0);
+			bg = (Long) list.get(0);
 			rtnStr = bg.intValue();
 		}
 		return rtnStr;
@@ -1080,16 +1080,16 @@ public class MstEmployeeRepoImpl implements MstEmployeeRepo {
 		// TODO Auto-generated method stub
 		Session currentSession = entityManager.unwrap(Session.class);
 		List list = new ArrayList();
-		BigInteger bg = null;
+		Long bg = null;
 		int rtnStr = 0;
 		StringBuffer query = new StringBuffer();
-		query.append("select count(*) from gpf_mst where employee_id=" + Integer.parseInt(empId));
+		query.append("select count(*) from gpf_mst where employee_id=" + empId);
 
-		System.out.println("select count(*) from gpf_mst where employee_id=" + Integer.parseInt(empId));
+		System.out.println("select count(*) from gpf_mst where employee_id=" +empId);
 		Query hsqlQuery = currentSession.createNativeQuery(query.toString());
 		list = hsqlQuery.list();
 		if (list != null && list.size() > 0) {
-			bg = (BigInteger) list.get(0);
+			bg = (Long) list.get(0);
 			rtnStr = bg.intValue();
 		}
 		return rtnStr;
@@ -1115,14 +1115,14 @@ public class MstEmployeeRepoImpl implements MstEmployeeRepo {
 			strQuery.append("SELECT DISTINCT emp.employee_id, emp.employee_full_name_en, emp.sevaarth_id, ")
 					.append("emp.designation_code, emp.ddo_code,dmr.rept_ddo_code,emp.gender,emp.dob FROM employee_mst emp ")
 					.append("INNER JOIN org_ddo_mst ddo ON emp.ddo_code = ddo.ddo_code ")
-					.append("INNER JOIN rlt_zp_ddo_map dmr ON ddo.ddo_code = ");
+					.append("INNER JOIN rlt_zp_ddo_map dmr ON ddo.ddo_code =emp.ddo_code ");
 
 			if (orgUserMst.getMstRoleEntity().getRoleId() == 2) {
-				strQuery.append("dmr.rept_ddo_code WHERE emp.is_active = 3 AND emp.dcps_gpf_flag = 'Y' ")
-						.append("AND dmr.zp_ddo_code = :ddocode");
+				strQuery.append(" WHERE emp.is_active = 3 AND emp.dcps_gpf_flag = 'Y' ")
+						.append("AND dmr.rept_ddo_code = :ddocode");
 			} else {
-				strQuery.append("dmr.FINAL_DDO_CODE WHERE emp.is_active = 4 AND emp.dcps_gpf_flag = 'Y' ")
-						.append("AND dmr.zp_ddo_code = :ddocode");
+				strQuery.append(" WHERE emp.is_active = 4 AND emp.dcps_gpf_flag = 'Y' ")
+						.append("AND dmr.FINAL_DDO_CODE = :ddocode");
 			}
 
 			Query query = currentSession.createNativeQuery(strQuery.toString());

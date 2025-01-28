@@ -43,6 +43,8 @@ public class PaybillGenerationTrnRepoImpl implements PaybillGenerationTrnRepo {
 	/*
 	 * @Autowired SessionFactory sessionFactory;
 	 */
+	
+	
 
 	@Override
 	public Long savePaybillHeadMpg(PaybillGenerationTrnEntity objEntity) {
