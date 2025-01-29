@@ -59,7 +59,7 @@ public class MstSchemeRepoImpl implements MstSchemeRepo {
 	}
 
 	@Override
-	public BigInteger findNumberOfEmployeeInBillGroup(String ddoCode, BigInteger billGroupId, int monthName,
+	public Long findNumberOfEmployeeInBillGroup(String ddoCode, BigInteger billGroupId, int monthName,
 			int yearName, int paybillType) {
 		Session currentSession = manager.unwrap(Session.class);
 		yearName = yearName - 1;
@@ -81,7 +81,7 @@ public class MstSchemeRepoImpl implements MstSchemeRepo {
 
 		System.out.println(HQL);
 		Query query = currentSession.createNativeQuery(HQL);
-		return (BigInteger) query.getResultList().get(0);
+		return (Long) query.getResultList().get(0);
 	}
 
 	public List<MstSchemeModel> findAllSchemename() {

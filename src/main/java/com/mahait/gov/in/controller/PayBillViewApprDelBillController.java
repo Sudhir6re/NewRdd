@@ -335,7 +335,6 @@ public class PayBillViewApprDelBillController extends BaseController {
 	 */
 
 	@RequestMapping(value = "/forwardPayBillToLevel2/{paybillGenerationTrnId}/{userId}") // , method =
-																							// RequestMethod.POST
 	public String deleteCadre(@PathVariable Long paybillGenerationTrnId, @PathVariable Long userId, Model model,
 			Locale locale, HttpServletRequest request) {
 

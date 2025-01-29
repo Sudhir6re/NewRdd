@@ -166,7 +166,7 @@ public class PaybillGenerateController  extends BaseController {
 
 	@GetMapping(value = "/getNumberOfEmployee/{logUser}/{schemeBillGroupId}/{monthName}/{yearName}/{paybillType}", consumes = {
 			"application/json" }, produces = { "application/json" })
-	public @ResponseBody BigInteger getNumberOfEmployee(@PathVariable String logUser,
+	public @ResponseBody Long getNumberOfEmployee(@PathVariable String logUser,
 			@PathVariable BigInteger schemeBillGroupId, @PathVariable int monthName, @PathVariable int yearName,
 			@PathVariable int paybillType, Model model, Locale locale) {
 
@@ -176,7 +176,7 @@ public class PaybillGenerateController  extends BaseController {
 		 */
 		String split[] = logUser.split("_");
 		logUser = split[0];
-		BigInteger getNumberofEmployeeInBillGroup = mstSchemeService.findNumberOfEmployeeInBillGroup(logUser,
+		Long getNumberofEmployeeInBillGroup = mstSchemeService.findNumberOfEmployeeInBillGroup(logUser,
 				schemeBillGroupId, monthName, yearName, paybillType);
 		return getNumberofEmployeeInBillGroup;
 	}

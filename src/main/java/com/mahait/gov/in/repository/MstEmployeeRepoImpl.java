@@ -60,17 +60,17 @@ public class MstEmployeeRepoImpl implements MstEmployeeRepo {
 		try {
 			if (month >= 1 && month < 10) {
 
-				HQL = "FROM MstEmployeeEntity as  t  where t.ddoCode = '" + ddoCode.trim() + "' and t.billGroupId = '"
-						+ billGroupId + "' and to_char(t.doj,'YYYY-MM')<='20" + year + "-0" + month
+				HQL = "FROM MstEmployeeEntity as  t  where t.ddoCode = '" + ddoCode.trim() + "' and t.billGroupId = "
+						+ billGroupId + " and to_char(t.doj,'YYYY-MM')<='20" + year + "-0" + month
 						+ "' and  (to_char(t.superAnnDate,'YYYY-MM')>='20" + year + "-0" + month
 						+ "' and   to_char(t.empServiceEndDate,'YYYY-MM')>='20" + year + "-0" + month
-						+ "') AND t.isActive='1' ORDER BY t.employeeFullNameEn";
+						+ "') AND t.isActive=1 ORDER BY t.employeeFullNameEn";
 			} else
-				HQL = "FROM MstEmployeeEntity as  t  where t.ddoCode = '" + ddoCode.trim() + "' and t.billGroupId = '"
-						+ billGroupId + "' and to_char(t.doj,'YYYY-MM')<='20" + year + "-" + month
+				HQL = "FROM MstEmployeeEntity as  t  where t.ddoCode = '" + ddoCode.trim() + "' and t.billGroupId = "
+						+ billGroupId + " and to_char(t.doj,'YYYY-MM')<='20" + year + "-" + month
 						+ "' and  (to_char(t.superAnnDate,'YYYY-MM')>='20" + year + "-" + month
 						+ "' and   to_char(t.empServiceEndDate,'YYYY-MM')>='20" + year + "-" + month
-						+ "') AND t.isActive='1' ORDER BY t.employeeFullNameEn";
+						+ "') AND t.isActive=1 ORDER BY t.employeeFullNameEn";
 			return (List<MstEmployeeEntity>) entityManager.createQuery(HQL).getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();

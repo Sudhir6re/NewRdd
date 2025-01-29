@@ -35,6 +35,7 @@ public class YearMstServiceImpl implements YearMstService {
 
 	@Override
 	public void saveYear(MstYearEntity mstYearEntity) {
+		mstYearEntity.setIsActive('1');
 		yearMstRepo.saveYear(mstYearEntity);
 	}
 

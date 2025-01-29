@@ -20,7 +20,7 @@ public class YearMstRepoImpl  implements YearMstRepo{
 	@Override
 	public List<MstYearEntity> findAllYears() {
 		TypedQuery<MstYearEntity> query = entityManager.createQuery(
-				"SELECT a FROM MstYearEntity",MstYearEntity.class);
+				"SELECT a FROM MstYearEntity a",MstYearEntity.class);
 		return query.getResultList();
 	}
 
@@ -36,6 +36,7 @@ public class YearMstRepoImpl  implements YearMstRepo{
 
 	@Override
 	public void saveYear(MstYearEntity mstCommonEntity) {
+		mstCommonEntity.setIsActive('1');
 		entityManager.merge(mstCommonEntity);
 	}
 

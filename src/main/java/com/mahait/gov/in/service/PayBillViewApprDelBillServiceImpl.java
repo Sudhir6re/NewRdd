@@ -114,7 +114,7 @@ public class PayBillViewApprDelBillServiceImpl implements PayBillViewApprDelBill
 				generateBillDetailsModel.setBillDescription(StringHelperUtils.isNullString(objLst[1]));
 				generateBillDetailsModel.setSchemeCode(StringHelperUtils.isNullString(objLst[2]));
 				generateBillDetailsModel.setSchemeName(StringHelperUtils.isNullString(objLst[3]));
-				BigInteger gross = (BigInteger) objLst[4];
+				Double gross = (Double) objLst[4];
 				generateBillDetailsModel.setBillGrossAmt(gross.doubleValue());
 				generateBillDetailsModel.setBillNetAmt(StringHelperUtils.isNullDouble(objLst[5]));
 				generateBillDetailsModel.setIsActive(StringHelperUtils.isNullInt(objLst[6]));
@@ -139,8 +139,8 @@ public class PayBillViewApprDelBillServiceImpl implements PayBillViewApprDelBill
 				generateBillDetailsModel.setBillDescription(StringHelperUtils.isNullString(objLst[1]));
 				generateBillDetailsModel.setSchemeCode(StringHelperUtils.isNullString(objLst[2]));
 				generateBillDetailsModel.setSchemeName(StringHelperUtils.isNullString(objLst[3]));
-				generateBillDetailsModel.setBillGrossAmt(StringHelperUtils.isNullBigInteger(objLst[4]).doubleValue());
-				generateBillDetailsModel.setBillNetAmt(StringHelperUtils.isNullBigInteger(objLst[5]).doubleValue());
+				generateBillDetailsModel.setBillGrossAmt(StringHelperUtils.isNullDouble(objLst[4]));
+				generateBillDetailsModel.setBillNetAmt(StringHelperUtils.isNullDouble(objLst[5]));
 				generateBillDetailsModel.setIsActive(StringHelperUtils.isNullInt(objLst[6]));
 				generateBillDetailsModel.setNoOfEmployee(StringHelperUtils.isNullInt(objLst[7]));
 				generateBillDetailsModel.setAuthno(StringHelperUtils.isNullString(objLst[8]));
@@ -162,8 +162,8 @@ public class PayBillViewApprDelBillServiceImpl implements PayBillViewApprDelBill
 				generateBillDetailsModel.setBillDescription(StringHelperUtils.isNullString(objLst[1]));
 				generateBillDetailsModel.setSchemeCode(StringHelperUtils.isNullString(objLst[2]));
 				generateBillDetailsModel.setSchemeName(StringHelperUtils.isNullString(objLst[3]));
-				generateBillDetailsModel.setBillGrossAmt(StringHelperUtils.isNullBigInteger(objLst[4]).doubleValue());
-				generateBillDetailsModel.setBillNetAmt(StringHelperUtils.isNullBigInteger(objLst[5]).doubleValue());
+				generateBillDetailsModel.setBillGrossAmt(StringHelperUtils.isNullDouble(objLst[4]));
+				generateBillDetailsModel.setBillNetAmt(StringHelperUtils.isNullDouble(objLst[5]));
 				generateBillDetailsModel.setIsActive(StringHelperUtils.isNullInt(objLst[6]));
 				generateBillDetailsModel.setNoOfEmployee(StringHelperUtils.isNullInt(objLst[7]));
 				generateBillDetailsModel.setAuthno(StringHelperUtils.isNullString(objLst[8]));

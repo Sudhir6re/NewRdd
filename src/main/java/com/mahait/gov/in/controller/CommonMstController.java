@@ -23,7 +23,6 @@ public class CommonMstController {
 	@Autowired
 	CommonHomeMethodsService commonHomeMethodsService;
 	
-	
 	@Autowired
 	CommonMstService commonMstService;
 	
@@ -50,7 +49,7 @@ public class CommonMstController {
 	@PostMapping("/updateCommonMst")
 	public String saveCommonConst(@ModelAttribute("mstCommonEntity") MstCommonEntity mstCommonEntity) {
 		commonMstService.updateCommonMst(mstCommonEntity);
-		return "redirect:/master/loadCommonConstList";
+		return "redirect:/developer/loadCommonConstList";
 	}
 	
 	@PostMapping("/saveCommonMst")
@@ -58,7 +57,7 @@ public class CommonMstController {
 		BigInteger commonId=new BigInteger(commonHomeMethodsService.findCodeSeq("common_id","common_mst"));
 		mstCommonEntity.setCommonId(commonId.intValue());
 		commonMstService.saveCommonMst(mstCommonEntity);
-		return "redirect:/master/loadCommonConstList";
+		return "redirect:/developer/loadCommonConstList";
 	}
 
 }

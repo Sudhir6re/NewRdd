@@ -1435,7 +1435,7 @@ public class PaybillGenerationTrnServiceImpl implements PaybillGenerationTrnServ
 		objEntity.setSchemeBillgroupId(paybillHeadMpgModel.getSchemeBillgroupId());
 		objEntity.setCreatedDate(new Date());
 		objEntity.setBillcreationDate(new Date());
-		objEntity.setIsActive(5);
+		objEntity.setIsActive(1);
 		objEntity.setDdoCode(ddoCode);
 		objEntity.setNoOfEmployee(paybillHeadMpgModel.getNoOfEmployee());
 		objEntity.setRemark("Testing");
@@ -1517,6 +1517,7 @@ public class PaybillGenerationTrnServiceImpl implements PaybillGenerationTrnServ
 			paybillGenerationTrnDetails.setBankId(mstEmployeeEntity2.getBankCode());
 			paybillGenerationTrnDetails.setBankBranchId(mstEmployeeEntity2.getBankBranchCode());
 			paybillGenerationTrnDetails.setEmpId(mstEmployeeEntity2.getEmployeeId());
+			paybillGenerationTrnDetails.setId(val);
 
 			if (payCommission == CommonConstants.PAYBILLDETAILS.COMMONCODE_PAYCOMMISSION_7PC) {
 				paybillGenerationTrnDetails.setDaPercent(percentageRate[0]);
@@ -1529,7 +1530,6 @@ public class PaybillGenerationTrnServiceImpl implements PaybillGenerationTrnServ
 			///// paybillGenerationTrnDetails.setHraPercent(Integer.parseInt(percentageHRA));
 			paybillGenerationTrnDetails.setRemark("Testing");
 			paybillGenerationTrnDetails.setPaybillGenerationTrnId(val);
-			objEntity.setPaybillGenerationTrnId(val);
 
 			cadre = paybillHeadMpgRepo.getEmpCadre(mstEmployeeEntity2.getSevaarthId(),
 					mstEmployeeEntity2.getEmpClass());
@@ -1771,7 +1771,7 @@ public class PaybillGenerationTrnServiceImpl implements PaybillGenerationTrnServ
 					String groupname = (String) object12[7];
 					// gisAmount = (double) object12[8];
 					if (object12[9] != null)
-						gradePaynew = (int) object12[9];
+						gradePaynew = Long.valueOf(object12[9].toString()).intValue();
 					int allowDeducCode = (int) object12[2];
 					String physicalhand = (String) object12[10];
 					int isRuleBased = 0;

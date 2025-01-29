@@ -14,7 +14,7 @@ public interface MstSchemeService {
 
 	public List<MstDcpsBillGroup> findAllMpgSchemeBillGroupByDDOCode(String DDOCode,int roleid);
 
-	public BigInteger findNumberOfEmployeeInBillGroup(String logUser, BigInteger schemeBillGroupId, int monthName,
+	public Long findNumberOfEmployeeInBillGroup(String logUser, BigInteger schemeBillGroupId, int monthName,
 			int yearName, int paybillType);
 
 	public List<MstScheme> findAllSchemeDetails(String data);

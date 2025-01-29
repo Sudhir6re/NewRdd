@@ -1009,7 +1009,7 @@ public class PaybillGenerationTrnRepoImpl implements PaybillGenerationTrnRepo {
 		Query query = currentSession.createNativeQuery(HQL);
 		// logger.info("query="+query.getQueryString());
 		// logger.info("query.list().get(0)="+query.list().get(0));
-		int result = ((BigInteger) query.list().get(0)).intValue();
+		int result = ((Long) query.list().get(0)).intValue();
 		return result;
 
 	}
@@ -1107,7 +1107,7 @@ public class PaybillGenerationTrnRepoImpl implements PaybillGenerationTrnRepo {
 		Query query = currentSession.createNativeQuery(HQL);
 		// logger.info("query="+query.getQueryString());
 		// logger.info("query.list().get(0)="+query.list().get(0));
-		int result = ((BigInteger) query.list().get(0)).intValue();
+		int result = ((Long) query.list().get(0)).intValue();
 		return result;
 
 	}
@@ -1119,7 +1119,7 @@ public class PaybillGenerationTrnRepoImpl implements PaybillGenerationTrnRepo {
 				+ "' and bill_type_id =" + paybillType + " and is_active in(1,2,3,4,5,6,7,9,10,11,12,13)";
 		System.out.println(HQL);
 		Query query = currentSession.createNativeQuery(HQL);
-		int result = ((BigInteger) query.list().get(0)).intValue();
+		int result = ((Long) query.list().get(0)).intValue();
 		return result;
 	}
 
@@ -1221,20 +1221,20 @@ public class PaybillGenerationTrnRepoImpl implements PaybillGenerationTrnRepo {
 	@Override
 	public void updateVoucherEntry(PaybillGenerationTrnEntity objPaybillGeberationTrnEntity) {
 		Session currentSession = entityManager.unwrap(Session.class);
-		currentSession.update(objPaybillGeberationTrnEntity);
+		currentSession.merge(objPaybillGeberationTrnEntity);
 
 	}
 
 	@Override
 	public List<MstEmployeeEntity> checkedBgisAndGisCatNull(String schemeBillGroupId, String userName) {
 		// TODO Auto-generated method stub
-		String HQL = "FROM MstEmployeeEntity as  t  where t.ddoCode = '" + userName.trim() + "' and t.billGroupId = "
-				+ schemeBillGroupId
-				+ " AND t.isActive='1' and t.sevaarthId!=null and ((t.begisCatg is null or t.begisCatg='0') or  (t.giscatagory is null or t.giscatagory=0)) "
-				+ " ORDER BY t.employeeFullNameEn";
+		
 
-		HQL = "FROM MstEmployeeEntity as  t  where t.ddoCode = '" + userName.trim() + "' and t.billGroupId = "
-				+ schemeBillGroupId + " AND t.isActive='1'   ORDER BY t.employeeFullNameEn";
+		String HQL = "FROM MstEmployeeEntity as  t  where t.ddoCode = '" + userName.trim() + "' and t.billGroupId = "
+				+ Long.valueOf(schemeBillGroupId)+ " AND t.isActive=1   ORDER BY t.employeeFullNameEn";
+		
+		System.out.println(HQL);
+		
 		return (List<MstEmployeeEntity>) entityManager.createQuery(HQL).getResultList();
 	}
 
