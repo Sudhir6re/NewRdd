@@ -271,7 +271,7 @@ $('#ApproveBill').click(function() {
 
 $('#btnForwardToBeams').click(function() {
 	var paybillGenerationTrnId = $('#radioval').val();
-	var consolidatedId=$("#consolidatedId").val();
+	var consolidatePaybillTrnId=$("#consolidatedId").val();
 //  $("#consolidatedId").val($(this).text());
 	$("#loaderMainNew").show();
 	
@@ -280,10 +280,11 @@ $('#btnForwardToBeams').click(function() {
 				      type: "POST",
 				      contentType : 'application/json',
 				      dataType : 'json',
-				      url: "../ddo/beams/frwdbilldatabeams/"+consolidatedId,
+				      url: "../ddo/beams/frwdbilldatabeams/"+consolidatePaybillTrnId,
 				      async: true,
 				      error : function(data) {
 							console.log(data);
+							$("#loaderMainNew").hide();
 					},
 				      success: function(data){
 				    	  

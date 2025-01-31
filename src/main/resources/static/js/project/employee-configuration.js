@@ -1,11 +1,17 @@
 var contextPath = $("#appRootPath").val();
 var context ="";
 var ddo ="";
-
+var dataTable;
 jQuery(document).ready(function() {
 	context = $("#appRootPath").val();
 		ddo=getUserUrl();
 	
+		if($("#dcpsDetailsTable").length){
+					dataTable=$("#dcpsDetailsTable").dataTable();
+		}
+		
+		
+		
 	   if (enableTyping != undefined) {
            enableTyping(new Array('fName','mName','lName'),//Input fiel Name
                     new Array('fNamemr','mNamemr','lNamemr'), 'NAME', 'mr_in'); //Output field Name
@@ -5154,6 +5160,14 @@ function editempconfig(empid) {
 		document.getElementById("myAForm").submit();
 	}
 
+	
+	
+	$("#btnFilter").click(function(){
+		var ddoCode=$("#ddoCode").val();
+			dataTable.column(6).search(ddoCode).draw(); 
+	});
+	
+	
 
 
 

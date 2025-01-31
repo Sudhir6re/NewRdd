@@ -51,7 +51,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<exclusions>
+			<!--<exclusions>
 				<exclusion>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-tomcat</artifactId>
@@ -60,7 +60,7 @@
 					<artifactId>logback-classic</artifactId>
 					<groupId>ch.qos.logback</groupId>
 				</exclusion>
-			</exclusions>
+			</exclusions>-->
 		</dependency>
 
 		<dependency>
@@ -193,7 +193,13 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20080701</version>
+		</dependency>
 
+		<!--
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
@@ -206,7 +212,7 @@
 			<artifactId>jul-to-slf4j</artifactId>
 			<version>1.7.36</version> 
 		</dependency>
-
+-->
 
 		<dependency>
 			<groupId>jakarta.xml.bind</groupId>
@@ -233,6 +239,46 @@
 			<artifactId>jsoup</artifactId>
 			<version>1.18.3</version>
 		</dependency>
+
+		<dependency>
+			<groupId>PayrollBEAMSIntegWS</groupId>
+			<artifactId>PayrollBEAMSIntegWS</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<!--	<version>1.2.2</version>-->
+			<version>1.4.19</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.apache.axis2</groupId>
+			<artifactId>axis2-adb</artifactId>
+			<version>1.8.0</version> <!-- or the latest stable version -->
+		</dependency>
+		<dependency>
+			<groupId>org.apache.axis2</groupId>
+			<artifactId>axis2-transport-local</artifactId>
+			<version>1.8.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.axis2</groupId>
+			<artifactId>axis2-transport-http</artifactId>
+			<version>1.8.0</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>javax.activation</groupId>
+			<artifactId>activation</artifactId>
+			<version>1.2.0</version> <!-- or the latest version -->
+		</dependency>
+
+
 
 	</dependencies>
 

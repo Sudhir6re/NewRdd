@@ -1,10 +1,14 @@
 
-/*jQuery(document).ready(function($) {
-	$('#tblConsolidatePayBill').hide();
-	$('#tblShowPayBill').hide();
-});*/
+jQuery(document).ready(function($) {
+	//$('#tblConsolidatePayBill').hide();
+	//$('#tblShowPayBill').hide();
+	
+	if($("#schemeCode").length  && $("#schemeCode").is(":visible")){
+		$("#schemeCode").select2();
+	}
+	
+});
 
-$("#schemeCode").select2();
 
 var paybillGenerationTransactionIdArr = []; 
 var grossAmtAr = []; 
@@ -101,7 +105,7 @@ $("#btnSearch").click(function (e){
 	var yearName = $("#paybillYear").val();
 	var monthName = $("#paybillMonth").val();
 	
-	else if (yearName == "" || yearName == "0") {
+	 if (yearName == "" || yearName == "0") {
 		e.preventDefault();
 		swal.fire("Please select paybill year");
 	}

@@ -34,7 +34,6 @@ public class MstRoleController  extends BaseController {
 		
 		String message = (String)model.asMap().get("message");
 		model.addAttribute("mstRoleModel", mstRoleModel);
-		
 	
 		model.addAttribute("lstRoleTable", commonHomeMethodsService.findAllRole());
 		model.addAttribute("language", locale.getLanguage());

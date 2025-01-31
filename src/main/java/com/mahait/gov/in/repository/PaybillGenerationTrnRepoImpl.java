@@ -55,7 +55,6 @@ public class PaybillGenerationTrnRepoImpl implements PaybillGenerationTrnRepo {
 
 	@Override
 	public Long saveHrPayPaybill(PaybillGenerationTrnDetails paybillGenerationTrnDetails) {
-
 		// logger.info(" inside the saved saveHrPayPaybill- ");
 		Session currentSession = entityManager.unwrap(Session.class);
 		Serializable saveId = (Serializable) currentSession.save(paybillGenerationTrnDetails);
@@ -65,7 +64,7 @@ public class PaybillGenerationTrnRepoImpl implements PaybillGenerationTrnRepo {
 	@Override
 	public Long getPaybillGenerationTrnId() {
 		Session currentSession = entityManager.unwrap(Session.class);
-		String hql = "SELECT coalesce(max(ch.paybillGenerationTrnId), 0) FROM PaybillGenerationTrnEntity ch";
+		String hql = "SELECT nextval('paybill_generation_trn_paybill_generation_trn_id_seq')";
 		Query query = currentSession.createQuery(hql);
 		return (Long) query.list().get(0);
 	}

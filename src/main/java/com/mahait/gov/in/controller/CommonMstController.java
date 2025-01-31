@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mahait.gov.in.entity.MstCommonEntity;
+import com.mahait.gov.in.entity.OrgUserMst;
 import com.mahait.gov.in.service.CommonHomeMethodsService;
 import com.mahait.gov.in.service.CommonMstService;
 
+import jakarta.servlet.http.HttpSession;
+
 @RequestMapping("/developer")
 @Controller
-public class CommonMstController {
+public class CommonMstController extends BaseController{
 	
 	@Autowired
 	CommonHomeMethodsService commonHomeMethodsService;
@@ -28,20 +31,25 @@ public class CommonMstController {
 	
 	
 	@GetMapping("/loadCommonConstList")
-	public String loadCommonConstList(@ModelAttribute("mstCommonEntity") MstCommonEntity mstCommonEntity,Model model) {
+	public String loadCommonConstList(@ModelAttribute("mstCommonEntity") MstCommonEntity mstCommonEntity,Model model, HttpSession session) {
 		BigInteger commonId=new BigInteger(commonHomeMethodsService.findCodeSeq("common_id","common_mst"));
 		mstCommonEntity.setCommonId(commonId.intValue());
 		model.addAttribute("mstCommonEntity", mstCommonEntity);
 		List<MstCommonEntity> lstMstCommonEntity=commonMstService.findAllCommonConst();
 		model.addAttribute("lstMstCommonEntity", lstMstCommonEntity);
+		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");
+		addMenuAndSubMenu(model, messages);
 		return "/views/common-mst";
 	}
 	
 	
 	@GetMapping("/editCommonConst/{commonId}")
-	public String editCommonConstList(@PathVariable Integer commonId,Model model) {
+	public String editCommonConstList(@PathVariable Integer commonId,Model model, HttpSession session) {
 		MstCommonEntity mstCommonEntity=commonMstService.findCommonMstById(commonId);
 		model.addAttribute("mstCommonEntity", mstCommonEntity);
+		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");
+		addMenuAndSubMenu(model, messages);
+		
 		return "/views/edit-common-mst";
 	}
 	

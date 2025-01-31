@@ -244,8 +244,6 @@ public class PayBillViewApprDelBillRepoImpl implements PayBillViewApprDelBillRep
 			if(payBillViewApprDelBillModel.getYearName()!=null  && !payBillViewApprDelBillModel.getYearName().equals("0"))
 				sb.append(" AND a.paybill_year = :paybillYear");
 			
-			sb.append(" AND a.rept_ddo_code = :ddoCode ");
-			
 			if(payBillViewApprDelBillModel.getBillNumber()!=null && !payBillViewApprDelBillModel.getBillNumber().equals("0")){
 				sb.append(" AND a.scheme_billgroup_id= :billNumber ");
 			}

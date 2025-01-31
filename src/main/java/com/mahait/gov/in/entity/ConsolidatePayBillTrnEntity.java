@@ -16,7 +16,7 @@ import lombok.Data;
 public class ConsolidatePayBillTrnEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CONSOLIDATE_PAYBILL_TRN_ID")
 	private Long consolidatePaybillTrnId;
 
@@ -100,5 +100,8 @@ public class ConsolidatePayBillTrnEntity {
 
 	@Column(name = "DCPS")
 	private Double dcps;
+	
+	@Column(name = "no_of_employee")
+	private Integer noOfEmployee;
 
 }

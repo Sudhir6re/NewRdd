@@ -60,14 +60,10 @@ public class ConsolidatePayBillServiceImpl implements ConsolidatePayBillService 
 						for (Object[] objLst : lstprop) {
 							ConsolidatePayBillModel obj = new ConsolidatePayBillModel();
 							obj.setDdoCode(StringHelperUtils.isNullString(objLst[0]));
-							BigInteger b=(BigInteger) objLst[1];
-							obj.setBillNo(b.longValue());
+							obj.setBillNo(StringHelperUtils.isNullLong(objLst[1]));
 							obj.setBillDesc(StringHelperUtils.isNullString(objLst[2]));
-							
-							BigInteger gross = (BigInteger) objLst[3];
-							obj.setBillGrossAmt(gross.doubleValue());
-							BigInteger net = (BigInteger) objLst[4];
-							obj.setBillNetAmt(net.doubleValue());
+							obj.setBillGrossAmt(StringHelperUtils.isNullDouble(objLst[3]));
+							obj.setBillNetAmt(StringHelperUtils.isNullDouble(objLst[4]));
 							lstObj.add(obj);
 						}
 					}
@@ -76,9 +72,6 @@ public class ConsolidatePayBillServiceImpl implements ConsolidatePayBillService 
 			}
 		return lstObj;
 		
-		
-
-
 	}
 
 	@Override
@@ -103,14 +96,18 @@ public class ConsolidatePayBillServiceImpl implements ConsolidatePayBillService 
 		Double hrr=0d;
 		Double deduc=0d;
 		Double pf=0d;
-		
+		Long consolidatedPaybillTrnId=0l;
 		
 		ConsolidatePayBillTrnEntity objEntity = new ConsolidatePayBillTrnEntity();
+		
+		consolidatedPaybillTrnId = consolidatePayBillRepo.getConsolidateTrnId();
+		Integer noOfEmployee=0;
 		for (ConsolidatePayBillModel model : consolidatePayBillModel.getLstCons()) {
 			
 			sumGrossAmount +=model.getBillGrossAmt();
 			sumNetAmount +=model.getBillNetAmt();
 			
+		
 			List<PaybillGenerationTrnEntity> lst =consolidatePayBillRepo.getPaybillDtls(consolidatePayBillModel.getMonthName(),consolidatePayBillModel.getYearName(),model.getDdoCode());
 			
 			for (PaybillGenerationTrnEntity paybillGenerationTrnEntity : lst) {
@@ -119,48 +116,37 @@ public class ConsolidatePayBillServiceImpl implements ConsolidatePayBillService 
 				
 				ConsolidatePayBillTrnMpgEntity consolidateTrnMpg = new ConsolidatePayBillTrnMpgEntity();
 				for (Object[] obj : lstpaybilldtls) {
-								
-					
-					BigInteger it = (BigInteger) obj[0];
-						incomeTax = (it.doubleValue());
+					noOfEmployee+=noOfEmployee;
+						incomeTax =  StringHelperUtils.isNullDouble(obj[0]);
 						totalITamt+=incomeTax;
-						BigInteger dcpsArr =null;
+					
 						if(obj[1]!=null) {
-							dcpsArr = (BigInteger) obj[1];
-							dcpsarr=(dcpsArr.doubleValue());
+							dcpsarr= StringHelperUtils.isNullDouble(obj[1]);
 							totaldcpsArr+=dcpsarr;
 						}
 						
 							
-						BigDecimal gisVal = null;
 						if(obj[2]!=null) {
-							gisVal = (BigDecimal) obj[2];
-							 gis=(gisVal.doubleValue());
+							 gis= StringHelperUtils.isNullDouble(obj[2]);
 								totalgis+=gis;
 						}
 						
 										
-						BigDecimal ptVal = null;
 						if(obj[3]!=null) {
-							ptVal = (BigDecimal) obj[3];
-							pt=(ptVal.doubleValue());
+							pt= StringHelperUtils.isNullDouble(obj[3]);
 							totalpt+=pt;
 						}
 						
 									
-						BigDecimal accpolicyVal = null;
 						if(obj[4]!=null) {
-							accpolicyVal = (BigDecimal) obj[4];
-							accpolicy=(accpolicyVal.doubleValue());
+							accpolicy= StringHelperUtils.isNullBigDecimal(obj[4]).doubleValue();
 							totalaccPolicy+=accpolicy;
 						}
 						
 					
 						
-						BigDecimal hrrVal = null;
 						if( obj[5]!=null) {
-							hrrVal = (BigDecimal) obj[5];
-							hrr=(hrrVal.doubleValue());
+							hrr= StringHelperUtils.isNullDouble(obj[5]);
 							totalHrr+=hrr;
 							
 						}
@@ -171,10 +157,8 @@ public class ConsolidatePayBillServiceImpl implements ConsolidatePayBillService 
 						
 					
 						
-						BigDecimal pfVal = null;;
 						if(obj[7]!=null) {
-							pfVal = (BigDecimal) obj[7];
-							pf=(pfVal.doubleValue());
+							pf= StringHelperUtils.isNullLong(obj[7]).doubleValue();
 							totalpf+=pf;
 						}
 						
@@ -183,7 +167,7 @@ public class ConsolidatePayBillServiceImpl implements ConsolidatePayBillService 
 				}
 				
 				System.out.println("consolidate trn id---"+consolidatePayBillRepo.getConsolidateTrnId());
-				consolidateTrnMpg.setConsolidatePaybillTrnId(consolidatePayBillRepo.getConsolidateTrnId());
+				consolidateTrnMpg.setConsolidatePaybillTrnId(consolidatedPaybillTrnId);
 				consolidateTrnMpg.setDdoCode(model.getDdoCode());
 				consolidateTrnMpg.setPaybillGenerationTrnId(paybillGenerationTrnEntity.getPaybillGenerationTrnId());
 				paybillGenerationTrnEntity.setIsActive(9);
@@ -191,8 +175,6 @@ public class ConsolidatePayBillServiceImpl implements ConsolidatePayBillService 
 				id = consolidatePayBillRepo.saveDtlsPaybillTrn(paybillGenerationTrnEntity);
 				
 			}
-			
-			
 		}
 		objEntity.setIt(totalITamt);
 		objEntity.setDcpsArr(totaldcpsArr);
@@ -211,6 +193,8 @@ public class ConsolidatePayBillServiceImpl implements ConsolidatePayBillService 
 		objEntity.setPaybillYear(consolidatePayBillModel.getYearName());
 		objEntity.setDdoCode(messages.getDdoCode());
 		objEntity.setSchemeCode(consolidatePayBillModel.getSchemeCode());
+		objEntity.setConsolidatePaybillTrnId(consolidatedPaybillTrnId);
+		objEntity.setNoOfEmployee(noOfEmployee);
 		objEntity.setIsActive(9);
 		id = consolidatePayBillRepo.saveConsolidatePayBill(objEntity);
 		
@@ -259,7 +243,6 @@ public class ConsolidatePayBillServiceImpl implements ConsolidatePayBillService 
 
 	@Override
 	public int approveConsolidateBill(Long consolidateId) {
-		
 		Serializable	id = consolidatePayBillRepo.updateConsolidateapproveStatus(consolidateId);
 		return (int) id;
 	}

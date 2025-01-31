@@ -14,7 +14,6 @@ import org.springframework.cache.annotation.EnableCaching;
 //@EntityScan(basePackages = { "com.mahait.gov.in.entity","com.mahait.gov.in.nps.entity" })
 @SpringBootApplication
 public class Rdd1Application {
-
 	public static void main(String[] args) {
 		SpringApplication.run(Rdd1Application.class, args);
 	}

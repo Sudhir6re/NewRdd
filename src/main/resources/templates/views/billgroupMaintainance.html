@@ -27,8 +27,8 @@
 			<form method="post" th:action="@{/ddoast/saveBillgroupMaintainance}"
 				th:object="${billgroupMaintainanceModel}"  name="frmDdoGroupBill" id="frmDdoGroupBill"
 				enctype="multipart/form-data" class="form-horizontal">
-				<input type="hidden"
-				name="message" id="message" th:value="${message}" />
+				<input type="hidden" name="message" id="message" th:value="${message}" />
+				<input type="hidden" th:field="*{schemeName}" id="schemeName"  />
 		
 				<!-- <fieldset>
 					<legend>Search by Bill Name </legend>
