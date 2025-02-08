@@ -52,6 +52,11 @@ public class ConsolidatePayBillTrnEntity {
 
 	@Column(name = "CMP_DATE")
 	private Date CMPDate;
+	
+	
+	
+	@Column(name = "CMP_DOWNLOAD_DATE")
+	private Date cmpDownloadDate;
 
 	@Column(name = "BILL_TYPE")
 	private Integer billType;
@@ -88,6 +93,12 @@ public class ConsolidatePayBillTrnEntity {
 
 	@Column(name = "GIS")
 	private Double gis;
+	
+	
+	@Column(name = "gis_zp")
+	private Double gisZp;
+	
+	
 
 	@Column(name = "GROUP_ACC_POLICY")
 	private Double accPolicy;

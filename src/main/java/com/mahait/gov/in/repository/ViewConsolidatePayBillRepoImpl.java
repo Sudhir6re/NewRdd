@@ -27,12 +27,12 @@ public class ViewConsolidatePayBillRepoImpl implements ViewConsolidatePayBillRep
 	@Override
 	public List<Object[]> findAllConsolidatedPaybillList(int monthName,int yearName,String ddoCode) {
 		Session currentSession = entityManager.unwrap(Session.class);
-		String HQL = " select cpt.consolidate_paybill_trn_id,b.scheme_code,b.scheme_name,  sum (cpt.gross_amt) as gross_amt,sum (cpt.net_amt) as net_amt, " + 
-				" cpt.is_active from consolidate_paybill_trn cpt inner join consolidate_paybill_trn_mpg cptm on cpt.consolidate_paybill_trn_id = cptm.consolidate_paybill_trn_id " + 
+		String HQL = "select cpt.consolidate_paybill_trn_id,b.scheme_code,b.scheme_name,  sum (cpt.gross_amt) as gross_amt,sum (cpt.net_amt) as net_amt, " + 
+				" cpt.is_active,cpt.auth_no,COUNT(e.PAYMENT_REF_NO) AS EKUBER_count,cpt.CMP_DOWNLOAD_STATUS  from consolidate_paybill_trn cpt inner join consolidate_paybill_trn_mpg cptm on cpt.consolidate_paybill_trn_id = cptm.consolidate_paybill_trn_id " + 
 				" inner join paybill_generation_trn a on cptm.paybill_generation_trn_id = a.paybill_generation_trn_id  " + 
 				" inner join mst_dcps_bill_group b on a.scheme_billgroup_id = b.bill_group_id  " + 
 				" inner join rlt_zp_ddo_map c on b.ddo_code = c.zp_ddo_code  " + 
-				" inner join org_ddo_mst cccc on a.ddo_code = cccc.ddo_code where c.rept_ddo_code ='"+ddoCode+"' " + 
+				" inner join org_ddo_mst cccc on a.ddo_code = cccc.ddo_code  LEFT JOIN HR_PAY_EKUBER_RECORD_MST e ON cpt.auth_no = e.AUTH_NO  where c.rept_ddo_code ='"+ddoCode+"' " + 
 				" and a.is_active in (9,11,14) and cpt.is_active not in (13) and cpt.paybill_year ="+yearName+"  and cpt.paybill_month ="+monthName+"   " + 
 				" group by cpt.consolidate_paybill_trn_id,b.scheme_code,b.scheme_name,cpt.is_active  " + 
 				" order by cpt.consolidate_paybill_trn_id desc" ;
@@ -50,7 +50,7 @@ public class ViewConsolidatePayBillRepoImpl implements ViewConsolidatePayBillRep
 				"  dd.scheme_name, \r\n" + 
 				"  sum (a.bill_gross_amt) as bill_gross_amt, \r\n" + 
 				"  sum (a.bill_net_amount) as bill_net_amount, \r\n" + 
-				"  cpt.is_active \r\n" + 
+				"  cpt.is_active ,cpt.auth_no,COUNT(e.PAYMENT_REF_NO) AS EKUBER_count,cpt.CMP_DOWNLOAD_STATUS \r\n" + 
 				"from \r\n" + 
 				"  consolidate_paybill_trn cpt \r\n" + 
 				"  inner join consolidate_paybill_trn_mpg cptm on cpt.consolidate_paybill_trn_id = cptm.consolidate_paybill_trn_id \r\n" + 
@@ -60,7 +60,7 @@ public class ViewConsolidatePayBillRepoImpl implements ViewConsolidatePayBillRep
 				"  inner join scheme_mst dd on dd.scheme_id = b.scheme_id \r\n" + 
 				"  inner join bill_group_mst ddd on b.bill_group_id = ddd.bill_group_id \r\n" + 
 				"  inner join ddo_reg_mst cccc on a.ddo_code = cccc.ddo_code \r\n" + 
-				"  and cccc.ddo_reg_id = ddo_code_user_id1 \r\n" + 
+				"  and cccc.ddo_reg_id = ddo_code_user_id1   LEFT JOIN HR_PAY_EKUBER_RECORD_MST e ON cpt.auth_no = e.AUTH_NO   \r\n" + 
 				"where \r\n" + 
 				"  a.ddo_code IN (\r\n" + 
 				"    select \r\n" + 
@@ -98,11 +98,11 @@ public class ViewConsolidatePayBillRepoImpl implements ViewConsolidatePayBillRep
 		
 		Session currentSession = entityManager.unwrap(Session.class);
 		String HQL = "select cpt.consolidate_paybill_trn_id,b.scheme_code,b.scheme_name,sum (a.bill_gross_amt) as bill_gross_amt,sum (a.bill_net_amount) as bill_net_amount," + 
-				" cpt.is_active from consolidate_paybill_trn cpt inner join consolidate_paybill_trn_mpg cptm on cpt.consolidate_paybill_trn_id = cptm.consolidate_paybill_trn_id" + 
+				" cpt.is_active,cpt.auth_no,COUNT(e.PAYMENT_REF_NO) AS EKUBER_count,cpt.CMP_DOWNLOAD_STATUS from consolidate_paybill_trn cpt inner join consolidate_paybill_trn_mpg cptm on cpt.consolidate_paybill_trn_id = cptm.consolidate_paybill_trn_id" + 
 				" inner join paybill_generation_trn a on cptm.paybill_generation_trn_id = a.paybill_generation_trn_id " + 
 				" inner join mst_dcps_bill_group b on a.scheme_billgroup_id = b.bill_group_id " + 
 				" inner join rlt_zp_ddo_map c on b.ddo_code = c.zp_ddo_code " + 
-				" inner join org_ddo_mst cccc on a.ddo_code = cccc.ddo_code where c.rept_ddo_code ='"+ddoCode+"'" + 
+				" inner join org_ddo_mst cccc on a.ddo_code = cccc.ddo_code   LEFT JOIN HR_PAY_EKUBER_RECORD_MST e ON cpt.auth_no = e.AUTH_NO where c.rept_ddo_code ='"+ddoCode+"'" + 
 				" and a.is_active in (9,11,14) and cpt.is_active not in (13) and cpt.paybill_year ="+yearName+"  and cpt.paybill_month ="+monthName+"  " + 
 				" group by cpt.consolidate_paybill_trn_id,b.scheme_code,b.scheme_name,cpt.is_active " + 
 				" order by cpt.consolidate_paybill_trn_id desc";

@@ -98,6 +98,7 @@ public class BDSIntegrationController {
 		Double hrr = 0d;
 		Double dcps = 0d;
 		Double gis = 0d;
+		Double gisZp = 0d;
 		Double groupaccpolicy=0d;
 		Double pf= 0d;
 		Double revenueStamp= 0d;
@@ -142,7 +143,7 @@ public class BDSIntegrationController {
 			
 			
 			if (objects[18]!=null) {
-				pf =(Double.parseDouble(objects[18].toString()));
+				gisZp =(Double.parseDouble(objects[18].toString()));
 			}
 			
 			/*
@@ -304,7 +305,8 @@ public class BDSIntegrationController {
 		lMapBillDetailsMap.put("BillType", strBillType);
 		lMapBillDetailsMap.put("FormId", "MTR44"); // DEFAULT
         lMapBillDetailsMap.put("TotalDeduction", String.valueOf(totalDeduction));
-		 Map lMapDeducBifurcatedMapSuppzero = new HashMap();
+		
+        Map lMapDeducBifurcatedMapSuppzero = new HashMap();
 		 lMapDeducBifurcatedMapSuppzero.put("RC0028001201",String.valueOf(pt));
 		 //prov fund details
 		 /*lMapBillDetailsMap.put("RC8336514701", gpfHeadActCodeOne);
@@ -315,10 +317,28 @@ public class BDSIntegrationController {
 		 lMapDeducBifurcatedMapSuppzero.put("RC8336516501", gpfHeadActCodeThree);
 		 lMapDeducBifurcatedMapSuppzero.put("RC8658518201",String.valueOf(it));
 		 lMapDeducBifurcatedMapSuppzero.put("RC0216006901",String.valueOf(hrr));
-		 lMapDeducBifurcatedMapSuppzero.put("RC8342535701",String.valueOf(dcps));
+	//	 lMapDeducBifurcatedMapSuppzero.put("RC8342535701",String.valueOf(dcps));
 		 lMapDeducBifurcatedMapSuppzero.put("RC8011502301",String.valueOf(gis));
 		 lMapDeducBifurcatedMapSuppzero.put("RC8121507501",String.valueOf(groupaccpolicy));
 		 lMapDeducBifurcatedMapSuppzero.put("RC0030046401", String.valueOf(revenueStamp)); //evenue stamp
+		 
+		 
+		 
+		  if (finyear1 > 2018 || (finyear1 == 2018 && paymonth >= 3)) {
+	        	totalDeduction = gpfHeadActCodeOne + pt + gpfHeadActCodeThree
+			            + gpfHeadActCodeTwo + gis+ gisZp
+			            + groupaccpolicy + revenueStamp;
+	        	
+			} else {
+				totalDeduction = gpfHeadActCodeOne + pt + gpfHeadActCodeThree
+			            + gpfHeadActCodeTwo + gis + gisZp
+			            + groupaccpolicy + dcps
+			            + revenueStamp;
+				lMapBillDetailsMap.put("RC8342535701",String.valueOf(dcps));
+			}
+		 
+		  lMapBillDetailsMap.put("TotalDeduction", String.valueOf(totalDeduction));
+		 
 		 
 /*		 lMapDeducBifurcatedMapSuppzero.put("RC8121507501",String.valueOf(groupaccpolicy));*/
 
@@ -336,6 +356,8 @@ public class BDSIntegrationController {
 			authNo = resultMap.get("authNo") != null ? (String) resultMap.get("authNo") : null;
 			statusCode = resultMap.get("statusCode") != null ? (String) resultMap.get("statusCode") : null;
 			pdfData = resultMap.get("pdfData") != null ? (byte[]) resultMap.get("pdfData") : null;
+			
+			uploadAuthSlip(pdfData,"RDD",authNo);
 		}
 
 		@SuppressWarnings("rawtypes")
@@ -421,9 +443,9 @@ public class BDSIntegrationController {
 					String strOSName = System.getProperty("os.name");
 					boolean test = strOSName.contains("Windows");
 					if (strOSName.contains("Windows")) {
-						key = "serverempconfigimagepath";
+						key = "authSlipWindowsPath";
 					} else {
-						key = "serverempconfigimagepathLinuxOS";
+						key = "authSlipLinuxPath";
 					}
 					rootPath = environment.getRequiredProperty(key);
 					rootPath += DeptNm;

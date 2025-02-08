@@ -27,7 +27,7 @@ public class BDSIntegrationRepoImpl implements BDSIntegrationRepo {
 		strQuery.append("select a.consolidate_paybill_trn_id,a.ddo_code,b.from_year as finyear1,b.to_year as finyear2,a.scheme_code,");
 		strQuery.append("a.gross_amt,a.no_of_employee,a.bill_type,a.paybill_month,a.created_date,sum(a.total_deduction) as total_deduction,");
 		strQuery.append("sum(a.pt) as pt,sum(a.income_tax) as incometax,sum(a.hrr) as hrr,sum((COALESCE(a.dcps_arr, 0)) + (COALESCE(a.dcps, 0))) as dcps,");
-		strQuery.append("sum(a.gis) as gis,sum(a.group_acc_policy) as group_acc_policy,sum(a.pf) as pf,sum(a.revenue_stamp) as revenueStamp from consolidate_paybill_trn a ");
+		strQuery.append("sum(a.gis) as gis,sum(a.group_acc_policy) as group_acc_policy,sum(a.pf) as pf,sum(a.revenue_stamp) as revenueStamp,sum(a.gis_zp) as gis_zp from consolidate_paybill_trn a ");
 		strQuery.append("inner join  year_mst b ON b.year_id = a.paybill_year ");
 		strQuery.append("inner join rlt_zp_ddo_map c on c.rept_ddo_code=a.ddo_code  ");
 		strQuery.append("inner join consolidate_paybill_trn_mpg d on d.consolidate_paybill_trn_id=a.consolidate_paybill_trn_id ");

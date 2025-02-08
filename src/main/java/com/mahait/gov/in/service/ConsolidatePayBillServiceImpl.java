@@ -81,6 +81,7 @@ public class ConsolidatePayBillServiceImpl implements ConsolidatePayBillService 
 		Double sumGrossAmount=0d;
 		Double sumNetAmount=0d;
 		Double totalITamt=0d;
+		Double totalGisZp=0d;
 		Double incomeTax=0d;
 		Double totaldcpsArr=0d;
 		Double totalgis=0d;
@@ -91,6 +92,7 @@ public class ConsolidatePayBillServiceImpl implements ConsolidatePayBillService 
 		Double totalpf=0d;
 		Double dcpsarr=0d;
 		Double gis=0d;
+		Double gisZp=0d;
 		Double pt=0d;
 		Double accpolicy=0d;
 		Double hrr=0d;
@@ -162,6 +164,12 @@ public class ConsolidatePayBillServiceImpl implements ConsolidatePayBillService 
 							totalpf+=pf;
 						}
 						
+						
+						if(obj[8]!=null) {
+							gisZp= StringHelperUtils.isNullLong(obj[8]).doubleValue();
+							totalGisZp+=gisZp;
+						}
+						
 										
 					
 				}
@@ -183,6 +191,7 @@ public class ConsolidatePayBillServiceImpl implements ConsolidatePayBillService 
 		objEntity.setPt(totalpt);
 		objEntity.setAccPolicy(totalaccPolicy);
 		objEntity.setHrr(totalHrr);
+		objEntity.setGisZp(totalGisZp);
 		objEntity.setTotalDeduct(totalDeduc);
 		objEntity.setPf(totalpf);
 		objEntity.setCreatedDate(new Date());

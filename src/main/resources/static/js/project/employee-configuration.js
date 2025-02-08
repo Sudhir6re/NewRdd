@@ -11,6 +11,14 @@ jQuery(document).ready(function() {
 		}
 		
 		
+		if($("#dcpsDetailsTable1").length){
+					$("#dcpsDetailsTable1").dataTable();
+		}
+		
+		
+		
+		
+		
 		
 	   if (enableTyping != undefined) {
            enableTyping(new Array('fName','mName','lName'),//Input fiel Name
