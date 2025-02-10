@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.PaybillGenReport}"></title>
+<style>
+</style>
+</head>
+<body class="paybill-gen-report-search">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.ReportBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.PaybillGenReport}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.PaybillGenReport}"></span>
+		</h3>
+		<div class="container">
+			<form name="frmEmpStatistics" action="" id="paybillgenrpserch"
+				method="post">
+				<table class="table bor-0">
+					<tbody>
+						<tr>
+							<td>&nbsp;</td>
+							<td class="captionTag">Month <font color="RED">*</font>
+							</td>
+							<td>&nbsp;:</td>
+							<td colspan="1"><select class="selecttag" name="monthId"
+								id="monthId">
+									<option value="-1" selected="">-- Select --</option>
+									<option value="1">January</option>
+									<option value="2">February</option>
+							</select></td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td class="captionTag">Year <font color="RED">*</font>
+							</td>
+							<td>&nbsp;:</td>
+							<td colspan="1"><select class="selecttag" name="yearId"
+								id="yearId">
+									<option value="-1" selected="">-- Select --</option>
+									<option value="20">2007-2008</option>
+									<option value="21">2008-2009</option>
+							</select></td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td class="captionTag">District</td>
+							<td>&nbsp;:</td>
+							<td colspan="1"><select class="selecttag" name="distId"
+								id="distId">
+									<option value="-1" selected="">-- Select --</option>
+									<option value="100080">Palghar</option>
+									<option value="343">Ahmednagar</option>
+							</select></td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr bgcolor="#f3f3f3">
+							<td colspan="5" style="border-top: solid 1px #333333;"><i><b>Note:
+								</b>Parameter marked with a '<font face="Verdana" color="red">*</font>'
+									are mandatory</i> <br></td>
+							<td colspan="5" class="TableBorderTN"
+								style="padding: 5px; text-align: right"><a th:href="@{/level3/paybillGenReport}"
+								type="button" id="rptBtn_GenerateReport" class="btn">Generate
+									Report </a> <input type="button" name="ResetParams"
+								id="rptBtn_ResetBtn" value="Reset" class="btn"></td>
+						</tr>
+					</tbody>
+				</table>
+
+
+			</form>
+
+		</div>
+
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+</body>
+</html>

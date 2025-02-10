@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<style>
+.branch-name, .bank-name, .gis-val {
+	min-width: 400px ! IMPORTANT;
+}
+
+.emp-name {
+	min-width: 250px ! IMPORTANT;
+}
+
+.scrollablediv td {
+	min-width: 150px;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.table-bordered {
+	border: 1px solid #ddd;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table, th, td {
+	border: 1px solid black;
+}
+
+.table-bordered>thead>tr>th, .table-bordered>tbody>tr>th,
+	.table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td,
+	.table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td {
+	border: 1px solid #ddd;
+}
+
+.text-left {
+	text-align: left;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.table-responsive {
+	padding-right: 10px;
+}
+
+@media print {
+	.scrollablediv table * {
+		font-size: 9px;
+		padding: 2px;
+	}
+	@page {
+		size: landscape;
+	}
+	.scrollablediv td {
+		min-width: unset ! IMPORTANT;
+	}
+}
+</style>
+
+</head>
+<body class="dcps-emp-stat">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.ReportBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pagelabel.empstsname}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<div id="dvContainer" class="container">
+
+
+			<form method="post" action="" name="frmEmpStatistics"
+				enctype="multipart/form-data" id="frmEmpStatistics">
+				<fieldset class="tabstyle">
+					<table class="table bor-0">
+						<tbody>
+							<tr>
+								<td>DDO CODE</td>
+								<td style="width: 25%"><select name="cmbDDOCode"
+									id="cmbDDOCode">
+										<option value="-1">Select</option>
+										<option value="02370100003"
+											title="TEST OFFICE RDD(new)-abc:,./">TEST OFFICE
+											RDD(new)-abc:,./(02370100003)</option>
+										<option value="02370100328" title="Demo DDO RDD Office">
+											Demo DDO RDD Office(02370100328)</option>
+								</select></td>
+								<td style="width: 10%">DCPS <input type="radio"
+									id="radioDCPSOrGPF" name="radioDCPS" value="Y"
+									checked="checked">
+								</td>
+								<td style="width: 10%">GPF <input type="radio"
+									id="radioDCPSOrGPF" name="radioDCPS" value="N"></td>
+								<td><input type="button" name="btnSubmit" id="btnSubmit"
+									value="Submit" class="buttontag"></td>
+							</tr>
+						</tbody>
+					</table>
+				</fieldset>
+				<div id="print-content">
+					<fieldset class="tabstyle">
+						<legend>Employee Statistics</legend>
+						<div class="scrollablediv">
+							<table class="table table-bordered table-hover table-striped"
+								id="btnExcel">
+								<thead>
+									<tr>
+										<th width="15%">Employee Name</th>
+										<th>PanchayatrajSevarth Id</th>
+										<th>Date of Birth</th>
+										<th>Cadre</th>
+										<th>Post Name</th>
+										<th>Post Type</th>
+										<th>Post Start Date</th>
+										<th>Post End Date</th>
+										<th>Date of Joining</th>
+										<th>Date of Service Expiry</th>
+										<th>Scale Description</th>
+										<th>Basic Salary</th>
+										<th>DCPS Account No.</th>
+										<th>GIS Group</th>
+										<th>GIS Value</th>
+										<th>Physically Handicapped</th>
+										<th>Bank name</th>
+										<th>Bank Branch Name</th>
+										<th>Account No</th>
+										<th>DDO Code</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>V NARWARE DCPS</td>
+										<td>02ZPEVNDM9201</td>
+										<td>25/11/1992</td>
+										<td>C</td>
+										<td>Junior Accounts Officer77200006705</td>
+										<td>Permanent</td>
+										<td>27/06/2003</td>
+										<td></td>
+										<td>01/01/2022</td>
+										<td>30/11/2050</td>
+										<td>4440-7440-Grade Pay (2000)</td>
+										<td>38900</td>
+										<td>023333333333VNDM9201V</td>
+										<td>C</td>
+										<td>DEMO Bill Group</td>
+										<td>-</td>
+										<td>ABHYUDAYA CO-OP BANK LTD</td>
+										<td>AIROLI,GREATER MUMBAI,MUMBAI</td>
+										<td>6442984542</td>
+										<td>02370100003</td>
+									</tr>
+									<tr>
+										<td>NAMARATA RATHOD</td>
+										<td>02ZPENRAF9501</td>
+										<td>01/01/1995</td>
+										<td>C</td>
+										<td>Junior Assistant (Accounts)77200006784</td>
+										<td>Permanent</td>
+										<td>14/06/1999</td>
+										<td></td>
+										<td>01/01/2017</td>
+										<td>31/12/2052</td>
+										<td>5200-20200-Grade Pay(2800)</td>
+										<td>22800</td>
+										<td>023333333333NRAF9501U</td>
+										<td>C</td>
+										<td>DEMO Bill Group</td>
+										<td>-</td>
+										<td>BANK OF AMERICA</td>
+										<td>BANK OF AMERICA, MUMBAI,GREATER MUMBAI,MUMBAI</td>
+										<td>4815616132131351561</td>
+										<td>02370100003</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</fieldset>
+				</div>
+			</form>
+
+			<div class="text-center">
+				<br />
+				<button id="print" onclick="printContent('print-content');"
+					class="btn orange">Print</button>
+				<button id="btnExcel" class="btn">Excel</button>
+				<a th:href="@{/user/home}" class="btn"><span
+					th:text="#{msg.thymeleaf.pagelabel.btnCancel}"></span></a>
+
+			</div>
+
+		</div>
+	</div>
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+
+</body>
+<script>
+	function printContent(el) {
+		var restorepage = $('body').html();
+		var printcontent = $('#' + el).clone(true);
+		$('body').empty().html(printcontent);
+		window.print();
+		$('body').html(restorepage);
+	}
+
+	$("#btnExcel").click(function() {
+		$(".table-excel").table2excel({
+			filename : "EmployeesStatastics.xls"
+		});
+	});
+</script>
+</html>

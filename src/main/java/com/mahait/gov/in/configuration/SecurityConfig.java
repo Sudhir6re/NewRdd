@@ -24,7 +24,6 @@ import com.mahait.gov.in.customfilter.CustomSimpleUrlAuthenticationSuccessHandle
 import com.mahait.gov.in.customfilter.UsernameDecryptFilter;
 import com.mahait.gov.in.service.UserService;
 
-import jakarta.servlet.http.HttpServletResponse;
 @Configuration
 public class SecurityConfig {
 

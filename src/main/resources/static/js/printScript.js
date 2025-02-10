@@ -8,3 +8,10 @@ function printContent(el) {
 	}, 250);
 
 }
+
+
+	$(".btnExcel").click(function() {
+		$(".table-excel").table2excel({
+			filename : "EmployeesStatastics.xls"
+		});
+	});
