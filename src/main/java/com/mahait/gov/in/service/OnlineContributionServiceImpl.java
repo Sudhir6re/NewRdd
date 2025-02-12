@@ -420,7 +420,8 @@ public class OnlineContributionServiceImpl implements OnlineContributionService 
 				dcpsContributionEntity.setPayCommission(dcpContributionModel1.getPayCommission().toString());
 				dcpsContributionEntity.setContribution(dcpContributionModel1.getContribution().doubleValue());
 				dcpsContributionEntity.setContributionEmpr(dcpContributionModel1.getEmprContribution().floatValue());
-				dcpsContributionEntity.setRegStatus(0);
+			//	dcpsContributionEntity.setRegStatus(0);
+				dcpsContributionEntity.setRegStatus(1);
 				dcpsContributionEntity.setDbId(99l);
 				dcpsContributionEntity.setDdoCode(orgUserMst.getDdoCode());
 				dcpsContributionEntity.setSevaarthId(dcpContributionModel1.getSevaarthId());
