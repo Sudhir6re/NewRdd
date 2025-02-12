@@ -26,7 +26,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,13 +34,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mahait.gov.in.entity.BeamsIntegrationEntity;
 import com.mahait.gov.in.entity.ConsolidatePayBillTrnEntity;
 import com.mahait.gov.in.entity.OrgUserMst;
-import com.mahait.gov.in.entity.PaybillGenerationTrnEntity;
 import com.mahait.gov.in.service.BDSIntegrationService;
 import com.mahait.gov.in.service.CommonHomeMethodsService;
 import com.mahait.gov.in.service.MstSchemeService;
 import com.mahait.gov.in.service.ViewDelConsolidatePayBillService;
 
-import bds.authorization.PayrollBEAMSIntegrateWS;
+import bds.authorization.BeamsIntegrationWebService;
 import jakarta.servlet.http.HttpSession;
 
 
@@ -69,6 +67,11 @@ public class BDSIntegrationController {
 	
 	@Autowired
 	BDSIntegrationService bdsintegrationservice;
+	
+	
+	@Autowired
+	BeamsIntegrationWebService beamsIntegrationWebService;
+	
 	@Autowired
 	private Environment environment;
 
@@ -83,7 +86,7 @@ public class BDSIntegrationController {
 		
 		//logger.info("paybillGenerationTrnIdMMM############" + consolidateId);
 		Long paybillid = 0l;
-		String ddocode = "";
+		String ddocode = messages.getDdoCode();
 		int finyear1 = 0;
 		int finyear2 = 0;
 		String schemecode = "";
@@ -263,7 +266,9 @@ public class BDSIntegrationController {
 		 * logger.info("resultMap is ::: " + resultMap);
 		 */
 
-		PayrollBEAMSIntegrateWS payrollBEAMSIntegrateWSObj = new PayrollBEAMSIntegrateWS();
+		//PayrollBEAMSIntegrateWS payrollBEAMSIntegrateWSObj = new PayrollBEAMSIntegrateWS();
+		
+		
 		HashMap lMapBillDetailsMap = new HashMap();
 		lMapBillDetailsMap.put("PaybillId", String.valueOf(paybillid)); // Consolidate
 		//lMapBillDetailsMap.put("DDOCode", ddocode);
@@ -323,7 +328,6 @@ public class BDSIntegrationController {
 		 lMapDeducBifurcatedMapSuppzero.put("RC0030046401", String.valueOf(revenueStamp)); //evenue stamp
 		 
 		 
-		 
 		  if (finyear1 > 2018 || (finyear1 == 2018 && paymonth >= 3)) {
 	        	totalDeduction = gpfHeadActCodeOne + pt + gpfHeadActCodeThree
 			            + gpfHeadActCodeTwo + gis+ gisZp
@@ -344,7 +348,8 @@ public class BDSIntegrationController {
 
 		 lMapBillDetailsMap.put("BifurcatedDedMapInnerMap",lMapDeducBifurcatedMapSuppzero);
 
-		HashMap resultMap = payrollBEAMSIntegrateWSObj.getBillApprvFrmBEAMSWS(lMapBillDetailsMap, "");
+		//HashMap resultMap = payrollBEAMSIntegrateWSObj.getBillApprvFrmBEAMSWS(lMapBillDetailsMap, "");
+		HashMap resultMap = beamsIntegrationWebService.forwardPaybillToBeams(lMapBillDetailsMap);
 		 
 //		 HashMap resultMap =new HashMap();
 
@@ -357,6 +362,7 @@ public class BDSIntegrationController {
 			statusCode = resultMap.get("statusCode") != null ? (String) resultMap.get("statusCode") : null;
 			pdfData = resultMap.get("pdfData") != null ? (byte[]) resultMap.get("pdfData") : null;
 			
+			if(pdfData.length>0)
 			uploadAuthSlip(pdfData,"RDD",authNo);
 		}
 

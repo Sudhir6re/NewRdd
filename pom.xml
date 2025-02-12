@@ -214,92 +214,69 @@
 		</dependency>
 -->
 
+
+
+<!-- Spring WS core for handling SOAP communication -->
+		<dependency>
+			<groupId>org.springframework.ws</groupId>
+			<artifactId>spring-ws-core</artifactId>
+		</dependency>
+
+		<!-- JAXB API for XML Binding (for JAXB-based XML serialization) -->
 		<dependency>
 			<groupId>jakarta.xml.bind</groupId>
 			<artifactId>jakarta.xml.bind-api</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.glassfish.jaxb</groupId>
-			<artifactId>jaxb-runtime</artifactId>
-		</dependency>
 
-		<dependency>
-			<groupId>com.sun.xml.ws</groupId>
-			<artifactId>jaxws-rt</artifactId>
-			<version>4.0.0</version>
-		</dependency>
+		<!-- Jakarta XML Web Services API -->
 		<dependency>
 			<groupId>jakarta.xml.ws</groupId>
 			<artifactId>jakarta.xml.ws-api</artifactId>
+			<version>4.0.2</version> <!-- Ensure the correct version here -->
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+		<!-- Jakarta JWS API (Optional: JAXB annotations for annotations like
+		@XmlRootElement) -->
 		<dependency>
-			<groupId>org.jsoup</groupId>
-			<artifactId>jsoup</artifactId>
-			<version>1.18.3</version>
+			<groupId>jakarta.jws</groupId>
+			<artifactId>jakarta.jws-api</artifactId>
+			<version>3.0.0</version>
 		</dependency>
 
+		<!-- Spring Boot Test for unit testing -->
 		<dependency>
-			<groupId>PayrollBEAMSIntegWS</groupId>
-			<artifactId>PayrollBEAMSIntegWS</artifactId>
-			<version>1.0</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 
-
+		<!-- Spring Boot DevTools for auto-reloading during development -->
 		<dependency>
-			<groupId>com.thoughtworks.xstream</groupId>
-			<artifactId>xstream</artifactId>
-			<!--	<version>1.2.2</version>-->
-			<version>1.4.19</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
 		</dependency>
 
-
+		<!-- Jakarta XML SOAP API (for handling SOAP messages) -->
 		<dependency>
-			<groupId>org.apache.axis2</groupId>
-			<artifactId>axis2-adb</artifactId>
-			<version>1.8.0</version> <!-- or the latest stable version -->
-		</dependency>
-		<dependency>
-			<groupId>org.apache.axis2</groupId>
-			<artifactId>axis2-transport-local</artifactId>
-			<version>1.8.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.axis2</groupId>
-			<artifactId>axis2-transport-http</artifactId>
-			<version>1.8.0</version>
-
-
+			<groupId>jakarta.xml.soap</groupId>
+			<artifactId>jakarta.xml.soap-api</artifactId>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/javax.activation/activation -->
+		<!-- https://mvnrepository.com/artifact/com.sun.xml.ws/jaxws-rt -->
 		<dependency>
-			<groupId>javax.activation</groupId>
-			<artifactId>activation</artifactId>
-			<version>1.1.1</version>
+			<groupId>com.sun.xml.ws</groupId>
+			<artifactId>jaxws-rt</artifactId>
+			<version>4.0.3</version>
 		</dependency>
 
 
 		<dependency>
-			<groupId>org.apache.axiom</groupId>
-			<artifactId>axiom-api</artifactId>
-			<version>1.2.12</version>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+			<version>3.4.5</version> <!-- Replace with your version -->
 		</dependency>
-
-
-		<dependency>
-			<groupId>org.apache.axiom</groupId>
-			<artifactId>axiom-impl</artifactId>
-			<version>1.2.12</version>
-		</dependency>
-
-		<dependency>
-			<groupId>net.sourceforge.jexcelapi</groupId>
-			<artifactId>jxl</artifactId>
-			<version>2.6.12</version>
-		</dependency>
-
 
 		<dependency>  
 		    <groupId>org.json</groupId>  

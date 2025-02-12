@@ -87,7 +87,6 @@ public class HrPayEkuberRecordMstDtls {
     private String toDdoCode;
     
     
-    
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CREATED_DATE")
