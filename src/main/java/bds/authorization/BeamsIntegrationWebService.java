@@ -17,6 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+
 import bds.authorization.xsd.AuthorizationSlip;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
@@ -33,33 +36,21 @@ public class BeamsIntegrationWebService {
 
 	Logger logger = LoggerFactory.getLogger(BeamsIntegrationWebService.class);
 
-	public HashMap forwardPaybillToBeams(HashMap billData) {
-		String key = "";
-		String beamsUrl = "";
-		String strOSName = System.getProperty("os.name");
-		boolean test = strOSName.contains("Windows");
-		if (strOSName.contains("Windows")) {
-			key = "beams.testWsdlLoc";
-		} else {
-			key = "beams.liveWsdlLoc";
-		}
-		beamsUrl = environment.getRequiredProperty(key);
+	public HashMap forwardPaybillToBeams(HashMap billData,String beamsUrl ) {
+		
+        XStream xStream = new XStream(new DomDriver("UTF-8"));
+        
+        xStream.alias("collection", Map.class);
+        
+        String mapToXML = xStream.toXML(billData);
+        
+        logger.info("mapToXML ::: " + mapToXML);
+        
+        Pattern pattern = Pattern.compile(">\\s+");
+        Matcher matcher = pattern.matcher(mapToXML);
+        mapToXML = matcher.replaceAll(">");
 
-		environment.getRequiredProperty(key);
-
-		String mapToXML = null;
-		try {
-			mapToXML = convertMapToXML(billData);
-		} catch (JAXBException e) {
-			e.printStackTrace();
-		}
-		logger.info("mapToXML ::: " + mapToXML);
-
-		String cleanedXML = removeExtraSpaces(mapToXML);
-
-		logger.info(cleanedXML);
-
-		String dataXML = "<?xml version='1.0' encoding='UTF-8' ?>" + cleanedXML;
+        String dataXML = "<?xml version='1.0' encoding='UTF-8' ?>" + mapToXML;
 		
 
         URL wsdlURL=null;
@@ -117,20 +108,6 @@ public class BeamsIntegrationWebService {
         }
 
 		return  beamsResponse;
-	}
-
-	private static String convertMapToXML(Map<String, Object> map) throws JAXBException {
-		StringWriter writer = new StringWriter();
-		JAXBContext context = JAXBContext.newInstance(Map.class);
-		Marshaller marshaller = context.createMarshaller();
-		marshaller.marshal(map, writer);
-		return writer.toString();
-	}
-
-	private static String removeExtraSpaces(String xml) {
-		Pattern pattern = Pattern.compile(">\\s+");
-		Matcher matcher = pattern.matcher(xml);
-		return matcher.replaceAll(">");
 	}
 
 }

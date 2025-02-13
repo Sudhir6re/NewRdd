@@ -36,7 +36,10 @@ public class NSDLDetailsModel {
 	private Double totalEmprContri;
 	private Double totalContriAmt;
 	private Integer deptCode;
+	private String action;
 	
 	private List<NSDLDetailsModel> nsdlDetailsModelList;
+
+	
 
 }

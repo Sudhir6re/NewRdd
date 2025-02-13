@@ -66,7 +66,7 @@ $("#btnSearch")
 									console.log(data);
 							 $("#tblDataTable").dataTable().fnClearTable();
 //									var paybillGenerationTrnId,status,billDescription, schemeCode, schemeName, billGrossAmt, billNetAmt, isActive,ddoCode;
-									var paybillGenerationTrnId,status,billDescription,  billGrossAmt, billNetAmt, isActive,ddoCode;
+									var paybillGenerationTrnId,status,billDescription,  billGrossAmt, billNetAmt, isActive,ddoCode,authNo;
 									$
 											.each(
 													data,
@@ -80,6 +80,7 @@ $("#btnSearch")
 														billNetAmt = result[4];
 														//ddoCode = result[5];
                                                         status= result[5];
+                                                        authNo= result[6];
                                                         console.log(status);
 														var chk = "<input type='radio' name='consolidatedPaybillTrnId' class='payBillId' data-pid='"
 																+ paybillGenerationTrnId
@@ -165,6 +166,41 @@ $("#btnSearch")
 													}
 														console.log(isActive);
 														var b="--";
+														
+														
+													   var eKuberCount=result[7];
+													   var cmpDownloadStatus=result[8];
+													   
+													   
+													
+													   
+													   if (authNo === null || authNo === '') {
+													           authNo = '--';  
+													       } else {
+													           authNo = `<a href="/ddo/viewAuthSlip/${authNo}" class="authNo" target="_blank"><span>${authNo}</span></a>`;  
+													       }
+													   
+													   
+													        var downloadText = '';
+													        if (authNo !== '--' && eKuberCount > 0 && (cmpDownloadStatus === 'EK' || cmpDownloadStatus === null)) {
+													            downloadText = `<a href="#" class="downloadEkuberTextFile beneficiaryCount" data-authNo="${authNo}" data-schemeCode="${schemeCode}" data-consolidatePayBillTrnId="${paybillGenerationTrnId}">
+													                                <span>${entry[5]}</span> </a>`;
+													        } else {
+													            downloadText = '0';
+													        }
+
+													        var downloadJson = '';
+													        if (cmpDownloadStatus !== null && eKuberCount > 0 && cmpDownloadStatus === 'EK') {
+													            downloadJson = `<a href="#" class="downloadEkuberJsonFile" data-authNo="${authNo}" data-schemeCode="${schemeCode}" data-consolidatePayBillTrnId="${paybillGenerationTrnId}">
+													                                <span>${entry[8]}</span></a>`;
+													        } else {
+													            downloadJson = '-';
+													        }
+
+													   
+														
+														
+														
 														$(
 																"#tblDataTable")
 																.dataTable()
@@ -176,7 +212,9 @@ $("#btnSearch")
 																				schemeName,
 																				billGrossAmt,
 																				billNetAmt,
-																				b ,
+																				authNo,
+																				downloadText,
+																				downloadJson,
 																				isActive]);
 													});
 								}

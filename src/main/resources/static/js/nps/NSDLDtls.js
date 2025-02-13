@@ -23,8 +23,10 @@ function removeErrorClass(element){
 
 
 var context ="";
+var dataTable="";
 $(document).ready(function() {
 	context = $("#appRootPath").val();
+	 dataTable= $("#tblDataTable").dataTable();
 });
 
 
@@ -176,6 +178,28 @@ $(document).on('click', '.filename', function(e){
 
 
 
+$("#filterDdoData").click(function(e) {
+	var month = $('#monthId').val();
+	var year = $('#yearId').val();
+	var cmbTr = $('#cmbTr').val();
+
+	removeErrorClass($('#monthId'));
+	removeErrorClass($('#yearId'));
+
+	if (month == "0") {
+		addErrorClass($('#monthId'), "Please select Month !!!");
+	}else if (year == "0") {
+		addErrorClass($('#yearId'), "Please select Year !!!");
+	}else if(year==16 && (monthId==1 || monthId==2 || monthId==3)){
+		swal('NSDL file can not be generated for selected Month and Year.');
+	}else{
+		$("#action").val("search");
+		var appRootPath=$("#appRootPath").val();
+		appRootPath=appRootPath.trim();
+		$( "#loaderMainNew").show();
+		$("#frmDCPSMatchedEntries").attr("action",appRootPath+"/ddo/NSDLinput");
+	}
+});
 
 $("#btnSearch").click(function(e) {
 
@@ -193,7 +217,7 @@ $("#btnSearch").click(function(e) {
 	}else if(year==16 && (monthId==1 || monthId==2 || monthId==3)){
 		swal('NSDL file can not be generated for selected Month and Year.');
 	}else{
-		var dataTable= $("#tblDataTable").dataTable();
+		
 		  $("#loaderMainNew").show();
 		$.ajax({
 			type : "GET",
@@ -426,7 +450,7 @@ $("#btnSearch").click(function(e) {
 			swal("Please Select Atleast one batch file !!!");
 			event.preventDefault();
 		}else{
-			$("#contributionList").attr("action", "/MJP/ddo/sendContriFile");
+			$("#contributionList").attr("action", context+"/ddo/sendContriFile");
 		}		
 	});
 	
@@ -436,7 +460,7 @@ $("#btnSearch").click(function(e) {
 			swal("Please Select Atleast one batch file !!!");
 			event.preventDefault();
 		}else{
-			$("#contributionList").attr("action", "/MJP/ddo/getNpsFileContriTranId");
+			$("#contributionList").attr("action", context+"/ddo/getNpsFileContriTranId");
 		}	
 	});
 	

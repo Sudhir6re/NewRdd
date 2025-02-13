@@ -28,7 +28,7 @@ public class ViewConsolidatePayBillRepoImpl implements ViewConsolidatePayBillRep
 	public List<Object[]> findAllConsolidatedPaybillList(int monthName,int yearName,String ddoCode) {
 		Session currentSession = entityManager.unwrap(Session.class);
 		String HQL = "select cpt.consolidate_paybill_trn_id,b.scheme_code,b.scheme_name,  sum (cpt.gross_amt) as gross_amt,sum (cpt.net_amt) as net_amt, " + 
-				" cpt.is_active,cpt.auth_no,COUNT(e.PAYMENT_REF_NO) AS EKUBER_count,cpt.CMP_DOWNLOAD_STATUS  from consolidate_paybill_trn cpt inner join consolidate_paybill_trn_mpg cptm on cpt.consolidate_paybill_trn_id = cptm.consolidate_paybill_trn_id " + 
+				" cpt.is_active,cpt.auth_no,COALESCE(COUNT(e.PAYMENT_REF_NO),0) AS EKUBER_count,cpt.CMP_DOWNLOAD_STATUS  from consolidate_paybill_trn cpt inner join consolidate_paybill_trn_mpg cptm on cpt.consolidate_paybill_trn_id = cptm.consolidate_paybill_trn_id " + 
 				" inner join paybill_generation_trn a on cptm.paybill_generation_trn_id = a.paybill_generation_trn_id  " + 
 				" inner join mst_dcps_bill_group b on a.scheme_billgroup_id = b.bill_group_id  " + 
 				" inner join rlt_zp_ddo_map c on b.ddo_code = c.zp_ddo_code  " + 
@@ -50,7 +50,7 @@ public class ViewConsolidatePayBillRepoImpl implements ViewConsolidatePayBillRep
 				"  dd.scheme_name, \r\n" + 
 				"  sum (a.bill_gross_amt) as bill_gross_amt, \r\n" + 
 				"  sum (a.bill_net_amount) as bill_net_amount, \r\n" + 
-				"  cpt.is_active ,cpt.auth_no,COUNT(e.PAYMENT_REF_NO) AS EKUBER_count,cpt.CMP_DOWNLOAD_STATUS \r\n" + 
+				"  cpt.is_active ,cpt.auth_no,COALESCE(COUNT(e.PAYMENT_REF_NO),0) AS EKUBER_count,cpt.CMP_DOWNLOAD_STATUS \r\n" + 
 				"from \r\n" + 
 				"  consolidate_paybill_trn cpt \r\n" + 
 				"  inner join consolidate_paybill_trn_mpg cptm on cpt.consolidate_paybill_trn_id = cptm.consolidate_paybill_trn_id \r\n" + 
@@ -98,7 +98,7 @@ public class ViewConsolidatePayBillRepoImpl implements ViewConsolidatePayBillRep
 		
 		Session currentSession = entityManager.unwrap(Session.class);
 		String HQL = "select cpt.consolidate_paybill_trn_id,b.scheme_code,b.scheme_name,sum (a.bill_gross_amt) as bill_gross_amt,sum (a.bill_net_amount) as bill_net_amount," + 
-				" cpt.is_active,cpt.auth_no,COUNT(e.PAYMENT_REF_NO) AS EKUBER_count,cpt.CMP_DOWNLOAD_STATUS from consolidate_paybill_trn cpt inner join consolidate_paybill_trn_mpg cptm on cpt.consolidate_paybill_trn_id = cptm.consolidate_paybill_trn_id" + 
+				" cpt.is_active,cpt.auth_no,COALESCE(COUNT(e.PAYMENT_REF_NO),0) AS EKUBER_count,cpt.CMP_DOWNLOAD_STATUS from consolidate_paybill_trn cpt inner join consolidate_paybill_trn_mpg cptm on cpt.consolidate_paybill_trn_id = cptm.consolidate_paybill_trn_id" + 
 				" inner join paybill_generation_trn a on cptm.paybill_generation_trn_id = a.paybill_generation_trn_id " + 
 				" inner join mst_dcps_bill_group b on a.scheme_billgroup_id = b.bill_group_id " + 
 				" inner join rlt_zp_ddo_map c on b.ddo_code = c.zp_ddo_code " + 

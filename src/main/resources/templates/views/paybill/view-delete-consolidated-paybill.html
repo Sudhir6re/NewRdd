@@ -124,35 +124,31 @@
 							<td th:text="${varBillGrp.billGrossAmt}"></td>
 							<td th:text="${varBillGrp.billNetAmount}"></td>
 
-							<td><a class="authNo" th:text="${anydeskvarBillGrp.authNo}"></a></td>
-							<td><a class="downloadEkuber" th:text="${varBillanydeGrp.authNo}"></a></td>
-							<td><a class="beneficiaryCount" th:text="${varBillGrp.authNo}"></a></td>
-
-
-							<td align="center" th:if="${varBillGrp.authNo != null}">
-        <a href="@{${'ddo/viewAuthSlip/'+varBillGrp.authNo}"   target="_blank"  >
-            <span th:text="${varBillGrp.authNo}"></span>
-        </a>
- 
-    </td>
-    <td align="center" th:if="${varBillGrp.authNo  == null}">-</td>
-
+							
+							 <td align="center"  class="authNo"  th:if="${varBillGrp.authNo  == null}">-</td>
+							 <td align="center" th:if="${varBillGrp.authNo != null}">
+						        <a href="@{${'/ddo/viewAuthSlip/'+varBillGrp.authNo}"   target="_blank"  >
+						            <span th:text="${varBillGrp.authNo}"></span>
+						        </a>
+						    </td>
+							
 
 
     <td align="center" th:if="${varBillGrp.authNo!= null and varBillGrp.eKuberCount > 0 and (varBillGrp.cmpDownloadStatus == 'EK' or varBillGrp.cmpDownloadStatus == null)}">
-        <a href="#" th:onclick="|handleDownload(this, ${entry[5]})|">
+        <a href="#" class="downloadEkuberTextFile beneficiaryCount"  th:data-authNo="${varBillGrp.authNo}"   th:data-schemeCode="${varBillGrp.schemeCode}"   th:data-consolidatePayBillTrnId="${varBillGrp.consolidatePayBillTrnId}"  >
             <span th:text="${entry[5]}"></span>
         </a>
     </td>
-    <td align="center" th:if="${varBillGrp.authNo == null or !(varBillGrp.eKuberCount > 0 and (varBillGrp.cmpDownloadStatus== 'EK' or varBillGrp.cmpDownloadStatus == null))}">-</td>
+    <td align="center" th:if="${varBillGrp.authNo == null or !(varBillGrp.eKuberCount > 0 and (varBillGrp.cmpDownloadStatus== 'EK' or varBillGrp.cmpDownloadStatus == null))}">0</td>
+
 
     <td th:if="${varBillGrp.cmpDownloadStatus != null and varBillGrp.ekuberCount > 0 and varBillGrp.eKuberCount > 0 and varBillGrp.cmpDownloadStatus == 'EK'}">
-        <a href="#" th:onclick="|handleDownloadJson(this, ${entry[5]})|">
+        <a href="#"  class="downloadEkuberJsonFile"  th:data-authNo="${varBillGrp.authNo}"   th:data-schemeCode="${varBillGrp.schemeCode}"   th:data-consolidatePayBillTrnId="${varBillGrp.consolidatePayBillTrnId}"  >
             <span th:text="${entry[8]}"></span>
         </a>
      
     </td>
-        <td  th:if="${varBillGrp.cmpDownloadStatus == null or varBillGrp.ekuberCount <= 0 or !(varBillGrp.ekuberCount > 0 and varBillGrp.cmpDownloadStatus == 'EK')}">-</td>
+       <td  th:if="${varBillGrp.cmpDownloadStatus == null or varBillGrp.ekuberCount <= 0 or !(varBillGrp.ekuberCount > 0 and varBillGrp.cmpDownloadStatus == 'EK')}">-</td>
 							
 							
 							

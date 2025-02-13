@@ -33,19 +33,19 @@ public class NSDLDetailsRepoImpl implements NSDLDetailsRepo {
 	@Override
 	public List<Object[]> getNSDLEmpDtlsForGenerate(int month, int year, String ddoCode) {
 		Session currentSession = entityManager.unwrap(Session.class);
-		String HQL = "select sum(a.gross_total_amt) as gross_amt,sum(a.total_net_amt) as net_amt,sum(a.nps_empr_allow) as emp_amt,  sum(nps_emp_contri) as empr_amt,"
-				+ " c.ddo_reg_no,d.ddo_code_level2  from paybill_generation_trn_details a \r\n"
-				+ " inner join employee_mst b on a.sevaarth_id=b.sevaarth_id\r\n"
-				+ " inner join ddo_reg_mst c on b.ddo_code=c.ddo_code\r\n"
-				+ " inner join ddo_map_rlt d on d.ddo_code_level1=c.ddo_code\r\n"
-				+ " inner join paybill_generation_trn e on e.paybill_generation_trn_id=a.paybill_generation_trn_id\r\n"
-				+ " where e.paybill_month='" + month + "' and e.paybill_year='" + year
-				+ "' and b.dcps_gpf_flag='Y'  and d.ddo_code_level2='" + ddoCode
-				+ "' and b.pran_no !='' and e.is_active='14'  and b.giscatahory=1 \r\n"
-				+ "  and b.pran_no not in (select DISTINCT sd_pran_no  from nsdl_bh a inner join nsdl_sd b on "
-				+ " a.file_name=b.file_name where month="+month+" and year ="+year+"  and b.ddo_reg_no='" + ddoCode+"') GROUP BY c.ddo_reg_no,d.ddo_code_level2";
-		Query query = currentSession.createNativeQuery(HQL);
-		System.out.println(HQL);
+		StringBuilder sb=new StringBuilder();
+		sb.append("SELECT SUM(a.gross_amt) AS gross_amt,SUM(a.net_total) AS net_amt,SUM(a.DCPS + a.DCPS_PAY + a.DCPS_DELAY + a.DCPS_DA + a.JANJULGISARR) AS emp_amt,"); 
+		sb.append("SUM(a.NPS_EMPLR_CONTRI_DED) AS empr_amt,dto.ddo_reg_no,d.rept_ddo_code FROM paybill_generation_trn_details a ");
+		sb.append("INNER JOIN employee_mst b ON a.sevaarth_id = b.sevaarth_id ");
+	    sb.append("INNER JOIN  org_ddo_mst c ON b.ddo_code = c.ddo_code ");
+	    sb.append("INNER JOIN  rlt_zp_ddo_map d ON d.zp_ddo_code = c.ddo_code  INNER JOIN   paybill_generation_trn e ON e.paybill_generation_trn_id = a.paybill_generation_trn_id "); 
+	    sb.append("	INNER JOIN  MST_DTO_REG dto ON dto.ddo_code = d.ZP_DDO_CODE "); 
+	    sb.append(" WHERE   e.paybill_month = "+month+"   AND e.paybill_year = "+year+" AND b.dcps_gpf_flag = 'Y' ");
+	    sb.append("    AND d.rept_ddo_code = '"+ddoCode+"' AND b.pran_no != '' AND e.is_active = '14'  AND b.giscatahory = 1 ");
+		sb.append(" AND b.pran_no NOT IN ( SELECT DISTINCT sd_pran_no FROM nsdl_bh a INNER JOIN nsdl_sd b ON a.file_name = b.file_name WHERE a.month = "+month+" AND a.year = "+year+" AND b.ddo_reg_no = '"+ddoCode+"')");
+		sb.append(" GROUP BY  dto.ddo_reg_no, d.rept_ddo_code;");
+		Query query = currentSession.createNativeQuery(sb.toString());
+		System.out.println(sb.toString());
 		return query.list();
 	}
 
@@ -105,34 +105,93 @@ public class NSDLDetailsRepoImpl implements NSDLDetailsRepo {
 
 	@Override
 	public List<Object[]> getEmployeeListNsdl(Integer yrCode, Integer month, Integer treasuryyno, String ddoName) {
-		// TODO Auto-generated method stub
+		Session currentSession = entityManager.unwrap(Session.class);
 		List empLst = null;
 		StringBuilder Strbld = new StringBuilder();
-		Session currentSession = entityManager.unwrap(Session.class);
-		try {
-			Strbld.append(
-					"select b.employee_full_name_en,b.ddo_code,b.sevaarth_id,c.office_name,sum(a.gross_total_amt) as gross_amt,sum(a.total_net_amt) as net_amt,"
-					+ " sum(a.nps_empr_allow) as emp_amt,  sum(nps_emp_contri) as empr_amt, "
-							+ " f.dcps_no,b.pran_no,  case when b.super_ann_date > now() then 'Employee Not Retired' else 'Employee Retired' end as empStatus  from paybill_generation_trn_details a\r\n"
-							+ " inner join employee_mst b on a.sevaarth_id=b.sevaarth_id\r\n"
-							+ " inner join ddo_reg_mst c on b.ddo_code=c.ddo_code\r\n"
-							+ " inner join ddo_map_rlt d on d.ddo_code_level1=c.ddo_code\r\n"
-							+ " inner join paybill_generation_trn e on e.paybill_generation_trn_id=a.paybill_generation_trn_id \r\n"
-							+ " left join dcps_details_mst f on b.sevaarth_id=f.sevaarth_id\r\n"
-							+ " where b.dcps_gpf_flag='Y' and d.ddo_code_level2='" + ddoName
-							+ "' and  b.pran_no != '' and e.is_active='14' and b.giscatahory=1 and e.paybill_month=" + month
-							+ " and e.paybill_year=" + yrCode +"   and b.pran_no not in (select DISTINCT sd_pran_no from nsdl_bh a inner join nsdl_sd b "
-									+ " on a.file_name=b.file_name where month="+month+" and year ="+yrCode+"  and b.ddo_reg_no='"+ddoName+"') "
-									+ "GROUP BY c.ddo_reg_no,d.ddo_code_level2,b.employee_full_name_en,b.ddo_code,b.sevaarth_id,c.office_name,f.dcps_no,b.pran_no,\r\n"
-							+ "b.super_ann_date ");
-			Query lQuery = currentSession.createNativeQuery(Strbld.toString());
-			return lQuery.list();
-		} catch (Exception e) {
-			System.out.println("Error occer in  getEmployeeList ---------" + e);
+		
+		Strbld.append(	" SELECT emp.employee_full_name_en,emp.DCPS_no,emp.PRAN_NO,sum(paybill.DCPS)+sum(paybill.DCPS_PAY)+sum(paybill.DCPS_DELAY)+sum(paybill.DCPS_DA) + sum(JANJULGISARR)  as emp_amt,"
+						+ " sum(paybill.NPS_EMPLR_CONTRI_DED) as DED_ADJUST ,loc.loc_name,dto.dto_reg_no,dto.ddo_reg_no,head.paybill_generation_trn_id,emp.super_ann_date FROM employee_mst  emp");
+		Strbld.append(" inner join paybill_generation_trn_details paybill on paybill.sevaarth_id=emp.sevaarth_id  ");
+		Strbld.append(" inner join paybill_generation_trn head on head.paybill_generation_trn_id=paybill.paybill_generation_trn_id  ");
+		//Strbld.append(" inner join consolidate_paybill_trn_mpg consMpg on consMpg.paybill_generation_trn_id = head.paybill_generation_trn_id  ");
+		//Strbld.append(" inner join consolidate_paybill_trn consMst on consMst.consolidate_paybill_trn_id = consMpg.consolidate_paybill_trn_id  ");
+		Strbld.append(" inner join ORG_DDO_MST ddo on ddo.LOCATION_CODE=cast(paybill.LOC_ID as varchar) ");
+		Strbld.append(" inner join RLT_ZP_DDO_MAP zp on zp.ZP_DDO_CODE =ddo.DDO_CODE    ");
+		Strbld.append(" inner join ORG_DDO_MST ddo2 on ddo2.DDO_CODE = zp.zp_DDO_CODE    ");
+		Strbld.append(" inner join MST_DTO_REG dto on dto.ddo_code=zp.ZP_DDO_CODE ");
+		if (ddoName != null && ddoName.equalsIgnoreCase("2222")) {
+			Strbld.append("  and substr(ddo2.ddo_code,1,4) <> '3301' ");
+		} else {
+			Strbld.append("  and substr(ddo2.ddo_code,1,4) <> '2222' ");
 		}
-		return null;
+		Strbld.append(" inner join CMN_LOCATION_MST loc  on cast(loc.LOC_ID as varchar)=substr(zp.rept_DDO_CODE,1,4) ");
+		Strbld.append(" where zp.rept_DDO_CODE='" + ddoName + "' and  head.PAYBILL_YEAR=" + yrCode
+				+ " and head.PAYBILL_MONTH=" + month + "  and zp.rept_DDO_CODE='" + ddoName + "'  ");
+		
+		//and consMst.STATUS = 1 
+		Strbld.append(
+				" and emp.PRAN_NO is not null and emp.pran_status='1' and  emp.is_active=1 and head.is_active=14 and emp.dcps_gpf_flag='Y' and paybill.dcps>0 ");
+		Strbld.append(
+				" group by  emp.employee_full_name_en,emp.DCPS_no,emp.PRAN_NO,loc.loc_name,dto.dto_reg_no,dto.ddo_reg_no,head.paybill_generation_trn_id,emp.super_ann_date  ");
+				
+				
+		
+		
+		
+		//old
+		
+		/*Strbld.append(
+				" select a.employee_full_name_en,a.DCPS_no,a.PRAN_NO,cast(a.emp_amt-COALESCE(b.sd_amnt,0) as double precision) as emp_amount ,cast(a.DED_ADJUST-COALESCE(b.sd_emplr_amnt,0) as double precision) as emplr_amount,a.loc_name,a.dto_reg_no,a.ddo_reg_no,b.sd_amnt,a.consolidate_paybill_trn_id,a.super_ann_date from  ");
+		Strbld.append(
+				" (SELECT emp.employee_full_name_en,emp.DCPS_no,emp.PRAN_NO,sum(paybill.DCPS)+sum(paybill.DCPS_PAY)+sum(paybill.DCPS_DELAY)+sum(paybill.DCPS_DA) + sum(JANJULGISARR)  as emp_amt,   "
+						+ " sum(paybill.NPS_EMPLR_CONTRI_DED) as DED_ADJUST ,loc.loc_name,dto.dto_reg_no,dto.ddo_reg_no,consMst.consolidate_paybill_trn_id,emp.super_ann_date FROM employee_mst  emp");
+		Strbld.append(" inner join paybill_generation_trn_details paybill on paybill.sevaarth_id=emp.sevaarth_id  ");
+		Strbld.append(" inner join paybill_generation_trn head on head.paybill_generation_trn_id=paybill.paybill_generation_trn_id  ");
+		Strbld.append(" inner join consolidate_paybill_trn_mpg consMpg on consMpg.paybill_generation_trn_id = head.paybill_generation_trn_id  ");
+		Strbld.append(" inner join consolidate_paybill_trn consMst on consMst.consolidate_paybill_trn_id = consMpg.consolidate_paybill_trn_id  ");
+		Strbld.append(" inner join ORG_DDO_MST ddo on ddo.LOCATION_CODE=cast(paybill.LOC_ID as varchar) ");
+		Strbld.append(" inner join RLT_ZP_DDO_MAP zp on zp.ZP_DDO_CODE =ddo.DDO_CODE    ");
+		Strbld.append(" inner join ORG_DDO_MST ddo2 on ddo2.DDO_CODE = zp.zp_DDO_CODE    ");
+		Strbld.append(" inner join MST_DTO_REG dto on dto.ddo_code=zp.ZP_DDO_CODE ");
+		if (ddoName != null && ddoName.equalsIgnoreCase("2222")) {
+			Strbld.append("  and substr(ddo2.ddo_code,1,4) <> '3301' ");
+		} else {
+			Strbld.append("  and substr(ddo2.ddo_code,1,4) <> '2222' ");
+		}
+		Strbld.append(" inner join CMN_LOCATION_MST loc  on cast(loc.LOC_ID as varchar)=substr(zp.rept_DDO_CODE,1,4) ");
+		Strbld.append(" where zp.rept_DDO_CODE='" + ddoName + "' and  head.PAYBILL_YEAR=" + yrCode
+				+ " and head.PAYBILL_MONTH=" + month + "  and zp.rept_DDO_CODE='" + ddoName + "'  ");
+		
+		//and consMst.STATUS = 1 
+		Strbld.append(
+				" and emp.PRAN_NO is not null and emp.pran_status='1' and  emp.is_active=1 and head.is_active=14 and emp.dcps_gpf_flag='Y' and paybill.dcps>0 ");
+		Strbld.append(
+				" group by  emp.employee_full_name_en,emp.DCPS_no,emp.PRAN_NO,loc.loc_name,dto.dto_reg_no,dto.ddo_reg_no,consMst.consolidate_paybill_trn_id,emp.super_ann_date ) a left outer join  ");
+		Strbld.append(
+				" (SELECT sd.SD_PRAN_NO,cast(sum(COALESCE(sd.SD_EMP_AMOUNT,0)) as double precision) as sd_amnt,cast(sum(COALESCE(sd.SD_EMPlr_AMOUNT,0)) as double precision) as sd_emplr_amnt,bh.YEAR,bh.MONTH ,sd.ddo_reg_no FROM NSDL_SD sd ");
+		Strbld.append(
+				" inner join NSDL_BH bh on bh.FILE_NAME=sd.FILE_NAME and bh.STATUS!='-1'  and  bh.is_LEGACY_DATA='N' ");
+		Strbld.append(" and bh.YEAR=" + yrCode + " and bh.MONTH=" + month + " and bh.file_name like '"
+				+ ddoName
+				+ "%' group by sd.SD_PRAN_NO,bh.YEAR,bh.MONTH ,sd.ddo_reg_no ) b on b.SD_PRAN_NO=a.PRAN_NO and b.ddo_reg_no=a.ddo_reg_no  ");
+		Strbld.append(
+				" where cast(a.emp_amt-COALESCE(b.sd_amnt,0) as double precision) > 0 and cast(a.DED_ADJUST-COALESCE(b.sd_emplr_amnt,0) as double precision) > 0 order by  a.ddo_reg_no");*/
+
+		System.out.println("   ---------" + Strbld.toString());
+		Query lQuery = currentSession.createNativeQuery(Strbld.toString());
+
+		empLst = lQuery.list();
+		
+		return empLst;
+
 	}
 
+	
+	
+	
+	
+	
+	
 	@Override
 	public Long getDDoRegCount(Integer yrCode, Integer month, Integer treasuryyno) {
 		// TODO Auto-generated method stub
@@ -349,6 +408,60 @@ public class NSDLDetailsRepoImpl implements NSDLDetailsRepo {
 		
 		Query selectQuery2 = currentSession.createNativeQuery(sb2.toString());
 		return selectQuery2.list();
+	}
+
+	
+	
+	
+	@Override
+	public List getEmployeeListNsdlsuperAnnNull(Integer year, Integer month, Integer treasuryyno, String ddoCode) {
+		Session currentSession = entityManager.unwrap(Session.class);
+		List empLst = null;
+		StringBuilder Strbld = new StringBuilder();
+		try {
+			Strbld.append(
+					" select a.employee_full_name_en,a.sevaarth_id,a.PRAN_NO,cast(a.emp_amt-COALESCE(b.sd_amnt,0) as double precision) as emp_amount ,cast(a.DED_ADJUST-COALESCE(b.sd_emplr_amnt,0) as double precision) as emplr_amount,a.loc_name,a.dto_reg_no,a.ddo_reg_no,b.sd_amnt,a.consolidate_paybill_trn_id,a.super_ann_date from  ");
+			Strbld.append(
+					" (SELECT emp.employee_full_name_en,emp.sevaarth_id,emp.PRAN_NO,sum(paybill.DCPS)+sum(paybill.DCPS_PAY)+sum(paybill.DCPS_DELAY)+sum(paybill.DCPS_DA) + sum(JANJULGISARR)  as emp_amt,   "
+							+ " sum(paybill.NPS_EMPLR_CONTRI_DED) as DED_ADJUST ,loc.loc_name,dto.dto_reg_no,dto.ddo_reg_no,consMst.consolidate_paybill_trn_id,emp.super_ann_date FROM employee_mst emp  ");
+			Strbld.append(" inner join paybill_generation_trn_details paybill on paybill.sevaarth_id=emp.sevaarth_id  ");
+			Strbld.append(" inner join paybill_generation_trn head on head.paybill_generation_trn_id=paybill.paybill_generation_trn_id  ");
+			Strbld.append(" inner join consolidate_paybill_trn_mpg consMpg on consMpg.paybill_generation_trn_id = head.paybill_generation_trn_id  ");
+			Strbld.append(" inner join consolidate_paybill_trn consMst on consMst.consolidate_paybill_trn_id = consMpg.consolidate_paybill_trn_id  ");
+			Strbld.append(" inner join ORG_DDO_MST ddo on ddo.LOCATION_CODE=cast(paybill.LOC_ID as varchar) ");
+			Strbld.append(" inner join RLT_ZP_DDO_MAP zp on zp.ZP_DDO_CODE =ddo.DDO_CODE    ");
+			Strbld.append(" inner join ORG_DDO_MST ddo2 on ddo2.DDO_CODE = zp.zp_DDO_CODE    ");
+			Strbld.append(" inner join MST_DTO_REG dto on dto.ddo_code=zp.ZP_DDO_CODE ");
+			if (treasuryyno != null && treasuryyno.toString().equalsIgnoreCase("2222")) {
+				Strbld.append("  and substr(ddo2.ddo_code,1,4) <> '3301' ");
+			} else {
+				Strbld.append("  and substr(ddo2.ddo_code,1,4) <> '2222' ");
+			}
+			Strbld.append(" inner join CMN_LOCATION_MST loc  on cast(loc.LOC_ID as varchar)=substr(zp.rept_DDO_CODE,1,4) ");
+			Strbld.append(" where zp.rept_DDO_CODE='" + ddoCode + "' and  head.PAYBILL_YEAR=" + year
+					+ " and head.PAYBILL_MONTH=" + month + "  and zp.rept_DDO_CODE='" + ddoCode + "'  ");  //and consMst.STATUS = 1
+			Strbld.append(
+					" and emp.PRAN_NO is not null  and  emp.is_active=1  and head.is_active=14 and emp.dcps_gpf_flag='Y' and paybill.dcps>0 and emp.super_ann_date is null ");
+			Strbld.append(
+					" group by  emp.employee_full_name_en,emp.sevaarth_id,emp.PRAN_NO,loc.loc_name,dto.dto_reg_no,dto.ddo_reg_no,consMst.consolidate_paybill_trn_id,emp.super_ann_date ) a left outer join  ");
+			Strbld.append(
+					" (SELECT sd.SD_PRAN_NO,cast(sum(COALESCE(sd.SD_EMP_AMOUNT,0)) as double precision) as sd_amnt,cast(sum(COALESCE(sd.SD_EMPlr_AMOUNT,0)) as double precision) as sd_emplr_amnt,bh.YEAR,bh.MONTH ,sd.ddo_reg_no FROM NSDL_SD sd ");
+			Strbld.append(
+					" inner join NSDL_BH bh on bh.FILE_NAME=sd.FILE_NAME and bh.STATUS!='-1'  and  bh.is_LEGACY_DATA='N' ");
+			Strbld.append(" and bh.YEAR=" + year + " and bh.MONTH=" + month + " and bh.file_name like '"
+					+ treasuryyno
+					+ "%' group by sd.SD_PRAN_NO,bh.YEAR,bh.MONTH ,sd.ddo_reg_no ) b on b.SD_PRAN_NO=a.PRAN_NO and b.ddo_reg_no=a.ddo_reg_no  ");
+			Strbld.append(
+					" where cast(a.emp_amt-COALESCE(b.sd_amnt,0) as double precision) > 0 and cast(a.DED_ADJUST-COALESCE(b.sd_emplr_amnt,0) as double precision) > 0 order by  a.ddo_reg_no");
+
+			System.out.println("   ---------" + Strbld.toString());
+			Query lQuery = currentSession.createNativeQuery(Strbld.toString());
+			empLst = lQuery.list();
+
+		} catch (Exception e) {
+			System.out.println("Error occer in  getEmployeeList ---------" + e);
+		}
+		return empLst;
 	}
 
 }
