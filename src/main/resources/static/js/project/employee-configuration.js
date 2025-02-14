@@ -3547,7 +3547,7 @@ function approveEmpDtls() {
 	if (uniqid != '') {
 		$.ajax({
 			type : "GET",
-			url : contextPath+"/level3/approveEmpDtls/" + uniqid + "/" + sevaarthid + "/" + dcpsgpfflg,
+			url : contextPath+ddo+"/approveEmpDtls/" + uniqid + "/" + sevaarthid + "/" + dcpsgpfflg,
 			async : true,
 			contentType : 'application/json',
 			error : function(data) {
@@ -4491,7 +4491,7 @@ function approveDcpsEmpDtls() {
 	if (empid != '') {
 		$.ajax({
 			type : "GET",
-			url : contextPath+"/ddo/approveDcpsEmpDtls/" + empid + "/" + dcpsnumber+"/"+sevaarthid+"/"+dcpsgpfflg,
+			url : contextPath+ddo+"/approveDcpsEmpDtls/" + empid + "/" + dcpsnumber+"/"+sevaarthid+"/"+dcpsgpfflg,
 			async : true,
 			contentType : 'application/json',
 			error : function(data) {

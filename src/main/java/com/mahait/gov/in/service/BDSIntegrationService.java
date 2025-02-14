@@ -14,6 +14,7 @@ public interface BDSIntegrationService {
 	
 	public boolean isEkuber(String ddoCode);
 	public ConsolidatePayBillTrnEntity getConsolidatedPaybillDtls(Long consolidatePaybillTrnId, String statusCode);
+	public String getBEAMSDdoCode(String ddocode);
 	
 	
 }

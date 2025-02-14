@@ -133,6 +133,20 @@ public class BDSIntegrationRepoImpl implements BDSIntegrationRepo {
 		currentSession.merge(consolidatePayBillTrnEntity);
 	}
 
+	@Override
+	public String getBEAMSDdoCode(String ddocode1) {
+	String ddoCode = "";
+	Session hibSession = manager.unwrap(Session.class);
+	StringBuffer sb = new StringBuffer();
+	sb.append("SELECT BEAMS_DDO_CODE FROM REPORTING_DDO_MST where DDO_CODE =  '" + ddocode1+"'");
+	Query lQuery = hibSession.createNativeQuery(sb.toString());
+	if (lQuery.getResultList() != null && lQuery.getResultList().size() > 0 && lQuery.getResultList().get(0) != null) {
+		ddoCode = lQuery.getSingleResult().toString();
+	}
+
+	return ddoCode;
+	}
+
 
 
 }

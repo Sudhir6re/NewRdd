@@ -118,12 +118,19 @@ public class ConsolidatePayBillServiceImpl implements ConsolidatePayBillService 
 				
 				ConsolidatePayBillTrnMpgEntity consolidateTrnMpg = new ConsolidatePayBillTrnMpgEntity();
 				for (Object[] obj : lstpaybilldtls) {
-					noOfEmployee+=noOfEmployee;
+					noOfEmployee++;
 						incomeTax =  StringHelperUtils.isNullDouble(obj[0]);
 						totalITamt+=incomeTax;
 					
 						if(obj[1]!=null) {
-							dcpsarr= StringHelperUtils.isNullDouble(obj[1]);
+							
+							
+							if(obj[1] instanceof Double) {
+								dcpsarr= StringHelperUtils.isNullDouble(obj[1]);
+							}else if(obj[1] instanceof Long) {
+								dcpsarr= StringHelperUtils.isNullLong(obj[1]).doubleValue();
+							}
+							
 							totaldcpsArr+=dcpsarr;
 						}
 						
@@ -166,8 +173,16 @@ public class ConsolidatePayBillServiceImpl implements ConsolidatePayBillService 
 						
 						
 						if(obj[8]!=null) {
-							gisZp= StringHelperUtils.isNullLong(obj[8]).doubleValue();
-							totalGisZp+=gisZp;
+							if(obj[1] instanceof Long) {
+								gisZp= StringHelperUtils.isNullLong(obj[8]).doubleValue();
+								totalGisZp+=gisZp;
+							}else if(obj[1] instanceof BigInteger) {
+								gisZp= StringHelperUtils.isNullBigInteger(obj[8]).doubleValue();
+								totalGisZp+=gisZp;
+							}
+							
+							
+							
 						}
 						
 										

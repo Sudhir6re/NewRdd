@@ -123,8 +123,8 @@ public class PaybillGenerationTrnRepoImpl implements PaybillGenerationTrnRepo {
 	public List<Object[]> getChangeStatementReport(String paybillGenerationTrnId) {
 		Session currentSession = entityManager.unwrap(Session.class);
 		String HQL = "  select\r\n" + "        temp.sevaarth_id,\r\n" + "        temp.employee_full_name_en,\r\n"
-				+ "        temp.designation_name,\r\n" + "        sum(temp.cur_year) as cur_year,\r\n"
-				+ "        sum(temp.cur_month) as cur_month,\r\n" + "        sum(temp.pre_year) as pre_year,\r\n"
+				+ "        temp.designation_name,\r\n" + "       SUM(CAST(temp.cur_year AS INTEGER)) AS cur_year,\r\n"
+				+ "        sum(temp.cur_month) as cur_month,\r\n" + "         SUM(CAST(temp.pre_year AS INTEGER)) AS pre_year,\r\n"
 				+ "        sum(temp.pre_month) as pre_month,\r\n"
 				+ "        cast(sum(cur_basic_pay)  as bigint)  as cur_basic,\r\n"
 				+ "        cast(sum(pre_basic_pay) as bigint) as pre_basic_pay,\r\n"
@@ -869,7 +869,7 @@ public class PaybillGenerationTrnRepoImpl implements PaybillGenerationTrnRepo {
 				+ "                        when (e.month_id= 1) then 12                                                                                                             \r\n"
 				+ "                        else (e.month_id -1)                                                                                             \r\n"
 				+ "                    end as varchar)||case                                                                                             \r\n"
-				+ "                    when (e.month_id= 1) then (d.year_english-1)                                                                                             \r\n"
+				+ "                   WHEN e.month_id = 1 THEN CAST(CAST(d.year_english AS INTEGER) - 1 AS VARCHAR)                                                                                          \r\n"
 				+ "                    else d.year_english  end||sevaarth_id                                                                             \r\n"
 				+ "                from\r\n"
 				+ "                    paybill_generation_trn_details be                                                                                 \r\n"

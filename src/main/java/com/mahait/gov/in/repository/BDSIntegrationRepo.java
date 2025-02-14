@@ -24,5 +24,7 @@ public interface BDSIntegrationRepo {
 	public ConsolidatePayBillTrnEntity getConsolidatedPaybillDtls(Long consolidatePaybillTrnId);
 
 	public void updategetBillDtls(ConsolidatePayBillTrnEntity consolidatePayBillTrnEntity);
+
+	public String getBEAMSDdoCode(String ddocode);
 }
 

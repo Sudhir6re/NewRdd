@@ -82,6 +82,11 @@ public class BDSIntegrationServiceImpl implements BDSIntegrationService {
 		return consolidatePayBillTrnEntity;
 	
 	}
+	@Override
+	public String getBEAMSDdoCode(String ddocode) {
+		// TODO Auto-generated method stub
+		return bdsintegrationrepo.getBEAMSDdoCode(ddocode) ;
+	}
 	
 	
 }

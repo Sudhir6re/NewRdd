@@ -343,11 +343,13 @@ $('#btnForwardToBeams').click(function() {
 					    	      icon: "success",
 					    	    
 					    	  });
-							 setTimeout(
+							  
+							  
+							/* setTimeout(
 										function() {
 											location
 													.reload(true);
-										}, 2000);
+										}, 2000);*/
 							
 						}
 				 });

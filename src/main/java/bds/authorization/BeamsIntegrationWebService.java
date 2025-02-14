@@ -1,6 +1,5 @@
 package bds.authorization;
 
-import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
@@ -21,9 +20,6 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import bds.authorization.xsd.AuthorizationSlip;
-import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.JAXBException;
-import jakarta.xml.bind.Marshaller;
 import jakarta.xml.ws.Binding;
 import jakarta.xml.ws.BindingProvider;
 import jakarta.xml.ws.Service;
@@ -39,19 +35,20 @@ public class BeamsIntegrationWebService {
 	public HashMap forwardPaybillToBeams(HashMap billData,String beamsUrl ) {
 		
         XStream xStream = new XStream(new DomDriver("UTF-8"));
-        
         xStream.alias("collection", Map.class);
-        
+        xStream.registerConverter(new MapConverter());
         String mapToXML = xStream.toXML(billData);
         
-        logger.info("mapToXML ::: " + mapToXML);
+      
         
         Pattern pattern = Pattern.compile(">\\s+");
         Matcher matcher = pattern.matcher(mapToXML);
         mapToXML = matcher.replaceAll(">");
 
         String dataXML = "<?xml version='1.0' encoding='UTF-8' ?>" + mapToXML;
-		
+        
+        
+        logger.info("mapToXML ::: " + mapToXML);
 
         URL wsdlURL=null;
 		try {
@@ -95,11 +92,11 @@ public class BeamsIntegrationWebService {
         if (slips.size()>0 && !slips.equals("null") && slips.get(0)!=null) {
             for (AuthorizationSlip slip : slips) {
             	if(slip!=null) {
-            		   System.out.println("AuthorizationSlip AuthNO: " + slip.getAuthNO());
-                       System.out.println("AuthorizationSlip StatusCode: " + slip.getStatusCode());
-                       beamsResponse.put("authNo", slip.getAuthNO());
-                       beamsResponse.put("statusCode", slip.getStatusCode());
-                       beamsResponse.put("pdfData", slip.getAuthPdf());
+            		   System.out.println("AuthorizationSlip AuthNO: " + slip.getAuthNO().getValue());
+                       System.out.println("AuthorizationSlip StatusCode: " + slip.getStatusCode().getValue());
+                       beamsResponse.put("authNo", slip.getAuthNO().getValue());
+                       beamsResponse.put("statusCode", slip.getStatusCode().getValue());
+                       beamsResponse.put("pdfData", slip.getAuthPdf().getValue());
                        beamsResponse.put("additionalFields", slip.getAdditionalFields());
             	}
             }

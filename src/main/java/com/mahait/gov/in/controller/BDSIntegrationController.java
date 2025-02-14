@@ -195,7 +195,6 @@ public class BDSIntegrationController {
 
 		if (month == 1 || month == 2 || month == 3) {
 			curYear = year - 1;
-
 		} else {
 			curYear = year;
 		}
@@ -250,10 +249,14 @@ public class BDSIntegrationController {
 		lMapBillDetailsMap.put("PaybillId", String.valueOf(paybillid)); // Consolidate
 		// lMapBillDetailsMap.put("DDOCode", ddocode);
 
+		
+		
+		String beamsDdoCode=bdsintegrationservice.getBEAMSDdoCode(ddocode);
 		if (ddocode.equals("0437010002")) {
 			lMapBillDetailsMap.put("DDOCode", "9101005555");
 		} else {
-			lMapBillDetailsMap.put("DDOCode", String.valueOf(ddocode));
+			//ddocode=beamsDdoCode;
+			lMapBillDetailsMap.put("DDOCode", String.valueOf(beamsDdoCode));
 		}
 
 		lMapBillDetailsMap.put("FinYear1", String.valueOf(curYear));
@@ -278,6 +281,23 @@ public class BDSIntegrationController {
 		lMapBillDetailsMap.put("SchemeCode", String.valueOf(schemecode.trim()));
 		// lMapBillDetailsMap.put("SubSchemeCode", String.valueOf(lStrSubSchemeCode));
 		// // NM
+		
+		
+		// testing temp data start
+		
+		
+		/*
+		 * 
+		 * lMapBillDetailsMap.put("BillPortalName", "HTESEVAARTH"); // DEFAULT
+		 * lMapBillDetailsMap.put("SchemeCode", "22033344");
+		 * lMapBillDetailsMap.put("DDOCode", "7101002070");
+		 */
+		//---------------
+		
+		//testing temp data end
+		
+		
+		
 		lMapBillDetailsMap.put("DetailHead", String.valueOf("36")); // DEFAULT
 		lMapBillDetailsMap.put("GrossAmount", String.valueOf(grossamount));
 		lMapBillDetailsMap.put("BillCreationDate", strDate);
@@ -351,7 +371,7 @@ public class BDSIntegrationController {
 			statusCode = resultMap.get("statusCode") != null ? (String) resultMap.get("statusCode") : null;
 			pdfData = resultMap.get("pdfData") != null ? (byte[]) resultMap.get("pdfData") : null;
 
-			if (pdfData.length > 0)
+			if (pdfData!=null)
 				uploadAuthSlip(pdfData, "RDD", authNo);
 		}
 
@@ -408,7 +428,7 @@ public class BDSIntegrationController {
 				.getConsolidatedPaybillDtls(consolidatePaybillTrnId, statusCode);
 		// PaybillGenerationTrnEntity paybillGenerationTrnEntity1 =
 		// bdsintegrationservice.getConsPaybillDtls(consolidatePaybillTrnId,statusCode);
-		if (resultMap != null && !resultMap.isEmpty()) {
+		if (resultMap != null && !resultMap.isEmpty()  && authNo!=null) {
 			List<String> data1 = bdsintegrationservice.getData(beamsIntegrationEntity, myList);
 			consolidatePayBillTrnEntity1.setAuthNo(Integer.parseInt(authNo));
 
