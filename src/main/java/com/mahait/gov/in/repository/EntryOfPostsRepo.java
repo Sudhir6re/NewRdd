@@ -104,4 +104,8 @@ public interface EntryOfPostsRepo {
 
 	List<CmnLocationMst> findByLocId(Long valueOf);
 
+	List<MstDesignationEntity> getDesignationLstByDdoCode(String ddoCode);
+
+	List<OrgDdoMst> findDdoDetailByDdoCode(String ddoCode);
+
 }

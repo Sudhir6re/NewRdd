@@ -144,6 +144,8 @@ public interface MstEmployeeService {
 
 	List<ZpRltDdoMap> findDdoByReptDdoCode(String reptDdoCode);
 
+	List<MstDesignationEntity> getDesigsForPFDAndCadre(String cadre, String fieldDept);
+
 
 
 	// public List<MstBankBranchEntity> getIfscCodeByBranchId(int branchId);

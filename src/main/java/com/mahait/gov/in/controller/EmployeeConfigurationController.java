@@ -700,6 +700,7 @@ public class EmployeeConfigurationController extends BaseController {
 	public @ResponseBody List<String> approveEmployeeConfiguration(@PathVariable String empid,
 			@PathVariable String sevaarthid, @PathVariable String dcpsgpfflg, Model model, Locale locale,
 			HttpSession session) {
+		
 
 		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");
 		long curentIdCount = mstEmployeeService.getCount(sevaarthid);
@@ -1246,19 +1247,22 @@ public class EmployeeConfigurationController extends BaseController {
 
 		} catch (Exception e) {
 			// TODO: handle exception
-			// e.printStackTrace();
+			 e.printStackTrace();
 		}
 
 		try {
 
 			model.addAttribute("lstAllBankBranchList",
 					mstEmployeeService.getBankBranch(String.valueOf(mstEmployeeModel.getBankId().toString())));
-			model.addAttribute("lstCurrentPost", mstEmployeeService
-					.GetCurrentPostByLvlTwo(mstEmployeeModel.getDesignationId(), mstEmployeeModel.getDdoCode(), locId));
+			
+			Long poatDetailId=mstEmployeeModel.getPostdetailid();
+			
+			model.addAttribute("lstCurrentPost",mstEmployeeService.findEmployeeConfigurationGetCurrentPost(
+					mstEmployeeModel.getDesignationId(), messages.getUserName(), poatDetailId!=null?poatDetailId.toString():"", locId));
 
 		} catch (Exception e) {
 			// TODO: handle exception
-			// e.printStackTrace();
+		    e.printStackTrace();
 		}
 
 		model.addAttribute("lstAllDistrict", listDistrictemdl);
@@ -1278,10 +1282,10 @@ public class EmployeeConfigurationController extends BaseController {
 		}
 */
 		if (mstEmployeeModel.getPayCommissionCode() != null) {
-		if(mstEmployeeModel.getPayCommissionCode().equals(2500347)    || mstEmployeeModel.getPayCommissionCode().equals(700016)) {
+		if(mstEmployeeModel.getPayCommissionCode().equals("2500347")    || mstEmployeeModel.getPayCommissionCode()==700016) {
 			lstsixpayscalelevel = mstEmployeeService.findEmployeeConfigurationGetSixPayScale(2500341);
 		}
-		if(mstEmployeeModel.getPayCommissionCode().equals(2500347)  || mstEmployeeModel.getPayCommissionCode().equals(700005) ) {
+		if(mstEmployeeModel.getPayCommissionCode().equals("2500347")  || mstEmployeeModel.getPayCommissionCode()==700005) {
 			payscalelevel = mstEmployeeService.findEmployeeConfigurationGetpayscale(mstEmployeeModel.getPayCommissionCode().intValue());
 		}
 		}
@@ -1302,7 +1306,26 @@ public class EmployeeConfigurationController extends BaseController {
 		model.addAttribute("lstsixpayscalelevel", lstsixpayscalelevel);
 		model.addAttribute("lstpfSeries", lstpfSeries);
 		model.addAttribute("language", locale.getLanguage());
+		model.addAttribute("mstEmployeeModel", mstEmployeeModel);
+		
+		
+		if (mstEmployeeModel.getCadreId() != null) {
+		    List<Object[]> employeeConfigurationService = mstEmployeeService.getCadreGroupMstData(
+		            locale.getLanguage(), mstEmployeeModel.getCadreId().toString());
+		    if(employeeConfigurationService.size()>0) {
+		    	Object[] obj=employeeConfigurationService.get(0);
+		    	mstEmployeeModel.setSuperannuationage(Long.parseLong(obj[1].toString()));
+		    }
 
+		    if (mstEmployeeModel.getDob() != null) {
+		        List<MstEmployeeModel> lst = mstEmployeeService.getCadreGroupMstDataNew(
+		                mstEmployeeModel.getCadreId().toString(), mstEmployeeModel.getDob().toString());
+		        if(lst.size()>0) {
+		        	  mstEmployeeModel.setSuperAnnDate(lst.get(0).getSuperAnnDate());
+			            mstEmployeeModel.setEmpServiceEndDate(lst.get(0).getSuperAnnDate());
+		        }
+		    }
+		}
 		addMenuAndSubMenu(model, messages);
 		return "/views/employee-configuration-draft-form";
 	}
@@ -1433,6 +1456,14 @@ public class EmployeeConfigurationController extends BaseController {
 			Locale locale) {
 		List<ZpRltDdoMap> lstZpRltDdoMap = mstEmployeeService.findDdoByReptDdoCode(reptDdoCode);
 		return ResponseEntity.ok(lstZpRltDdoMap);
+	}
+	
+	
+	@RequestMapping(value = "/getDesigsForPFDAndCadre/{cadre}/{fieldDept}", consumes = {
+	"application/json" }, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<MstDesignationEntity>> getDesigsForPFDAndCadre(@PathVariable String cadre,@PathVariable String fieldDept,HttpSession session) {
+		List<MstDesignationEntity> lstMstDesignationEntity = mstEmployeeService.getDesigsForPFDAndCadre(cadre,fieldDept);
+		return ResponseEntity.ok(lstMstDesignationEntity);
 	}
 	
 	

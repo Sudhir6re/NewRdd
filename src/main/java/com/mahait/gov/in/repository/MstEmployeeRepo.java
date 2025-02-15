@@ -10,6 +10,7 @@ import com.mahait.gov.in.entity.EmployeeAllowDeducComponentAmtEntity;
 import com.mahait.gov.in.entity.LoanEmployeeDtlsEntity;
 import com.mahait.gov.in.entity.MstCadreGroupEntity;
 import com.mahait.gov.in.entity.MstDcpsDetailsEntity;
+import com.mahait.gov.in.entity.MstDesignationEntity;
 import com.mahait.gov.in.entity.MstEmployeeDetailEntity;
 import com.mahait.gov.in.entity.MstEmployeeEntity;
 import com.mahait.gov.in.entity.MstGisdetailsEntity;
@@ -153,6 +154,8 @@ public interface MstEmployeeRepo {
 	public String approveDcpsEmpByDdo(String empid, OrgUserMst message);
 
 	public List<ZpRltDdoMap> findDdoByReptDdoCode(String reptDdoCode);
+
+	public List<MstDesignationEntity> getDesigsForPFDAndCadre(String cadre, String fieldDept);
 
 
 

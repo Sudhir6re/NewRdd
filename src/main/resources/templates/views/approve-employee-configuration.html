@@ -189,7 +189,7 @@ input#uid1, input#uid2, input#uid3 {
 						<span th:if="${mstEmployeeModel.dcpsgpfflag == 'Y' and levelRoleVal ==7}"> <input
 							type="button" id="btnSave" class="btn btn-primary"
 							th:value="#{msg.thymeleaf.pagelabel.approve}"
-							th:onclick="'approveEmpDtls();'" />
+							th:onclick="'approveDcpsEmpDtls();'" />
 						</span> 
 						
 						 <span th:if="${mstEmployeeModel.dcpsgpfflag == 'N'}"> <input

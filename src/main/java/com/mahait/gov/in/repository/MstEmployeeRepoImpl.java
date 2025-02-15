@@ -22,6 +22,7 @@ import com.mahait.gov.in.entity.EmployeeAllowDeducComponentAmtEntity;
 import com.mahait.gov.in.entity.LoanEmployeeDtlsEntity;
 import com.mahait.gov.in.entity.MstCadreGroupEntity;
 import com.mahait.gov.in.entity.MstDcpsDetailsEntity;
+import com.mahait.gov.in.entity.MstDesignationEntity;
 import com.mahait.gov.in.entity.MstEmployeeDetailEntity;
 import com.mahait.gov.in.entity.MstEmployeeEntity;
 import com.mahait.gov.in.entity.MstGisdetailsEntity;
@@ -170,7 +171,7 @@ public class MstEmployeeRepoImpl implements MstEmployeeRepo {
 	@Override
 	public List<Object[]> getCadreMstData(long fielddeptid) {
 		Session currentSession = entityManager.unwrap(Session.class);
-		String hql = "SELECT cadre_id,cadre_name from mst_dcps_cadre where field_dept_id = '" + fielddeptid + "' ";
+		String hql = "SELECT cadre_id,cadre_name from mst_dcps_cadre where field_dept_id = '" + fielddeptid + "' and cadre_id in(1344,1345) ";
 		Query query = currentSession.createNativeQuery(hql);
 		return (List<Object[]>) query.list();
 
@@ -1549,4 +1550,37 @@ public class MstEmployeeRepoImpl implements MstEmployeeRepo {
 		String HQL = "FROM ZpRltDdoMap as  t  where  t.reptDdoCode = '" + reptDdoCode + "'";
 		return  entityManager.createQuery(HQL).getResultList();
 	}
+	
+	@Override
+	public List<MstDesignationEntity> getDesigsForPFDAndCadre(String cadre, String fieldDept) {
+	    Session session = entityManager.unwrap(Session.class);
+	    
+	    StringBuilder sb = new StringBuilder();
+	    sb.append("SELECT distinct MDE FROM MstDesignationEntity MDE ")
+	      .append("JOIN MstDcpsDesignation MDD ON MDE.desginationId = MDD.orgDesignation.desginationId ")
+	      .append("JOIN MstPayrollDesignationMst MPD ON MDE.desginationId = MPD.orgDesignationId ")
+	      .append("WHERE MDE.isActive = '1' ")
+	      .append("AND MDD.fieldDeptId = :fieldDept ");
+
+	    if (cadre != null && !cadre.equals("0")) {
+	        sb.append("AND MPD.cadreTypeId = (SELECT groupId FROM DcpsCadreMst WHERE cadreId = :cadre) ");
+	    }
+	    
+	    sb.append("ORDER BY MDE.desgination");
+
+	    String hqlQuery = sb.toString();
+	    
+	    System.out.println(hqlQuery);
+	    
+	    Query<MstDesignationEntity> query = session.createQuery(hqlQuery, MstDesignationEntity.class);
+	    query.setParameter("fieldDept", Long.valueOf(fieldDept));
+	    
+	    if (cadre != null && !cadre.equals("0")) {
+	        query.setParameter("cadre", Long.valueOf(cadre));
+	    }
+
+	    List<MstDesignationEntity> resultList = query.getResultList();
+	    return resultList;
+	}
+
 }

@@ -1934,6 +1934,11 @@ public class MstEmployeeServiceImpl implements MstEmployeeService {
 		return mstEmployeeRepo.findDdoByReptDdoCode(reptDdoCode);
 	}
 
+	@Override
+	public List<MstDesignationEntity> getDesigsForPFDAndCadre(String cadre, String fieldDept) {
+		return mstEmployeeRepo.getDesigsForPFDAndCadre(cadre,fieldDept);
+	}
+
 	
 	
 	
