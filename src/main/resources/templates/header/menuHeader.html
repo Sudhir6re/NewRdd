@@ -1,57 +1,59 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head th:fragment="var-script-header">
-	<title th:utext="#{msg.thymeleaf.pagelabel.MahaSevaarth}"></title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" th:href="@{/css/payrollStyles.css}" />
-	<link rel="stylesheet" th:href="@{/css/styles.css}" />
-	<link rel="stylesheet" th:href="@{/css/train.css}" />
-	<link rel="stylesheet" th:href="@{/css/dept.css}" />
-	<!-- <link rel="stylesheet" th:href="@{/css/print.css}" /> -->
-	<link rel="stylesheet" th:href="@{/css/select2.min.css}" />
-	<link rel="stylesheet" th:href="@{/css/datePicker-jquery-ui.min.css}" />
-	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
-	<script th:src="@{/js/jquery-3.3.1.js}"></script>
-	<script th:src="@{/js/project/datatable-common.js}"></script>
-	<script th:src="@{/js/printScript.js}"></script>
-	<script th:src="@{/js/script.js}"></script>
-	<script th:src="@{/js/datePicker.js}"></script>
-	<script th:src="@{/js/bootstrap.min.js}"></script>
-	<script th:src="@{/js/jquery.dataTables.min.js}"></script>
-	<script th:src="@{/js/dataTables.bootstrap4.min.js}"></script>
-	<script th:src="@{/js/sweetalert.min.js}"></script>
-	<script th:src="@{/js/jquery.validate.min.js}"></script>
-	<script th:src="@{/js/select2.min.js}"></script>
-	<script th:src="@{/js/datePickerjquery-ui.min.js}"></script>
-	<script th:src="@{/js/table2excel.js}"></script>
-	<script th:src="@{/js/table2excel-common.js}"></script>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600;700&display=swap"
-		rel="stylesheet">
-	<link
-		href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Libre+Baskerville:wght@400;700&family=Lobster&family=Play:wght@400;700&family=Righteous&family=Sansita+Swashed:wght@400;500;700&display=swap"
-		rel="stylesheet">
-	<style type="text/css">
-		.error {
-			color: red !important;
-			font-size: 12px !important;
-		}
+<title th:utext="#{msg.thymeleaf.pagelabel.MahaSevaarth}"></title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" th:href="@{/css/payrollStyles.css}" />
+<link rel="stylesheet" th:href="@{/css/styles.css}" />
+<link rel="stylesheet" th:href="@{/css/train.css}" />
+<link rel="stylesheet" th:href="@{/css/dept.css}" />
+<!-- <link rel="stylesheet" th:href="@{/css/print.css}" /> -->
+<link rel="stylesheet" th:href="@{/css/select2.min.css}" />
+<link rel="stylesheet" th:href="@{/css/datePicker-jquery-ui.min.css}" />
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<script th:src="@{/js/jquery-3.3.1.js}"></script>
+<script th:src="@{/js/project/datatable-common.js}"></script>
+<script th:src="@{/js/printScript.js}"></script>
+<script th:src="@{/js/script.js}"></script>
+<script th:src="@{/js/datePicker.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/js/dataTables.bootstrap4.min.js}"></script>
+<script th:src="@{/js/sweetalert.min.js}"></script>
+<script th:src="@{/js/jquery.validate.min.js}"></script>
+<script th:src="@{/js/select2.min.js}"></script>
+<script th:src="@{/js/datePickerjquery-ui.min.js}"></script>
+<script th:src="@{/js/table2excel.js}"></script>
+<script th:src="@{/js/table2excel-common.js}"></script>
+<link
+	href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600;700&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Libre+Baskerville:wght@400;700&family=Lobster&family=Play:wght@400;700&family=Righteous&family=Sansita+Swashed:wght@400;500;700&display=swap"
+	rel="stylesheet">
+<style type="text/css">
+.error {
+	color: red !important;
+	font-size: 12px !important;
+}
 
-		.homemenu {
-			display: none !important;
-		}
+.homemenu {
+	display: none !important;
+}
 
-		.homemenushow {
-			display: block !important;
-		}
-	</style>
+.homemenushow {
+	display: block !important;
+}
+</style>
 </head>
 <div id="navbar" th:fragment="varmenuheader">
-	<input type="hidden" name="levelRoleVal" id="levelRoleVal" th:value="${levelRoleVal}" />
-
-	<input type="hidden" name="appRootPath" id="appRootPath" th:value="${appRootPath}" />
+	<input type="hidden" name="levelRoleVal" id="levelRoleVal"
+		th:value="${levelRoleVal}" /> <input type="hidden" name="appRootPath"
+		id="appRootPath" th:value="${appRootPath}" />
 	<!-- th:value="${#servletContext.contextPath}"  -->
 
 
@@ -70,124 +72,91 @@
 				</div>
 				<div class="header-top-user col-md-6 col-xs-12 text-right">
 					<b th:inline="text" class="aadhaarlogo white"><span
-							th:utext="#{msg.thymeleaf.pageheading.welcome}"></span> <label
-							th:utext="#{msg.thymeleaf.heading.login}"></label> | <font color="" id="logUser">
-						<!-- 	<span th:text="${remoteUser}"></span> -->
+						th:utext="#{msg.thymeleaf.pageheading.welcome}"></span> <label
+						th:utext="#{msg.thymeleaf.heading.login}"></label> | <font
+						color="" id="logUser"> <!-- 	<span th:text="${remoteUser}"></span> -->
 							<span th:text="${userName}"></span>
-						</font> </b>
+					</font> </b>
 				</div>
 			</div>
 		</div>
 		<div class="header container" align="left">
-			<img th:src="@{/images/GOM.png}" alt="Maharashtra Government" class="logo hide" id="favicon" />
-			<div class=" main-logo flex">
-				<img th:src="@{/images/logo.jpg}" alt="Maharashtra Government" class=" newlogo" />
+			<img th:src="@{/images/GOM.png}" alt="Maharashtra Government"
+				class="logo hide" id="favicon" />
+			<div class=" main-logo">
+				<img th:src="@{/images/logo.jpg}" alt="Maharashtra Government"
+					class=" newlogo" />
 			</div>
 			<div class="clear"></div>
 		</div>
-		<div class="container">
+		<div class="container" style="padding: 0;">
+
 			<nav class="navbar navbar-default" role="navigation">
 				<div class="">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle" data-toggle="collapse"
 							data-target="#bs-example-navbar-collapse-1">
-							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
-								class="icon-bar"></span> <span class="icon-bar"></span>
+							<span class="sr-only">Toggle navigation</span> <span
+								class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
 						</button>
 					</div>
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<div class="collapse navbar-collapse"
+						id="bs-example-navbar-collapse-1">
 
 
 						<!-- menuList and subMenuList Coming from Intially from TopicController -> topics.html  and also setted to each and every controller -->
 						<ul class="nav navbar-nav navbar-left">
 
 
-							<li class="Menu-item-li first-li">
-								<a th:href="@{/mdc/home}" th:if="${levelRoleVal == 1}" id="payrollLink1"
-									class="homemenu1">
+							<li class="Menu-item-li first-li"><a th:href="@{/mdc/home}"
+								th:if="${levelRoleVal == 1}" id="payrollLink1" class="homemenu1">
 									<span class="glyphicon glyphicon-home"></span>
-								</a>
+							</a> <a th:href="@{/ddo/home}" th:if="${levelRoleVal == 2}"
+								id="payrollLink1" class="homemenu1"> <span
+									class="glyphicon glyphicon-home"></span>
+							</a> <a th:href="@{/ddoast/home}" th:if="${levelRoleVal == 3}"
+								id="payrollLink1" class="homemenu1"> <span
+									class="glyphicon glyphicon-home"></span>
+							</a> <a th:href="@{/user/home}" th:if="${levelRoleVal == 4}"
+								id="payrollLink1" class="homemenu1"> <span
+									class="glyphicon glyphicon-home"></span>
+							</a> <a th:href="@{/super/home}" th:if="${levelRoleVal == 5}"
+								id="payrollLink1" class="homemenu1"> <span
+									class="glyphicon glyphicon-home"></span>
+							</a> <a th:href="@{/mdp/home}" th:if="${levelRoleVal == 6}"
+								id="payrollLink1" class="homemenu1"> <span
+									class="glyphicon glyphicon-home"></span>
+							</a> <a th:href="@{/level3/home}" th:if="${levelRoleVal == 7}"
+								id="payrollLink1" class="homemenu1"> <span
+									class="glyphicon glyphicon-home"></span>
+							</a> <a th:href="@{/level4/home}" th:if="${levelRoleVal == 8}"
+								id="payrollLink1" class="homemenu1"> <span
+									class="glyphicon glyphicon-home"></span>
+							</a> <a th:href="@{/developer/home}" th:if="${levelRoleVal == 9}"
+								id="payrollLink1" class="homemenu1"> <span
+									class="glyphicon glyphicon-home"></span>
+							</a> <a th:href="@{/user/home}" th:if="${levelRoleVal == null}"
+								id="payrollLink1" class="homemenu1"> <span
+									class="glyphicon glyphicon-home"></span>
+							</a></li>
 
-								<a th:href="@{/ddo/home}" th:if="${levelRoleVal == 2}" id="payrollLink1"
-									class="homemenu1">
-									<span class="glyphicon glyphicon-home"></span>
-								</a>
-
-
-								<a th:href="@{/ddoast/home}" th:if="${levelRoleVal == 3}" id="payrollLink1"
-									class="homemenu1">
-									<span class="glyphicon glyphicon-home"></span>
-								</a>
-
-
-								<a th:href="@{/user/home}" th:if="${levelRoleVal == 4}" id="payrollLink1"
-									class="homemenu1">
-									<span class="glyphicon glyphicon-home"></span>
-								</a>
-
-
-								<a th:href="@{/super/home}" th:if="${levelRoleVal == 5}" id="payrollLink1"
-									class="homemenu1">
-									<span class="glyphicon glyphicon-home"></span>
-								</a>
-
-								<a th:href="@{/mdp/home}" th:if="${levelRoleVal == 6}" id="payrollLink1"
-									class="homemenu1">
-									<span class="glyphicon glyphicon-home"></span>
-								</a>
-
-
-
-								<a th:href="@{/level3/home}" th:if="${levelRoleVal == 7}" id="payrollLink1"
-									class="homemenu1">
-									<span class="glyphicon glyphicon-home"></span>
-								</a>
-
-
-
-								<a th:href="@{/level4/home}" th:if="${levelRoleVal == 8}" id="payrollLink1"
-									class="homemenu1">
-									<span class="glyphicon glyphicon-home"></span>
-								</a>
-								
-								
-								<a th:href="@{/developer/home}" th:if="${levelRoleVal == 9}" id="payrollLink1"
-									class="homemenu1">
-									<span class="glyphicon glyphicon-home"></span>
-								</a>
-
-
-
-								<a th:href="@{/user/home}" th:if="${levelRoleVal == null}" id="payrollLink1"
-									class="homemenu1">
-									<span class="glyphicon glyphicon-home"></span>
-								</a>
-
-							</li>
-
-							<li class="dropdown Menu-item-li" th:each="varMenu : ${menuList}"><a href="#"
-									class="dropdown-toggle" data-toggle="dropdown" th:utext="${varMenu.menuName}"><b
-										class="caret"></b></a>
+							<li class="dropdown Menu-item-li" th:each="varMenu : ${menuList}"><a
+								href="#" class="dropdown-toggle" data-toggle="dropdown"
+								th:utext="${varMenu.menuName}"><b class="caret"></b></a>
 
 								<ul class="dropdown-menu">
-									<li th:each="varSubMenu: ${subMenuList}" class="Menu-item-li"><a href="#"
-											th:if="${varMenu.key == varSubMenu.menuKey}"
-											th:utext="${varSubMenu.subMenuName}"
-											th:href="@{${varSubMenu.linkName}}"></a></li>
-								</ul>
-							</li>
+									<li th:each="varSubMenu: ${subMenuList}" class="Menu-item-li"><a
+										href="#" th:if="${varMenu.key == varSubMenu.menuKey}"
+										th:utext="${varSubMenu.subMenuName}"
+										th:href="@{${varSubMenu.linkName}}"></a></li>
+								</ul></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
-							<li class="Menu-item-li">
-
-								
-
-								<a th:href="@{/user/logOut}"  id="payrollLink1"
-									class="homemenu1">
-									<span aria-hidden="true">Logout</span>
-								</a>
-								
-<!--
+							<li class="Menu-item-li"><a th:href="@{/user/logOut}"
+								id="payrollLink1" class="homemenu1"> <span
+									aria-hidden="true">Logout</span>
+							</a> <!--
 								<a th:href="@{/mdc/logOut}" th:if="${levelRoleVal == 1}" id="payrollLink1"
 									class="homemenu1">
 									<span aria-hidden="true">Logout</span>
@@ -230,36 +199,24 @@
 								<a th:href="@{/level4/logOut}" th:if="${levelRoleVal == 6}" id="payrollLink1"
 									class="homemenu1">
 									<span aria-hidden="true">Logout</span>
-								</a>-->
-
-							</li>
-							<li class="Menu-item-li">
-
-								<a th:if="${levelRoleVal == 1}" th:href="@{/mdc/changePassword}" class="chpass">Change
-									Password</a> <a th:if="${levelRoleVal == 2}" th:href="@{/ddo/changePassword}"
-									class="chpass">Change
-									Password</a> <a th:if="${levelRoleVal == 3}" th:href="@{/ddoast/changePassword}"
-									class="chpass">Change
-									Password</a>
-
-								<a th:if="${levelRoleVal == 4}" th:href="@{/user/changePassword}" class="chpass">Change
-									Password</a>
-
-								<a th:if="${levelRoleVal == 5}" th:href="@{/super/changePassword}" class="chpass">Change
-									Password</a>
-
-								<a th:if="${levelRoleVal == 6}" th:href="@{/mdp/changePassword}" class="chpass">Change
-									Password</a>
-
-
-								<a th:if="${levelRoleVal == 7}" th:href="@{/level3/changePassword}" class="chpass">Change
-									Password</a>
-
-
-								<a th:if="${levelRoleVal == 8}" th:href="@{/level4/changePassword}" class="chpass">Change
-									Password</a>
-
-							</li>
+								</a>--></li>
+							<li class="Menu-item-li"><a th:if="${levelRoleVal == 1}"
+								th:href="@{/mdc/changePassword}" class="chpass">Change
+									Password</a> <a th:if="${levelRoleVal == 2}"
+								th:href="@{/ddo/changePassword}" class="chpass">Change
+									Password</a> <a th:if="${levelRoleVal == 3}"
+								th:href="@{/ddoast/changePassword}" class="chpass">Change
+									Password</a> <a th:if="${levelRoleVal == 4}"
+								th:href="@{/user/changePassword}" class="chpass">Change
+									Password</a> <a th:if="${levelRoleVal == 5}"
+								th:href="@{/super/changePassword}" class="chpass">Change
+									Password</a> <a th:if="${levelRoleVal == 6}"
+								th:href="@{/mdp/changePassword}" class="chpass">Change
+									Password</a> <a th:if="${levelRoleVal == 7}"
+								th:href="@{/level3/changePassword}" class="chpass">Change
+									Password</a> <a th:if="${levelRoleVal == 8}"
+								th:href="@{/level4/changePassword}" class="chpass">Change
+									Password</a></li>
 							<!-- <li class="Menu-item-li"><span th:if="${language == 'en'}">
 									<a class="lang-tit" th:href="@{?lang=mh}">मराठी</a>
 							</span> <span th:if="${language == 'mh'}"> <a class="lang-tit"
@@ -271,8 +228,8 @@
 				<!-- /.container-fluid -->
 			</nav>
 		</div>
-
 	</header>
+
 </div>
 
 <div class="container footer-main" th:fragment="varmenufooter">
@@ -289,8 +246,9 @@
 	</footer>
 </div>
 <div class="print-time-main" th:fragment="varprinttime">
-	<p style="font-size: 12px; text-align: left; display: none;" class="print-time">
-		<span>Printing Date & time:</span>&nbsp;<span
+	<p style="font-size: 12px; text-align: left; display: none;"
+		class="print-time">
+		<span>Printing Date &amp; time:</span>&nbsp;<span
 			th:text="${#calendars.format(#calendars.createNow(), 'dd/MM/yy HH:mm')}"></span>
 	</p>
 </div>

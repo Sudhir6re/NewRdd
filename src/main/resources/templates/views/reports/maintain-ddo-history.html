@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="#{msg.thymeleaf.pageheading.maintainDdoHistory}"></title>
+<style>
+</style>
+</head>
+<body class="maintain-ddo-history">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.ReportBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.maintainDdoHistory}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pageheading.maintainDdoHistory}"></span>
+		</h3>
+		<div class="container">
+			<form name="frmEmpStatistics" action="" id="frmEmpStatistics"
+				method="post">
+				<fieldset class="tabstyle">
+					<legend>DDO History</legend>
+					<div>
+						<table class="table table-bordered" id="vo">
+							<thead>
+								<tr>
+									<th>DDO Name</th>
+									<th>Start date</th>
+									<th>End Date</th>
+									<th>DDO Code</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><a href="#" onclick="updatedetails();">Rajaram
+											Shyam Raje </a></td>
+									<td>01/01/2014</td>
+									<td>31/12/2016</td>
+									<td>3333333333</td>
+								</tr>
+								<tr>
+									<td><a href="#" onclick="updatedetails();">HEMA BHAGAT
+									</a></td>
+									<td>12/02/2018</td>
+									<td>13/04/2019</td>
+									<td>3333333333</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div align="center">
+						<input type="button" name="BTN.CREATE" onclick="enterNewEntry();"
+							id="btnCreate" value="Create New Entry" style="width: 20%"
+							class="buttontag">
+					</div>
+				</fieldset>
+				<br />
+				<fieldset class="tabstyle" id="newEntry">
+					<legend>Add New Entry</legend>
+					<table class="table bor-0">
+						<tbody>
+							<tr>
+								<td width="15%" align="right">DDO Name  <label
+									class="mandatoryindicator"> *</label></td>
+								<td width="20%" align="left"><input type="text"
+									id="updatedtxtNameNew" size="" maxlength="99"
+									name="updatedtxtNameNew"></td>
+								<td width="15%" align="right">Salutation <label class="mandatoryindicator">*</label></td>
+								<td width="20%" align="left"><select name="cmbSalutation"
+									id="cmbSalutation" style="width: 65%;">
+										<option value="-1">-- Select --</option>
+										<option value="700075">Shri.</option>
+										<option value="700076">Smt.</option>
+								</select> </td>
+							</tr>
+							<tr>
+								<td width="15%" align="right">From Date</td>
+								<td width="20%" align="left"><input type="text"
+									name="updatedtxtFromDateNew" id="updatedtxtFromDateNew"
+									maxlength="10"><label class="mandatoryindicator">
+										*</label></td>
+								<td width="15%" align="right">To Date</td>
+								<td width="20%" align="left"><input type="text"
+									name="updatedtxtTodateNew" id="updatedtxtTodateNew"></td>
+							</tr>
+						</tbody>
+					</table>
+					<div align="center">
+						<input type="button" name="BTN.CREATENEWENTRTY"
+							id="btnCreateNewEntry" value="Add new Entry" class="buttontag">
+					</div>
+				</fieldset>
+				<fieldset class="tabstyle" id="updatedetails">
+					<legend>Update Details</legend>
+					<table class="table bor-0">
+						<tbody>
+							<tr>
+								<td width="10%" align="right">DDO Name <label
+									class="mandatoryindicator"> *</label></td>
+								<td width="20%" align="left"><input type="text"
+									id="updateDdoName" size="" maxlength="99" name="updateDdoName">
+								</td>
+								<td width="10%" align="right">Salutation</td>
+								<td width="20%" align="left"><select
+									name="cmbSalutationUpdated" id="cmbSalutationUpdated"
+									style="width: 65%;">
+										<option value="-1">-- Select --</option>
+										<option value="700075">Shri.</option>
+										<option value="700076">Smt.</option>
+								</select> <label class="mandatoryindicator">*</label></td>
+							</tr>
+							<tr>
+								<td align="right">From Date <label
+									class="mandatoryindicator"> *</label></td>
+								<td align="left"><input type="text"
+									name="updatedtxtFromDate" id="updatedtxtFromDate"
+									maxlength="10"></td>
+								<td align="right">To Date</td>
+								<td align="left"><input type="text" name="updatedtxtTodate"
+									id="updatedtxtTodate"></td>
+							</tr>
+						</tbody>
+					</table>
+					<div align="center">
+						<input type="button" name="BTNUPDATE" id="btnUpdate"
+							value="Update Details" class="buttontag">
+					</div>
+				</fieldset>
+			</form>
+
+		</div>
+
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script>
+		$("#newEntry").hide();
+		$("#updatedetails").hide();
+		function enterNewEntry() {
+			$("#newEntry").show();
+			$("#updatedetails").hide();
+		}
+		function updatedetails() {
+			$("#newEntry").hide();
+			$("#updatedetails").show();
+		}
+	</script>
+</body>
+</html>
