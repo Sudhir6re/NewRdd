@@ -51,9 +51,9 @@ li.ui-state-default.ui-corner-top.ui-tabs-selected.ui-state-active {
 }
 
 .HeaderTopBar-main.container {
-	border-top: 1px solid #003c80 !important
+    border-top: 1px solid #003c80 !important;
+    padding: 0;
 }
-
 .input span {
 	color: #003c80 !important
 }
@@ -378,10 +378,16 @@ section#banner {
 }
 
 .header {
-	max-width: 1170px !important;
-	border-bottom: none
+    /* max-width: 1170px !important; */
+    border-bottom: none;
+    background: linear-gradient(87deg, #bd6c03, #bd6c03);
+    text-align: center;
+    width: 97% !important;
 }
-
+.logobar{
+	 background: linear-gradient(87deg, #bd6c03, #bd6c03);
+    text-align: center;
+}
 .HomePage section {
 	padding: 0
 }
@@ -2420,12 +2426,17 @@ a.btn, input.btn, button.btn,.buttontag {
 
     }
 }
-img.newlogo {
+/* img.newlogo {
     width: 100%;
-}
+} */
 .bor-imp, .bor-imp td, .bor-imp td, .bor-imp tr {
     border: 1px solid #ccc !important;
 }
 * [readonly] {
     background: #eee !important;
+}
+@media (min-width: 1200px) {
+    .container {
+        width: 97% !important;
+    }
 }
