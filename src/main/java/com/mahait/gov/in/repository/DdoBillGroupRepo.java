@@ -35,7 +35,7 @@ public interface DdoBillGroupRepo {
 
 	public MstDcpsBillGroup findDcpsBillGroupById(Long billGroupId);
 
-	public String saveAttachDettachEmployeeBillGroup(String sevaarthId,int empid, Long long1,String status);
+	public String saveAttachDettachEmployeeBillGroup(String sevaarthId,Long lLongArrDcpsEmpIdstoBeDetached, Long long1,String status);
 
 	public MstDcpsBillGroup findMpgSchemeBillGroupBySchemeBillGroupId(Long valueOf);
 

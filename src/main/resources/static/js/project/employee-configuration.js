@@ -1,11 +1,25 @@
 var contextPath = $("#appRootPath").val();
 var context ="";
 var ddo ="";
-
+var dataTable;
 jQuery(document).ready(function() {
 	context = $("#appRootPath").val();
 		ddo=getUserUrl();
 	
+		if($("#dcpsDetailsTable").length){
+					dataTable=$("#dcpsDetailsTable").dataTable();
+		}
+		
+		
+		if($("#dcpsDetailsTable1").length){
+					$("#dcpsDetailsTable1").dataTable();
+		}
+		
+		
+		
+		
+		
+		
 	   if (enableTyping != undefined) {
            enableTyping(new Array('fName','mName','lName'),//Input fiel Name
                     new Array('fNamemr','mNamemr','lNamemr'), 'NAME', 'mr_in'); //Output field Name
@@ -3531,37 +3545,51 @@ function approveEmpDtls() {
 	var dcpsgpfflg=$('input[name="dcpsgpfflag"]:checked').val();
 
 	if (uniqid != '') {
-		$.ajax({
-			type : "GET",
-			url : contextPath+"/level3/approveEmpDtls/" + uniqid + "/" + sevaarthid + "/" + dcpsgpfflg,
-			async : true,
-			contentType : 'application/json',
-			error : function(data) {
-				// console.log(data);
-			},
-			beforeSend : function(){
-				$( "#loaderMainNew").show();
-				},
-			complete : function(data){
-				$( "#loaderMainNew").hide();
-			},	
-			success : function(data) {
-				var sevaarthIdres = data;
-				// alert(checkFlag);
-				swal({ 
-					 text: "Approved Successfully Sevaarthid is generated "+ sevaarthid,
-					 type: "success"}).then(okay => {
-					   if (okay) {
-						   document.getElementById("myForm").submit();
-					  }
-					});
-//				swal('Approved Successfully Sevaarthid is genrated '
-//						+ sevaarthIdres);
-//				document.getElementById("myForm").submit();
-				return status;
+		
+		swal({
+				  title: "Are you sure?",
+				  text: "To Approve this Employee !!!",
+				  icon: "warning",
+				  buttons: true,
+				  dangerMode: true,
+				}).then((willDelete) => {
+				    if (willDelete) {
+						$.ajax({
+									type : "GET",
+									url : contextPath+ddo+"approveEmpDtls/" + uniqid + "/" + sevaarthid + "/" + dcpsgpfflg,
+									async : true,
+									contentType : 'application/json',
+									error : function(data) {
+										// console.log(data);
+									},
+									beforeSend : function(){
+										$( "#loaderMainNew").show();
+										},
+									complete : function(data){
+										$( "#loaderMainNew").hide();
+									},	
+									success : function(data) {
+										var sevaarthIdres = data;
+										// alert(checkFlag);
+										swal({ 
+											 text: "Approved Successfully Sevaarthid is generated "+ sevaarthid,
+											 type: "success"}).then(okay => {
+											   if (okay) {
+												   document.getElementById("myForm").submit();
+											  }
+											});
+						//				swal('Approved Successfully Sevaarthid is genrated '
+						//						+ sevaarthIdres);
+						//				document.getElementById("myForm").submit();
+										return status;
 
-			}
-		});
+									}
+								});
+				     }
+			})
+		
+		
+		
 	}
 }
 
@@ -4005,35 +4033,71 @@ $("#cadre")
 					}
 					
 					if (cadreid != '') {
-						$
-								.ajax({
-									type : "GET",
-									url : contextPath+"/ddoast/fetchcadregroupdtlsDate/" + cadreid + "/" + dob,
-									async : true,
-									contentType : 'application/json',
-									error : function(data) {
-										// console.log(data);
-									},
-									beforeSend : function(){
-										$( "#loaderMainNew").show();
-										},
-									complete : function(data){
-										$( "#loaderMainNew").hide();
-									},	
-									success : function(data) {
-										// console.log(data);
-										// alert(data);
-										var len = data.length;
-										if (len != 0) {
-											var temp = data;
-											var date=data[0].superAnnDate;
-											$('#superAnnDate').val(dateToYMD(date));
-											
-										} else {
-											swal("Record not found !!!");
+											$
+													.ajax({
+														type : "GET",
+														url : contextPath+"/ddoast/fetchcadregroupdtlsDate/" + cadreid + "/" + dob,
+														async : true,
+														contentType : 'application/json',
+														error : function(data) {
+															// console.log(data);
+														},
+														beforeSend : function(){
+															$( "#loaderMainNew").show();
+															},
+														complete : function(data){
+															$( "#loaderMainNew").hide();
+														},	
+														success : function(data) {
+															// console.log(data);
+															// alert(data);
+															var len = data.length;
+															if (len != 0) {
+																var temp = data;
+																var date=data[0].superAnnDate;
+																$('#superAnnDate').val(dateToYMD(date));
+																
+															} else {
+																swal("Record not found !!!");
+															}
+														}
+													});
+										}
+					
+					
+					if (cadreid != '') {
+                       var cadre=cadreid;
+                       var fieldDept=$("#parentFieldDepartmentId").val();
+						$.ajax({
+							type : "GET",
+						    url: contextPath+ddo+"getDesigsForPFDAndCadre/"+cadre+"/"+fieldDept,
+							async : true,
+							 // data: { ddoCode: ddoCode},
+							contentType : 'application/json',
+							error : function(data) {
+								 console.log(data);
+								 $("#loaderMainNew").hide();
+							},
+							beforeSend : function(){
+								$( "#loaderMainNew").show();
+								},
+							complete : function(data){
+								$( "#loaderMainNew").hide();
+							},	
+							success : function(data) {
+								 console.log(data);
+								 $("#loaderMainNew").hide();
+								var len = data.length;
+									$("#loaderMainNew").hide();
+									$('#designationId').empty();
+								    $('#designationId').append($('<option  value="0"></option>').text("Please Select")); 
+									if(len>0){
+										for (var i = 0; i < data.length; i++) {
+											$('#designationId').append('<option value="' + data[i].desginationId + '">' + data[i].desgination + '</option>');
 										}
 									}
-								});
+							}
+						});
 					}
 
 				});
@@ -4475,38 +4539,49 @@ function approveDcpsEmpDtls() {
 	var dcpsgpfflg='Y';
 
 	if (empid != '') {
-		$.ajax({
-			type : "GET",
-			url : contextPath+"/ddo/approveDcpsEmpDtls/" + empid + "/" + dcpsnumber+"/"+sevaarthid+"/"+dcpsgpfflg,
-			async : true,
-			contentType : 'application/json',
-			error : function(data) {
-				// console.log(data);
-			},
-			beforeSend : function(){
-				$( "#loaderMainNew").show();
-				},
-			complete : function(data){
-				$( "#loaderMainNew").hide();
-			},	
-			success : function(data) {
-				var dcpsid = data;
-//				 alert(dcpsid);
-//				 alert(dcpsid[0]);
-				
-				swal({ 
-					 text: "DCPS ID ("+dcpsid[0]+") and Sevaarth ID ("+dcpsid[1]+") Registered Successfully",
-					 type: "success"}).then(okay => {
-					   if (okay) {
-						   document.getElementById("myForm").submit();
-					  }
-					});
-//				swal('DCPS ID '+dcpsid+' Registered Successfully');
-//				document.getElementById("myForm").submit();
-				return status;
+		
+		swal({
+				  title: "Are you sure?",
+				  text: "To Approve this employee !!!",
+				  icon: "warning",
+				  buttons: true,
+				  dangerMode: true,
+				}).then((willDelete) => {
+				    if (willDelete) {
+						$.ajax({
+									type : "GET",
+									url : contextPath+ddo+"approveDcpsEmpDtls/" + empid + "/" + dcpsnumber+"/"+sevaarthid+"/"+dcpsgpfflg,
+									async : true,
+									contentType : 'application/json',
+									error : function(data) {
+										// console.log(data);
+									},
+									beforeSend : function(){
+										$( "#loaderMainNew").show();
+										},
+									complete : function(data){
+										$( "#loaderMainNew").hide();
+									},	
+									success : function(data) {
+										var dcpsid = data;
+						//				 alert(dcpsid);
+						//				 alert(dcpsid[0]);
+										
+										swal({ 
+											 text: "DCPS ID ("+dcpsid[0]+") and Sevaarth ID ("+dcpsid[1]+") Registered Successfully",
+											 type: "success"}).then(okay => {
+											   if (okay) {
+												   document.getElementById("myForm").submit();
+											  }
+											});
+						//				swal('DCPS ID '+dcpsid+' Registered Successfully');
+						//				document.getElementById("myForm").submit();
+										return status;
 
-			}
-		});
+									}
+								});
+				     }
+			})
 	}
 }
 
@@ -5108,6 +5183,8 @@ $("#dcpsaccountmaintainby").change(function(){
 	}
 });
 
+
+
 $("#reptDdoCode").change(function(){
 	var reptDdoCode=$("#reptDdoCode").val();
 	if(reptDdoCode!=''){
@@ -5132,7 +5209,7 @@ $("#reptDdoCode").change(function(){
 							$("#ddoCode").empty();
 							$("#ddoCode").append("<option value='0' >Please Select</option>")
 							for(var i=0;i<len;i++){
-								$("#ddoCode").append("<option value='"+data[i].ddoCode+"' >"+data[i].ddoCode+"</option>")
+								$("#ddoCode").append("<option value='"+data[i].zpDdoCode+"' >"+data[i].zpDdoCode+"</option>")
 							}
 						} else {
 							swal("Record not found !!!");
@@ -5146,8 +5223,20 @@ $("#reptDdoCode").change(function(){
 
 
 
+function editempconfig(empid) {
+		var employeeid = empid;
+		$('#employeeId').val(employeeid);
+		document.getElementById("myAForm").submit();
+	}
 
-
+	
+	
+	$("#btnFilter").click(function(){
+		var ddoCode=$("#ddoCode").val();
+			dataTable.column(6).search(ddoCode).draw(); 
+	});
+	
+	
 
 
 

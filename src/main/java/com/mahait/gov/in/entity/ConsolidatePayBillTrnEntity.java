@@ -16,7 +16,7 @@ import lombok.Data;
 public class ConsolidatePayBillTrnEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CONSOLIDATE_PAYBILL_TRN_ID")
 	private Long consolidatePaybillTrnId;
 
@@ -52,6 +52,11 @@ public class ConsolidatePayBillTrnEntity {
 
 	@Column(name = "CMP_DATE")
 	private Date CMPDate;
+	
+	
+	
+	@Column(name = "CMP_DOWNLOAD_DATE")
+	private Date cmpDownloadDate;
 
 	@Column(name = "BILL_TYPE")
 	private Integer billType;
@@ -88,6 +93,12 @@ public class ConsolidatePayBillTrnEntity {
 
 	@Column(name = "GIS")
 	private Double gis;
+	
+	
+	@Column(name = "gis_zp")
+	private Double gisZp;
+	
+	
 
 	@Column(name = "GROUP_ACC_POLICY")
 	private Double accPolicy;
@@ -100,5 +111,8 @@ public class ConsolidatePayBillTrnEntity {
 
 	@Column(name = "DCPS")
 	private Double dcps;
+	
+	@Column(name = "no_of_employee")
+	private Integer noOfEmployee;
 
 }

@@ -22,9 +22,8 @@ public class ConsolidatePayBillRepoImpl implements ConsolidatePayBillRepo {
 	EntityManager entityManager;
 
 	public Long saveConsolidatePayBill(ConsolidatePayBillTrnEntity objEntity) {
-
 		Session currentSession = entityManager.unwrap(Session.class);
-		Serializable saveId =  (Serializable) currentSession.save(objEntity);
+		Serializable saveId = (Serializable) currentSession.save(objEntity);
 		return (Long) saveId;
 	}
 
@@ -34,8 +33,6 @@ public class ConsolidatePayBillRepoImpl implements ConsolidatePayBillRepo {
 		Serializable saveId = (Serializable) currentSession.save(objEntity);
 		return (Long) saveId;
 	}
-
-	// db madhe update kara ok
 
 	@Override
 	public List<Object[]> addConsComponents(String ddoCode, List<Integer> payBillGenerationTransId) {
@@ -93,22 +90,24 @@ public class ConsolidatePayBillRepoImpl implements ConsolidatePayBillRepo {
 	public List<Object[]> fetchbilldts(Long paybillGenerationTrnId) {
 		Session currentSession = entityManager.unwrap(Session.class);
 
-		String HQL = " select  COALESCE(IT,0) as IT,sum(DCPS)as DCPS_ARR,sum(gis)as GIS,sum(pt)as PT,sum(ACC_POLICY)as GROUP_ACC_POLICY,sum(hrr)as HRR, " + 
-				" Sum(TOTAL_DED)as TotalDeduct,SUM(COALESCE(gpf_grp_abc,0) + COALESCE(GPF_ADV_GRP_ABC,0) + " + 
-				" COALESCE(GPF_ABC_ARR_MR,0)+COALESCE(gpf_grp_d,0)+COALESCE(GPF_ADV_GRP_D,0)+COALESCE(GPF_D_ARR_MR,0))as prov_fund " + 
-				" from paybill_generation_trn_details  where paybill_generation_trn_id='"+paybillGenerationTrnId+"' group by " + 
-				" IT,gis,pt,ACC_POLICY,hrr,gpf_grp_abc,GPF_ADV_GRP_ABC,GPF_ABC_ARR_MR,gpf_grp_d,GPF_ADV_GRP_D,GPF_D_ARR_MR";/// ,sum(COALESCE(dcps_da_arr,0)+COALESCE(dcps_delay,0)+COALESCE(dcps_employer,0)+COALESCE(dcps_pay_arr,0)+COALESCE(dcps_regular_recovery,0))as
-																					/// dcps
+		String HQL = " select  COALESCE(IT,0) as IT,sum(DCPS)as DCPS_ARR,sum(gis)as GIS,sum(pt)as PT,sum(ACC_POLICY)as GROUP_ACC_POLICY,sum(hrr)as HRR, "
+				+ " Sum(TOTAL_DED)as TotalDeduct,SUM(COALESCE(gpf_grp_abc,0) + COALESCE(GPF_ADV_GRP_ABC,0) + "
+				+ " COALESCE(GPF_ABC_ARR_MR,0)+COALESCE(gpf_grp_d,0)+COALESCE(GPF_ADV_GRP_D,0)+COALESCE(GPF_D_ARR_MR,0))as prov_fund,sum(GIS_ZP)as GIS_ZP "
+				+ " from paybill_generation_trn_details  where paybill_generation_trn_id='" + paybillGenerationTrnId
+				+ "' group by "
+				+ " IT,gis,pt,ACC_POLICY,hrr,gpf_grp_abc,GPF_ADV_GRP_ABC,GPF_ABC_ARR_MR,gpf_grp_d,GPF_ADV_GRP_D,GPF_D_ARR_MR";/// ,sum(COALESCE(dcps_da_arr,0)+COALESCE(dcps_delay,0)+COALESCE(dcps_employer,0)+COALESCE(dcps_pay_arr,0)+COALESCE(dcps_regular_recovery,0))as
+		/// dcps
 		Query query = currentSession.createNativeQuery(HQL);
 
 		System.out.println("raw query" + query.getQueryString());
 		return query.list();
 	}
 
+	
 	@Override
 	public Long getConsolidateTrnId() {
 		Session currentSession = entityManager.unwrap(Session.class);
-		String hql = " SELECT coalesce(max(ch.consolidatePaybillTrnId), 0)+1 FROM ConsolidatePayBillTrnEntity ch";
+		String hql = "SELECT nextval('consolidate_paybill_trn_consolidate_paybill_trn_id_seq')";
 		Query query = currentSession.createQuery(hql);
 		return (Long) query.list().get(0);
 	}
@@ -142,8 +141,8 @@ public class ConsolidatePayBillRepoImpl implements ConsolidatePayBillRepo {
 	public List<Object[]> fetchDDOLstForConsolidateApproval(String ddoCode) {
 		Session currentSession = entityManager.unwrap(Session.class);
 
-		String HQL = " select consolidate_paybill_trn_id,scheme_code, '-'as subSchemeCode,gross_amt,net_amt  from consolidate_paybill_trn  where ddo_code = '"+ddoCode+"'"
-				+ " and is_active = 9 ";
+		String HQL = " select consolidate_paybill_trn_id,scheme_code, '-'as subSchemeCode,gross_amt,net_amt  from consolidate_paybill_trn  where ddo_code = '"
+				+ ddoCode + "'" + " and is_active = 9 ";
 
 		Query query = currentSession.createNativeQuery(HQL);
 
@@ -151,27 +150,27 @@ public class ConsolidatePayBillRepoImpl implements ConsolidatePayBillRepo {
 		return query.list();
 	}
 
-
-
 	@Override
 	public Serializable updateConsolidateapproveStatus(Long consolidateId) {
 		// TODO Auto-generated method stub
 		try {
-			
+
 			Session currentSession = entityManager.unwrap(Session.class);
-				String hql = "update paybill_generation_trn a set is_active='11' from consolidate_paybill_trn_mpg b where a.paybill_generation_trn_id=b.paybill_generation_trn_id and b.consolidate_paybill_trn_id ='"+consolidateId+"' ";
-				
-				Query query = currentSession.createNativeQuery(hql);
-				query.executeUpdate();
-				
-				hql = "update consolidate_paybill_trn a set is_active='11' from consolidate_paybill_trn_mpg b where a.consolidate_paybill_trn_id=b.consolidate_paybill_trn_id and b.consolidate_paybill_trn_id ='"+consolidateId+"'";
-				query = currentSession.createNativeQuery(hql);
-				query.executeUpdate();
-				
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-			return  1;
+			String hql = "update paybill_generation_trn a set is_active='11' from consolidate_paybill_trn_mpg b where a.paybill_generation_trn_id=b.paybill_generation_trn_id and b.consolidate_paybill_trn_id ='"
+					+ consolidateId + "' ";
+
+			Query query = currentSession.createNativeQuery(hql);
+			query.executeUpdate();
+
+			hql = "update consolidate_paybill_trn a set is_active='11' from consolidate_paybill_trn_mpg b where a.consolidate_paybill_trn_id=b.consolidate_paybill_trn_id and b.consolidate_paybill_trn_id ='"
+					+ consolidateId + "'";
+			query = currentSession.createNativeQuery(hql);
+			query.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 1;
 	}
 
 }

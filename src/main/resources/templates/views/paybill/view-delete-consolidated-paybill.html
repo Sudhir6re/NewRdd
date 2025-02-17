@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
-<head>  
+<head>
 <title th:utext="#{menu.mapping.viewDeleteConsolidatedPayBill}"></title>
 </head>
 <body class="view-delete-consolidated-paybill">
 	<div th:replace="header/menuHeader :: var-script-header"></div>
 	<div th:replace="header/menuHeader :: varmenuheader"></div>
 	<div class="container min-height-600">
-	<div class="breadcrumbMain">
+		<div class="breadcrumbMain">
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
 					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
@@ -26,23 +26,19 @@
 			<!-- <legend th:utext="#{menu.mapping.viewDeleteConsolidatedPayBill}"
 				th:style="${'color: orange;'}"></legend> -->
 
-			<form class="form-horizontal" th:action="@{/ddo/beams/frwdbilldatabeams}"
+			<form class="form-horizontal"
+				th:action="@{/ddo/beams/frwdbilldatabeams}"
 				th:object="${consolidatePayBillModel}" method="POST"
 				enctype="multipart/form-data">
 				<!-- th:action="@{/master/saveBillGrpMain}" -->
 
 				<input type="hidden" name="language" id="language"
 					th:value="${language}" /> <input type="hidden" name="message"
-					id="message" th:value="${message}" />
-					<input type="hidden"	name="userId" id="userId" th:value="${userId}" />
-					
-					
-					
-					<input type="hidden"  id="consolidatedId"
-					 />
-					<input type="hidden"
-					name="radioval" id="radioval" /> 
-					
+					id="message" th:value="${message}" /> <input type="hidden"
+					name="userId" id="userId" th:value="${userId}" /> <input
+					type="hidden" id="consolidatedId" /> <input type="hidden"
+					name="radioval" id="radioval" />
+
 
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="title"><span
@@ -83,10 +79,11 @@
 				</div>
 
 				<div class="form-group text-center">
-						<input type="button" id="btnSearch" class="btn btn-primary"
-							th:value="#{msg.thymeleaf.pagelabel.btnSearch}" />
-							<input type="reset" id="btnReset" class="btn btn-primary" th:value="#{msg.thymeleaf.pagelabel.btnReset}"/>
-					
+					<input type="button" id="btnSearch" class="btn btn-primary"
+						th:value="#{msg.thymeleaf.pagelabel.btnSearch}" /> <input
+						type="reset" id="btnReset" class="btn btn-primary"
+						th:value="#{msg.thymeleaf.pagelabel.btnReset}" />
+
 				</div>
 
 				<hr />
@@ -99,56 +96,91 @@
 						<tr>
 							<th th:utext="#{msg.thymeleaf.pagelabel.select}" />
 							<th th:utext="#{msg.thymeleaf.pagelabel.consolitedBillIdLabel}" />
- 							<th th:utext="#{msg.thymeleaf.pagelabel.schemeCode}" />
-							<th th:utext="#{msg.thymeleaf.pagelabel.subSchemeCode}" /> 
+							<th th:utext="#{msg.thymeleaf.pagelabel.schemeCode}" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.subSchemeCode}" />
 							<th th:utext="#{msg.thymeleaf.pagelabel.grossAmount}" />
 							<th th:utext="#{msg.thymeleaf.pagelabel.netAmount}" />
 							<th th:utext="#{msg.thymeleaf.pagelabel.authNumber}" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.downloadEkuberFile}" />
+							<th th:utext="#{msg.thymeleaf.pagelabel.Beneficiary}" />
 							<th th:utext="#{msg.thymeleaf.pagelabel.status}"></th>
+
+
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="varBillGrp : ${LstConsolidatedPayBillModel}">
-							<td><input type="radio" name="consolidatedPaybillTrnId" id="consolidatedPaybillTrnId"
-								th:value="${varBillGrp.consolidatePayBillTrnId}"   th:data="${varBillGrp.isActive}"  /></td>
-							<td><a class="consolidatePayBillTrnId"  
-                                          th:text=${varBillGrp.consolidatePayBillTrnId}></a></td>
-							<td th:text="${varBillGrp.schemeCode}"></td> 
-							<td th:text="${varBillGrp.schemeName}"></td> 
+							<td><input type="radio" name="consolidatedPaywinbillTrnId"
+								id="consolidatedPaybillTrnId"     
+								th:value="${varBillGrp.consolidatePayBillTrnId}"
+								th:data="${varBillGrp.isActive}"  th:data-authNo="${varBillGrp.authNo}"   th:data-schemeCode="${varBillGrp.schemeCode}"   th:data-consolidatePayBillTrnId="${varBillGrp.consolidatePayBillTrnId}"   />       
+						
+								
+								   </td>
+							<td><a class="consolidatePayBillTrnId"
+								th:text=${varBillGrp.consolidatePayBillTrnId}></a></td>
+							<td th:text="${varBillGrp.schemeCode}"></td>
+							<td th:text="${varBillGrp.schemeName}"></td>
 							<td th:text="${varBillGrp.billGrossAmt}"></td>
 							<td th:text="${varBillGrp.billNetAmount}"></td>
-							<td>--</td>
-							<!-- 	<td th:text="${varBillGrp.isActive}"></td> -->
+
+							
+							 <td align="center"  class="authNo"  th:if="${varBillGrp.authNo  == null}">-</td>
+							 <td align="center" th:if="${varBillGrp.authNo != null}">
+						        <a href="@{${'/ddo/viewAuthSlip/'+varBillGrp.authNo}"   target="_blank"  >
+						            <span th:text="${varBillGrp.authNo}"></span>
+						        </a>
+						    </td>
+							
+
+
+    <td align="center" th:if="${varBillGrp.authNo!= null and varBillGrp.eKuberCount > 0 and (varBillGrp.cmpDownloadStatus == 'EK' or varBillGrp.cmpDownloadStatus == null)}">
+        <a href="#" class="downloadEkuberTextFile beneficiaryCount"  th:data-authNo="${varBillGrp.authNo}"   th:data-schemeCode="${varBillGrp.schemeCode}"   th:data-consolidatePayBillTrnId="${varBillGrp.consolidatePayBillTrnId}"  >
+            <span th:text="${entry[5]}"></span>
+        </a>
+    </td>
+    <td align="center" th:if="${varBillGrp.authNo == null or !(varBillGrp.eKuberCount > 0 and (varBillGrp.cmpDownloadStatus== 'EK' or varBillGrp.cmpDownloadStatus == null))}">0</td>
+
+
+    <td th:if="${varBillGrp.cmpDownloadStatus != null and varBillGrp.ekuberCount > 0 and varBillGrp.eKuberCount > 0 and varBillGrp.cmpDownloadStatus == 'EK'}">
+        <a href="#"  class="downloadEkuberJsonFile"  th:data-authNo="${varBillGrp.authNo}"   th:data-schemeCode="${varBillGrp.schemeCode}"   th:data-consolidatePayBillTrnId="${varBillGrp.consolidatePayBillTrnId}"  >
+            <span th:text="${entry[8]}"></span>
+        </a>
+     
+    </td>
+       <td  th:if="${varBillGrp.cmpDownloadStatus == null or varBillGrp.ekuberCount <= 0 or !(varBillGrp.ekuberCount > 0 and varBillGrp.cmpDownloadStatus == 'EK')}">-</td>
+							
+							
+							
+							
 						 <td><span th:if="${varBillGrp.isActive} ==9"> <span
 									class="label label-info text-center"
 									th:utext="#{msg.thymeleaf.pagelabel.consolatedPaybill}">Pending</span>
 							</span> <span th:if="${varBillGrp.isActive} ==10"> <span
 									class="label label-warning text-center"
-								th:utext="#{msg.thymeleaf.pagelabel.forwardToBeams}">Consolidated
+									th:utext="#{msg.thymeleaf.pagelabel.forwardToBeams}">Consolidated
 										Paybill Forward to BEAMS</span>
 							</span> <span th:if="${varBillGrp.isActive} ==11"> <span
 									class="label label-success text-center"
-								th:utext="#{msg.thymeleaf.pagelabel.consolatedApprove}"></span>Consolidate Paybill Approved
-							</span>
-							 <span th:if="${varBillGrp.isActive} ==12" >
-							 <span
+									th:utext="#{msg.thymeleaf.pagelabel.consolatedApprove}"></span>Consolidate
+									Paybill Approved
+							</span> <span th:if="${varBillGrp.isActive} ==12"> <span
 									class="label label-danger text-center"
-								th:utext="#{msg.thymeleaf.pagelabel.consolatedReject}">Consolidated
+									th:utext="#{msg.thymeleaf.pagelabel.consolatedReject}">Consolidated
 										Paybill Rejected by Beams</span>
-										
-							</span>
-							
-							 <span th:if="${varBillGrp.isActive} ==13"> <span
+
+							</span> <span th:if="${varBillGrp.isActive} ==13"> <span
 									class="label label-danger text-center"
-							th:utext="#{msg.thymeleaf.pagelabel.consolatedDelete}"></span>
-							</span>
-							<span th:if="${varBillGrp.isActive} ==14"> <span
+									th:utext="#{msg.thymeleaf.pagelabel.consolatedDelete}"></span>
+							</span> <span th:if="${varBillGrp.isActive} ==14"> <span
 									class="label label-danger text-center"
-							th:utext="#{msg.thymeleaf.pagelabel.consolatedApproved}"></span> Voucher Entry Done
+									th:utext="#{msg.thymeleaf.pagelabel.consolatedApproved}"></span>
+									Voucher Entry Done
 							</span></td>
- 
-						
+
+
 						</tr>
+						
 					</tbody>
 				</table>
 				<div class="text-center">
@@ -157,8 +189,8 @@
 						</span>
 					&nbsp;&nbsp;
 					 <span>
-					 <input type="button" value="View Details"
-						class="btn btn-primary" id="btnViewDetails" />
+					 <input type="button" value="View Details" class="btn btn-primary"
+						id="btnViewDetails" />
 						</span>
 						
 					&nbsp;&nbsp; <span><input type="button"
@@ -167,11 +199,12 @@
 						
 						
 						<span>
-						<input
-						type="hidden" value="Forward Bills to BEAMS"
-						class="btn btn-primary" id="btnForwardToBeams"   style="display:none;" /></span>
+						<input type="button" value="Forward Bills to BEAMS"
+						class="btn btn-primary" id="btnForwardToBeams" />
+					</span>
 					&nbsp;&nbsp;
-					<a th:href="@{/user/home}" class="btn"><span th:text="#{msg.thymeleaf.pagelabel.btnCancel}"></span></a>
+					<a th:href="@{/user/home}" class="btn"><span
+						th:text="#{msg.thymeleaf.pagelabel.btnCancel}"></span></a>
 				</div>
 			</form>
 		</fieldset>

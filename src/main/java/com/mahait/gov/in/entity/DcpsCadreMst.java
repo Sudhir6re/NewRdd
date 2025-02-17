@@ -23,7 +23,7 @@ public class DcpsCadreMst {
     private Long fieldDeptId;
 
     @Column(name = "GROUP_ID", length = 10)
-    private String groupId;
+    private Long groupId;
 
     @Column(name = "CADRE_CODE", length = 20)
     private Long cadreCode;

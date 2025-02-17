@@ -6,6 +6,22 @@ $(document).ready(function() {
 	    }
 });
 
+
+
+
+
+
+
+
+
+
+$("#cmbSchemeName").change(function(){
+	$("#schemeName").val($("#cmbSchemeName").text());
+});
+
+
+
+
 function funDdo1() {
 
 		var schemeId = $('#cmbSchemeName').val();
@@ -14,7 +30,7 @@ function funDdo1() {
 			removeErrorClass($("#schemeName"));
 		}
 
-		if (schemeId != '') {
+		if (schemeId != ''  && schemeId != '0') {
 			$.ajax({
 				type : "GET",
 				url : contextPath+"/ddoast/getSchemeCodeAgainstName/" + schemeId,

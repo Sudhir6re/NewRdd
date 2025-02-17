@@ -1,33 +1,33 @@
 package com.mahait.gov.in.entity;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import lombok.Data;
 
 @Data
 //@JsonIgnoreProperties(value = { "mstNomineeDetailsEntity", "mstSubDepartmentEntity", "mstGpfDetailsEntity" })
-//@Entity
-//@Table(name = "Change_details_mst", schema = "public")
+@Entity
+@Table(name = "Change_details_mst", schema = "public")
 public class ChangeDtlsHst {
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "mstEmployeeEntity", orphanRemoval = true)
-	private List<MstNomineeDetailsEntity> mstNomineeDetailsEntity;
-
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "mstEmployeeEntity", orphanRemoval = true)
-	private MstGpfDetailsEntity mstGpfDetailsEntity;
-
+	/*
+	 * @OneToMany(cascade = CascadeType.ALL, mappedBy = "mstEmployeeEntity",
+	 * orphanRemoval = true) private List<MstNomineeDetailsEntity>
+	 * mstNomineeDetailsEntity;
+	 * 
+	 * @OneToOne(cascade = CascadeType.ALL, mappedBy = "mstEmployeeEntity",
+	 * orphanRemoval = true) private MstGpfDetailsEntity mstGpfDetailsEntity;
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CHANGE_DTLS_ID")

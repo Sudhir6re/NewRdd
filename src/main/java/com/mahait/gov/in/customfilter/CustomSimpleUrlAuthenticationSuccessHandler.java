@@ -93,6 +93,7 @@ public class CustomSimpleUrlAuthenticationSuccessHandler implements Authenticati
 		roleTargetUrlMap.put("ROLE_MDC", "/mdc/home");
 		roleTargetUrlMap.put("ROLE_MDP", "/mdp/home"); // developer
 		roleTargetUrlMap.put("ROLE_SUPER", "/super/home"); 
+		roleTargetUrlMap.put("ROLE_DEVELOPER", "/developer/home"); 
 
 		final Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 		for (final GrantedAuthority grantedAuthority : authorities) {

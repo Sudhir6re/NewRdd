@@ -32,7 +32,7 @@ public class MstSchemeServiceImpl implements MstSchemeService {
 	}
 
 	@Override
-	public BigInteger findNumberOfEmployeeInBillGroup(String logUser, BigInteger schemeBillGroupId, int monthName,
+	public Long findNumberOfEmployeeInBillGroup(String logUser, BigInteger schemeBillGroupId, int monthName,
 			int yearName, int paybillType) {
 		// TODO Auto-generated method stub
 		return mstSchemeRepo.findNumberOfEmployeeInBillGroup(logUser, schemeBillGroupId, monthName, yearName,

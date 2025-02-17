@@ -35,6 +35,7 @@ public interface NSDLDetailsService {
 	List<Object[]> getNsdlEmpDataLevelwise(int month, int year, String userName);
 	List<NSDLDetailsModel> getEmployeeListNsdl1(Integer year, Integer month, String ddoCode);
 	List<DdoWiseNpsContriModel> searchDdoWiseContribution(int month, int year, OrgUserMst messages);
+	List getEmployeeListNsdlsuperAnnNull(Integer year, Integer month, Integer treasuryyno, String ddoCode);
 	
 	
 

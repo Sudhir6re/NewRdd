@@ -138,7 +138,7 @@ public class DeptEligibilityForAllowAndDeductRepoImpl implements DeptEligibility
 	public EmployeeAllowDeducComponentAmtEntity findMstDeptByDeptId(String sevaarthId, int deptallowcode) { // for checking sevaarth id for grp components
 	
 		try {
-		String hql1 = " select e from "+EmployeeAllowDeducComponentAmtEntity.class.getName()+" e where SEVAARTH_ID='"+sevaarthId+"' and department_allowdeduc_code= "+deptallowcode;
+		String hql1 = " select e from EmployeeAllowDeducComponentAmtEntity e where sevaarthId='"+sevaarthId+"' and deptallowcode= "+deptallowcode;
 		Query query = (Query) entityManager.createQuery(hql1,EmployeeAllowDeducComponentAmtEntity.class);
 		return (EmployeeAllowDeducComponentAmtEntity) query.getSingleResult();
 		} catch (NoResultException e) {

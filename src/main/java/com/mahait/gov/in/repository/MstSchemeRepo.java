@@ -17,7 +17,7 @@ public interface MstSchemeRepo {
 
 	List<MstDcpsBillGroup> findAllMpgSchemeBillGroupByDDOCode(String dDOCode, int roleid);
 
-	BigInteger findNumberOfEmployeeInBillGroup(String logUser, BigInteger schemeBillGroupId, int monthName, int yearName, int paybillType);
+	Long findNumberOfEmployeeInBillGroup(String logUser, BigInteger schemeBillGroupId, int monthName, int yearName, int paybillType);
 
 	List<MstSchemeModel> findAllMpgSchemeBillGroupBylvl2DDOCode(String userName);
 

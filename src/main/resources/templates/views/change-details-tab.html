@@ -906,7 +906,12 @@
 				<!-- 												ng-click="uploadPhoto();"></span></label></td> -->
 				<td width="10%">
 					<!-- 										<img id="photoView" src="#" onerror="" width="100" height="100" /> -->
-					<img id="imagePath"
+					<img id="imagePath" th:if="${levelRoleVal==2}"
+					th:src="@{${'/ddo/viewFilephoto/' + empChangeDetailsModel.employeeId}}"
+					width="100" height="100" />
+					
+					
+					<img id="imagePath" th:if="${levelRoleVal==3}"
 					th:src="@{${'/ddoast/viewFilephoto/' + empChangeDetailsModel.employeeId}}"
 					width="100" height="100" />
 				</td>
@@ -933,8 +938,13 @@
 				<!-- 												ng-click="uploadPhoto1();"></span></label></td> -->
 				<td width="10%">
 					<!-- 										<img id="blah" src="#" width="100" height="100" onerror="" /> -->
-					<img id="imagePathSign"
+					<img id="imagePathSign"  th:if="${levelRoleVal==3}"
 					th:src="@{${'/ddoast/viewFileSign/' + empChangeDetailsModel.employeeId}}"
+					width="100" height="100" />
+					
+					
+						<img id="imagePathSign"  th:if="${levelRoleVal==2}"
+					th:src="@{${'/ddo/viewFileSign/' + empChangeDetailsModel.employeeId}}"
 					width="100" height="100" />
 				</td>
 			</tr>

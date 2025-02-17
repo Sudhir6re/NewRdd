@@ -313,8 +313,6 @@ public class LoginController extends BaseController{
 
 	}
 
-	
-	
 
 	@RequestMapping("/user/home")
 	public ModelAndView userHomePage(HttpServletRequest request, Model model, HttpServletResponse response,
@@ -338,21 +336,42 @@ public class LoginController extends BaseController{
 			return new ModelAndView("redirect:/ddo/home");
 		}else if (levelRoleVal==4) {
 			modelAndView.setViewName("topics");
-			//return new ModelAndView("redirect:/user/home");
 		}else if (levelRoleVal==5) {
 			return new ModelAndView("redirect:/super/home");
-		} else {
+		}else if (levelRoleVal==6) {
+			return new ModelAndView("redirect:/mdp/home");
+		} else if (levelRoleVal==8) {
+			return new ModelAndView("redirect:/level4/home");
+		}else if (levelRoleVal==9) {
+			return new ModelAndView("redirect:/developer/home");
+		}  
+		else {
 			modelAndView.setViewName("homepageLevel");
 		}
 		return modelAndView;
 
 	}
-
 	
 
 	/* Super Admin Home Page */
 	@RequestMapping("/super/home")
 	public ModelAndView getSuperHomePage(HttpServletRequest request, Model model, HttpServletResponse response,
+			Locale locale, HttpSession session) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("language", locale.getLanguage());
+		request.getSession().setAttribute("MY_SESSION_MESSAGES",
+				userService.getUserIdbyUserName(request.getRemoteUser()));
+		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");
+		addMenuAndSubMenu(modelAndView,messages);
+		modelAndView.setViewName("topics");
+		return modelAndView;
+	}
+	
+	
+
+	/* Super Admin Home Page */
+	@RequestMapping("/developer/home")
+	public ModelAndView developerHomePage(HttpServletRequest request, Model model, HttpServletResponse response,
 			Locale locale, HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("language", locale.getLanguage());

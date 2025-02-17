@@ -14,5 +14,14 @@ public class LstConsolidatedPayBillModel {
 	private double billNetAmount;
 	private char isActive;
 	private Integer isActiveInt;
+	
+	private Integer authNo;
+	
+	private Long eKuberCount;
+	private String cmpDownloadStatus;
+	
+	
+	
+	
 
 }

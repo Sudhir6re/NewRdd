@@ -810,4 +810,14 @@ public class EntryOfPostsServiceImpl implements EntryOfPostsService {
 		return entryOfPostsRepo.findAllDesignation();
 	}
 
+	@Override
+	public List<MstDesignationEntity> getDesignationLstByDdoCode(String ddoCode) {
+		List<OrgDdoMst> lst=entryOfPostsRepo.findDdoDetailByDdoCode(ddoCode);
+		if(lst.size()>0) {
+			return entryOfPostsRepo.getDesignationLstByDdoCode(lst.get(0).getHodLocCode());
+		}else {
+			return entryOfPostsRepo.getDesignationLstByDdoCode(ddoCode);
+		}
+	}
+
 }

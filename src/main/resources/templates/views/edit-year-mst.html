@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title
+	th:utext="#{msg.thymeleaf.pageheading.dearnessallowanceMaster}"></title>
+<style>
+.error {
+	color: red !important;
+	font-size: 12px !important;
+}
+
+select.error, textarea.error, input.error {
+	border: 1px solid red !important;
+}
+</style>
+</head>
+<body class="allowance-deduction-mst">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.commonMst}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span
+				th:utext="#{msg.thymeleaf.pagelabel.yearmaster}"></span>
+		</h3>
+		<!-- <div align="center" class="success">
+			<span th:utext="${message}"></span>
+		</div> -->
+		<!-- <div th:if="${savedSuccessfully.value} eq 'SAVED'">
+			<p>Saved Successfully !</p>
+		</div> -->
+		<fieldset class="container">
+			<!-- <legend th:utext="#{msg.thymeleaf.pageheading.addBankDetails}" th:style="${'color: orange;'}"></legend> -->
+
+			<!-- 		<h1 th:utext="#{common.label.title}"></h1> -->
+
+			<form class="form-horizontal"
+				th:action="@{/developer/saveYear}"
+				th:object="${mstYearEntity}" method="POST"
+				name="allowMst" enctype="multipart/form-data">
+
+				<input type="hidden" name="message" id="message"
+					th:value="${message}" /> <input type="hidden" name="language"
+					id="language" th:value="${language}" />
+					
+					 <input type="hidden" name="context" id="context" th:value="${context}" />
+					 
+					 
+					 	 <input type="hidden" name="yearId" id="yearId" th:field="*{yearId}" />
+
+
+
+
+				 <div class="form-group">
+					<label class="control-label col-sm-2" for="title"> <span
+						th:utext="#{msg.thymeleaf.pagelabel.finyearEnglish}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control number" id="yearEnglish"
+							th:field="*{yearEnglish}"></input>
+					</div>
+
+					<label class="control-label col-sm-2" for="title"> <span
+						th:utext="#{msg.thymeleaf.pagelabel.finyearMarathi}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+							
+							<div class="col-sm-3">
+					
+					<input type="text" class="form-control" id="yearMarathi" 
+							th:field="*{yearMarathi}"></input>
+					</div>
+							
+					
+				</div> 
+
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.finyearFromyear}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					
+					
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="from_year"
+							th:field="*{from_year}"></input>
+					</div>
+					
+
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.finyeartoYear}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="to_year"
+							th:field="*{to_year}"></input>
+						<!--  th:text="${user.name}" -->
+					</div>
+
+
+				</div>
+				
+				
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pagelabel.finyear}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					
+					
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="financialYear"
+							th:field="*{financialYear}"></input>
+					</div>
+					
+
+				
+
+				</div>
+
+				
+				<div class="form-group text-center">
+					<hr />
+					<input type="submit" id="btnSave" class="btn btn-primary"
+						th:value="#{msg.thymeleaf.pagelabel.btnSave}" />
+					<!-- <input type="button" class="btn btn-info" id="btnCancel" th:value="#{msg.thymeleaf.pagelabel.btnCancel}"/> -->
+					<input type="reset" id="btnReset" class="btn btn-primary" th:value="#{msg.thymeleaf.pagelabel.btnReset}"/>
+					<a th:href="@{/user/home}" class="btn"><span
+						th:text="#{msg.thymeleaf.pagelabel.btnCancel}"></span></a>
+				</div>
+
+				<input type="hidden" name="${_csrf.parameterName}"
+					value="${_csrf.token}" />
+
+			</form>
+		</fieldset>
+
+
+		
+	</div>
+
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script th:src="@{/js/jquery.validate.min.js}"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.min.js"></script>
+	<script th:src="@{/js/allowance-deduction-wise-mst.js}"></script>
+	<script th:src="@{/js/project/datatable-common.js}"></script>
+	
+
+</body>
+</html>

@@ -3,8 +3,26 @@
 	xmlns:th="http://www.thymeleaf.org">
 <head>
 <title th:utext="#{msg.thymeleaf.pageheading.Level3ApprovalForm1}"></title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi">
+	
+</script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+	<script src="https://gisttrans.maharashtra.gov.in/Transliteration/js/CDAC-Typing.min.js" type="text/javascript"></script>
 <style>
 </style>
+
+
+
 </head>
 <body class="level3-approval-form1">
 	<div th:replace="header/menuHeader :: var-script-header"></div>
@@ -48,19 +66,25 @@
 						</tr>
 						<tr>
 							<td colspan="2" align="center"><input type="button"
-								value="Filter" name="btnFilter" class="btn"></td>
+								value="Filter" name="btnFilter"  id="btnFilter" class="btn"></td>
 						</tr>
 					</tbody>
 				</table>
 			</fieldset>
 			<hr />
+			
+				<form class="form-horizontal container" name="myAForm" id="myAForm"
+				th:action="@{/level3/approveEmployeeConfiguration}"
+				th:object="${mstEmployeeModel}" method="POST"
+				enctype="multipart/form-data">
+				
+					<input type="hidden" name="employeeId" id="employeeId"
+					th:field="*{employeeId}" class="form-control" />
 			<fieldset>
 				<legend>
 					<b>All Employee Details</b>
 				</legend>
-				<table class="table table-hover table-bordered">
-				
-				
+				<table class="table table-hover table-bordered" id="dcpsDetailsTable1">
 				<thead>
 					<tr style="text-align: center;">
 						<th th:utext="#{msg.thymeleaf.pagelabel.srno}"
@@ -94,7 +118,6 @@
 							style="text-align: center;"></th>
 					</tr>
 				</thead>
-				<tbody>
 
 				<tbody>
 					<tr th:each="varempdtls : ${employeedetails}">
@@ -120,12 +143,13 @@
 				</tbody>
 				</table>
 			</fieldset>
+				</form>
 		</div>
 
 	</div>
-	</div>
 
 	<div th:replace="header/menuHeader :: varmenufooter"></div>
+		<script th:src="@{/js/project/employee-configuration.js}"></script>
 
 </body>
 </html>

@@ -31,6 +31,7 @@ import com.mahait.gov.in.entity.MstGpfDetailsEntity;
 import com.mahait.gov.in.entity.MstGpfDetailsHistEntity;
 import com.mahait.gov.in.entity.MstNomineeDetailsEntity;
 import com.mahait.gov.in.entity.MstNomineeDetailsHistEntity;
+import com.mahait.gov.in.entity.OrgUserMst;
 import com.mahait.gov.in.model.EmpChangeDetailsModel;
 import com.mahait.gov.in.model.MstEmployeeModel;
 import com.mahait.gov.in.repository.EmpChangeDetailsRepo;
@@ -677,7 +678,7 @@ public class EmpChangeDetailsServiceImpl implements EmpChangeDetailsService {
 	}
 
 	@Override
-	public List<MstEmployeeEntity> getEmployeeDetails(String ddoCode, String language) {
+	public List<MstEmployeeEntity> getEmployeeDetails(OrgUserMst orgUserMst, String language) {
 		// List<MstEmployeeEntity> listempentity =
 		// empChangeDetailsRepo.getEmployeeDetails(ddoCode);
 		// List<EmpChangeDetailsModel> result = new ArrayList<EmpChangeDetailsModel>();
@@ -701,7 +702,7 @@ public class EmpChangeDetailsServiceImpl implements EmpChangeDetailsService {
 		//
 		// return result;
 
-		return empChangeDetailsRepo.getEmployeeDetails(ddoCode);
+		return empChangeDetailsRepo.getEmployeeDetails(orgUserMst);
 	}
 
 	@Override
@@ -1221,9 +1222,9 @@ public class EmpChangeDetailsServiceImpl implements EmpChangeDetailsService {
 			changeDtlsHst.setDesignationCode(mstEmployeeEntity.getDesignationCode());
 			changeDtlsHst.setPayscalelevelId(mstEmployeeEntity.getPayscalelevelId());
 			changeDtlsHst.setBegisCatg(mstEmployeeEntity.getBegisCatg());
-			changeDtlsHst.setQualification(mstEmployeeEntity.getQualification().toString());
-			changeDtlsHst.setAppointment(mstEmployeeEntity.getAppointment());
-			changeDtlsHst.setTeaching(mstEmployeeEntity.getTeaching());
+			//changeDtlsHst.setQualification(mstEmployeeEntity.getQualification().toString());
+			//changeDtlsHst.setAppointment(mstEmployeeEntity.getAppointment());
+		//	changeDtlsHst.setTeaching(mstEmployeeEntity.getTeaching());
 			if (mstEmployeeEntity.getPayscalelevelId() != null)
 				changeDtlsHst.setSevenPcLevel(Long.valueOf(mstEmployeeEntity.getPayscalelevelId()));
 			else

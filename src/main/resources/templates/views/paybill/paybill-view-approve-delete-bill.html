@@ -285,14 +285,26 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
 			
 
 				<div class="text-center">
-					<!-- 	<input type="button" value="Forward Change Statement" class="btn btn-primary" id="btnForwardChangeStatment" /> -->
-					<!-- <input type="button" value="Generate Paybill" class="btn btn-primary" id="btnForwardBill" />  -->
-					<input type="button" th:if="${roleId=='2'}"
-						value="Forward PayBill To Beams" class="btn btn-primary"
-						id="btnForwardBillToBeams" /> <input type="button"
+					 	<input type="button" value="Forward Change Statement" class="btn btn-primary" id="btnForwardChangeStatment" />
+					 	
+				 <input type="button" value="Generate Paybill" class="btn btn-primary" id="btnForwardBill" />  
+					
+					
+						
+						<input type="button"
 						value="Forward PayBill To DDO" class="btn btn-primary"
-						id="btnForwardBillToLevel2" /> <input type="button"
+						id="btnForwardBillToLevel2" />
+						
+						
+						<!-- 	<input
+						type="button" value="Forward PayBill To Beams"
+						class="btn btn-primary" id="btnForwardBillToBeams" /> -->
+						
+						
+						 <input type="button"
 						value="Delete Bill" class="btn btn-primary" id="btnDeleteBill" />
+						
+						
 					<input type="button" value="Voucher Entry" class="btn btn-primary"
 						id="btnVoucherEntry" data-toggle="modal" data-target="#myModal" />
 					<!-- <input type="reset" id="btnReset" class="btn btn-primary"

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title
+	th:utext="#{msg.thymeleaf.pageheading.dearnessallowanceMaster}"></title>
+<style>
+.error {
+	color: red !important;
+	font-size: 12px !important;
+}
+
+select.error, textarea.error, input.error {
+	border: 1px solid red !important;
+}
+</style>
+</head>
+<body class="allowance-deduction-mst">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pageheading.commonMst}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span
+				th:utext="#{msg.thymeleaf.pageheading.commonMst}"></span>
+		</h3>
+		<!-- <div align="center" class="success">
+			<span th:utext="${message}"></span>
+		</div> -->
+		<!-- <div th:if="${savedSuccessfully.value} eq 'SAVED'">
+			<p>Saved Successfully !</p>
+		</div> -->
+		<fieldset class="container">
+			<!-- <legend th:utext="#{msg.thymeleaf.pageheading.addBankDetails}" th:style="${'color: orange;'}"></legend> -->
+
+			<!-- 		<h1 th:utext="#{common.label.title}"></h1> -->
+
+			<form class="form-horizontal"
+				th:action="@{/developer/saveCommonMst}"
+				th:object="${mstCommonEntity}" method="POST"
+				name="allowMst" enctype="multipart/form-data">
+
+				<input type="hidden" name="message" id="message"
+					th:value="${message}" /> <input type="hidden" name="language"
+					id="language" th:value="${language}" />
+					
+					 <input type="hidden" name="context" id="context" th:value="${context}" />
+					 
+					 <input type="hidden" name="commonId" id="commonId" th:field="*{commonId}" />
+
+
+
+
+				 <div class="form-group">
+					<label class="control-label col-sm-2" for="title"> <span
+						th:utext="#{msg.thymeleaf.pageheading.commonValue}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control number" id="commonValue"
+							th:field="*{commonValue}"></input>
+					</div>
+
+					<label class="control-label col-sm-2" for="title"> <span
+						th:utext="#{msg.thymeleaf.pageheading.commonCode}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+							
+							<div class="col-sm-3">
+					
+					<input type="text" class="form-control" id="commonCode" 
+							th:field="*{commonCode}"></input>
+					</div>
+							
+					
+				</div> 
+
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pageheading.commonValueEnglish}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					
+					
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="commonValEnglish"
+							th:field="*{commonValEnglish}"></input>
+					</div>
+					
+
+					<label class="control-label col-sm-2" for="title"><span
+						th:utext="#{msg.thymeleaf.pageheading.commonValueMarathi}"></span>&nbsp;&nbsp;<b><font
+							color="red" size="4px;">*</font></b></label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="commonValMarathi"
+							th:field="*{commonValMarathi}"></input>
+						<!--  th:text="${user.name}" -->
+					</div>
+
+
+				</div>
+
+				
+				<div class="form-group text-center">
+					<hr />
+					<input type="submit" id="btnSave" class="btn btn-primary"
+						th:value="#{msg.thymeleaf.pagelabel.btnSave}" />
+					<!-- <input type="button" class="btn btn-info" id="btnCancel" th:value="#{msg.thymeleaf.pagelabel.btnCancel}"/> -->
+					<input type="reset" id="btnReset" class="btn btn-primary" th:value="#{msg.thymeleaf.pagelabel.btnReset}"/>
+					<a th:href="@{/user/home}" class="btn"><span
+						th:text="#{msg.thymeleaf.pagelabel.btnCancel}"></span></a>
+				</div>
+
+				<input type="hidden" name="${_csrf.parameterName}"
+					value="${_csrf.token}" />
+
+			</form>
+		</fieldset>
+
+
+		<table id="tblDataTable" class="table table-striped table-bordered"
+			style="width: 100%">
+			<thead>
+				<tr>
+					<th th:utext="#{msg.thymeleaf.pagelabel.srno}"></th>
+					<th th:utext="#{msg.thymeleaf.pageheading.commonValue}"></th>
+					<th th:utext="#{msg.thymeleaf.pageheading.commonValueEnglish}"></th>
+					<th th:utext="#{msg.thymeleaf.pageheading.commonValueMarathi}"></th>
+					<th th:utext="#{msg.thymeleaf.pageheading.commonCode}"></th>
+					<th th:utext="#{msg.thymeleaf.pagelabel.status}"></th>
+					<th th:utext="#{msg.thymeleaf.datatablelabel.action}"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="varlstAlloDeduMst: ${lstMstCommonEntity}">
+					<td th:text="${varlstAlloDeduMstStat.index+1}"></td>
+					<td th:text="${varlstAlloDeduMst.commonValue}"></td>
+					<td th:text="${varlstAlloDeduMst.commonValEnglish}"></td>
+				
+
+					<td class="text-right" th:text="${varlstAlloDeduMst.commonValMarathi}"></td>
+					<td class="text-right" th:text="${varlstAlloDeduMst.commonCode}"></td>
+					<td class="text-center"><span th:if="${varlstAlloDeduMst.isActive} == '1'">
+							<span class="label label-success"
+							th:utext="#{msg.thymeleaf.status.active}"></span>
+					</span> <span th:if="${varlstAlloDeduMst.isActive} =='0'"> <span
+							class="label label-danger"
+							th:utext="#{msg.thymeleaf.status.inactive}"></span>
+					</span></td>
+					<td>
+						<div class="form-group text-center flex">
+								<a data-toggle="tooltipEdit" title="Edit"
+									th:href="@{'/developer/editCommonConst/' + ${varlstAlloDeduMst.commonId}}"><span
+									class="glyphicon glyphicon-edit"></span></a>
+								<a data-toggle="tooltipDelete" title="Delete"
+									th:data="${varlstAlloDeduMst.isActive}"
+									th:data-val="${varlstAlloDeduMst.isActive}" class="delete">
+									<span class="glyphicon glyphicon-trash "></span>
+								</a>
+							</div>
+					</td>
+				</tr>
+			</tbody>
+
+		</table>
+	</div>
+
+
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script th:src="@{/js/jquery.validate.min.js}"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.min.js"></script>
+	<script th:src="@{/js/allowance-deduction-wise-mst.js}"></script>
+	<script th:src="@{/js/project/datatable-common.js}"></script>
+	
+
+	
+	<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+
+</body>
+</html>

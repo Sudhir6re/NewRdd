@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/developer")
 public class MstRoleController  extends BaseController {
 	
 	@Autowired
@@ -34,7 +34,6 @@ public class MstRoleController  extends BaseController {
 		
 		String message = (String)model.asMap().get("message");
 		model.addAttribute("mstRoleModel", mstRoleModel);
-		
 	
 		model.addAttribute("lstRoleTable", commonHomeMethodsService.findAllRole());
 		model.addAttribute("language", locale.getLanguage());
@@ -60,7 +59,7 @@ public class MstRoleController  extends BaseController {
 		
 		
 		model.addAttribute("lstRoleTable", commonHomeMethodsService.findAllRole());
-		return "redirect:/admin/mstRole"; /*redirects to controller URL*/
+		return "redirect:/developer/mstRole"; /*redirects to controller URL*/
 	}	
 	@RequestMapping(value="/editRole/{roleId}")	// , method = RequestMethod.POST
     public String editScheme (@PathVariable int roleId, RedirectAttributes redirectAttributes, Model model,Locale locale,HttpSession session) {
@@ -84,7 +83,7 @@ public class MstRoleController  extends BaseController {
 			redirectAttributes.addFlashAttribute("message","UPDATED");
 		}
 		//model.addAttribute("lstRoleTable", commonHomeMethodsService.findAllRole());
-		return "redirect:/admin/master/mstRole"; //redirects to controller URL
+		return "redirect:/developer/master/mstRole"; //redirects to controller URL
 	}
 	
 	@RequestMapping(value="/deleteRole/{roleId}")	// , method = RequestMethod.POST

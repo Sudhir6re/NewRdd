@@ -78,7 +78,7 @@ jQuery(document)
                                           $("#btnDeleteBill").attr("disabled", true); 
                                           $("#btnVoucherEntry").attr("disabled", true); 
                                           $("#btnForwardBillToDDO").attr("disabled", true); 
-                                          $("#btnForwardBillToLevel2").attr("disabled", true);
+                                          $("#btnForwardBillToLevel2").attr("disabled", false);
                                           
                                      }
                                      else if(status==5){
@@ -87,6 +87,7 @@ jQuery(document)
                                     	 $("#btnForwardBillToBeams").attr("disabled", false);   //5,6,7
                                     	// $("#btnVoucherEntry").attr("disabled", false);   //5,6,7
                                     	 $("#btnDeleteBill").attr("disabled", false); 
+										 $("#btnForwardBillToLevel2").attr("disabled", false);
                                     	 
                                      }
                                      else if(status==6 || status==7)
@@ -489,34 +490,7 @@ jQuery(document)
 							})
 						});
 
-					//Forward to Beams 
-					
-				/*	$('#btnForwardBillToBeams').click(function() {
-						var paybillGenerationTrnId = $('#radioval').val();
-						swal({
-							  title: "Are you sure?",
-							  text: "PayBill will be Forwarded to Level 2 !",
-							  icon: "warning",
-							  buttons: true,
-							  dangerMode: true,
-							}).then((willDelete) => {
-							    if (willDelete) {   
-									$.ajax({
-									      type: "GET",
-									      url: "../paybill/forwardPayBillToLevel2/"+paybillGenerationTrnId,
-									      async: true,
-									      success: function(data){
-									    	  swal("PayBill Forwarded successfully !", {
-									    	      icon: "success",
-									    	  });
-									    	  setTimeout(function() {
-												    location.reload(true);
-												}, 3000);
-									      }
-									 });
-							     }
-							})
-						});*/
+				
 					
 					});
 

@@ -18,8 +18,11 @@ public class BrokenPeriodEntity {
 	private Long brokenPeriodId;
 	@Column(name = "SEVAARTH_ID")
 	private String sevaarthid;
+	
 	@Column(name = "EMP_ID")
-	private Integer empId;
+	private Long empId;
+	
+	
 	@Column(name = "MONTH_ID")
 	private Integer monthId;
 	@Column(name = "YEAR_ID")

@@ -27,6 +27,10 @@ public class PaybillGenerationTrnDetails {
 
 	@Column(name = "EMP_ID")
 	private Long empId;
+	
+	
+	@Column(name = "id")
+	private Long id;
 
 	@Column(name = "SPL_PAY")
 	private Double splPay;

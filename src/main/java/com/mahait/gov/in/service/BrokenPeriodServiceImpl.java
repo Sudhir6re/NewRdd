@@ -1092,7 +1092,7 @@ public class BrokenPeriodServiceImpl implements BrokenPeriodService {
 
 			BrokenPeriodEntity lObjMstBrokenPeriodPay = new BrokenPeriodEntity();
 			//
-			lObjMstBrokenPeriodPay.setEmpId(Integer.valueOf(lLongEisEmpId.intValue()));
+			lObjMstBrokenPeriodPay.setEmpId(lLongEisEmpId);
 			lObjMstBrokenPeriodPay.setSevaarthid(sevaarthid);
 			lObjMstBrokenPeriodPay.setMonthId(Integer.valueOf(lLongMonth.intValue()));
 			lObjMstBrokenPeriodPay.setYearId(Integer.valueOf(lLongYear.intValue()));

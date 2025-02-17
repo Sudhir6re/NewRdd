@@ -43,9 +43,12 @@ public class MstGpfDetailsEntity {
 	private Long updateid;
 	private String sevaarthId;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "EMPLOYEE_ID", insertable = false, updatable = false)
-	private MstEmployeeDetailEntity mstEmployeeDetailEntity;
+	/*
+	 * @OneToOne(fetch = FetchType.LAZY)
+	 * 
+	 * @JoinColumn(name = "EMPLOYEE_ID", insertable = false, updatable = false)
+	 * private MstEmployeeDetailEntity mstEmployeeDetailEntity;
+	 */
 	
 	
 	@ManyToOne(fetch = FetchType.LAZY)

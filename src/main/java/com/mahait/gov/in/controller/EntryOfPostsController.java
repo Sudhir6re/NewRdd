@@ -365,6 +365,13 @@ public class EntryOfPostsController extends BaseController {
 		return ResponseEntity.ok(lstLevel1Ddo);
 	}
 	
+	@RequestMapping(value = "/getDesignationLstByDdoCode/{ddoCode}", consumes = {
+	"application/json" }, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<MstDesignationEntity>> getDesignationLstByDdoCode(@PathVariable String ddoCode,HttpSession session) {
+		List<MstDesignationEntity> lstMstDesignationEntity = entryOfPostsService.getDesignationLstByDdoCode(ddoCode);
+		return ResponseEntity.ok(lstMstDesignationEntity);
+	}
+	
 	
 	
 	

@@ -43,15 +43,30 @@ public class ViewDelConsolidatePayBillServiceImpl implements ViewDelConsolidateP
 					if(objLst[4] instanceof BigDecimal) {
 						BigDecimal net = (BigDecimal)objLst[4];
 						obj.setBillNetAmount(net.doubleValue());
-					}else if(objLst[3] instanceof Double) {
+					}else if(objLst[4] instanceof Double) {
 						obj.setBillNetAmount(StringHelperUtils.isNullDouble(objLst[4]));
 					}
 					if(objLst[5] instanceof Character) {
 						obj.setIsActive(StringHelperUtils.isNullChar(objLst[5]));
-					}else if(objLst[3] instanceof Integer) {
+					}else if(objLst[5] instanceof Integer) {
 						obj.setIsActiveInt(StringHelperUtils.isNullInt(objLst[5]));
 					}
-				
+					
+					
+					if(objLst[6] instanceof Integer) {
+						obj.setAuthNo(StringHelperUtils.isNullInt(objLst[6]));
+					}else if(objLst[5] instanceof String) {
+						obj.setAuthNo(Integer.parseInt(StringHelperUtils.isNullString(objLst[5])));
+					}
+					
+					
+					if(objLst[7] instanceof Long) {
+						obj.setEKuberCount(StringHelperUtils.isNullLong(objLst[7]));
+					}
+					
+					
+					obj.setCmpDownloadStatus(StringHelperUtils.isNullString(objLst[8]));
+
 					lstObj.add(obj);
 				}
 			}		

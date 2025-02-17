@@ -613,6 +613,45 @@ function getAllGrOrder() {
 	}
 }
 
+function getDesignationLstByDdoCode() {
+	var ddoCode=$('#ddoCode').val();
+	 
+	if(ddoCode!='' && ddoCode!="0"){
+			$.ajax({
+				type : "GET",
+			    url: context+ddo+"getDesignationLstByDdoCode/"+ddoCode,
+				async : true,
+				 // data: { ddoCode: ddoCode},
+				contentType : 'application/json',
+				error : function(data) {
+					 console.log(data);
+					 $("#loaderMainNew").hide();
+				},
+				beforeSend : function(){
+					$( "#loaderMainNew").show();
+					},
+				complete : function(data){
+					$( "#loaderMainNew").hide();
+				},	
+				success : function(data) {
+					 console.log(data);
+					 $("#loaderMainNew").hide();
+					var len = data.length;
+						$("#loaderMainNew").hide();
+						j=1;
+						$('#designationCmb').empty();
+					    $('#designationCmb').append($('<option  value="-1"></option>').text("Please Select")); 
+						if(len>0){
+							for (var i = 0; i < data.length; i++) {
+								$('#designationCmb').append('<option value="' + data[i].desginationId + '">' + data[i].desgination + '</option>');
+							}
+						}
+				}
+			});
+	}
+}
+
+
 
 
 
@@ -692,6 +731,13 @@ $(document).on('change', '#ddoCode', function() {
 				getAllGrOrder();
 		}
 		
+		if($('#designationCmb').length){
+				getDesignationLstByDdoCode();
+		}
+		
+		
+		
+		
 		
 	
 	if($('#orderCmb').length){
@@ -748,9 +794,9 @@ $("#districtId").change(function(){
 			},	
 	      success: function(data){
 	    		 var len = data.length;
-	    		 $('#orderCmb').empty();
+	    		 $('#ddoCode').empty();
 	    		 $( "#loaderMainNew").hide();
-	    		 $('#orderCmb').append($('<option  value="-1"></option>').text("Please Select")); 
+	    		 $('#ddoCode').append($('<option  value="-1"></option>').text("Please Select")); 
 					if (len != 0) {
 							   for(var i=0;i<len;i++){
 								$.each(data, function(index, row) {

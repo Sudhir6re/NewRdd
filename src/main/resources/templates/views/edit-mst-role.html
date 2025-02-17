@@ -39,7 +39,7 @@ select.error, textarea.error, input.error {
 		
 <!-- 		<h1 th:utext="#{common.label.title}"></h1> -->
 		
-		<form class="form-horizontal" th:action="@{/admin/master/editRoleSave}"
+		<form class="form-horizontal" th:action="@{/developer/editRoleSave}"
 			th:object="${mstRoleEntity}" method="POST" name="mstRole" enctype="multipart/form-data">
 			
 			<input type="hidden" name="language" id="language" th:value="${language}"/>

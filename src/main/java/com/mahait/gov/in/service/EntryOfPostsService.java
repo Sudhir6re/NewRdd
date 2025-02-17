@@ -3,6 +3,7 @@ package com.mahait.gov.in.service;
 import java.math.BigInteger;
 import java.util.List;
 
+import com.mahait.gov.in.entity.DdoOffice;
 import com.mahait.gov.in.entity.HrPayOfficepostMpg;
 import com.mahait.gov.in.entity.HrPayOrderMst;
 import com.mahait.gov.in.entity.MstDesignationEntity;
@@ -71,6 +72,8 @@ public interface EntryOfPostsService {
 	List<Object[]> findLevelDdoCodeByDistrict(String districtId, OrgUserMst messages);
 
 	List<MstDesignationEntity> findAllDesignation();
+
+	List<MstDesignationEntity> getDesignationLstByDdoCode(String ddoCode);
 
 
 }

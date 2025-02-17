@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mahait.gov.in.common.CommonConstants;
 import com.mahait.gov.in.common.CommonConstants.STATUS;
@@ -155,7 +156,7 @@ public class NSDLDetailsController extends BaseController {
 		return "/views/report/NSDLDDOWiseReport";
 	}
 
-	@GetMapping("/NSDLinput")
+	@RequestMapping("/NSDLinput")
 	public String NSDLinput(HttpSession session, @ModelAttribute("nsdlDetailsModel") NSDLDetailsModel nsdlDetailsModel,
 			Model model, Locale locale) {
 		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");
@@ -165,6 +166,15 @@ public class NSDLDetailsController extends BaseController {
 		model.addAttribute("lstGetAllYear", commonHomeMethodsService.lstGetAllYears());
 
 		List<CmnLocationMst> lstTreasury = onlineContributionService.findTreasuryList(messages);
+		if(nsdlDetailsModel.getAction()!=null) {
+			if(nsdlDetailsModel.getAction().equals("search")) {
+				List<DdoWiseNpsContriModel> ddoList = nsdlDetailsService.searchDdoWiseContribution(nsdlDetailsModel.getMonth(), nsdlDetailsModel.getYear(),
+						messages);
+				
+				model.addAttribute("ddoList", ddoList);
+			}
+		}
+		
 		model.addAttribute("lstTreasury", lstTreasury);
 		return "/views/nps/NSDLinput";
 	}
@@ -387,7 +397,7 @@ public class NSDLDetailsController extends BaseController {
 			}
 			InputStreamResource inputStreamResource = new InputStreamResource(fileInputStream);
 
-			return ResponseEntity.ok().header(CommonConstants.Headers.CONTENT_DISPOSITION, "attachment;filename=" + serverFile)
+			return ResponseEntity.ok().header("Content-Disposition", "attachment;filename=" + serverFile)
 					.contentType(MediaType.TEXT_PLAIN).contentLength(serverFile.length()).body(inputStreamResource);
 
 		} catch (IOException e) {
@@ -540,7 +550,7 @@ public class NSDLDetailsController extends BaseController {
 			}
 			InputStreamResource inputStreamResource = new InputStreamResource(fileInputStream);
 
-			return ResponseEntity.ok().header(CommonConstants.Headers.CONTENT_DISPOSITION, "attachment;filename=" + serverFile)
+			return ResponseEntity.ok().header("Content-Disposition", "attachment;filename=" + serverFile)
 					.contentType(MediaType.TEXT_PLAIN).contentLength(serverFile.length()).body(inputStreamResource);
 
 		} catch (IOException e) {
@@ -551,8 +561,176 @@ public class NSDLDetailsController extends BaseController {
 		return null;
 	}
 
+	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/genNsdlTxtFile", method = RequestMethod.POST)
+	public String genNsdlRegularTextFile(HttpSession session,
+			@ModelAttribute("nsdlDetailsModel") NSDLDetailsModel nsdlDetailsModel, Model model, Locale locale,RedirectAttributes redirectAttributes) {
+		
+		Integer year = nsdlDetailsModel.getYear();
+		Integer month=nsdlDetailsModel.getMonth();
+		Integer treasuryyno=nsdlDetailsModel.getTreasuryId();
+		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");
+		String ddoCode=messages.getUserName();
+		treasuryyno = Integer.parseInt(ddoCode.substring(0, 4));
+		List lstemployeenullSuperanndate = nsdlDetailsService.getEmployeeListNsdlsuperAnnNull(year, month, treasuryyno, ddoCode);
+		String empname=null;
+		String sevarthid=null;
+		String pranno=null;
+		if(lstemployeenullSuperanndate != null && !lstemployeenullSuperanndate.isEmpty())
+		{
+			for (Iterator itr = lstemployeenullSuperanndate.iterator(); itr.hasNext();) {
+				Object[] lObj1 = (Object[]) itr.next();
+				empname = (lObj1[0] != null) ? lObj1[0].toString() : "NA";
+				sevarthid = ((lObj1[1] != null) ? lObj1[1].toString() : "NA");
+				pranno = ((lObj1[2] != null) ? lObj1[2].toString() : "");
+			}	
+			redirectAttributes.addFlashAttribute("message","You cannot generate the file as super annuation date is not updated in the system  for the given employee "+empname+ " "+sevarthid+" Please update it from nodal officer");
+			return "redirect:/ddo/NSDLDetails";
+		}else {
+			String yearName = "";
+			String BatchId="";
+			treasuryyno = nsdlDetailsModel.getTreasuryId();
+
+			List<Object[]> yeard = commonHomeMethodsService.findyearinfo(BigInteger.valueOf(year.longValue()));
+			for (Object[] objects : yeard) {
+				yearName = objects[1].toString();
+			}
+			month = nsdlDetailsModel.getMonth();
+
+			String monthname = "";
+			String midFix = "";
+			String finalFix = "";
+			if (String.valueOf(month).length() == 1) {
+				midFix = "0";
+				monthname = midFix + month;
+			} else {
+				monthname = month.toString();
+			}
+			String batchIdPrefix = treasuryyno + yearName + midFix + month;
+			String countBatchId = nsdlDetailsService.getbatchIdCount(batchIdPrefix);
+			if (countBatchId.length() == 1) {
+				finalFix = "00";
+			}
+			if (countBatchId.length() == 2) {
+				finalFix = "0";
+			}
+
+			BatchId = batchIdPrefix + finalFix + countBatchId;
+			
+			List<Object[]> lstemployee = nsdlDetailsService.getEmployeeListNsdl(year, month, treasuryyno, ddoCode);
+			//int countReg = lObjNsdlNps.getDDoRegCount(yrCode, month, treasuryyno, strDDOCode);
+			
+			Calendar cal = Calendar.getInstance(TimeZone.getDefault());
+			String date = "ddMMyyyy";
+			SimpleDateFormat sdf = new SimpleDateFormat(date);
+			sdf.setTimeZone(TimeZone.getDefault());
+			String currentdate = sdf.format(cal.getTime());
+
+			String ddoName = messages.getUserName();
+			//lstemployee = nsdlDetailsService.getEmployeeListNsdl(year, month, treasuryyno, ddoName);
+			// Long countReg = nsdlDetailsService.getDDoRegCount(yrCode, month,treasuryyno);
+
+			int i = 3;
+			int k = 0;
+			
+			String dtoRegNo=null;
+			String ddoRegNo=null;
+			
+			
+			
+			for (Object[] obje : lstemployee) {
+				
+				dtoRegNo=obje[6].toString();
+				ddoRegNo=obje[7].toString();
+				
+				i++;
+				k++;
+				NSDLSDDtlsEntity nSDLSDDtlsEntity = new NSDLSDDtlsEntity();
+				nSDLSDDtlsEntity.setSrno(i);
+				nSDLSDDtlsEntity.setDdoRegNo(dtoRegNo);
+				nSDLSDDtlsEntity.setFileRemark(BatchId);
+				nSDLSDDtlsEntity.setHeaderName("SD");
+				nSDLSDDtlsEntity.setIsLegacyData('Y');
+				nSDLSDDtlsEntity.setSdEmpAmt(Double.valueOf(obje[3].toString()));
+				nSDLSDDtlsEntity.setSdEmplrAmt(Double.valueOf(obje[4].toString()));
+				nSDLSDDtlsEntity.setSdNo(Long.valueOf(1));
+				nSDLSDDtlsEntity.setSdNo2(Long.valueOf(1));
+				nSDLSDDtlsEntity.setSdNo3(Long.valueOf(k));
+				nSDLSDDtlsEntity.setSdPranNo(obje[2].toString());
+				nSDLSDDtlsEntity.setStatus("1");
+				nSDLSDDtlsEntity.setSdStatus("A" + "^" + monthname + "^" + yearName);
+				nSDLSDDtlsEntity.setDdoRegNo(ddoRegNo);
+				String empCont = obje[3].toString();
+				String emprCont = obje[4].toString();
+
+				Double total = Double.parseDouble(empCont) + Double.parseDouble(emprCont);
+				nSDLSDDtlsEntity.setSdRemark("cont for " + monthname + " and " + yearName);
+				nSDLSDDtlsEntity.setSdTotalAmt(total);
+				Integer saveId = nsdlDetailsService.saveSDDetail(nSDLSDDtlsEntity);
+			}
+
+			List<Object[]> lst = nsdlDetailsService.getNSDLEmpDtlsForGenerate(month, year, ddoName);
+			int j = 0;
+			for (Object[] obj : lst) {
+				j++;
+
+				NSDLBHDtlsEntity nSDLBHDtlsEntity = new NSDLBHDtlsEntity();
+				nSDLBHDtlsEntity.setSrno(2);
+				nSDLBHDtlsEntity.setHeaderName("BH");
+				nSDLBHDtlsEntity.setBhBatchFixId(dtoRegNo + BatchId);
+				nSDLBHDtlsEntity.setBhCol2('R');
+				nSDLBHDtlsEntity.setIsLegacyData("N");
+				nSDLBHDtlsEntity.setBhEmpAmt(Double.valueOf(obj[3].toString()));
+				nSDLBHDtlsEntity.setBhEmplrAmt(Double.valueOf(obj[2].toString()));
+				nSDLBHDtlsEntity.setBhDate(currentdate);
+				nSDLBHDtlsEntity.setBhddoCount(1);
+				nSDLBHDtlsEntity.setBhFixNo(dtoRegNo);
+				nSDLBHDtlsEntity.setBhNo('1');
+				nSDLBHDtlsEntity.setBhPRANCount(String.valueOf(lstemployee.size()));
+				nSDLBHDtlsEntity.setFileStatus("1");
+				nSDLBHDtlsEntity.setFileName(BatchId);
+
+				String empCont = obj[3].toString();
+				String emprCont = obj[2].toString();
+
+				Double total = Double.parseDouble(empCont) + Double.parseDouble(emprCont);
+
+				nSDLBHDtlsEntity.setBhTotalAmt(total);
+				// nSDLBHDtlsEntity.setFileName(fileName);
+				nSDLBHDtlsEntity.setStatus("1");
+				nSDLBHDtlsEntity.setFrnNo("0");
+				nSDLBHDtlsEntity.setMonth(Integer.valueOf(monthname));
+				nSDLBHDtlsEntity.setYear(year);
+				nSDLBHDtlsEntity.setYearName(Integer.valueOf(yearName));
+				Integer saveId1 = nsdlDetailsService.saveBHDetail(nSDLBHDtlsEntity);
+
+				NSDLDHDtlsEntity nSDLDHDtlsEntity = new NSDLDHDtlsEntity();
+				nSDLDHDtlsEntity.setSrno(3);
+				nSDLDHDtlsEntity.setHeaderName("DH");
+				nSDLDHDtlsEntity.setDhDDORegno(ddoRegNo); // SVG
+				nSDLDHDtlsEntity.setBhSDCnt(BigInteger.valueOf((lstemployee.size())));
+				nSDLDHDtlsEntity.setDhCol2(String.valueOf(j));
+				nSDLDHDtlsEntity.setDhEmpAmt(Double.valueOf(obj[3].toString()));
+				nSDLDHDtlsEntity.setDhEmplrAmt(Double.valueOf(obj[2].toString()));
+				nSDLDHDtlsEntity.setDhNo(String.valueOf(j));
+				nSDLDHDtlsEntity.setDhStatus("1");
+				// nSDLDHDtlsEntity.setFileName(fileName);
+				nSDLDHDtlsEntity.setFileName(BatchId);
+				nSDLDHDtlsEntity.setIsLegacyData('N');
+				nSDLDHDtlsEntity.setDhNo("1");
+
+				Integer saveId2 = nsdlDetailsService.saveDHDetail(nSDLDHDtlsEntity);
+
+			}
+			return "redirect:/master/NSDLDetails";
+		}
+	}
+	
+	
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/genNsdlTxtFile11", method = RequestMethod.POST)
 	public String genNsdlTxtFile(HttpSession session,
 			@ModelAttribute("nsdlDetailsModel") NSDLDetailsModel nsdlDetailsModel, Model model, Locale locale) {
 		Long Num = null;
@@ -845,5 +1023,9 @@ public class NSDLDetailsController extends BaseController {
 		model.addAttribute("lstTreasury", lstTreasury);
 		return "/views/nps/ddo-wise-emp-paybill-contri-report";
 	}
+	
+	
+	
+	
 
 }

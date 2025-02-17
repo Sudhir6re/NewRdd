@@ -275,4 +275,10 @@ public class NSDLDetailsServiceImpl implements NSDLDetailsService {
 		}
 		return lstDdoWiseNpsContriModel;
 	}
+
+	@Override
+	public List getEmployeeListNsdlsuperAnnNull(Integer year, Integer month, Integer treasuryyno, String ddoCode) {
+		// TODO Auto-generated method stub
+		return nsdlDetailsRepo.getEmployeeListNsdlsuperAnnNull(year,month, treasuryyno,ddoCode);
+	}
 }

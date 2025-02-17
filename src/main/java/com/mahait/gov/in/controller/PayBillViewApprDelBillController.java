@@ -134,8 +134,8 @@ public class PayBillViewApprDelBillController extends BaseController {
 
 		model.addAttribute("gotMonthName", session.getAttribute("PAY_BILL_MONTH"));
 
-		model.addAttribute("lstSchemeBillGroup",
-				mstSchemeService.findAllMpgSchemeBillGroupByDDOCode(messages.getDdoCode(), messages.getMstRoleEntity().getRoleId()));
+		model.addAttribute("lstSchemeBillGroup", mstSchemeService
+				.findAllMpgSchemeBillGroupByDDOCode(messages.getDdoCode(), messages.getMstRoleEntity().getRoleId()));
 		model.addAttribute("lstMonths", commonHomeMethodsService.lstGetAllMonths());
 		model.addAttribute("lstYears", commonHomeMethodsService.lstGetAllYears());
 		model.addAttribute("roleId", messages.getMstRoleEntity().getRoleId());
@@ -153,8 +153,7 @@ public class PayBillViewApprDelBillController extends BaseController {
 		List<LstGenerateBillDetailsModel> lstPaybillViewApproveDeleteModel = new ArrayList<>();
 		lstPaybillViewApproveDeleteModel = payBillViewApprDelBill.findPayBillByBillNumber(payBillViewApprDelBillModel,
 				messages);
-		
-		
+
 		model.addAttribute("lstGenerateBillDetails", lstPaybillViewApproveDeleteModel);
 
 		if (messages.getMstRoleEntity().getRoleId() == 3) {
@@ -335,7 +334,6 @@ public class PayBillViewApprDelBillController extends BaseController {
 	 */
 
 	@RequestMapping(value = "/forwardPayBillToLevel2/{paybillGenerationTrnId}/{userId}") // , method =
-																							// RequestMethod.POST
 	public String deleteCadre(@PathVariable Long paybillGenerationTrnId, @PathVariable Long userId, Model model,
 			Locale locale, HttpServletRequest request) {
 
@@ -3759,10 +3757,10 @@ public class PayBillViewApprDelBillController extends BaseController {
 	public ResponseEntity<List<LstGenerateBillDetailsModel>> findPayBillByBillNumber(@PathVariable String billNumber,
 			@PathVariable int yearName, @PathVariable int monthName, Model model, Locale locale, HttpSession session) {
 		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");
-		
+
 		List<LstGenerateBillDetailsModel> lstPaybillViewApproveDeleteModel = payBillViewApprDelBill
 				.findPayBillByBillNumber(billNumber, monthName, yearName, messages.getMstRoleEntity().getRoleId());
-		
+
 		return ResponseEntity.ok(lstPaybillViewApproveDeleteModel);
 	}
 
@@ -3772,11 +3770,11 @@ public class PayBillViewApprDelBillController extends BaseController {
 	public ResponseEntity<List<LstGenerateBillDetailsModel>> findPayBillByMonthYear(@PathVariable int yearName,
 			@PathVariable int monthName, Model model, Locale locale, HttpSession session) {
 		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");
-		
+
 		List<LstGenerateBillDetailsModel> lstPaybillViewApproveDeleteModel = payBillViewApprDelBill
 				.findPayBillByMonthYear(monthName, yearName, messages.getDdoCode(),
 						messages.getMstRoleEntity().getRoleId());
-		
+
 		return ResponseEntity.ok(lstPaybillViewApproveDeleteModel);
 	}
 
@@ -3860,17 +3858,12 @@ public class PayBillViewApprDelBillController extends BaseController {
 		paybillStatusEntity.setMacId(namePIp);
 		Serializable id3 = paybillHeadMpgRepo.savePaybillStatus(paybillStatusEntity);
 
-		
-		
 		// update voucher detail in mst
-		
-		paybillGenerationTrnService.updateMstDcpsContriVoucherDtlEntity(paybillGenerationTrnEntity,voucherNo, vdate);
-		
-	//	MstDcpsContriVoucherDtlEntity MstDcpsContriVoucherDtlEntity 
-		
-		
-		
-		
+
+		paybillGenerationTrnService.updateMstDcpsContriVoucherDtlEntity(paybillGenerationTrnEntity, voucherNo, vdate);
+
+		// MstDcpsContriVoucherDtlEntity MstDcpsContriVoucherDtlEntity
+
 		/*
 		 * List<PaybillGenerationTrnDetails> paybillGenerationTrnDetails =
 		 * bdsintegrationservice.getPaybillSevaarthid(paybillGenerationTrnId); for
@@ -4181,6 +4174,53 @@ public class PayBillViewApprDelBillController extends BaseController {
 
 		addMenuAndSubMenu(model, messages);
 		return "/views/paybill/paybill-view-approve-delete-bill";
+	}
+	
+	@GetMapping("/viewAuthSlip/{authNo}")
+	void viewFilephoto(HttpServletResponse response, @PathVariable String authNo) throws IOException {
+	    try {
+	        if (authNo != null && !authNo.isEmpty()) {
+	            String key = "";
+	            String rootPath = "";
+	            String strOSName = System.getProperty("os.name");
+	            
+	            if (strOSName.contains("Windows")) {
+	                key = "authSlipWindowsPath";
+	            } else {
+	                key = "authSlipLinuxPath";
+	            }
+	            
+	            rootPath = environment.getRequiredProperty(key);
+	            rootPath += "RDD";
+	            
+	            File dir = new File(rootPath);
+	            if (!dir.exists() && !dir.mkdirs()) {
+	                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Unable to create directories");
+	                return;
+	            }
+
+	            String name = authNo + ".pdf";
+	            File serverFile = new File(dir, name);
+
+	            if (!serverFile.exists()) {
+	                response.sendError(HttpServletResponse.SC_NOT_FOUND, "File not found");
+	                return;
+	            }
+
+	            try (FileInputStream inputStream = new FileInputStream(serverFile)) {
+	                response.setContentType("application/pdf");
+	                response.setHeader("Content-Disposition", "inline; filename=\"" + serverFile.getName() + "\"");
+	                response.setContentLengthLong(serverFile.length()); 
+
+	                FileCopyUtils.copy(inputStream, response.getOutputStream());
+	            }
+	        } else {
+	            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid authNo");
+	        }
+	    } catch (Exception e) {
+	        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred while processing the file.");
+	        e.printStackTrace(); 
+	    }
 	}
 
 }

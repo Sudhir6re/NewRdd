@@ -24,14 +24,17 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "employee_mst_details", schema = "public")
-@JsonIgnoreProperties(value = { "mstNomineeDetailsEntity", "mstSubDepartmentEntity", "mstGpfDetailsEntity" })
+//@JsonIgnoreProperties(value = { "mstNomineeDetailsEntity", "mstSubDepartmentEntity", "mstGpfDetailsEntity" })
 public class MstEmployeeDetailEntity {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mstEmployeeDetailEntity", orphanRemoval = true)
-    private List<MstNomineeDetailsEntity> mstNomineeDetailsEntity;
-
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "mstEmployeeDetailEntity", orphanRemoval = true)
-    private MstGpfDetailsEntity mstGpfDetailsEntity;
+	/*
+	 * @OneToMany(cascade = CascadeType.ALL, mappedBy = "mstEmployeeDetailEntity",
+	 * orphanRemoval = true) private List<MstNomineeDetailsEntity>
+	 * mstNomineeDetailsEntity;
+	 * 
+	 * @OneToOne(cascade = CascadeType.ALL, mappedBy = "mstEmployeeDetailEntity",
+	 * orphanRemoval = true) private MstGpfDetailsEntity mstGpfDetailsEntity;
+	 */
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
