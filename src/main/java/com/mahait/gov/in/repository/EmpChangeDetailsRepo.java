@@ -11,6 +11,7 @@ import com.mahait.gov.in.entity.MstGpfDetailsEntity;
 import com.mahait.gov.in.entity.MstGpfDetailsHistEntity;
 import com.mahait.gov.in.entity.MstNomineeDetailsEntity;
 import com.mahait.gov.in.entity.MstNomineeDetailsHistEntity;
+import com.mahait.gov.in.entity.OrgUserMst;
 import com.mahait.gov.in.model.EmpChangeDetailsModel;
 import com.mahait.gov.in.model.MstEmployeeModel;
 
@@ -40,7 +41,7 @@ public interface EmpChangeDetailsRepo {
 */
 	List<Object[]> GetCurrentPostDesigation(Integer postdetailid);
 
-	List<MstEmployeeEntity> getEmployeeDetails(String ddoCode);
+	List<MstEmployeeEntity> getEmployeeDetails(OrgUserMst orgUserMst);
 
 	public String getDesignationName(String strDesgId);
 

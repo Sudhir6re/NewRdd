@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.mahait.gov.in.entity.MstEmployeeDetailEntity;
 import com.mahait.gov.in.entity.MstEmployeeEntity;
 import com.mahait.gov.in.entity.MstNomineeDetailsHistEntity;
+import com.mahait.gov.in.entity.OrgUserMst;
 import com.mahait.gov.in.model.EmpChangeDetailsModel;
 import com.mahait.gov.in.model.MstEmployeeModel;
 
@@ -44,7 +45,7 @@ public interface EmpChangeDetailsService {
 	public List<Object[]> GetCurrentPostDesigation(Integer postdetailid);
 
 
-	List<MstEmployeeEntity> getEmployeeDetails(String ddoCode, String language);
+	List<MstEmployeeEntity> getEmployeeDetails(OrgUserMst messages, String language);
 
 
 	EmpChangeDetailsModel getEmployeeinfo(Long employeeId);

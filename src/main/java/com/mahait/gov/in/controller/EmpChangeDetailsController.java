@@ -104,7 +104,7 @@ public class EmpChangeDetailsController extends BaseController {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
 		List<MstEmployeeEntity> employeeConfigurationService = empChangeDetailsService
-				.getEmployeeDetails(messages.getDdoCode(), locale.getLanguage());
+				.getEmployeeDetails(messages, locale.getLanguage());
 
 		model.addAttribute("empLst", employeeConfigurationService);
 
@@ -746,6 +746,7 @@ public class EmpChangeDetailsController extends BaseController {
 		model.addAttribute("language", locale.getLanguage());
 		model.addAttribute("empChangeDetailsModel", empChangeDetailsModel);
 
+		addMenuAndSubMenu(model, messages);
 		return "/views/Approve-Emp-Change-Dtls";
 
 	}

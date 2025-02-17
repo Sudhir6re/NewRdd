@@ -22,6 +22,7 @@ import com.mahait.gov.in.entity.MstGpfDetailsEntity;
 import com.mahait.gov.in.entity.MstGpfDetailsHistEntity;
 import com.mahait.gov.in.entity.MstNomineeDetailsEntity;
 import com.mahait.gov.in.entity.MstNomineeDetailsHistEntity;
+import com.mahait.gov.in.entity.OrgUserMst;
 import com.mahait.gov.in.model.EmpChangeDetailsModel;
 import com.mahait.gov.in.model.MstEmployeeModel;
 
@@ -193,19 +194,60 @@ public class EmpChangeDetailsRepoImpl implements EmpChangeDetailsRepo {
 	}
 
 	@Override
-	public List<MstEmployeeEntity> getEmployeeDetails(String ddoCode) {
+	public List<MstEmployeeEntity> getEmployeeDetails(OrgUserMst orgUserMst) {
 		Session currentSession = manager.unwrap(Session.class);
-		List<MstEmployeeEntity> result = null;
-		try {
-			result = manager.createQuery(
-					"from MstEmployeeEntity where (isActive=1 or isActive=4) and ddoCode='" + ddoCode + "'",
-					MstEmployeeEntity.class).getResultList();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			// logger.info("stack trace exceptionend");
+		List<MstEmployeeEntity> result = new ArrayList<MstEmployeeEntity>();
+		
+		if(orgUserMst.getMstRoleEntity().getRoleId()==3) {
+			try {
+				result = manager.createQuery(
+						"from MstEmployeeEntity where (isActive=1 or isActive=4) and ddoCode='" + orgUserMst.getDdoCode() + "'",
+						MstEmployeeEntity.class).getResultList();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else {
+			StringBuilder sb=new StringBuilder();
+			sb.append("select employee_full_name_en,sevaarth_id,dob,gender,employee_id,super_ann_date,");
+			sb.append("reason_for_rejectorapproved,reason_for_changedtls,doj from employee_mst_details a ");
+			sb.append("inner join rlt_zp_ddo_map b on a.ddo_code=b.zp_ddo_code where a.form_status=5 ");
+			sb.append("and b.rept_ddo_code='"+orgUserMst.getDdoCode()+"'");
+			Query query=currentSession.createNativeQuery(sb.toString());
+			
+			List<Object[]> lstObject=query.getResultList();
+			for(Object object[]:lstObject) {
+				MstEmployeeEntity mstEmployeeEntity=new MstEmployeeEntity();
+				mstEmployeeEntity.setEmployeeFullNameEn(StringHelperUtils.isNullString(object[0]));;
+				mstEmployeeEntity.setSevaarthId(StringHelperUtils.isNullString(object[1]));
+			
+				if(object[2]!=null)
+				mstEmployeeEntity.setDob(StringHelperUtils.isNullDate(object[2]));
+				
+				//if(object[3]!=null)
+			//	mstEmployeeEntity.setGender(StringHelperUtils.isNullString(object[3]).charAt(0));
+				
+				if(object[4] instanceof Long)
+				    mstEmployeeEntity.setEmployeeId(StringHelperUtils.isNullLong(object[4]));
+				
+				if(object[4] instanceof BigInteger)
+					mstEmployeeEntity.setEmployeeId(StringHelperUtils.isNullBigInteger(object[4]).longValue());
+				
+				if(object[4]!=null)
+				mstEmployeeEntity.setSuperAnnDate(StringHelperUtils.isNullTimestamp(object[5]));
+				
+				
+				if(object[8]!=null)
+					mstEmployeeEntity.setDoj(StringHelperUtils.isNullTimestamp(object[8]));
+				
+				mstEmployeeEntity.setReasonForRejOrApprv(StringHelperUtils.isNullString(object[6]));
+				mstEmployeeEntity.setReasonForChangedtls(StringHelperUtils.isNullString(object[7]));
+				result.add(mstEmployeeEntity);
+			}
+			
 		}
-
+		
+		
+		
 		return result;
 	}
 
@@ -313,10 +355,10 @@ public class EmpChangeDetailsRepoImpl implements EmpChangeDetailsRepo {
 					mstEmployeeModel.setSuperannuationage(mstEmployeeEntity.getSuperAnnAge());
 				mstEmployeeModel.setEmpServiceEndDate(mstEmployeeEntity.getSuperAnnDate()); // by default set to
 																							// retirement date added by
-				mstEmployeeModel.setAppointmentId(Long.valueOf(mstEmployeeEntity.getAppointment()));
+				//mstEmployeeModel.setAppointmentId(Long.valueOf(mstEmployeeEntity.getAppointment()));
 				// mstEmployeeModel.setQid(Long.valueOf(mstEmployeeEntity.getQualification()));//
 				// sudhir
-				mstEmployeeModel.setQualification(mstEmployeeEntity.getQualification());
+				//mstEmployeeModel.setQualification(mstEmployeeEntity.getQualification());
 				mstEmployeeModel.setSuperAnnDate(mstEmployeeEntity.getSuperAnnDate());
 				mstEmployeeModel.setPayCommissionCode(mstEmployeeEntity.getPayCommissionCode());
 				mstEmployeeModel.setFirstDesignationId(mstEmployeeEntity.getFirstDesignationCode());
@@ -853,7 +895,7 @@ public class EmpChangeDetailsRepoImpl implements EmpChangeDetailsRepo {
 	public List<MstNomineeDetailsHistEntity> getNominees(String empId) {
 		Session hibSession = manager.unwrap(Session.class);
 		List<MstNomineeDetailsHistEntity> result = null;
-		result = manager.createQuery("from MstNomineeDetailsHistEntity where employeeId =" + Integer.valueOf(empId),
+		result = manager.createQuery("from MstNomineeDetailsHistEntity where employeeId =" + Long.valueOf(empId),
 				MstNomineeDetailsHistEntity.class).getResultList();
 		return result;
 	}

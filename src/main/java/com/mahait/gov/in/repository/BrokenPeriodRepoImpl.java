@@ -222,7 +222,7 @@ public class BrokenPeriodRepoImpl implements BrokenPeriodRepo {
 				+ "WHERE a.designation_code = :designationCode";
 
 		List<Object[]> lstres = currentSession.createNativeQuery(sql)
-				.setParameter("designationCode", strDesignationCode).getResultList();
+				.setParameter("designationCode", Long.valueOf(strDesignationCode)).getResultList();
 
 		if (!lstres.isEmpty()) {
 			Object[] objects = lstres.get(0); // Assuming the query returns at least one record.
@@ -243,12 +243,12 @@ public class BrokenPeriodRepoImpl implements BrokenPeriodRepo {
 			HQL = "select  COALESCE(deptallmt.department_allowdeduc_col_nm, deptallmt.department_allowdeduc_name) allded , deptallmt.is_type,deptallmt.department_allowdeduc_code,"
 					+ "cgmst.group_name_en,cgmst.gis_amount,deptallmt.method_name,deptallmt.formulas,deptallmt.is_rule_based,deptallmt.is_non_computation_component,deptallmt.is_non_government,deptallmt.is_loan_adv"
 					+ "  from  department_allowdeduc_mst deptallmt inner join employee_allowdeduc_mpg empalldecmpg on deptallmt.department_allowdeduc_code =  empalldecmpg.department_allowdeduc_code  inner join  employee_mst empmst on empmst.employee_id = empalldecmpg.employee_id inner join cadre_group_mst  cgmst    on empmst.emp_class = cgmst.id "
-					+ "where UPPER(empalldecmpg.sevaarth_id)s= UPPER(:sevaarthId) and deptallmt.is_type in (1,2,4,3) order by  deptallmt.department_allowdeduc_seq ";
+					+ "where UPPER(empalldecmpg.sevaarth_id)= UPPER(:sevaarthId) and deptallmt.is_type in (1,2,4,3) order by  deptallmt.department_allowdeduc_seq ";
 		} else {
 			HQL = "select  COALESCE(deptallmt.department_allowdeduc_col_nm, deptallmt.department_allowdeduc_name) allded , deptallmt.is_type,deptallmt.department_allowdeduc_code,"
 					+ "cgmst.group_name_en,cgmst.gis_amount,deptallmt.method_name,deptallmt.formulas,deptallmt.is_rule_based,deptallmt.is_non_computation_component,deptallmt.is_non_government,deptallmt.is_loan_adv"
 					+ "  from  department_allowdeduc_mst deptallmt inner join employee_allowdeduc_mpg empalldecmpg on deptallmt.department_allowdeduc_code =  empalldecmpg.department_allowdeduc_code  inner join  employee_mst empmst on empmst.employee_id = empalldecmpg.employee_id inner join cadre_group_mst  cgmst    on empmst.emp_class = cgmst.id "
-					+ " where UPPER(empalldecmpg.sevaarth_id)= UPPER(:sevaarthId) and deptallmt.is_type in (1,2,4,3) and deptallmt.is_non_government!=1 and deptallmt.department_allowdeduc_code not in(51,52,46) and deptallmt.broken_method_name is not null order by  deptallmt.department_allowdeduc_seq ";
+					+ " where UPPER(empalldecmpg.sevaarth_id)= UPPER(:sevaarthId) and deptallmt.is_type in (1,2,4,3) and (deptallmt.is_non_government!=1) and deptallmt.department_allowdeduc_code not in(51,52,46) and deptallmt.broken_method_name is not null order by  deptallmt.department_allowdeduc_seq ";
 		}
 		Query query = currentSession.createNativeQuery(HQL).setParameter("sevaarthId", sevaarthId.trim());
 		return query.getResultList();
@@ -312,7 +312,7 @@ public class BrokenPeriodRepoImpl implements BrokenPeriodRepo {
 		lSBQuery.append(
 				" FROM BrokenPeriodEntity WHERE empId = :empId AND yearId = :year AND monthId = :month AND ddoCode= :ddoCode");
 		Query lQuery = currentSession.createQuery(lSBQuery.toString());
-		lQuery.setParameter("empId", Integer.valueOf(lLongEmpId.intValue()));
+		lQuery.setParameter("empId",lLongEmpId);
 		lQuery.setParameter("year", Integer.valueOf(lLongYearId.intValue()));
 		lQuery.setParameter("month", Integer.valueOf(lLongMonthId.intValue()));
 		lQuery.setParameter("ddoCode", ddoCode.toString());
@@ -336,7 +336,7 @@ public class BrokenPeriodRepoImpl implements BrokenPeriodRepo {
 				" FROM BrokenPeriodEntity WHERE empId = :empId AND yearId = :year AND monthId = :month AND ddoCode= :ddoCode");
 
 		Query lQuery = currentSession.createQuery(lSBQuery.toString());
-		lQuery.setParameter("empId", Integer.valueOf(lLongEmpId.intValue()));
+		lQuery.setParameter("empId", lLongEmpId);
 		lQuery.setParameter("year", Integer.valueOf(lLongYearId.intValue()));
 		lQuery.setParameter("month", Integer.valueOf(lLongMonthId.intValue()));
 		lQuery.setParameter("ddoCode", ddoCode.toString());
@@ -444,7 +444,7 @@ public class BrokenPeriodRepoImpl implements BrokenPeriodRepo {
 
 		String HQL = "select  deptallmt.department_allowdeduc_code, COALESCE(deptallmt.department_allowdeduc_col_nm, deptallmt.department_allowdeduc_name) allded  "
 				+ " from  department_allowdeduc_mst deptallmt inner join employee_allowdeduc_mpg empalldecmpg on deptallmt.department_allowdeduc_code =  empalldecmpg.department_allowdeduc_code "
-				+ " where UPPER(empalldecmpg.sevaarth_id)= UPPER(:sevaarthId) and deptallmt.is_type in (1) and deptallmt.is_non_government!=1 and deptallmt.department_allowdeduc_code not in(51,52,46) order by  deptallmt.department_allowdeduc_seq";
+				+ " where UPPER(empalldecmpg.sevaarth_id)= UPPER(:sevaarthId) and deptallmt.is_type in (1) and (deptallmt.is_non_government!=1) and deptallmt.department_allowdeduc_code not in(51,52,46) order by  deptallmt.department_allowdeduc_seq";
 		Query lQuery = currentSession.createNativeQuery(HQL);
 		lQuery.setParameter("sevaarthId", sevaarthId.trim());
 		listAllowances = lQuery.getResultList();
@@ -460,7 +460,7 @@ public class BrokenPeriodRepoImpl implements BrokenPeriodRepo {
 
 		String HQL = "select  deptallmt.department_allowdeduc_code,COALESCE(deptallmt.department_allowdeduc_col_nm, deptallmt.department_allowdeduc_name) allded  from  "
 				+ " department_allowdeduc_mst deptallmt inner join employee_allowdeduc_mpg empalldecmpg on deptallmt.department_allowdeduc_code =  empalldecmpg.department_allowdeduc_code "
-				+ " where UPPER(empalldecmpg.sevaarth_id)= UPPER(:sevaarthId) and deptallmt.is_type in (2,4,3) and deptallmt.is_non_government!=1 and deptallmt.department_allowdeduc_code not in(51,52,46) order by  deptallmt.department_allowdeduc_seq";
+				+ " where UPPER(empalldecmpg.sevaarth_id)= UPPER(:sevaarthId) and deptallmt.is_type in (2,4,3) and (deptallmt.is_non_government!=1) and deptallmt.department_allowdeduc_code not in(51,52,46) order by  deptallmt.department_allowdeduc_seq";
 		Query lQuery = currentSession.createNativeQuery(HQL);
 		lQuery.setParameter("sevaarthId", sevaarthId.trim());
 		listDeductions =  lQuery.getResultList();
@@ -473,7 +473,7 @@ public class BrokenPeriodRepoImpl implements BrokenPeriodRepo {
 		Session currentSession = entityManager.unwrap(Session.class);
 		String hql = " select nextval('broken_period_pay_mst_broken_period_id_seq') ";
 		Query query = currentSession.createNativeQuery(hql);
-		BigInteger result = ((BigInteger) query.getResultList().get(0));
+		Long result = ((Long) query.getResultList().get(0));
 		return result.longValue();
 	}
 
@@ -518,7 +518,7 @@ public class BrokenPeriodRepoImpl implements BrokenPeriodRepo {
 		query.setParameter("sevaarthId", sevaarthId.trim());
 		query.setParameter("ddoCode", ddoCode);
 
-		int result = ((BigInteger) (query.getResultList().get(0))).intValue();
+		int result = ((Long) (query.getResultList().get(0))).intValue();
 		return result;
 	}
 
@@ -535,7 +535,7 @@ public class BrokenPeriodRepoImpl implements BrokenPeriodRepo {
 		query.setParameter("year", year);
 		query.setParameter("sevaarthId", sevaarthId.trim());
 		query.setParameter("ddoCode", ddoCode);
-		int result = ((BigInteger) (query.getResultList().get(0))).intValue();
+		int result = ((Long) (query.getResultList().get(0))).intValue();
 		return result;
 	}
 
