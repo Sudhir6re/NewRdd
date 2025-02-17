@@ -303,26 +303,22 @@ public class BDSIntegrationController {
 		lMapBillDetailsMap.put("BillCreationDate", strDate);
 		lMapBillDetailsMap.put("BeneficiaryCount", Integer.valueOf(beneficiarycount));
 		lMapBillDetailsMap.put("BillType", strBillType);
-		lMapBillDetailsMap.put("FormId", "MTR44"); // DEFAULT
+		lMapBillDetailsMap.put("FormId", "MTR44A"); // DEFAULT
 		lMapBillDetailsMap.put("TotalDeduction", String.valueOf(totalDeduction));
-
-		Map lMapDeducBifurcatedMapSuppzero = new HashMap();
-		lMapDeducBifurcatedMapSuppzero.put("RC0028001201", String.valueOf(pt));
-		// prov fund details
-		/*
-		 * lMapBillDetailsMap.put("RC8336514701", gpfHeadActCodeOne);
-		 * lMapBillDetailsMap.put("RC8336518301", gpfHeadActCodeTwo);
-		 * lMapBillDetailsMap.put("RC8336516501", gpfHeadActCodeThree);
-		 */
-		lMapDeducBifurcatedMapSuppzero.put("RC8336514701", gpfHeadActCodeOne);
-		lMapDeducBifurcatedMapSuppzero.put("RC8336518301", gpfHeadActCodeTwo);
-		lMapDeducBifurcatedMapSuppzero.put("RC8336516501", gpfHeadActCodeThree);
-		lMapDeducBifurcatedMapSuppzero.put("RC8658518201", String.valueOf(it));
-		lMapDeducBifurcatedMapSuppzero.put("RC0216006901", String.valueOf(hrr));
+		
+		Map lMapDeducBifurcatedMap = new HashMap();
+		lMapDeducBifurcatedMap.put("RC0028001201", String.valueOf(pt));
+		lMapDeducBifurcatedMap.put("RC8336514701", gpfHeadActCodeOne);
+		lMapDeducBifurcatedMap.put("RC8336518301", gpfHeadActCodeTwo);
+		lMapDeducBifurcatedMap.put("RC8336516501", gpfHeadActCodeThree);
+		
+		//lMapDeducBifurcatedMapSuppzero.put("RC8658518201", String.valueOf(it));
+		//lMapDeducBifurcatedMapSuppzero.put("RC0216006901", String.valueOf(hrr));
 		// lMapDeducBifurcatedMapSuppzero.put("RC8342535701",String.valueOf(dcps));
-		lMapDeducBifurcatedMapSuppzero.put("RC8011502301", String.valueOf(gis));
-		lMapDeducBifurcatedMapSuppzero.put("RC8121507501", String.valueOf(groupaccpolicy));
-		lMapDeducBifurcatedMapSuppzero.put("RC0030046401", String.valueOf(revenueStamp)); // evenue stamp
+		lMapDeducBifurcatedMap.put("RC8011502301", String.valueOf(gis));
+		lMapDeducBifurcatedMap.put("RC8011526601", String.valueOf(gisZp));
+		lMapDeducBifurcatedMap.put("RC8121507501", String.valueOf(groupaccpolicy));
+		lMapDeducBifurcatedMap.put("RC0030046401", String.valueOf(revenueStamp)); // evenue stamp
 
 		if (finyear1 > 2018 || (finyear1 == 2018 && paymonth >= 3)) {
 			totalDeduction = gpfHeadActCodeOne + pt + gpfHeadActCodeThree + gpfHeadActCodeTwo + gis + gisZp
@@ -331,15 +327,26 @@ public class BDSIntegrationController {
 		} else {
 			totalDeduction = gpfHeadActCodeOne + pt + gpfHeadActCodeThree + gpfHeadActCodeTwo + gis + gisZp
 					+ groupaccpolicy + dcps + revenueStamp;
-			lMapBillDetailsMap.put("RC8342535701", String.valueOf(dcps));
+			lMapDeducBifurcatedMap.put("RC8342516101", String.valueOf(dcps));
+			
 		}
-
 		lMapBillDetailsMap.put("TotalDeduction", String.valueOf(totalDeduction));
-
-		/*
-		 * lMapDeducBifurcatedMapSuppzero.put("RC8121507501",String.valueOf(
-		 * groupaccpolicy));
-		 */
+		Map lMapDeducBifurcatedMapSuppzero = new HashMap();
+		final Iterator<Map.Entry> entries = lMapDeducBifurcatedMap.entrySet().iterator();
+		while (entries.hasNext()) {
+		    final Map.Entry entry = entries.next();
+		    String compValue = entry.getValue().toString();
+		    if ("0.0".equals(compValue) || compValue == null) {
+		        entries.remove();
+		    } else {
+		        Double d = Double.parseDouble(compValue);
+		         Long value =(long) Double.parseDouble(compValue);
+		         lMapDeducBifurcatedMapSuppzero.put(entry.getKey(), value);
+		        if (value == 0) {
+		            entries.remove();
+		        }
+		    }
+		}
 
 		lMapBillDetailsMap.put("BifurcatedDedMapInnerMap", lMapDeducBifurcatedMapSuppzero);
 

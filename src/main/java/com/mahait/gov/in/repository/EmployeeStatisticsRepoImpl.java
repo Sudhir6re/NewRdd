@@ -36,7 +36,7 @@ public class EmployeeStatisticsRepoImpl implements EmployeeStatisticsRepo{
 					" left join gpf_mst h on h.employee_id=a.employee_id " + 
 					" left join dcps_details_mst i on i.employee_id=a.employee_id " + 
 					" left join org_post_mst j on j.post_id=f.post_id  " + 
-					" left join cmn_lookup_mst k on k.lookup_id=cast (a.pfseries as BigInt)  " + 
+					" left join cmn_lookup_mst k   ON k.lookup_id = CASE     WHEN a.pfseries ~ '^\\d+$' THEN CAST(a.pfseries AS BIGINT)   ELSE 0   END " + 
 					" left join cmn_lookup_mst l on l.lookup_id=j.post_type_lookup_id  " + 
 					" left join payband_gp_state_7pc m on a.seven_pc_level =m.level_id " + 
 					" where a.ddo_code  = '"+ddoCode+"' and a.is_active='1'";
@@ -55,7 +55,7 @@ public class EmployeeStatisticsRepoImpl implements EmployeeStatisticsRepo{
 					" left join gpf_mst h on h.employee_id=a.employee_id " + 
 					" left join dcps_details_mst i on i.employee_id=a.employee_id " + 
 					" left join org_post_mst j on j.post_id=f.post_id  " + 
-					" left join cmn_lookup_mst k on k.lookup_id=cast (a.pfseries as BigInt)  " + 
+					" left join cmn_lookup_mst k  ON k.lookup_id = CASE     WHEN a.pfseries ~ '^\\d+$' THEN CAST(a.pfseries AS BIGINT)   ELSE 0   END " + 
 					" left join cmn_lookup_mst l on l.lookup_id=j.post_type_lookup_id  " + 
 					" left join payband_gp_state_7pc m on a.seven_pc_level =m.level_id " + 
 					" where a.is_active='1' ";
@@ -65,3 +65,4 @@ public class EmployeeStatisticsRepoImpl implements EmployeeStatisticsRepo{
 		return query.list();
 	}
 }
+

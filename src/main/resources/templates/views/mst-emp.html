@@ -70,7 +70,9 @@
 							<td th:text="${varEmp.payCommissionName}"></td>
 							<td th:text="${varEmp.employeeId}" style="display: none;"></td>
 							<td th:text="${varEmp.Dcpsgpfflag}"></td>
-							<td th:text="${varEmp.empServiceEndDate}"></td>
+							
+							<td align="center"
+										th:text="${#dates.format(varEmp.empServiceEndDate, 'dd-MM-yyyy')}"></td>
 
 
 							<!-- <td>

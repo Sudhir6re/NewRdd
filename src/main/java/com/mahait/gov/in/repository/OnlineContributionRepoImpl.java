@@ -34,10 +34,9 @@ public class OnlineContributionRepoImpl implements OnlineContributionRepo {
 
 	@PersistenceContext
 	EntityManager entityManager;
-
 	@Override
 	public List<CmnLookupMst> getPaymentTypeLst() {
-		String HQL = "FROM CmnLookupMst as t  where lookupId in ('700047','700048','700049')  ORDER BY t.lookupId";
+		String HQL = "FROM CmnLookupMst as t  where lookupId in (700047,700048,700049)  ORDER BY t.lookupId";
 		return (List<CmnLookupMst>) entityManager.createQuery(HQL).getResultList();
 	}
 

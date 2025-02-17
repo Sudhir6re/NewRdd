@@ -200,7 +200,8 @@ table, th, td {
 								<tr th:each="varData : ${empList}">
 									<td align="left" th:text="${varData.empname}"></td>
 									<td align="center" th:text="${varData.sevaarthId}"></td>
-									<td align="center" th:text="${varData.dob}"></td>
+									<td align="center"
+										th:text="${#dates.format(varData.dob, 'dd-MM-yyyy')}"></td>
 									<td align="center" th:text="${varData.sevaarthId}"></td>
 									<td align="center" th:text="${varData.cadre}"></td>
 									<td align="left" th:text="${varData.postname}"></td>
@@ -226,11 +227,7 @@ table, th, td {
 									<td align="left" th:text="${varData.bankbarname}"></td>
 									<td align="left" th:text="${varData.accno}"></td>
 									<td align="left" th:text="${varData.pranNo}"></td>
-
-
-
 								</tr>
-
 							</tbody>
 						</table>
 					</div>

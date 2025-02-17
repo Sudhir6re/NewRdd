@@ -357,15 +357,16 @@ public class EmpChangeDetailsController extends BaseController {
 			}
 		}
 
-		if (empChangeDetailsModel.getPayscalelevelId() != null)
-			if (!empChangeDetailsModel.getPayscalelevelId().equals("")
-					&& !empChangeDetailsModel.getPayscalelevelId().equals("0"))
+		if (empChangeDetailsModel.getPayscalelevelId() != null  )
+			if (!empChangeDetailsModel.getPayscalelevelId().equals("")&& !empChangeDetailsModel.getPayscalelevelId().equals("0"))
 				lstsvnbasicpay = mstEmployeeService
 						.findEmployeeConfigurationGetsvnbasicpay(empChangeDetailsModel.getPayscalelevelId());
 		if (empChangeDetailsModel.getAccountmaintainby() != null)
 			if (!empChangeDetailsModel.getAccountmaintainby().equals("")
 					&& !empChangeDetailsModel.getAccountmaintainby().equals("0"))
 				lstpfSeries = mstEmployeeService.getPfSeries(empChangeDetailsModel.getAccountmaintainby());
+		
+		
 
 		model.addAttribute("lstsvnbasicpay", lstsvnbasicpay);
 		model.addAttribute("lstpayscalelevel", payscalelevel);

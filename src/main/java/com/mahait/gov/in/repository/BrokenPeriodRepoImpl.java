@@ -208,6 +208,7 @@ public class BrokenPeriodRepoImpl implements BrokenPeriodRepo {
 
 		} catch (Exception e) {
 			// TODO: handle exception
+			System.out.print(e.getMessage());
 		}
 		return mstEmployeeModel;
 	}

@@ -384,11 +384,13 @@ public class MstEmployeeRepoImpl implements MstEmployeeRepo {
 		Long lLngParentLookupId = null;
 		if (accmainby.equals("700092")) {
 			lLngParentLookupId = 700098l;
-		}
-
-		if (accmainby.equals("700093")) {
+		}else if (accmainby.equals("700093")) {
 			lLngParentLookupId = 700181l;
+		}else {
+			lLngParentLookupId = Long.valueOf(accmainby);
 		}
+		
+		
 		Session hibSession = entityManager.unwrap(Session.class);
 		Query query = hibSession
 				.createNativeQuery("SELECT Lookup_id,lookup_name FROM cmn_lookup_mst where parent_lookup_id = '"
