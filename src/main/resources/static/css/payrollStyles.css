@@ -30,8 +30,8 @@ li.Menu-item-li.first-li {
 }
 
 .header, .min-height-600, nav.navbar.navbar-default, .HeaderTopBar.flex.row,
-	.container.footer-main {
-	border: 1px solid #003c80 !important;
+	.container.footer-main,.theme-bor {
+	border: 1px solid #bd6c03 !important;
 	border-top: none !important;
 	border-bottom: none !important
 }
@@ -46,9 +46,9 @@ li.ui-state-default.ui-corner-top.ui-tabs-selected.ui-state-active {
 	background: #ba6d3d ! IMPORTANT
 }
 
-.container.footer-main {
+/* .container.footer-main {
 	border-bottom: 1px solid #003c80 !important
-}
+} */
 
 .HeaderTopBar-main.container {
     border-top: 1px solid #003c80 !important;
