@@ -35,12 +35,12 @@
 									<tbody>
 										<tr>
 											<td align="left" width="30%">Name of the
-												Organization/Institution</td>
+												Organization/Institution <label
+												class="mandatoryindicator">*</label></td>
 											<td align="left"><input type="text" size="100%" class="removeErrorFromInput"
 												name="txtNameOfOffice" id="txtNameOfOffice"
 												th:attr="readonly=${organisationDtlsModel.officeName!=null}? 'true' : 'false'"
-												th:field="*{officeName}"> <label
-												class="mandatoryindicator">*</label></td>
+												th:field="*{officeName}"> </td>
 										</tr>
 									</tbody>
 								</table>
@@ -97,22 +97,23 @@
 												name="txtVillage" id="txtVillage" maxlength="50"></td>
 										</tr>
 										<tr>
-											<td width="15%" align="left">Address</td>
+											<td width="15%" align="left">Address <label
+												class="mandatoryindicator">*</label></td>
 											<td width="35%"><textarea name="txtAddress1"
 													th:field="*{Address}" class="removeErrorFromInput"
 													th:attr="readonly=${organisationDtlsModel.Address!=null}? 'true' : 'false'"
-													id="txtAddress1" rows="5" cols="42"></textarea> <label
+													id="txtAddress1" rows="5" cols="42"></textarea> </td>
+											<td width="15%" align="left">PIN <label
 												class="mandatoryindicator">*</label></td>
-											<td width="15%" align="left">PIN</td>
 											<td width="35%"><input type="text" size="48"
 												th:field="*{pin}" class="number removeErrorFromInput"
 												th:attr="readonly=${organisationDtlsModel.pin!=null}? 'true' : 'false'"
-												name="txtPin" id="txtPin" maxlength="6"> <label
-												class="mandatoryindicator">*</label></td>
+												name="txtPin" id="txtPin" maxlength="6"> </td>
 										</tr>
 										<tr>
 											<td width="15%" align="left">Organization/Institution
-												City Class</td>
+												City Class <label
+												class="mandatoryindicator">*</label></td>
 											<td align="left" width="35%">
 											
 											<select name="cmbOfficeCityClass" class="removeErrorFromDropdown"  id="cmbOfficeCityClass"
@@ -121,7 +122,7 @@
 														th:value="${varPay.lookupDesc} "
 														th:text="${varPay.lookupDesc}">
 													</option>
-												</select> <label class="mandatoryindicator">*</label>
+												</select> 
 											</td>
 												
 										</tr>
@@ -159,12 +160,12 @@
 												th:field="*{tel1}" name="txtTelNo1" id="txtTelNo1"
 												maxlength="11"
 												th:attr="readonly=${organisationDtlsModel.tel1!=null}? 'true' : 'false'"></td>
-											<td width="15%" align="left">Tel No(2) Mobile</td>
+											<td width="15%" align="left">Tel No(2) Mobile <label
+												class="mandatoryindicator">*</label></td>
 											<td width="35%"><input type="text" size="48"
 												th:field="*{tel2}"
 												th:attr="readonly=${organisationDtlsModel.tel2!=null}? 'true' : 'false'"
-												name="txtTelNo2" id="txtTelNo2" maxlength="10"><label
-												class="mandatoryindicator">*</label></td>
+												name="txtTelNo2" id="txtTelNo2" maxlength="10"></td>
 										</tr>
 										<tr>
 											<td colspan="4"

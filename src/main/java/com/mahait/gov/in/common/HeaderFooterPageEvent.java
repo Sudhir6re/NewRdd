@@ -57,7 +57,7 @@ public class HeaderFooterPageEvent extends PdfPageEventHelper {
 
             // add image
 //            Image logo = Image.getInstance(HeaderFooterPageEvent.class.getResource("/images/logo-v16.png"));
-            Image logo = Image.getInstance(HeaderFooterPageEvent.class.getResource("/static/images/logo-v16.png"));
+            Image logo = Image.getInstance(HeaderFooterPageEvent.class.getResource("/static/images/GOM.png"));
             header.addCell(logo);
             
             // add text
@@ -66,7 +66,7 @@ public class HeaderFooterPageEvent extends PdfPageEventHelper {
             text.setPaddingLeft(10);
             text.setBorder(Rectangle.BOTTOM);
             text.setBorderColor(BaseColor.LIGHT_GRAY);
-            text.addElement(new Phrase("MJP Payroll System", new Font(Font.FontFamily.TIMES_ROMAN, 14)));
+            text.addElement(new Phrase("RDD", new Font(Font.FontFamily.TIMES_ROMAN, 14)));
             text.addElement(new Phrase("Official website of Government of Maharashtra", new Font(Font.FontFamily.TIMES_ROMAN, 12)));
             header.addCell(text);
             

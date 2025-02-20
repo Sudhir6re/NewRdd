@@ -29,7 +29,7 @@ audio, canvas, progress, video {
 	vertical-align: baseline
 }
 
-audio:not ([controls] ) {
+audio:not([controls] ) {
 	display: none;
 	height: 0
 }
@@ -91,7 +91,7 @@ img {
 	border: 0
 }
 
-svg:not (:root ) {
+svg:not(:root ) {
 	overflow: hidden
 }
 
@@ -1206,8 +1206,8 @@ img {
 }
 
 hr {
-	margin-top: 20px;
-	margin-bottom: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 	border: 0;
 	border-top: 1px solid #eee
 }
@@ -1249,7 +1249,7 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small,
 }
 
 h1, .h1, h2, .h2, h3, .h3 {
-	margin-top: 20px;
+	margin-top: 10px;
 	margin-bottom: 10px
 }
 
@@ -2448,12 +2448,13 @@ th {
 .table {
 	width: 100%;
 	max-width: 100%;
-	margin-bottom: 20px
+	margin-bottom: 10px
 }
 
 .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td,
 	.table>tbody>tr>td, .table>tfoot>tr>td {
-	padding: 8px;
+	/* padding: 5px; */
+	padding: 1px 5px;
 	line-height: 1.42857143;
 	vertical-align: top;
 	border-top: 1px solid #ddd
@@ -2681,7 +2682,7 @@ legend {
 	display: block;
 	width: 100%;
 	padding: 0;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 	font-size: 16px;
 	line-height: inherit;
 	color: #333;
@@ -2811,7 +2812,7 @@ input[type=date].input-lg, input[type=time].input-lg, input[type=datetime-local]
 }
 
 .form-group {
-	margin-bottom: 15px
+	margin-bottom: 10px
 }
 
 .radio, .checkbox {
@@ -3834,7 +3835,7 @@ section {
 	margin-left: 5px
 }
 
-.btn-group>.btn:not (:first-child ):not (:last-child ):not (.dropdown-toggle
+.btn-group>.btn:not(:first-child ):not(:last-child ):not(.dropdown-toggle
 	) {
 	border-radius: 0
 }
@@ -3843,13 +3844,12 @@ section {
 	margin-left: 0
 }
 
-.btn-group>.btn:first-child:not (:last-child ):not (.dropdown-toggle ) {
+.btn-group>.btn:first-child:not(:last-child ):not(.dropdown-toggle ) {
 	border-top-right-radius: 0;
-	border-bottom-right-radius: 0
+	border-bottom-right-radius: 0;
 }
 
-.btn-group>.btn:last-child:not (:first-child ), .btn-group>.dropdown-toggle:not
-	(:first-child ) {
+.btn-group>.btn:last-child:not(:first-child ), .btn-group>.dropdown-toggle:not(:first-child ) {
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0
 }
@@ -3858,7 +3858,7 @@ section {
 	float: left
 }
 
-.btn-group>.btn-group:not (:first-child ):not (:last-child )>.btn {
+.btn-group>.btn-group:not(:first-child ):not(:last-child )>.btn {
 	border-radius: 0
 }
 
@@ -3929,35 +3929,35 @@ section {
 	margin-left: 0
 }
 
-.btn-group-vertical>.btn:not (:first-child ):not (:last-child ) {
+.btn-group-vertical>.btn:not(:first-child ):not(:last-child ) {
 	border-radius: 0
 }
 
-.btn-group-vertical>.btn:first-child:not (:last-child ) {
+.btn-group-vertical>.btn:first-child:not(:last-child ) {
 	border-top-right-radius: 4px;
 	border-bottom-right-radius: 0;
 	border-bottom-left-radius: 0
 }
 
-.btn-group-vertical>.btn:last-child:not (:first-child ) {
+.btn-group-vertical>.btn:last-child:not(:first-child ) {
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 	border-bottom-left-radius: 4px
 }
 
-.btn-group-vertical>.btn-group:not (:first-child ):not (:last-child )>.btn
+.btn-group-vertical>.btn-group:not(:first-child ):not(:last-child )>.btn
 	{
 	border-radius: 0
 }
 
-.btn-group-vertical>.btn-group:first-child:not (:last-child )>.btn:last-child,
-	.btn-group-vertical>.btn-group:first-child:not (:last-child )>.dropdown-toggle
+.btn-group-vertical>.btn-group:first-child:not(:last-child )>.btn:last-child,
+	.btn-group-vertical>.btn-group:first-child:not(:last-child )>.dropdown-toggle
 	{
 	border-bottom-right-radius: 0;
 	border-bottom-left-radius: 0
 }
 
-.btn-group-vertical>.btn-group:last-child:not (:first-child )>.btn:first-child
+.btn-group-vertical>.btn-group:last-child:not(:first-child )>.btn:first-child
 	{
 	border-top-left-radius: 0;
 	border-top-right-radius: 0
@@ -4060,9 +4060,8 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 	display: table-cell
 }
 
-.input-group-addon:not (:first-child ):not (:last-child ),
-	.input-group-btn:not (:first-child ):not (:last-child ), .input-group .form-control:not
-	(:first-child ):not (:last-child ) {
+.input-group-addon:not(:first-child ):not(:last-child ),
+	.input-group-btn:not(:first-child ):not(:last-child ), .input-group .form-control:not(:first-child ):not(:last-child ) {
 	border-radius: 0
 }
 
@@ -4103,9 +4102,7 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 .input-group .form-control:first-child, .input-group-addon:first-child,
 	.input-group-btn:first-child>.btn, .input-group-btn:first-child>.btn-group>.btn,
-	.input-group-btn:first-child>.dropdown-toggle, .input-group-btn:last-child>.btn:not
-	(:last-child ):not (.dropdown-toggle ), .input-group-btn:last-child>.btn-group:not
-	(:last-child )>.btn {
+	.input-group-btn:first-child>.dropdown-toggle, .input-group-btn:last-child>.btn:not(:last-child ):not(.dropdown-toggle ), .input-group-btn:last-child>.btn-group:not(:last-child )>.btn {
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0
 }
@@ -4116,8 +4113,7 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 .input-group .form-control:last-child, .input-group-addon:last-child,
 	.input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group>.btn,
-	.input-group-btn:last-child>.dropdown-toggle, .input-group-btn:first-child>.btn:not
-	(:first-child ), .input-group-btn:first-child>.btn-group:not (:first-child
+	.input-group-btn:last-child>.dropdown-toggle, .input-group-btn:first-child>.btn:not(:first-child ), .input-group-btn:first-child>.btn-group:not(:first-child
 	)>.btn {
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0
@@ -5586,8 +5582,7 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 	color: #843534
 }
 
-@
--webkit-keyframes progress-bar-stripes {from { background-position:40px0
+@-webkit-keyframes progress-bar-stripes {from { background-position:40px0
 	
 }
 
@@ -5596,8 +5591,7 @@ to {
 }
 
 }
-@
--o-keyframes progress-bar-stripes {from { background-position:40px0
+@-o-keyframes progress-bar-stripes {from { background-position:40px0
 	
 }
 
@@ -5606,8 +5600,7 @@ to {
 }
 
 }
-@
-keyframes progress-bar-stripes {from { background-position:40px0
+@keyframes progress-bar-stripes {from { background-position:40px0
 	
 }
 
@@ -7089,8 +7082,7 @@ button.close {
 	transform: translate3d(0, 0, 0)
 }
 
-@
--ms-viewport {
+@-ms-viewport {
 	width: device-width
 }
 

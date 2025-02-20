@@ -33,7 +33,7 @@
 					<table class="table bor-0">
 						<tbody>
 							<tr align="center">
-								<td align="left" width="15%"><b>Financial Year</b></td>
+								<td align="left" width="15%"><b>Financial Year &nbsp;<label class="mandatoryindicator">*</label></b></td>
 								<td align="left" width="40%"><select class="form-control"
 									id="cmbFinancialYear" >
 										<option selected="selected" th:value="0"
@@ -41,7 +41,7 @@
 										<option th:each="varGetAllYear : ${lstGetAllYear}"
 											th:value="${varGetAllYear.yearId}"
 											th:text="${language=='mh' ? varGetAllYear.financialYear : varGetAllYear.financialYear}"></option> 
-								</select>&nbsp;<label class="mandatoryindicator">*</label></td>
+								</select></td>
 								<td align="left"><input type="button" name="btnGo"
 									id="btnGo" value="GO" class="btn" onclick="getEmpInfo()">
 									<input type="button" name="btnBackWithGo" id="btnBackWithGo"

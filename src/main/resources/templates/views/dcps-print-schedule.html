@@ -51,7 +51,7 @@
 					<table class="table bor-0 width-70">
 						<tbody>
 							<tr>
-								<td width="30%">Financial Year</td>
+								<td width="30%">Financial Year <label class="mandatoryindicator">*</label></td>
 								<td><select class="form-control"
 									id="cmbFinancialYear" >
 										<option selected="selected" th:value="0"
@@ -59,7 +59,7 @@
 										<option th:each="varGetAllYear : ${lstGetAllYear}"
 											th:value="${varGetAllYear.yearId}"
 											th:text="${language=='mh' ? varGetAllYear.financialYear : varGetAllYear.financialYear}"></option> 
-								</select><label class="mandatoryindicator">*</label></td>
+								</select></td>
 								<td><input type="button" name="btnSubmit" id="btnSubmit"
 									value="Go" class="buttontag" onclick="getEmpInfo()"></td>
 							</tr>

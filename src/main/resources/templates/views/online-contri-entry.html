@@ -49,7 +49,7 @@ div#tblEmpDtlsBody\ table-responsive th {
 					<legend>
 						<b>Input Details For Contribution</b>
 					</legend>
-					<table class="bor-0">
+					<table class="bor-0 table">
 						<tbody>
 							<tr>
 								<td style="font-style: italic; color: red; padding-left: 1%"
@@ -68,7 +68,7 @@ div#tblEmpDtlsBody\ table-responsive th {
 					<table class="table bor-0">
 						<tbody>
 							<tr>
-								<td width="15%"><b>Treasury Name</b></td>
+								<td width="15%"><b>Treasury Name <label class="mandatoryindicator">*</label></b></td>
 								<td width="35%"><select readonly th:field="*{treasuryCode}"
 									id="cmbTreasuryCode">
 
@@ -77,7 +77,7 @@ div#tblEmpDtlsBody\ table-responsive th {
 											th:text="${cmnLocationMst.locName}"></option>
 
 
-								</select> <label class="mandatoryindicator">*</label></td>
+								</select> </td>
 							</tr>
 							<tr>
 								<td width="15%"><b>DDO Name</b></td>
@@ -104,14 +104,13 @@ div#tblEmpDtlsBody\ table-responsive th {
 											th:value="${varGetAllBillGrp.dcpsDdoBillGroupId}"
 											th:text="${language=='mh' ? varGetAllBillGrp.description : varGetAllBillGrp.description}"></option>
 								</select></td>
-								<td width="15%"><b>Scheme</b></td>
+								<td width="15%"><b>Scheme <label class="mandatoryindicator">*</label></b></td>
 								<td width="35%"><input type="hidden" name="schemeCode"
 									th:field="*{schemeCode}" id="schemeCode">
 									
 									 <input
 									type="text" name="txtSchemeName"   
-									th:field="*{schemeName}" id="txtSchemeName"> <label
-									class="mandatoryindicator"   >*</label>
+									th:field="*{schemeName}" id="txtSchemeName"> 
 									
 									</td>
 							</tr>
@@ -193,7 +192,6 @@ div#tblEmpDtlsBody\ table-responsive th {
 						</table>
 					</div>
 
-					<br>
 					<div id="DAArrearsDatesDivDisplay"
 						th:style="${dcpContributionModel.typeOfPayment == '700048' ? 'display:contents;' : 'display:none;'}">
 						<table class="table bor-0">
