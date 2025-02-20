@@ -685,22 +685,10 @@ li.officials {
 	font-weight: 600
 }
 
-li.Menu-item-li a {
-	font-size: 16px !important
+li.Menu-item-li a ,.container.IL-main,p.conText,ul.dropdown-menu li a,.footer {
+	font-size: 14px !important
 }
 
-.container.IL-main {
-	font-size: 15px
-}
-
-p.conText {
-	font-size: 16px;
-	font-family: 'Libre Baskerville', serif
-}
-
-ul.dropdown-menu li a {
-	font-size: 16px !important
-}
 
 .ILfisrt ol, .ILfisrt ul {
 	text-align: left
@@ -723,10 +711,7 @@ ul.dropdown-menu li a {
 	margin: 20px 0 !important
 }
 
-.footer {
-	font-family: 'Libre Baskerville', serif;
-	font-size: 14px
-}
+
 
 .glyphicon.glyphicon-eye-open, .glyphicon.glyphicon-edit, .glyphicon.glyphicon-trash
 	{
@@ -760,7 +745,7 @@ a.page-link {
 
 h3.PageHeading {
 	text-align: center;
-	font-size: 20px;
+	font-size: 16px;
 	/* margin-bottom: 20px; */
 	font-weight: 600;
 	font-family: 'Libre Baskerville', serif
@@ -2439,9 +2424,6 @@ a.btn, input.btn, button.btn,.buttontag {
     .container {
         width: 97% !important;
     }
-}
-td input[type='text'], td input[type='number'], td input[type='email'], td input[type='password'], td input[type='date'], td select, td textarea {
-    height: auto !important;
 }
 td input[type=date], td input[type=time], td input[type=datetime-local], td input[type=month] {
     line-height: normal !important;

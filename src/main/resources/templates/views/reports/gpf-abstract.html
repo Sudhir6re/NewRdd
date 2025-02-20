@@ -34,7 +34,8 @@
 					<table class="table bor-0">
 						<tbody>
 							<tr>
-								<td align="center" width="15%"><b>Department</b></td>
+								<td align="center" width="15%"><b>Department </b><b><font
+											color="red" size="4px;">*</font></b></td>
 								<td width="30%"><select class="selecttag" name="Department"
 									id="Department">
 										<option value="4000839">MAHARASHTRA
@@ -42,8 +43,7 @@
 								</select>&nbsp;&nbsp;<label class="mandatoryindicator">*</label></td>
 								<td width="20%"><label class="control-label monthhide"
 									for="title"><span
-										th:utext="#{msg.thymeleaf.pagelabel.month}"></span>&nbsp;&nbsp;<b><font
-											color="red" size="4px;">*</font></b></label></td>
+										th:utext="#{msg.thymeleaf.pagelabel.month}"></span>&nbsp;&nbsp;</label></td>
 								<td width="30%"><select name="monthId"
 									th:field="*{monthId}" id="monthId"
 									class="form-control removeErrorFromDropdown">
@@ -55,7 +55,7 @@
 								</select></td>
 							</tr>
 							<tr>
-								<td width="20%"><label class="control-label " for="title"><span
+								<td width="20%" align="center"><label class="control-label " for="title"><span
 										th:utext="#{msg.thymeleaf.pagelabel.billGroup}"></span>&nbsp;&nbsp;<b><font
 											color="red" size="4px;">*</font></b></label></td>
 								<td width="30%"><select name="billGroup"

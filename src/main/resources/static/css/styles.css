@@ -1,13 +1,12 @@
-.bor-0 table, .bor-0 td, .bor-0 tr, .bor-0 tbody, .bor-0 thead, .bor-0,.bor-0 th {
+.bor-0 table, .bor-0 td, .bor-0 tr, .bor-0 tbody, .bor-0 thead, .bor-0,
+	.bor-0 th {
 	border: none !important;
 }
 
-input[type='text'],input[type='number'],input[type='email'],input[type='password'],input[type='date'],
- select, textarea {
-	margin: 0;
-	font: inherit;
-	height: 30px;
-	padding: 6px 12px;
+input[type='text'], input[type='number'], input[type='email'], input[type='password'],
+	input[type='date'], select, textarea {
+	margin: 3px 0px !important; font : inherit; height : 26px;
+	padding: 3px 12px;
 	color: #555;
 	background-color: #fff;
 	background-image: none;
@@ -21,90 +20,114 @@ input[type='text'],input[type='number'],input[type='email'],input[type='password
 		.15s;
 	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 	width: 90% ! IMPORTANT;
+	font: inherit;
+	height: 26px;
 }
-.buttontag,.bigbutton{
-display: inline-block;
-    padding: 6px 12px;
-    margin-bottom: 0;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-image: none;
-    border: 1px solid transparent;
-    border-radius: 4px;
+
+.buttontag, .bigbutton {
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
 }
-.width-70{
-	    width: 70% !important;
+
+.width-70 {
+	width: 70% !important;
 }
-.width-60{
-	    width: 60%!important;
+
+.width-60 {
+	width: 60% !important;
 }
-.width-50{
-	    width: 50% !important;
+
+.width-50 {
+	width: 50% !important;
 }
-.width-50-auto{
-	    width: 50% !important;
-	    margin:0 auto;
+
+.width-50-auto {
+	width: 50% !important;
+	margin: 0 auto;
 }
-.tbBold{
-	font-weight:bold;
+
+.tbBold {
+	font-weight: bold;
 }
+
 .mandatoryindicator {
-    color: red;
-    font-weight: 900;
+	color: red;
+	font-weight: 900;
 }
+
 .container-fluid {
-    width: 95%;
-    padding: 10px 10px;
-    background: #fff;
-    min-height: 100vh;
+	width: 95%;
+	padding: 10px 10px;
+	background: #fff;
+	min-height: 100vh;
 }
+
 .scrollablediv {
-    height: 400px;
-    overflow: auto;
+	height: 400px;
+	overflow: auto;
 }
+
 .bor-imp, .bor-imp td, .bor-imp td, .bor-imp tr {
-    border: 1px solid #ccc !important;
+	border: 1px solid #ccc !important;
 }
+
 .table-bordered-self, .table-bordered-self>th, .table-bordered-self>td,
 	.table-bordered-self>tr {
 	box-shadow: 0 0 1px 1px #000 !important;
 }
-.stripedBG{
+
+.stripedBG {
 	background-color: #f9f9f9;
 }
+
 .datatableheader>th {
-    background-color: #fbf4eb;
-    font-weight: bold;
-    color: #cc7a06;
-    text-align: center;
-    vertical-align: middle ! IMPORTANT;
+	background-color: #fbf4eb;
+	font-weight: bold;
+	color: #cc7a06;
+	text-align: center;
+	vertical-align: middle ! IMPORTANT;
 }
+
 a {
-    color: #cc6306 ! IMPORTANT;
+	color: #cc6306 ! IMPORTANT;
 }
+
 .bor-col, .bor-col>tbody, .bor-col>tbody>tr, .bor-col>tbody>tr>td {
-    border-left: none !important;
-    border-right: none !important;
+	border-left: none !important;
+	border-right: none !important;
 }
+
 select:disabled, input:disabled {
-    background: #ddd !important;
+	background: #ddd !important;
 }
+
 span.select2 {
-    max-width: 90% !important;
+	max-width: 90% !important;
 }
+
 input:focus-visible, select:focus-visible {
-    outline: none !important;
-    border: 1px solid;
+	outline: none !important;
+	border: 1px solid;
 }
-.bg-success,.bg-warning,.bg-danger {
-    padding: 3px 10px;
+
+.bg-success, .bg-warning, .bg-danger {
+	padding: 3px 10px;
+}
+td {
+    vertical-align: middle !important;
 }
