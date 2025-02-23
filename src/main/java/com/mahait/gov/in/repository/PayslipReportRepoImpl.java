@@ -39,7 +39,7 @@ public class PayslipReportRepoImpl  implements PayslipReportRepo{
 		Session currentSession = entityManager.unwrap(Session.class);
 		String HQL=" select distinct COALESCE(d.department_allowdeduc_col_nm, d.department_allowdeduc_name) allded,d.is_type,d.department_allowdeduc_id,'0' " + 
 				" tempvalue,' ' tempempty,department_allowdeduc_seq " + 
-				" from employee_mst a inner join department_allowdeduc_mpg b ON b.ddo_code=a.ddo_code " + 
+				" from employee_mst a inner join employee_allowdeduc_mpg b ON b.sevaarth_id=a.sevaarth_id " + 
 				" inner join paybill_generation_trn_details c ON c.sevaarth_id=a.sevaarth_id " + 
 				" inner join paybill_generation_trn e ON e.paybill_generation_trn_id=c.paybill_generation_trn_id  " + 
 				" inner join department_allowdeduc_mst d ON b.department_allowdeduc_code=d.department_allowdeduc_code  where  d.is_active='1' " + 

@@ -1538,8 +1538,8 @@ public class PaybillGenerationTrnServiceImpl implements PaybillGenerationTrnServ
 			payslipDeduc = 0d;
 			
 			if (count > 0) {
-				int basicpay = 0;
-				int netpay = 0;
+				Long basicpay = 0l;
+				Long netpay = 0l;
 				int allowdedcode = 0;
 				int isType = 0;
 				
@@ -1552,8 +1552,8 @@ public class PaybillGenerationTrnServiceImpl implements PaybillGenerationTrnServ
 					allowdedcode = (int) objects[4];
 					// hmAllowDeducCodeAndValues.put(objects[4], objects[5]); // 4 code,5 amount,6
 					// Name
-					basicpay = ((BigInteger) objects[2]).intValue();
-					netpay = ((BigInteger) objects[3]).intValue();
+					basicpay = ((Long) objects[2]);
+					netpay = ((Long) objects[3]);
 					String compName = (String) objects[6];
 					brokenMethodName = (String) objects[7];
 					isType = (int) objects[8];
@@ -1691,10 +1691,6 @@ public class PaybillGenerationTrnServiceImpl implements PaybillGenerationTrnServ
 						break;
 					}
 				}
-				
-			
-					
-					
 
 				// END:Fetch Broken Period Allowance and Deduction Data
 

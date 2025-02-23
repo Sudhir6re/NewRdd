@@ -1390,7 +1390,12 @@ public class PaybillGenerationTrnRepoImpl implements PaybillGenerationTrnRepo {
 		query.setParameter("allowDeducCode", allowDeducCode);
 
 		query.addScalar("amount", StandardBasicTypes.DOUBLE);
-		return (Double) query.uniqueResult();
+		
+		if(query.uniqueResult()!=null) {
+			return (Double) query.uniqueResult();
+		}else {
+			return 0d;
+		}
 	}
 
 	@Override
@@ -1410,7 +1415,13 @@ public class PaybillGenerationTrnRepoImpl implements PaybillGenerationTrnRepo {
 
 		query.addScalar("amount", StandardBasicTypes.DOUBLE);
 
-		return (Double) query.uniqueResult();
+		if(query.uniqueResult()!=null) {
+			return (Double) query.uniqueResult();
+		}else {
+			return 0d;
+		}
+		
+		
 	}
 
 	@Override

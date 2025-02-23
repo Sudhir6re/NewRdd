@@ -42,7 +42,7 @@
 		flag=0;
 		 $.ajax({
 		      type: "GET",
-		      url: "../user/isPaybillGenerated/"+billNumber+"/"+monthName +"/"+yearName,
+		      url: "../employee/isPaybillGenerated/"+billNumber+"/"+monthName +"/"+yearName,
 		      async: false,
 		      dataType : 'json',
 		    // contentType:'application/json',

@@ -40,7 +40,7 @@ import jakarta.servlet.http.HttpSession;
 
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/employee")
 public class EmpPayslipController  extends BaseController {
 
 	List<PayslipReportModel> listOfPayslipEmp = new ArrayList<>();
@@ -114,8 +114,8 @@ public class EmpPayslipController  extends BaseController {
 		//// dDOCityCategoryService.getCityCategoryMappedWithDDo(messages.getUserName());
 
 		String savaarthid = "";
-		BigInteger payCommCode = null;
-		BigInteger payCommissionCode = null;
+		Long payCommCode = null;
+		Long payCommissionCode = null;
 		String sevenPCLvl = null;
 
 		allowEdpList.clear();
@@ -133,8 +133,8 @@ public class EmpPayslipController  extends BaseController {
 		List<Object[]> lstEmp = empPayslipService.getEmployeeData1(payslipReportModel.getSchemeBillgroupId(),
 				payslipReportModel.getPaybillMonth(), payslipReportModel.getPaybillYear(), messages);
 
-		BigInteger hraPercent = null;
-		BigInteger daPercent = null;
+		Long hraPercent = null;
+		Double daPercent = null;
 		allowEdpList.clear();
 		deducAgEdpList.clear();
 		nongovdeducEdpList.clear();
@@ -143,7 +143,6 @@ public class EmpPayslipController  extends BaseController {
 		if (lstEmp.size() > 0) {
 			ltsPayslipModel.clear();
 			for (Object object[] : lstEmp) {
-
 				PayslipModel payslipModel = new PayslipModel();
 				payslipModel.setSevaarthId(StringHelperUtils.isNullString(object[0]));
 				payslipModel.setEmpName(StringHelperUtils.isNullString(object[1]));
@@ -155,12 +154,11 @@ public class EmpPayslipController  extends BaseController {
 				if (object[4] != null)
 					payslipModel.setDob(StringHelperUtils.isNullDate(object[4]));
 
-				payslipModel.setMobileNo1(StringHelperUtils.isNullBigDecimal(object[5]));
+				payslipModel.setMobileNo1(StringHelperUtils.isNullLong(object[5]));
 
 				payslipModel.setPanNo(StringHelperUtils.isNullString(object[6]));
-				BigInteger payComm = (BigInteger) object[7];
-				payslipModel.setPayCommisionCode(payComm.longValue());
-				payCommissionCode = payComm;
+				payslipModel.setPayCommisionCode(StringHelperUtils.isNullLong(object[7]));
+				payCommissionCode = payslipModel.getPayCommisionCode();
 
 				payslipModel.setUidNo(StringHelperUtils.isNullString(object[8]));
 				payslipModel.setIfsc(StringHelperUtils.isNullString(object[9]));
@@ -183,8 +181,7 @@ public class EmpPayslipController  extends BaseController {
 				payslipModel.setDdoCode(StringHelperUtils.isNullString(object[11]));
 
 				
-				BigInteger gross = (BigInteger)object[12];
-				payslipModel.setGrossTotalAmt(gross.doubleValue());
+				payslipModel.setGrossTotalAmt(StringHelperUtils.isNullDouble(object[12]));
 				payslipModel.setTotalDeduction(StringHelperUtils.isNullDouble(object[13]));
 				payslipModel.setTotalNetAmt(StringHelperUtils.isNullDouble(object[14]));
 
@@ -200,8 +197,7 @@ public class EmpPayslipController  extends BaseController {
 			///	payslipModel.setDaPercent(StringHelperUtils.isNullInt(object[18]));
 				//// daPercent = StringHelperUtils.isNullInt(object[21]);
 				if (object[18] != null) {
-					BigInteger sevenPcLvl = (BigInteger) object[18];
-					payslipModel.setSevenPcLvl(sevenPcLvl.longValue());
+					payslipModel.setSevenPcLvl(StringHelperUtils.isNullLong(object[18]));
 					payslipModel.setLvl("S_" + object[18]);
 				}
 
@@ -215,25 +211,21 @@ public class EmpPayslipController  extends BaseController {
 				 * BigDecimal basic = (BigDecimal) object[21]; Double basicPay =
 				 * basic.doubleValue();
 				 */
-				BigInteger basic = (BigInteger) object[19];
-				payslipModel.setBasic(basic.doubleValue());
+				payslipModel.setBasic(StringHelperUtils.isNullDouble(object[19]));
 				payslipModel.setVoucherNo(StringHelperUtils.isNullString(object[20]));
 				payslipModel.setVoucherDate(StringHelperUtils.isNullDate(object[21]));
-				BigInteger billNo = (BigInteger) object[22];
-				payslipModel.setBillNo(billNo.longValue());
+				payslipModel.setBillNo(StringHelperUtils.isNullLong(object[22]));
 				ltsPayslipModel.add(payslipModel);
 			}
-
 		}
-
 		model.addAttribute("ltsPayslipModel", ltsPayslipModel);
 		model.addAttribute("ddoCode", messages.getDdoCode());
 
 		for (Object[] objects : lstEmp) {
 			savaarthid = objects[0].toString();
-			payCommCode = (BigInteger) objects[7];
-			daPercent = (BigInteger) (objects[19]);
-			hraPercent = (BigInteger) (objects[18]);
+			payCommCode =StringHelperUtils.isNullLong(objects[7]);
+			daPercent = StringHelperUtils.isNullDouble(objects[19]);
+			hraPercent = StringHelperUtils.isNullLong(objects[18]);
 
 			allEdpList = empPayslipService.getAllDataForinnernew(savaarthid);
 			lstempdetails1 = empPayslipService.getempDetails(payslipReportModel.getSchemeBillgroupId(),

@@ -1,6 +1,5 @@
 package com.mahait.gov.in.model;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 
@@ -24,7 +23,7 @@ public class PayslipModel {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dor;
 	
-	private BigDecimal mobileNo1;
+	private Long mobileNo1;
 	
 	
 	private String panNo;

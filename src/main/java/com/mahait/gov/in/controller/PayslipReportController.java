@@ -104,8 +104,8 @@ public class PayslipReportController extends BaseController {
 		//// dDOCityCategoryService.getCityCategoryMappedWithDDo(messages.getUserName());
 
 		String savaarthid = "";
-		BigInteger payCommCode = null;
-		BigInteger payCommissionCode = null;
+		Long payCommCode = null;
+		Long payCommissionCode = null;
 		String sevenPCLvl = null;
 
 		allowEdpList.clear();
@@ -122,8 +122,8 @@ public class PayslipReportController extends BaseController {
 		List<Object[]> lstEmp = payslipReportService.getEmployeeData1(payslipReportModel.getSchemeBillgroupId(),
 				payslipReportModel.getPaybillMonth(), payslipReportModel.getPaybillYear(), messages.getDdoCode());
 
-		BigInteger hraPercent = null;
-		BigInteger daPercent = null;
+		Long hraPercent = null;
+		Double daPercent = null;
 		allowEdpList.clear();
 		deducAgEdpList.clear();
 		nongovdeducEdpList.clear();
@@ -144,12 +144,11 @@ public class PayslipReportController extends BaseController {
 				if (object[4] != null)
 					payslipModel.setDob(StringHelperUtils.isNullDate(object[4]));
 
-				payslipModel.setMobileNo1(StringHelperUtils.isNullBigDecimal(object[5]));
+				payslipModel.setMobileNo1(StringHelperUtils.isNullLong(object[5]));
 
 				payslipModel.setPanNo(StringHelperUtils.isNullString(object[6]));
-				BigInteger payComm = (BigInteger) object[7];
-				payslipModel.setPayCommisionCode(payComm.longValue());
-				payCommissionCode = payComm;
+				payslipModel.setPayCommisionCode(StringHelperUtils.isNullLong(object[7]));
+				payCommissionCode = payslipModel.getPayCommisionCode();
 
 				payslipModel.setUidNo(StringHelperUtils.isNullString(object[8]));
 				payslipModel.setIfsc(StringHelperUtils.isNullString(object[9]));
@@ -172,8 +171,7 @@ public class PayslipReportController extends BaseController {
 				payslipModel.setDdoCode(StringHelperUtils.isNullString(object[11]));
 
 				
-				BigInteger gross = (BigInteger)object[12];
-				payslipModel.setGrossTotalAmt(gross.doubleValue());
+				payslipModel.setGrossTotalAmt(StringHelperUtils.isNullDouble(object[12]));
 				payslipModel.setTotalDeduction(StringHelperUtils.isNullDouble(object[13]));
 				payslipModel.setTotalNetAmt(StringHelperUtils.isNullDouble(object[14]));
 
@@ -189,8 +187,7 @@ public class PayslipReportController extends BaseController {
 			///	payslipModel.setDaPercent(StringHelperUtils.isNullInt(object[18]));
 				//// daPercent = StringHelperUtils.isNullInt(object[21]);
 				if (object[18] != null) {
-					BigInteger sevenPcLvl = (BigInteger) object[18];
-					payslipModel.setSevenPcLvl(sevenPcLvl.longValue());
+					payslipModel.setSevenPcLvl(StringHelperUtils.isNullLong(object[18]));
 					payslipModel.setLvl("S_" + object[18]);
 				}
 
@@ -204,12 +201,10 @@ public class PayslipReportController extends BaseController {
 				 * BigDecimal basic = (BigDecimal) object[21]; Double basicPay =
 				 * basic.doubleValue();
 				 */
-				BigInteger basic = (BigInteger) object[19];
-				payslipModel.setBasic(basic.doubleValue());
+				payslipModel.setBasic(StringHelperUtils.isNullDouble(object[19]));
 				payslipModel.setVoucherNo(StringHelperUtils.isNullString(object[20]));
 				payslipModel.setVoucherDate(StringHelperUtils.isNullDate(object[21]));
-				BigInteger billNo = (BigInteger) object[22];
-				payslipModel.setBillNo(billNo.longValue());
+				payslipModel.setBillNo(StringHelperUtils.isNullLong(object[22]));
 				ltsPayslipModel.add(payslipModel);
 			}
 
@@ -220,9 +215,9 @@ public class PayslipReportController extends BaseController {
 
 		for (Object[] objects : lstEmp) {
 			savaarthid = objects[0].toString();
-			payCommCode = (BigInteger) objects[7];
-			daPercent = (BigInteger) (objects[19]);
-			hraPercent = (BigInteger) (objects[18]);
+			payCommCode =StringHelperUtils.isNullLong(objects[7]);
+			daPercent = StringHelperUtils.isNullDouble(objects[19]);
+			hraPercent =StringHelperUtils.isNullLong(objects[18]);
 
 			allEdpList = payslipReportService.getAllDataForinnernew(savaarthid);
 			lstempdetails1 = payslipReportService.getempDetails(payslipReportModel.getSchemeBillgroupId(),
@@ -265,7 +260,6 @@ public class PayslipReportController extends BaseController {
 						mapAllowanceSum.put(object.getDeptalldetNm().toUpperCase().trim(), amount.doubleValue());
 					}
 				}
-
 				PayslipReportModel pm = new PayslipReportModel();
 				String componentName = object.getDeptalldetNm().toUpperCase().trim().toString();
 				if (amount > 0) {
@@ -456,7 +450,7 @@ public class PayslipReportController extends BaseController {
 				if (object[4] != null)
 					payslipModel.setDob(StringHelperUtils.isNullDate(object[4]));
 
-				payslipModel.setMobileNo1(StringHelperUtils.isNullBigDecimal(object[5]));
+				payslipModel.setMobileNo1(StringHelperUtils.isNullLong(object[5]));
 
 				payslipModel.setPanNo(StringHelperUtils.isNullString(object[6]));
 				BigInteger payComm = (BigInteger) object[7];
