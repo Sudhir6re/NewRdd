@@ -399,6 +399,7 @@ public class OnlineContributionServiceImpl implements OnlineContributionService 
 
 		if(dcpContributionModel.getLstDcpContributionModel()!=null) {
 			for (DcpContributionModel dcpContributionModel1 : dcpContributionModel.getLstDcpContributionModel()) {
+				if(dcpContributionModel1.getDcpsNO()!=null) {
 				DcpsContributionEntity dcpsContributionEntity = onlineContributionRepo
 						.findDcpsContri(dcpContributionModel1.getDcpContributionId()).orElseGet(DcpsContributionEntity::new);
 				dcpsContributionEntity.setBasicPay(dcpContributionModel1.getBasicPay().doubleValue());
@@ -437,6 +438,8 @@ public class OnlineContributionServiceImpl implements OnlineContributionService 
 				}
 				
 				onlineContributionRepo.saveDcpsContributionEntity(dcpsContributionEntity);
+				}
+				
 			}
 		}
 		return save;

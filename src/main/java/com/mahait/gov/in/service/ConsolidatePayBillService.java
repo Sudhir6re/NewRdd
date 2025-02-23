@@ -9,8 +9,6 @@ import com.mahait.gov.in.model.ConsolidatePayBillModel;
 
 public interface ConsolidatePayBillService {
 	
-	
-
 	public List<ConsolidatePayBillModel> fetchDDOLst(String ddoCode);
 
 	public List<ConsolidatePayBillModel> searchConsolidatedPaybill(ConsolidatePayBillModel consolidatePayBillModel,OrgUserMst messages);
@@ -22,5 +20,7 @@ public interface ConsolidatePayBillService {
 	public List<ConsolidatePayBillModel> fetchDDOLstForConsolidateApproval(String ddoCode);
 
 	public int approveConsolidateBill(Long consolidateId);
+
+	public String deleteConsolidateBill(Long consPaybillGenerationTrnId);
 
 }

@@ -47,14 +47,14 @@ $("#btnSearch")
 			 
 					$("#loaderMainNew").show();
 			
-				$
-						.ajax({
+				$.ajax({
 							type : "GET",
 							url : urlCall,
 							async : false,
 							error : function(data) {
-								console.log(data);
-							},
+											  							console.log(data);
+																		$("#loaderMainNew").hide();
+											  },
 							success : function(data) {
 								$("#loaderMainNew").hide();
 								$('#tblDataTable').show();
@@ -92,7 +92,8 @@ $("#btnSearch")
 														if (status == "9") {
 															isActive = '<span class="label label-success text-center payBillTrnId" data="'
 																	+ paybillGenerationTrnId
-																	+ '"> Pending</span>';
+																//	+ '"> Pending</span>';
+																	+ '"> Consolidated Paybill Approved</span>';
 															/*+ '">Consolidated Paybill Forward to BEAMS</span>';
 */															paybillGenerationTrnId='<a class="consolidatePayBillTrnId" >'+paybillGenerationTrnId+'</a>';
 
@@ -234,6 +235,10 @@ $('#btnAbstractReport').click(function() {
 				      type: "GET",
 				      url: "../ddo/viewabstractReport/"+consolidatedId,
 				      async: true,
+					  error : function(data) {
+					  				  							console.log(data);
+					  											$("#loaderMainNew").hide();
+					  				  },
 				      success: function(data){
 				    		$("#loaderMainNew").hide();
 							 console.log(data);
@@ -380,7 +385,14 @@ $('body').on('click','.payBillId',function(){
     	   $('#ApproveBill').attr("disabled", true);
        }
        
-       
+	   
+
+	       if(status=="11"){
+	     	    $('#btnDeleteBill').attr("disabled", false);
+	        }
+	   
+	   
+	   
        
 });
 
@@ -400,8 +412,9 @@ $('body').on('click','.consolidatePayBillTrnId',function(){
 				 url : "../ddo/consolidatePayBillTrnReport/"+consolidatePayBillTrnId,
 					 async : true,
 					 error : function(data) {
-						 console.log(data);
-					 },
+					 				  							console.log(data);
+					 											$("#loaderMainNew").hide();
+					 				  },
 					 success : function(data) {
 							$("#loaderMainNew").hide();
 						 console.log(data);
@@ -420,9 +433,8 @@ $('body').on('click','.consolidatePayBillTrnId',function(){
 $('#btnDeleteBill')
 .click(
 		function() {
-			var consPaybillGenerationTrnId =pid;
+			var consPaybillGenerationTrnId = $('#radioval').val();
 			$("#loaderMainNew").show();
-			 //alert(consPaybillGenerationTrnId);
 			if (consPaybillGenerationTrnId != '') {
 				$
 						.ajax({
@@ -432,8 +444,9 @@ $('#btnDeleteBill')
 							async : true,
 							contentType : 'application/json',
 							error : function(data) {
-								console.log(data);
-							},
+											  							console.log(data);
+																		$("#loaderMainNew").hide();
+											  },
 							success : function(data) {
 								console.log(data);
 								// alert(data);
@@ -479,8 +492,12 @@ $('#btnViewDetails').click(function() {
 //		    if (consolidatePayBillTrnId != '') {   
 				$.ajax({
 				      type: "GET",
-				      url: "../paybill/viewDetailsReport/"+ consolidatedId,
+				      url: "../ddo/paybill/viewDetailsReport/"+ consolidatedId,
 				      async: true,
+					  error : function(data) {
+					  							console.log(data);
+												$("#loaderMainNew").hide();
+					  },
 				      success: function(data){
 				    	  $("#loaderMainNew").hide();
 							 console.log(data);

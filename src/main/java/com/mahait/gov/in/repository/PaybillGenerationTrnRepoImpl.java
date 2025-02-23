@@ -1170,9 +1170,13 @@ public class PaybillGenerationTrnRepoImpl implements PaybillGenerationTrnRepo {
 				+ schemeBillGroupId + "' " + " and to_char(emst.doj,'YYYY-MM')<='" + yearName + "-" + month1
 				+ "'  and  (to_char(emst.super_ann_date,'YYYY-MM')>='" + yearName + "-" + month1 + "' "
 				+ " and   to_char(emst.emp_service_end_date,'YYYY-MM')>='" + yearName + "-" + month1 + "') "
-				+ "and (super_ann_date-cast('" + yearName + "-" + monthName + "-" + 01 + "' as date) < " + totalnumDays2
-				+ " or  emp_service_end_date-cast('" + yearName + "-" + monthName + "-" + 01 + "' as date) < "
+				+ "and EXTRACT(DAY FROM (super_ann_date-cast('" + yearName + "-" + monthName + "-" + 01 + "' as date))) < " + totalnumDays2
+				+ " or  EXTRACT(DAY from (emp_service_end_date-cast('" + yearName + "-" + monthName + "-" + 01 + "' as date))) < "
 				+ totalnumDays2 + ")"; //
+		
+		
+		
+		
 
 		Query query = currentSession.createNativeQuery(Hql);
 		System.out.println("isEmpRetired" + query);

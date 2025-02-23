@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -96,21 +97,13 @@ public class ViewDeleteConsPayBillController extends BaseController{
 	}
 
 	@GetMapping("/deleteConsolidateBill/{consPaybillGenerationTrnId}")
-	public String deleteConsolidateBill(@ModelAttribute("consolidatePayBillTrnEntity") ConsolidatePayBillTrnEntity consolidatePayBillTrnEntity,@PathVariable int consPaybillGenerationTrnId,
+	public ResponseEntity<String> deleteConsolidateBill(@PathVariable Long consPaybillGenerationTrnId,
 			Model model,Locale locale,HttpSession session) {
-		
-		
 		ConsolidatePayBillTrnEntity consolidatePayBillTrnEntity1 = viewDelConsolidatePayBillService.findDeleteBillById(consPaybillGenerationTrnId);
-		
-		if(consolidatePayBillTrnEntity1!=null)
-		{
-			model.addAttribute("is_changed","1");
-			return "/views/paybill/view-delete-consolidated-paybill";
-		}
-		else
-		{
-			model.addAttribute("is_changed","0");
-			return "/views/paybill/view-delete-consolidated-paybill";
+		if(consolidatePayBillTrnEntity1!=null) {
+			return ResponseEntity.ok("1");
+		}else {
+			return ResponseEntity.ok("0");
 		}
 	}
 	

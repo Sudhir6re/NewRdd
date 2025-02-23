@@ -113,7 +113,7 @@ public class ViewConsolidatePayBillRepoImpl implements ViewConsolidatePayBillRep
 	}
 	//for delete consolidate paybill
 	@Override
-	public ConsolidatePayBillTrnEntity updateConsolidateStatusById(int consPaybillGenerationTrnId) {
+	public ConsolidatePayBillTrnEntity updateConsolidateStatusById(Long consPaybillGenerationTrnId) {
 		ConsolidatePayBillTrnEntity objCadre = null;
 		Session currentSession = entityManager.unwrap(Session.class);
 		objCadre = currentSession.get(ConsolidatePayBillTrnEntity.class, consPaybillGenerationTrnId);
@@ -136,7 +136,7 @@ public class ViewConsolidatePayBillRepoImpl implements ViewConsolidatePayBillRep
 		
 	}*/
 	
-	public int updatePaybillStatus(int lstConsolidatedBillList) {
+	public int updatePaybillStatus(Long lstConsolidatedBillList) {
 	    Session currentSession = entityManager.unwrap(Session.class);
 	    String hql1 = "update paybill_generation_trn set is_active = 5 where paybill_generation_trn_id in (select paybill_generation_trn_id from consolidate_paybill_trn_mpg where consolidate_paybill_trn_id = " + lstConsolidatedBillList + ")";
 	    Query query12 = currentSession.createNativeQuery(hql1); // This is valid but deprecated in Hibernate 6.x
@@ -145,7 +145,7 @@ public class ViewConsolidatePayBillRepoImpl implements ViewConsolidatePayBillRep
 	}
 
 	@Override
-	public Integer findConsolidatedPaybillNumber(int consPaybillGenerationTrnId) {
+	public Integer findConsolidatedPaybillNumber(Long consPaybillGenerationTrnId) {
 	    Session currentSession = entityManager.unwrap(Session.class);
 	    String queryStr = "select pd.paybill_generation_trn_id from consolidate_paybill_trn cp " +
 	            "inner join consolidate_paybill_trn_mpg cpm on cp.consolidate_paybill_trn_id = cpm.consolidate_paybill_trn_id " +
@@ -158,6 +158,14 @@ public class ViewConsolidatePayBillRepoImpl implements ViewConsolidatePayBillRep
 	        return list.get(0);
 	    }
 	    return null;
+	}
+	@Override
+	public int deletePaybillStatus(Long consPaybillGenerationTrnId) {
+	    Session currentSession = entityManager.unwrap(Session.class);
+	    String hql1 = "update paybill_generation_trn set is_active = 13 where paybill_generation_trn_id in (select paybill_generation_trn_id from consolidate_paybill_trn_mpg where consolidate_paybill_trn_id = " + consPaybillGenerationTrnId + ")";
+	    Query query12 = currentSession.createNativeQuery(hql1); // This is valid but deprecated in Hibernate 6.x
+	    query12.executeUpdate();
+	    return query12.executeUpdate();
 	}
 
 

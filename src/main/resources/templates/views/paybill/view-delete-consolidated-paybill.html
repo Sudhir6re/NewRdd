@@ -112,8 +112,8 @@
 						<tr th:each="varBillGrp : ${LstConsolidatedPayBillModel}">
 							<td><input type="radio" name="consolidatedPaywinbillTrnId"
 								id="consolidatedPaybillTrnId"     
-								th:value="${varBillGrp.consolidatePayBillTrnId}"
-								th:data="${varBillGrp.isActive}"  th:data-authNo="${varBillGrp.authNo}"   th:data-schemeCode="${varBillGrp.schemeCode}"   th:data-consolidatePayBillTrnId="${varBillGrp.consolidatePayBillTrnId}"   />       
+								th:value="${varBillGrp.consolidatePayBillTrnId}" th:data-status="${varBillGrp.isActive}" 
+								th:data="${varBillGrp.isActive}"  class='payBillId' th:data-authNo="${varBillGrp.authNo}"   th:data-schemeCode="${varBillGrp.schemeCode}"  th:data-pid="${varBillGrp.consolidatePayBillTrnId}"    th:data-consolidatePayBillTrnId="${varBillGrp.consolidatePayBillTrnId}"   />       
 						
 								
 								   </td>
@@ -142,31 +142,34 @@
     <td align="center" th:if="${varBillGrp.authNo == null or !(varBillGrp.eKuberCount > 0 and (varBillGrp.cmpDownloadStatus== 'EK' or varBillGrp.cmpDownloadStatus == null))}">0</td>
 
 
-    <td th:if="${varBillGrp.cmpDownloadStatus != null and varBillGrp.ekuberCount > 0 and varBillGrp.eKuberCount > 0 and varBillGrp.cmpDownloadStatus == 'EK'}">
+    <td th:if="${varBillGrp.cmpDownloadStatus != null and varBillGrp.eKuberCount > 0 and varBillGrp.eKuberCount > 0 and varBillGrp.cmpDownloadStatus == 'EK'}">
         <a href="#"  class="downloadEkuberJsonFile"  th:data-authNo="${varBillGrp.authNo}"   th:data-schemeCode="${varBillGrp.schemeCode}"   th:data-consolidatePayBillTrnId="${varBillGrp.consolidatePayBillTrnId}"  >
             <span th:text="${entry[8]}"></span>
         </a>
      
     </td>
-       <td  th:if="${varBillGrp.cmpDownloadStatus == null or varBillGrp.ekuberCount <= 0 or !(varBillGrp.ekuberCount > 0 and varBillGrp.cmpDownloadStatus == 'EK')}">-</td>
+       <td  th:if="${varBillGrp.cmpDownloadStatus == null or varBillGrp.eKuberCount <= 0 or !(varBillGrp.eKuberCount > 0 and varBillGrp.cmpDownloadStatus == 'EK')}">-</td>
 							
 							
 							
 							
-						 <td><span th:if="${varBillGrp.isActive} ==9"> <span
-									class="label label-info text-center"
-									th:utext="#{msg.thymeleaf.pagelabel.consolatedPaybill}">Pending</span>
+						 <td><span th:if="${varBillGrp.isActive} ==9"> 
+						<!--  <span class="label label-info text-center"	th:utext="#{msg.thymeleaf.pagelabel.consolatedPaybill}">Pending</span> -->
+						 
+						  <span class="label label-success text-center" th:utext="#{msg.thymeleaf.pagelabel.consolatedApprove}">
+						 
 							</span> <span th:if="${varBillGrp.isActive} ==10"> <span
 									class="label label-warning text-center"
 									th:utext="#{msg.thymeleaf.pagelabel.forwardToBeams}">Consolidated
 										Paybill Forward to BEAMS</span>
-							</span> <span th:if="${varBillGrp.isActive} ==11"> <span
-									class="label label-success text-center"
-									th:utext="#{msg.thymeleaf.pagelabel.consolatedApprove}"></span>Consolidate
+							</span> <span th:if="${varBillGrp.isActive} ==11">
+							 <span class="label label-success text-center" th:utext="#{msg.thymeleaf.pagelabel.consolatedApprove}">
+							  
+							  </span>Consolidate
 									Paybill Approved
-							</span> <span th:if="${varBillGrp.isActive} ==12"> <span
-									class="label label-danger text-center"
-									th:utext="#{msg.thymeleaf.pagelabel.consolatedReject}">Consolidated
+							</span>
+							
+							 <span th:if="${varBillGrp.isActive} ==12"> <span class="label label-danger text-center"th:utext="#{msg.thymeleaf.pagelabel.consolatedReject}">Consolidated
 										Paybill Rejected by Beams</span>
 
 							</span> <span th:if="${varBillGrp.isActive} ==13"> <span

@@ -12,13 +12,15 @@ public class LstConsolidatedPayBillModel {
 	private String schemeName;
 	private double billGrossAmt;
 	private double billNetAmount;
-	private char isActive;
+	private Integer isActive;
 	private Integer isActiveInt;
 	
 	private Integer authNo;
 	
 	private Long eKuberCount;
+	
 	private String cmpDownloadStatus;
+
 	
 	
 	

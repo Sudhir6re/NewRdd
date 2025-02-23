@@ -46,9 +46,9 @@ public class ViewDelConsolidatePayBillServiceImpl implements ViewDelConsolidateP
 					}else if(objLst[4] instanceof Double) {
 						obj.setBillNetAmount(StringHelperUtils.isNullDouble(objLst[4]));
 					}
-					if(objLst[5] instanceof Character) {
-						obj.setIsActive(StringHelperUtils.isNullChar(objLst[5]));
-					}else if(objLst[5] instanceof Integer) {
+					
+					if(objLst[5] instanceof Integer) {
+						obj.setIsActive(StringHelperUtils.isNullInt(objLst[5]));
 						obj.setIsActiveInt(StringHelperUtils.isNullInt(objLst[5]));
 					}
 					
@@ -90,7 +90,7 @@ public class ViewDelConsolidatePayBillServiceImpl implements ViewDelConsolidateP
 		//for delete the consolidate paybill
 		
 		@Override
-		public ConsolidatePayBillTrnEntity findDeleteBillById(int consPaybillGenerationTrnId) {
+		public ConsolidatePayBillTrnEntity findDeleteBillById(Long consPaybillGenerationTrnId) {
 			ConsolidatePayBillTrnEntity objConsolidatePayBillTrnEntity = viewConsolidatePayBillRepo
 					.updateConsolidateStatusById(consPaybillGenerationTrnId);
 			/*PaybillGenerationTrnEntity paybillGenerationTrnEntity = new PaybillGenerationTrnEntity();*/
@@ -108,7 +108,7 @@ public class ViewDelConsolidatePayBillServiceImpl implements ViewDelConsolidateP
 				objConsolidatePayBillTrnEntity.setIsActive(13); // Deleted
 				objConsolidatePayBillTrnEntity.setUpdatedDate(new Date());
 				viewConsolidatePayBillRepo.updateConsolidateStatus(objConsolidatePayBillTrnEntity);
-				int consolatedNo=viewConsolidatePayBillRepo.updatePaybillStatus(consPaybillGenerationTrnId);
+				int consolatedNo=viewConsolidatePayBillRepo.deletePaybillStatus(consPaybillGenerationTrnId);
 			}
 			
 			

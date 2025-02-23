@@ -51,7 +51,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<!--<exclusions>
+			<exclusions>
 				<exclusion>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-tomcat</artifactId>
@@ -60,7 +60,7 @@
 					<artifactId>logback-classic</artifactId>
 					<groupId>ch.qos.logback</groupId>
 				</exclusion>
-			</exclusions>-->
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -199,7 +199,6 @@
 			<version>20080701</version>
 		</dependency>
 
-		<!--
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
@@ -212,7 +211,6 @@
 			<artifactId>jul-to-slf4j</artifactId>
 			<version>1.7.36</version> 
 		</dependency>
--->
 
 
 		<!-- Spring WS core for handling SOAP communication -->

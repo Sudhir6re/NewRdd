@@ -11,9 +11,10 @@ public interface ViewConsolidatePayBillRepo {
 /*	public PaybillGenerationTrnEntity findAllConsolidatedPaybill(int consPaybillGenerationTrnId);*/
 	
 	//for delete consolidate paybill
-	public ConsolidatePayBillTrnEntity updateConsolidateStatusById(int consPaybillGenerationTrnId);
+	public ConsolidatePayBillTrnEntity updateConsolidateStatusById(Long consPaybillGenerationTrnId);
 	public void updateConsolidateStatus(ConsolidatePayBillTrnEntity consolidatePayBillTrnEntity);
-	public int updatePaybillStatus(int lstConsolidatedBillList);
-	public Integer findConsolidatedPaybillNumber(int consPaybillGenerationTrnId);
+	public int updatePaybillStatus(Long lstConsolidatedBillList);
+	public Integer findConsolidatedPaybillNumber(Long consPaybillGenerationTrnId);
+	public int deletePaybillStatus(Long consPaybillGenerationTrnId);
 	
 }

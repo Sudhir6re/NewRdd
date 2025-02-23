@@ -445,11 +445,10 @@ public class DisplayOuterReportContorller extends BaseController
 		List<Object[]>  billcreateornotbill = displayOuterReportService.findbillcrateornot(monthName,yearName,messages.getDdoCode().toString(),String.valueOf(billNo));
 		Integer existingData = billcreateornotbill.size();
 		for (Object[] bill : billcreateornotbill) {
-			
-			BigInteger billId = (BigInteger) (bill[0]);
-			billno=billId.longValue();
+		//	BigInteger billId = (BigInteger) (bill[0]);
+			billno=StringHelperUtils.isNullLong(bill[0]);
 		}
-		billno=billno;
+		//billno=billno;
 		String resJson = billno.toString();
 		return ResponseEntity.ok(resJson);
 	}

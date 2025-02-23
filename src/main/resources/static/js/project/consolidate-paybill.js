@@ -30,6 +30,9 @@ $("#selectAll").change(function() {
 });
 
 
+
+
+
 //for reject consolidate paybill
 $('#btnRejectConsolidatePaybill')
 .click(
@@ -119,3 +122,64 @@ $("#btnSearch").click(function (e){
 	} 
 	
 });
+
+
+
+
+
+
+$('#btnDeleteBill')
+.click(
+		function() {
+			
+			var consPaybillGenerationTrnId = $(
+								'#radioid').val();
+
+			 //alert(consPaybillGenerationTrnId);
+			if (consPaybillGenerationTrnId != '') {
+				$
+						.ajax({
+							type : "GET",
+							url : "../ddo/deleteConsolidateBill/"
+									+ consPaybillGenerationTrnId, 
+							async : true,
+							contentType : 'application/json',
+							error : function(data) {
+								console.log(data);
+							},
+							success : function(data) {
+								console.log(data);
+								// alert(data);
+
+								if ($("#is_changed")
+										.val() == 1) {
+
+									swal(
+											"Consolidate Paybill has been deleted successfully",
+											{
+												icon : "success",
+											});
+									setTimeout(
+											function() {
+												location
+														.reload(true);
+											}, 2000);
+
+								} else {
+									swal(
+											"Consolidate Paybill has been deleted successfully",
+											{
+												icon : "success",
+											});
+									setTimeout(
+											function() {
+												location
+														.reload(true);
+											}, 2000);
+								}
+
+							}
+						});
+			}
+		});
+

@@ -22,5 +22,6 @@ public interface ConsolidatePayBillRepo {
 	public void updaterejectConsolidateStatus(PaybillGenerationTrnEntity paybillGenerationTrnEntity);
 	public List<Object[]> fetchDDOLstForConsolidateApproval(String ddoCode);
 	public Serializable updateConsolidateapproveStatus(Long consolidateId);
+	public void deleteConsolidateBill(Long consPaybillGenerationTrnId);
 
 }

@@ -29,7 +29,7 @@ public class DDOCityCategoryRepoImpl implements DDOCityCategoryRepo {
 		Session currentSession = entityManager.unwrap(Session.class);
 		String hql = "select bb.sevaarth_id,aa.bill_group_id from mst_dcps_bill_group  aa inner join employee_mst bb on aa.bill_group_id = bb.billgroup_id  \r\n" + 
 				"    WHERE NOT EXISTS (select 1 from employee_allowdeduc_mpg c where bb.sevaarth_id = c.sevaarth_id) and  "
-				+ "aa.bill_group_id = '"+schemeBillGroupId+"' and bb.ddo_code = '"+ddoCode+"'";
+				+ "aa.bill_group_id = '"+schemeBillGroupId+"' and bb.ddo_code = '"+ddoCode+"' and bb.is_active=1";
 		Query query = currentSession.createNativeQuery(hql);
 		return query.list();
 	}

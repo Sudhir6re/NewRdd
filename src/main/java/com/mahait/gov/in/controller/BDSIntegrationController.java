@@ -372,10 +372,12 @@ public class BDSIntegrationController {
 
 		String authNo = null;
 		String statusCode = null;
+		String dataXML = null;
 		byte[] pdfData = null;
 		if (resultMap != null && !resultMap.isEmpty()) {
 			authNo = resultMap.get("authNo") != null ? (String) resultMap.get("authNo") : null;
 			statusCode = resultMap.get("statusCode") != null ? (String) resultMap.get("statusCode") : null;
+			dataXML = resultMap.get("dataXML") != null ? (String) resultMap.get("dataXML") : null;
 			pdfData = resultMap.get("pdfData") != null ? (byte[]) resultMap.get("pdfData") : null;
 
 			if (pdfData!=null)
@@ -395,6 +397,7 @@ public class BDSIntegrationController {
 				final String key = "Status" + stCode[cnt];
 				final String stMsg = String.valueOf(cnt + 1) + ") " + environment.getRequiredProperty(key);
 				finalMsg.add(stMsg);
+				finalMsg.add(dataXML);
 				myList.add(stMsg);
 
 			}

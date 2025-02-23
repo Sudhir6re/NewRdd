@@ -173,4 +173,41 @@ public class ConsolidatePayBillRepoImpl implements ConsolidatePayBillRepo {
 		return 1;
 	}
 
+	
+
+	@Override
+	public void deleteConsolidateBill(Long consPaybillGenerationTrnId) {
+		try {
+			Session currentSession = entityManager.unwrap(Session.class);
+			String hql = "update paybill_generation_trn a set is_active='13' from consolidate_paybill_trn_mpg b where a.paybill_generation_trn_id=b.paybill_generation_trn_id and b.consolidate_paybill_trn_id ='"
+					+ consPaybillGenerationTrnId + "' ";
+
+			Query query = currentSession.createNativeQuery(hql);
+			query.executeUpdate();
+
+			hql = "update consolidate_paybill_trn a set is_active='13' from consolidate_paybill_trn_mpg b where a.consolidate_paybill_trn_id=b.consolidate_paybill_trn_id and b.consolidate_paybill_trn_id ='"
+					+ consPaybillGenerationTrnId + "'";
+			query = currentSession.createNativeQuery(hql);
+			query.executeUpdate();
+			
+			
+			
+			/*
+			 * hql =
+			 * "delete from from consolidate_paybill_trn_mpg where consolidate_paybill_trn_id ="
+			 * + consPaybillGenerationTrnId;
+			 * 
+			 * query = currentSession.createNativeQuery(hql); query.executeUpdate();
+			 * 
+			 * hql =
+			 * "delete from consolidate_paybill_trn where consolidate_paybill_trn_id ="+
+			 * consPaybillGenerationTrnId; query = currentSession.createNativeQuery(hql);
+			 * query.executeUpdate();
+			 */
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }

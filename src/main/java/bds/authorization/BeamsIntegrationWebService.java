@@ -98,6 +98,7 @@ public class BeamsIntegrationWebService {
                        beamsResponse.put("statusCode", slip.getStatusCode().getValue());
                        beamsResponse.put("pdfData", slip.getAuthPdf().getValue());
                        beamsResponse.put("additionalFields", slip.getAdditionalFields());
+                       beamsResponse.put("dataXML", dataXML);
             	}
             }
         } else {

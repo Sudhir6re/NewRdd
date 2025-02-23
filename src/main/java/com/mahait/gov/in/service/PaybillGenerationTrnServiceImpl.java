@@ -1218,43 +1218,42 @@ public class PaybillGenerationTrnServiceImpl implements PaybillGenerationTrnServ
 
 				obj.setInstName(StringHelperUtils.isNullString(objLst[0]));
 				obj.setBillName(StringHelperUtils.isNullString(objLst[1]));
-				BigInteger gross = (BigInteger) objLst[2];
-				obj.setGrossSalary(gross.doubleValue());
+				obj.setGrossSalary(StringHelperUtils.isNullDouble(objLst[2]));
 				obj.setFa(StringHelperUtils.isNullDouble(objLst[3]));
 				obj.setRecovery(StringHelperUtils.isNullDouble(objLst[4]));
 				obj.setGPF(StringHelperUtils.isNullDouble(objLst[5]));
-				BigInteger dcpsReg = (BigInteger) objLst[6];
-				obj.setDcpsreg(dcpsReg.doubleValue());
+				obj.setDcpsreg(StringHelperUtils.isNullLong(objLst[6]).doubleValue());
 				obj.setDcpsdel(StringHelperUtils.isNullDouble(objLst[7]));
 				obj.setDcpsPay(StringHelperUtils.isNullDouble(objLst[8]));
 				obj.setDcpsda(StringHelperUtils.isNullDouble(objLst[9]));
 				BigDecimal npsEmprDeduc = (BigDecimal) objLst[10];
 				obj.setNpsEmprDeduc(npsEmprDeduc.doubleValue());
 				obj.setIt(StringHelperUtils.isNullDouble(objLst[11]));
-				BigDecimal pt = (BigDecimal) objLst[12];
-				obj.setPt(pt.doubleValue());
+				obj.setPt(StringHelperUtils.isNullDouble(objLst[12]));
 				obj.setCompadv(StringHelperUtils.isNullDouble(objLst[13]));
 				obj.setOtherded(StringHelperUtils.isNullDouble(objLst[14]));
 				obj.setPli(StringHelperUtils.isNullDouble(objLst[15]));
-				BigDecimal gis = (BigDecimal) objLst[16];
-				obj.setGis(gis.doubleValue());
+				
+				if(objLst[16]!=null) {
+					BigDecimal gis = (BigDecimal) objLst[16];
+					obj.setGis(gis.doubleValue());
+				}
+			
+				
+				
 				BigDecimal accPolicy = (BigDecimal) objLst[17];
 				obj.setAccPolicy(accPolicy.doubleValue());
-				obj.setRevenueStamp(StringHelperUtils.isNullDouble(objLst[18]));
+				obj.setRevenueStamp(StringHelperUtils.isNullBigDecimal(objLst[18]).doubleValue());
 
-				BigDecimal totalDed = (BigDecimal) objLst[19];
-				obj.setTotdedction(totalDed.doubleValue());
-				BigInteger netPay = (BigInteger) objLst[20];
-				obj.setNetpay(netPay.doubleValue());
+				obj.setTotdedction(StringHelperUtils.isNullDouble(objLst[19]));
+				obj.setNetpay(StringHelperUtils.isNullDouble(objLst[20]));
 				obj.setRecurringDeposit(StringHelperUtils.isNullDouble(objLst[21]));
 				obj.setNgrlic(StringHelperUtils.isNullDouble(objLst[22]));
 				obj.setNgrmisc(StringHelperUtils.isNullDouble(objLst[23]));
 				obj.setNgrbankloan(0d);/// StringHelperUtils.isNullDouble(objLst[24])
 				obj.setNgrsocloan(0d);// StringHelperUtils.isNullDouble(objLst[25])
-				BigDecimal ngr = (BigDecimal) objLst[26];
-				obj.setNgrtotded(ngr.doubleValue());
-				BigDecimal totalSal = (BigDecimal) objLst[27];
-				obj.setTotalSalary(totalSal.doubleValue());
+				obj.setNgrtotded(StringHelperUtils.isNullDouble(objLst[26]));
+				obj.setTotalSalary(StringHelperUtils.isNullDouble(objLst[27]));
 
 				lstObj.add(obj);
 			}
@@ -1889,8 +1888,10 @@ public class PaybillGenerationTrnServiceImpl implements PaybillGenerationTrnServ
 								.round(paybillHeadMpgRepo.fetchAccidentialPilocyDtls(startDate, cadre, allowDeducCode));
 
 						paybillGenerationTrnDetails.setAccPolicy(groupAccPolicy);
+					
 						dedByTreasury += groupAccPolicy;
-
+						
+						
 						break;
 
 					case CommonConstants.PAYBILLDETAILS.COMMONCODE_COMPONENT_GIS:

@@ -253,10 +253,14 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
 										Paybill Approved</span>
 							</span> <span th:if="${varBillGrp.isActive} ==12"> <span
 									class="label label-danger text-center">Paybill Rejected</span>
-							</span> <span th:if="${varBillGrp.isActive} ==13"> <span
+							</span> 
+							<span th:if="${varBillGrp.isActive} ==13"> 
+							<span
 									class="label label-success text-center"
-									th:utext="#{msg.thymeleaf.pagelabel.consolatedDelete}"></span>
-							</span> <span th:if="${varBillGrp.isActive} ==14"> <span
+									th:utext="#{msg.thymeleaf.pagelabel.consolatedDelete}">
+							</span>
+							</span> 
+							<span th:if="${varBillGrp.isActive} ==14"> <span
 									class="label label-success text-center"
 									th:utext="#{msg.thymeleaf.pagelabel.consolatedApproved}">Voucher
 										Entry Done</span>

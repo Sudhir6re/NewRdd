@@ -238,9 +238,6 @@ public class ConsolidatePayBillServiceImpl implements ConsolidatePayBillService 
 			
 		}
 		return paybillGenerationTrnEntity;
-	
-		
-
 	}
 
 	@Override
@@ -269,6 +266,12 @@ public class ConsolidatePayBillServiceImpl implements ConsolidatePayBillService 
 	public int approveConsolidateBill(Long consolidateId) {
 		Serializable	id = consolidatePayBillRepo.updateConsolidateapproveStatus(consolidateId);
 		return (int) id;
+	}
+
+	@Override
+	public String  deleteConsolidateBill(Long consPaybillGenerationTrnId) {
+		consolidatePayBillRepo.deleteConsolidateBill(consPaybillGenerationTrnId);
+		return "1";
 	}
 
 }
