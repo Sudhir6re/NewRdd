@@ -146,6 +146,20 @@ public interface MstEmployeeService {
 
 	List<MstDesignationEntity> getDesigsForPFDAndCadre(String cadre, String fieldDept);
 
+	Long validateAccountNum(String accountNum, String employeeid);
+
+	Long validateUIDUniq(String uid, String employeeid);
+
+	Long validateTelephone(String telphone, String employeeid);
+
+	Long validateMobileno(Long mobno, String employeeid);
+
+	Long validateEmail(String email, String employeeid);
+
+	Long validatePancard(String panno, String employeeid);
+
+	Long validatePranNo(String pranno, String employeeid);
+
 
 
 	// public List<MstBankBranchEntity> getIfscCodeByBranchId(int branchId);

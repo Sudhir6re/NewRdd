@@ -1585,4 +1585,67 @@ public class MstEmployeeRepoImpl implements MstEmployeeRepo {
 	    return resultList;
 	}
 
+	@Override
+	public Long validateAccountNum(String accountNum, String employeeid) {
+		Session currentSession = entityManager.unwrap(Session.class);
+		String hql = "select count(*) as count from employee_mst where BANK_ACNT_NO = '" + accountNum
+				+ "' and employee_id != " + Long.valueOf(employeeid);
+		Query query = currentSession.createNativeQuery(hql).addScalar("count", Long.class);
+		return (Long) query.uniqueResult();
+	}
+
+	@Override
+	public Long validateUIDUniq(String uid, String employeeid) {
+		Session currentSession = entityManager.unwrap(Session.class);
+		String hql = "select count(*) as count from employee_mst where UID_NO = '" + uid
+				+ "' and employee_id != " + Long.valueOf(employeeid);
+		Query query = currentSession.createNativeQuery(hql).addScalar("count", Long.class);
+		return (Long) query.uniqueResult();
+	}
+
+	@Override
+	public Long validatePancard(String panno, String employeeid) {
+		Session currentSession = entityManager.unwrap(Session.class);
+		String hql = "select count(*) as count from employee_mst where PAN_NO = '" + panno
+				+ "' and employee_id != " + Long.valueOf(employeeid);
+		Query query = currentSession.createNativeQuery(hql).addScalar("count", Long.class);
+		return (Long) query.uniqueResult();
+	}
+
+	@Override
+	public Long validatePranNo(String pranno, String employeeid) {
+		Session currentSession = entityManager.unwrap(Session.class);
+		String hql = "select count(*) as count from employee_mst where pran_no = '" + pranno
+				+ "' and employee_id != " + Long.valueOf(employeeid);
+		Query query = currentSession.createNativeQuery(hql).addScalar("count", Long.class);
+		return (Long) query.uniqueResult();
+	}
+
+	@Override
+	public Long validateEmail(String email, String employeeid) {
+		Session currentSession = entityManager.unwrap(Session.class);
+		String hql = "select count(*) as count from employee_mst where EMAIL_ID = '" + email
+				+ "' and employee_id != " + Long.valueOf(employeeid);
+		Query query = currentSession.createNativeQuery(hql).addScalar("count", Long.class);
+		return (Long) query.uniqueResult();
+	}
+
+	@Override
+	public Long validateMobileno(Long mobno, String employeeid) {
+		Session currentSession = entityManager.unwrap(Session.class);
+		String hql = "select count(*) as count from employee_mst where MOBILE_NO1 = " + mobno
+				+ " and employee_id != " + Long.valueOf(employeeid);
+		Query query = currentSession.createNativeQuery(hql).addScalar("count", Long.class);
+		return (Long) query.uniqueResult();
+	}
+
+	@Override
+	public Long validateTelephone(String telphone, String employeeid) {
+		Session currentSession = entityManager.unwrap(Session.class);
+		String hql = "select count(*) as count from employee_mst where LANDLINE_NO = '" + telphone
+				+ "' and employee_id != " + Long.valueOf(employeeid);
+		Query query = currentSession.createNativeQuery(hql).addScalar("count", Long.class);
+		return (Long) query.uniqueResult();
+	}
+
 }

@@ -157,6 +157,20 @@ public interface MstEmployeeRepo {
 
 	public List<MstDesignationEntity> getDesigsForPFDAndCadre(String cadre, String fieldDept);
 
+	public Long validateAccountNum(String accountNum, String employeeid);
+
+	public Long validateUIDUniq(String uid, String employeeid);
+
+	public Long validatePancard(String pranno, String employeeid);
+
+	public Long validatePranNo(String pranno, String employeeid);
+
+	public Long validateEmail(String email, String employeeid);
+
+	public Long validateMobileno(Long mobno, String employeeid);
+
+	public Long validateTelephone(String telphone, String employeeid);
+
 
 
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.mahait.gov.in.entity.CmnDistrictMst;
@@ -17,7 +18,6 @@ import com.mahait.gov.in.entity.OrgUserMst;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
 
 @Repository
 public class DDOInfoRepoImpl implements DDOInfoRepo {
@@ -175,6 +175,32 @@ public class DDOInfoRepoImpl implements DDOInfoRepo {
 	public void update(OrgUserMst orgUserMst) {
 		Session currentSession = entityManager.unwrap(Session.class);
 		currentSession.update(orgUserMst);
+	}
+	@Override
+	public Long validateAccNo(String accNo, OrgUserMst messages) {
+		Session currentSession = entityManager.unwrap(Session.class);
+		String hql = "select count(*) as count from org_ddo_mst where account_no = '" + accNo
+				+ "' and ddo_code != '" +  messages.getDdoCode()+"'";
+		Query query = currentSession.createNativeQuery(hql).addScalar("count", Long.class);
+		return (Long) query.uniqueResult();
+	}
+
+	@Override
+	public Long validateTelephone(String telPhone, OrgUserMst messages) {
+		Session currentSession = entityManager.unwrap(Session.class);
+		String hql = "select count(*) as count from MST_DCPS_DDO_OFFICE where TEL_NO1 = " + telPhone
+				+ " and ddo_code != '" +  messages.getDdoCode()+"'";
+		Query query = currentSession.createNativeQuery(hql).addScalar("count", Long.class);
+		return (Long) query.uniqueResult();
+	}
+
+	@Override
+	public Long validateEmailAdd(String email, OrgUserMst messages) {
+		Session currentSession = entityManager.unwrap(Session.class);
+		String hql = "select count(*) as count from MST_DCPS_DDO_OFFICE where EMAIL = " + email
+				+ " and ddo_code != '" +  messages.getDdoCode()+"'";
+		Query query = currentSession.createNativeQuery(hql).addScalar("count", Long.class);
+		return (Long) query.uniqueResult();
 	}
 
 

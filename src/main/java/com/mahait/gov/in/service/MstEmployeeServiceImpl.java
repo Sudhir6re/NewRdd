@@ -1939,6 +1939,41 @@ public class MstEmployeeServiceImpl implements MstEmployeeService {
 		return mstEmployeeRepo.getDesigsForPFDAndCadre(cadre,fieldDept);
 	}
 
+	@Override
+	public Long validateAccountNum(String accountNum, String employeeid) {
+		return mstEmployeeRepo.validateAccountNum(accountNum,employeeid);
+	}
+
+	@Override
+	public Long validateUIDUniq(String uid, String employeeid) {
+		return mstEmployeeRepo.validateUIDUniq(uid,employeeid);
+	}
+
+	@Override
+	public Long validateTelephone(String telphone, String employeeid) {
+		return mstEmployeeRepo.validateTelephone(telphone,employeeid);
+	}
+
+	@Override
+	public Long validateMobileno(Long mobno, String employeeid) {
+		return mstEmployeeRepo.validateMobileno(mobno,employeeid);
+	}
+
+	@Override
+	public Long validateEmail(String email, String employeeid) {
+		return mstEmployeeRepo.validateEmail(email,employeeid);
+	}
+
+	@Override
+	public Long validatePancard(String panno, String employeeid) {
+		return mstEmployeeRepo.validatePancard(panno,employeeid);
+	}
+
+	@Override
+	public Long validatePranNo(String pranno, String employeeid) {
+		return mstEmployeeRepo.validatePranNo(pranno,employeeid);
+	}
+
 	
 	
 	

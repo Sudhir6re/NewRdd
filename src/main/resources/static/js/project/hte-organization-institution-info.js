@@ -161,10 +161,119 @@ $("#cmbcity").change(function() //cmbOfficeCityClass
 		 			    	}
 		 			 });	
 		     	 }
-		     	 
-		     	
-		     		
 		 });
+		 
+		 
+		 
+		 $("#txtAccountNo").blur(function() //cmbOfficeCityClass
+		 		 {
+		 		 	  var accNo = $("#txtAccountNo").val();
+		 		     	 if (city != '') 
+		 		     	 {
+		 		     		 $.ajax({
+		 		 			      type: "GET",
+		 		 			      url: context+"/ddoast/validateAccNo/"+accNo,
+		 		 			      async: true,
+		 		 			      contentType:'application/json',
+		 		 			      error: function(data){
+		 		 			    	 //console.log(data);
+		 		 			      },
+		 		 			     beforeSend : function(){
+		 		 					$( "#loaderMainNew").show();
+		 		 					},
+		 		 				complete : function(data){
+		 		 					$( "#loaderMainNew").hide();
+		 		 				},
+		 		 			      success: function(data){
+									if (data > 0) {
+
+																swal('Entered Account no number: '
+																		+ accNo
+																		+ ' is already present in system. Please enter correct Account number.');
+
+																document.getElementById("txtAccountNo").value = "";
+																status = false;
+															}
+		 		 			    	
+		 		 			    	}
+		 		 			 });	
+		 		     	 }
+		 		 });
+
+				 
+				 
+				 $("#txtTelNo2").blur(function() //cmbOfficeCityClass
+				 	 		 {
+				 	 		 	  var telPhone = $("#txtTelNo2").val();
+				 	 		     	 if (city != '') 
+				 	 		     	 {
+				 	 		     		 $.ajax({
+				 	 		 			      type: "GET",
+				 	 		 			      url: context+"/ddoast/validateTelPhone/"+telPhone,
+				 	 		 			      async: true,
+				 	 		 			      contentType:'application/json',
+				 	 		 			      error: function(data){
+				 	 		 			    	 //console.log(data);
+				 	 		 			      },
+				 	 		 			     beforeSend : function(){
+				 	 		 					$( "#loaderMainNew").show();
+				 	 		 					},
+				 	 		 				complete : function(data){
+				 	 		 					$( "#loaderMainNew").hide();
+				 	 		 				},
+				 	 		 			      success: function(data){
+				 								if (data > 0) {
+
+				 															swal('Entered Telephone  number: '
+				 																	+ telPhone
+				 																	+ ' is already present in system. Please enter correct telepphone number.');
+
+				 															document.getElementById("txtTelNo2").value = "";
+				 															status = false;
+				 														}
+				 	 		 			    	
+				 	 		 			    	}
+				 	 		 			 });	
+				 	 		     	 }
+				 	 		 });
+
+							 
+							 
+							 
+							 $("#txtEmail").blur(function() //cmbOfficeCityClass
+							 	 		 {
+							 	 		 	  var email = $("#txtEmail").val();
+							 	 		     	 if (city != '') 
+							 	 		     	 {
+							 	 		     		 $.ajax({
+							 	 		 			      type: "GET",
+							 	 		 			      url: context+"/ddoast/validateEmailAdd/"+email,
+							 	 		 			      async: true,
+							 	 		 			      contentType:'application/json',
+							 	 		 			      error: function(data){
+							 	 		 			    	 //console.log(data);
+							 	 		 			      },
+							 	 		 			     beforeSend : function(){
+							 	 		 					$( "#loaderMainNew").show();
+							 	 		 					},
+							 	 		 				complete : function(data){
+							 	 		 					$( "#loaderMainNew").hide();
+							 	 		 				},
+							 	 		 			      success: function(data){
+							 								if (data > 0) {
+
+							 															swal('Entered Email: '
+							 																	+ email
+							 																	+ ' is already present in system. Please enter correct Email.');
+
+							 															document.getElementById("txtEmail").value = "";
+							 															status = false;
+							 														}
+							 	 		 			    	
+							 	 		 			    	}
+							 	 		 			 });	
+							 	 		     	 }
+							 	 		 });
 
 
 

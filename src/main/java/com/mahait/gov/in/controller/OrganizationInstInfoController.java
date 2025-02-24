@@ -193,6 +193,9 @@ public class OrganizationInstInfoController  extends BaseController {
 	public ResponseEntity<Object> getIfscCodeByBranchId(@PathVariable int branchId) {
 		return ResponseEntity.ok(commonHomeMethodsService.getIfscCodeByBranchId(branchId));
 	}
+	
+	
+	
 
 	
 }

@@ -208,4 +208,22 @@ public class DDOInfoServiceImpl implements DDOInfoService{
 		// TODO Auto-generated method stub
 		///return ddoInfoRepo.getLevel1DDOList(lStrDdoCode);
 	}
+
+	@Override
+	public Long validateAccNo(String accNo, OrgUserMst messages) {
+		// TODO Auto-generated method stub
+		return ddoInfoRepo.validateAccNo( accNo,  messages);
+	}
+
+	@Override
+	public Long validateTelephone(String telPhone, OrgUserMst messages) {
+		// TODO Auto-generated method stub
+		return ddoInfoRepo.validateTelephone(telPhone,messages);
+	}
+
+	@Override
+	public Long validateEmailAdd(String email, OrgUserMst messages) {
+		// TODO Auto-generated method stub
+		return ddoInfoRepo.validateEmailAdd(email,messages);
+	}
 }

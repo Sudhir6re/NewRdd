@@ -2856,7 +2856,7 @@ function validateUIDUniqe() {
 			$
 					.ajax({
 						type : "GET",
-						url : "validateUIDUniqeness/" + UID +"/"+employeeId,
+						url : contextPath+"/ddoast/validateUIDUniqeness/" + UID +"/"+employeeId,
 						async : true,
 						contentType : 'application/json',
 						error : function(data) {
@@ -2935,7 +2935,7 @@ function validateMobileUniqe() {
 			$
 					.ajax({
 						type : "GET",
-						url : "validateMobileno/" + mobileno+"/"+employeeId,
+						url : contextPath+"/ddoast/validateMobileno/" + mobileno+"/"+employeeId,
 						async : true,
 						contentType : 'application/json',
 						error : function(data) {
@@ -2979,7 +2979,7 @@ function validateTelePhoneUniqe() {
 			$
 					.ajax({
 						type : "GET",
-						url : "validateTelephone/" + telephoneno+"/"+employeeId,
+						url : contextPath+"/ddoast/validateTelephone/" + telephoneno+"/"+employeeId,
 						async : true,
 						contentType : 'application/json',
 						error : function(data) {
@@ -3023,7 +3023,7 @@ function validateEmailUniqe() {
 			$
 					.ajax({
 						type : "GET",
-						url : "validateEmail/" + email+"/"+employeeId,
+						url : contextPath+"/ddoast/validateEmail/" + email+"/"+employeeId,
 						async : true,
 						contentType : 'application/json',
 						error : function(data) {
@@ -3061,7 +3061,7 @@ function validatePanUniqe() {
 			$
 					.ajax({
 						type : "GET",
-						url : "validatePancard/" + panno+"/"+employeeId,
+						url : contextPath+"/ddoast/validatePancard/" + panno+"/"+employeeId,
 						async : true,
 						contentType : 'application/json',
 						error : function(data) {
@@ -3085,6 +3085,50 @@ function validatePanUniqe() {
 										+ ' is already present in system. Please enter correct PAN number.');
 
 								document.getElementById("panNo").value = "";
+								status = false;
+							}
+							return status;
+						}
+					});
+		}
+	}
+
+function validatePranUniqe() {
+	// alert('inside validateUIDUniqe');
+	var pranno = document.getElementById("pranNo").value;
+	var employeeId = document.getElementById("employeeId").value;
+	if (employeeId == "" || employeeId == null) {
+		employeeId='0';
+	}
+	
+		if (pranno != '') {
+			$
+					.ajax({
+						type : "GET",
+						url : contextPath+"/ddoast/validatePranNo/" + pranno+"/"+employeeId,
+						async : true,
+						contentType : 'application/json',
+						error : function(data) {
+						},
+						beforeSend : function(){
+							$( "#loaderMainNew").show();
+							},
+						complete : function(data){
+							$( "#loaderMainNew").hide();
+						},	
+						success : function(data) {
+							var len = data.length;
+							var checkFlag = data;
+							if (checkFlag == 0) {
+								$('#pranNo').val(panno);
+								status = true;
+							} else if (checkFlag > 0) {
+
+								swal('Entered PRAN number: '
+										+ pranno
+										+ ' is already present in system. Please enter correct PRAN number.');
+
+								document.getElementById("pranno").value = "";
 								status = false;
 							}
 							return status;

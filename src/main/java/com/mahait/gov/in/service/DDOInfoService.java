@@ -43,4 +43,10 @@ public interface DDOInfoService {
 		DdoOffice updateApproveRejectStatus(String ddoCode, int flag, String cityClass);
 
 		List<NewRegDDOModel> getLstTown();
+
+		Long validateAccNo(String accNo, OrgUserMst messages);
+
+		Long validateTelephone(String telPhone, OrgUserMst messages);
+
+		Long validateEmailAdd(String email, OrgUserMst messages);
 }

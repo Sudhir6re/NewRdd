@@ -1466,9 +1466,58 @@ public class EmployeeConfigurationController extends BaseController {
 		return ResponseEntity.ok(lstMstDesignationEntity);
 	}
 	
+	@RequestMapping("/validateAccountNum/{accountNum}/{employeeId}")
+	public ResponseEntity<Long> validateAccountNum(@PathVariable String accountNum, @PathVariable String employeeId,
+			Model model, Locale locale) {
+		Long status = mstEmployeeService.validateAccountNum(accountNum, employeeId);
+		return ResponseEntity.ok(status);
+	}
+	@RequestMapping("/validateUIDUniqeness/{uid}/{employeeId}")
+	public ResponseEntity<Long> validateUIDUniq(@PathVariable String uid, @PathVariable String employeeId,
+			Model model, Locale locale) {
+		Long status = mstEmployeeService.validateUIDUniq(uid, employeeId);
+		return ResponseEntity.ok(status);
+	}
+
+	@RequestMapping("/validateTelephone/{telphone}/{employeeid}")
+	public ResponseEntity<Long> validateTelephone(@PathVariable String telphone, @PathVariable String employeeid,
+			Model model, Locale locale) {
+		Long status = mstEmployeeService.validateTelephone(telphone, employeeid);
+		return ResponseEntity.ok(status);
+	}
+
+
+	@RequestMapping("/validateMobileno/{mobileno}/{employeeId}")
+	public ResponseEntity<Long> validateMobileno(@PathVariable String mobileno, @PathVariable String employeeId,
+			Model model, Locale locale) {
+		Long mobno;
+		mobno = Long.valueOf(mobileno.toString());
+		Long status =  mstEmployeeService.validateMobileno(mobno, employeeId);
+		return ResponseEntity.ok(status);
+	}
+
+	@RequestMapping("/validateEmail/{email}/{employeeId}")
+	public ResponseEntity<Long> validateEmail(@PathVariable String email, @PathVariable String employeeId,
+			Model model, Locale locale) {
+		Long status = mstEmployeeService.validateEmail(email, employeeId);
+		return ResponseEntity.ok(status);
+	}
+
+
+	@RequestMapping("/validatePancard/{panno}/{employeeId}")
+	public ResponseEntity<Long> validatePancard(@PathVariable String panno, @PathVariable String employeeId,
+			Model model, Locale locale) {
+		Long status = mstEmployeeService.validatePancard(panno, employeeId);
+		return ResponseEntity.ok(status);
+	}
 	
+	@RequestMapping("/validatePranNo/{pranno}/{employeeId}")
+	public ResponseEntity<Long> validatePranNo(@PathVariable String pranno, @PathVariable String employeeId,
+			Model model, Locale locale) {
+		Long status = mstEmployeeService.validatePranNo(pranno, employeeId);
+		return ResponseEntity.ok(status);
+	}
 	
-	//List<MstEmployeeModel> employeeConfigurationService = mstEmployeeService.getDcpsEmployeeDetails(strddo,locale.getLanguage(), locId,messages);
 	
 	
 

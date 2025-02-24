@@ -50,4 +50,10 @@ public interface DDOInfoRepo {
 
 	void update(OrgUserMst orgUserMst);
 
+	Long validateAccNo(String accNo, OrgUserMst messages);
+
+	Long validateTelephone(String telPhone, OrgUserMst messages);
+
+	Long validateEmailAdd(String email, OrgUserMst messages);
+
 }
