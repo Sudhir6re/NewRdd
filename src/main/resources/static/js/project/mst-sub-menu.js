@@ -120,10 +120,16 @@ $("form[name='mstSubMenu']").validate({
 		  			console.log(data);
 		  		if(data){
 		  			$('#url').text(data.roleDescription);
+					
 		  		}
 		  			
 		  	     }
 		  	 });
 	}
 	
+	
+	
+	$("#url").click(function(){
+		$("#linkName").val($("#url").text());
+		});
   	

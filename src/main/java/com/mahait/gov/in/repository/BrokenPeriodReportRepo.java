@@ -12,7 +12,7 @@ public interface BrokenPeriodReportRepo {
 
 	List<Map<String, Object>> getbrokenPeriodDetails(Integer month, Integer year, String strddo, Long billNumber);
 
-	List<Object[]> getbrokenPeriodvalue(BigInteger brokenPeriodId, String sevaarthId);
+	List<Object[]> getbrokenPeriodvalue(Long long1, String sevaarthId);
 
 	Long findbillsize(int monthName, int yearName, Long billNumber, String ddoCode);
 

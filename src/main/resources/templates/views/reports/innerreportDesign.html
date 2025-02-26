@@ -513,7 +513,10 @@ body {font-family: Verdana }.TableBorderN {border-style: solid;border-color: gre
 										th:each="alnetamtRow,iterationStatus : ${innerrptPagerow.alnetamt}">
 										<td colspan="1" valign="middle"
 										class="TableRowFieldBBN TableRowFieldRBN Label2"
-										style="font-weight: bold;"><span th:text="${alnetamtRow}"></span>
+										style="font-weight: bold;">
+										
+									<!-- 	<span th:text="${alnetamtRow.netAmnt}"  th:style="${style}"></span> -->
+										<span th:text="${alnetamtRow}" ></span>
 									</td>
 									</span>
 								</tr>

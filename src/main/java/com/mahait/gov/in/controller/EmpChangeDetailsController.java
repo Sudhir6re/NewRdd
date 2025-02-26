@@ -357,7 +357,7 @@ public class EmpChangeDetailsController extends BaseController {
 			}
 		}
 
-		if (empChangeDetailsModel.getPayscalelevelId() != null  )
+		if (empChangeDetailsModel.getPayscalelevelId() != null  && empChangeDetailsModel.getPayCommissionCode() == 700005)
 			if (!empChangeDetailsModel.getPayscalelevelId().equals("")&& !empChangeDetailsModel.getPayscalelevelId().equals("0"))
 				lstsvnbasicpay = mstEmployeeService
 						.findEmployeeConfigurationGetsvnbasicpay(empChangeDetailsModel.getPayscalelevelId());

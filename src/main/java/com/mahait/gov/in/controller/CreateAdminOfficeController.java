@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.JsonObject;
@@ -30,6 +31,7 @@ import com.mahait.gov.in.service.CreateAdminOfficeService;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import reactor.core.publisher.Mono;
 
 @RequestMapping("/mdc")
 @Controller
@@ -87,7 +89,9 @@ public class CreateAdminOfficeController extends BaseController {
 
 		List<Object[]> adminOfcLst = createAdminOfficeService.retriveDisctOfcList(messages, "");
 		model.addAttribute("adminOfcLst", adminOfcLst);
-
+		
+		zpRltDdoMapModel.setRadioFinalLevel("3");
+		
 		// model.addAttribute("lstZpRltDdoMapModel", lstZpRltDdoMapModel);
 
 		String districtName = null;
@@ -136,7 +140,7 @@ public class CreateAdminOfficeController extends BaseController {
 		if (requestData.containsKey("districtId") && requestData.get("districtId") != null) {
 			districtId = (String) requestData.get("districtId");
 		}
-		if (requestData.containsKey("stateId") && requestData.get("stateId") != null) {
+		if (requestData.containsKey("talukaId") && requestData.get("talukaId") != null) {
 			talukaId = (String) requestData.get("talukaId");
 		}
 		if (requestData.containsKey("cmbAdminType") && requestData.get("cmbAdminType") != null) {
@@ -210,7 +214,35 @@ public class CreateAdminOfficeController extends BaseController {
 	}
 	
 	
+	@RequestMapping(value = "/isValidLevel2Ddo/{reptDdoCode}", consumes = {
+	"application/json" }, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Long> isValidLevel2Ddo(@PathVariable String reptDdoCode) {
+		Long  response1 = createAdminOfficeService.isValidLevel2Ddo(reptDdoCode);
+		return ResponseEntity.ok(response1);
+	}
 	
+	@RequestMapping(value = "/isValidLevel3Ddo/{finalDdoCode}", consumes = {
+	"application/json" }, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Long> isValidLevel3Ddo(@PathVariable String finalDdoCode) {
+		Long  response1 = createAdminOfficeService.isValidLevel3Ddo(finalDdoCode);
+		return ResponseEntity.ok(response1);
+	}
 	
+	@RequestMapping("/validateMobNo/{telPhone}")
+	public ResponseEntity<Long> validateMobNo(@PathVariable String mobNo,
+			Model model, Locale locale, HttpSession session) {
+		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");
+		Long status = createAdminOfficeService.validateMobNo(mobNo, messages);
+		return ResponseEntity.ok(status);
+	}
+
+
+	@RequestMapping("/validateEmailAdd/{email}")
+	public ResponseEntity<Long> validateEmailAdd(@PathVariable String email, @PathVariable String employeeId,
+			Model model, Locale locale, HttpSession session) {
+		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");
+		Long status = createAdminOfficeService.validateEmailAdd(email, messages);
+		return ResponseEntity.ok(status);
+	}
 
 }

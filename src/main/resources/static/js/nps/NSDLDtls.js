@@ -66,7 +66,7 @@ $("#Search").click(function(e){
 			$("#loaderMainNew").show();
     		 $.ajax({
 			      type: "GET",
-			      url: "../ddo/getNSDLEmpDtls/"+month+"/"+year,
+			      url: context+"/level3/getNSDLEmpDtls/"+month+"/"+year,
 			      async: true,
 			      contentType:'application/json',
 			      error: function(data){
@@ -159,10 +159,10 @@ $("#Search").click(function(e){
 
 		console.log(pathArray[0]);
 		
-		var path=pathArray[0]+"/ddo/NSDLEmpWiseReport/"+filename;
+		var path=pathArray[0]+"/level3/NSDLEmpWiseReport/"+filename;
 		console.log(path);
 
-		window.location.href=pathArray[0]+"/ddo/NSDLEmpWiseReport/"+filename;
+		window.location.href=pathArray[0]+"/level3/NSDLEmpWiseReport/"+filename;
 
 
 }
@@ -197,7 +197,7 @@ $("#filterDdoData").click(function(e) {
 		var appRootPath=$("#appRootPath").val();
 		appRootPath=appRootPath.trim();
 		$( "#loaderMainNew").show();
-		$("#frmDCPSMatchedEntries").attr("action",appRootPath+"/ddo/NSDLinput");
+		$("#frmDCPSMatchedEntries").attr("action",appRootPath+"/level3/NSDLinput");
 	}
 });
 
@@ -222,7 +222,7 @@ $("#btnSearch").click(function(e) {
 		$.ajax({
 			type : "GET",
 		    //url: context+"/ddo/searchDdoWiseContribution",
-		    url: context+"/ddo/searchDdoWiseContribution/"+month+"/"+year,
+		    url: context+"/level3/searchDdoWiseContribution/"+month+"/"+year,
 			async : true,
 			//data: { ddoCode1: ddoCode1 ,BillNo:BillNo,Dsgn:Dsgn,lPostName:""},
 			contentType : 'application/json',
@@ -293,7 +293,7 @@ $("#btnSearch").click(function(e) {
   	 		$("#loaderMainNew").show();
    		 $.ajax({
 			      type: "GET",
-			      url: "../ddo/getNSDLEmpDtlsForGenerate/"+month+"/"+year,
+			      url: "../level3/getNSDLEmpDtlsForGenerate/"+month+"/"+year,
 			      async: true,
 			      contentType:'application/json',
 			      error: function(data){
@@ -366,10 +366,10 @@ $("#btnSearch").click(function(e) {
 
 		console.log(pathArray[0]);
 		
-		var path=pathArray[0]+"/ddo/NSDLDDOWiseReport/"+ddoCode;
+		var path=pathArray[0]+"/level3/NSDLDDOWiseReport/"+ddoCode;
 		console.log(path);
 
-		window.location.href=pathArray[0]+"/ddo/NSDLDDOWiseReport/"+ddoCode;
+		window.location.href=pathArray[0]+"/level3/NSDLDDOWiseReport/"+ddoCode;
 
 
 }
@@ -403,7 +403,7 @@ $("#btnSearch").click(function(e) {
 			$("#loaderMainNew").show();
 			  $.ajax({
 			        type: 'GET',
-			        url: "../ddo/viewAndSaveFile/"+month+"/"+year+"/"+treasuryId+"/"+fileId,
+			        url: "../level3/viewAndSaveFile/"+month+"/"+year+"/"+treasuryId+"/"+fileId,
 			        xhrFields: {
 				           responseType: 'blob'
 				       },
@@ -450,7 +450,7 @@ $("#btnSearch").click(function(e) {
 			swal("Please Select Atleast one batch file !!!");
 			event.preventDefault();
 		}else{
-			$("#contributionList").attr("action", context+"/ddo/sendContriFile");
+			$("#contributionList").attr("action", context+"/level3/sendContriFile");
 		}		
 	});
 	
@@ -460,7 +460,7 @@ $("#btnSearch").click(function(e) {
 			swal("Please Select Atleast one batch file !!!");
 			event.preventDefault();
 		}else{
-			$("#contributionList").attr("action", context+"/ddo/getNpsFileContriTranId");
+			$("#contributionList").attr("action", context+"/level3/getNpsFileContriTranId");
 		}	
 	});
 	

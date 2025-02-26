@@ -32,8 +32,6 @@ public class CreateAdminOfficeRepoImpl implements CreateAdminOfficeRepo {
 	@Override
 	public List<Object[]> getAllDDOOfficeDtlsData(String districtName, String talukaNametName, String adminType) {
 		List list = null;
-
-		
 		Session hibSession = entityManager.unwrap(Session.class);
 		StringBuffer strQuery = new StringBuffer();
 		strQuery.append(
@@ -239,13 +237,59 @@ public class CreateAdminOfficeRepoImpl implements CreateAdminOfficeRepo {
 		String ddoCode = null;
 		Session currentSession = entityManager.unwrap(Session.class);
 		StringBuffer sb = new StringBuffer();
-		//sb.append("select DDO_CODE from ZP_LVL3_MST where"
-			//	+ " DIST_ID=(select  cast(DIST_CODE as integer) from ZP_ADMIN_OFFICE_DISTRICT_MPG where DIST_ID=" + distOfcId + ")");
 		sb.append("select final_ddo_code from rlt_zp_ddo_map where rept_ddo_code='"+reptDdoCode+"' limit 1");
 		Query query = currentSession.createNativeQuery(sb.toString(),String.class);
 		ddoCode = query.getSingleResult().toString();
 		logger.info("level3ddocode" + ddoCode);
 		return ddoCode;
+	}
+
+	@Override
+	public Long isValidLevel2Ddo(String reptDdoCode) {
+		Long count = 0l;
+		Session currentSession = entityManager.unwrap(Session.class);
+		StringBuffer sb = new StringBuffer();
+		sb.append("select count(*) from rlt_zp_ddo_map where rept_ddo_code='"+reptDdoCode+"' ");
+		Query query = currentSession.createNativeQuery(sb.toString(),Long.class);
+		count = (Long) query.getSingleResult();
+		logger.info("reptDdoCode" + count);
+		return count;
+	}
+
+	@Override
+	public Long isValidLevel3Ddo(String finalDdoCode) {
+		Long count = 0l;
+		Session currentSession = entityManager.unwrap(Session.class);
+		StringBuffer sb = new StringBuffer();
+		sb.append("select count(*) from rlt_zp_ddo_map where final_ddo_code='"+finalDdoCode+"' ");
+		Query query = currentSession.createNativeQuery(sb.toString(),Long.class);
+		count = (Long) query.getSingleResult();
+		logger.info("finalDdoCode" + count);
+		return count;
+	}
+
+	@Override
+	public Long validateMobNo(String mobNo) {
+		Long count = 0l;
+		Session currentSession = entityManager.unwrap(Session.class);
+		StringBuffer sb = new StringBuffer();
+		sb.append("select count(*) from MST_DCPS_DDO_OFFICE where TEL_NO1="+Long.valueOf(mobNo));
+		Query query = currentSession.createNativeQuery(sb.toString(),Long.class);
+		count = (Long) query.getSingleResult();
+		logger.info("TEL_NO1" + count);
+		return count;
+	}
+
+	@Override
+	public Long validateEmailAdd(String email) {
+		Long count = 0l;
+		Session currentSession = entityManager.unwrap(Session.class);
+		StringBuffer sb = new StringBuffer();
+		sb.append("select count(*) from MST_DCPS_DDO_OFFICE where EMAIL='"+email+"' ");
+		Query query = currentSession.createNativeQuery(sb.toString(),Long.class);
+		count = (Long) query.getSingleResult();
+		logger.info("EMAIL" + count);
+		return count;
 	}
 
 }

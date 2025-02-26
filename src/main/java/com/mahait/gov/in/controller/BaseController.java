@@ -34,6 +34,10 @@ public abstract class BaseController {
 				modelAndView.addObject("subMenuList", subMenuList);
 			}
 		}
+		
+		modelAndView.addObject("lstGetAllMonths", commonHomeMethodsService.lstGetAllMonths());
+		modelAndView.addObject("lstGetAllYear", commonHomeMethodsService.lstGetAllYears());
+		
 		modelAndView.addObject("levelRoleVal", levelRoleVal);
 		modelAndView.addObject("today", new Date());
 		modelAndView.addObject("appRootPath", getAppRootPath());
@@ -61,6 +65,9 @@ public abstract class BaseController {
 		model.addAttribute("request", getAppRootPath());
 		model.addAttribute("session", getAppRootPath());
 		model.addAttribute("servletContext", getAppRootPath());
+		
+		model.addAttribute("lstGetAllMonths", commonHomeMethodsService.lstGetAllMonths());
+		model.addAttribute("lstGetAllYear", commonHomeMethodsService.lstGetAllYears());
 
 		model.addAttribute("request", request);
 		model.addAttribute("session", request.getSession());

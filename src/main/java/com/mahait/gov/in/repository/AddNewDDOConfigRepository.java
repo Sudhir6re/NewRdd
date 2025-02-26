@@ -420,12 +420,15 @@ public class AddNewDDOConfigRepository {
 	}
 
 	public void insertMstDcpsDdoOffice(String lStrDdoCode, String lStrDdoOffice, String lStrDistCode, Long lLngLocId,
-			Long lLngUserIdCrtd, Long lLngPostIdCrtd, OrgUserMst orgUserMst) {
+			Long lLngUserIdCrtd, Long lLngPostIdCrtd, OrgUserMst orgUserMst, String mobNo, String email) {
 		Session ghibSession = entityManager.unwrap(Session.class);
 		Long lLngMstOfficeDdoId = null;
 
+		if(mobNo==null) {
+			mobNo="0";
+		}
+		
 		try {
-
 			DdoOffice lObjDdoOffice = new DdoOffice();
 			lObjDdoOffice.setDcpsDdoCode(lStrDdoCode);
 			lObjDdoOffice.setDcpsDdoOfficeName(lStrDdoOffice);
@@ -434,7 +437,8 @@ public class AddNewDDOConfigRepository {
 			lObjDdoOffice.setDcpsDdoOfficeDistrict(lStrDistCode);
 			lObjDdoOffice.setLangId(1l);
 			lObjDdoOffice.setLocId(lLngLocId);
-
+			lObjDdoOffice.setDcpsDdoOfficeEmail(email);
+			lObjDdoOffice.setDcpsDdoOfficeTelNo1(Long.valueOf(mobNo));
 			lObjDdoOffice.setDbId(99l);
 			lObjDdoOffice.setPostId(lLngPostIdCrtd);
 			lObjDdoOffice.setUserId(lLngUserIdCrtd);

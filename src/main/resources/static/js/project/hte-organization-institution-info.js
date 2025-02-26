@@ -43,6 +43,7 @@ $("#cmbBankName").change(function()
 		 			      contentType:'application/json',
 		 			      error: function(data){
 		 			    	 //console.log(data);
+							 $( "#loaderMainNew").hide();
 		 			      },
 		 			     beforeSend : function(){
 		 					$( "#loaderMainNew").show();
@@ -95,6 +96,7 @@ $("#cmbBranchName").change(function()
 		 			      contentType:'application/json',
 		 			      error: function(data){
 		 			    	 //console.log(data);
+							 $( "#loaderMainNew").hide();
 		 			      },
 		 			     beforeSend : function(){
 		 					$( "#loaderMainNew").show();
@@ -146,6 +148,7 @@ $("#cmbcity").change(function() //cmbOfficeCityClass
 		 			      contentType:'application/json',
 		 			      error: function(data){
 		 			    	 //console.log(data);
+							 $( "#loaderMainNew").hide();
 		 			      },
 		 			     beforeSend : function(){
 		 					$( "#loaderMainNew").show();
@@ -177,6 +180,7 @@ $("#cmbcity").change(function() //cmbOfficeCityClass
 		 		 			      contentType:'application/json',
 		 		 			      error: function(data){
 		 		 			    	 //console.log(data);
+									 $( "#loaderMainNew").hide();
 		 		 			      },
 		 		 			     beforeSend : function(){
 		 		 					$( "#loaderMainNew").show();
@@ -192,7 +196,6 @@ $("#cmbcity").change(function() //cmbOfficeCityClass
 																		+ ' is already present in system. Please enter correct Account number.');
 
 																document.getElementById("txtAccountNo").value = "";
-																status = false;
 															}
 		 		 			    	
 		 		 			    	}
@@ -214,6 +217,7 @@ $("#cmbcity").change(function() //cmbOfficeCityClass
 				 	 		 			      contentType:'application/json',
 				 	 		 			      error: function(data){
 				 	 		 			    	 //console.log(data);
+												 $( "#loaderMainNew").hide();
 				 	 		 			      },
 				 	 		 			     beforeSend : function(){
 				 	 		 					$( "#loaderMainNew").show();
@@ -229,7 +233,6 @@ $("#cmbcity").change(function() //cmbOfficeCityClass
 				 																	+ ' is already present in system. Please enter correct telepphone number.');
 
 				 															document.getElementById("txtTelNo2").value = "";
-				 															status = false;
 				 														}
 				 	 		 			    	
 				 	 		 			    	}
@@ -252,6 +255,7 @@ $("#cmbcity").change(function() //cmbOfficeCityClass
 							 	 		 			      contentType:'application/json',
 							 	 		 			      error: function(data){
 							 	 		 			    	 //console.log(data);
+															 $( "#loaderMainNew").hide();
 							 	 		 			      },
 							 	 		 			     beforeSend : function(){
 							 	 		 					$( "#loaderMainNew").show();
@@ -267,7 +271,6 @@ $("#cmbcity").change(function() //cmbOfficeCityClass
 							 																	+ ' is already present in system. Please enter correct Email.');
 
 							 															document.getElementById("txtEmail").value = "";
-							 															status = false;
 							 														}
 							 	 		 			    	
 							 	 		 			    	}

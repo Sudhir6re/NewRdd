@@ -173,7 +173,7 @@ public class BrokenPeriodReportServiceImpl implements BrokenPeriodReportService 
 			if(i<=empsize) {
 				Map<String, Object> map = (Map<String, Object>) iterator1.next();
 				row = new ArrayList();
-				List <Object[]> lstempbrokendata=brokenPeriodReportRepo.getbrokenPeriodvalue((BigInteger) map.get("broken_period_id"),map.get("sevaarth_id").toString());
+				List <Object[]> lstempbrokendata=brokenPeriodReportRepo.getbrokenPeriodvalue((Long) map.get("broken_period_id"),map.get("sevaarth_id").toString());
 				Map<Integer,Double> mapAllowanceCodeToAmount = new HashMap<>();
 				for (Object[] broken : lstempbrokendata) {
 					mapAllowanceCodeToAmount.put(Integer.parseInt(broken[0].toString()), Double.parseDouble(broken[1].toString()));
@@ -226,7 +226,7 @@ public class BrokenPeriodReportServiceImpl implements BrokenPeriodReportService 
 		if(i<=empsize) {
 			Map<String, Object> map = (Map<String, Object>) iterator2.next();
 			row = new ArrayList();
-			List <Object[]> lstempbrokendata=brokenPeriodReportRepo.getbrokenPeriodvalue((BigInteger) map.get("broken_period_id"),map.get("sevaarth_id").toString());
+			List <Object[]> lstempbrokendata=brokenPeriodReportRepo.getbrokenPeriodvalue((Long) map.get("broken_period_id"),map.get("sevaarth_id").toString());
 			Map<Integer,Double> mapAllowanceCodeToAmount = new HashMap<>();
 			for (Object[] broken : lstempbrokendata) {
 				mapAllowanceCodeToAmount.put(Integer.parseInt(broken[0].toString()), Double.parseDouble(broken[1].toString()));

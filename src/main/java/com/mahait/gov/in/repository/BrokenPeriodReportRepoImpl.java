@@ -1,6 +1,5 @@
 package com.mahait.gov.in.repository;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -65,7 +64,7 @@ public class BrokenPeriodReportRepoImpl implements BrokenPeriodReportRepo {
 	}
 
 	@Override
-	public List<Object[]> getbrokenPeriodvalue(BigInteger brokenid, String sevaarthId) {
+	public List<Object[]> getbrokenPeriodvalue(Long brokenid, String sevaarthId) {
 		Session currentSession = manager.unwrap(Session.class);
 
 		String HQL = " select allow_deduc_code,allow_deduc_amt from broken_period_allow_deduc_mst a inner join  employee_allowdeduc_mpg b ON a.allow_deduc_code=b.department_allowdeduc_code where broken_period_id  ="

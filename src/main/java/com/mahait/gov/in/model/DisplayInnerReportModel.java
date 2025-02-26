@@ -28,7 +28,11 @@ public class DisplayInnerReportModel implements Serializable {
 	private List lstdedectionag = new ArrayList();
 	private List lstdeducother = new ArrayList();
 	private List lstdeductrsy = new ArrayList();
-	private List alnetamt = new ArrayList();
+	
+	
+	private List<DisplayInnerReportModel> alnetamt = new ArrayList();
+	
+	
 	private List algrosstotal = new ArrayList();
 	private List algrosssale = new ArrayList();
 	private List algrossamt = new ArrayList();
@@ -41,6 +45,11 @@ public class DisplayInnerReportModel implements Serializable {
 	private List valoans = new ArrayList();
 	private List hbaloans = new ArrayList();
 	private List dcpsgpsno = new ArrayList();
+	
+	
+   private String style;
+   private String netAmnt;
+   
 	
 	
 	

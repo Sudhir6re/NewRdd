@@ -37,5 +37,13 @@ public interface CreateAdminOfficeRepo {
 
 	String findLevel3DdoCode(String distOfcId, String reptDdoCode);
 
+	Long isValidLevel2Ddo(String reptDdoCode);
+
+	Long isValidLevel3Ddo(String finalDdoCode);
+
+	Long validateMobNo(String mobNo);
+
+	Long validateEmailAdd(String email);
+
 
 }

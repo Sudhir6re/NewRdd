@@ -140,6 +140,72 @@ function loadLevel3DdoCode(){
 }
 
 
+function isValidLevel2Ddo(ddo){
+	var context = $("#appRootPath").val();
+	var distOfcId = $("#cmbDistOffice").val();
+	var reptDdoCode = $("#txtRepDDOCode").val();
+	var count=0;
+	
+	$( "#loaderMainNew").show();
+	$.ajax({
+	      type: "POST",
+	      url: context+"/mdc/isValidLevel2Ddo/"+reptDdoCode,
+	      async: false,
+	      contentType:'application/json',
+	      error: function(data){
+	    	  console.log(data);
+	      },
+		  	beforeSend : function(){
+				$( "#loaderMainNew").show();
+				},
+			complete : function(data){
+				$( "#loaderMainNew").hide();
+			},	
+	      success: function(data){
+			console.log(data);
+			count=data
+	     }
+	 });
+	 return count;
+}
+
+
+$("#txtFinalDDOCode").blur(function(){
+	var context = $("#appRootPath").val();
+	var distOfcId = $("#cmbDistOffice").val();
+	var finalDdoCode = $("#txtFinalDDOCode").val();
+	var count=0;
+	
+	$( "#loaderMainNew").show();
+	$.ajax({
+	      type: "POST",
+	      url: context+"/mdc/isValidLevel3Ddo/"+finalDdoCode,
+	      async: false,
+	      contentType:'application/json',
+	      error: function(data){
+	    	  console.log(data);
+	      },
+		  	beforeSend : function(){
+				$( "#loaderMainNew").show();
+				},
+			complete : function(data){
+				$( "#loaderMainNew").hide();
+			},	
+	      success: function(data){
+			console.log(data);
+			count=data
+			if(count==0){
+				swal("Enter Valid level 3 ddo code");
+				$("#txtFinalDDOCode").val("");
+			}
+	     }
+	 });
+ });
+
+
+
+
+
 
 
 
@@ -203,13 +269,14 @@ function populateTable(data) {
     	
     	
     	   if(status==0){
-    		   status= '<span class="btn btn-warning" >Pending</span>';
+    		   status= '<span class="label label-warning" >Pending</span>';
     	   }else if(status==1){
-    		   status= '<span  class="btn btn-succes" >Approved</span>';
+    		   status= '<span  class="label label-success" >Approved</span>';
     	   }else{
-    		   status= '<span  class="btn btn-danger >Rejected</span>';
+    		   status= '<span  class="label label-danger">Rejected</span>';
     	   }
-    	   
+		   
+		   
 		    var formattedDate = dateToDMY(createdDate);
 		    
 		    dataTable.fnAddData(
@@ -283,6 +350,13 @@ $("#txtRepDDOCode").blur(function(){
 	var context = $("#appRootPath").val();
 	var ddoCode=$("#txtRepDDOCode").val();
 	$( "#loaderMainNew").show();
+	
+	var count=isValidLevel2Ddo(ddoCode);
+	
+	if(count==0){
+		swal("Invalid Level2 ddo code  !!!");
+		$("#txtRepDDOCode").val("");
+	}else{
     $.ajax({
     	url : context+"/mdc/getddoInfo",
         type: 'GET',
@@ -322,6 +396,8 @@ $("#txtRepDDOCode").blur(function(){
         	swal("DDO Not Found")
         }
     });
+	}
+	
 });
 
 
@@ -650,5 +726,80 @@ function checkforHirechy() {
         $('#txtFinalDDOCode').prop('readonly', false);
     }
 }
+
+
+$("#txtMobileNo").blur(function() //cmbOfficeCityClass
+			 	 		 {
+			 	 		 	  var mobNo = $("#txtMobileNo").val();
+			 	 		     	 if (city != '') 
+			 	 		     	 {
+			 	 		     		 $.ajax({
+			 	 		 			      type: "GET",
+			 	 		 			      url: context+"/mdc/validateMobNo/"+mobNo,
+			 	 		 			      async: true,
+			 	 		 			      contentType:'application/json',
+			 	 		 			      error: function(data){
+			 	 		 			    	 //console.log(data);
+											 $( "#loaderMainNew").hide();
+			 	 		 			      },
+			 	 		 			     beforeSend : function(){
+			 	 		 					$( "#loaderMainNew").show();
+			 	 		 					},
+			 	 		 				complete : function(data){
+			 	 		 					$( "#loaderMainNew").hide();
+			 	 		 				},
+			 	 		 			      success: function(data){
+			 								if (data > 0) {
+
+			 															swal('Entered mobile  number: '
+			 																	+ mobNo
+			 																	+ ' is already present in system. Please enter correct mobile number.');
+
+			 															document.getElementById("txtMobileNo").value = "";
+			 														}
+			 	 		 			    	
+			 	 		 			    	}
+			 	 		 			 });	
+			 	 		     	 }
+			 	 		 });
+
+						 
+						 
+						 
+						 $("#txtEmailId").blur(function() //cmbOfficeCityClass
+						 	 		 {
+						 	 		 	  var email = $("#txtEmailId").val();
+						 	 		     	 if (city != '') 
+						 	 		     	 {
+						 	 		     		 $.ajax({
+						 	 		 			      type: "GET",
+						 	 		 			      url: context+"/mdc/validateEmailAdd/"+email,
+						 	 		 			      async: true,
+						 	 		 			      contentType:'application/json',
+						 	 		 			      error: function(data){
+						 	 		 			   $( "#loaderMainNew").hide();
+						 	 		 			      },
+						 	 		 			     beforeSend : function(){
+						 	 		 					$( "#loaderMainNew").show();
+						 	 		 					},
+						 	 		 				complete : function(data){
+						 	 		 					$( "#loaderMainNew").hide();
+						 	 		 				},
+						 	 		 			      success: function(data){
+						 								if (data > 0) {
+						 															swal('Entered Email: '
+						 																	+ email
+						 																	+ ' is already present in system. Please enter correct Email.');
+						 															document.getElementById("txtEmail").value = "";
+						 														}
+						 	 		 			    	
+						 	 		 			    	}
+						 	 		 			 });	
+						 	 		     	 }
+						 	 		 });
+
+
+
+
 
 

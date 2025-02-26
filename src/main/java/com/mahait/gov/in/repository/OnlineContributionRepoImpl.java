@@ -262,15 +262,19 @@ public class OnlineContributionRepoImpl implements OnlineContributionRepo {
 	@Override
 	public List<Object[]> findTreasuryList(OrgUserMst messages) {
 		Session currentSession = entityManager.unwrap(Session.class);
+		
 		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT LOC.LOC_ID,LOC.LOC_NAME FROM CMN_LOCATION_MST loc inner join ORG_DDO_MST org on substr(org.DDO_CODE,1,4)=cast(loc.LOC_ID as text)  ");
+		sb.append("WHERE LOC.DEPARTMENT_ID=100003 AND  org.LOCATION_CODE=:locationCode");		
+		
+	/*	StringBuilder sb = new StringBuilder();
 		sb.append(" select  b.loc_id,b.loc_name from RLT_DDO_ORG a");
 		sb.append(" inner join cmn_location_mst b on a.LOCATION_CODE=b.location_code");
-		sb.append(" where a.ddo_code=:ddo_code");
+		sb.append(" where a.ddo_code=:ddo_code");*/
 
 		Query query = currentSession.createNativeQuery(sb.toString());
-		query.setParameter("ddo_code", messages.getDdoCode());
+		query.setParameter("locationCode", messages.getLocId().toString());
 		return query.getResultList();
-
 	}
 
 	@Override

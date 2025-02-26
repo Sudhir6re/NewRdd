@@ -58,7 +58,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/ddo")
+@RequestMapping("/level3")
 public class NSDLDetailsController extends BaseController {
 	// protected final Log logger = LogFactory.getLog(getClass());
 	@Autowired

@@ -74,14 +74,14 @@ public class GPFAbstractReportController  extends BaseController {
 
 		String officename = commonHomeMethodsService.getOffice(messages.getDdoCode());
 
-		BigInteger trsyCode = null;
+		Long trsyCode = null;
 		String trsyName = null;
 
 		List<Object[]> treasuryDtls = regularReportService.findTrsyDtls(messages.getDdoCode());
 
 		for (Object[] objects : treasuryDtls) {
 
-			trsyCode = (BigInteger) objects[0];
+			trsyCode = (Long) objects[0];
 			trsyName = (String) objects[1];
 
 		}
