@@ -403,7 +403,7 @@ section#banner {
 
 legend {
 	font-weight: 600;
-	font-size: 18px !important;
+	font-size: 16px !important;
 	border-color: orange !important;
 	width: 97% !important
 }
@@ -2427,4 +2427,7 @@ a.btn, input.btn, button.btn,.buttontag {
 }
 td input[type=date], td input[type=time], td input[type=datetime-local], td input[type=month] {
     line-height: normal !important;
+}
+.swal-title {
+    font-size: 14px !important;
 }

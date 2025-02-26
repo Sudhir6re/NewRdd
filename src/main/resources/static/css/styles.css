@@ -126,8 +126,13 @@ input:focus-visible, select:focus-visible {
 }
 
 .bg-success, .bg-warning, .bg-danger {
-	padding: 3px 10px;
+	padding: 0px 10px;
 }
 td {
     vertical-align: middle !important;
+}
+.tableHeadFixed thead {
+    position: sticky;
+    top: 0;
+    background: #ccc;
 }
