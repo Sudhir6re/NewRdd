@@ -39,14 +39,16 @@
 							<tr>
 								<th th:text="#{msg.thymeleaf.pagelabel.ddoCode}"></th>
 								<th th:text="#{msg.thymeleaf.pagelabel.ddocodelevel2}"></th>
+									<th th:text="#{msg.thymeleaf.pagelabel.ddocodelevel3}"></th>
 								<th th:text="#{msg.thymeleaf.pagelabel.hierarchylevel}"></th>
 								<th th:text="#{msg.thymeleaf.pagelabel.status}"></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="VarDDO : ${zpDDOOfficelst}">
-								<td><a><span th:text="${VarDDO.zpDdoCode}"></span></a></td>
-								<td style="text-align: left" th:text="${VarDDO.reptDdoCode}"></td>
+							<tr th:each="VarDDO,rowStat : ${zpDDOOfficelst}">
+								<td style="text-align: left" ><span th:text="${VarDDO.zpDdoCode}" th:data-srno="${rowStat.index}" th:id="|${rowStat.index}${VarDDO.zpDdoCode}|"   th:data="${VarDDO.zpDdoCode}"  th:data-ddocode="${VarDDO.zpDdoCode}"     class="ddoCode"></span></td>
+								<td style="text-align: left" ><span th:text="${VarDDO.reptDdoCode}"  th:data-srno="${rowStat.index}"  th:id="|${rowStat.index}${VarDDO.reptDdoCode}|"  th:data="${VarDDO.reptDdoCode}"  th:data-ddocode="${VarDDO.reptDdoCode}"  class="ddoCode"></span></td>
+								<td style="text-align: left"><span th:text="${VarDDO.finalDdoCode}"  th:data-srno="${rowStat.index}" th:id="|${rowStat.index}${VarDDO.finalDdoCode}|"  th:data="${VarDDO.finalDdoCode}"  th:data-ddocode="${VarDDO.finalDdoCode}"   class="ddoCode"></span></td>
 								<td style="text-align: left">2</td>
 								<td style="text-align: left"><a
 									th:href="@{'/ddo/approveRejectDtls/'+${VarDDO.zpDdoCode}}">Click
@@ -65,6 +67,67 @@
 		</div>
 	</div>
 	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script type="text/javascript">
+	$(document).ready(function() {
+	var contextPath = $("#appRootPath").val();
+	$('body').on('click', '.ddoCode', function() {
+	var field=$(this).attr("data");  
+	var srno=$(this).attr("data-srno");  
+	
+	var ddoCode=field;
+
+	$( "#loaderMainNew").show();
+	$.ajax({
+		type : "GET",
+		url : contextPath+"/ddo/fetchDdoDetails/" + ddoCode,
+		async : true,
+		contentType : 'application/json',
+		error : function(data) {
+			// console.log(data);
+			$( "#loaderMainNew").hide();
+		},
+		success : function(data) {
+			// console.log(data);
+			// alert(data);
+			var len = data.length;
+			$( "#loaderMainNew").hide();
+				var temp = data;
+				$
+						.each(
+								temp,
+								function(index,
+										value) {
+									console
+											.log(value[1]);
+									
+									setDDOdtls(value[0]+","+value[1], field, srno);
+								
+																							});
+		}
+	});
+});
+
+$('body').on('click', '.hideDdoCode', function() {
+	var field=$(this).attr("data-ddocode");  
+	var srno=$(this).attr("data-srno");  
+	 hideDtls(field, srno);
+});
+
+
+function setDDOdtls(myAjax, field, srno) {
+	var divId = srno.toString() + field.toString();
+	document.getElementById(divId).innerHTML = '<a   data-ddocode="'+field+'"  data-srno="'+srno+'"   class="hideDdoCode"  >'+ field+ '<br>'+ myAjax + '</a>';
+}
+
+function hideDtls(field, srno) {
+
+	var divId = srno.toString() + field.toString();
+	document.getElementById(divId).innerHTML = '<a   data-ddocode="'+field+'"  data-srno="'+srno+'"   class="ddoCode"   >' + field + '</a>';
+}
+});
+	
+	</script>
+	
 </body>
 
 </html>
