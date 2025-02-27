@@ -1,4 +1,4 @@
-package com.mahait.gov.in.service;
+package com.mahait.gov.in.controller;
 
 import java.math.BigInteger;
 import java.text.DecimalFormat;
@@ -15,24 +15,26 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.mahait.gov.in.common.StringHelperUtils;
 import com.mahait.gov.in.entity.PaybillGenerationTrnEntity;
 import com.mahait.gov.in.model.DisplayInnerReportModel;
 import com.mahait.gov.in.model.Partition;
 import com.mahait.gov.in.repository.DisplayInnerReportRepo;
+import com.mahait.gov.in.service.CommonHomeMethodsService;
+import com.mahait.gov.in.service.DisplayOuterReportService;
 
-@Service
-@Transactional
-public class DisplayInnerReportServiceImpl implements DisplayInnerReportService {
+public class DisplayInnerReportServiceImpl_bkp {
+
+
 	@Autowired
 	DisplayInnerReportRepo displayInnerReportRepo;
 	@Autowired
 	DisplayOuterReportService displayOuterReportService;
 	@Autowired
 	CommonHomeMethodsService commonHomeMethodsService;
+	
+	
 
 	public Page<DisplayInnerReportModel> findPaginated(Pageable pageable, Long billNumber, String strddo) {
 		int pageSize = pageable.getPageSize();
@@ -111,23 +113,19 @@ public class DisplayInnerReportServiceImpl implements DisplayInnerReportService 
 					 */
 
 					if (allEdpList.get(i).getCompoType() == 2) {
-
 						deducAgEdpList.add(allEdpList.get(i)); // Deductions Adj. By CAFO/Supri./Admin.
 					} else if (allEdpList.get(i).getCompoType() == 4) {
 						deducOthEdpList.add(allEdpList.get(i));
 					} else {
-
 						deducTyEdpList.add(allEdpList.get(i)); // Adjust by Treasury
 					}
 
 				} else if(allEdpList.get(i).getType() == 4) {
 					if (allEdpList.get(i).getCompoType() == 2) {
-
 						deducAgEdpList.add(allEdpList.get(i)); // Deductions Adj. By CAFO/Supri./Admin.
 					} else if (allEdpList.get(i).getCompoType() == 4) {
 						deducOthEdpList.add(allEdpList.get(i));
 					} else {
-
 						deducTyEdpList.add(allEdpList.get(i)); // Adjust by Treasury
 					}
 				}
@@ -999,117 +997,165 @@ public class DisplayInnerReportServiceImpl implements DisplayInnerReportService 
 				row.add(String.valueOf(i + allowEdpList.size() + deducAgEdpList.size()));
 			}
 			lstdeductrsy.add(row);
-		
-			
-			ArrayList<String> algrossamt = new ArrayList<>(List.of("", "TOTAL"));
-			ArrayList<String> algrosssale = new ArrayList<>(List.of("", "GROSS SAL"));
-			ArrayList<String> algrosstotal = new ArrayList<>(List.of("", "GROSS TOT"));
-			ArrayList<String> alnetamt = new ArrayList<>(List.of("", "NET"));
-			ArrayList<String> altotal_deduction = new ArrayList<>(List.of("", "Total AG Ded."));
-			ArrayList<String> aldeduct_adj_try = new ArrayList<>(List.of("", "Tot.TRY.Ded"));
-			ArrayList<String> aldeduct_adj_otr = new ArrayList<>(List.of("", "Tot.Ded.Adj"));
-			
-			
-			List<DisplayInnerReportModel> netAmntDiffLst= new ArrayList();
-			DisplayInnerReportModel displayInnerReportModel=new DisplayInnerReportModel();
-			displayInnerReportModel.setNetAmnt("");
-			displayInnerReportModel.setStyle("");
-			netAmntDiffLst.add(displayInnerReportModel);
-			
-			
-			DisplayInnerReportModel displayInnerReportModel1=new DisplayInnerReportModel();
-			displayInnerReportModel1.setNetAmnt("NET");
-			displayInnerReportModel.setStyle("");
-			netAmntDiffLst.add(displayInnerReportModel1);
-			
-			
+			// ded TY ended##########################################
+			// gross total row started
+			ArrayList algrossamt = new ArrayList();
+			algrossamt.add("");
+			algrossamt.add("TOTAL");
+			Iterator iteratorgrossamt = lstempdetails.iterator();
 			Double grossTotalSum = 0d;
-			Double algrosssaleSum = 0d;
-			Double algrosstotalSum = 0d;
-			Double alnetamtSum = 0d;
-			Double altotal_deductionSum = 0d;
-			Double aldeduct_adj_trySum = 0d;
-			Double aldeduct_adj_otrSum = 0d;
 
 			for (int i = 1; i <= 9; i++) {
-			    if (i <= empsize) {
-			        Map<String, Object> map = (Map<String, Object>) lstempdetails.get(i - 1);
-			        
-			        // Gross Amount
-			        String grossAmt = map.getOrDefault("gross_amt", "0").toString();
-			        algrossamt.add(grossAmt);
-			        algrosssale.add(grossAmt);
-			        algrosstotal.add(grossAmt);
-			        
-			        Double grossAmtValue = Double.parseDouble(grossAmt);
-			        grossTotalSum += grossAmtValue;
-			        algrosssaleSum += grossAmtValue;
-			        algrosstotalSum += grossAmtValue;
-
-			        // Net Amount
-			        String netAmt = map.getOrDefault("net_total", "0").toString();
-			        alnetamt.add(netAmt);
-			        alnetamtSum += Double.parseDouble(netAmt);
-
-			        // AG Deductions
-			        String agDeduction = map.getOrDefault("deduc_adj_ag", "0").toString();
-			        altotal_deduction.add(agDeduction);
-			        altotal_deductionSum += Double.parseDouble(agDeduction);
-
-			        // TRY Deductions
-			        String tryDeduction = map.getOrDefault("other_ded_try", "0").toString();
-			        aldeduct_adj_try.add(tryDeduction);
-			        aldeduct_adj_trySum += Double.parseDouble(tryDeduction);
-
-			        // Other Deductions
-			        String otrDeduction = map.getOrDefault("deduct_adj_otr", "0").toString();
-			        aldeduct_adj_otr.add(otrDeduction);
-			        aldeduct_adj_otrSum += Double.parseDouble(otrDeduction);
-			        
-			        DisplayInnerReportModel displayInnerReportModel3=new DisplayInnerReportModel();
-			        displayInnerReportModel3.setNetAmnt(netAmt);
-			        if((Double.parseDouble(grossAmt)-(Double.parseDouble(otrDeduction)+Double.parseDouble(tryDeduction)+Double.parseDouble(agDeduction))!=Double.parseDouble(netAmt))) {
-			        	displayInnerReportModel3.setStyle("color:red;");
-			        }else {
-			        	displayInnerReportModel3.setStyle("");
-			        }
-					netAmntDiffLst.add(displayInnerReportModel3);
-
-			    } else {
-			        // empty values
-			        algrossamt.add(" ");
-			        algrosssale.add(" ");
-			        algrosstotal.add(" ");
-			        alnetamt.add(" ");
-			        altotal_deduction.add(" ");
-			        aldeduct_adj_try.add(" ");
-			        aldeduct_adj_otr.add(" ");
-			        
-			        DisplayInnerReportModel displayInnerReportModel3=new DisplayInnerReportModel();
-			        displayInnerReportModel3.setNetAmnt("");
-			        displayInnerReportModel3.setStyle("");
-					netAmntDiffLst.add(displayInnerReportModel3);
- 
-			    }
-			    
-			    //  sums 
-			    if (empsize == i) {
-			        algrossamt.add(Math.round(grossTotalSum) + "");
-			        algrosssale.add(Math.round(algrosssaleSum) + "");
-			        algrosstotal.add(Math.round(algrosstotalSum) + "");
-			        alnetamt.add(Math.round(alnetamtSum) + "");
-			        altotal_deduction.add(Math.round(altotal_deductionSum) + "");
-			        aldeduct_adj_try.add(Math.round(aldeduct_adj_trySum) + "");
-			        aldeduct_adj_otr.add(Math.round(aldeduct_adj_otrSum) + "");
-			        
-			        DisplayInnerReportModel displayInnerReportModel3=new DisplayInnerReportModel();
-			        displayInnerReportModel3.setNetAmnt(Math.round(alnetamtSum)+"");
-			        displayInnerReportModel3.setStyle("");
-					netAmntDiffLst.add(displayInnerReportModel3);
-			    }
+				if (i <= empsize) {
+					Map<String, Object> map = (Map<String, Object>) iteratorgrossamt.next();
+					algrossamt.add(map.get("gross_amt").toString());
+					grossTotalSum += Double.parseDouble(map.get("gross_amt").toString());
+				} else {
+					algrossamt.add(" ");
+				}
+				if (empsize == i) {
+					algrossamt.add(Math.round(grossTotalSum));
+				}
 			}
 
+			// algrossamt.add(" ");
+			// gross total row ended
+
+			// gross sale row started
+			ArrayList algrosssale = new ArrayList();
+			algrosssale.add("");
+			algrosssale.add("GROSS SAL");
+			Iterator iteratorgrossale = lstempdetails.iterator();
+			Double algrosssaleSum = 0d;
+			for (int i = 1; i <= 9; i++) {
+				if (i <= empsize) {
+					Map<String, Object> map = (Map<String, Object>) iteratorgrossale.next();
+					algrosssale.add(map.get("gross_amt").toString());
+					algrosssaleSum += Double.parseDouble(map.get("gross_amt").toString());
+				} else {
+					algrosssale.add("");
+				}
+				if (empsize == i) {
+					algrosssale.add(Math.round(algrosssaleSum));
+				}
+			}
+			// algrosssale.add("");
+			// gross sale row ended
+
+			// gross total row started
+			ArrayList algrosstotal = new ArrayList();
+			algrosstotal.add("");
+			algrosstotal.add("GROSS TOT");
+			Iterator iteratorgrosstotal = lstempdetails.iterator();
+			Double algrosstotalSum = 0d;
+			for (int i = 1; i <= 9; i++) {
+				if (i <= empsize) {
+					Map<String, Object> map = (Map<String, Object>) iteratorgrosstotal.next();
+					algrosstotal.add(map.get("gross_amt").toString());
+					algrosstotalSum += Double.parseDouble(map.get("gross_amt").toString());
+				} else {
+					algrosstotal.add("");
+				}
+				if (empsize == i) {
+					algrosstotal.add(Math.round(algrosstotalSum));
+				}
+			}
+			// algrosstotal.add("");
+			// gross total row ended
+
 			
+			// net total row started
+			ArrayList alnetamt = new ArrayList();
+			alnetamt.add("");
+			alnetamt.add("NET");
+			Iterator iteratornetamt = lstempdetails.iterator();
+			Double alnetamtSum = 0d;
+			for (int i = 1; i <= 9; i++) {
+				if (i <= empsize) {
+					Map<String, Object> map = (Map<String, Object>) iteratornetamt.next();
+					alnetamt.add(map.get("net_total").toString());
+					alnetamtSum += Double.parseDouble(map.get("net_total").toString());
+				} else {
+					alnetamt.add(" ");
+				}
+				if (empsize == i) {
+					alnetamt.add(Math.round(alnetamtSum));
+				}
+			}
+			// alnetamt.add(" ");
+			// net total row ended
+
+			// DEDUCTIONS ADJUSTABLE BY AG row started
+			ArrayList altotal_deduction = new ArrayList();
+			altotal_deduction.add("");
+			altotal_deduction.add("Total AG Ded.");
+			Iterator iteratortotal_deduction = lstempdetails.iterator();
+			Double altotal_deductionSum = 0d;
+			for (int i = 1; i <= 9; i++) {
+				if (i <= empsize) {
+					Map<String, Object> map = (Map<String, Object>) iteratortotal_deduction.next();
+					if (map.get("deduc_adj_ag") != null) {
+						altotal_deduction.add(map.get("deduc_adj_ag").toString());
+						altotal_deductionSum += Double.parseDouble(map.get("deduc_adj_ag").toString());
+					}
+				} else {
+					altotal_deduction.add(" ");
+				}
+				if (empsize == i) {
+					altotal_deduction.add(Math.round(altotal_deductionSum));
+				}
+			}
+			// alnetamt.add(" ");
+			// DEDUCTIONS ADJUSTABLE BY AG row ended
+
+			// DEDUCTIONS ADJUSTABLE BY TRY started
+			ArrayList aldeduct_adj_try = new ArrayList();
+			aldeduct_adj_try.add("");
+			aldeduct_adj_try.add("Tot.TRY.Ded");
+			Iterator iteratoraldeduct_adj_try = lstempdetails.iterator();
+			Double aldeduct_adj_trySum = 0d;
+			for (int i = 1; i <= 9; i++) {
+				if (i <= empsize) {
+					Map<String, Object> map = (Map<String, Object>) iteratoraldeduct_adj_try.next();
+					if (map.get("other_ded_try") != null) {
+						aldeduct_adj_try.add(map.get("other_ded_try").toString());
+						aldeduct_adj_trySum += Double.parseDouble(map.get("other_ded_try").toString());
+					}
+				} else {
+					aldeduct_adj_try.add(" ");
+				}
+				if (empsize == i) {
+					aldeduct_adj_try.add(Math.round(aldeduct_adj_trySum));
+				}
+			}
+			// alnetamt.add(" ");
+			// DEDUCTIONS ADJUSTABLE BY TRY ended
+
+			// DEDUCTIONS ADJUSTABLE BY OTHERS row started
+			ArrayList aldeduct_adj_otr = new ArrayList();
+			aldeduct_adj_otr.add("");
+			aldeduct_adj_otr.add("Tot.Ded.Adj");
+			Iterator iteratoraldeduct_adj_otr = lstempdetails.iterator();
+			Double aldeduct_adj_otrSum = 0d;
+			for (int i = 1; i <= 9; i++) {
+				if (i <= empsize) {
+					Map<String, Object> map = (Map<String, Object>) iteratoraldeduct_adj_otr.next();
+					if (map.get("deduct_adj_otr") != null) {
+						aldeduct_adj_otr.add(map.get("deduct_adj_otr").toString());
+						aldeduct_adj_otrSum += Double.parseDouble(map.get("deduct_adj_otr").toString());
+					}
+				} else {
+					aldeduct_adj_otr.add(" ");
+				}
+				if (empsize == i) {
+					aldeduct_adj_otr.add(Math.round(aldeduct_adj_otrSum));
+				}
+			}
+			// alnetamt.add(" ");
+			// DEDUCTIONS ADJUSTABLE BY OTHERS row ended
+
+			// DEDUCTIONS ADJUSTABLE BY TRY ended
+
 			// DEDUCTIONS ADJUSTABLE BY OTHERS row started
 			ArrayList abcloans = new ArrayList();
 			abcloans.add("");
@@ -1129,7 +1175,6 @@ public class DisplayInnerReportServiceImpl implements DisplayInnerReportService 
 							mon = Long.parseLong(objects[12].toString());
 							yer = Long.parseLong(objects[13].toString());
 						}
-
 						BigInteger monthcurr = BigInteger.valueOf(mon);
 						BigInteger yearcurr = BigInteger.valueOf(yer);
 
@@ -1201,7 +1246,6 @@ public class DisplayInnerReportServiceImpl implements DisplayInnerReportService 
 			displyinnrpt.setAlgrossamt(algrossamt);
 			displyinnrpt.setAlgrosssale(algrosssale);
 			displyinnrpt.setAlgrosstotal(algrosstotal);
-			displyinnrpt.setNetAmntDiffLst(netAmntDiffLst);
 			// displyinnrpt.setDeductionamt(deductionamt);
 			displyinnrpt.setDeductionamt(altotal_deduction);
 			displyinnrpt.setAldeduct_adj_try(aldeduct_adj_try);
@@ -1215,19 +1259,17 @@ public class DisplayInnerReportServiceImpl implements DisplayInnerReportService 
 		return displayInnerReportRepo.getempDetails(bill_no);
 	}
 
-	@Override
 	public Date findbillCreateDate(Long billNumber) {
 		return displayInnerReportRepo.findbillCreateDate(billNumber);
 	}
 
-	@Override
 	public String getbillDetails(Long billNumber) {
 		return displayInnerReportRepo.getbillDetails(billNumber);
 	}
 
-	@Override
 	public PaybillGenerationTrnEntity findPayBilldetailByPaybillid(Long billNumber) {
 		return displayInnerReportRepo.findPayBilldetailByPaybillid(billNumber);
 	}
+
 
 }

@@ -508,18 +508,34 @@ body {font-family: Verdana }.TableBorderN {border-style: solid;border-color: gre
 									</span>
 								</tr>
 
-								<tr class="TablerowBG22 innerTr innTR24">
+								<!-- <tr class="TablerowBG22 innerTr innTR24">
 									<span
 										th:each="alnetamtRow,iterationStatus : ${innerrptPagerow.alnetamt}">
 										<td colspan="1" valign="middle"
 										class="TableRowFieldBBN TableRowFieldRBN Label2"
 										style="font-weight: bold;">
 										
-									<!-- 	<span th:text="${alnetamtRow.netAmnt}"  th:style="${style}"></span> -->
+										<span th:text="${alnetamtRow.netAmnt}"  th:style="${style}"></span>
 										<span th:text="${alnetamtRow}" ></span>
 									</td>
 									</span>
 								</tr>
+								 -->
+								
+								<tr class="TablerowBG22 innerTr innTR24">
+									<span
+										th:each="alnetamtRow,iterationStatus : ${innerrptPagerow.netAmntDiffLst}">
+										<td colspan="1" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: bold;">
+										
+										<span th:text="${alnetamtRow.netAmnt}"  th:style="${alnetamtRow.style}"></span> 
+										<!--  <span th:text="${alnetamtRow}" ></span>-->
+									</td>
+									</span>
+								</tr>
+								
+								
 								<tr class="TablerowBG1 innTR25">
 
 									<td colspan="1" align="left" valign="middle"
@@ -613,11 +629,15 @@ body {font-family: Verdana }.TableBorderN {border-style: solid;border-color: gre
 					
 		    
 		    
-		    <a       id="print"  target="_blank"
-				th:href="@{${'/innerreport/getinnerreportAllPages/'+billNumber+'/'+size+'/1/1'}}">
+		    <a       id="print"  target="_blank"  th:if="${levelRoleVal == 3}"
+				th:href="@{${'/ddoast/getinnerreportAllPages/'+billNumber+'/'+size+'/1/1'}}">
 					<input id="pdfbutton" type="button" value="Print ALL" class="orange btn"></input>
 			</a> 
 			
+		    <a       id="print"  target="_blank"  th:if="${levelRoleVal == 2}"
+				th:href="@{${'/ddo/getinnerreportAllPages/'+billNumber+'/'+size+'/1/1'}}">
+					<input id="pdfbutton" type="button" value="Print ALL" class="orange btn"></input>
+			</a> 
 			
 			
 			<!-- 

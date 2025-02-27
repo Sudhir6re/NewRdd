@@ -70,12 +70,12 @@ public class BrokenPeriodReportController extends BaseController{
 			
 			List<Object[]>  monthinfo = commonHomeMethodsService.findmonthinfo(bigInteger);
 			for (Object[] monthLst : monthinfo) {
-				monname = monthLst[4].toString();
+				monname = monthLst[1].toString();
 			}
 			
 			List<Object[]>  yearinfo = commonHomeMethodsService.findyearinfo(yearcurr);
 			for (Object[] yearLst : yearinfo) {
-				curryear = yearLst[9].toString();
+				curryear = yearLst[1].toString();
 			}
 	        String officeDetails = commonHomeMethodsService.getOffice(messages.getDdoCode());
 	     ///   model.addAttribute("createddate", sdf.format(new Date()));

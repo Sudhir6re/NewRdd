@@ -97,12 +97,12 @@ public class DisplayInnerReportController  extends BaseController{
 		
 		List<Object[]> monthinfo = commonHomeMethodsService.findmonthinfo(monthcurr);
 		for (Object[] monthLst : monthinfo) {
-			monname = monthLst[4].toString();
+			monname = monthLst[1].toString();
 		}
 
 		List<Object[]> yearinfo = commonHomeMethodsService.findyearinfo(yearcurr);
 		for (Object[] yearLst : yearinfo) {
-			curryear = yearLst[9].toString();
+			curryear = yearLst[1].toString();
 		}
 		
 		String officeDetails = commonHomeMethodsService.getOffice(ddoCode);
@@ -304,12 +304,15 @@ public class DisplayInnerReportController  extends BaseController{
 			model.addAttribute("pageNumbers", pageNumbers);
 		}
 
+		PaybillGenerationTrnEntity paybillGenerationTrnEntity=displayInnerReportService.findPayBilldetailByPaybillid(billNumber);
+		
+		
 		Long mon = 0l;
 		Long yer = 0l;
-		List<Object[]> createdate = commonHomeMethodsService.findDetailsBillNumber(billNumber);
-		for (Object[] objects : createdate) {
-			mon = Long.parseLong(objects[4].toString());
-			yer = Long.parseLong(objects[5].toString());
+	//	List<Object[]> createdate = commonHomeMethodsService.findDetailsBillNumber(billNumber);
+		if (paybillGenerationTrnEntity!=null) {
+			mon = paybillGenerationTrnEntity.getPaybillMonth().longValue();
+			yer = paybillGenerationTrnEntity.getPaybillYear().longValue();
 		}
 
 		BigInteger monthcurr = BigInteger.valueOf(mon);
@@ -318,10 +321,13 @@ public class DisplayInnerReportController  extends BaseController{
 		String monname = "";
 		String curryear = "";
 
+		String billDetails = displayInnerReportService.getbillDetails(billNumber);
+		
 		List<Object[]> monthinfo = commonHomeMethodsService.findmonthinfo(monthcurr);
 		for (Object[] monthLst : monthinfo) {
 			monname = monthLst[1].toString();
 		}
+		
 
 		List<Object[]> yearinfo = commonHomeMethodsService.findyearinfo(yearcurr);
 		for (Object[] yearLst : yearinfo) {
@@ -330,7 +336,6 @@ public class DisplayInnerReportController  extends BaseController{
 		String officeDetails = commonHomeMethodsService.getOffice(ddoCode);
 
 		Date createdateded = displayInnerReportService.findbillCreateDate(billNumber);
-		String billDetails = displayInnerReportService.getbillDetails(billNumber);
 		model.addAttribute("billDetails", billDetails);
 		model.addAttribute("createddate", sdf.format(createdateded));
 		model.addAttribute("currmonyer", monname + " " + curryear);
@@ -342,7 +347,7 @@ public class DisplayInnerReportController  extends BaseController{
 		addMenuAndSubMenu(model,messages);
 		
 		model.addAttribute("displayInnerReportModel", displayInnerReportModel);
-		return "views/report/inner-report-allpages";
+		return "views/reports/inner-report-allpages";
 	}
 
 }

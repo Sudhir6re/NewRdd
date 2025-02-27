@@ -505,7 +505,7 @@ tr.TablerowBG22.innerTr.innTR22 td:nth-child(2) table#innertable tr td.Label2 sp
 											</span>
 										</tr>
 
-										<tr class="TablerowBG22 innerTr innTR24">
+										<!-- <tr class="TablerowBG22 innerTr innTR24">
 											<span
 												th:each="alnetamtRow,iterationStatus : ${innerrptPagerow.alnetamt}">
 												<td colspan="1" valign="middle"
@@ -513,7 +513,25 @@ tr.TablerowBG22.innerTr.innTR22 td:nth-child(2) table#innertable tr td.Label2 sp
 												style="font-weight: 500;"><span
 													th:text="${alnetamtRow}"></span></td>
 											</span>
-										</tr>
+										</tr> -->
+										
+										
+								<tr class="TablerowBG22 innerTr innTR24">
+									<span
+										th:each="alnetamtRow,iterationStatus : ${innerrptPagerow.netAmntDiffLst}">
+										<td colspan="1" valign="middle"
+										class="TableRowFieldBBN TableRowFieldRBN Label2"
+										style="font-weight: bold;">
+										
+										<span th:text="${alnetamtRow.netAmnt}"  th:style="${alnetamtRow.style}"></span> 
+										<!--  <span th:text="${alnetamtRow}" ></span>-->
+									</td>
+									</span>
+								</tr>
+										
+										
+										
+										
 										<tr class="TablerowBG1 innTR25">
 
 											<td colspan="1" align="left" valign="middle"

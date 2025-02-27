@@ -293,7 +293,7 @@ public class CommonHomeMethodsRepoImpl implements CommonHomeMethodsRepo {
 	@Override
 	public List<Object[]> findyearinfo(BigInteger yearcurr) {
 		Session currentSession = manager.unwrap(Session.class);
-		String HQL = "select * from year_mst  where year_id  = '" + yearcurr + "' ";
+		String HQL = "select year_id,year_english,financial_year from year_mst  where year_id  = '" + yearcurr + "' ";
 		Query query = currentSession.createNativeQuery(HQL);
 		return query.list();
 	}
@@ -301,7 +301,7 @@ public class CommonHomeMethodsRepoImpl implements CommonHomeMethodsRepo {
 	@Override
 	public List<Object[]> findmonthinfo(BigInteger month) {
 		Session currentSession = manager.unwrap(Session.class);
-		String HQL = "select * from month_mst     where month_id   ='" + month + "' ";
+		String HQL = "select month_id,month_english  from month_mst     where month_id   ='" + month + "' ";
 		Query query = currentSession.createNativeQuery(HQL);
 		return query.list();
 	}

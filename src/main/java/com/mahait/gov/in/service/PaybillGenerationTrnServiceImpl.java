@@ -1882,11 +1882,8 @@ public class PaybillGenerationTrnServiceImpl implements PaybillGenerationTrnServ
 
 						groupAccPolicy = (double) Math
 								.round(paybillHeadMpgRepo.fetchAccidentialPilocyDtls(startDate, cadre, allowDeducCode));
-
 						paybillGenerationTrnDetails.setAccPolicy(groupAccPolicy);
-					
 						dedByTreasury += groupAccPolicy;
-						
 						
 						break;
 

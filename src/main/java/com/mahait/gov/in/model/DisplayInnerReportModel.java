@@ -30,7 +30,9 @@ public class DisplayInnerReportModel implements Serializable {
 	private List lstdeductrsy = new ArrayList();
 	
 	
-	private List<DisplayInnerReportModel> alnetamt = new ArrayList();
+	private List alnetamt = new ArrayList();
+	
+	private List<DisplayInnerReportModel> netAmntDiffLst= new ArrayList();
 	
 	
 	private List algrosstotal = new ArrayList();

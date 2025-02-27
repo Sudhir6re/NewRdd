@@ -186,8 +186,8 @@ public class DisplayOuterReportContorller extends BaseController
 
 		List<Object[]>  yearinfo = commonHomeMethodsService.findyearinfo(BigInteger.valueOf(year));
 		for (Object[] yearLst : yearinfo) {
-			curryear = yearLst[9].toString();
-			finyear = yearLst[3].toString();
+			curryear = yearLst[1].toString();
+			finyear = yearLst[2].toString();
 			
 		}
 		

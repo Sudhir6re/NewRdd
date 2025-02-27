@@ -120,23 +120,26 @@
 						<tr>
 							<td>
 								<table style="border: none;">
-									<tr th:each="varDept : ${testObj}">
-										<td style="border: none;"><span
-											th:if="${varDept[4]} == '1'"> <input type="checkbox"
+									<tr th:each="varDept : ${testObj}"  >
+										<td style="border: none;">
+										<span  th:if="${varDept[4]} == '1'" > 
+											<input type="checkbox"
 												th:value="${varDept[5]}" class="chk" name="test"
 												th:data-serialid="${varDept[0]}" th:id="${varDept[5]}"
 												th:attr="typeComponent=${varDept[3]}" /> <span
 												class="componentName" th:text="${varDept[3]}"></span>
-										</span></td>
+										</span>
+										</td>
 									</tr>
 								</table>
 							</td>
 
 							<td>
 								<table style="border: none;">
-									<tr th:each="varDept : ${testObj}">
-										<td style="border: none;"><span
-											th:if="${varDept[4]} == '2'"> <input type="checkbox"
+									<tr th:each="varDept : ${testObj}" >
+										<td style="border: none;">
+										<span  th:if="${varDept[4]} == '2'"
+											> <input type="checkbox"
 												th:value="${varDept[5]}" class="chk" name="test"
 												th:id="${varDept[5]}" th:data-serialid="${varDept[0]}"
 												th:attr="typeComponent=${varDept[3]}" /> <span
@@ -150,9 +153,9 @@
 
 							<td>
 								<table style="border: none;">
-									<tr th:each="varDept : ${testObj}">
-										<td style="border: none;"><span
-											th:if="${varDept[4]} == '3'"> <input type="checkbox"
+									<tr th:each="varDept : ${testObj}"  >
+										<td style="border: none;"><span  th:if="${varDept[4]} == '3'"
+											> <input type="checkbox"
 												th:value="${varDept[5]}" th:data-serialid="${varDept[0]}"
 												th:attr="typeComponent=${varDept[3]}" class="chk"
 												name="test" th:id="${varDept[5]}" /> <span
@@ -166,9 +169,10 @@
 
 							<td>
 								<table style="border: none;">
-									<tr th:each="varDept : ${testObj}">
-										<td style="border: none;"><span
-											th:if="${varDept[4]} == '4'"> <input type="checkbox"
+									<tr th:each="varDept : ${testObj}" >
+										<td style="border: none;"><span   th:if="${varDept[4]} == '4'"
+											> 
+											<input type="checkbox"
 												th:value="${varDept[5]}" th:data-serialid="${varDept[0]}"
 												class="chk" name="test" th:id="${varDept[5]}"
 												th:attr="typeComponent=${varDept[3]}" /> <span
@@ -176,7 +180,6 @@
 										</span></td>
 									</tr>
 								</table>
-
 							</td> 
 						</tr>
 						<tr>
