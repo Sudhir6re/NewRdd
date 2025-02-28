@@ -7,8 +7,20 @@
 <link rel="stylesheet" th:href="@{/css/styles.css}" />
 </head>
 <body class="school-dist-wise-val-report">
-	<div class="container-fluid">
-		<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.reportBD}"></span></a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span>School
+							Configuration Report</span></li>
+				</ol>
+			</nav>
+		</div>
 		<fieldset>
 			<div id="print-content">
 				<form id="rptForm_ID" name="schoolDistrictValidationView"
@@ -51,6 +63,6 @@
 			</div>
 		</fieldset>
 	</div>
-
+<div th:replace="header/menuHeader :: varmenufooter"></div>
 </body>
 </html>

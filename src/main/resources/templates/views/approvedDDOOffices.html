@@ -52,8 +52,8 @@ div#datatableNew_length {
 											th:utext="#{msg.thymeleaf.pagelabel.level2ddocode}"></th>
 										<th class="datatableheader"
 											th:utext="#{msg.thymeleaf.pagelabel.level3ddocode}"></th>
-										<th class="datatableheader"
-											th:utext="#{msg.thymeleaf.pagelabel.level4ddocode}"></th>
+										<!-- <th class="datatableheader"
+											th:utext="#{msg.thymeleaf.pagelabel.level4ddocode}"></th> -->
 										<th class="datatableheader"
 											th:utext="#{msg.thymeleaf.pagelabel.hierarchylevel}"></th>
 									</tr>
@@ -62,7 +62,7 @@ div#datatableNew_length {
 									<tr class="odd" th:each="varLst : ${lstApprovedOffices}">
 										<td th:text="${varLst.zpDdoCode}"></td>
 										<td th:text="${varLst.reptDdoCode}"></td>
-										<td th:text="${varLst.specialDdoCode}"></td>
+										<!-- <td th:text="${varLst.specialDdoCode}"></td> -->
 										<td th:text="${varLst.finalDdoCode}"></td>
 										<td th:text="${varLst.zplevel}"></td>
 									</tr>

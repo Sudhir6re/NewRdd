@@ -25,7 +25,7 @@ table#tblNonGovDuesDeduct th:nth-child(2) {
 }
 </style>
 </head>
-<body class="NonGovernmentDuesAndDeduction">
+<body class="allow-deduc-rule-master">
 	<div th:replace="header/menuHeader :: var-script-header"></div>
 	<div th:replace="header/menuHeader :: varmenuheader"></div>
 
@@ -60,7 +60,7 @@ table#tblNonGovDuesDeduct th:nth-child(2) {
 				<label class="control-label col-sm-2" for="isType"><span
 					th:utext="#{msg.thymeleaf.datatablelabel.typeAllowanceDeduction}"></span>&nbsp;&nbsp;<b><font
 						color="red" size="4px;">*</font></b></label>
-				<div class="col-sm-3" readonly>
+				<div class="col-sm-3">
 					<select class="form-control" th:field="*{isType}" id="isType">
 						<option th:value="0">Please Select</option>
 						<option th:value="1">Allowances</option>
