@@ -27,7 +27,7 @@
 			<form method="POST" th:object="${paybillGenerationReportModel}"
 				th:action="@{/mdc/treasuryDDOWiseReport}"
 				enctype="multipart/form-data">
-				<table class="table bor-0">
+				<table class="table tbBold bor-0">
 					<tbody>
 						<tr>
 							<td width="15%">Region :</td>
@@ -46,7 +46,7 @@
 							<td width="35%"></td>
 						</tr>
 						<tr>
-							<td width="15%">Year :</td>
+							<td width="15%">Year <label class="mandatoryindicator">*</label> :</td>
 							<td width="35%"><select id="cmbYear" name="cmbYear"
 								th:field="*{year}" tabindex="10" style="width: 50%">
 									<option value="0">------Select Year------</option>
@@ -55,7 +55,7 @@
 										th:text="${language=='mh' ? varGetAllYear.yearMarathi : varGetAllYear.yearEnglish}"></option>
 
 
-							</select><label class="mandatoryindicator">*</label></td>
+							</select></td>
 							<td width="15%">Month :</td>
 							<td width="35%"><select id="cmbMonth" name="cmbMonth"
 								th:field="*{month}" tabindex="10" style="width: 50%">
