@@ -25,6 +25,7 @@ import com.mahait.gov.in.entity.OrgPostDetailsRlt;
 import com.mahait.gov.in.entity.OrgPostMst;
 import com.mahait.gov.in.entity.OrgUserMst;
 import com.mahait.gov.in.entity.SubjectPostMpg;
+import com.mahait.gov.in.model.DdoOfficeModel;
 import com.mahait.gov.in.model.PostEntryModel;
 import com.mahait.gov.in.model.UserPostCustomVO;
 import com.mahait.gov.in.repository.CmnLanguageMstRepository;
@@ -86,7 +87,32 @@ public class EntryOfPostsServiceImpl implements EntryOfPostsService {
 
 	@Override
 	public List getAllOfficesFromDDO(String ddoCode) {
-		return entryOfPostsRepo.getAllOfficesFromDDO(ddoCode);
+		List<DdoOffice> ddoOffices = entryOfPostsRepo.getAllOfficesFromDDO(ddoCode);
+		List<DdoOffice> lstDdoOfficeModel = new ArrayList<>();
+		for (DdoOffice ddoOffice : ddoOffices) {
+			DdoOfficeModel model = new DdoOfficeModel();
+			model.setDcpsDdoOfficeIdPk(String.valueOf(ddoOffice.getDcpsDdoOfficeIdPk()));
+			model.setDcpsDdoCode(ddoOffice.getDcpsDdoCode());
+			model.setDcpsDdoOfficeName(ddoOffice.getDcpsDdoOfficeName());
+			model.setDcpsDdoOfficeDdoFlag(ddoOffice.getDcpsDdoOfficeDdoFlag());
+			model.setDcpsDdoOfficeState(ddoOffice.getDcpsDdoOfficeState());
+			model.setDcpsDdoOfficeDistrict(ddoOffice.getDcpsDdoOfficeDistrict());
+			model.setDcpsDdoOfficeTaluka(ddoOffice.getDcpsDdoOfficeTaluka());
+			model.setDcpsDdoOfficeTown(ddoOffice.getDcpsDdoOfficeTown());
+			model.setDcpsDdoOfficeVillage(ddoOffice.getDcpsDdoOfficeVillage());
+			model.setDcpsDdoOfficeAddress1(ddoOffice.getDcpsDdoOfficeAddress1());
+			model.setDcpsDdoOfficePin(ddoOffice.getDcpsDdoOfficePin());
+			model.setDcpsDdoOfficeCityClass(ddoOffice.getDcpsDdoOfficeCityClass());
+			model.setDcpsDdoOfficeTelNo1(ddoOffice.getDcpsDdoOfficeTelNo1());
+			model.setDcpsDdoOfficeTelNo2(ddoOffice.getDcpsDdoOfficeTelNo2());
+			model.setDcpsDdoOfficeFax(ddoOffice.getDcpsDdoOfficeFax());
+			model.setDcpsDdoOfficeEmail(ddoOffice.getDcpsDdoOfficeEmail());
+			model.setDcpsDdoOfficeGrant(ddoOffice.getDcpsDdoOfficeGrant());
+			model.setCreatedDate(ddoOffice.getCreatedDate());
+			model.setStatusFlag(ddoOffice.getStatusFlag());
+			lstDdoOfficeModel.add(ddoOffice);
+		}
+		return lstDdoOfficeModel;
 	}
 
 	@Override
@@ -340,9 +366,9 @@ public class EntryOfPostsServiceImpl implements EntryOfPostsService {
 					orgPostMaster.setCreatedBy(messages);
 					orgPostMaster.setCreatedByPost(orgPostMst);
 					orgPostMaster.setLocationCode(String.valueOf(locId));
-					
-					orgPostMaster=entryOfPostsRepo.savePost(orgPostMaster);
-					Long pId =orgPostMaster.getPostId();
+
+					orgPostMaster = entryOfPostsRepo.savePost(orgPostMaster);
+					Long pId = orgPostMaster.getPostId();
 
 					subjectPostMpg1.setPostId(postId);
 					subjectPostMpg1.setSubjectName(subjectSel);
@@ -537,15 +563,15 @@ public class EntryOfPostsServiceImpl implements EntryOfPostsService {
 
 		OrgDdoMst orgDdoMst = organizationInstInfoRepo.findDDOInfo(postEntryModel.getDdoCode());
 
-		List<CmnLocationMst> lstCmnLocationMst=entryOfPostsRepo.findByLocId(Long.valueOf(orgDdoMst.getLocationCode()));
-		
+		List<CmnLocationMst> lstCmnLocationMst = entryOfPostsRepo
+				.findByLocId(Long.valueOf(orgDdoMst.getLocationCode()));
+
 		CmnLocationMst cmnLocationMst = null;
-		if(lstCmnLocationMst.size()>0) {
-			 cmnLocationMst = lstCmnLocationMst.get(0);
-		}else {
-			cmnLocationMst=new CmnLocationMst();
+		if (lstCmnLocationMst.size() > 0) {
+			cmnLocationMst = lstCmnLocationMst.get(0);
+		} else {
+			cmnLocationMst = new CmnLocationMst();
 		}
-		
 
 		long nextPsr = entryOfPostsRepo.getNextPsrNo();
 
@@ -575,8 +601,8 @@ public class EntryOfPostsServiceImpl implements EntryOfPostsService {
 			newOrgPostMst.setParentPostId(-1l);
 			newOrgPostMst.setPostLevelId(1l);
 			newOrgPostMst.setStatusLookupId(13l);
-			
-			newOrgPostMst.setPostId(orgPostMstRepository.findMaxPostId()+1);
+
+			newOrgPostMst.setPostId(orgPostMstRepository.findMaxPostId() + 1);
 
 			newOrgPostMst.setOfficeId(postEntryModel.getOfficeCmb());
 
@@ -584,8 +610,6 @@ public class EntryOfPostsServiceImpl implements EntryOfPostsService {
 			newOrgPostMst.setOrderId(postEntryModel.getOrderCmb());
 			newOrgPostMst.setOrderDate(postEntryModel.getOrderDate());
 			newOrgPostMst.setDdoCode(postEntryModel.getDdoCode());
-
-			
 
 			OrgPostMst pg1 = entryOfPostsRepo.savePost(newOrgPostMst);
 			Long postId = pg1.getPostId();
@@ -602,7 +626,7 @@ public class EntryOfPostsServiceImpl implements EntryOfPostsService {
 			HrPayPsrPostMpg postPsrMpg = new HrPayPsrPostMpg();
 			postPsrMpg.setPsrId(nextPsr);
 			postPsrMpg.setPostId(postId);
-			postPsrMpg.setLocId(orgDdoMst.getLocationCode()==null?0l:Long.valueOf(orgDdoMst.getLocationCode()));
+			postPsrMpg.setLocId(orgDdoMst.getLocationCode() == null ? 0l : Long.valueOf(orgDdoMst.getLocationCode()));
 			entryOfPostsRepo.save(postPsrMpg);
 
 			OrgPostDetailsRlt orgPostDtlRlt = new OrgPostDetailsRlt();
@@ -697,10 +721,8 @@ public class EntryOfPostsServiceImpl implements EntryOfPostsService {
 				} else {
 					postType = "VACANT";
 				}
-				
-								
+
 				customVO.setDdoCode(rowList[8].toString());
-				
 
 				customVO.setPostType(postType);
 
@@ -773,7 +795,7 @@ public class EntryOfPostsServiceImpl implements EntryOfPostsService {
 	@Override
 	public void renewPostEntry(PostEntryModel postEntryModel, long locId, BigInteger loggedInPostId,
 			OrgUserMst messages) {
-		if (postEntryModel.getPostIdsToBeAttached() != " ") {  //99100001001649
+		if (postEntryModel.getPostIdsToBeAttached() != " ") { // 99100001001649
 			String[] lStrArrPostIdsToBeAttached = postEntryModel.getPostIdsToBeAttached().split("~");
 			Long[] lLongArrPostIdsToBeAttached = new Long[lStrArrPostIdsToBeAttached.length];
 			for (Integer lInt = 0; lInt < lStrArrPostIdsToBeAttached.length; lInt++) {
@@ -802,7 +824,7 @@ public class EntryOfPostsServiceImpl implements EntryOfPostsService {
 
 	@Override
 	public List<Object[]> findLevelDdoCodeByDistrict(String districtId, OrgUserMst messages) {
-		return entryOfPostsRepo.findLevelDdoCodeByDistrict(districtId,messages);
+		return entryOfPostsRepo.findLevelDdoCodeByDistrict(districtId, messages);
 	}
 
 	@Override
@@ -812,10 +834,10 @@ public class EntryOfPostsServiceImpl implements EntryOfPostsService {
 
 	@Override
 	public List<MstDesignationEntity> getDesignationLstByDdoCode(String ddoCode) {
-		List<OrgDdoMst> lst=entryOfPostsRepo.findDdoDetailByDdoCode(ddoCode);
-		if(lst.size()>0) {
+		List<OrgDdoMst> lst = entryOfPostsRepo.findDdoDetailByDdoCode(ddoCode);
+		if (lst.size() > 0) {
 			return entryOfPostsRepo.getDesignationLstByDdoCode(lst.get(0).getHodLocCode());
-		}else {
+		} else {
 			return entryOfPostsRepo.getDesignationLstByDdoCode(ddoCode);
 		}
 	}

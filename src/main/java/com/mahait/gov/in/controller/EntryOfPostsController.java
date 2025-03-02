@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.mahait.gov.in.common.StringHelperUtils;
 import com.mahait.gov.in.entity.DdoOffice;
 import com.mahait.gov.in.entity.HrPayOrderMst;
 import com.mahait.gov.in.entity.MstDcpsBillGroup;
@@ -28,6 +27,7 @@ import com.mahait.gov.in.entity.MstDesignationEntity;
 import com.mahait.gov.in.entity.OrgDdoMst;
 import com.mahait.gov.in.entity.OrgPostDetailsRlt;
 import com.mahait.gov.in.entity.OrgUserMst;
+import com.mahait.gov.in.model.DdoOfficeModel;
 import com.mahait.gov.in.model.PostEntryModel;
 import com.mahait.gov.in.repository.OrgDdoMstRepository;
 import com.mahait.gov.in.repository.OrgPostDetailsRltRepository;
@@ -360,8 +360,8 @@ public class EntryOfPostsController extends BaseController {
 	}
 	@RequestMapping(value = "/getAllOfficesFromDDO/{ddoCode}", consumes = {
 	"application/json" }, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<DdoOffice>> getAllOfficesFromDDO(@PathVariable String ddoCode,HttpSession session) {
-		List<DdoOffice> lstLevel1Ddo = entryOfPostsService.getAllOfficesFromDDO(ddoCode);
+	public ResponseEntity<List<DdoOfficeModel>> getAllOfficesFromDDO(@PathVariable String ddoCode,HttpSession session) {
+		List<DdoOfficeModel> lstLevel1Ddo = entryOfPostsService.getAllOfficesFromDDO(ddoCode);
 		return ResponseEntity.ok(lstLevel1Ddo);
 	}
 	

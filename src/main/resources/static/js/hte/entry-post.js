@@ -565,7 +565,9 @@ function getAllOfficesFromDDO() {
 						$("#loaderMainNew").hide();
 						j=1;
 						if(len>0){
+							$('#officeCmb').empty();
 							for (var i = 0; i < data.length; i++) {
+								console.log("value"+BigInt(data[i].dcpsDdoOfficeIdPk).toString()); 
 								$('#officeCmb').append('<option value="' + data[i].dcpsDdoOfficeIdPk + '">' + data[i].dcpsDdoOfficeName + '</option>');
 							}
 						}
@@ -603,9 +605,9 @@ function getAllGrOrder() {
 						$("#loaderMainNew").hide();
 						j=1;
 						if(len>0){
-						 dataTable.clear();
+							$('#orderCmb').empty();
 							for (var i = 0; i < data.length; i++) {
-								$('#officeCmb').append('<option value="' + data[i].orderId + '">' + data[i].orderName + '</option>');
+								$('#orderCmb').append('<option value="' + data[i].orderId + '">' + data[i].orderName + '</option>');
 							}
 						}
 				}
