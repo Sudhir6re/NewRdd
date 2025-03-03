@@ -20,9 +20,11 @@ div#datatableNew_length {
 				<ol class="breadcrumb">
 					<!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
 					<li class="breadcrumb-item"><a href="#"><span
-							th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
-					<li class="breadcrumb-item active" aria-current="page"><span
+							th:utext="#{msg.thymeleaf.pagelabel.reportBD}"></span></a></li>
+					<li class="breadcrumb-item" aria-current="page"><span
 						th:utext="#{msg.thymeleaf.pagelabel.sysappr}"></span></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pagelabel.apprDDOOff}"></span></li>
 				</ol>
 			</nav>
 		</div>
@@ -38,8 +40,8 @@ div#datatableNew_length {
 					<input type="hidden" value="text" id="zpDdoCode"
 						th:value="${zpDdoCode}" />
 
-					<form class="form-horizontal" method="POST" name="updateEmpType" th:object="${newRegDDOModel}"
-						enctype="multipart/form-data">
+					<form class="form-horizontal" method="POST" name="updateEmpType"
+						th:object="${newRegDDOModel}" enctype="multipart/form-data">
 
 
 						<div id="tcontent1" class="halftabcontent">

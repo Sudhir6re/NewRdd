@@ -14,7 +14,10 @@ $("#cmbBranchName").select2();
 $("#btnedit").click(function(){
 	var contextPath = $("#appRootPath").val();
 	$('form *').prop('readonly', false); 
-	$("#txtIFSCCode").prop('readonly', true); 
+	setInterval(function() {
+	    $("#txtIFSCCode").prop('readonly', true);
+	}, 500); 
+
 	$("#btnSave").removeClass("hide");
 	$('select').removeClass('readonly')
 	$("DDOInfo").attr("action",contextPath+"/ddoast/updateddoOfficeDetails");
@@ -22,6 +25,9 @@ $("#btnedit").click(function(){
 $("#edit").click(function(){
 	var contextPath = $("#appRootPath").val();
 	$('form *').prop('readonly', false); 
+	setInterval(function() {
+		    $("#txtIFSCCode").prop('readonly', true);
+		}, 500);
 	$("#cmbOfficeCityClass").prop('readonly', true); 
 	$("#btnSave").removeClass("hide");
 	$('select').removeClass('readonly')

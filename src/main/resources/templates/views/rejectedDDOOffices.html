@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title th:utext="#{msg.thymeleaf.pagelabel.rejDDOOff}"></title>
+<title th:utext="#{msg.thymeleaf.pagelabel.rejDDOOff}"></title>
 </head>
 <style>
 div#datatableNew_length {
@@ -10,66 +11,77 @@ div#datatableNew_length {
 }
 </style>
 
-<body class="approvedDDOOffices">
-    <div th:replace="header/menuHeader :: var-script-header"></div>
-    <div th:replace="header/menuHeader :: varmenuheader"></div>
-    <div class="container min-height-600 ">
-        <div class="breadcrumbMain">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <!--   <li class="breadcrumb-item homelinkbd"><a href="#">Home</a></li> -->
-                    <li class="breadcrumb-item"><a href="#"><span th:utext="#{msg.thymeleaf.pagelabel.masterBD}"></span></a></li>
-                    <li class="breadcrumb-item active" aria-current="page"><span th:utext="#{msg.thymeleaf.pagelabel.rejDDOOff}"></span></li>
-                </ol>
-            </nav>
-        </div>
-        <h3 Class="PageHeading">
-            <span th:utext="#{msg.thymeleaf.pagelabel.apprDDOOff}"></span>
-        </h3>
-        <div class="newpagecontent container">
+<body class="rejectedDDOOffices">
+	<div th:replace="header/menuHeader :: var-script-header"></div>
+	<div th:replace="header/menuHeader :: varmenuheader"></div>
+	<div class="container min-height-600 ">
+		<div class="breadcrumbMain">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#"><span
+							th:utext="#{msg.thymeleaf.pagelabel.reportBD}"></span></a></li>
+					<li class="breadcrumb-item" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pagelabel.sysappr}"></span></li>
+					<li class="breadcrumb-item active" aria-current="page"><span
+						th:utext="#{msg.thymeleaf.pagelabel.rejDDOOff}"></span></li>
+				</ol>
+			</nav>
+		</div>
+		<h3 Class="PageHeading">
+			<span th:utext="#{msg.thymeleaf.pagelabel.rejDDOOff}"></span>
+		</h3>
+		<div class="newpagecontent container">
 
-    <br><br><br>
-        <div align="center">
-            <fieldset class="tabstyle">
-            
-            <input type="hidden" value="text" id="zpDdoCode" th:value="${zpDdoCode}"/>
-            
-            <form class="form-horizontal" method="POST" name="updateEmpType"
-				th:action="@{/level1/saveCRTEmp}" th:object="${newRegDDOModel}"
-				enctype="multipart/form-data">
-               
-               
-               <div id="tcontent1" class="halftabcontent">
-					<table  id="datatableNew" class="table table-bordered">
-						<thead>
-							<tr>
-								<th class="datatableheader" th:utext="#{msg.thymeleaf.pagelabel.ddocode}"></th>
-								<th class="datatableheader" th:utext="#{msg.thymeleaf.pagelabel.level2ddocode}"></th>
-								<th class="datatableheader" th:utext="#{msg.thymeleaf.pagelabel.level3ddocode}"></th>
-								<th class="datatableheader" th:utext="#{msg.thymeleaf.pagelabel.level4ddocode}"></th> 
-								<th class="datatableheader" th:utext="#{msg.thymeleaf.pagelabel.hierarchylevel}"></th> 
-							</tr>
-						</thead>
-						<tbody>
-							 <tr class="odd" th:each="varLst : ${lstRejectedOffices}">
-								<td th:text="${varLst.zpDdoCode}"></td>
-								<td th:text="${varLst.reptDdoCode}"></td>
-								<td th:text="${varLst.specialDdoCode}"></td>
-								<td th:text="${varLst.finalDdoCode}"></td>
-								<td th:text="${varLst.zplevel}"></td>
-							</tr> 
-						</tbody>
-					</table>
-				</div>
-                </form>
-            </fieldset>
-        </div>
-        <br><br>
+			<br>
+			<br>
+			<br>
+			<div align="center">
+				<fieldset class="tabstyle">
 
-        </div>
-    </div>
-    <div th:replace="header/menuHeader :: varmenufooter"></div>
-    <script th:src="@{/js/project/approveReject.js}"></script>
+					<input type="hidden" value="text" id="zpDdoCode"
+						th:value="${zpDdoCode}" />
+
+					<form class="form-horizontal" method="POST" name="updateEmpType"
+						th:action="@{/level1/saveCRTEmp}" th:object="${newRegDDOModel}"
+						enctype="multipart/form-data">
+
+
+						<div id="tcontent1" class="halftabcontent">
+							<table id="datatableNew" class="table table-bordered">
+								<thead>
+									<tr>
+										<th class="datatableheader"
+											th:utext="#{msg.thymeleaf.pagelabel.ddocode}"></th>
+										<th class="datatableheader"
+											th:utext="#{msg.thymeleaf.pagelabel.level2ddocode}"></th>
+										<th class="datatableheader"
+											th:utext="#{msg.thymeleaf.pagelabel.level3ddocode}"></th>
+										<!-- 	<th class="datatableheader" th:utext="#{msg.thymeleaf.pagelabel.level4ddocode}"></th>  -->
+										<th class="datatableheader"
+											th:utext="#{msg.thymeleaf.pagelabel.hierarchylevel}"></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="odd" th:each="varLst : ${lstRejectedOffices}">
+										<td th:text="${varLst.zpDdoCode}"></td>
+										<td th:text="${varLst.reptDdoCode}"></td>
+										<!-- <td th:text="${varLst.specialDdoCode}"></td> -->
+										<td th:text="${varLst.finalDdoCode}"></td>
+										<td th:text="${varLst.zplevel}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</form>
+				</fieldset>
+			</div>
+			<br>
+			<br>
+
+		</div>
+	</div>
+	<div th:replace="header/menuHeader :: varmenufooter"></div>
+	<script th:src="@{/js/project/approveReject.js}"></script>
 </body>
 
 </html>
