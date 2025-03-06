@@ -1565,7 +1565,7 @@ public class MstEmployeeRepoImpl implements MstEmployeeRepo {
 	      .append("AND MDD.fieldDeptId = :fieldDept ");
 
 	    if (cadre != null && !cadre.equals("0")) {
-	        sb.append("AND MPD.cadreTypeId = (SELECT groupId FROM DcpsCadreMst WHERE cadreId = :cadre) ");
+	        sb.append("AND MPD.cadreTypeId = (SELECT cast(groupId as long) FROM DcpsCadreMst WHERE cadreId = :cadre) ");
 	    }
 	    
 	    sb.append("ORDER BY MDE.desgination");

@@ -1,5 +1,7 @@
 package com.mahait.gov.in.controller;
 
+
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -34,10 +36,10 @@ public abstract class BaseController {
 				modelAndView.addObject("subMenuList", subMenuList);
 			}
 		}
-		
+
 		modelAndView.addObject("lstGetAllMonths", commonHomeMethodsService.lstGetAllMonths());
 		modelAndView.addObject("lstGetAllYear", commonHomeMethodsService.lstGetAllYears());
-		
+
 		modelAndView.addObject("levelRoleVal", levelRoleVal);
 		modelAndView.addObject("today", new Date());
 		modelAndView.addObject("appRootPath", getAppRootPath());
@@ -46,8 +48,12 @@ public abstract class BaseController {
 		modelAndView.addObject("servletContext", request.getServletContext());
 		modelAndView.addObject("remoteUser", request.getRemoteUser());
 		modelAndView.addObject("userUrl", CommonConstants.getUserWiseUrl(messages));
-		if(messages!=null) {
-		modelAndView.addObject("userName",messages.getUserName());
+
+		String currentDate = LocalDate.now().toString();
+		modelAndView.addObject("currentDate", currentDate);
+
+		if (messages != null) {
+			modelAndView.addObject("userName", messages.getUserName());
 		}
 	}
 
@@ -65,7 +71,7 @@ public abstract class BaseController {
 		model.addAttribute("request", getAppRootPath());
 		model.addAttribute("session", getAppRootPath());
 		model.addAttribute("servletContext", getAppRootPath());
-		
+
 		model.addAttribute("lstGetAllMonths", commonHomeMethodsService.lstGetAllMonths());
 		model.addAttribute("lstGetAllYear", commonHomeMethodsService.lstGetAllYears());
 
@@ -74,8 +80,11 @@ public abstract class BaseController {
 		model.addAttribute("servletContext", request.getServletContext());
 		model.addAttribute("remoteUser", request.getRemoteUser());
 		model.addAttribute("userUrl", CommonConstants.getUserWiseUrl(messages));
-		if(messages!=null) {
-			model.addAttribute("userName",messages.getUserName());
+
+		String currentDate = LocalDate.now().toString();
+		model.addAttribute("currentDate", currentDate);
+		if (messages != null) {
+			model.addAttribute("userName", messages.getUserName());
 		}
 	}
 

@@ -768,6 +768,12 @@ $(document)
 																							.setAttribute(
 																									"min",
 																									genDate);
+																									
+																									
+																									
+																									if(value[3]!="" && value[3]!=null && value[3]!=undefined){
+																															$("#effectiveDate").prop("readonly",true);
+																										}
 
 																					////departmentId = value[0];
 

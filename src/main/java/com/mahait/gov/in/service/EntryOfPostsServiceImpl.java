@@ -88,7 +88,7 @@ public class EntryOfPostsServiceImpl implements EntryOfPostsService {
 	@Override
 	public List getAllOfficesFromDDO(String ddoCode) {
 		List<DdoOffice> ddoOffices = entryOfPostsRepo.getAllOfficesFromDDO(ddoCode);
-		List<DdoOffice> lstDdoOfficeModel = new ArrayList<>();
+		List<DdoOfficeModel> lstDdoOfficeModel = new ArrayList<>();
 		for (DdoOffice ddoOffice : ddoOffices) {
 			DdoOfficeModel model = new DdoOfficeModel();
 			model.setDcpsDdoOfficeIdPk(String.valueOf(ddoOffice.getDcpsDdoOfficeIdPk()));
@@ -110,7 +110,7 @@ public class EntryOfPostsServiceImpl implements EntryOfPostsService {
 			model.setDcpsDdoOfficeGrant(ddoOffice.getDcpsDdoOfficeGrant());
 			model.setCreatedDate(ddoOffice.getCreatedDate());
 			model.setStatusFlag(ddoOffice.getStatusFlag());
-			lstDdoOfficeModel.add(ddoOffice);
+			lstDdoOfficeModel.add(model);
 		}
 		return lstDdoOfficeModel;
 	}

@@ -1,6 +1,7 @@
 package com.mahait.gov.in.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -25,7 +26,7 @@ public class HrPayOrderMst implements Serializable {
     private String orderName;
 
     @Column(name = "ORDER_DATE")
-    private Date orderDate;
+    private Timestamp orderDate;
 
     @Column(name = "CREATED_BY")
     private Long createdBy;

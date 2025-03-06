@@ -53,6 +53,45 @@ $(document).on('change','.removeErrorFromDropdown', function(event){
 	}
   });
  
+  
+  $(document).on('blur change', '.preventFutureDate', function(event) {
+      if ($(this).val() != "") {
+          var inputValue = $(this).val();
+          if (new Date(inputValue) > new Date()) {
+              $(this).val(new Date().toISOString().split('T')[0]);  // Reset to today's date
+              swal('You cannot select a future date!');
+          }
+      }
+  });
+
+	
+
+	$(document).on('blur','.validateMobileNo', function(event){
+		if($(this).val()!=""){
+	var mobileNo = $(this).val();
+			var regex = /^[0-9]*$/;
+			if (!regex.test(mobileNo)){
+				$(this).val("");
+			}
+			if (mobileNo.length != 10) {
+				swal('Please enter 10 digit mobile No.');
+				$(this).val("");
+			}
+			if (!(mobileNo.charAt(0) == 7 || mobileNo.charAt(0) == 8 || mobileNo
+					.charAt(0) == 9)) {
+				swal('Please enter valid mobile No.');
+				$(this).val("");
+			}
+
+	         }
+    });
+	
+	
+	
+
+  
+  
+  
 $(document).on('blur','.removeErrorFromInput', function(event){
 	if($(this).val()!='' || $(this).val()!=undefined){
 		removeErrorClass($(this));		

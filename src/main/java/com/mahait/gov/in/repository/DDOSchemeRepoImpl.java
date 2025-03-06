@@ -10,9 +10,14 @@ import com.mahait.gov.in.entity.CmnTalukaMst;
 import com.mahait.gov.in.entity.OrgPostMst;
 import com.mahait.gov.in.entity.RltDCPSDdoSchemeEntity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import jakarta.persistence.Table;
 
 @Repository
 public class DDOSchemeRepoImpl implements DDOSchemeRepo {
@@ -116,16 +121,15 @@ public class DDOSchemeRepoImpl implements DDOSchemeRepo {
 	}
 
 	@Override
-	public List<Object[]> CheckSubSchemeExist(String schemeCode, String subschemeCode) {
-
+	public Long CheckSubSchemeExist(String schemeCode, String subschemeCode) {
 		Session currentSession = entityManager.unwrap(Session.class);
-		String hql = "SELECT submst.SUBSCHEME_CD,mstsch.SCHEME_CODE FROM   SCHEME_SUBSCHEME submst inner join MST_SCHEME mstsch on  mstsch.SCHEME_CODE=submst.SCHEME_CD \r\n"
-				+ " where submst.SCHEME_CD='" + schemeCode + "' and submst.SUBSCHEME_CD='" + subschemeCode + "' \r\n"
-				+ " and submst.DH_CD='36' and mstsch.DEMAND_CODE in ('T-09','T-10')";
+		String hql = "select count(*) from RLT_DCPS_DDO_SCHEMES where SCHEME_CODE='"+schemeCode+"' and DDO_CODE='"+subschemeCode+"'";
 		System.out.println("HQL:" + hql);
 		Query query = currentSession.createNativeQuery(hql);
-		return query.getResultList();
+		return (Long) query.getSingleResult();
 	}
+	
+	
 
 	@Override
 	public String getlocid(String ddoCode) {

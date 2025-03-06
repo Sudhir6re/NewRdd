@@ -53,8 +53,6 @@ public class OrganisationDtlsController   extends BaseController {
 		ModelAndView modelAndView = new ModelAndView();
 
 		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");
-		// logger.info("For Testing Logger *****");
-		List<TopicModel> subMenuList = new ArrayList<>();
 
 		organisationDtlsModel = organisationDtlsService.lstOfficeDetails(messages.getDdoCode());
 		

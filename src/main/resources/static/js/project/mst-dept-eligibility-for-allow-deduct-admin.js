@@ -176,6 +176,18 @@ $(document).ready(function(){
     								    		 selecteditems.push(value[1]); 
     								    		 $("#"+value[1]).attr("data-serialid",value[1]);
     								    		 serialid.push(value[0]);
+
+												 			var today = new Date(value[3]);
+												 			var genDate = today.getFullYear()+ '-'+ ('0' + (today.getMonth() + 1)).slice(-2)+ '-'+ ('0' + today.getDate()).slice(-2);
+															$("#effectiveDate").val(genDate);
+															$("#effectiveDate").attr("min",genDate);
+															
+															
+															if(value[3]!="" && value[3]!=null && value[3]!=undefined){
+																$("#effectiveDate").prop("readonly",true);
+															}
+												 
+												 
     							    		});
     						    		  }
     						    }

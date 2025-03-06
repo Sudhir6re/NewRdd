@@ -134,7 +134,7 @@ public class DDOSchemeServiceImpl implements DDOSchemeService {
 	}
 
 	@Override
-	public List<Object[]> CheckSubSchemeExist(String schemeCode, String subschemeCode) {
+	public Long CheckSubSchemeExist(String schemeCode, String subschemeCode) {
 		// TODO Auto-generated method stub
 		return ddoSchemeRepo.CheckSubSchemeExist(schemeCode,subschemeCode);
 	}

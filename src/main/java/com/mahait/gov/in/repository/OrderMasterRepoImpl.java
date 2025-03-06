@@ -110,13 +110,20 @@ public class OrderMasterRepoImpl implements OrderMasterRepo {
 	return lstresult;}
 
 
+	
+	
+	
 	@Override
 	public List<Object[]> getsancOrderLst(String ddo) {
 		Session currentSession = entityManager.unwrap(Session.class);
+		StringBuilder sb=new StringBuilder();
+		sb.append("SELECT hr.ORDER_NAME, hr.ORDER_DATE,CASE  WHEN ddo.DDO_OFFICE IS NULL THEN '' ELSE ddo.DDO_OFFICE END AS DDO_CODE,ddo.DDO_CODE FROM HR_PAY_ORDER_MST hr inner join RLT_ZP_DDO_MAP rep on rep.zp_ddo_code=hr.ddo_code ");
+		sb.append("inner join org_ddo_mst ddo on (hr.LOCATION_CODE=ddo.LOCATION_CODE or hr.ddo_code=ddo.ddo_code) where rep.rept_ddo_code='"+ddo+"'");
+	
 		String hql = " SELECT hr.ORDER_NAME, hr.ORDER_DATE FROM HR_PAY_ORDER_MST hr inner join RLT_ZP_DDO_MAP rep on rep.zp_ddo_code=hr.ddo_code "
 				+ "where rep.rept_ddo_code='"+ddo+"'";//inner join org_ddo_mst ddo on hr.LOCATION_CODE=ddo.LOCATION_CODE
 		System.out.println("HQL:"+hql);
-		Query query = currentSession.createNativeQuery(hql);
+		Query query = currentSession.createNativeQuery(sb.toString());
 		return query.getResultList();
 	}
 	

@@ -381,7 +381,8 @@ public class EntryOfPostsRepoImpl implements EntryOfPostsRepo {
 		 * "%')  "); else sb.append("  and  upper(a.post_name) like  upper('%" +
 		 * lPostName + "%') ");
 		 */
-
+		 
+		sb.append("  where g.ddo_code='"+ddoSelected+"'");
 		sb.append("   order by a.CREATED_DATE desc  ");
 
 		System.out.println(sb.toString());

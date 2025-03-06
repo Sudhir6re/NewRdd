@@ -28,7 +28,7 @@ public interface DDOSchemeService {
 
 	List getpostRole(OrgPostMst createdByPost);
 
-	List<Object[]> CheckSubSchemeExist(String schemeCode, String subschemeCode);
+	Long CheckSubSchemeExist(String schemeCode, String subschemeCode);
 
 	Long addSchemesAndBillGroupsToDdo(NewRegDDOModel newRegDDOModel, OrgUserMst messages);
 

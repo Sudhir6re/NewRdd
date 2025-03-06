@@ -57,6 +57,11 @@ $(".officeName").click(function() {
 
 	$('#approveDDOOffice').trigger("reset");
 	var ddoCode = $(this).attr("value");
+	
+	
+	
+	var status= $(this).attr("data");
+	
 
 	if (ddoCode != '') {
 
@@ -144,6 +149,10 @@ $(".officeName").click(function() {
 					}else{
 						$('#deptLetter').prop("checked",false);
 					}
+					
+					
+					$('#txtTelNo2').val(value[31]);
+					
 
 				});
 				$('select').each(function() {
@@ -159,6 +168,14 @@ $(".officeName").click(function() {
 
 			}
 		});
+		
+		
+		if(status=="Approved"){
+			  $("#approve").prop("disabled",true);
+			  $("#btnRjct").prop("disabled",true);
+		}
+		
+		
 	} else {
 		swal("Please Select Atleast one Component");
 	}
@@ -217,124 +234,64 @@ $('#approve').click(function() {
 });
 
 
-$('#btnRjct').click(
-		function() {
+$('#btnRjct').click(function() {
 			var ddoCode = $('#hiddenddoCode').val();
-			var flag = 2;
-			if (ddoCode != '') {
-				$.ajax({
-					type : "GET",
-					url : contextPath + "/ddo/updateApproveRejectStatus/"
-							+ ddoCode + "/" + flag,
-					async : true,
-					contentType : 'application/json',
-					error : function(data) {
-						console.log(data);
-					},
-					success : function(data) {
-						console.log(data);
-						// alert(data);
-						swal("Rejected Successfully", {
-							icon : "success",
-						});
-						location.reload();
-
-					}
-				});
+			var cityClass = $('#ddoOffClass').val();
+			var txtReasonForRejection = $('#txtReasonForRejection').val();
+			
+			$("#reasonForRejection").show();
+				
+			if(txtReasonForRejection==''){
+				swal("Please write remark for rejection ", "", "warning");
 			}
+			
+			var flag = 2;
+			
+			cityClass=txtReasonForRejection;
+			
+			
+			if (ddoCode !== '' && txtReasonForRejection!='') {
+			       swal({
+			           title: "Are you sure you want to Reject?",
+			           icon: "warning",
+			           buttons: {
+			               cancel: {
+			                   text: "Cancel",
+			                   value: false,
+			                   visible: true,
+			                   className: "",
+			                   closeModal: true
+			               },
+			               confirm: {
+			                   text: "OK",
+			                   value: true,
+			                   visible: true,
+			                   className: "",
+			                   closeModal: true
+			               }
+			           }
+			       }).then((isConfirmed) => {
+			           if (isConfirmed) {
+			               $.ajax({
+			                   type: "GET",
+			                   url: contextPath + "/ddo/updateApproveRejectStatus/" + ddoCode + "/" + flag + "/" + cityClass,
+			                   async: true,
+			                   contentType: 'application/json',
+			                   error: function(data) {
+			                       console.log(data);
+			                   },
+			                   success: function(data) {
+			                       console.log(data);
+			                       swal("Rejected Successfully!", "", "success").then(() => {
+			                           location.reload();
+			                       });
+			                   }
+			               });
+			           } else {
+			               swal("Action cancelled", "", "info");
+			           }
+			       });
+			   }
 		});
-
-// $(document).ready(function() {
-// setTimeout(function () {
-// $("#cmbTaluka").select2();
-// $("#cmbDesignation").select2();
-// $("#stateId").select2();
-// $("#districtId").select2();
-// $("#talukaId").select2();
-// $("#txtTown").select2();
-// $("#instituteType").select2();
-// $("#cmbDesignation").select2();
-// $("#cmbBankName").select2();
-// $("#cmbBranchName").select2();
-// }, 500);
-//	
-// });
-
-/*
-$("form[name='approveDDOOffice']").validate({
-    rules: {
-    	districtId: {
-            required: true,
-           min: 1
-        },
-        txtPin: {
-            required: true,
-        },
-        txtAddress1: "required",
-        ddoOffClass: {
-            required: true,
-            min: 1
-        },
-        txtDDOName: {
-            required: true,
-        },
-        cmbDesignation: {
-            required: true,
-        },
-        txtWEFDate: "required",
-        cmbBankName: {
-            required: true,
-            min: 1
-        },
-        cmbBranchName: {
-        	required: true,
-        	min: 1
-        },
-        txtAccountNo: {
-        	required: true,
-        	min: 1
-        }
-    },
-    messages: {
-        cmbAdminOffice: {
-            required: "Please select Admin Office",
-            min: "Please select Admin Office"
-        },
-        districtId: {
-            required: "Please Select District ",
-           min: "Please Select District "
-        },
-        txtPin: {
-            required: "Please Enter Pin Code ",
-        },
-        txtAddress1: "Please Enter Address ",
-        ddoOffClass: {
-            required: "Please Select City Class ",
-            min: "Please Select City Class "
-        },
-        txtDDOName: {
-            required: "Please Enter DDO Name ",
-        },
-        cmbDesignation: {
-            required: "Please Select Designation ",
-        },
-        txtWEFDate: "Please Enter Date ",
-        cmbBankName: {
-            required: "Please Select Bank Name ",
-            min: "Please Select Bank Name "
-        },
-        cmbBranchName: {
-        	required:"Please Select Branch Name ",
-        	min: "Please Select Branch Name ",
-        },
-        txtAccountNo: {
-        	required: "Please Enter Account Number ",
-        }
-      
-    },
-    submitHandler: function(form) {
-        form.submit();
-        $("#loaderMainNew").show();
-    }
-});*/
-
+		
+	

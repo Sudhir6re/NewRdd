@@ -115,10 +115,13 @@ public class DDOInfoRepoImpl implements DDOInfoRepo {
 	@Override
 	public List<Object[]> getDDOOffForApproval(String ddoCode) {
 		Session currentSession = entityManager.unwrap(Session.class);
-		String hql = "SELECT DCPS_DDO_OFFICE_MST_ID,OFF_NAME,ADDRESS1,ADDRESS2,STATUS_FLAG,ddo_code FROM MST_DCPS_DDO_OFFICE where STATUS_FLAG=0 \r\n" + 
-				"and ddo_code in (SELECT zp_ddo_code FROM rlt_zp_ddo_map where rept_ddo_code='"+ddoCode+"')";
-		System.out.println("getEmpDataForIncrementApproval------" + hql);
-		Query query = currentSession.createNativeQuery(hql);
+		StringBuilder sb=new StringBuilder();
+		sb.append("SELECT DCPS_DDO_OFFICE_MST_ID,OFF_NAME,ADDRESS1,ADDRESS2,STATUS_FLAG,ddo_code FROM MST_DCPS_DDO_OFFICE ");
+		sb.append("where ");
+		//sb.append("STATUS_FLAG=0 and ");
+		sb.append(" ddo_code in (SELECT zp_ddo_code FROM rlt_zp_ddo_map where rept_ddo_code='"+ddoCode+"')");
+		System.out.println("getEmpDataForIncrementApproval------" + sb.toString());
+		Query query = currentSession.createNativeQuery(sb.toString());
 		return query.getResultList();
 	}
 
@@ -128,7 +131,7 @@ public class DDOInfoRepoImpl implements DDOInfoRepo {
 		String hql = "select m.off_name,m.state,m.district,m.taluka,m.town,m.village,m.address1,m.office_pin,m.office_city_class,\r\n" + 
 				"m.dice_code,m.grant_applicable,m.tel_no1,m.fax,m.tribal_area_flag, \r\n" + 
 				"m.email,m.hilly_area_flag,m.naxalite_area_flag,o.ddo_office,o.dsgn_code,o.start_date,o.tan_no,o.itawardcircle,o.bank_name,o.branch_name,o.ifs_code,o.account_no,\r\n" + 
-				"o.remarks,o.institute_type_id,o.bank_passbook,o.bank_cheaque, o.dept_letter from MST_DCPS_DDO_OFFICE m inner join ORG_DDO_MST o on o.ddo_code=m.ddo_code where m.ddo_code ='"+ddoCode+"'";
+				"o.remarks,o.institute_type_id,o.bank_passbook,o.bank_cheaque, o.dept_letter,m.tel_no2,o.ddo_personal_name from MST_DCPS_DDO_OFFICE m inner join ORG_DDO_MST o on o.ddo_code=m.ddo_code where m.ddo_code ='"+ddoCode+"'";
 		System.out.println("getAlreadySavedDataforDDO------" + hql);
 		Query query = currentSession.createNativeQuery(hql);
 		return query.getResultList();

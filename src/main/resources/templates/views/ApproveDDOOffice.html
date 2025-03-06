@@ -80,12 +80,12 @@
 												th:text="${VarDDO.orginstname}"></span></a></td> -->
 							<!-- 	<td style="text-align: left"><a th:href="@{/master/ApproveDDOOficeStatus}" th:text="${VarDDO.orginstname}"></a></td> -->
 							<td><a style="text-align: left" class="officeName"
-								id="officeName" th:value="${VarDDO.ddoCode}"
+								id="officeName" th:value="${VarDDO.ddoCode}"   th:data="${VarDDO.status}"
 								th:text="${VarDDO.officeName}"></a></td>
 							<td style="text-align: left" th:text="${VarDDO.ddoCode}"></td>
 							<td style="text-align: left">Sub Office</td>
 							<td style="text-align: left" th:text="${VarDDO.address}"></td>
-							<td style="text-align: left">Pending</td>
+							<td style="text-align: left"   th:text="${VarDDO.status}">Pending</td>
 						</tr>
 					</tbody>
 				</table>
@@ -430,7 +430,7 @@
 					</fieldset>
 					
 					<br>
-					<fieldset class="tabstyle">
+				<fieldset class="tabstyle">
 					<legend> Verify Documents </legend>
 					<p>
 						<input type="checkbox"  name="bankPass" id="bankPass" />&nbsp;&nbsp;&nbsp;<label>Bank

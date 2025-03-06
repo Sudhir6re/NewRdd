@@ -71,44 +71,59 @@ $("#btnSave").click(function (e) {
     };
 
     const fieldsToValidate = [
-        { id: "#txtAdminDept", error: errors.adminDept },
-        { id: "#txtFieldDept", error: errors.hodDept },
-        { id: "#txtDDOName", error: errors.name },
-        { id: "#cmbDesignation", error: errors.designation, invalidValues: ["", "0"] },
-        { id: "#txtWEFDate", error: errors.withEffectFrmDate },
-        { id: "#cmbBankName", error: errors.bankName, invalidValues: ["", "0"] },
-        { id: "#cmbBranchName", error: errors.branch, invalidValues: ["", "0"] },
-        { id: "#txtIFSCCode", error: errors.ifscCode },
-        { id: "#txtAccountNo", error: errors.bankAccNo },
-        { id: "#txtNameOfOffice", error: errors.nameoforginstt },
-        { id: "#cmbState", error: errors.state, invalidValues: ["", "0"] },
-        { id: "#cmbDist", error: errors.district, invalidValues: ["", "0"] },
-        { id: "#txtAddress1", error: errors.address },
-        { id: "#txtPin", error: errors.pinCode },
-        { id: "#cmbOfficeCityClass", error: errors.cityclass }
+        { id: "#txtAdminDept", error: errors.adminDept,tab: 1 },
+        { id: "#txtFieldDept", error: errors.hodDept,tab: 1 },
+        { id: "#txtDDOName", error: errors.name,tab: 1 },
+        { id: "#cmbDesignation", error: errors.designation, invalidValues: ["", "0"],tab: 1 },
+        { id: "#txtWEFDate", error: errors.withEffectFrmDate,tab: 1 },
+        { id: "#cmbBankName", error: errors.bankName, invalidValues: ["", "0"] ,tab: 1},
+        { id: "#cmbBranchName", error: errors.branch, invalidValues: ["", "0"] ,tab: 1},
+        { id: "#txtIFSCCode", error: errors.ifscCode ,tab: 1},
+        { id: "#txtAccountNo", error: errors.bankAccNo,tab: 1 },
+        { id: "#txtNameOfOffice", error: errors.nameoforginstt ,tab: 2},
+        { id: "#cmbState", error: errors.state, invalidValues: ["", "0"],tab: 2 },
+        { id: "#cmbDist", error: errors.district, invalidValues: ["", "0"],tab: 2 },
+        { id: "#txtAddress1", error: errors.address ,tab: 2},
+        { id: "#txtPin", error: errors.pinCode ,tab: 2},
+        { id: "#cmbOfficeCityClass", error: errors.cityclass ,tab: 2}
     ];
 
     let hasError = false;
     for (const field of fieldsToValidate) {
         const element = $(field.id);
+        const tab =field.tab;
         const value = element.val();
 
         if (!value || (field.invalidValues && field.invalidValues.includes(value))) {
             showError(element, field.error); 
 			console.log(element);
+			if(tab=="1"){
+			     $('a[href="#home"]').click();
+			}
             hasError = true;
         } else {
             hideError(element); 
         }
     }
+	
+	
 
-    if (hasError) {
+	if($('.checkbox-group:checked').length === 0){
+		swal("Please Select atleast one documents");
+		$('a[href="#home"]').click();
+	}
+
+
+    if (hasError   ||  $('.checkbox-group:checked').length === 0 ) {
 		e.preventDefault(); 
 		return;
 	}
 
+	
+	
     $("#loaderMainNew").show();
 });
+
 
 
 

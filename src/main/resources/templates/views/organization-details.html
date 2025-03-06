@@ -157,12 +157,12 @@
 										<tr>
 											<td width="15%" align="left">Tel No(1)</td>
 											<td width="35%"><input type="text" size="48"  
-												th:field="*{tel1}" name="txtTelNo1" id="txtTelNo1"
+												th:field="*{tel1}" name="txtTelNo1" id="txtTelNo1"  class="validateMobileNo"
 												maxlength="11"
 												th:attr="readonly=${organisationDtlsModel.tel1!=null}? 'true' : 'false'"></td>
 											<td width="15%" align="left">Tel No(2) Mobile <label
 												class="mandatoryindicator">*</label></td>
-											<td width="35%"><input type="text" size="48"
+											<td width="35%"><input type="text" size="48"  class="validateMobileNo"
 												th:field="*{tel2}"
 												th:attr="readonly=${organisationDtlsModel.tel2!=null}? 'true' : 'false'"
 												name="txtTelNo2" id="txtTelNo2" maxlength="10"></td>
@@ -196,7 +196,7 @@
 							<table class="table bor-0">
 								<tbody>
 									<tr>
-										<td align="center"><input type="button" class="btn bk"
+										<td align="center"><input type="button" class="btn bk" id="back"
 											value="Back" /> <input type="submit" name="btnSave"
 											id="btnSave" value="Save &amp; Forward To Reporting DDO"
 											class="buttontag hide"> <!-- <a th:href="@{/ddoast/editddoOfficeDetails}"> -->

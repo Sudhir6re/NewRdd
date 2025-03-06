@@ -297,14 +297,15 @@ body.mst-grorder table#oldData tr td:nth-child(6) {
 					style="width: 100%">
 					<thead>
 						<tr>
+						    <th>Level 1 DDO Code</th>
 							<th th:utext="#{menu.master.sub.sancatioOrderNo}"></th>
 							<th th:utext="#{menu.master.sub.sancationDate}"></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="varDept : ${lstSancOrder}">
+						    <td   th:text="${varDept.officeName + ' ( '+ varDept.ddoCode + ' ) '}"></td>
 							<td th:text="${varDept.sanctionOrderNo}"></td>
-
 							<td th:text="${#dates.format(varDept.date, 'dd-MMM-yyyy')}"></td>
 							<!-- th:text="${varDept.orderDate}" -->
 

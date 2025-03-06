@@ -129,12 +129,11 @@ public class DDOSchemeController  extends BaseController{
 		return "redirect:/ddo/loadDdoSchemesAndBillGroups"; /// redirects to controller URL
 	}
 
-	@GetMapping(value = "/CheckSubSchemeExist/{schemeCode}/{subschemeCode}")
-	public ResponseEntity<String> PaybillValidation(@PathVariable String schemeCode,@PathVariable String subschemeCode, HttpSession session) {
+	@GetMapping(value = "/CheckSubSchemeExist/{schemeCode}/{ddoCode}")
+	public ResponseEntity<String> PaybillValidation(@PathVariable String schemeCode,@PathVariable String ddoCode, HttpSession session) {
 		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");
-		List<Object[]> orderNo = ddoSchemeService.CheckSubSchemeExist(schemeCode,subschemeCode);
-		Integer existingData = orderNo.size();
-		String resJson = existingData.toString();
+		Long count = ddoSchemeService.CheckSubSchemeExist(schemeCode,ddoCode);
+		String resJson = count.toString();
 		return ResponseEntity.ok(resJson);
 	}
 	@RequestMapping("/displaySchemeNameForCode/{schemeCode}")

@@ -57,6 +57,7 @@ public class OrganisationDtlsServiceImpl implements OrganisationDtlsService {
 		// OrgDdoMstModel orgDdoMstModel = new OrgDdoMstModel();
 		if (orgInfo != null) {
 			obj.setDdoOffice(orgInfo.getDdoOffice());
+			obj.setDdoPersonalName(orgInfo.getDdoPersonalName());
 			obj.setDesignationId(orgInfo.getDsgnCode());
 			obj.setStartDate(orgInfo.getStartDate());
 			obj.setTanNo(orgInfo.getTanNo());

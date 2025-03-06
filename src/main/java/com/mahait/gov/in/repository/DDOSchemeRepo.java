@@ -27,7 +27,7 @@ public interface DDOSchemeRepo {
 
 	List getpostRole(OrgPostMst createdByPost);
 
-	List<Object[]> CheckSubSchemeExist(String schemeCode, String subschemeCode);
+	Long CheckSubSchemeExist(String schemeCode, String subschemeCode);
 
 	String getlocid(String userName);
 

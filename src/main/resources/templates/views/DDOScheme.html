@@ -26,7 +26,7 @@
 		</h3>
 		<div class="newpagecontent container">
 			<form method="post" name="frmScheme" enctype="multipart/form-data"
-				th:action="@{/ddo/addSchemesAndBillGroupsToDdo}"
+				th:action="@{/ddo/addSchemesAndBillGroupsToDdo}"  id="newRegDDOModel"
 				th:object="${newRegDDOModel}">
 				
 				 <input type="hidden" name="message"
@@ -67,8 +67,8 @@
 							<tr>
 								<td width="40%" align="left">DDO Institution Name <label
 									class="mandatoryindicator">*</label></td>
-								<td width="60%" align="left"><select class="form-control"
-									id="department_id" th:field="*{instDdoCode}">
+								<td width="60%" align="left"><select class="form-control" name="instDdoCode"
+									id="department_id" th:field="*{instDdoCode}"> 
 										<option selected="selected" th:value="0"
 											th:utext="#{msg.thymeleaf.dropdown.pleaseselect}"></option>
 										<!--<option value="1">Latur</option> -->
@@ -80,7 +80,7 @@
 							<tr>
 								<td width="10%" align="left">Scheme Code <label
 									class="mandatoryindicator">*</label></td>
-								<td width="100%" align="left"><input type="text"
+								<td width="100%" align="left"><input type="text"  
 									name="txtSchemeCode" id="txtSchemeCode" maxlength="10"
 									style="text-align: left"></td>
 							</tr>
@@ -139,9 +139,9 @@
 
 					<div align="center">
 						<input type="submit" name="btnSave" id="btnSave"
-							value="Add Schemes" size="3" maxlength="3" class="buttontag">
+							value="Add Schemes" size="3"  class="buttontag">
 						<input type="button" name="btnBack" onclick="ReturnLoginPage();"
-							id="btnBack" value="Back" size="3" maxlength="3"
+							id="btnBack" value="Back" size="3"
 							class="buttontag">
 					</div>
 				</fieldset>

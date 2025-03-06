@@ -13,8 +13,6 @@ $(document).ready(function() {
 	}
 	
 	
-	
-	
 	    if ($('#cmbAsstDDO').length) {
 	        $('#cmbAsstDDO').select2();
 	    }
@@ -566,8 +564,8 @@ function getAllOfficesFromDDO() {
 						j=1;
 						if(len>0){
 							$('#officeCmb').empty();
+							$('#officeCmb').append($('<option  value="-1"></option>').text("Please Select")); 
 							for (var i = 0; i < data.length; i++) {
-								console.log("value"+BigInt(data[i].dcpsDdoOfficeIdPk).toString()); 
 								$('#officeCmb').append('<option value="' + data[i].dcpsDdoOfficeIdPk + '">' + data[i].dcpsDdoOfficeName + '</option>');
 							}
 						}
@@ -606,6 +604,7 @@ function getAllGrOrder() {
 						j=1;
 						if(len>0){
 							$('#orderCmb').empty();
+							$('#orderCmb').append($('<option  value="-1"></option>').text("Please Select")); 
 							for (var i = 0; i < data.length; i++) {
 								$('#orderCmb').append('<option value="' + data[i].orderId + '">' + data[i].orderName + '</option>');
 							}
@@ -800,11 +799,9 @@ $("#districtId").change(function(){
 	    		 $( "#loaderMainNew").hide();
 	    		 $('#ddoCode').append($('<option  value="-1"></option>').text("Please Select")); 
 					if (len != 0) {
-							   for(var i=0;i<len;i++){
 								$.each(data, function(index, row) {
 															   $('#ddoCode').append('<option value="' + row[0] + '">' + row[0]+"("+row[1] + ')</option>');
 											                });
-				                }		
 				}
 					
 	     }

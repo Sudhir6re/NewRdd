@@ -11,7 +11,6 @@ import lombok.Data;
 @Data
 public class DdoOfficeModel {
 	
-	@JsonProperty("dcpsDdoOfficeIdPk")
     private String dcpsDdoOfficeIdPk;
 	 
 	 

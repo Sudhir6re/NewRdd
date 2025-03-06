@@ -66,6 +66,8 @@ public class OrganisationDtlsModel {
     
     private String fieldDeptName;
     
+    private String ddoPersonalName;
+    
     
     
 	

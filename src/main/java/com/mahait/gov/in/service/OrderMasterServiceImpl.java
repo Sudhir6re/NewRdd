@@ -5,6 +5,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -100,7 +101,7 @@ public class OrderMasterServiceImpl implements OrderMasterService {
 		if(mstGrOrderModel!=null) {
 			///payOrderMst.setOrderId(mstGrOrderModel.getGrOrderId());//setting order id
 			payOrderMst.setOrderName(mstGrOrderModel.getSanctionOrderNo());
-			payOrderMst.setOrderDate(mstGrOrderModel.getDate());
+			payOrderMst.setOrderDate(new Timestamp(mstGrOrderModel.getDate().getTime()));
 			payOrderMst.setGrType(mstGrOrderModel.getOrderType());
 			///payOrderMst.setLocationCode(messages.getUpdatedByPost().getLocationCode());
 			///payOrderMst.setCmnLanguageMst(cmnLanguageMst);
@@ -231,6 +232,8 @@ public class OrderMasterServiceImpl implements OrderMasterService {
 					MstGrOrderModel obj1 = new MstGrOrderModel();
 					obj1.setSanctionOrderNo(StringHelperUtils.isNullString(obj[0]));
 					obj1.setDate(StringHelperUtils.isNullDate(obj[1]));
+					obj1.setOfficeName(StringHelperUtils.isNullString(obj[2]));
+					obj1.setDdoCode(StringHelperUtils.isNullString(obj[3]));
 					
 					listobj.add(obj1);
 				}
