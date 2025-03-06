@@ -228,7 +228,7 @@ public class CreateAdminOfficeController extends BaseController {
 		return ResponseEntity.ok(response1);
 	}
 	
-	@RequestMapping("/validateMobNo/{telPhone}")
+	@RequestMapping("/validateMobNo/{mobNo}")
 	public ResponseEntity<Long> validateMobNo(@PathVariable String mobNo,
 			Model model, Locale locale, HttpSession session) {
 		OrgUserMst messages = (OrgUserMst) session.getAttribute("MY_SESSION_MESSAGES");

@@ -81,15 +81,15 @@
 													th:text="${cmnTalukaMst.talukaName}"></option> -->
 
 										</select></td>
-									</tr>
-									<tr>
-										<td colspan="6" align="center"><br/><input id="btnFilter"
+									
+										<td  align="center"><input id="btnFilter"
 											class="buttontag" type="button" size="5" maxlength="5"
 											value="Filter" name="btnFilter" style="width: 120px;"></td>
 									</tr>
 								</tbody>
 							</table>
 						</fieldset>
+						<br>
 						<div id="tabmenu">
 							<legend><b>DDO Office</b></legend>
 						</div>
@@ -180,9 +180,9 @@
 										<td th:text="${zpRltDdoMapRlt[6]}" class="hide"></td>
 
 										<td><span th:switch="${zpRltDdoMapRlt[5]}"> <span
-												th:case="0" class="label label-warning">Pending</span> <span
-												th:case="1" class="label label-success" >Approved</span> <span
-												th:case="*"  class="label label-danger" >Rejected</span>
+												th:case="0" class="">Pending</span> <span
+												th:case="1" class="" >Approved</span> <span
+												th:case="*"  class="" >Rejected</span>
 										</span></td>
 
 
