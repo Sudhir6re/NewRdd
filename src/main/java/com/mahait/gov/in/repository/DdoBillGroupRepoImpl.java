@@ -323,4 +323,24 @@ public class DdoBillGroupRepoImpl implements DdoBillGroupRepo {
 		return "save";
 	}
 
+	 
+	@Override
+	public Long billGroupMappedWithPost(String billGrpId) {
+		Session currentSession = entityManager.unwrap(Session.class);
+		StringBuilder sb=new StringBuilder();
+		sb.append("select  count(*) from mst_dcps_bill_group mstBillGrp LEFT JOIN HR_PAY_POST_PSR_MPG psrMPg ");
+		sb.append("ON psrMPg.bill_no = mstBillGrp.bill_group_id ");
+		sb.append("LEFT JOIN employee_mst emp ON emp.billgroup_id = mstBillGrp.bill_group_id ");
+		sb.append("  where mstBillGrp.bill_group_id="+Long.valueOf(billGrpId));
+		sb.append(" AND psrMPg.bill_no IS NOT NULL OR emp.billgroup_id IS NOT NULL");
+		Query query = currentSession.createNativeQuery(sb.toString());
+		return (Long) query.getSingleResult();
+	}
+
+	@Override
+	public void deleteBillGroup(MstDcpsBillGroup mstBillGroupEntity) {
+		Session currentSession = entityManager.unwrap(Session.class);
+		currentSession.merge(mstBillGroupEntity);
+	}
+
 }

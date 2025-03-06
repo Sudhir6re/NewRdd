@@ -86,4 +86,12 @@ public interface DdoBillGroupService {
 
 
 	public String saveAttachDettachPost(MpgSchemeBillGroupModel mpgSchemeBillGroupModel);
+
+
+
+	public MstDcpsBillGroup findBillGroupDtls(Long billgroupid);
+
+
+
+	public void deleteBillGroup(MstDcpsBillGroup mstBillGroupEntity);
 }

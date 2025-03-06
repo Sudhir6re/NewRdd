@@ -1,6 +1,5 @@
 package com.mahait.gov.in.repository;
 
-import java.math.BigInteger;
 import java.util.List;
 
 import com.mahait.gov.in.entity.MstDcpsBillGroup;
@@ -58,5 +57,9 @@ public interface DdoBillGroupRepo {
 
 	public String saveAttachDettachPostToBillGroup(String sevaarthId, Long lLongArrDcpsEmpIdstoBeDetached, Long schemebillGroupId,
 			String status);
+
+	public Long billGroupMappedWithPost(String billGrpId);
+
+	public void deleteBillGroup(MstDcpsBillGroup mstBillGroupEntity);
 
 }

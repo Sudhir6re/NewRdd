@@ -193,14 +193,18 @@ public Map<String, Object> getBillDtlsForAlreadySaved(String billGrpId) {
 
 	List lst = ddoBillGroupRepo.getBillDtlsForAlreadySaved(billGrpId);
 	List groupdetils = ddoBillGroupRepo.getBillgroupDtlsForAlreadySaved(billGrpId);
+	
+	Long count=ddoBillGroupRepo.billGroupMappedWithPost(billGrpId);
 	if(lst.size()>0 && lst!=null) {
 		Map<String, Object> response = new HashMap<>();
 		
 		response.put("billdetails", lst);
 		response.put("grpdtls", groupdetils);
+		response.put("billGrpMapped", count);
 		return response;
 	}else {
 		Map<String, Object> response = new HashMap<>();
+		response.put("billGrpMapped", 0);
 		return response;
 	}
 
@@ -336,6 +340,17 @@ public String saveAttachDettachPost(MpgSchemeBillGroupModel mpgSchemeBillGroupMo
 
 	return result;
 
+}
+
+@Override
+public MstDcpsBillGroup findBillGroupDtls(Long billgroupid) {
+	MstDcpsBillGroup mstBillGroupEntity = ddoBillGroupRepo.findDcpsBillGroupById(billgroupid);
+	return mstBillGroupEntity;
+}
+
+@Override
+public void deleteBillGroup(MstDcpsBillGroup mstBillGroupEntity) {
+	ddoBillGroupRepo.deleteBillGroup(mstBillGroupEntity);
 }
 }
 

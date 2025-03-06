@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.mahait.gov.in.entity.MstDcpsBillGroup;
 import com.mahait.gov.in.entity.MstScheme;
 import com.mahait.gov.in.entity.OrgUserMst;
 import com.mahait.gov.in.model.BillgroupMaintainanceModel;
@@ -29,7 +30,6 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/ddoast")
-
 public class BillgroupMaintainanceController  extends BaseController {
 
 	@Autowired
@@ -87,16 +87,7 @@ public class BillgroupMaintainanceController  extends BaseController {
 		return mstscheme;
 	}
 
-	// @GetMapping(value="/getBillDtlsForAlreadySaved/{billGrpId}")
-	// public @ResponseBody List<Object[]> getBillDtlsForAlreadySaved(@PathVariable
-	// String billGrpId,Model model,Locale locale)
-	// {
-	// List<Object[]> lst =
-	// ddoBillGroupService.getBillDtlsForAlreadySaved(billGrpId);
-	// return lst;
-	//
-	//
-	// }
+
 
 	@RequestMapping(value = "/getBillDtlsForAlreadySaved/{billGrpId}", consumes = {
 			"application/json" }, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -105,4 +96,13 @@ public class BillgroupMaintainanceController  extends BaseController {
 		return ResponseEntity.ok(response1);
 	}
 
+	@RequestMapping(value="/deleteBillGroup/{billgroupid}")	// , method = RequestMethod.POST
+	public String deleteBillGroup(@PathVariable Long billgroupid) {
+		MstDcpsBillGroup mstBillGroupEntity = ddoBillGroupService.findBillGroupDtls(billgroupid);
+		mstBillGroupEntity.setBillDeleted('Y');
+		ddoBillGroupService.deleteBillGroup(mstBillGroupEntity);
+		
+		return "views/mst-billgroup";
+	}
+	
 }

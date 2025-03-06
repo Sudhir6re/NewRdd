@@ -1,14 +1,62 @@
-var contextPath =
+var contextPath = "";
 $(document).ready(function() {
-	 contextPath = $("#appRootPath").val();
-	  if ($('#cmbSchemeName').length) {
+	
+	var varMessage = $("#message").val();
+		if (varMessage != undefined && varMessage != "") {
+			swal('Billgroup added successfully', {
+				icon : "success",
+			});
+		}
+	
+	contextPath = $("#appRootPath").val();
+	if ($('#cmbSchemeName').length) {
 	        $('#cmbSchemeName').select2();
 	    }
+		
+		
+		$("#btnDelete").click(function(){
+			    var billgroupid = $("#txtBillGroupNo").val();
+			    ConfirmDeleteRecord(billgroupid);
+			  });
 });
 
 
 
 
+function ConfirmDeleteRecord(billgroupid) {
+	var billGrpmappedToPost = $("#billGrpmappedToPost").val();
+	if(parseInt(billGrpmappedToPost)==0){
+		swal({
+			  title: "Are you sure?",
+			  text: "to delete this bill group !!!",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			}).then((willDelete) => {
+			    if (willDelete) {   
+					$.ajax({
+					      type: "GET",
+					      url: "../ddoast/deleteBillGroup/"+billgroupid,
+					      async: true,
+					      success: function(data){
+					    	  swal("Deleted successfully !", {
+					    	      icon: "success",
+					    	  });
+					    	  setTimeout(function() {
+								    location.reload(true);
+								}, 3000);
+					      }
+					 });
+			     }
+		})
+	} else if(isActive==0) {
+		 swal({
+	    	  title: 'Not allowed !',
+	    	  text: 'This bill group is mapped with vacant post',
+			  icon: "warning",
+	    });
+	}
+}
 
 
 
@@ -96,7 +144,8 @@ $(".billGrpId")
 									$.each(response.billdetails,function(index,value) {
 												$('#txtSchemeCode').val(value[3]);
 												$('#txtDescription').val(value[0]);
-												 $('#cmbSchemeName').val(value[3]);
+												// $('#cmbSchemeName').val(value[3]);
+												 $('#cmbSchemeName').val(value[3]).trigger('change');
 												 $('#txtBillGroupNo').val(value[5]); 
 												 var typePost= value[2];
 												 if(typePost=='P')
@@ -123,6 +172,12 @@ $(".billGrpId")
 												if(value == 'D')
 													 $('#GroupD').prop("checked",true);
 						                 });
+										 
+										 
+										 var count=response.billGrpMapped;
+										 $("#billGrpmappedToPost").val(count);
+										 
+										 
 									
 								}
 								}
