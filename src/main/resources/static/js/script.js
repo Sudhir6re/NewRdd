@@ -58,7 +58,7 @@ $(document).on('change','.removeErrorFromDropdown', function(event){
       if ($(this).val() != "") {
           var inputValue = $(this).val();
           if (new Date(inputValue) > new Date()) {
-              $(this).val(new Date().toISOString().split('T')[0]);  // Reset to today's date
+              $(this).val("");  // Reset to today's date
               swal('You cannot select a future date!');
           }
       }
