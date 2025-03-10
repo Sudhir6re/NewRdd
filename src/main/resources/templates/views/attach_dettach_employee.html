@@ -54,7 +54,7 @@
 				<LEGEND> Input Bill Group Details </LEGEND>
 				<div class="form-group">
 
-					<label class="control-label col-sm-2" for="title"><span
+					<label class="control-label col-sm-3" for="title"><span
 						th:utext="#{msg.thymeleaf.pagelabel.billdescription}"></span>&nbsp;&nbsp;<b><font
 							color="red" size="4px;">*</font></b></label>
 					<div class="col-sm-4">
@@ -67,7 +67,9 @@
 								th:text="${language=='mh' ? varAllBillGroup.description : varAllBillGroup.description}"></option>
 						</select>
 					</div>
-					<label class="control-label col-sm-2" for="title"><span
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="title"><span
 						th:utext="#{msg.thymeleaf.pageheading.typeattachDeattach}"></span>&nbsp;&nbsp;<b><font
 							color="red" size="4px;">*</font></b></label>
 					<div class="col-sm-4">
@@ -81,10 +83,10 @@
 						</select>
 					</div>
 				</DIV>
-				<DIV align=center>
+				<DIV class="text-center">
 					<INPUT onclick="findAttachDettachEmp();" id=btnGo
 						class="buttontag btn" maxLength=3 size=3 type=button value=GO
-						name=btnGo> <INPUT onclick="history.back()" 
+						name=btnGo> <INPUT onclick="history.back()"
 						id=btnBackWithGo class="buttontag btn" type=button value=Back
 						name=btnBackWithGo>
 				</DIV>
